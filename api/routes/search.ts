@@ -10,7 +10,7 @@ export function createSearchRouter(clubs: MergedClub[]): Router {
 
   router.get('/search', async (req: Request, res: Response) => {
     const { name, near, radius } = req.query as Record<string, string>;
-    const radiusKm = parseFloat(radius ?? '25') || 25;
+    const radiusKm = Math.max(1, parseFloat(radius ?? '25') || 25);
 
     if (!name && !near) {
       res.status(400).json({ error: 'Parameter "name" oder "near" erforderlich.' });
