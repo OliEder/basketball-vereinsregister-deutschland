@@ -74,3 +74,22 @@ describe('SearchEngine.searchByLocation', () => {
     expect(results.map(r => r.clubId)).not.toContain(2);
   });
 });
+
+describe('SearchEngine.searchCombined', () => {
+  const engine = new SearchEngine(clubs);
+
+  it('filters by location then by name', () => {
+    // Regensburg ist nah, München ist ~100km entfernt
+    const results = engine.searchCombined('Baskets', 49.0134, 12.1016, 50);
+    const clubIds = results.map(r => r.clubId);
+    expect(clubIds).toContain(1); // Fibalon Baskets Regensburg — nah + name match
+    expect(clubIds).not.toContain(2); // Bayern Baskets München — zu weit
+  });
+
+  it('preserves distanceKm in combined results', () => {
+    const results = engine.searchCombined('Regensburg', 49.0134, 12.1016, 50);
+    expect(results.length).toBeGreaterThan(0);
+    expect(results[0].distanceKm).toBeDefined();
+    expect(results[0].distanceKm).toBeCloseTo(0, 0);
+  });
+});
