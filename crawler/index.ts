@@ -21,6 +21,8 @@ async function crawl(): Promise<void> {
       const { ligen, hasMoreData } = await client.getLigen(verband.id, startAtIndex);
       console.log(`  ${ligen.length} Ligen ab Index ${startAtIndex}`);
 
+      if (ligen.length === 0) break;
+
       for (const liga of ligen) {
         try {
           const entries = await client.getTable(liga.ligaId);
