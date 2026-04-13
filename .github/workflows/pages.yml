@@ -1,0 +1,39 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'portal/**'
+      - 'data/clubs.json'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy-Artefakt zusammenstellen
+        run: |
+          mkdir -p _site/data
+          cp portal/index.html portal/style.css portal/app.js _site/
+          cp data/clubs.json _site/data/clubs.json
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - uses: actions/deploy-pages@v4
+        id: deployment

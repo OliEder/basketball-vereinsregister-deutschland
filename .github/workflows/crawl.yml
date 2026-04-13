@@ -1,0 +1,34 @@
+name: Monthly Crawler
+
+on:
+  schedule:
+    - cron: '0 3 1 * *'   # 1. des Monats, 03:00 UTC
+  workflow_dispatch:        # manuell auslösbar
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Crawler ausführen
+        run: npm run crawl
+
+      - name: clubs.json committen (wenn geändert)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/clubs.json
+          git diff --staged --quiet || git commit -m "chore: update clubs.json [crawler]"
+          git push
