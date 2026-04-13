@@ -1,4 +1,76 @@
-const API_BASE = '';
+// Fuse.js wird via CDN geladen (siehe index.html)
+// Suchlogik läuft vollständig client-seitig
+
+let searchEngine = null;
+
+// --- Haversine ---
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// --- SearchEngine (client-seitig) ---
+
+class SearchEngine {
+  constructor(clubs) {
+    this.clubs = clubs;
+    this.fuse = new Fuse(clubs, {
+      keys: ['name'],
+      threshold: 0.4,
+      includeScore: true
+    });
+  }
+
+  searchByName(query) {
+    return this.fuse.search(query).map(r => r.item);
+  }
+
+  searchByLocation(lat, lng, radiusKm) {
+    return this.clubs
+      .filter(c => c.lat != null && c.lng != null)
+      .map(c => ({ ...c, distanceKm: Math.round(haversineKm(lat, lng, c.lat, c.lng) * 10) / 10 }))
+      .filter(c => c.distanceKm <= radiusKm)
+      .sort((a, b) => a.distanceKm - b.distanceKm);
+  }
+
+  searchCombined(query, lat, lng, radiusKm) {
+    const byLocation = this.searchByLocation(lat, lng, radiusKm);
+    const locationIds = new Set(byLocation.map(c => c.clubId));
+    const byName = this.searchByName(query).filter(c => locationIds.has(c.clubId));
+    const distances = new Map(byLocation.map(c => [c.clubId, c.distanceKm]));
+    return byName.map(c => ({ ...c, distanceKm: distances.get(c.clubId) }));
+  }
+}
+
+// --- Nominatim (direkt vom Browser) ---
+
+async function geocodeCity(city) {
+  const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=de&q=' +
+    encodeURIComponent(city);
+  const res = await fetch(url, {
+    headers: { 'Accept': 'application/json', 'Accept-Language': 'de' }
+  });
+  const data = await res.json();
+  if (!data.length) return null;
+  return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+}
+
+// --- Daten laden ---
+
+async function loadClubs() {
+  setStatus('Lade Vereinsdaten...');
+  const res = await fetch('data/clubs.json');
+  if (!res.ok) throw new Error('clubs.json konnte nicht geladen werden');
+  return res.json();
+}
+
+// --- Rendering ---
 
 function debounce(fn, ms) {
   let timer;
@@ -106,6 +178,10 @@ function renderClub(club) {
   return card;
 }
 
+function setStatus(text) {
+  document.getElementById('status-text').textContent = text;
+}
+
 function showResults(results, statusText) {
   const list = document.getElementById('results-list');
   const status = document.getElementById('status-text');
@@ -114,48 +190,57 @@ function showResults(results, statusText) {
   results.forEach(club => list.appendChild(renderClub(club)));
 }
 
-async function searchByName(query) {
-  if (query.length < 3) return;
-  try {
-    const res = await fetch(API_BASE + '/search?name=' + encodeURIComponent(query));
-    const data = await res.json();
-    showResults(data.results, data.total + ' Verein(e) gefunden');
-  } catch {
-    document.getElementById('status-text').textContent = 'Fehler beim Laden der Ergebnisse.';
-  }
+// --- Suche ---
+
+function doNameSearch(query) {
+  if (!searchEngine || query.length < 3) return;
+  const results = searchEngine.searchByName(query);
+  showResults(results, results.length + ' Verein(e) gefunden');
 }
 
-async function searchByLocation() {
+async function doLocationSearch() {
+  if (!searchEngine) return;
   const near = document.getElementById('near-input').value.trim();
-  const radius = document.getElementById('radius-select').value;
+  const radius = Math.max(1, parseFloat(document.getElementById('radius-select').value) || 25);
   if (!near) return;
 
-  document.getElementById('status-text').textContent = 'Suche läuft...';
+  setStatus('Suche läuft...');
   try {
-    const res = await fetch(API_BASE + '/search?near=' + encodeURIComponent(near) + '&radius=' + radius);
-    const data = await res.json();
-    if (data.error) {
-      document.getElementById('status-text').textContent = data.error;
+    const coords = await geocodeCity(near);
+    if (!coords) {
+      setStatus('"' + near + '" konnte nicht gefunden werden.');
       return;
     }
-    showResults(data.results, data.total + ' Verein(e) im Umkreis von ' + radius + ' km um "' + near + '"');
+    const results = searchEngine.searchByLocation(coords.lat, coords.lng, radius);
+    showResults(results, results.length + ' Verein(e) im Umkreis von ' + radius + ' km um "' + near + '"');
   } catch {
-    document.getElementById('status-text').textContent = 'Fehler beim Laden der Ergebnisse.';
+    setStatus('Fehler bei der Ortssuche.');
   }
 }
 
-const debouncedSearch = debounce(searchByName, 300);
+const debouncedSearch = debounce(doNameSearch, 300);
 
 document.getElementById('name-input').addEventListener('input', e => {
   debouncedSearch(e.target.value.trim());
 });
 
 document.getElementById('name-btn').addEventListener('click', () => {
-  searchByName(document.getElementById('name-input').value.trim());
+  doNameSearch(document.getElementById('name-input').value.trim());
 });
 
-document.getElementById('near-btn').addEventListener('click', searchByLocation);
+document.getElementById('near-btn').addEventListener('click', doLocationSearch);
 
 document.getElementById('near-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') searchByLocation();
+  if (e.key === 'Enter') doLocationSearch();
 });
+
+// --- Init ---
+
+loadClubs()
+  .then(clubs => {
+    searchEngine = new SearchEngine(clubs);
+    setStatus(clubs.length + ' Vereine geladen. Bereit zur Suche.');
+  })
+  .catch(() => {
+    setStatus('Fehler: Vereinsdaten konnten nicht geladen werden.');
+  });
