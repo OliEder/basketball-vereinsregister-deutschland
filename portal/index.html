@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basketball Vereinsregister</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Basketball Vereinsregister</h1>
+    <p>Finde einen Basketballverein in Deutschland</p>
+  </header>
+
+  <main>
+    <section class="search-box">
+      <div class="search-row">
+        <input type="text" id="name-input" placeholder="Vereinsname suchen..." autocomplete="off">
+        <button id="name-btn">Suchen</button>
+      </div>
+
+      <div class="divider">— oder —</div>
+
+      <div class="search-row">
+        <input type="text" id="near-input" placeholder="Mein Ort (z.B. Regensburg)">
+        <select id="radius-select">
+          <option value="10">10 km</option>
+          <option value="25" selected>25 km</option>
+          <option value="50">50 km</option>
+          <option value="100">100 km</option>
+        </select>
+        <button id="near-btn">In der Nähe suchen</button>
+      </div>
+    </section>
+
+    <section id="results">
+      <p id="status-text"></p>
+      <div id="results-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
