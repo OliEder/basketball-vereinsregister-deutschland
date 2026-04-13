@@ -7,7 +7,8 @@
     "strict": true,
     "outDir": "./dist",
     "rootDir": "./",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": ["crawler/**/*", "api/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist", "portal"]
