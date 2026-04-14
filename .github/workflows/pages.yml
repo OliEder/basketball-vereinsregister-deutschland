@@ -6,6 +6,7 @@ on:
     paths:
       - 'portal/**'
       - 'data/clubs.json'
+      - 'data/schemas/**'
   workflow_dispatch:
 
 jobs:
@@ -25,9 +26,10 @@ jobs:
 
       - name: Deploy-Artefakt zusammenstellen
         run: |
-          mkdir -p _site/data
+          mkdir -p _site/data/schemas
           cp portal/index.html portal/style.css portal/app.js _site/
           cp data/clubs.json _site/data/clubs.json
+          cp data/schemas/*.json _site/data/schemas/
 
       - uses: actions/configure-pages@v4
 
