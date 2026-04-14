@@ -66,13 +66,13 @@ async function crawl(): Promise<void> {
 
   // Phase 2: Club-Details nur für neue clubIds
   console.log('\nPhase 2: Hole Club-Details für neue Vereine...');
-  const existing = loadExistingClubs();
+  const existingClubs = loadExistingClubs();
   let detailCount = 0;
 
   for (const club of allClubs.values()) {
-    if (existing.has(club.clubId)) {
-      // Preserve existing data, only update teams
-      const prev = existing.get(club.clubId)!;
+    if (existingClubs.has(club.clubId)) {
+      // Preserve coordinates, name, halls from existing data; teams come from Phase 1
+      const prev = existingClubs.get(club.clubId)!;
       club.name = prev.name;
       club.vereinsnummer = prev.vereinsnummer;
       club.geocodedFrom = prev.geocodedFrom;
@@ -86,6 +86,8 @@ async function crawl(): Promise<void> {
         club.vereinsnummer = details.vereinsnummer;
         club.geocodedFrom = extractCityFromName(details.vereinsname);
         detailCount++;
+      } else {
+        console.warn(`  Club-Details nicht gefunden für clubId ${club.clubId} (${club.name})`);
       }
       club.halls = [];
     }
