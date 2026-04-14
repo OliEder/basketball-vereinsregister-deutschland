@@ -61,4 +61,16 @@ export class BbbClient {
     );
     return data.data.tabelle?.entries ?? [];
   }
+
+  async getClubDetails(clubId: number): Promise<{ vereinsname: string; vereinsnummer: string } | null> {
+    await this.sleep(RATE_LIMIT_MS);
+    try {
+      const data = await this.request<{ data: { club: { vereinsname: string; vereinsnummer: string } } }>(
+        `${BBB_BASE}/club/id/${clubId}/actualmatches?justHome=false&rangeDays=0`
+      );
+      return data.data.club ?? null;
+    } catch {
+      return null;
+    }
+  }
 }

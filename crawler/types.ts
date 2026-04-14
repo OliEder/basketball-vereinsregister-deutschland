@@ -3,6 +3,7 @@
 export interface ClubEntry {
   clubId: number;
   name: string;
+  vereinsnummer?: string;
   verbandId: number;
   verbandName: string;
   lat: number | null;

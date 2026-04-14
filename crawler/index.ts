@@ -1,5 +1,5 @@
 import { BbbClient } from './bbb-client';
-import { extractClubs } from './extractor';
+import { extractClubs, extractCityFromName } from './extractor';
 import { geocodeCity } from './geocoder';
 import { mergeAndWrite, loadExistingClubs } from './writer';
 import { ClubEntry } from './types';
@@ -30,6 +30,13 @@ async function crawl(): Promise<void> {
           const clubs = extractClubs(entries, verband.id, verband.label);
           for (const club of clubs) {
             if (!allClubs.has(club.clubId)) {
+              // Offiziellen Vereinsnamen holen
+              const details = await client.getClubDetails(club.clubId);
+              if (details) {
+                club.name = details.vereinsname;
+                club.vereinsnummer = details.vereinsnummer;
+                club.geocodedFrom = extractCityFromName(details.vereinsname);
+              }
               allClubs.set(club.clubId, club);
             }
           }
