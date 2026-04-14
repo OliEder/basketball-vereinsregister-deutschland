@@ -112,3 +112,8 @@ export interface BbbSpielfeld {
   plz?: string;
   ort?: string;
 }
+
+export interface HallRawEntry {
+  clubId: number;
+  spielfelder: BbbSpielfeld[];
+}

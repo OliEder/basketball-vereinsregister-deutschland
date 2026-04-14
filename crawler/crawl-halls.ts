@@ -6,14 +6,9 @@ import fs from 'fs';
 import path from 'path';
 import { BbbClient } from './bbb-client';
 import { loadExistingClubs } from './writer';
-import { BbbSpielfeld } from './types';
+import { BbbSpielfeld, HallRawEntry } from './types';
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'halls-raw.json');
-
-interface HallRawEntry {
-  clubId: number;
-  spielfelder: BbbSpielfeld[];
-}
 
 async function crawlHalls(): Promise<void> {
   const client = new BbbClient();
