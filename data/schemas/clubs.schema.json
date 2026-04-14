@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vereinsregister.github.io/data/schemas/clubs.schema.json",
+  "title": "ClubsArray",
+  "type": "array",
+  "items": {
+    "$ref": "https://vereinsregister.github.io/data/schemas/club.schema.json"
+  }
+}

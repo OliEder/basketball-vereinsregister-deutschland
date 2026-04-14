@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vereinsregister.github.io/data/schemas/club.schema.json",
+  "title": "ClubEntry",
+  "type": "object",
+  "required": ["clubId", "name", "verbandId", "verbandName", "lastCrawled", "halls", "teams"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "clubId": { "type": "integer" },
+    "name": { "type": "string" },
+    "vereinsnummer": { "type": "string" },
+    "verbandId": { "type": "integer" },
+    "verbandName": { "type": "string" },
+    "lat": { "type": ["number", "null"] },
+    "lng": { "type": ["number", "null"] },
+    "geocodedFrom": { "type": ["string", "null"] },
+    "logoUrl": { "type": ["string", "null"] },
+    "lastCrawled": { "type": "string", "format": "date-time" },
+    "website": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "phone": { "type": "string" },
+    "address": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "street": { "type": "string" },
+        "zip": { "type": "string" },
+        "city": { "type": "string" }
+      }
+    },
+    "info": { "type": "string" },
+    "halls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "dbbSpielfeldId", "bezeichnung"],
+        "unevaluatedProperties": false,
+        "properties": {
+          "id": { "type": ["string", "integer"] },
+          "dbbSpielfeldId": { "type": ["integer", "null"] },
+          "bezeichnung": { "type": "string" },
+          "strasse": { "type": "string" },
+          "plz": { "type": "string" },
+          "ort": { "type": "string" }
+        }
+      }
+    },
+    "teams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["teamPermanentId", "training"],
+        "unevaluatedProperties": false,
+        "properties": {
+          "teamPermanentId": { "type": "integer" },
+          "altersklasse": { "type": "string" },
+          "geschlecht": { "type": "string" },
+          "training": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["wochentag", "von", "bis", "hallId"],
+              "unevaluatedProperties": false,
+              "properties": {
+                "wochentag": {
+                  "type": "string",
+                  "enum": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+                },
+                "von": { "type": "string", "format": "time" },
+                "bis": { "type": "string", "format": "time" },
+                "hallId": { "type": ["string", "integer"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
