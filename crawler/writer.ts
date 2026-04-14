@@ -67,7 +67,7 @@ export function mergeAndWrite(newClubs: ClubEntry[]): void {
       ...(prev ?? {}),
       ...club,
       halls: mergeHalls(prev?.halls ?? [], club.halls ?? []),
-      teams: mergeTeams(prev?.teams ?? [], club.teams ?? [])
+      teams: mergeTeams(club.teams ?? [], prev?.teams ?? [])
     });
   }
 
