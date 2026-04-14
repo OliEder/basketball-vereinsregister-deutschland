@@ -75,4 +75,14 @@ describe('extractTeams', () => {
     const result = extractTeams(entries, 'Senioren', 'männlich');
     expect(result.size).toBe(0);
   });
+
+  it('deduplicates teams with same teamPermanentId within a club', () => {
+    const entries: BbbTableEntry[] = [
+      { rang: 1, team: { seasonTeamId: 1, teamPermanentId: 100, teamname: 'Bonn 1', teamnameSmall: 'Bonn', clubId: 10 } },
+      { rang: 2, team: { seasonTeamId: 2, teamPermanentId: 100, teamname: 'Bonn 1 (duplicate)', teamnameSmall: 'Bonn', clubId: 10 } },
+    ];
+    const result = extractTeams(entries, 'Senioren', 'männlich');
+    expect(result.get(10)).toHaveLength(1);
+    expect(result.get(10)![0].teamPermanentId).toBe(100);
+  });
 });
