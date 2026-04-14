@@ -11,7 +11,6 @@ function makeFetch(responseBody: object, status = 200) {
 
 describe('BbbClient', () => {
   it('extracts verbaende from wam data', async () => {
-    const client = new BbbClient();
     const mockFetch = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
@@ -21,7 +20,7 @@ describe('BbbClient', () => {
         }
       })
     });
-    (client as any).fetch = mockFetch;
+    const client = new BbbClient(mockFetch as any);
 
     const result = await client.getVerbaende();
     expect(result).toHaveLength(1);
@@ -30,7 +29,6 @@ describe('BbbClient', () => {
   });
 
   it('returns ligen for a verband', async () => {
-    const client = new BbbClient();
     const mockFetch = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
@@ -43,7 +41,7 @@ describe('BbbClient', () => {
         }
       })
     });
-    (client as any).fetch = mockFetch;
+    const client = new BbbClient(mockFetch as any);
 
     const result = await client.getLigen(2, 0);
     expect(result.ligen).toHaveLength(1);
@@ -52,7 +50,6 @@ describe('BbbClient', () => {
   });
 
   it('returns table entries for a liga', async () => {
-    const client = new BbbClient();
     const mockFetch = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
@@ -73,7 +70,7 @@ describe('BbbClient', () => {
         }
       })
     });
-    (client as any).fetch = mockFetch;
+    const client = new BbbClient(mockFetch as any);
 
     const result = await client.getTable(51933);
     expect(result).toHaveLength(1);

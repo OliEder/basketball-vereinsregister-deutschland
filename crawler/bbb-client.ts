@@ -85,11 +85,13 @@ export class BbbClient {
         `${BBB_BASE}/team/id/${teamPermanentId}/schedule`
       );
       return data.data.matches ?? [];
-    } catch {
+    } catch (err) {
+      console.warn(`getSpielplan(${teamPermanentId}) fehlgeschlagen:`, err);
       return [];
     }
   }
 
+  /** Lädt die Spielfeldinformationen für ein Match. Gibt nur das spielfeld-Objekt zurück (nicht die gesamten matchInfo-Daten). */
   async getMatchInfo(matchId: number): Promise<BbbSpielfeld | null> {
     await this.sleep(RATE_LIMIT_MS);
     try {
@@ -97,7 +99,8 @@ export class BbbClient {
         `${BBB_BASE}/match/id/${matchId}/matchInfo`
       );
       return data.data.matchInfo?.spielfeld ?? null;
-    } catch {
+    } catch (err) {
+      console.warn(`getMatchInfo(${matchId}) fehlgeschlagen:`, err);
       return null;
     }
   }
