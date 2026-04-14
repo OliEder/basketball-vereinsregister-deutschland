@@ -17,17 +17,18 @@ async function geocodeAll(): Promise<void> {
   console.log(`${toGeocode.length} Vereine ohne Koordinaten werden geocodiert...`);
 
   let done = 0;
-  for (const club of toGeocode) {
+  for (let i = 0; i < toGeocode.length; i++) {
+    const club = toGeocode[i];
     const coords = await geocodeCity(club.geocodedFrom ?? club.name);
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;
       done++;
     }
-    if (done % 50 === 0 && done > 0) {
-      console.log(`  ${done}/${toGeocode.length} geocodiert...`);
-      // Zwischenspeichern damit bei Timeout kein Fortschritt verloren geht
-      mergeAndWrite(toGeocode.slice(0, done));
+    // Alle 50 verarbeiteten Einträge zwischenspeichern (nicht nur erfolgreich geocodierte)
+    if ((i + 1) % 50 === 0) {
+      console.log(`  ${done} geocodiert, ${i + 1}/${toGeocode.length} verarbeitet...`);
+      mergeAndWrite(toGeocode.slice(0, i + 1));
     }
   }
 
