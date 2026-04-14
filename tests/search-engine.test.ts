@@ -11,7 +11,9 @@ const makeClub = (clubId: number, name: string, lat: number, lng: number): Merge
   lng,
   geocodedFrom: name.split(' ').pop() ?? null,
   logoUrl: null,
-  lastCrawled: '2026-04-13T10:00:00Z'
+  lastCrawled: '2026-04-13T10:00:00Z',
+  halls: [],
+  teams: []
 });
 
 const clubs: MergedClub[] = [

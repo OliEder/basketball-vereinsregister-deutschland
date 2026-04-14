@@ -1,5 +1,28 @@
 // crawler/types.ts
 
+export interface Hall {
+  id: number | string;
+  dbbSpielfeldId: number | null;
+  bezeichnung: string;
+  strasse?: string;
+  plz?: string;
+  ort?: string;
+}
+
+export interface TrainingSession {
+  wochentag: 'Montag' | 'Dienstag' | 'Mittwoch' | 'Donnerstag' | 'Freitag' | 'Samstag' | 'Sonntag';
+  von: string;
+  bis: string;
+  hallId: number | string;
+}
+
+export interface TeamEntry {
+  teamPermanentId: number;
+  altersklasse?: string;
+  geschlecht?: string;
+  training: TrainingSession[];
+}
+
 export interface ClubEntry {
   clubId: number;
   name: string;
@@ -11,6 +34,8 @@ export interface ClubEntry {
   geocodedFrom: string | null;
   logoUrl: string | null;
   lastCrawled: string;
+  halls: Hall[];
+  teams: TeamEntry[];
 }
 
 export interface ClubEnriched {
@@ -25,6 +50,11 @@ export interface ClubEnriched {
     city?: string;
   };
   info?: string;
+  halls?: Hall[];
+  teams?: Array<{
+    teamPermanentId: number;
+    training: TrainingSession[];
+  }>;
 }
 
 export interface MergedClub extends ClubEntry {
@@ -52,6 +82,8 @@ export interface BbbLiga {
   liganame: string;
   verbandId: number;
   verbandName: string;
+  akName?: string;
+  geschlecht?: string;
 }
 
 export interface BbbTeam {
@@ -65,4 +97,18 @@ export interface BbbTeam {
 export interface BbbTableEntry {
   rang: number;
   team: BbbTeam;
+}
+
+export interface BbbMatch {
+  matchId: number;
+  kickoffDate: string;
+  homeTeam: { teamPermanentId: number };
+}
+
+export interface BbbSpielfeld {
+  id: number;
+  bezeichnung: string;
+  strasse?: string;
+  plz?: string;
+  ort?: string;
 }

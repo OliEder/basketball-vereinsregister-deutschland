@@ -1,6 +1,6 @@
 // tests/extractor.test.ts
-import { extractClubs, extractCityFromName } from '../crawler/extractor';
-import { BbbTableEntry } from '../crawler/types';
+import { extractClubs, extractCityFromName, extractTeams } from '../crawler/extractor';
+import { BbbTableEntry, TeamEntry } from '../crawler/types';
 
 const makeEntry = (clubId: number, teamname: string, teamPermanentId: number): BbbTableEntry => ({
   rang: 1,
@@ -47,5 +47,32 @@ describe('extractClubs', () => {
     const entries = [makeEntry(428, 'Fibalon Baskets Regensburg', 1001)];
     const clubs = extractClubs(entries, 2, 'Bayern');
     expect(clubs[0].geocodedFrom).toBe('Regensburg');
+  });
+});
+
+
+describe('extractTeams', () => {
+  it('groups teamPermanentIds by clubId with altersklasse + geschlecht', () => {
+    const entries: BbbTableEntry[] = [
+      { rang: 1, team: { seasonTeamId: 1, teamPermanentId: 100, teamname: 'Bonn 1', teamnameSmall: 'Bonn', clubId: 10 } },
+      { rang: 2, team: { seasonTeamId: 2, teamPermanentId: 200, teamname: 'Berlin 1', teamnameSmall: 'Berlin', clubId: 20 } },
+      { rang: 3, team: { seasonTeamId: 3, teamPermanentId: 101, teamname: 'Bonn 2', teamnameSmall: 'Bonn', clubId: 10 } },
+    ];
+    const result = extractTeams(entries, 'Senioren', 'männlich');
+    expect(result.get(10)).toEqual([
+      { teamPermanentId: 100, altersklasse: 'Senioren', geschlecht: 'männlich', training: [] },
+      { teamPermanentId: 101, altersklasse: 'Senioren', geschlecht: 'männlich', training: [] },
+    ]);
+    expect(result.get(20)).toEqual([
+      { teamPermanentId: 200, altersklasse: 'Senioren', geschlecht: 'männlich', training: [] },
+    ]);
+  });
+
+  it('skips entries with null clubId', () => {
+    const entries: BbbTableEntry[] = [
+      { rang: 1, team: { seasonTeamId: 1, teamPermanentId: 999, teamname: 'Sieger A/B', teamnameSmall: 'Sieger', clubId: null as any } },
+    ];
+    const result = extractTeams(entries, 'Senioren', 'männlich');
+    expect(result.size).toBe(0);
   });
 });
