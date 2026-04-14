@@ -56,8 +56,8 @@
                   "type": "string",
                   "enum": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
                 },
-                "von": { "type": "string", "format": "time" },
-                "bis": { "type": "string", "format": "time" },
+                "von": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+                "bis": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
                 "hallId": { "type": ["string", "integer"] }
               }
             }
