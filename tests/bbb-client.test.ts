@@ -1,6 +1,14 @@
 // tests/bbb-client.test.ts
 import { BbbClient } from '../crawler/bbb-client';
 
+function makeFetch(responseBody: object, status = 200) {
+  return jest.fn().mockResolvedValue({
+    ok: status >= 200 && status < 300,
+    status,
+    json: async () => responseBody
+  });
+}
+
 describe('BbbClient', () => {
   it('extracts verbaende from wam data', async () => {
     const client = new BbbClient();
@@ -70,5 +78,53 @@ describe('BbbClient', () => {
     const result = await client.getTable(51933);
     expect(result).toHaveLength(1);
     expect(result[0].team.clubId).toBe(1977);
+  });
+});
+
+describe('BbbClient.getSpielplan', () => {
+  it('returns home matches for a team', async () => {
+    const mockFetch = makeFetch({
+      status: '0',
+      data: {
+        matches: [
+          { matchId: 1001, kickoffDate: '2026-03-01', homeTeam: { teamPermanentId: 167890 } },
+          { matchId: 1002, kickoffDate: '2026-03-15', homeTeam: { teamPermanentId: 167890 } }
+        ]
+      }
+    });
+    const client = new BbbClient(mockFetch as any);
+    const matches = await client.getSpielplan(167890);
+    expect(matches).toHaveLength(2);
+    expect(matches[0].matchId).toBe(1001);
+  });
+
+  it('returns empty array when no matches', async () => {
+    const mockFetch = makeFetch({ status: '0', data: { matches: [] } });
+    const client = new BbbClient(mockFetch as any);
+    expect(await client.getSpielplan(99999)).toEqual([]);
+  });
+});
+
+describe('BbbClient.getMatchInfo', () => {
+  it('returns spielfeld from matchInfo', async () => {
+    const mockFetch = makeFetch({
+      status: '0',
+      data: {
+        matchInfo: {
+          spielfeld: { id: 105061, bezeichnung: 'Mittelschule West', strasse: 'Woffenbacher Str. 38', plz: '92318', ort: 'Neumarkt' }
+        }
+      }
+    });
+    const client = new BbbClient(mockFetch as any);
+    const spielfeld = await client.getMatchInfo(1001);
+    expect(spielfeld).not.toBeNull();
+    expect(spielfeld!.id).toBe(105061);
+    expect(spielfeld!.bezeichnung).toBe('Mittelschule West');
+  });
+
+  it('returns null when spielfeld missing', async () => {
+    const mockFetch = makeFetch({ status: '0', data: { matchInfo: {} } });
+    const client = new BbbClient(mockFetch as any);
+    expect(await client.getMatchInfo(1001)).toBeNull();
   });
 });

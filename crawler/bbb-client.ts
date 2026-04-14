@@ -1,11 +1,15 @@
 // crawler/bbb-client.ts
-import { BbbVerband, BbbLiga, BbbTableEntry } from './types';
+import { BbbVerband, BbbLiga, BbbTableEntry, BbbMatch, BbbSpielfeld } from './types';
 
 const BBB_BASE = 'https://www.basketball-bund.net/rest';
 const RATE_LIMIT_MS = 1100;
 
 export class BbbClient {
-  private fetch: typeof globalThis.fetch = globalThis.fetch;
+  private fetch: typeof globalThis.fetch;
+
+  constructor(fetchImpl?: typeof globalThis.fetch) {
+    this.fetch = fetchImpl ?? globalThis.fetch;
+  }
 
   private async sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -69,6 +73,30 @@ export class BbbClient {
         `${BBB_BASE}/club/id/${clubId}/actualmatches?justHome=false&rangeDays=0`
       );
       return data.data.club ?? null;
+    } catch {
+      return null;
+    }
+  }
+
+  async getSpielplan(teamPermanentId: number): Promise<BbbMatch[]> {
+    await this.sleep(RATE_LIMIT_MS);
+    try {
+      const data = await this.request<{ data: { matches: BbbMatch[] } }>(
+        `${BBB_BASE}/team/id/${teamPermanentId}/schedule`
+      );
+      return data.data.matches ?? [];
+    } catch {
+      return [];
+    }
+  }
+
+  async getMatchInfo(matchId: number): Promise<BbbSpielfeld | null> {
+    await this.sleep(RATE_LIMIT_MS);
+    try {
+      const data = await this.request<{ data: { matchInfo: { spielfeld?: BbbSpielfeld } } }>(
+        `${BBB_BASE}/match/id/${matchId}/matchInfo`
+      );
+      return data.data.matchInfo?.spielfeld ?? null;
     } catch {
       return null;
     }
