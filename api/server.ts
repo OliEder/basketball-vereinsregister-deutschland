@@ -2,8 +2,9 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { ClubEntry, ClubEnriched, MergedClub } from '../crawler/types';
+import { ClubEntry, MergedClub } from '../crawler/types';
 import { createSearchRouter } from './routes/search';
+import { validateClubs, loadAndValidateEnriched, mergeHalls, mergeTeams } from '../crawler/writer';
 
 const PORT = process.env.PORT ?? 3000;
 const CLUBS_PATH = path.join(__dirname, '..', 'data', 'clubs.json');
@@ -16,16 +17,24 @@ function loadAndMerge(): MergedClub[] {
   }
 
   const base: ClubEntry[] = JSON.parse(fs.readFileSync(CLUBS_PATH, 'utf-8'));
-  const enriched: ClubEnriched[] = fs.existsSync(ENRICHED_PATH)
-    ? JSON.parse(fs.readFileSync(ENRICHED_PATH, 'utf-8'))
-    : [];
 
+  if (!validateClubs(base)) {
+    console.warn('clubs.json Schema-Validierungsfehler — Server startet trotzdem');
+  }
+
+  const enriched = loadAndValidateEnriched(ENRICHED_PATH);
   const enrichedMap = new Map(enriched.map(e => [e.clubId, e]));
 
-  return base.map(club => ({
-    ...club,
-    ...(enrichedMap.get(club.clubId) ?? {})
-  }));
+  return base.map(club => {
+    const e = enrichedMap.get(club.clubId);
+    if (!e) return club as MergedClub;
+    return {
+      ...club,
+      ...e,
+      halls: mergeHalls(club.halls ?? [], e.halls ?? []),
+      teams: mergeTeams(club.teams ?? [], e.teams ?? [])
+    } as MergedClub;
+  });
 }
 
 const clubs = loadAndMerge();
