@@ -2,8 +2,12 @@
 // mit lat === null und schreibt die Koordinaten zurück.
 // Kann mehrfach ausgeführt werden (idempotent).
 
+import fs from 'fs';
+import path from 'path';
 import { geocodeCity } from './geocoder';
 import { loadExistingClubs, mergeAndWrite } from './writer';
+
+const TODO_PATH = path.join(__dirname, '..', 'data', 'geocoding-todo.json');
 
 async function geocodeAll(): Promise<void> {
   const existing = loadExistingClubs();
@@ -34,6 +38,24 @@ async function geocodeAll(): Promise<void> {
 
   mergeAndWrite(toGeocode);
   console.log(`Geocoding abgeschlossen: ${done}/${toGeocode.length} erfolgreich.`);
+
+  const failed = toGeocode.filter(c => c.lat === null);
+  if (failed.length > 0) {
+    const todo = failed.map(c => ({
+      clubId: c.clubId,
+      name: c.name,
+      geocodedFrom: c.geocodedFrom,
+      verbandName: c.verbandName,
+      bbbUrl: `https://www.basketball-bund.net/vereinDetail/id/${c.clubId}`,
+      // Manuell in clubs-enriched.json eintragen:
+      // { "clubId": X, "address": { "city": "Stadtname" } }
+    }));
+    fs.writeFileSync(TODO_PATH, JSON.stringify(todo, null, 2), 'utf-8');
+    console.log(`${failed.length} Vereine ohne Koordinaten → data/geocoding-todo.json`);
+  } else {
+    if (fs.existsSync(TODO_PATH)) fs.unlinkSync(TODO_PATH);
+    console.log('Alle Vereine geocodiert — geocoding-todo.json gelöscht.');
+  }
 }
 
 geocodeAll().catch(err => {
