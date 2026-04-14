@@ -79,7 +79,12 @@ export function mergeAndWrite(newClubs: ClubEntry[]): void {
 
 export function loadAndValidateEnriched(enrichedPath: string): ClubEnriched[] {
   if (!fs.existsSync(enrichedPath)) return [];
-  const raw: unknown[] = JSON.parse(fs.readFileSync(enrichedPath, 'utf-8'));
+  const parsed: unknown = JSON.parse(fs.readFileSync(enrichedPath, 'utf-8'));
+  if (!Array.isArray(parsed)) {
+    console.warn(`${enrichedPath}: Erwartet Array, erhalten: ${typeof parsed} — wird übersprungen`);
+    return [];
+  }
+  const raw: unknown[] = parsed;
   const valid: ClubEnriched[] = [];
   for (const entry of raw) {
     if (validateEnriched(entry)) {

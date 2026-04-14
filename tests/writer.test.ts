@@ -59,7 +59,7 @@ describe('validateEnriched', () => {
     expect(validateEnriched(invalid as any)).toBe(false);
   });
 
-  it('returns false for unknown field', () => {
+  it('returns false for unknown field (unevaluatedProperties: false)', () => {
     const invalid = { clubId: 1, unknownField: 'oops' };
     expect(validateEnriched(invalid as any)).toBe(false);
   });
