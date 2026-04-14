@@ -5,6 +5,7 @@ import { mergeAndWrite, loadExistingClubs } from './writer';
 import { ClubEntry } from './types';
 
 async function crawl(): Promise<void> {
+  const skipGeocoding = process.argv.includes('--skip-geocoding');
   const client = new BbbClient();
   const allClubs = new Map<number, ClubEntry>();
 
@@ -42,8 +43,17 @@ async function crawl(): Promise<void> {
     }
   }
 
-  console.log(`\n${allClubs.size} eindeutige Vereine gefunden. Starte Geocoding...`);
+  console.log(`\n${allClubs.size} eindeutige Vereine gefunden.`);
 
+  // Erst schreiben (ohne Koordinaten) damit clubs.json nie leer bleibt
+  mergeAndWrite(Array.from(allClubs.values()));
+
+  if (skipGeocoding) {
+    console.log('Geocoding übersprungen (--skip-geocoding).');
+    return;
+  }
+
+  console.log('Starte Geocoding...');
   const existing = loadExistingClubs();
   const toGeocode = Array.from(allClubs.values()).filter(club => {
     const ex = existing.get(club.clubId);

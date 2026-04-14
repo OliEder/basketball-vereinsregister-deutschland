@@ -6,12 +6,13 @@ on:
   workflow_dispatch:        # manuell auslösbar
 
 jobs:
+  # Job 1: BBB-API crawlen (~10-30 min)
+  # Schreibt alle Vereine ohne Koordinaten in clubs.json und committed sofort.
   crawl:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
 
@@ -22,13 +23,45 @@ jobs:
 
       - run: npm ci
 
-      - name: Crawler ausführen
-        run: npm run crawl
+      - name: BBB-API crawlen (ohne Geocoding)
+        run: npx ts-node crawler/index.ts --skip-geocoding
 
-      - name: clubs.json committen (wenn geändert)
+      - name: clubs.json committen
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/clubs.json
-          git diff --staged --quiet || git commit -m "chore: update clubs.json [crawler]"
+          git diff --staged --quiet || git commit -m "chore: update clubs.json - BBB crawl"
+          git push
+
+  # Job 2: Geocoding (nur Vereine mit lat === null)
+  # Initial: ~37 min für ~2000 Vereine. Danach: nur neue Einträge, wenige Minuten.
+  # Speichert alle 50 Vereine zwischendurch (Fortschritt bei Timeout nicht verloren).
+  geocode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    needs: crawl
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Geocoding (nur neue/fehlende Vereine)
+        run: npm run geocode
+
+      - name: clubs.json mit Koordinaten committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/clubs.json
+          git diff --staged --quiet || git commit -m "chore: update clubs.json - geocoding"
           git push

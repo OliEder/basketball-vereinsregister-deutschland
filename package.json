@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "crawl": "npx ts-node crawler/index.ts",
+    "geocode": "npx ts-node crawler/geocode.ts",
     "api": "npx ts-node api/server.ts",
     "test": "npx jest --runInBand",
     "test:watch": "npx jest --watch"
