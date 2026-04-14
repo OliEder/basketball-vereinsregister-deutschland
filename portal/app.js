@@ -100,6 +100,65 @@ function createLogoEl(club) {
   return placeholder;
 }
 
+function renderTeams(club, info) {
+  if (!club.teams || club.teams.length === 0) return;
+
+  const hallsById = {};
+  if (club.halls) {
+    club.halls.forEach(h => { hallsById[h.id] = h; });
+  }
+
+  const section = document.createElement('div');
+  section.className = 'club-teams';
+
+  club.teams.forEach(team => {
+    const teamEl = document.createElement('div');
+    teamEl.className = 'club-team';
+
+    const label = document.createElement('div');
+    label.className = 'club-team-label';
+    const parts = [team.altersklasse, team.geschlecht].filter(Boolean);
+    label.textContent = parts.length > 0 ? parts.join(' \u00B7 ') : 'Team';
+    teamEl.appendChild(label);
+
+    if (!team.training || team.training.length === 0) {
+      const noTraining = document.createElement('div');
+      noTraining.className = 'club-team-no-training';
+      noTraining.textContent = '(keine Trainingszeiten hinterlegt)';
+      teamEl.appendChild(noTraining);
+    } else {
+      team.training.forEach(t => {
+        const row = document.createElement('div');
+        row.className = 'club-training-row';
+        row.appendChild(document.createTextNode(t.wochentag + ' ' + t.von + '\u2013' + t.bis));
+
+        const hall = hallsById[t.hallId];
+        if (hall) {
+          row.appendChild(document.createTextNode(' \u00B7 '));
+          const hasAddr = hall.strasse && hall.ort;
+          if (hasAddr) {
+            const mapsQuery = encodeURIComponent(hall.bezeichnung + ', ' + hall.strasse + ', ' + (hall.plz ? hall.plz + ' ' : '') + hall.ort);
+            const hallLink = document.createElement('a');
+            hallLink.href = 'https://www.google.com/maps/search/?api=1&query=' + mapsQuery;
+            hallLink.target = '_blank';
+            hallLink.rel = 'noopener';
+            hallLink.textContent = hall.bezeichnung + ', ' + hall.strasse;
+            row.appendChild(hallLink);
+          } else {
+            row.appendChild(document.createTextNode(hall.bezeichnung));
+          }
+        }
+
+        teamEl.appendChild(row);
+      });
+    }
+
+    section.appendChild(teamEl);
+  });
+
+  info.appendChild(section);
+}
+
 function renderClub(club) {
   const card = document.createElement('div');
   card.className = 'club-card';
@@ -121,7 +180,7 @@ function renderClub(club) {
   ].filter(Boolean);
   const meta = document.createElement('div');
   meta.className = 'club-meta';
-  meta.textContent = metaParts.join(' · ');
+  meta.textContent = metaParts.join(' \u00B7 ');
   info.appendChild(meta);
 
   if (club.address && (club.address.street || club.address.zip || club.address.city)) {
@@ -135,6 +194,8 @@ function renderClub(club) {
     info.appendChild(addrEl);
   }
 
+  renderTeams(club, info);
+
   const links = document.createElement('div');
   links.className = 'club-links';
   if (club.website) {
@@ -142,19 +203,19 @@ function renderClub(club) {
     a.href = club.website;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.textContent = '🌐 ' + club.website.replace(/^https?:\/\//, '');
+    a.textContent = '\uD83C\uDF10 ' + club.website.replace(/^https?:\/\//, '');
     links.appendChild(a);
   }
   if (club.email) {
     const a = document.createElement('a');
     a.href = 'mailto:' + club.email;
-    a.textContent = '📧 ' + club.email;
+    a.textContent = '\uD83D\uDCE7 ' + club.email;
     links.appendChild(a);
   }
   if (club.phone) {
     const a = document.createElement('a');
     a.href = 'tel:' + club.phone;
-    a.textContent = '📞 ' + club.phone;
+    a.textContent = '\uD83D\uDCDE ' + club.phone;
     links.appendChild(a);
   }
   if (links.childNodes.length > 0) info.appendChild(links);
@@ -166,13 +227,22 @@ function renderClub(club) {
     info.appendChild(infoText);
   }
 
-  const bbbLink = document.createElement('a');
-  bbbLink.className = 'bbb-link';
-  bbbLink.href = 'https://www.basketball-bund.net/vereinDetail/id/' + club.clubId;
-  bbbLink.target = '_blank';
-  bbbLink.rel = 'noopener';
-  bbbLink.textContent = 'Auf basketball-bund.net ansehen →';
-  info.appendChild(bbbLink);
+  // Club-ID mit Copy-Button
+  const clubIdRow = document.createElement('div');
+  clubIdRow.className = 'club-id-row';
+  clubIdRow.appendChild(document.createTextNode('Club-ID: ' + club.clubId + ' '));
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'club-id-copy';
+  copyBtn.title = 'Club-ID kopieren';
+  copyBtn.textContent = '\uD83D\uDCCB';
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(String(club.clubId)).then(() => {
+      copyBtn.textContent = '\u2713';
+      setTimeout(() => { copyBtn.textContent = '\uD83D\uDCCB'; }, 1500);
+    });
+  });
+  clubIdRow.appendChild(copyBtn);
+  info.appendChild(clubIdRow);
 
   card.appendChild(info);
   return card;

@@ -126,19 +126,58 @@ main {
   margin-top: 0.5rem;
 }
 
-.bbb-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.3rem 0.8rem;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: #333;
+.club-teams {
+  margin: 8px 0;
+  font-size: 0.85em;
+}
+
+.club-team {
+  margin-bottom: 6px;
+}
+
+.club-team-label {
+  font-weight: 600;
+  color: #444;
+}
+
+.club-team-no-training {
+  color: #999;
+  font-style: italic;
+}
+
+.club-training-row {
+  color: #555;
+  margin-left: 8px;
+}
+
+.club-training-row a {
+  color: #1a73e8;
   text-decoration: none;
 }
 
-.bbb-link:hover { background: #eeeeee; }
+.club-training-row a:hover {
+  text-decoration: underline;
+}
+
+.club-id-row {
+  font-size: 0.78em;
+  color: #999;
+  margin-top: 6px;
+}
+
+.club-id-copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 0.9em;
+  color: #999;
+  vertical-align: middle;
+}
+
+.club-id-copy:hover {
+  color: #555;
+}
 
 @media (max-width: 500px) {
   .club-card { flex-direction: column; }
