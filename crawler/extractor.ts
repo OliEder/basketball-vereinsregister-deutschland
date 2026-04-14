@@ -19,6 +19,7 @@ export function extractClubs(
 
   for (const entry of entries) {
     const { clubId, teamname, teamPermanentId } = entry.team;
+    if (clubId === null || clubId === undefined) continue;  // Cup-Platzhalter ("Sieger X/Y")
     if (seen.has(clubId)) continue;
 
     seen.set(clubId, {

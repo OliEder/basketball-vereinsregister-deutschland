@@ -1,16 +1,5 @@
 [
   {
-    "clubId": null,
-    "name": "Sieger Marburg/Keltern",
-    "verbandId": 100,
-    "verbandName": "Bundesligen",
-    "lat": null,
-    "lng": null,
-    "geocodedFrom": "Marburg/Keltern",
-    "logoUrl": "https://www.basketball-bund.net/media/team/null/logo",
-    "lastCrawled": "2026-04-14T06:41:45.375Z"
-  },
-  {
     "clubId": 31,
     "name": "BSG Basket Ludwigsburg",
     "verbandId": 31,
@@ -19,7 +8,8 @@
     "lng": 9.1895147,
     "geocodedFrom": "Ludwigsburg",
     "logoUrl": "https://www.basketball-bund.net/media/team/151289/logo",
-    "lastCrawled": "2026-04-14T06:46:50.699Z"
+    "lastCrawled": "2026-04-14T06:46:50.699Z",
+    "vereinsnummer": "0133065"
   },
   {
     "clubId": 34,
@@ -30,18 +20,20 @@
     "lng": 12.03996,
     "geocodedFrom": "Burglengenfeld",
     "logoUrl": "https://www.basketball-bund.net/media/team/313917/logo",
-    "lastCrawled": "2026-04-14T07:03:57.581Z"
+    "lastCrawled": "2026-04-14T07:03:57.581Z",
+    "vereinsnummer": "0232376"
   },
   {
     "clubId": 40,
-    "name": "SC Westfalia Kinderhaus",
+    "name": "SC Westfalia Kinderhaus 1920",
     "verbandId": 11,
     "verbandName": "Nordrhein-Westfalen",
     "lat": 51.9942949,
     "lng": 7.6025935,
     "geocodedFrom": "Kinderhaus",
     "logoUrl": "https://www.basketball-bund.net/media/team/169754/logo",
-    "lastCrawled": "2026-04-14T07:29:04.159Z"
+    "lastCrawled": "2026-04-14T07:29:04.159Z",
+    "vereinsnummer": "1140111"
   },
   {
     "clubId": 42,
@@ -52,40 +44,44 @@
     "lng": 8.747636,
     "geocodedFrom": "Friedberg",
     "logoUrl": "https://www.basketball-bund.net/media/team/163581/logo",
-    "lastCrawled": "2026-04-14T06:56:48.311Z"
+    "lastCrawled": "2026-04-14T06:56:48.311Z",
+    "vereinsnummer": "0220266"
   },
   {
     "clubId": 60,
-    "name": "TV Weismain",
+    "name": "TV 1904 Weismain",
     "verbandId": 2,
     "verbandName": "Bayern",
     "lat": 50.0850003,
     "lng": 11.2400354,
     "geocodedFrom": "Weismain",
     "logoUrl": "https://www.basketball-bund.net/media/team/321847/logo",
-    "lastCrawled": "2026-04-14T06:58:23.950Z"
+    "lastCrawled": "2026-04-14T06:58:23.950Z",
+    "vereinsnummer": "0240450"
   },
   {
     "clubId": 62,
-    "name": "SG Bramsche",
+    "name": "SG Bramsche e. V. 1966",
     "verbandId": 4,
     "verbandName": "Bremen",
     "lat": 52.4075184,
     "lng": 7.9791742,
-    "geocodedFrom": "Bramsche",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/161919/logo",
-    "lastCrawled": "2026-04-14T07:11:42.154Z"
+    "lastCrawled": "2026-04-14T07:11:42.154Z",
+    "vereinsnummer": "0782150"
   },
   {
     "clubId": 68,
-    "name": "TuS Petersfehn",
+    "name": "TuS \"Frei Weg\" Petersfehn 1904",
     "verbandId": 7,
     "verbandName": "Niedersachsen",
     "lat": 53.138746,
     "lng": 8.1117799,
     "geocodedFrom": "Petersfehn",
     "logoUrl": "https://www.basketball-bund.net/media/team/158021/logo",
-    "lastCrawled": "2026-04-14T07:21:22.945Z"
+    "lastCrawled": "2026-04-14T07:21:22.945Z",
+    "vereinsnummer": "0771100"
   },
   {
     "clubId": 69,
@@ -96,7 +92,8 @@
     "lng": 8.6472766,
     "geocodedFrom": "Haiterbach",
     "logoUrl": "https://www.basketball-bund.net/media/team/151278/logo",
-    "lastCrawled": "2026-04-14T06:47:00.149Z"
+    "lastCrawled": "2026-04-14T06:47:00.149Z",
+    "vereinsnummer": "0134086"
   },
   {
     "clubId": 79,
@@ -107,7 +104,8 @@
     "lng": 8.2164153,
     "geocodedFrom": "Altdorf",
     "logoUrl": "https://www.basketball-bund.net/media/team/158900/logo",
-    "lastCrawled": "2026-04-14T06:56:49.434Z"
+    "lastCrawled": "2026-04-14T06:56:49.434Z",
+    "vereinsnummer": "0231375"
   },
   {
     "clubId": 80,
@@ -118,29 +116,32 @@
     "lng": 12.3747329,
     "geocodedFrom": "Leipzig",
     "logoUrl": "https://www.basketball-bund.net/media/team/157056/logo",
-    "lastCrawled": "2026-04-14T07:50:07.646Z"
+    "lastCrawled": "2026-04-14T07:50:07.646Z",
+    "vereinsnummer": "1530070"
   },
   {
     "clubId": 85,
-    "name": "PSV Wismar Bulls",
+    "name": "Polizeisportverein Wismar",
     "verbandId": 12,
     "verbandName": "Mecklenburg-Vorpommern",
     "lat": 52.5119683,
     "lng": 13.2783539,
-    "geocodedFrom": "Bulls",
+    "geocodedFrom": "Wismar",
     "logoUrl": "https://www.basketball-bund.net/media/team/167783/logo",
-    "lastCrawled": "2026-04-14T07:20:41.144Z"
+    "lastCrawled": "2026-04-14T07:20:41.144Z",
+    "vereinsnummer": "1220017"
   },
   {
     "clubId": 88,
-    "name": "BBV 1950 Wurzen",
+    "name": "Basketballverein 1950 Wurzen",
     "verbandId": 15,
     "verbandName": "Sachsen",
     "lat": 51.3709574,
     "lng": 12.7410574,
     "geocodedFrom": "Wurzen",
     "logoUrl": "https://www.basketball-bund.net/media/team/154120/logo",
-    "lastCrawled": "2026-04-14T07:49:19.222Z"
+    "lastCrawled": "2026-04-14T07:49:19.222Z",
+    "vereinsnummer": "1530072"
   },
   {
     "clubId": 89,
@@ -151,7 +152,8 @@
     "lng": 12.918914,
     "geocodedFrom": "Chemnitz",
     "logoUrl": "https://www.basketball-bund.net/media/team/153634/logo",
-    "lastCrawled": "2026-04-14T07:49:20.397Z"
+    "lastCrawled": "2026-04-14T07:49:20.397Z",
+    "vereinsnummer": "1510073"
   },
   {
     "clubId": 91,
@@ -160,53 +162,58 @@
     "verbandName": "Thüringen",
     "lat": 51.4506408,
     "lng": 7.4189129,
-    "geocodedFrom": "66",
+    "geocodedFrom": "Gera",
     "logoUrl": "https://www.basketball-bund.net/media/team/168854/logo",
-    "lastCrawled": "2026-04-14T07:57:07.165Z"
+    "lastCrawled": "2026-04-14T07:57:07.165Z",
+    "vereinsnummer": "1600116"
   },
   {
     "clubId": 97,
-    "name": "BG Leitershofen/Stadtbergen 2",
+    "name": "BG Leitershofen/Stadtbergen",
     "verbandId": 32,
     "verbandName": "Regionalliga Südost",
     "lat": null,
     "lng": null,
-    "geocodedFrom": "2",
+    "geocodedFrom": "Leitershofen",
     "logoUrl": "https://www.basketball-bund.net/media/team/151070/logo",
-    "lastCrawled": "2026-04-14T06:46:44.617Z"
+    "lastCrawled": "2026-04-14T06:46:44.617Z",
+    "vereinsnummer": "0220263"
   },
   {
     "clubId": 98,
-    "name": "SC Osterwieck",
+    "name": "Sportclub Osterwieck",
     "verbandId": 4,
     "verbandName": "Bremen",
     "lat": 51.9689672,
     "lng": 10.7135463,
     "geocodedFrom": "Osterwieck",
     "logoUrl": "https://www.basketball-bund.net/media/team/157836/logo",
-    "lastCrawled": "2026-04-14T07:11:44.414Z"
+    "lastCrawled": "2026-04-14T07:11:44.414Z",
+    "vereinsnummer": "1320020"
   },
   {
     "clubId": 99,
-    "name": "SG Schaffhausen/Baskets 98",
+    "name": "Schaffhausen 96ers",
     "verbandId": 9,
     "verbandName": "Saarland",
     "lat": 51.1819526,
     "lng": 6.8662858,
-    "geocodedFrom": "98",
+    "geocodedFrom": "96ers",
     "logoUrl": "https://www.basketball-bund.net/media/team/163397/logo",
-    "lastCrawled": "2026-04-14T07:46:58.925Z"
+    "lastCrawled": "2026-04-14T07:46:58.925Z",
+    "vereinsnummer": "0914049"
   },
   {
     "clubId": 103,
-    "name": "TSV 1868 Aichach",
+    "name": "TSV Aichach",
     "verbandId": 2,
     "verbandName": "Bayern",
     "lat": 48.4591478,
     "lng": 11.1309953,
     "geocodedFrom": "Aichach",
     "logoUrl": "https://www.basketball-bund.net/media/team/171487/logo",
-    "lastCrawled": "2026-04-14T06:59:30.618Z"
+    "lastCrawled": "2026-04-14T06:59:30.618Z",
+    "vereinsnummer": "0220262"
   },
   {
     "clubId": 104,
@@ -217,84 +224,92 @@
     "lng": 11.5753822,
     "geocodedFrom": "München",
     "logoUrl": "https://www.basketball-bund.net/media/team/151025/logo",
-    "lastCrawled": "2026-04-14T06:55:37.263Z"
+    "lastCrawled": "2026-04-14T06:55:37.263Z",
+    "vereinsnummer": "0212141"
   },
   {
     "clubId": 108,
-    "name": "HanseBaskets Salzwedel I",
+    "name": "PSV Salzwedel",
     "verbandId": 13,
     "verbandName": "Sachsen-Anhalt",
     "lat": 51.4567532,
     "lng": 7.0184723,
-    "geocodedFrom": "I",
+    "geocodedFrom": "Salzwedel",
     "logoUrl": "https://www.basketball-bund.net/media/team/154562/logo",
-    "lastCrawled": "2026-04-14T07:52:29.285Z"
+    "lastCrawled": "2026-04-14T07:52:29.285Z",
+    "vereinsnummer": "1310021"
   },
   {
     "clubId": 112,
-    "name": "GGZ Baskets Zwickau",
+    "name": "Basketballclub Zwickau",
     "verbandId": 32,
     "verbandName": "Regionalliga Südost",
     "lat": 50.7185043,
     "lng": 12.4939267,
     "geocodedFrom": "Zwickau",
     "logoUrl": "https://www.basketball-bund.net/media/team/152236/logo",
-    "lastCrawled": "2026-04-14T06:46:42.477Z"
+    "lastCrawled": "2026-04-14T06:46:42.477Z",
+    "vereinsnummer": "1510061"
   },
   {
     "clubId": 115,
-    "name": "KK Nikola Tesla MTEL",
+    "name": "S.S.D. Nikola Tesla e.V.",
     "verbandId": 30,
     "verbandName": "Regionalliga Nord",
     "lat": 48.1485621,
     "lng": 11.4627313,
-    "geocodedFrom": "MTEL",
+    "geocodedFrom": "e.V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/171897/logo",
-    "lastCrawled": "2026-04-14T06:44:41.072Z"
+    "lastCrawled": "2026-04-14T06:44:41.072Z",
+    "vereinsnummer": "0554501"
   },
   {
     "clubId": 116,
-    "name": "TB Sigmaringen a.K.",
+    "name": "TB Sigmaringen e. V.",
     "verbandId": 1,
     "verbandName": "Baden-Württemberg",
     "lat": 52.5748116,
     "lng": 13.30425,
-    "geocodedFrom": "a.K.",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/166438/logo",
-    "lastCrawled": "2026-04-14T06:51:46.657Z"
+    "lastCrawled": "2026-04-14T06:51:46.657Z",
+    "vereinsnummer": "0134085"
   },
   {
     "clubId": 117,
-    "name": "TG Stockach",
+    "name": "TG Stockach e.V.",
     "verbandId": 1,
     "verbandName": "Baden-Württemberg",
     "lat": 47.8530941,
     "lng": 9.0134524,
-    "geocodedFrom": "Stockach",
+    "geocodedFrom": "e.V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/165593/logo",
-    "lastCrawled": "2026-04-14T06:53:55.557Z"
+    "lastCrawled": "2026-04-14T06:53:55.557Z",
+    "vereinsnummer": "0114068"
   },
   {
     "clubId": 119,
-    "name": "TSG Öhringen",
+    "name": "TSG Öhringen e. V.",
     "verbandId": 1,
     "verbandName": "Baden-Württemberg",
     "lat": 49.2005034,
     "lng": 9.5024397,
-    "geocodedFrom": "Öhringen",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/172056/logo",
-    "lastCrawled": "2026-04-14T06:49:49.093Z"
+    "lastCrawled": "2026-04-14T06:49:49.093Z",
+    "vereinsnummer": "0133062"
   },
   {
     "clubId": 120,
-    "name": "BV Hellas Esslingen",
+    "name": "BV Hellas Esslingen e. V.",
     "verbandId": 1,
     "verbandName": "Baden-Württemberg",
     "lat": 48.7427584,
     "lng": 9.3071685,
-    "geocodedFrom": "Esslingen",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/153098/logo",
-    "lastCrawled": "2026-04-14T06:48:55.723Z"
+    "lastCrawled": "2026-04-14T06:48:55.723Z",
+    "vereinsnummer": "0133061"
   },
   {
     "clubId": 121,
@@ -305,84 +320,92 @@
     "lng": 8.6440034,
     "geocodedFrom": "Kirchlengern",
     "logoUrl": "https://www.basketball-bund.net/media/team/160419/logo",
-    "lastCrawled": "2026-04-14T07:35:31.076Z"
+    "lastCrawled": "2026-04-14T07:35:31.076Z",
+    "vereinsnummer": "1150306"
   },
   {
     "clubId": 123,
-    "name": "BC Dresden",
+    "name": "Basketball Club Dresden e.V.",
     "verbandId": 3,
     "verbandName": "Berlin",
     "lat": 51.0493286,
     "lng": 13.7381437,
-    "geocodedFrom": "Dresden",
+    "geocodedFrom": "e.V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/321575/logo",
-    "lastCrawled": "2026-04-14T07:06:38.484Z"
+    "lastCrawled": "2026-04-14T07:06:38.484Z",
+    "vereinsnummer": "1520058"
   },
   {
     "clubId": 128,
-    "name": "Berlin Baskets 1",
+    "name": "Berlin Baskets",
     "verbandId": 3,
     "verbandName": "Berlin",
     "lat": null,
     "lng": null,
-    "geocodedFrom": "1",
+    "geocodedFrom": "Baskets",
     "logoUrl": "https://www.basketball-bund.net/media/team/313606/logo",
-    "lastCrawled": "2026-04-14T07:07:21.040Z"
+    "lastCrawled": "2026-04-14T07:07:21.040Z",
+    "vereinsnummer": "0300903"
   },
   {
     "clubId": 129,
-    "name": "TG Wiesmoor",
+    "name": "TG Wiesmoor von 1930 e. V.",
     "verbandId": 7,
     "verbandName": "Niedersachsen",
     "lat": 53.4114442,
     "lng": 7.7309444,
-    "geocodedFrom": "Wiesmoor",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/156149/logo",
-    "lastCrawled": "2026-04-14T07:24:56.391Z"
+    "lastCrawled": "2026-04-14T07:24:56.391Z",
+    "vereinsnummer": "0791070"
   },
   {
     "clubId": 134,
-    "name": "TV Dellbrück",
+    "name": "Turnverein Dellbrück",
     "verbandId": 11,
     "verbandName": "Nordrhein-Westfalen",
     "lat": 50.9759208,
     "lng": 7.0741062,
     "geocodedFrom": "Dellbrück",
     "logoUrl": "https://www.basketball-bund.net/media/team/165310/logo",
-    "lastCrawled": "2026-04-14T07:33:22.288Z"
+    "lastCrawled": "2026-04-14T07:33:22.288Z",
+    "vereinsnummer": "1110927"
   },
   {
     "clubId": 136,
-    "name": "TB Essen-Überruhr",
+    "name": "Turnerbund 1900 Essen-Überruhr",
     "verbandId": 11,
     "verbandName": "Nordrhein-Westfalen",
     "lat": 51.4287899,
     "lng": 7.0688091,
     "geocodedFrom": "Essen-Überruhr",
     "logoUrl": "https://www.basketball-bund.net/media/team/159554/logo",
-    "lastCrawled": "2026-04-14T07:32:51.682Z"
+    "lastCrawled": "2026-04-14T07:32:51.682Z",
+    "vereinsnummer": "1121117"
   },
   {
     "clubId": 139,
-    "name": "Güstrow Lizards Herren",
+    "name": "SV Einheit Güstrow",
     "verbandId": 12,
     "verbandName": "Mecklenburg-Vorpommern",
     "lat": 49.649486,
     "lng": 7.5299995,
-    "geocodedFrom": "Herren",
+    "geocodedFrom": "Güstrow",
     "logoUrl": "https://www.basketball-bund.net/media/team/172711/logo",
-    "lastCrawled": "2026-04-14T07:20:44.528Z"
+    "lastCrawled": "2026-04-14T07:20:44.528Z",
+    "vereinsnummer": "1230004"
   },
   {
     "clubId": 145,
-    "name": "Alte Freunde Düsseldorf",
+    "name": "SV Alte Freunde 95 Düsseldorf",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": 51.2254018,
     "lng": 6.7763137,
     "geocodedFrom": "Düsseldorf",
     "logoUrl": "https://www.basketball-bund.net/media/team/314737/logo",
-    "lastCrawled": "2026-04-14T06:48:16.477Z"
+    "lastCrawled": "2026-04-14T06:48:16.477Z",
+    "vereinsnummer": "1120119"
   },
   {
     "clubId": 147,
@@ -393,40 +416,44 @@
     "lng": 7.222753,
     "geocodedFrom": "Wellesweiler",
     "logoUrl": "https://www.basketball-bund.net/media/team/163409/logo",
-    "lastCrawled": "2026-04-14T07:47:00.863Z"
+    "lastCrawled": "2026-04-14T07:47:00.863Z",
+    "vereinsnummer": "0914040"
   },
   {
     "clubId": 153,
-    "name": "TuS Huchting a.K.",
+    "name": "TuS Huchting",
     "verbandId": 4,
     "verbandName": "Bremen",
     "lat": 52.5748116,
     "lng": 13.30425,
-    "geocodedFrom": "a.K.",
+    "geocodedFrom": "Huchting",
     "logoUrl": "https://www.basketball-bund.net/media/team/156426/logo",
-    "lastCrawled": "2026-04-14T07:12:05.920Z"
+    "lastCrawled": "2026-04-14T07:12:05.920Z",
+    "vereinsnummer": "0401180"
   },
   {
     "clubId": 156,
-    "name": "Brander TV Aachen",
+    "name": "Brander Turnverein 1883 Aachen e.V.",
     "verbandId": 11,
     "verbandName": "Nordrhein-Westfalen",
     "lat": 50.776351,
     "lng": 6.083862,
-    "geocodedFrom": "Aachen",
+    "geocodedFrom": "e.V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/155929/logo",
-    "lastCrawled": "2026-04-14T07:30:16.429Z"
+    "lastCrawled": "2026-04-14T07:30:16.429Z",
+    "vereinsnummer": "1110114"
   },
   {
     "clubId": 161,
-    "name": "SG Enkheim aK",
+    "name": "SG Enkheim",
     "verbandId": 6,
     "verbandName": "Hessen",
     "lat": 51.287728,
     "lng": 10.1806606,
-    "geocodedFrom": "aK",
+    "geocodedFrom": "Enkheim",
     "logoUrl": "https://www.basketball-bund.net/media/team/173144/logo",
-    "lastCrawled": "2026-04-14T07:19:02.620Z"
+    "lastCrawled": "2026-04-14T07:19:02.620Z",
+    "vereinsnummer": "0613063"
   },
   {
     "clubId": 167,
@@ -435,9 +462,10 @@
     "verbandName": "Bremen",
     "lat": 50.6736018,
     "lng": 9.7425818,
-    "geocodedFrom": "1860",
+    "geocodedFrom": "Bremen",
     "logoUrl": "https://www.basketball-bund.net/media/team/157822/logo",
-    "lastCrawled": "2026-04-14T07:11:43.280Z"
+    "lastCrawled": "2026-04-14T07:11:43.280Z",
+    "vereinsnummer": "0401190"
   },
   {
     "clubId": 169,
@@ -448,7 +476,8 @@
     "lng": 9.0271181,
     "geocodedFrom": "Ebingen",
     "logoUrl": "https://www.basketball-bund.net/media/team/319692/logo",
-    "lastCrawled": "2026-04-14T06:52:18.819Z"
+    "lastCrawled": "2026-04-14T06:52:18.819Z",
+    "vereinsnummer": "0134082"
   },
   {
     "clubId": 171,
@@ -459,7 +488,8 @@
     "lng": 9.0115732,
     "geocodedFrom": "Holzgerlingen",
     "logoUrl": "https://www.basketball-bund.net/media/team/166868/logo",
-    "lastCrawled": "2026-04-14T06:51:24.619Z"
+    "lastCrawled": "2026-04-14T06:51:24.619Z",
+    "vereinsnummer": "0134079"
   },
   {
     "clubId": 172,
@@ -470,84 +500,92 @@
     "lng": 9.3293362,
     "geocodedFrom": "Neuenstadt",
     "logoUrl": "https://www.basketball-bund.net/media/team/321595/logo",
-    "lastCrawled": "2026-04-14T06:50:18.556Z"
+    "lastCrawled": "2026-04-14T06:50:18.556Z",
+    "vereinsnummer": "0133060"
   },
   {
     "clubId": 173,
-    "name": "WSV Mehrstetten a.K.",
+    "name": "WSV Mehrstetten",
     "verbandId": 1,
     "verbandName": "Baden-Württemberg",
     "lat": 52.5748116,
     "lng": 13.30425,
-    "geocodedFrom": "a.K.",
+    "geocodedFrom": "Mehrstetten",
     "logoUrl": "https://www.basketball-bund.net/media/team/319712/logo",
-    "lastCrawled": "2026-04-14T06:51:25.750Z"
+    "lastCrawled": "2026-04-14T06:51:25.750Z",
+    "vereinsnummer": "0134078"
   },
   {
     "clubId": 175,
-    "name": "Justabs Halle I",
+    "name": "Justabs Halle",
     "verbandId": 13,
     "verbandName": "Sachsen-Anhalt",
     "lat": 51.4567532,
     "lng": 7.0184723,
-    "geocodedFrom": "I",
+    "geocodedFrom": "Halle",
     "logoUrl": "https://www.basketball-bund.net/media/team/153770/logo",
-    "lastCrawled": "2026-04-14T07:51:57.581Z"
+    "lastCrawled": "2026-04-14T07:51:57.581Z",
+    "vereinsnummer": "1330028"
   },
   {
     "clubId": 179,
-    "name": "Telekom Baskets Bonn 2",
+    "name": "Baskets Bonn e. V.",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": null,
     "lng": null,
-    "geocodedFrom": "2",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/157611/logo",
-    "lastCrawled": "2026-04-14T06:47:31.073Z"
+    "lastCrawled": "2026-04-14T06:47:31.073Z",
+    "vereinsnummer": "1110714"
   },
   {
     "clubId": 184,
-    "name": "TG Düsseldorf",
+    "name": "Turngemeinde v.1881 Düsseldorf",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": 51.2254018,
     "lng": 6.7763137,
     "geocodedFrom": "Düsseldorf",
     "logoUrl": "https://www.basketball-bund.net/media/team/159768/logo",
-    "lastCrawled": "2026-04-14T06:47:31.073Z"
+    "lastCrawled": "2026-04-14T06:47:31.073Z",
+    "vereinsnummer": "1120117"
   },
   {
     "clubId": 193,
-    "name": "DJK TUSA 06 Düsseldorf 3",
+    "name": "DJK TUSA 06 Düsseldorf",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": null,
     "lng": null,
-    "geocodedFrom": "3",
+    "geocodedFrom": "Düsseldorf",
     "logoUrl": "https://www.basketball-bund.net/media/team/314735/logo",
-    "lastCrawled": "2026-04-14T06:48:01.862Z"
+    "lastCrawled": "2026-04-14T06:48:01.862Z",
+    "vereinsnummer": "1120101"
   },
   {
     "clubId": 196,
-    "name": "BG TVO / TV Jahn",
+    "name": "BG TVO Biggesee / TV Jahn Siegen",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": 47.8754565,
     "lng": 12.6752565,
-    "geocodedFrom": "Jahn",
+    "geocodedFrom": "Siegen",
     "logoUrl": "https://www.basketball-bund.net/media/team/174227/logo",
-    "lastCrawled": "2026-04-14T06:47:23.491Z"
+    "lastCrawled": "2026-04-14T06:47:23.491Z",
+    "vereinsnummer": "1131150"
   },
   {
     "clubId": 200,
-    "name": "ISD Sportverein",
+    "name": "ISD Sportverein e. V.",
     "verbandId": 33,
     "verbandName": "Regionalliga West",
     "lat": 49.3921336,
     "lng": 12.7161963,
-    "geocodedFrom": "Sportverein",
+    "geocodedFrom": "V.",
     "logoUrl": "https://www.basketball-bund.net/media/team/158790/logo",
-    "lastCrawled": "2026-04-14T06:47:56.632Z"
+    "lastCrawled": "2026-04-14T06:47:56.632Z",
+    "vereinsnummer": "1120118"
   },
   {
     "clubId": 203,
