@@ -20,6 +20,9 @@ export interface TeamEntry {
   teamPermanentId: number;
   altersklasse?: string;
   geschlecht?: string;
+  teamNumber?: number;
+  teamAkj?: string;
+  teamAkjId?: number;
   training: TrainingSession[];
 }
 

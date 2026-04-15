@@ -100,6 +100,24 @@ function createLogoEl(club) {
   return placeholder;
 }
 
+function getTeamLabel(team, allTeams) {
+  const ak = team.altersklasse ?? '';
+  const g = team.geschlecht ?? '';
+  const num = team.teamNumber ?? 1;
+
+  // Basisname
+  let base;
+  if (ak.toLowerCase() === 'senioren') {
+    base = g === 'weiblich' ? 'Frauen' : g === 'männlich' ? 'Herren' : ak;
+  } else {
+    const suffix = g ? ' (' + g + ')' : '';
+    base = ak + suffix;
+  }
+
+  // Nummer anhängen wenn > 1
+  return num > 1 ? base + ' ' + num : base;
+}
+
 function renderTeams(club, info) {
   if (!club.teams || club.teams.length === 0) return;
 
@@ -117,8 +135,13 @@ function renderTeams(club, info) {
 
     const label = document.createElement('div');
     label.className = 'club-team-label';
-    const parts = [team.altersklasse, team.geschlecht].filter(Boolean);
-    label.textContent = parts.length > 0 ? parts.join(' \u00B7 ') : 'Team';
+    label.textContent = getTeamLabel(team, club.teams);
+    if (team.teamAkj) {
+      const akj = document.createElement('span');
+      akj.className = 'club-team-akj';
+      akj.textContent = ' (' + team.teamAkj + ')';
+      label.appendChild(akj);
+    }
     teamEl.appendChild(label);
 
     if (!team.training || team.training.length === 0) {

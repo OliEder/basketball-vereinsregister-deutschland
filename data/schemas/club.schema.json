@@ -55,6 +55,9 @@
           "teamPermanentId": { "type": "integer" },
           "altersklasse": { "type": "string" },
           "geschlecht": { "type": "string" },
+          "teamNumber": { "type": "integer" },
+          "teamAkj": { "type": "string" },
+          "teamAkjId": { "type": "integer" },
           "training": {
             "type": "array",
             "items": {

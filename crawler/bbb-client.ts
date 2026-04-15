@@ -104,4 +104,18 @@ export class BbbClient {
       return null;
     }
   }
+
+  async getTeamDetails(teamPermanentId: number): Promise<{ teamNumber: number; teamAkj: string; teamAkjId: number } | null> {
+    await this.sleep(RATE_LIMIT_MS);
+    try {
+      const data = await this.request<{ data: { team: { teamNumber: number; teamAkj: string; teamAkjId: number } } }>(
+        `${BBB_BASE}/team/id/${teamPermanentId}/matches`
+      );
+      const t = data.data.team;
+      return t ? { teamNumber: t.teamNumber, teamAkj: t.teamAkj, teamAkjId: t.teamAkjId } : null;
+    } catch (err) {
+      console.warn(`getTeamDetails(${teamPermanentId}) fehlgeschlagen:`, err);
+      return null;
+    }
+  }
 }

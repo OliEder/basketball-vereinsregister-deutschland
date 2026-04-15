@@ -140,6 +140,12 @@ main {
   color: #444;
 }
 
+.club-team-akj {
+  font-weight: 400;
+  color: #888;
+  font-size: 0.9em;
+}
+
 .club-team-no-training {
   color: #999;
   font-style: italic;
