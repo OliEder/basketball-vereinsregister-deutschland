@@ -82,7 +82,7 @@ export class BbbClient {
     await this.sleep(RATE_LIMIT_MS);
     try {
       const data = await this.request<{ data: { matches: BbbMatch[] } }>(
-        `${BBB_BASE}/team/id/${teamPermanentId}/schedule`
+        `${BBB_BASE}/team/id/${teamPermanentId}/matches`
       );
       return data.data.matches ?? [];
     } catch (err) {
@@ -95,10 +95,10 @@ export class BbbClient {
   async getMatchInfo(matchId: number): Promise<BbbSpielfeld | null> {
     await this.sleep(RATE_LIMIT_MS);
     try {
-      const data = await this.request<{ data: { matchInfo: { spielfeld?: BbbSpielfeld } } }>(
+      const data = await this.request<{ data: { spielfeld?: BbbSpielfeld } }>(
         `${BBB_BASE}/match/id/${matchId}/matchInfo`
       );
-      return data.data.matchInfo?.spielfeld ?? null;
+      return data.data.spielfeld ?? null;
     } catch (err) {
       console.warn(`getMatchInfo(${matchId}) fehlgeschlagen:`, err);
       return null;
