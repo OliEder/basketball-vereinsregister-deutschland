@@ -4,42 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basketball Vereinsregister</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
-  <header>
-    <h1>Basketball Vereinsregister</h1>
-    <p>Finde einen Basketballverein in Deutschland</p>
+
+  <div class="court-bg" aria-hidden="true">
+    <div class="court-lines"></div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🏀 Deutschland</div>
+      <h1 class="hero-title">Basketball<br><span class="hero-accent">Vereinsregister</span></h1>
+      <p class="hero-sub">Finde deinen Verein — nach Name oder in deiner Nähe</p>
+      <div id="stats-bar"></div>
+    </div>
   </header>
 
   <main>
-    <section class="search-box">
-      <div class="search-row">
-        <input type="text" id="name-input" placeholder="Vereinsname suchen..." autocomplete="off">
-        <button id="name-btn">Suchen</button>
+    <section class="search-panel">
+      <div class="search-tabs">
+        <button class="tab active" data-tab="name">Nach Name</button>
+        <button class="tab" data-tab="location">In der Nähe</button>
       </div>
 
-      <div class="divider">— oder —</div>
+      <div class="tab-content active" id="tab-name">
+        <div class="search-row">
+          <input type="text" id="name-input" placeholder="z.B. Telekom Baskets, Bayern..." autocomplete="off" spellcheck="false">
+          <button id="name-btn" class="btn-primary">Suchen</button>
+        </div>
+      </div>
 
-      <div class="search-row">
-        <input type="text" id="near-input" placeholder="Mein Ort (z.B. Regensburg)">
-        <select id="radius-select">
-          <option value="10">10 km</option>
-          <option value="25" selected>25 km</option>
-          <option value="50">50 km</option>
-          <option value="100">100 km</option>
+      <div class="tab-content" id="tab-location">
+        <div class="search-row">
+          <input type="text" id="near-input" placeholder="Dein Ort, z.B. Regensburg">
+          <select id="radius-select">
+            <option value="10">10 km</option>
+            <option value="25" selected>25 km</option>
+            <option value="50">50 km</option>
+            <option value="100">100 km</option>
+          </select>
+          <button id="near-btn" class="btn-primary">Suchen</button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <label for="geschlecht-filter">Geschlecht:</label>
+        <select id="geschlecht-filter">
+          <option value="">Alle</option>
+          <option value="männlich">männlich</option>
+          <option value="weiblich">weiblich</option>
+          <option value="mix">mix</option>
         </select>
-        <button id="near-btn">In der Nähe suchen</button>
+        <label for="ak-filter">Altersklasse:</label>
+        <select id="ak-filter">
+          <option value="">Alle</option>
+        </select>
       </div>
     </section>
 
     <section id="results">
       <p id="status-text"></p>
+      <div id="map-container" style="display:none">
+        <div id="map"></div>
+      </div>
       <div id="results-list"></div>
     </section>
   </main>
 
+  <footer>
+    <div class="footer-inner">
+      <span>Daten: <a href="https://www.basketball-bund.net" target="_blank" rel="noopener">basketball-bund.net</a></span>
+      <div class="support-links">
+        <a href="https://buymeacoffee.com/olivermarcus.eder" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+        <a href="https://ko-fi.com/OliEder" target="_blank" rel="noopener">Ko-fi</a>
+      </div>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>

@@ -2,6 +2,9 @@
 
 Findet Basketballvereine in Deutschland — per Namenssuche oder Umkreissuche.
 
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-olivermarcus.eder-yellow?logo=buy-me-a-coffee)](https://buymeacoffee.com/olivermarcus.eder)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-OliEder-blue?logo=ko-fi)](https://ko-fi.com/OliEder)
+
 Datenquelle: [basketball-bund.net](https://www.basketball-bund.net) API
 
 ## Quick Start

@@ -95,10 +95,10 @@ export class BbbClient {
   async getMatchInfo(matchId: number): Promise<BbbSpielfeld | null> {
     await this.sleep(RATE_LIMIT_MS);
     try {
-      const data = await this.request<{ data: { spielfeld?: BbbSpielfeld } }>(
+      const data = await this.request<{ data: { matchInfo: { spielfeld?: BbbSpielfeld } | null } }>(
         `${BBB_BASE}/match/id/${matchId}/matchInfo`
       );
-      return data.data.spielfeld ?? null;
+      return data.data.matchInfo?.spielfeld ?? null;
     } catch (err) {
       console.warn(`getMatchInfo(${matchId}) fehlgeschlagen:`, err);
       return null;

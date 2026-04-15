@@ -107,7 +107,9 @@ describe('BbbClient.getMatchInfo', () => {
     const mockFetch = makeFetch({
       status: '0',
       data: {
-        spielfeld: { id: 105061, bezeichnung: 'Mittelschule West', strasse: 'Woffenbacher Str. 38', plz: '92318', ort: 'Neumarkt' }
+        matchInfo: {
+          spielfeld: { id: 105061, bezeichnung: 'Mittelschule West', strasse: 'Woffenbacher Str. 38', plz: '92318', ort: 'Neumarkt' }
+        }
       }
     });
     const client = new BbbClient(mockFetch as any);
@@ -118,7 +120,7 @@ describe('BbbClient.getMatchInfo', () => {
   });
 
   it('returns null when spielfeld missing', async () => {
-    const mockFetch = makeFetch({ status: '0', data: {} });
+    const mockFetch = makeFetch({ status: '0', data: { matchInfo: null } });
     const client = new BbbClient(mockFetch as any);
     expect(await client.getMatchInfo(1001)).toBeNull();
   });
