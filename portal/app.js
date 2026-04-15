@@ -136,12 +136,6 @@ function renderTeams(club, info) {
     const label = document.createElement('div');
     label.className = 'club-team-label';
     label.textContent = getTeamLabel(team, club.teams);
-    if (team.teamAkj) {
-      const akj = document.createElement('span');
-      akj.className = 'club-team-akj';
-      akj.textContent = ' (' + team.teamAkj + ')';
-      label.appendChild(akj);
-    }
     teamEl.appendChild(label);
 
     if (!team.training || team.training.length === 0) {
