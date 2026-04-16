@@ -1,0 +1,69 @@
+= Kapitel 6: Laufzeitsicht
+
+== Szenario 1: Crawl-Prozess
+
+[mermaid]
+----
+sequenceDiagram
+    participant Maintainer
+    participant Crawler as Crawler (index.ts)
+    participant BBB as BBB-API
+    participant Nominatim
+    participant FS as Dateisystem
+
+    Maintainer->>Crawler: npm run crawl
+    Crawler->>BBB: POST /wam/data (Verbände)
+    BBB-->>Crawler: [{id, label}]
+    loop Für jeden Verband
+        Crawler->>BBB: POST /wam/liga/list (Ligen)
+        BBB-->>Crawler: [{ligaId, verbandId}]
+        loop Für jede Liga
+            Crawler->>BBB: GET /tabelle (Teams)
+            BBB-->>Crawler: [{clubId, teamname}]
+        end
+    end
+    Crawler->>Nominatim: GET /search?q=Vereinsort
+    Nominatim-->>Crawler: [{lat, lon}]
+    Crawler->>FS: schreibt clubs.json
+----
+
+== Szenario 2: Namenssuche im Portal
+
+[mermaid]
+----
+sequenceDiagram
+    participant Nutzer
+    participant Portal as Portal (app.js)
+    participant Fuse as Fuse.js
+    participant DOM
+
+    Nutzer->>Portal: Eingabe in Suchfeld
+    Portal->>Fuse: search(query)
+    Fuse-->>Portal: [MergedClub, ...]
+    Portal->>Portal: applyFilters(results)
+    Portal->>DOM: renderResults()
+    DOM-->>Nutzer: Vereinsliste + Karte
+----
+
+== Szenario 3: Umkreissuche
+
+[mermaid]
+----
+sequenceDiagram
+    participant Nutzer
+    participant Portal as Portal (app.js)
+    participant Nominatim
+    participant Haversine as Haversine (intern)
+    participant Leaflet
+    participant DOM
+
+    Nutzer->>Portal: Ortsname + Radius eingeben
+    Portal->>Nominatim: GET /search?q=Ortsname
+    Nominatim-->>Portal: {lat, lon}
+    Portal->>Haversine: searchByLocation(lat, lng, radius)
+    Haversine-->>Portal: [MergedClub mit distanceKm, ...]
+    Portal->>Portal: applyFilters(results)
+    Portal->>Leaflet: updateMap(results)
+    Portal->>DOM: renderResults()
+    DOM-->>Nutzer: Vereinsliste + Karte mit Markern
+----

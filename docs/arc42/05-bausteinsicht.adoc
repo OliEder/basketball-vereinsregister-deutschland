@@ -1,0 +1,109 @@
+= Kapitel 5: Bausteinsicht
+
+== Ebene 1: Systemübersicht
+
+[plantuml]
+----
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor transparent
+
+package "Basketball Vereinsregister" {
+  [Crawler] as C
+  [Portal] as P
+  [API (optional)] as A
+  database "clubs.json" as DB
+  database "clubs-enriched.json" as EN
+  database "halls-raw.json" as HR
+}
+
+C --> DB : schreibt
+C --> HR : schreibt
+EN --> A : liest
+DB --> A : liest
+A --> P : (lokal, optional)
+DB --> P : lädt (statisch)
+
+note right of A : Nur lokal / Entwicklung.\nProduktion nutzt clubs.json direkt.
+@enduml
+----
+
+== Ebene 2: Crawler
+
+[plantuml]
+----
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor transparent
+
+package "Crawler" {
+  [index.ts\n(Orchestrierung)] as IDX
+  [bbb-client.ts\n(HTTP-Client)] as BBC
+  [extractor.ts\n(Datenextraktion)] as EXT
+  [geocoder.ts\n(Nominatim-Client)] as GEO
+  [writer.ts\n(Datei-I/O + Validierung)] as WRT
+  [crawl-halls.ts\n(Spielfeld-Crawl)] as CH
+  [merge-halls.ts\n(Koordinaten-Merge)] as MH
+  [geocode-halls.ts\n(Hallen-Geocoding)] as GH
+}
+
+IDX --> BBC : ruft auf
+IDX --> EXT : ruft auf
+IDX --> GEO : ruft auf
+IDX --> WRT : ruft auf
+CH --> BBC : ruft auf
+CH --> WRT : schreibt halls-raw.json
+MH --> WRT : liest/schreibt clubs.json
+GH --> GEO : ruft auf
+GH --> WRT : aktualisiert halls
+
+note bottom of BBC : Rate-Limit: 1100ms\nzwischen Requests
+@enduml
+----
+
+== Ebene 2: Portal
+
+[plantuml]
+----
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor transparent
+
+package "Portal" {
+  [index.html\n(Markup + Tabs + Footer)] as HTML
+  [style.css\n(Design-System)] as CSS
+  [app.js\n(Suche + Karte + Rendering)] as APP
+}
+
+package "Externe Bibliotheken (CDN)" {
+  [Fuse.js\n(Fuzzy-Suche)] as FUSE
+  [Leaflet\n(Karte)] as LEAF
+  [Nominatim\n(Umkreis-Geocoding)] as NOM
+}
+
+HTML --> CSS : referenziert
+HTML --> APP : lädt
+APP --> FUSE : Namenssuche
+APP --> LEAF : Kartenanzeige
+APP --> NOM : Ortsname → Koordinaten
+@enduml
+----
+
+== Schnittstellen zwischen Modulen
+
+[cols="2,2,3"]
+|===
+|Schnittstelle |Format |Beschreibung
+
+|clubs.json
+|JSON-Array von `MergedClub`
+|Hauptdatenschnittstelle. Crawler schreibt, Portal liest. Schema in `data/schemas/club.schema.json`.
+
+|clubs-enriched.json
+|JSON-Array von `ClubEnriched`
+|Manuelle Ergänzungen. API merged diese beim Start mit clubs.json.
+
+|halls-raw.json
+|JSON-Array von `HallRawEntry`
+|Rohdaten der Spielfelder direkt aus der BBB-API. Input für `merge-halls` und `geocode-halls`.
+|===

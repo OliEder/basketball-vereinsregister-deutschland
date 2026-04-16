@@ -1,0 +1,32 @@
+= Kapitel 4: Lösungsstrategie
+
+Die wesentlichen Architekturentscheidungen und ihre Begründungen:
+
+[cols="3,4,4"]
+|===
+|Entscheidung |Lösung |Begründung
+
+|Datenbeschaffung
+|Crawl-and-Store: Daten werden periodisch gecrawlt und als `clubs.json` gespeichert
+|Die BBB-API bietet keinen Namens-Suche-Endpoint. Live-Proxy würde für jede Suchanfrage hunderte API-Calls erfordern.
+
+|Suche
+|Client-seitige Fuzzy-Suche via Fuse.js und Haversine-Distanzberechnung im Browser
+|GitHub Pages erlaubt kein serverseitiges Computing. Die clubs.json (~400KB) ist kompakt genug für vollständiges Client-seitiges Laden.
+
+|Geocoding
+|Nominatim (OpenStreetMap) — kostenlos, kein API-Key
+|Google Maps API wäre kostenpflichtig ab Volumen. Nominatim ist ausreichend präzise für deutsche Vereinsadressen.
+
+|Koordinatenquelle
+|Hallen-Koordinaten als primäre Geo-Quelle für Vereine (via `merge-halls`)
+|Hallen haben konkrete Adressen (Spielfelddaten aus BBB-API). Vereinssitze sind oft Privatanschriften oder ungenau.
+
+|Portal-Technologie
+|Vanilla HTML/CSS/JS ohne Framework oder Build-System
+|Minimaler Wartungsaufwand für einen Einzelentwickler. Keine Dependency-Updates, kein Build-Pipeline-Risiko.
+
+|Datenanreicherung
+|Manuell gepflegte `clubs-enriched.json` als Override-Layer
+|Ermöglicht manuelle Korrekturen und Ergänzungen (Website, Kontakt, Info) ohne Crawler-Anpassung.
+|===
