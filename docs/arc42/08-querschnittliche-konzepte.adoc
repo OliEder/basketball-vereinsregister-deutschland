@@ -1,0 +1,64 @@
+= Kapitel 8: Querschnittliche Konzepte
+
+== Geocoding-Strategie
+
+Vereine haben häufig ungenaue oder private Adressen als Vereinssitz. Spielfelder (Hallen) haben konkrete Adressen, die aus der BBB-API bezogen werden (`/spielfeld`-Endpunkt).
+
+Die Geocoding-Strategie folgt dieser Priorität:
+
+1. **Hallen-Koordinaten** (bevorzugt): Nach `npm run merge-halls` werden die Koordinaten der gecrawlten Hallen in die Vereinsdaten übernommen.
+2. **Vereinsadresse** (Fallback): Falls keine Hallen vorhanden oder geocodet, wird der Vereinsort über Nominatim in Koordinaten umgewandelt.
+3. **Kein Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche.
+
+Bekannte Einschränkung: Einige Vereine haben Hallen weit entfernt vom eigentlichen Vereinsort (z.B. Gastspielfelder). Diese Irrläufer können manuell in `clubs-enriched.json` korrigiert werden.
+
+== Schema-Validierung
+
+Alle zentralen Datendateien werden gegen JSON-Schemas validiert (AJV-Bibliothek):
+
+[cols="2,3"]
+|===
+|Datei |Schema
+
+|`data/clubs.json`
+|`data/schemas/club.schema.json`
+
+|`data/clubs-enriched.json`
+|`data/schemas/club-enriched.schema.json`
+
+|`data/clubs.json` (Gesamtarray)
+|`data/schemas/clubs.schema.json`
+|===
+
+Validierungsfehler werden im Crawler als Warnungen geloggt — der Crawler bricht nicht ab, um Teilcrawls zu erhalten.
+
+== Fehlerbehandlung im Crawler
+
+[cols="2,4"]
+|===
+|Fehlerklasse |Behandlung
+
+|BBB-API HTTP-Fehler (4xx/5xx)
+|Exception wird geworfen, Crawl für diese Liga/Team abgebrochen. Andere Ligen laufen weiter.
+
+|BBB-API Fehler-Status (`status !== '0'`)
+|Exception wird geworfen (siehe `bbb-client.ts: request()`).
+
+|Nominatim-Fehler
+|Koordinate bleibt `null`. Verein wird ohne Geo-Daten gespeichert.
+
+|Rate-Limit-Überschreitung
+|Crawler wartet 1100ms zwischen jedem BBB-Request. Nominatim: 1 Request/s.
+|===
+
+== Datenanreicherung (Override-Layer)
+
+`data/clubs-enriched.json` ist eine manuell gepflegte Datei, die beim API-Start mit `clubs.json` gemerged wird. Folgende Felder können überschrieben oder ergänzt werden:
+
+- `website`, `email`, `phone`
+- `address` (Straße, PLZ, Ort)
+- `info` (Freitext)
+- `halls` (Hallen-Override oder Ergänzung)
+- `teams` (Trainingszeiten-Override)
+
+Merge-Logik: Alle Felder aus `clubs-enriched.json` überschreiben die gecrawlten Felder. Hallen und Teams werden nach ID gemerged (`mergeHalls`, `mergeTeams` in `writer.ts`).

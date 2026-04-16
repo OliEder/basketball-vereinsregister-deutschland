@@ -1,0 +1,88 @@
+= Kapitel 9: Architekturentscheidungen
+
+== ADR-001: Client-seitige Suche statt Backend-API
+
+*Status:* Akzeptiert
+
+*Kontext:*
+Das Portal soll auf GitHub Pages laufen. GitHub Pages erlaubt ausschließlich statische Dateien — kein serverseitiges Computing.
+
+*Entscheidung:*
+Suche und Filterung laufen vollständig im Browser. clubs.json (~400KB) wird beim Seitenaufruf einmal geladen und vollständig im RAM gehalten. Fuse.js übernimmt die Fuzzy-Suche, Haversine die Distanzberechnung.
+
+*Konsequenzen:*
+* (+) Kein Server, keine Betriebskosten, kein Backend-Maintenance
+* (+) Hohe Verfügbarkeit durch statisches Hosting
+* (-) Skaliert nicht für sehr große Datenmengen (> 5MB JSON wäre problematisch)
+* (-) Keine server-seitige Zugriffssteuerung oder Logging
+
+---
+
+== ADR-002: Crawl-and-Store statt Live-Proxy
+
+*Status:* Akzeptiert
+
+*Kontext:*
+Die BBB-API bietet keinen Namens-Suche-Endpunkt. Jede Suchanfrage würde hunderte sequentielle API-Calls erfordern (Verbände → Ligen → Teams). Das Rate-Limit von 1100ms macht dies für Echtzeit-Suche untauglich.
+
+*Entscheidung:*
+Daten werden regelmäßig (wöchentlich) gecrawlt und als `clubs.json` gespeichert. Das Portal nutzt diese Snapshot-Datei.
+
+*Konsequenzen:*
+* (+) Keine API-Abhängigkeit zur Laufzeit des Portals
+* (+) Volle Kontrolle über die Datenstruktur
+* (-) Daten können bis zu 7 Tage veraltet sein
+* (-) Crawl muss manuell oder per CI ausgelöst werden
+
+---
+
+== ADR-003: Geocoding via Nominatim
+
+*Status:* Akzeptiert
+
+*Kontext:*
+Vereine und Hallen brauchen GPS-Koordinaten für die Umkreissuche und Kartenanzeige.
+
+*Entscheidung:*
+Nominatim (OpenStreetMap) wird für alle Geocoding-Operationen verwendet.
+
+*Konsequenzen:*
+* (+) Kostenlos, kein API-Key erforderlich
+* (+) Gute Abdeckung für Deutschland
+* (-) Rate-Limit: 1 Request/Sekunde — Geocoding-Batch dauert lange
+* (-) Qualität variiert bei unvollständigen Adressen
+
+---
+
+== ADR-004: Hallen-Koordinaten als primäre Geo-Quelle
+
+*Status:* Akzeptiert
+
+*Kontext:*
+Vereinssitze sind oft Privatanschriften (des Vorsitzenden) oder ungenaue Ortsangaben. Spielfelder haben konkrete Straßenadressen aus der BBB-API.
+
+*Entscheidung:*
+Nach dem Hallen-Crawl werden Hallen-Koordinaten via `merge-halls` in die Vereinsdaten übernommen und als primäre Koordinatenquelle verwendet.
+
+*Konsequenzen:*
+* (+) Koordinaten sind geografisch akkurater (tatsächlicher Spielort)
+* (-) Einige Vereine spielen in fremden Hallen — Koordinaten zeigen nicht den Vereinssitz
+* (-) Erfordert separaten Crawl-Schritt (`crawl-halls → geocode-halls → merge-halls`)
+
+---
+
+== ADR-005: Vanilla HTML/CSS/JS für das Portal
+
+*Status:* Akzeptiert
+
+*Kontext:*
+Das Portal ist eine einfache Single-Page-Applikation mit Suchfeld, Filter und Kartenansicht.
+
+*Entscheidung:*
+Kein JavaScript-Framework (kein React, Vue, Svelte). Vanilla HTML, CSS und JS ohne Build-Schritt. Externe Libraries (Fuse.js, Leaflet) werden per CDN eingebunden.
+
+*Konsequenzen:*
+* (+) Keine Dependency-Updates, kein Build-Pipeline-Risiko
+* (+) Sehr schnelle Ladezeit (kein Bundle-Overhead)
+* (-) `app.js` wächst mit Features — ohne Modularisierung schwerer wartbar
+* (-) Keine TypeScript-Typsicherheit im Portal-Code

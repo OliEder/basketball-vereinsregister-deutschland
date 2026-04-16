@@ -1,0 +1,74 @@
+= Kapitel 7: Verteilungssicht
+
+== Produktionsumgebung
+
+[mermaid]
+----
+graph TD
+    subgraph "GitHub"
+        Repo["📁 Repository\n(Code + clubs.json)"]
+        Pages["🌐 GitHub Pages\n(portal/)"]
+    end
+
+    subgraph "Lokale Entwicklung"
+        Crawler["⚙️ Crawler\n(npm run crawl)"]
+        API["🔧 Express API\n(npm run api, optional)"]
+    end
+
+    subgraph "Externe Dienste"
+        BBB["basketball-bund.net/rest"]
+        Nominatim["nominatim.openstreetmap.org"]
+    end
+
+    subgraph "Browser-Nutzer"
+        Browser["🖥️ Browser"]
+    end
+
+    Crawler -->|"HTTP POST"| BBB
+    Crawler -->|"HTTP GET"| Nominatim
+    Crawler -->|"git push"| Repo
+    Repo -->|"GitHub Actions / automatisch"| Pages
+    Browser -->|"HTTPS"| Pages
+    Browser -->|"HTTP GET (Umkreissuche)"| Nominatim
+----
+
+== Deployment-Prozess
+
+[cols="2,4"]
+|===
+|Schritt |Beschreibung
+
+|1. Crawl ausführen
+|`npm run crawl` lokal ausführen. Dauer: 20–60 Minuten je nach Datenmenge.
+
+|2. Hallen crawlen (optional)
+|`npm run crawl-halls && npm run geocode-halls && npm run merge-halls`
+
+|3. Prüfen
+|`data/clubs.json` auf Vollständigkeit prüfen. Anzahl Vereine, fehlende Koordinaten.
+
+|4. Pushen
+|`git add data/clubs.json && git commit -m "chore: update clubs.json" && git push`
+
+|5. GitHub Pages
+|GitHub Pages deployed automatisch aus dem `main`-Branch. Keine Build-Pipeline nötig.
+|===
+
+== Infrastruktur-Anforderungen
+
+[cols="2,2,3"]
+|===
+|Komponente |Anforderung |Begründung
+
+|Portal-Hosting
+|Statisches File-Hosting
+|GitHub Pages, Netlify oder beliebig — keine serverseitigen Features nötig.
+
+|Crawler
+|Node.js ≥ 22, Internetzugang
+|Läuft lokal oder in CI (GitHub Actions).
+
+|Speicher
+|< 5MB für clubs.json + Portal
+|Weit unterhalb typischer Hosting-Limits.
+|===
