@@ -1,0 +1,234 @@
+/* Erbt alle CSS-Variablen aus style.css */
+
+.verein-header {
+  position: relative;
+  z-index: 1;
+  padding: 1.25rem 1.5rem 0;
+  border-bottom: 1px solid var(--dark-4);
+}
+
+.verein-header-inner {
+  max-width: 740px;
+  margin: 0 auto;
+  padding-bottom: 1.25rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s;
+}
+
+.back-link:hover { color: var(--light); }
+
+.verein-main {
+  position: relative;
+  z-index: 1;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.verein-loading,
+.verein-error {
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.verein-error a { color: var(--orange); }
+
+/* Club Header */
+.verein-club-header {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.verein-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: var(--dark-3);
+  flex-shrink: 0;
+}
+
+.verein-logo-placeholder {
+  width: 64px;
+  height: 64px;
+  background: var(--dark-3);
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.verein-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.verein-verband {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Links */
+.verein-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+.verein-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--orange);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--dark-4);
+  border-radius: 99px;
+  padding: 0.3rem 0.85rem;
+  transition: border-color 0.15s;
+}
+
+.verein-links a:hover { border-color: var(--orange); }
+
+/* Section Title */
+.verein-section-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+/* Karte */
+.verein-map-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--dark-4);
+  margin-bottom: 1rem;
+}
+
+#verein-map {
+  height: 280px;
+  width: 100%;
+  background: var(--dark-3);
+}
+
+/* Hallen-Liste */
+.verein-halls {
+  margin-bottom: 2rem;
+}
+
+.verein-hall-item {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-4);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.verein-hall-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--light);
+  margin-bottom: 0.15rem;
+}
+
+.verein-hall-addr {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Teams */
+.verein-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.verein-team-card {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-4);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+.verein-team-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.verein-team-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.verein-team-rang {
+  font-size: 0.8rem;
+  color: var(--orange);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.verein-team-liga {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.verein-team-loading {
+  font-style: italic;
+}
+
+.verein-badge-pokal {
+  font-size: 0.75rem;
+  background: var(--dark-4);
+  color: var(--muted);
+  border-radius: 99px;
+  padding: 0.15rem 0.6rem;
+  font-weight: 600;
+}
+
+/* Trainingszeiten */
+.verein-training-row {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-left: 0.25rem;
+  line-height: 1.7;
+}
+
+.verein-training-row a {
+  color: #5ba3f5;
+  text-decoration: none;
+}
+
+.verein-training-row a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 500px) {
+  .verein-club-header { flex-direction: column; }
+  .verein-team-header { flex-direction: column; align-items: flex-start; }
+}
