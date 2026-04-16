@@ -1,0 +1,63 @@
+= Kapitel 12: Glossar
+
+[cols="2,5"]
+|===
+|Begriff |Erläuterung
+
+|BBB / basketball-bund.net
+|Betreiber der offiziellen deutschen Basketball-Datenbank und API (`basketball-bund.net/rest`). Nicht zu verwechseln mit dem DBB (Dachverband).
+
+|DBB
+|Deutscher Basketball Bund — nationaler Dachverband. BBB ist der technische Betreiber der Spielbetrieb-Plattform.
+
+|Verband
+|Regionaler Basketball-Verband (z.B. Bayerischer Basketball Verband). Strukturierungsebene über Ligen.
+
+|Liga
+|Spielklasse innerhalb eines Verbands (z.B. Bezirksliga Männer). Enthält Teams.
+
+|clubId
+|Eindeutige numerische ID eines Vereins in der BBB-Datenbank. Primärschlüssel für alle Vereins-Lookups.
+
+|teamPermanentId
+|Stabile ID eines Teams über Saisons hinweg (im Gegensatz zur `seasonTeamId`, die saisongebunden ist).
+
+|Altersklasse
+|Alterskategorie eines Teams (z.B. U16, U18, Herren, Damen). Aus dem BBB-Feld `altersklasse`.
+
+|Spielfeld / Halle
+|Physischer Spielort eines Teams. Ein Verein kann mehrere Spielfelder haben. Enthält Adresse und (nach Geocoding) Koordinaten.
+
+|dbbSpielfeldId
+|Eindeutige ID eines Spielfelds in der BBB-Datenbank.
+
+|clubs.json
+|Zentrale Datendatei — Array aller `MergedClub`-Objekte. Auto-generiert vom Crawler, versioniert im Repository.
+
+|clubs-enriched.json
+|Manuell gepflegte Ergänzungsdatei. Überschreibt oder ergänzt Felder aus clubs.json (Website, Kontakt, Info).
+
+|halls-raw.json
+|Rohdaten der Spielfelder direkt aus der BBB-API. Input für Geocoding und Merge-Prozess.
+
+|Geocoding
+|Umwandlung von Adressen oder Ortsnamen in GPS-Koordinaten (Breitengrad / Längengrad) via Nominatim.
+
+|Haversine
+|Formel zur Berechnung der Luftlinien-Distanz zwischen zwei GPS-Koordinaten. Verwendet für die Umkreissuche.
+
+|Nominatim
+|Geocoding-Service von OpenStreetMap (`nominatim.openstreetmap.org`). Kostenlos, Rate-Limit: 1 Request/Sekunde.
+
+|Fuse.js
+|JavaScript-Bibliothek für clientseitige Fuzzy-Suche. Findet Treffer auch bei Tippfehlern oder unvollständigen Eingaben.
+
+|Leaflet
+|JavaScript-Bibliothek für interaktive Karten. Zeigt Vereinsstandorte als Marker auf OpenStreetMap.
+
+|Crawl-and-Store
+|Architekturmuster: Daten werden periodisch von einer externen Quelle abgerufen und lokal gespeichert, statt live abgefragt.
+
+|MergedClub
+|TypeScript-Interface (`crawler/types.ts`): Kombination aus `ClubEntry` (Crawler-Daten) und `ClubEnriched` (manuelle Anreicherung).
+|===

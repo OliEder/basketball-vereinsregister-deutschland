@@ -1,0 +1,70 @@
+= Kapitel 11: Risiken und technische Schulden
+
+== Risiken
+
+[cols="1,2,3,2,2"]
+|===
+|ID |Risiko |Beschreibung |Wahrscheinlichkeit |Maßnahme
+
+|R1
+|BBB-API Breaking Change
+|basketball-bund.net ändert Endpunkte oder Response-Format ohne Ankündigung. Der Crawler bricht.
+|Mittel
+|Crawler-Tests schreiben; Monitoring via wöchentlichem CI-Run; schnelle Anpassung möglich da bbb-client.ts isoliert ist.
+
+|R2
+|Nominatim Rate-Limit
+|Zu schnelle Geocoding-Requests führen zu temporären Sperren.
+|Gering
+|1100ms-Delay ist bereits implementiert. Bei Sperre: Wartezeit erhöhen.
+
+|R3
+|Geocoding-Irrläufer
+|Hallen-Koordinaten zeigen auf falsche Vereine (Gastspielfelder, Doppelbelegungen).
+|Mittel
+|Manuelle Korrektur via clubs-enriched.json möglich. Regelmäßiger visueller Check der Karte.
+
+|R4
+|clubs.json Datengröße
+|Wächst clubs.json auf > 2MB, steigt Ladezeit im Browser spürbar.
+|Gering (aktuell ~400KB)
+|Felder schlank halten. Bei Bedarf: Lazy-Loading oder Pagination einführen.
+
+|R5
+|Abhängigkeit von CDN
+|Fuse.js und Leaflet werden per CDN geladen. CDN-Ausfall = Portal teilweise funktionslos.
+|Sehr gering
+|Bei Bedarf: Bibliotheken lokal einbinden und mit Portal committen.
+|===
+
+== Technische Schulden
+
+[cols="1,2,3,2"]
+|===
+|ID |Bereich |Beschreibung |Priorität
+
+|TD1
+|Portal (`app.js`)
+|`app.js` hat 504 Zeilen ohne Modularisierung. Suche, Rendering, Karte und Event-Handling sind in einer Datei. Schwer testbar.
+|Mittel
+
+|TD2
+|Portal (Tests)
+|Keine automatisierten Tests für Portal-Logik (Suche, Filter, Haversine). Nur manuelle Verifikation.
+|Hoch
+
+|TD3
+|clubs-enriched.json
+|Keine Validierungsschicht für manuelle Einträge in clubs-enriched.json. Fehler fallen erst beim API-Start auf.
+|Mittel
+
+|TD4
+|Crawler (Fehlerbehandlung)
+|Einzelne Liga-Crawl-Fehler werden geloggt aber nicht aggregiert. Kein Überblick über Crawl-Vollständigkeit.
+|Niedrig
+
+|TD5
+|Dokumentation
+|Kein CONTRIBUTING.md, kein Setup-Guide für neue Contributor.
+|Niedrig
+|===

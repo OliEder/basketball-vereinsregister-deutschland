@@ -1,0 +1,63 @@
+= Kapitel 10: Qualitätsanforderungen
+
+== Quality Tree
+
+[mermaid]
+----
+graph TD
+    Q[Qualität]
+    Q --> A[Aktualität]
+    Q --> V[Verfügbarkeit]
+    Q --> F[Auffindbarkeit]
+    Q --> W[Wartbarkeit]
+
+    A --> A1[Vereinsdaten max. 7 Tage alt]
+    A --> A2[Crawl-Fehler werden sichtbar geloggt]
+
+    V --> V1[Portal erreichbar ohne eigenen Server]
+    V --> V2[Kein Single-Point-of-Failure]
+
+    F --> F1[Fuzzy-Suche toleriert Tippfehler]
+    F --> F2[Umkreissuche mit variablem Radius]
+    F --> F3[Filter nach Altersklasse und Geschlecht]
+
+    W --> W1[Crawler für Einzelperson wartbar]
+    W --> W2[Neue Felder ohne Refactoring ergänzbar]
+----
+
+== Qualitätsszenarien
+
+[cols="1,2,3,2"]
+|===
+|ID |Qualitätsmerkmal |Szenario |Ziel
+
+|Q1
+|Aktualität
+|Maintainer führt wöchentlichen Crawl durch
+|clubs.json ist nach Crawl maximal 7 Tage alt
+
+|Q2
+|Verfügbarkeit
+|Nutzer ruft Portal zu beliebiger Zeit auf
+|Portal lädt in < 3 Sekunden, unabhängig von BBB-API-Status
+
+|Q3
+|Auffindbarkeit
+|Nutzer tippt "Baskets Münch" statt "Telekom Baskets München"
+|Verein erscheint in Top-3 der Suchergebnisse
+
+|Q4
+|Auffindbarkeit
+|Nutzer sucht im Umkreis von 25km um "Regensburg"
+|Alle Vereine mit Hallen im Radius werden angezeigt
+
+|Q5
+|Wartbarkeit
+|Maintainer will neues Feld (z.B. Vereinsfarbe) ergänzen
+|Feld kann in clubs-enriched.json ohne Crawler-Anpassung hinzugefügt werden
+
+|Q6
+|Wartbarkeit
+|BBB-API ändert Endpunkt-Format
+|Anpassung nur in bbb-client.ts und extractor.ts nötig
+|===
