@@ -467,6 +467,69 @@ footer {
   color: var(--orange) !important;
 }
 
+/* ===== PROJECT TEASER ===== */
+
+#project-teaser {
+  max-width: 740px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.project-teaser-label {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.project-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.project-card {
+  display: block;
+  background: var(--dark-2);
+  border: 1px solid var(--dark-4);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--orange);
+}
+
+.project-card svg {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--orange);
+}
+
+.project-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--light);
+  margin-bottom: 0.25rem;
+}
+
+.project-card-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 520px) {
+  .project-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeDown {
   from { opacity: 0; transform: translateY(-12px); }
