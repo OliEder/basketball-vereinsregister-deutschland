@@ -2,7 +2,7 @@
 
 == Produktionsumgebung
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     subgraph "GitHub"

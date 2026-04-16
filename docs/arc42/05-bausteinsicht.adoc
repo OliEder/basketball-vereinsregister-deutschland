@@ -2,7 +2,7 @@
 
 == Ebene 1: Systemübersicht
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle
@@ -30,7 +30,7 @@ note right of A : Nur lokal / Entwicklung.\nProduktion nutzt clubs.json direkt.
 
 == Ebene 2: Crawler
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle
@@ -63,7 +63,7 @@ note bottom of BBC : Rate-Limit: 1100ms\nzwischen Requests
 
 == Ebene 2: Portal
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle

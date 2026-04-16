@@ -2,7 +2,7 @@
 
 == Quality Tree
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     Q[Qualität]

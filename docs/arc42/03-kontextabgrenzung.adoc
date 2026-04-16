@@ -27,7 +27,7 @@ Das Vereinsregister steht zwischen der BBB-Datenquelle und dem Endnutzer. Es üb
 
 == Systemkontext-Diagramm
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     Nutzer["👤 Browser-Nutzer"]

@@ -2,7 +2,7 @@
 
 == Szenario 1: Crawl-Prozess
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Maintainer
@@ -29,7 +29,7 @@ sequenceDiagram
 
 == Szenario 2: Namenssuche im Portal
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Nutzer
@@ -47,7 +47,7 @@ sequenceDiagram
 
 == Szenario 3: Umkreissuche
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Nutzer
