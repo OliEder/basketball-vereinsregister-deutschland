@@ -2,92 +2,15 @@
 
 == Ebene 1: Systemübersicht
 
-[source,plantuml]
-----
-@startuml
-skinparam componentStyle rectangle
-skinparam backgroundColor transparent
-
-package "Basketball Vereinsregister" {
-  [Crawler] as C
-  [Portal] as P
-  [API (optional)] as A
-  database "clubs.json" as DB
-  database "clubs-enriched.json" as EN
-  database "halls-raw.json" as HR
-}
-
-C --> DB : schreibt
-C --> HR : schreibt
-EN --> A : liest
-DB --> A : liest
-A --> P : (lokal, optional)
-DB --> P : lädt (statisch)
-
-note right of A : Nur lokal / Entwicklung.\nProduktion nutzt clubs.json direkt.
-@enduml
-----
+image::https://www.plantuml.com/plantuml/png/PP4nJyD038Nt-nLMfrQYPMT0RKEbibHHaLY0mKbCSkJgYtoEAa3yTvm8Q2j6V-_vdNrU9aNH_X1SQZrtA7Y0CXwwoCJweE-1GAXKv3hGcQN0igqbzbnbCKG15UHaaZKvrvc8DS5aZQabBJ04U2GXpqcezab99l3f09uomMCWUG5Ca0qWZw8OnZeVwbL-3zFOgO-COJRobV4A5GjCzaGP-Y8jtbBaoI3UhV-hSsBnPKFLoRRPNTWQcp3DRPQJOxjtNyvbC9_VMYZSG2eRsw3G7xRTdxFDReGhOy5JKcSjbs0rrhdLqn1R35VmjzMlUH03KgKmjQEej_IPSnpLJk3hHY6-Ze6xNc3CW6lOi1vzsOQUwyKpvnAhlXrYWNlzK3Zz3bHUgDM5Mn9NTkvl[Ebene 1: Systemübersicht,link="https://www.plantuml.com/plantuml/png/PP4nJyD038Nt-nLMfrQYPMT0RKEbibHHaLY0mKbCSkJgYtoEAa3yTvm8Q2j6V-_vdNrU9aNH_X1SQZrtA7Y0CXwwoCJweE-1GAXKv3hGcQN0igqbzbnbCKG15UHaaZKvrvc8DS5aZQabBJ04U2GXpqcezab99l3f09uomMCWUG5Ca0qWZw8OnZeVwbL-3zFOgO-COJRobV4A5GjCzaGP-Y8jtbBaoI3UhV-hSsBnPKFLoRRPNTWQcp3DRPQJOxjtNyvbC9_VMYZSG2eRsw3G7xRTdxFDReGhOy5JKcSjbs0rrhdLqn1R35VmjzMlUH03KgKmjQEej_IPSnpLJk3hHY6-Ze6xNc3CW6lOi1vzsOQUwyKpvnAhlXrYWNlzK3Zz3bHUgDM5Mn9NTkvl"]
 
 == Ebene 2: Crawler
 
-[source,plantuml]
-----
-@startuml
-skinparam componentStyle rectangle
-skinparam backgroundColor transparent
-
-package "Crawler" {
-  [index.ts\n(Orchestrierung)] as IDX
-  [bbb-client.ts\n(HTTP-Client)] as BBC
-  [extractor.ts\n(Datenextraktion)] as EXT
-  [geocoder.ts\n(Nominatim-Client)] as GEO
-  [writer.ts\n(Datei-I/O + Validierung)] as WRT
-  [crawl-halls.ts\n(Spielfeld-Crawl)] as CH
-  [merge-halls.ts\n(Koordinaten-Merge)] as MH
-  [geocode-halls.ts\n(Hallen-Geocoding)] as GH
-}
-
-IDX --> BBC : ruft auf
-IDX --> EXT : ruft auf
-IDX --> GEO : ruft auf
-IDX --> WRT : ruft auf
-CH --> BBC : ruft auf
-CH --> WRT : schreibt halls-raw.json
-MH --> WRT : liest/schreibt clubs.json
-GH --> GEO : ruft auf
-GH --> WRT : aktualisiert halls
-
-note bottom of BBC : Rate-Limit: 1100ms\nzwischen Requests
-@enduml
-----
+image::https://www.plantuml.com/plantuml/png/RP9DImCn48Rl-HL3xrlRQmzIkigkO16gO44y9DdfDZOVDPdGglZVJVhb5lRwlE_CF5bs6eXxYaQpi55sopqt89tPEekMdkbB8tYKn6shiLCHN6vQxw9jIgUT1_BSXXIb8SQsAUGjmg3qVAVH3-270Rmfs-1-IE4TU827ksLcGeX2QfN6pi5iLkO0zscb9EVF_7xvadcBJhe6BxYwVyfuvnNzmzV5eIlp-MBDjGxdfAnpOD2tU1tCwyxswwYgsIzZIHYAuZRxmGHyN17mkBhWfDU7aruVJe9TNDPzgq_qs0roxL49WeDQaLus_0ZEidctb3vae9jBLUeemh5MrNqwLNUORoXohO92Vxh2c7M481oHC-1M9y459omUbL4qWV5uD381ldSgNKKB2_oCoI6mATec_LL_[Ebene 2: Crawler,link="https://www.plantuml.com/plantuml/png/RP9DImCn48Rl-HL3xrlRQmzIkigkO16gO44y9DdfDZOVDPdGglZVJVhb5lRwlE_CF5bs6eXxYaQpi55sopqt89tPEekMdkbB8tYKn6shiLCHN6vQxw9jIgUT1_BSXXIb8SQsAUGjmg3qVAVH3-270Rmfs-1-IE4TU827ksLcGeX2QfN6pi5iLkO0zscb9EVF_7xvadcBJhe6BxYwVyfuvnNzmzV5eIlp-MBDjGxdfAnpOD2tU1tCwyxswwYgsIzZIHYAuZRxmGHyN17mkBhWfDU7aruVJe9TNDPzgq_qs0roxL49WeDQaLus_0ZEidctb3vae9jBLUeemh5MrNqwLNUORoXohO92Vxh2c7M481oHC-1M9y459omUbL4qWV5uD381ldSgNKKB2_oCoI6mATec_LL_"]
 
 == Ebene 2: Portal
 
-[source,plantuml]
-----
-@startuml
-skinparam componentStyle rectangle
-skinparam backgroundColor transparent
-
-package "Portal" {
-  [index.html\n(Markup + Tabs + Footer)] as HTML
-  [style.css\n(Design-System)] as CSS
-  [app.js\n(Suche + Karte + Rendering)] as APP
-}
-
-package "Externe Bibliotheken (CDN)" {
-  [Fuse.js\n(Fuzzy-Suche)] as FUSE
-  [Leaflet\n(Karte)] as LEAF
-  [Nominatim\n(Umkreis-Geocoding)] as NOM
-}
-
-HTML --> CSS : referenziert
-HTML --> APP : lädt
-APP --> FUSE : Namenssuche
-APP --> LEAF : Kartenanzeige
-APP --> NOM : Ortsname → Koordinaten
-@enduml
-----
+image::https://www.plantuml.com/plantuml/png/JP7BRi8m44Nt_eeHgtO17z151QMWIeI0b7PLTJ4aGt1ZZoDx8b6g_dl7z04xwnoFxxKzJO9H1kzCwYpt6D537NmVc5Wg-N04aMf1RXrTRTbXtRKn3DpCWmiH928dLJfaJAyIMuBHDaH1Du9F0_1gkQ7Zv23UlG4cU7fU5ncdd36fKphJULLbY7q_UVyXi-tMV5sTkJWAHIPui3jdWnoe8uQR-MDv-vkp71Bz3IzVgaLc1U7UaPnPiPWjCok3junY_PcMctMEoQrWFBxFHU1EhxudlTF9KfIBqqhg758Z9gypoqaAI_J4AGtrWVvL3bIrqdScHZwHRIzISzLjeYJMKJWDi0eXDhaPiPaID_ettm==[Ebene 2: Portal,link="https://www.plantuml.com/plantuml/png/JP7BRi8m44Nt_eeHgtO17z151QMWIeI0b7PLTJ4aGt1ZZoDx8b6g_dl7z04xwnoFxxKzJO9H1kzCwYpt6D537NmVc5Wg-N04aMf1RXrTRTbXtRKn3DpCWmiH928dLJfaJAyIMuBHDaH1Du9F0_1gkQ7Zv23UlG4cU7fU5ncdd36fKphJULLbY7q_UVyXi-tMV5sTkJWAHIPui3jdWnoe8uQR-MDv-vkp71Bz3IzVgaLc1U7UaPnPiPWjCok3junY_PcMctMEoQrWFBxFHU1EhxudlTF9KfIBqqhg758Z9gypoqaAI_J4AGtrWVvL3bIrqdScHZwHRIzISzLjeYJMKJWDi0eXDhaPiPaID_ettm=="]
 
 == Schnittstellen zwischen Modulen
 
