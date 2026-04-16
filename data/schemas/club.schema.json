@@ -41,7 +41,9 @@
           "bezeichnung": { "type": "string" },
           "strasse": { "type": "string" },
           "plz": { "type": "string" },
-          "ort": { "type": "string" }
+          "ort": { "type": "string" },
+          "lat": { "type": ["number", "null"] },
+          "lng": { "type": ["number", "null"] }
         }
       }
     },

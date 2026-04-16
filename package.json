@@ -10,7 +10,8 @@
     "test:watch": "npx jest --watch",
     "crawl-halls": "npx ts-node crawler/crawl-halls.ts",
     "merge-halls": "npx ts-node crawler/merge-halls.ts",
-    "backfill-team-details": "npx ts-node crawler/backfill-team-details.ts"
+    "backfill-team-details": "npx ts-node crawler/backfill-team-details.ts",
+    "geocode-halls": "npx ts-node crawler/geocode-halls.ts"
   },
   "dependencies": {
     "ajv": "^8.18.0",

@@ -77,6 +77,12 @@ export function mergeAndWrite(newClubs: ClubEntry[]): void {
   console.log(`clubs.json: ${sorted.length} Vereine gespeichert.`);
 }
 
+export function writeClubs(clubs: Map<number, ClubEntry>): void {
+  const sorted = Array.from(clubs.values()).sort((a, b) => a.clubId - b.clubId);
+  fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
+  fs.writeFileSync(DATA_PATH, JSON.stringify(sorted, null, 2), 'utf-8');
+}
+
 export function loadAndValidateEnriched(enrichedPath: string): ClubEnriched[] {
   if (!fs.existsSync(enrichedPath)) return [];
   const parsed: unknown = JSON.parse(fs.readFileSync(enrichedPath, 'utf-8'));

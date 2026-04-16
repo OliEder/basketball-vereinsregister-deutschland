@@ -7,6 +7,8 @@ export interface Hall {
   strasse?: string;
   plz?: string;
   ort?: string;
+  lat?: number | null;
+  lng?: number | null;
 }
 
 export interface TrainingSession {
