@@ -153,7 +153,7 @@ Das Vereinsregister steht zwischen der BBB-Datenquelle und dem Endnutzer. Es üb
 
 == Systemkontext-Diagramm
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     Nutzer["👤 Browser-Nutzer"]
@@ -230,7 +230,7 @@ Die wesentlichen Architekturentscheidungen und ihre Begründungen:
 
 == Ebene 1: Systemübersicht
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle
@@ -258,7 +258,7 @@ note right of A : Nur lokal / Entwicklung.\nProduktion nutzt clubs.json direkt.
 
 == Ebene 2: Crawler
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle
@@ -291,7 +291,7 @@ note bottom of BBC : Rate-Limit: 1100ms\nzwischen Requests
 
 == Ebene 2: Portal
 
-[plantuml]
+[source,plantuml]
 ----
 @startuml
 skinparam componentStyle rectangle
@@ -340,7 +340,7 @@ APP --> NOM : Ortsname → Koordinaten
 
 == Szenario 1: Crawl-Prozess
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Maintainer
@@ -367,7 +367,7 @@ sequenceDiagram
 
 == Szenario 2: Namenssuche im Portal
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Nutzer
@@ -385,7 +385,7 @@ sequenceDiagram
 
 == Szenario 3: Umkreissuche
 
-[mermaid]
+[source,mermaid]
 ----
 sequenceDiagram
     participant Nutzer
@@ -410,7 +410,7 @@ sequenceDiagram
 
 == Produktionsumgebung
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     subgraph "GitHub"
@@ -639,7 +639,7 @@ Kein JavaScript-Framework (kein React, Vue, Svelte). Vanilla HTML, CSS und JS oh
 
 == Quality Tree
 
-[mermaid]
+[source,mermaid]
 ----
 graph TD
     Q[Qualität]
