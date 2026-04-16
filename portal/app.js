@@ -245,8 +245,9 @@ function renderClub(club) {
   const info = document.createElement('div');
   info.className = 'club-info';
 
-  const name = document.createElement('div');
+  const name = document.createElement('a');
   name.className = 'club-name';
+  name.href = 'verein.html?id=' + club.clubId;
   name.textContent = club.name;
   info.appendChild(name);
 

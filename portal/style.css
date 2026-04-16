@@ -314,6 +314,14 @@ main {
   text-overflow: ellipsis;
 }
 
+a.club-name {
+  text-decoration: none;
+  color: var(--white);
+  transition: color 0.15s;
+}
+
+a.club-name:hover { color: var(--orange); }
+
 .club-meta {
   color: var(--muted);
   font-size: 0.82rem;
