@@ -1,0 +1,36 @@
+= Basketball Vereinsregister Deutschland — Architekturdokumentation
+:doctype: book
+:toc: left
+:toc-title: Inhalt
+:toclevels: 3
+:sectnums:
+:icons: font
+:source-highlighter: highlight.js
+:lang: de
+:author: Oliver-Marcus Eder
+:revdate: 2026-04-16
+:revnumber: 1.0
+
+include::01-einfuehrung-und-ziele.adoc[]
+
+include::02-randbedingungen.adoc[]
+
+include::03-kontextabgrenzung.adoc[]
+
+include::04-loesungsstrategie.adoc[]
+
+include::05-bausteinsicht.adoc[]
+
+include::06-laufzeitsicht.adoc[]
+
+include::07-verteilungssicht.adoc[]
+
+include::08-querschnittliche-konzepte.adoc[]
+
+include::09-architekturentscheidungen.adoc[]
+
+include::10-qualitaetsanforderungen.adoc[]
+
+include::11-risiken-und-technische-schulden.adoc[]
+
+include::12-glossar.adoc[]

@@ -1,0 +1,65 @@
+name: Render AsciiDoc Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**/*.adoc'
+      - '.github/workflows/render-docs.yml'
+      - 'Gemfile'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: render-docs
+  cancel-in-progress: true
+
+jobs:
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Flatten AsciiDoc (resolve includes)
+        run: |
+          set -euo pipefail
+          bundle exec asciidoctor-reducer docs/arc42/arc42.adoc -o docs/arc42/README.adoc
+
+      - name: Verify flattened output
+        run: |
+          set -euo pipefail
+          test -s docs/arc42/README.adoc
+          if grep -n '^include::' docs/arc42/README.adoc; then
+            echo "README.adoc still contains include directives."
+            exit 1
+          fi
+
+      - name: Commit flattened README.adoc
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/arc42/README.adoc
+          if git diff --cached --quiet; then
+            echo "No changes to docs/arc42/README.adoc."
+            exit 0
+          fi
+          git commit -m "chore(docs): update flattened arc42 README.adoc [skip ci]"
+          git push
