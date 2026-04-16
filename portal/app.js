@@ -6,6 +6,11 @@ let map = null;
 let markerLayer = null;
 let lastResults = [];
 
+function setTeaserVisible(visible) {
+  const teaser = document.getElementById('project-teaser');
+  if (teaser) teaser.style.display = visible ? '' : 'none';
+}
+
 // --- Haversine ---
 
 function haversineKm(lat1, lng1, lat2, lng2) {
@@ -407,6 +412,7 @@ function renderResults(statusText) {
   }
   filtered.forEach(club => list.appendChild(renderClub(club)));
   updateMap(filtered);
+  setTeaserVisible(filtered.length === 0 && lastResults.length === 0);
 }
 
 // --- Suche ---
