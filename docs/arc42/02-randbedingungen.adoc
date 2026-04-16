@@ -1,0 +1,58 @@
+= Kapitel 2: Randbedingungen
+
+== Technische Randbedingungen
+
+[cols="2,4"]
+|===
+|Randbedingung |Erläuterung
+
+|BBB-API als einzige Datenquelle
+|Die offizielle API von basketball-bund.net (`/rest`) ist die einzige strukturierte Quelle für Vereinsdaten. Kein offizieller Vertrag, kein SLA, keine Stabilitätsgarantie.
+
+|Rate-Limiting
+|Die BBB-API reagiert empfindlich auf schnelle Anfragen. Der Crawler wartet mindestens 1100ms zwischen Requests.
+
+|Node.js / TypeScript
+|Der Crawler und die optionale lokale API sind in TypeScript geschrieben (Node.js ≥ 22). Das Portal ist Vanilla HTML/CSS/JS ohne Build-Schritt.
+
+|Kein Build-System für das Portal
+|Das Portal wird direkt als statische Dateien ausgeliefert. Kein Webpack, kein Vite, kein Bundler.
+
+|GitHub Pages als Hosting
+|Das Portal läuft auf GitHub Pages — kein Server-seitiges Rendering, kein Backend im Produktionsbetrieb.
+
+|Nominatim für Geocoding
+|Koordinaten für Vereine und Hallen werden über die freie Nominatim-API (OpenStreetMap) ermittelt. Rate-Limit: 1 Request/Sekunde.
+|===
+
+== Organisatorische Randbedingungen
+
+[cols="2,4"]
+|===
+|Randbedingung |Erläuterung
+
+|Ein Maintainer
+|Das Projekt wird von einer Person entwickelt und betrieben. Architektur und Prozesse müssen für einen Einzelentwickler handhabbar sein.
+
+|Open Source
+|Der Code ist öffentlich auf GitHub verfügbar. Dokumentation und Commit-Nachrichten sollen für Außenstehende verständlich sein.
+
+|Kein Budget
+|Alle eingesetzten Dienste (GitHub Pages, Nominatim, BBB-API) sind kostenlos nutzbar.
+|===
+
+== Konventionen
+
+[cols="2,4"]
+|===
+|Konvention |Beschreibung
+
+|Conventional Commits
+|Commit-Nachrichten folgen dem Format `type: description` (feat, fix, docs, chore).
+
+|Semver
+|Releases werden nach Semantic Versioning nummeriert.
+
+|Sprache
+|Code und Kommentare auf Englisch. Nutzeroberfläche und Dokumentation auf Deutsch.
+|===

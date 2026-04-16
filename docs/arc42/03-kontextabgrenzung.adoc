@@ -1,0 +1,68 @@
+= Kapitel 3: Kontextabgrenzung
+
+== Fachlicher Kontext
+
+Das Vereinsregister steht zwischen der BBB-Datenquelle und dem Endnutzer. Es übersetzt maschinenlesbare API-Daten in eine suchbare, menschenlesbare Form.
+
+[cols="2,2,3"]
+|===
+|Nachbarsystem |Richtung |Beschreibung
+
+|basketball-bund.net API
+|→ Crawler (eingehend)
+|Liefert Verbands-, Liga-, Team- und Spielfelddaten als JSON. Kein Namens-Suche-Endpoint.
+
+|Nominatim (OpenStreetMap)
+|→ Crawler (eingehend)
+|Wandelt Orts- und Adress-Strings in GPS-Koordinaten (lat/lng) um.
+
+|Browser-Nutzer
+|→ Portal (eingehend)
+|Gibt Suchbegriffe oder Standort ein, erhält Vereinslisten und Kartenansicht.
+
+|GitHub Pages
+|← Portal (ausgehend)
+|Hostet die statischen Dateien (index.html, app.js, clubs.json).
+|===
+
+== Systemkontext-Diagramm
+
+[mermaid]
+----
+graph TD
+    Nutzer["👤 Browser-Nutzer"]
+    Portal["🏀 Vereinsregister Portal\n(GitHub Pages)"]
+    ClubsJSON["📄 clubs.json"]
+    Crawler["⚙️ Crawler\n(lokal / CI)"]
+    BBBAPI["🌐 BBB-API\nbasketball-bund.net/rest"]
+    Nominatim["🗺️ Nominatim\nopenstreetmap.org"]
+
+    Nutzer -->|"Suche (Name / Standort)"| Portal
+    Portal -->|"lädt statisch"| ClubsJSON
+    Crawler -->|"schreibt"| ClubsJSON
+    Crawler -->|"GET Verbände, Ligen, Teams, Spielfelder"| BBBAPI
+    Crawler -->|"GET Koordinaten"| Nominatim
+----
+
+== Technischer Kontext
+
+[cols="2,2,3"]
+|===
+|Schnittstelle |Protokoll / Format |Bemerkung
+
+|BBB-API
+|HTTPS / JSON (POST)
+|Proprietäres Response-Format mit `status`-Feld. Kein offizielles Schema.
+
+|Nominatim
+|HTTPS / JSON (GET)
+|Standard-Geocoding-API. Max. 1 Request/s, User-Agent Pflicht.
+
+|Portal → clubs.json
+|HTTP / JSON (GET, statisch)
+|~400KB flache JSON-Datei, browser-seitig geladen und vollständig im RAM gehalten.
+
+|Browser → Nominatim
+|HTTPS / JSON (GET)
+|Direkt aus dem Browser bei Umkreissuche (Ortsname → Koordinaten).
+|===

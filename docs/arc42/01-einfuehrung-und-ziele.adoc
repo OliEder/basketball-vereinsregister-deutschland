@@ -1,0 +1,53 @@
+= Kapitel 1: Einführung und Ziele
+
+== Aufgabenstellung
+
+Basketballvereine in Deutschland sind schwer auffindbar. Die offizielle BBB-API (basketball-bund.net) bietet keinen direkten Namens-Such-Endpunkt — jede Anfrage setzt eine bekannte `clubId` voraus. Das Basketball Vereinsregister Deutschland löst dieses Problem: Es crawlt regelmäßig alle Vereinsdaten aus der BBB-API, speichert sie lokal und macht sie über ein öffentliches Suchportal zugänglich.
+
+Nutzer können Vereine nach Name oder Standort suchen und erhalten Informationen zu Teams, Trainingshallen und Kontaktdaten.
+
+== Qualitätsziele
+
+[cols="1,3,3"]
+|===
+|Priorität |Qualitätsziel |Motivation
+
+|1
+|Aktualität
+|Vereinsdaten spiegeln den aktuellen BBB-Stand wider. Regelmäßiger Crawl (wöchentlich) hält die Daten frisch.
+
+|2
+|Verfügbarkeit
+|Das Portal ist ohne eigene Server-Infrastruktur erreichbar. Statisches Hosting auf GitHub Pages garantiert hohe Uptime ohne Betriebskosten.
+
+|3
+|Auffindbarkeit
+|Nutzer finden Vereine auch bei unscharfer Eingabe (Tippfehler, Abkürzungen). Fuzzy-Suche via Fuse.js.
+
+|4
+|Einfachheit
+|Die Architektur ist für einen einzelnen Maintainer wartbar. Keine komplexen Infrastruktur-Abhängigkeiten.
+|===
+
+== Stakeholder
+
+[cols="2,2,3"]
+|===
+|Rolle |Erwartung |Kontakt
+
+|Endnutzer (Spieler, Eltern, Trainer)
+|Verein schnell finden, Kontaktdaten abrufen
+|Öffentlich
+
+|Maintainer (Oliver-Marcus Eder)
+|Codebase verstehen, Daten aktuell halten
+|GitHub
+
+|DBB / basketball-bund.net
+|Indirekte Datenquelle, kein formaler Vertrag
+|Extern
+
+|Open-Source-Contributor
+|Codebase verstehen, Beiträge leisten
+|GitHub Discussions
+|===
