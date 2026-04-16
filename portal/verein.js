@@ -24,16 +24,23 @@ function akSortKey(ak) {
   return i === -1 ? 99 : i;
 }
 
-function showError(msg) {
+function showError(msg, { showReload = false } = {}) {
   const content = document.getElementById('verein-content');
   content.textContent = '';
   const err = document.createElement('div');
   err.className = 'verein-error';
-  const back = document.createElement('a');
-  back.href = 'index.html';
-  back.textContent = 'Zurück zur Suche';
   err.appendChild(document.createTextNode(msg + ' '));
-  err.appendChild(back);
+  if (showReload) {
+    const btn = document.createElement('button');
+    btn.textContent = 'Erneut versuchen';
+    btn.onclick = () => location.reload();
+    err.appendChild(btn);
+  } else {
+    const back = document.createElement('a');
+    back.href = 'index.html';
+    back.textContent = 'Zurück zur Suche';
+    err.appendChild(back);
+  }
   content.appendChild(err);
 }
 
@@ -304,12 +311,12 @@ async function loadTeamLiga(team, clubId, card) {
     card._ligaEl.classList.remove('verein-team-loading');
 
     const tableRes = await fetch(BBB_BASE + '/competition/table/id/' + liga.ligaId);
-    if (!tableRes.ok) throw new Error('Tabelle nicht ladbar');
+    if (!tableRes.ok) { const e = Object.assign(new Error('Tabelle nicht ladbar'), { _pokal: true }); throw e; }
     const tableData = await tableRes.json();
     const entries = (tableData && tableData.data && tableData.data.tabelle && tableData.data.tabelle.entries)
       ? tableData.data.tabelle.entries : [];
 
-    if (entries.length === 0) throw new Error('keine Einträge — Pokal');
+    if (entries.length === 0) { const e = Object.assign(new Error('keine Einträge'), { _pokal: true }); throw e; }
 
     const entry = entries.find(e =>
       String(e.team && e.team.clubId) === String(clubId) ||
@@ -319,13 +326,17 @@ async function loadTeamLiga(team, clubId, card) {
     if (entry) {
       card._rangEl.textContent = 'Platz ' + entry.rang;
     }
-  } catch (_err) {
-    card._ligaEl.textContent = '';
+  } catch (err) {
     card._ligaEl.classList.remove('verein-team-loading');
-    const badge = document.createElement('span');
-    badge.className = 'verein-badge-pokal';
-    badge.textContent = 'Pokal / KO-Turnier';
-    card._rangEl.appendChild(badge);
+    if (err && err._pokal) {
+      card._ligaEl.textContent = '';
+      const badge = document.createElement('span');
+      badge.className = 'verein-badge-pokal';
+      badge.textContent = 'Pokal / KO-Turnier';
+      card._ligaEl.appendChild(badge);
+    } else {
+      card._ligaEl.textContent = 'Liga nicht verfügbar';
+    }
   }
 }
 
@@ -359,7 +370,8 @@ async function init() {
     if (teamsSection) content.appendChild(teamsSection);
 
   } catch (err) {
-    showError('Fehler: ' + err.message + '.');
+    const isLoadError = err.message === 'clubs.json nicht ladbar';
+    showError('Fehler: ' + err.message + '.', { showReload: isLoadError });
   }
 }
 
