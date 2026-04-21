@@ -1,18 +1,16 @@
 function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.classList.add('light');
+  } else {
+    document.documentElement.classList.remove('light');
+  }
+  // Update button icons if DOM is ready
   const sun = document.getElementById('theme-icon-sun');
   const moon = document.getElementById('theme-icon-moon');
   const btn = document.getElementById('theme-toggle-btn');
-  if (theme === 'light') {
-    document.documentElement.classList.add('light');
-    if (sun) sun.style.display = 'none';
-    if (moon) moon.style.display = '';
-    if (btn) btn.setAttribute('aria-label', 'Zum Dark-Modus wechseln');
-  } else {
-    document.documentElement.classList.remove('light');
-    if (sun) sun.style.display = '';
-    if (moon) moon.style.display = 'none';
-    if (btn) btn.setAttribute('aria-label', 'Zum Light-Modus wechseln');
-  }
+  if (sun) sun.style.display = theme === 'light' ? 'none' : '';
+  if (moon) moon.style.display = theme === 'light' ? '' : 'none';
+  if (btn) btn.setAttribute('aria-label', theme === 'light' ? 'Zum Dark-Modus wechseln' : 'Zum Light-Modus wechseln');
 }
 
 function initTheme() {
@@ -20,6 +18,9 @@ function initTheme() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = stored || (prefersDark ? 'dark' : 'light');
   applyTheme(theme);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { applyTheme(theme); });
+  }
 }
 
 function toggleTheme() {
