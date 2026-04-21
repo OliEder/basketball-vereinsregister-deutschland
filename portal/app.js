@@ -173,7 +173,7 @@ function allowedAksForJahrgang(jahrgang) {
   const idx = AK_LADDER.indexOf(ak);
   const allowed = [ak];
   if (idx + 1 < AK_LADDER.length) allowed.push(AK_LADDER[idx + 1]);
-  if (ak === 'U18' || ak === 'U20') allowed.push('Senioren');
+  if ((ak === 'U18' || ak === 'U20') && !allowed.includes('Senioren')) allowed.push('Senioren');
   return allowed;
 }
 
