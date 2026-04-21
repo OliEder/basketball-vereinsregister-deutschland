@@ -221,7 +221,7 @@
 }
 
 .verein-training-row a {
-  color: #5ba3f5;
+  color: var(--link-color);
   text-decoration: none;
 }
 

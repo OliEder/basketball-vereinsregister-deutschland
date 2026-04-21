@@ -15,6 +15,7 @@
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --radius: 10px;
+  --link-color: #5ba3f5;
 }
 
 html { scroll-behavior: smooth; transition: background 0.25s; }
@@ -30,6 +31,7 @@ html.light {
   --white: #1a1714;
   --orange: #d94f00;
   --orange-dim: #b03d00;
+  --link-color: #0070d4;
 }
 
 body {
