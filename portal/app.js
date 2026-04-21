@@ -152,6 +152,31 @@ function akSortKey(ak) {
   return i === -1 ? 999 : i;
 }
 
+const AK_LADDER = ['Mini', 'U10', 'U12', 'U14', 'U16', 'U18', 'U20', 'Senioren'];
+
+function jahrgangToAk(jahrgang) {
+  const alter = currentSeasonYear() - parseInt(jahrgang, 10) + 1;
+  if (alter <= 8)  return 'Mini';
+  if (alter <= 10) return 'U10';
+  if (alter <= 12) return 'U12';
+  if (alter <= 14) return 'U14';
+  if (alter <= 16) return 'U16';
+  if (alter <= 18) return 'U18';
+  if (alter <= 20) return 'U20';
+  return 'Senioren';
+}
+
+function allowedAksForJahrgang(jahrgang) {
+  if (!jahrgang) return [];
+  const ak = jahrgangToAk(jahrgang);
+  if (ak === 'Senioren') return ['Senioren'];
+  const idx = AK_LADDER.indexOf(ak);
+  const allowed = [ak];
+  if (idx + 1 < AK_LADDER.length) allowed.push(AK_LADDER[idx + 1]);
+  if (ak === 'U18' || ak === 'U20') allowed.push('Senioren');
+  return allowed;
+}
+
 function getTeamLabel(team, allTeams) {
   const ak = team.altersklasse ?? '';
   const g = team.geschlecht ?? '';
@@ -352,11 +377,14 @@ function updateMap(results) {
 }
 
 function applyFilters(results) {
-  const ak = document.getElementById('ak-filter').value;
+  const jahrgang = document.getElementById('ak-filter').value;
   const g = document.getElementById('geschlecht-filter').value;
   return results.filter(c => {
     const teams = c.teams || [];
-    if (ak && !teams.some(t => t.altersklasse === ak)) return false;
+    if (jahrgang) {
+      const allowed = allowedAksForJahrgang(jahrgang);
+      if (!teams.some(t => allowed.includes(t.altersklasse))) return false;
+    }
     if (g && !teams.some(t => t.geschlecht === g)) return false;
     return true;
   });
@@ -431,16 +459,16 @@ document.getElementById('geschlecht-filter').addEventListener('change', () => re
 
 // --- Init ---
 
-// Altersklassen-Dropdown mit Jahrgängen befüllen
-(function fillAkFilter() {
+// Jahrgänge-Dropdown befüllen
+(function fillJahrgangFilter() {
   const select = document.getElementById('ak-filter');
-  AK_ORDER.forEach(ak => {
+  const season = currentSeasonYear();
+  for (let jg = season; jg >= season - 19; jg--) {
     const opt = document.createElement('option');
-    opt.value = ak;
-    const jg = akJahrgang(ak);
-    opt.textContent = jg ? ak + ' (' + jg + ')' : ak;
+    opt.value = String(jg);
+    opt.textContent = 'Jg. ' + jg + ' (' + jahrgangToAk(jg) + ')';
     select.appendChild(opt);
-  });
+  }
 })();
 
 loadClubs()
