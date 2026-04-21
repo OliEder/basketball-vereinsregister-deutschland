@@ -229,9 +229,8 @@ function renderClub(club) {
   const info = document.createElement('div');
   info.className = 'club-info';
 
-  const name = document.createElement('a');
+  const name = document.createElement('div');
   name.className = 'club-name';
-  name.href = 'verein.html?id=' + club.clubId;
   name.textContent = club.name;
   info.appendChild(name);
 
@@ -245,51 +244,12 @@ function renderClub(club) {
   meta.textContent = metaParts.join(' \u00B7 ');
   info.appendChild(meta);
 
-  if (club.address && (club.address.street || club.address.zip || club.address.city)) {
-    const addrParts = [
-      club.address.street,
-      [club.address.zip, club.address.city].filter(Boolean).join(' ')
-    ].filter(Boolean);
-    const addrEl = document.createElement('div');
-    addrEl.className = 'club-meta';
-    addrEl.textContent = addrParts.join(', ');
-    info.appendChild(addrEl);
-  }
+  const badges = renderTeamBadges(club);
+  if (badges) info.appendChild(badges);
 
-  renderTeams(club, info);
+  const footer = document.createElement('div');
+  footer.className = 'club-card-footer';
 
-  const links = document.createElement('div');
-  links.className = 'club-links';
-  if (club.website) {
-    const a = document.createElement('a');
-    a.href = club.website;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.textContent = '\uD83C\uDF10 ' + club.website.replace(/^https?:\/\//, '');
-    links.appendChild(a);
-  }
-  if (club.email) {
-    const a = document.createElement('a');
-    a.href = 'mailto:' + club.email;
-    a.textContent = '\uD83D\uDCE7 ' + club.email;
-    links.appendChild(a);
-  }
-  if (club.phone) {
-    const a = document.createElement('a');
-    a.href = 'tel:' + club.phone;
-    a.textContent = '\uD83D\uDCDE ' + club.phone;
-    links.appendChild(a);
-  }
-  if (links.childNodes.length > 0) info.appendChild(links);
-
-  if (club.info) {
-    const infoText = document.createElement('div');
-    infoText.className = 'club-info-text';
-    infoText.textContent = club.info;
-    info.appendChild(infoText);
-  }
-
-  // Club-ID mit Copy-Button
   const clubIdRow = document.createElement('div');
   clubIdRow.className = 'club-id-row';
   clubIdRow.appendChild(document.createTextNode('Club-ID: ' + club.clubId + ' '));
@@ -304,8 +264,30 @@ function renderClub(club) {
     });
   });
   clubIdRow.appendChild(copyBtn);
-  info.appendChild(clubIdRow);
+  footer.appendChild(clubIdRow);
 
+  const mehr = document.createElement('a');
+  mehr.className = 'mehr-infos-btn';
+  mehr.href = 'verein.html?id=' + club.clubId;
+
+  const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  arrow.setAttribute('width', '12');
+  arrow.setAttribute('height', '12');
+  arrow.setAttribute('viewBox', '0 0 24 24');
+  arrow.setAttribute('fill', 'none');
+  arrow.setAttribute('stroke', 'currentColor');
+  arrow.setAttribute('stroke-width', '2.5');
+  arrow.setAttribute('stroke-linecap', 'round');
+  arrow.setAttribute('stroke-linejoin', 'round');
+  arrow.setAttribute('aria-hidden', 'true');
+  const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  arrowPath.setAttribute('d', 'M5 12h14M12 5l7 7-7 7');
+  arrow.appendChild(arrowPath);
+  mehr.appendChild(arrow);
+  mehr.appendChild(document.createTextNode(' Mehr Infos'));
+  footer.appendChild(mehr);
+
+  info.appendChild(footer);
   card.appendChild(info);
   return card;
 }
