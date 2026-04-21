@@ -17,7 +17,20 @@
   --radius: 10px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; transition: background 0.25s; }
+
+html.light {
+  --dark: #f5f4f0;
+  --dark-2: #ffffff;
+  --dark-3: #ece9e3;
+  --dark-4: #dbd7cf;
+  --mid: #c8c3b8;
+  --muted: #6b6258;
+  --light: #4a4640;
+  --white: #1a1714;
+  --orange: #d94f00;
+  --orange-dim: #b03d00;
+}
 
 body {
   font-family: var(--font-body);
@@ -590,6 +603,34 @@ footer {
   .project-cards {
     grid-template-columns: 1fr;
   }
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  background: var(--dark-3);
+  border: 1px solid var(--dark-4);
+  border-radius: 6px;
+  color: var(--white);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--dark-4);
+  border-color: var(--mid);
+}
+
+.hero .theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
 }
 
 /* ===== ANIMATIONS ===== */
