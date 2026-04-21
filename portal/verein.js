@@ -1,4 +1,9 @@
 const BBB_BASE = 'https://www.basketball-bund.net/rest';
+const CORS_PROXY = 'https://corsproxy.io/?url=';
+
+function bbbFetch(url) {
+  return fetch(CORS_PROXY + encodeURIComponent(url));
+}
 const CLUBS_JSON = 'data/clubs.json';
 
 function getClubIdFromUrl() {
@@ -293,12 +298,17 @@ function renderTeams(club) {
       loadTeamLiga(team, club.clubId, card);
     });
 
+  const note = document.createElement('p');
+  note.className = 'verein-proxy-note';
+  note.textContent = 'Liga- und Tabellendaten werden live über corsproxy.io von basketball-bund.net geladen.';
+  section.appendChild(note);
+
   return section;
 }
 
 async function loadTeamLiga(team, clubId, card) {
   try {
-    const matchRes = await fetch(BBB_BASE + '/team/id/' + team.teamPermanentId + '/matches');
+    const matchRes = await bbbFetch(BBB_BASE + '/team/id/' + team.teamPermanentId + '/matches');
     if (!matchRes.ok) throw new Error('matches nicht ladbar');
     const matchData = await matchRes.json();
     const matches = (matchData && matchData.data && matchData.data.matches) ? matchData.data.matches : [];
@@ -310,7 +320,7 @@ async function loadTeamLiga(team, clubId, card) {
     card._ligaEl.textContent = liga.liganame || ('Liga ' + liga.ligaId);
     card._ligaEl.classList.remove('verein-team-loading');
 
-    const tableRes = await fetch(BBB_BASE + '/competition/table/id/' + liga.ligaId);
+    const tableRes = await bbbFetch(BBB_BASE + '/competition/table/id/' + liga.ligaId);
     if (!tableRes.ok) { const e = Object.assign(new Error('Tabelle nicht ladbar'), { _pokal: true }); throw e; }
     const tableData = await tableRes.json();
     const entries = (tableData && tableData.data && tableData.data.tabelle && tableData.data.tabelle.entries)

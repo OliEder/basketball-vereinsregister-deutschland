@@ -230,6 +230,13 @@
 
 .verein-training-row a:hover { text-decoration: underline; }
 
+.verein-proxy-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
 /* Responsive */
 @media (max-width: 500px) {
   .verein-club-header { flex-direction: column; }
