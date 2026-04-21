@@ -11,6 +11,9 @@
   max-width: 740px;
   margin: 0 auto;
   padding-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .back-link {
