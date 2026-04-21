@@ -301,10 +301,10 @@ async function loadTeamLiga(team, clubId, card) {
     const matchRes = await fetch(BBB_BASE + '/team/id/' + team.teamPermanentId + '/matches');
     if (!matchRes.ok) throw new Error('matches nicht ladbar');
     const matchData = await matchRes.json();
-    const matches = (matchData && matchData.data && matchData.data.data) ? matchData.data.data : [];
+    const matches = (matchData && matchData.data && matchData.data.matches) ? matchData.data.matches : [];
     if (matches.length === 0) throw new Error('keine Matches');
 
-    const liga = matches[0] && matches[0].liga;
+    const liga = matches[0] && matches[0].ligaData;
     if (!liga || !liga.ligaId) throw new Error('keine ligaId');
 
     card._ligaEl.textContent = liga.liganame || ('Liga ' + liga.ligaId);
