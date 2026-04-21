@@ -170,70 +170,54 @@ function getTeamLabel(team, allTeams) {
   return num > 1 ? base + ' ' + num : base;
 }
 
-function renderTeams(club, info) {
-  if (!club.teams || club.teams.length === 0) return;
+function getBadgeLabel(team) {
+  const ak = team.altersklasse || '';
+  const g = team.geschlecht || '';
+  const num = team.teamNumber || 1;
 
-  const hallsById = {};
-  if (club.halls) {
-    club.halls.forEach(h => { hallsById[h.id] = h; });
+  let base;
+  if (ak.toLowerCase() === 'senioren') {
+    base = g === 'weiblich' ? 'Damen' : g === 'männlich' ? 'Herren' : 'Senioren';
+  } else {
+    const gSuffix = g === 'männlich' ? ' m' : g === 'weiblich' ? ' w' : g === 'mix' ? ' mix' : '';
+    base = ak + gSuffix;
   }
 
-  const ak = document.getElementById('ak-filter').value;
+  return num > 1 ? base + ' ' + num : base;
+}
+
+function renderTeamBadges(club) {
+  if (!club.teams || club.teams.length === 0) return null;
+
+  const jahrgang = document.getElementById('ak-filter').value;
   const g = document.getElementById('geschlecht-filter').value;
+  const allowed = jahrgang ? allowedAksForJahrgang(jahrgang) : null;
 
-  const section = document.createElement('div');
-  section.className = 'club-teams';
-
-  const sortedTeams = club.teams
+  const visibleTeams = club.teams
     .slice()
     .sort((a, b) => akSortKey(a.altersklasse) - akSortKey(b.altersklasse))
-    .filter(t => (!ak || t.altersklasse === ak) && (!g || t.geschlecht === g));
+    .filter(t => (!allowed || allowed.includes(t.altersklasse)) && (!g || t.geschlecht === g));
 
-  sortedTeams.forEach(team => {
-    const teamEl = document.createElement('div');
-    teamEl.className = 'club-team';
+  if (visibleTeams.length === 0) return null;
 
-    const label = document.createElement('div');
-    label.className = 'club-team-label';
-    label.textContent = getTeamLabel(team, club.teams);
-    teamEl.appendChild(label);
+  const wrap = document.createElement('div');
+  wrap.className = 'team-badges';
 
-    if (!team.training || team.training.length === 0) {
-      const noTraining = document.createElement('div');
-      noTraining.className = 'club-team-no-training';
-      noTraining.textContent = '(keine Trainingszeiten hinterlegt)';
-      teamEl.appendChild(noTraining);
+  visibleTeams.forEach(team => {
+    const badge = document.createElement('span');
+    const geschlecht = team.geschlecht || '';
+    if (geschlecht === 'männlich') {
+      badge.className = 'team-badge team-badge--m';
+    } else if (geschlecht === 'weiblich') {
+      badge.className = 'team-badge team-badge--w';
     } else {
-      team.training.forEach(t => {
-        const row = document.createElement('div');
-        row.className = 'club-training-row';
-        row.appendChild(document.createTextNode(t.wochentag + ' ' + t.von + '\u2013' + t.bis));
-
-        const hall = hallsById[t.hallId];
-        if (hall) {
-          row.appendChild(document.createTextNode(' \u00B7 '));
-          const hasAddr = hall.strasse && hall.ort;
-          if (hasAddr) {
-            const mapsQuery = encodeURIComponent(hall.bezeichnung + ', ' + hall.strasse + ', ' + (hall.plz ? hall.plz + ' ' : '') + hall.ort);
-            const hallLink = document.createElement('a');
-            hallLink.href = 'https://www.google.com/maps/search/?api=1&query=' + mapsQuery;
-            hallLink.target = '_blank';
-            hallLink.rel = 'noopener';
-            hallLink.textContent = hall.bezeichnung + ', ' + hall.strasse;
-            row.appendChild(hallLink);
-          } else {
-            row.appendChild(document.createTextNode(hall.bezeichnung));
-          }
-        }
-
-        teamEl.appendChild(row);
-      });
+      badge.className = 'team-badge';
     }
-
-    section.appendChild(teamEl);
+    badge.textContent = getBadgeLabel(team);
+    wrap.appendChild(badge);
   });
 
-  info.appendChild(section);
+  return wrap;
 }
 
 function renderClub(club) {
