@@ -3,6 +3,14 @@ import { BbbVerband, BbbLiga, BbbTableEntry, BbbMatch, BbbSpielfeld } from './ty
 
 const BBB_BASE = 'https://www.basketball-bund.net/rest';
 const RATE_LIMIT_MS = 1100;
+const MAX_ATTEMPTS = 4;
+const RETRY_BASE_MS = 2000;
+
+class HttpError extends Error {
+  constructor(public status: number, url: string) {
+    super(`BBB API error: ${status} ${url}`);
+  }
+}
 
 export class BbbClient {
   private fetch: typeof globalThis.fetch;
@@ -25,7 +33,7 @@ export class BbbClient {
       }
     });
     if (!response.ok) {
-      throw new Error(`BBB API error: ${response.status} ${url}`);
+      throw new HttpError(response.status, url);
     }
     const data = await response.json() as any;
     if (data.status !== '0') {
@@ -34,9 +42,24 @@ export class BbbClient {
     return data as T;
   }
 
+  /** Wiederholt transiente Fehler (Netzwerk, 429, 5xx) mit exponentiellem Backoff; 4xx werden sofort weitergereicht. */
+  private async requestWithRetry<T>(url: string, options?: RequestInit): Promise<T> {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        return await this.request<T>(url, options);
+      } catch (err) {
+        const transient = !(err instanceof HttpError) || err.status === 429 || err.status >= 500;
+        if (!transient || attempt >= MAX_ATTEMPTS) throw err;
+        const wait = RETRY_BASE_MS * 2 ** (attempt - 1);
+        console.warn(`  Request fehlgeschlagen (${err}), Versuch ${attempt}/${MAX_ATTEMPTS}, neuer Versuch in ${wait} ms`);
+        await this.sleep(wait);
+      }
+    }
+  }
+
   async getVerbaende(): Promise<BbbVerband[]> {
     await this.sleep(RATE_LIMIT_MS);
-    const data = await this.request<{ data: { verbaende: BbbVerband[] } }>(
+    const data = await this.requestWithRetry<{ data: { verbaende: BbbVerband[] } }>(
       `${BBB_BASE}/wam/data`,
       {
         method: 'POST',
@@ -48,7 +71,7 @@ export class BbbClient {
 
   async getLigen(verbandId: number, startAtIndex: number): Promise<{ ligen: BbbLiga[]; hasMoreData: boolean }> {
     await this.sleep(RATE_LIMIT_MS);
-    const data = await this.request<{ data: { ligen: BbbLiga[]; hasMoreData: boolean } }>(
+    const data = await this.requestWithRetry<{ data: { ligen: BbbLiga[]; hasMoreData: boolean } }>(
       `${BBB_BASE}/wam/liga/list?startAtIndex=${startAtIndex}`,
       {
         method: 'POST',
@@ -60,7 +83,7 @@ export class BbbClient {
 
   async getTable(ligaId: number): Promise<BbbTableEntry[]> {
     await this.sleep(RATE_LIMIT_MS);
-    const data = await this.request<{ data: { tabelle: { entries: BbbTableEntry[] } } }>(
+    const data = await this.requestWithRetry<{ data: { tabelle: { entries: BbbTableEntry[] } } }>(
       `${BBB_BASE}/competition/table/id/${ligaId}`
     );
     return data.data.tabelle?.entries ?? [];

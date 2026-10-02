@@ -10,7 +10,7 @@ jobs:
   # Schreibt alle Vereine ohne Koordinaten in clubs.json und committed sofort.
   crawl:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 300
     permissions:
       contents: write
     steps:
@@ -27,11 +27,13 @@ jobs:
         run: npx ts-node crawler/index.ts --skip-geocoding
 
       - name: clubs.json committen
+        if: ${{ always() && hashFiles('data/clubs.json') != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/clubs.json
           git diff --staged --quiet || git commit -m "chore: update clubs.json - BBB crawl"
+          git pull --rebase origin main
           git push
 
   # Job 2: Geocoding (nur Vereine mit lat === null)
@@ -64,4 +66,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/clubs.json
           git diff --staged --quiet || git commit -m "chore: update clubs.json - geocoding"
+          git pull --rebase origin main
           git push
