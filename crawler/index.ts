@@ -4,12 +4,33 @@ import { geocodeCity } from './geocoder';
 import { mergeAndWrite, loadExistingClubs } from './writer';
 import { ClubEntry, TeamEntry } from './types';
 
+// Attach accumulated teams to club entries
+function withTeams(allClubs: Map<number, ClubEntry>, teamsByClub: Map<number, TeamEntry[]>): ClubEntry[] {
+  for (const [clubId, teams] of teamsByClub) {
+    const club = allClubs.get(clubId);
+    if (club) club.teams = teams;
+  }
+  return Array.from(allClubs.values());
+}
+
+// Preserve coordinates, name, halls from existing data; teams come from Phase 1
+function preserveExisting(club: ClubEntry, prev: ClubEntry): ClubEntry {
+  club.name = prev.name;
+  club.vereinsnummer = prev.vereinsnummer;
+  club.geocodedFrom = prev.geocodedFrom;
+  club.lat = prev.lat;
+  club.lng = prev.lng;
+  club.halls = prev.halls ?? [];
+  return club;
+}
+
 async function crawl(): Promise<void> {
   const skipGeocoding = process.argv.includes('--skip-geocoding');
   const client = new BbbClient();
   const allClubs = new Map<number, ClubEntry>();
   // teamsByClub accumulates teamPermanentIds + altersklasse/geschlecht per club
   const teamsByClub = new Map<number, TeamEntry[]>();
+  const existingClubs = loadExistingClubs();
 
   // Phase 1: Verbände → Ligen → Tabellen
   console.log('Phase 1: Lade Tabellen...');
@@ -54,31 +75,27 @@ async function crawl(): Promise<void> {
       hasMore = hasMoreData;
       startAtIndex += ligen.length;
     }
+
+    // Zwischenstand sichern, damit ein Abbruch (Timeout) nicht alles verwirft
+    // (nur bekannte Vereine; neue brauchen erst Phase 2, sonst bliebe der Tabellenname dauerhaft stehen)
+    withTeams(allClubs, teamsByClub);
+    const known = Array.from(allClubs.values())
+      .filter(c => existingClubs.has(c.clubId))
+      .map(c => preserveExisting({ ...c }, existingClubs.get(c.clubId)!));
+    mergeAndWrite(known);
   }
 
-  // Attach accumulated teams to club entries
-  for (const [clubId, teams] of teamsByClub) {
-    const club = allClubs.get(clubId);
-    if (club) club.teams = teams;
-  }
+  withTeams(allClubs, teamsByClub);
 
   console.log(`\nPhase 1 fertig: ${allClubs.size} Vereine, ${teamsByClub.size} mit Teams.`);
 
   // Phase 2: Club-Details nur für neue clubIds
   console.log('\nPhase 2: Hole Club-Details für neue Vereine...');
-  const existingClubs = loadExistingClubs();
   let detailCount = 0;
 
   for (const club of allClubs.values()) {
     if (existingClubs.has(club.clubId)) {
-      // Preserve coordinates, name, halls from existing data; teams come from Phase 1
-      const prev = existingClubs.get(club.clubId)!;
-      club.name = prev.name;
-      club.vereinsnummer = prev.vereinsnummer;
-      club.geocodedFrom = prev.geocodedFrom;
-      club.lat = prev.lat;
-      club.lng = prev.lng;
-      club.halls = prev.halls ?? [];
+      preserveExisting(club, existingClubs.get(club.clubId)!);
     } else {
       const details = await client.getClubDetails(club.clubId);
       if (details) {
