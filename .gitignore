@@ -7,4 +7,6 @@ data/geocoding-todo.json
 data/halls-raw.json
 docs/superpowers/geocoding-check.json
 probe-live.json
+_live/
+_live_new/
 regeocode-report.json
