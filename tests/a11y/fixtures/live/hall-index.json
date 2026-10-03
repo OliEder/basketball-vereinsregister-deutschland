@@ -1,0 +1,5 @@
+{
+  "1235": { "bezeichnung": "Sporthalle am Ring", "strasse": "Ringstr. 1", "plz": "86720", "ort": "Nördlingen", "lat": 48.85, "lng": 10.49 },
+  "924": { "bezeichnung": "Sporthalle Schwabing", "strasse": "Hohenzollernstr. 5", "plz": "80801", "ort": "München", "lat": 48.16, "lng": 11.58 },
+  "961": { "bezeichnung": "Halle Ohne Koordinaten", "strasse": null, "plz": "80331", "ort": "München", "lat": null, "lng": null }
+}

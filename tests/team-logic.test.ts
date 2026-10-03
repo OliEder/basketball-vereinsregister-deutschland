@@ -72,3 +72,33 @@ describe('liga helpers', () => {
     expect(L.formatKickoff(null, '18:30')).toBe('18:30');
   });
 });
+
+describe('venueFor', () => {
+  const halls = { '10': { bezeichnung: 'Heimhalle', ort: 'Bonn' }, '20': { bezeichnung: 'Gasthalle', ort: 'Köln' } };
+
+  it('nimmt bei einem Heimspiel die Halle des eigenen Vereins', () => {
+    const d = L.describeMatch(m({ homeTeam: t(1, 'A', 10), guestTeam: t(2, 'B', 20) }), 1);
+    expect(L.venueFor(d, 10, halls).bezeichnung).toBe('Heimhalle');
+  });
+
+  it('nimmt bei einem Auswärtsspiel die Halle des Heimteams (Gegner)', () => {
+    const d = L.describeMatch(m({ homeTeam: t(2, 'B', 20), guestTeam: t(1, 'A', 10) }), 1);
+    expect(L.venueFor(d, 10, halls).bezeichnung).toBe('Gasthalle');
+  });
+
+  it('liefert null ohne Index, ohne Eintrag oder ohne Verein', () => {
+    const d = L.describeMatch(m({ homeTeam: t(2, 'B', 99), guestTeam: t(1, 'A', 10) }), 1);
+    expect(L.venueFor(d, 10, halls)).toBeNull();
+    expect(L.venueFor(d, 10, null)).toBeNull();
+    expect(L.venueFor(null, 10, halls)).toBeNull();
+    expect(L.venueFor(L.describeMatch(m({ homeTeam: t(1, 'A', 10) }), 1), null, halls)).toBeNull();
+  });
+});
+
+describe('initials', () => {
+  it('bildet Kürzel ohne Rechtsform', () => {
+    expect(L.initials('TSV 1861 Nördlingen e.V.')).toBe('TN');
+    expect(L.initials('Telekom Baskets Bonn')).toBe('TBB');
+    expect(L.initials('')).toBe('·');
+  });
+});

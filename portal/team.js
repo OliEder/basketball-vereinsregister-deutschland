@@ -7,6 +7,23 @@ function el(tag, cls, text) {
   return e;
 }
 
+const LOGO_BASE = 'https://www.basketball-bund.net/media/team/';
+
+/** Teamlogo von basketball-bund.net; fehlt es, erscheint ein Kürzel. Dekorativ (der Name steht daneben). */
+function logoEl(teamId, name, size) {
+  const wrap = el('span', 'team-logo team-logo--' + (size || 'sm'));
+  wrap.setAttribute('aria-hidden', 'true');
+  const fallback = () => { wrap.textContent = ''; wrap.classList.add('team-logo--empty'); wrap.appendChild(document.createTextNode(TeamLogic.initials(name))); };
+  if (teamId == null) { fallback(); return wrap; }
+  const img = document.createElement('img');
+  img.src = LOGO_BASE + encodeURIComponent(teamId) + '/logo';
+  img.alt = '';
+  img.loading = 'lazy';
+  img.addEventListener('error', fallback);
+  wrap.appendChild(img);
+  return wrap;
+}
+
 function teamLink(teamId, ligaId, text) {
   const a = el('a', null, text);
   a.href = 'team.html?id=' + encodeURIComponent(teamId) + (ligaId ? '&liga=' + encodeURIComponent(ligaId) : '');
@@ -61,19 +78,91 @@ function renderStats(doc, teamId, list) {
   return grid;
 }
 
-function renderNext(list) {
+function mapsQuery(venue) {
+  return encodeURIComponent([venue.bezeichnung, venue.strasse, [venue.plz, venue.ort].filter(Boolean).join(' ')].filter(Boolean).join(', '));
+}
+
+function renderVenue(venue, isHome) {
+  const box = el('div', 'next-game-venue');
+  const info = el('div', 'next-game-venue-info');
+  info.appendChild(el('div', 'next-game-venue-label', isHome ? 'Heimspiel in' : 'Spielort (Halle des Gastgebers)'));
+  info.appendChild(el('div', 'next-game-venue-name', venue.bezeichnung));
+  const addr = [venue.strasse, [venue.plz, venue.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  if (addr) info.appendChild(el('div', 'next-game-venue-addr', addr));
+  info.appendChild(el('div', 'next-game-venue-note', 'Voraussichtlich – die genaue Halle steht in der offiziellen Ansetzung.'));
+  const links = el('div', 'next-game-nav');
+  [['Route in Google Maps', 'https://www.google.com/maps/dir/?api=1&destination='], ['Route in Apple Karten', 'https://maps.apple.com/?daddr=']].forEach(([label, base]) => {
+    const a = el('a', 'dss-btn dss-btn--secondary dss-btn--sm', label);
+    a.href = base + mapsQuery(venue);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    links.appendChild(a);
+  });
+  info.appendChild(links);
+  box.appendChild(info);
+  return box;
+}
+
+function initVenueMap(mapEl, venue) {
+  if (typeof L === 'undefined') { mapEl.remove(); return; }
+  const map = L.map(mapEl, { zoomControl: true, scrollWheelZoom: false }).setView([venue.lat, venue.lng], 15);
+  const dark = document.documentElement.getAttribute('data-theme') !== 'light';
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') + '/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap, © CARTO',
+    maxZoom: 19
+  }).addTo(map);
+  const icon = L.divIcon({ className: '', html: '<div class="team-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  L.marker([venue.lat, venue.lng], { icon, title: venue.bezeichnung, alt: venue.bezeichnung }).addTo(map);
+}
+
+function renderNext(list, doc, ownClubId, hallIndex) {
   const next = TeamLogic.nextMatch(list, todayIso());
-  if (!next) return null;
-  const section = el('div');
-  section.appendChild(el('div', 'team-section-title', 'Nächstes Spiel'));
-  const box = el('div', 'team-next');
-  box.appendChild(el('div', 'team-next-when', TeamLogic.formatKickoff(next.match.kickoffDate, next.match.kickoffTime)));
-  const teams = el('div', 'team-next-teams');
-  teams.appendChild(el('span', 'team-match-ha', next.isHome ? 'Heim' : 'Auswärts'));
-  teams.appendChild(document.createTextNode('gegen '));
-  teams.appendChild(next.opponent ? teamLink(next.opponent.teamPermanentId, null, next.opponent.teamname) : document.createTextNode('?'));
-  box.appendChild(teams);
-  section.appendChild(box);
+  const section = el('section', 'next-game dss-card dss-card--default');
+  section.appendChild(el('h2', 'next-game-title team-section-title', 'Nächstes Spiel'));
+  if (!next) {
+    if (!list.length) return null;
+    section.appendChild(el('div', 'team-empty', 'Aktuell sind keine weiteren Spiele geplant.'));
+    return section;
+  }
+
+  const m = next.match;
+  const matchup = el('div', 'next-game-matchup');
+  const side = (team, cls) => {
+    const box = el('div', 'next-game-team ' + cls);
+    box.appendChild(logoEl(team && team.teamPermanentId, team && team.teamname, 'lg'));
+    const name = el('div', 'next-game-team-name');
+    if (team && next.opponent && team.teamPermanentId === next.opponent.teamPermanentId) {
+      name.appendChild(teamLink(team.teamPermanentId, doc.ligaId, team.teamname));
+    } else {
+      name.textContent = team ? team.teamname : '?';
+    }
+    box.appendChild(name);
+    return box;
+  };
+  matchup.appendChild(side(m.homeTeam, 'next-game-team--home'));
+  const mid = el('div', 'next-game-vs');
+  mid.appendChild(el('div', 'next-game-vs-label', 'vs.'));
+  const when = TeamLogic.formatKickoff(m.kickoffDate, m.kickoffTime).split(' · ');
+  mid.appendChild(el('div', 'next-game-kickoff', when[0]));
+  if (when[1]) mid.appendChild(el('div', 'next-game-kickoff-time', when[1] + ' Uhr'));
+  mid.appendChild(el('div', 'next-game-ha', next.isHome ? 'Heimspiel' : 'Auswärtsspiel'));
+  matchup.appendChild(mid);
+  matchup.appendChild(side(m.guestTeam, 'next-game-team--guest'));
+  section.appendChild(matchup);
+
+  if (doc.liganame) section.appendChild(el('div', 'next-game-competition', doc.liganame));
+
+  const venue = TeamLogic.venueFor(next, ownClubId, hallIndex);
+  if (venue) {
+    section.appendChild(renderVenue(venue, next.isHome));
+    if (typeof venue.lat === 'number' && typeof venue.lng === 'number') {
+      const mapEl = el('div', 'next-game-map');
+      mapEl.setAttribute('role', 'region');
+      mapEl.setAttribute('aria-label', 'Karte: ' + venue.bezeichnung);
+      section.appendChild(mapEl);
+      setTimeout(() => initVenueMap(mapEl, venue), 0);
+    }
+  }
   return section;
 }
 
@@ -97,7 +186,10 @@ function renderTable(doc, teamId) {
     const tr = el('tr', String(r.team.teamPermanentId) === String(teamId) ? 'team-own is-own' : '');
     tr.appendChild(el('td', 'center num lead', String(r.rang)));
     const nameCell = el('td');
-    nameCell.appendChild(teamLink(r.team.teamPermanentId, doc.ligaId, r.team.teamname));
+    const nameWrap = el('span', 'team-name-cell');
+    nameWrap.appendChild(logoEl(r.team.teamPermanentId, r.team.teamname, 'xs'));
+    nameWrap.appendChild(teamLink(r.team.teamPermanentId, doc.ligaId, r.team.teamname));
+    nameCell.appendChild(nameWrap);
     tr.appendChild(nameCell);
     tr.appendChild(el('td', 'num', String(r.anzspiele)));
     tr.appendChild(el('td', 'num', String(r.s)));
@@ -119,6 +211,7 @@ function matchRow(d, ligaId) {
 
   const teams = el('div', 'team-match-teams dss-row-main');
   teams.appendChild(el('span', 'team-match-ha', d.isHome ? 'H' : 'A'));
+  if (d.opponent) teams.appendChild(logoEl(d.opponent.teamPermanentId, d.opponent.teamname, 'xs'));
   teams.appendChild(d.opponent ? teamLink(d.opponent.teamPermanentId, ligaId, d.opponent.teamname) : document.createTextNode('?'));
   row.appendChild(teams);
 
@@ -169,11 +262,11 @@ function renderSchedule(list, ligaId) {
   return section;
 }
 
-function renderLiga(docs, doc, teamId, container) {
+function renderLiga(docs, doc, teamId, container, hallIndex) {
   const list = TeamLogic.teamMatches(doc.matches, teamId);
   container.textContent = '';
   container.appendChild(renderStats(doc, teamId, list));
-  const next = renderNext(list);
+  const next = renderNext(list, doc, TeamLogic.clubIdOf(doc, teamId), hallIndex);
   if (next) container.appendChild(next);
   container.appendChild(renderTable(doc, teamId));
   container.appendChild(renderSchedule(list, doc.ligaId));
@@ -196,6 +289,10 @@ async function init() {
   const ligaIds = index[String(teamId)];
   if (!ligaIds || !ligaIds.length) { message('Für dieses Team liegen keine Live-Daten vor.'); return; }
 
+  // Hallenindex ist optional: ohne ihn entfällt nur der Spielort
+  let hallIndex = null;
+  try { hallIndex = await fetchJson(LIVE_BASE + 'hall-index.json'); } catch (e) { /* kein Spielort */ }
+
   let docs;
   try {
     docs = await Promise.all(ligaIds.map(id => fetchJson(LIVE_BASE + 'liga/' + id + '.json')));
@@ -211,7 +308,10 @@ async function init() {
 
   const content = document.getElementById('team-content');
   content.textContent = '';
-  content.appendChild(el('h1', 'team-title', name));
+  const head = el('div', 'team-head');
+  head.appendChild(logoEl(teamId, name, 'xl'));
+  head.appendChild(el('h1', 'team-title', name));
+  content.appendChild(head);
 
   const sub = el('div', 'team-sub');
   if (clubId != null) {
@@ -240,7 +340,7 @@ async function init() {
     ligaLabel.textContent = current.liganame + ' · ' + current.verbandName;
     document.querySelectorAll('.team-liga-btn[data-liga]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.liga === String(current.ligaId))));
     history.replaceState(null, '', '?id=' + encodeURIComponent(teamId) + '&liga=' + encodeURIComponent(current.ligaId));
-    renderLiga(docs, current, teamId, body);
+    renderLiga(docs, current, teamId, body, hallIndex);
   }
   select();
 }

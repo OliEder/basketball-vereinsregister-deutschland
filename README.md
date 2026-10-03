@@ -34,7 +34,7 @@ flowchart LR
 | Vereine, Teams, Hallen, Koordinaten | Monthly Crawler | monatlich | `data/clubs.json` (im Repo, wird committet) |
 | Tabellen, Spielpläne | Live-Crawl pro Liga | alle 6 Stunden | `data/live/` (nur im Pages-Artefakt, nicht im Repo) |
 
-Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId}`), die Spiele und Tabelle liefert, und schreibt `liga/<id>.json`, `team-index.json` (Team → Ligen) und `index.json`. Zwischen zwei Läufen bleiben die zuletzt gecachten Live-Daten erhalten, auch bei Portaländerungen.
+Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId}`), die Spiele und Tabelle liefert, und schreibt `liga/<id>.json`, `team-index.json` (Team → Ligen) und `index.json`. Zwischen zwei Läufen bleiben die zuletzt gecachten Live-Daten erhalten, auch bei Portaländerungen. Beim Zusammenstellen des Artefakts entsteht außerdem `hall-index.json` (Club-ID → Heimhalle, `crawler/hall-index.ts`); die Team-Seite zeigt damit Spielort und Karte des nächsten Spiels. Der Ort gilt als voraussichtlich: bei Heimspielen die Heimhalle des eigenen Vereins, sonst die des gastgebenden Gegners.
 
 ## GitHub Actions
 
