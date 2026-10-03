@@ -9,7 +9,7 @@ const PORT = Number(process.env.A11Y_PORT || 4173);
 
 fs.rmSync(site, { recursive: true, force: true });
 fs.mkdirSync(path.join(site, 'data'), { recursive: true });
-for (const f of fs.readdirSync(path.join(root, 'portal'))) fs.copyFileSync(path.join(root, 'portal', f), path.join(site, f));
+fs.cpSync(path.join(root, 'portal'), site, { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'fixtures', 'clubs.json'), path.join(site, 'data', 'clubs.json'));
 fs.cpSync(path.join(__dirname, 'fixtures', 'live'), path.join(site, 'data', 'live'), { recursive: true });
 

@@ -1,0 +1,207 @@
+/* ──────────────────────────────────────────────────────────────
+   DSS Design System · Token File · v1.0
+   Bayerischer Basketball Verband · Digitaler Spielbericht
+   ──────────────────────────────────────────────────────────────
+   Identity: Standalone (Ink · Amber · Sky)
+   Accessibility: WCAG 2.1 AAA validated
+   DBB-Compat: hue-vars swap to S/W/Gold/Hellblau if needed.
+
+   Usage:
+       @import "tokens.css";
+       body { color: var(--ink-600); background: var(--n-50); }
+   ─────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Hue tokens (swap these for DBB-Compat) ─────────────────── */
+  --h-ink:   60;     /* warm near-black */
+  --h-amber: 83;     /* signal amber */
+  --h-sky:   244;    /* court sky */
+
+  /* DBB-Compat preset (commented — uncomment to switch):
+     --h-ink:   0;
+     --h-amber: 90;
+     --h-sky:   225;
+  */
+
+  /* ── Ink scale · Primary (low chroma anthracite) ────────────── */
+  --ink-0:    oklch(1.000 0     0);
+  --ink-50:   oklch(0.985 0.003 var(--h-ink));
+  --ink-100:  oklch(0.965 0.005 var(--h-ink));
+  --ink-200:  oklch(0.925 0.007 var(--h-ink));
+  --ink-300:  oklch(0.850 0.009 var(--h-ink));
+  --ink-400:  oklch(0.700 0.011 var(--h-ink));
+  --ink-500:  oklch(0.560 0.012 var(--h-ink));
+  --ink-600:  oklch(0.420 0.013 var(--h-ink));    /* body text AAA */
+  --ink-700:  oklch(0.300 0.012 var(--h-ink));    /* deep text */
+  --ink-800:  oklch(0.200 0.010 var(--h-ink));    /* button fill */
+  --ink-900:  oklch(0.130 0.008 var(--h-ink));    /* strong text */
+  --ink-1000: oklch(0.020 0.004 var(--h-ink));    /* dark surface */
+
+  /* ── Amber scale · Accent A (signal honey) ──────────────────── */
+  --amber-50:   oklch(0.975 0.025 var(--h-amber));
+  --amber-100:  oklch(0.940 0.060 var(--h-amber));
+  --amber-200:  oklch(0.880 0.110 var(--h-amber));
+  --amber-300:  oklch(0.830 0.145 var(--h-amber));
+  --amber-400:  oklch(0.800 0.165 var(--h-amber));   /* fill */
+  --amber-500:  oklch(0.760 0.165 var(--h-amber));
+  --amber-600:  oklch(0.660 0.150 calc(var(--h-amber) - 5));
+  --amber-700:  oklch(0.540 0.130 calc(var(--h-amber) - 10));
+  --amber-800:  oklch(0.420 0.110 calc(var(--h-amber) - 20));  /* text AAA */
+  --amber-900:  oklch(0.290 0.080 calc(var(--h-amber) - 25));
+
+  /* ── Sky scale · Accent B (court cool blue) ─────────────────── */
+  --sky-50:   oklch(0.975 0.018 var(--h-sky));
+  --sky-100:  oklch(0.940 0.045 var(--h-sky));
+  --sky-200:  oklch(0.880 0.080 var(--h-sky));
+  --sky-300:  oklch(0.820 0.110 var(--h-sky));
+  --sky-400:  oklch(0.760 0.125 var(--h-sky));    /* fill */
+  --sky-500:  oklch(0.680 0.140 calc(var(--h-sky) + 2));
+  --sky-600:  oklch(0.560 0.140 calc(var(--h-sky) + 5));
+  --sky-700:  oklch(0.450 0.135 calc(var(--h-sky) + 8));
+  --sky-800:  oklch(0.345 0.120 calc(var(--h-sky) + 12));  /* text AAA */
+  --sky-900:  oklch(0.230 0.080 calc(var(--h-sky) + 15));
+
+  /* ── Neutral scale · cool grey ──────────────────────────────── */
+  --n-0:    oklch(1.000 0     0);
+  --n-50:   oklch(0.985 0.003 250);
+  --n-100:  oklch(0.965 0.005 250);
+  --n-200:  oklch(0.925 0.006 250);
+  --n-300:  oklch(0.860 0.008 250);
+  --n-400:  oklch(0.700 0.010 250);
+  --n-500:  oklch(0.520 0.011 250);
+  --n-600:  oklch(0.420 0.011 250);    /* muted text AAA */
+  --n-700:  oklch(0.320 0.010 250);
+  --n-800:  oklch(0.215 0.009 250);
+  --n-900:  oklch(0.145 0.008 250);
+  --n-950:  oklch(0.085 0.006 250);
+  --n-1000: oklch(0.025 0.004 250);
+
+  /* ── Semantic ───────────────────────────────────────────────── */
+  --ok-fill:    oklch(0.640 0.150 150);
+  --ok-text:    oklch(0.400 0.130 150);
+  --ok-soft:    oklch(0.960 0.040 150);
+
+  --warn-fill:  oklch(0.770 0.165 75);
+  --warn-text:  oklch(0.420 0.120 60);
+  --warn-soft:  oklch(0.970 0.055 80);
+
+  --err-fill:   oklch(0.580 0.220 27);   /* foul dots / non-text */
+  --err-button: oklch(0.400 0.190 27);   /* AAA on white text */
+  --err-text:   oklch(0.420 0.180 27);
+  --err-soft:   oklch(0.955 0.045 27);
+
+  --info-fill:  oklch(0.620 0.140 245);
+  --info-text:  oklch(0.380 0.130 245);
+  --info-soft:  oklch(0.955 0.035 245);
+
+  /* ── Team colors (configurable per match) ───────────────────── */
+  --team-heim:  var(--sky-700);
+  --team-gast:  oklch(0.520 0.180 25);
+
+  /* ── Surface aliases ────────────────────────────────────────── */
+  --surface-0:  var(--n-0);
+  --surface-1:  var(--n-50);
+  --surface-2:  var(--n-100);
+  --page-bg:    var(--n-50);
+  --page-fg:    var(--ink-900);
+  --page-mute:  var(--n-600);
+  --page-line:  var(--n-200);
+
+  /* ── Typography ─────────────────────────────────────────────── */
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-heading: 'Sora', system-ui, sans-serif;
+  --font-body:    'Manrope', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Spacing scale · 4 px base ──────────────────────────────── */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Radius scale ───────────────────────────────────────────── */
+  --radius-none: 0;
+  --radius-sm:   4px;    /* chips, mini badges */
+  --radius-md:   8px;    /* inputs, fields */
+  --radius-lg:   12px;   /* cards */
+  --radius-xl:   18px;   /* panels, modals */
+  --radius-full: 999px;  /* avatars, pills */
+
+  /* ── Shadows ────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(15, 20, 38, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 20, 38, 0.08), 0 1px 3px rgba(15, 20, 38, 0.04);
+  --shadow-lg: 0 18px 48px rgba(15, 20, 38, 0.16), 0 4px 12px rgba(15, 20, 38, 0.08);
+  --shadow-xl: 0 30px 80px -10px rgba(15, 20, 38, 0.30), 0 12px 30px -8px rgba(15, 20, 38, 0.18);
+
+  /* ── Focus ring ─────────────────────────────────────────────── */
+  --ring-w:     3px;
+  --ring-color: oklch(0.82 0.10 var(--h-sky));
+
+  /* ── Touch targets ──────────────────────────────────────────── */
+  --touch-sm: 44px;   /* WCAG minimum */
+  --touch-md: 56px;   /* default web */
+  --touch-lg: 64px;   /* gymnasium-grade */
+
+  /* ── Field heights ──────────────────────────────────────────── */
+  --fld-h-touch:   56px;
+  --fld-h-default: 44px;
+  --fld-h-compact: 36px;
+
+  /* ── Table row heights ──────────────────────────────────────── */
+  --row-touch:   60px;
+  --row-default: 44px;
+  --row-compact: 36px;
+  --row-dense:   30px;
+
+  /* ── Overlay ────────────────────────────────────────────────── */
+  --backdrop:        oklch(0.13 0.02 250 / 0.55);
+  --backdrop-heavy:  oklch(0.10 0.02 250 / 0.72);
+
+  /* ── Breakpoints (CSS only; use @media for actual queries) ──── */
+  --bp-mobile:  640px;
+  --bp-tablet:  1024px;   /* iPad landscape — main Kampfgericht device */
+  --bp-desktop: 1280px;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Dark theme · auto via media query OR explicit data-theme="dark"
+   ──────────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-bg:   var(--n-1000);
+    --page-fg:   var(--n-100);
+    --page-mute: var(--n-400);
+    --page-line: var(--n-800);
+    --surface-0: var(--n-1000);
+    --surface-1: var(--n-950);
+    --surface-2: var(--n-900);
+  }
+}
+:root[data-theme="dark"] {
+  --page-bg:   var(--n-1000);
+  --page-fg:   var(--n-100);
+  --page-mute: var(--n-400);
+  --page-line: var(--n-800);
+  --surface-0: var(--n-1000);
+  --surface-1: var(--n-950);
+  --surface-2: var(--n-900);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Validation patterns (informative — apply in JS or via :invalid)
+   ──────────────────────────────────────────────────────────────── */
+/*
+  Trikotnummer (FIBA): 0, 00, einstellige 1-9, 01-09 oder 10-99
+    pattern: ^(0|00|0?[1-9]|[1-9][0-9])$
+  Lizenz-Nummer: SR-YYYY-NNNN  (Schiedsrichter)
+                 KG-YYYY-NNNN  (Kampfgericht)
+*/

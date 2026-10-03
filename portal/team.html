@@ -6,7 +6,9 @@
   <title>Team — Basketball Vereinsregister</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dss/tokens.css">
+  <link rel="stylesheet" href="dss/components.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="verein.css">
   <link rel="stylesheet" href="team.css">
@@ -17,7 +19,7 @@
   <div class="court-bg" aria-hidden="true">
     <div class="court-lines"></div>
   </div>
-  <header class="verein-header">
+  <header class="verein-header dss-topbar">
     <div class="verein-header-inner">
       <a href="index.html" class="back-link" id="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -25,7 +27,7 @@
         </svg>
         Zurück
       </a>
-      <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Zum Light-Modus wechseln" title="Theme wechseln">
+      <button class="theme-toggle dss-btn dss-btn--ghost dss-btn--icon" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Zum Light-Modus wechseln" title="Theme wechseln">
         <svg id="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>

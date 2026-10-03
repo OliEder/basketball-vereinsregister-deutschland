@@ -52,7 +52,7 @@ function showError(msg, { showReload = false } = {}) {
   const content = document.getElementById('verein-content');
   content.textContent = '';
   const err = document.createElement('div');
-  err.className = 'verein-error';
+  err.className = 'verein-error dss-empty';
   err.appendChild(document.createTextNode(msg + ' '));
   if (showReload) {
     const btn = document.createElement('button');
@@ -134,6 +134,7 @@ function renderLinks(club) {
 
   if (club.website) {
     const a = document.createElement('a');
+    a.className = 'dss-chip dss-chip--link';
     a.href = club.website;
     a.target = '_blank';
     a.rel = 'noopener';
@@ -142,6 +143,7 @@ function renderLinks(club) {
   }
 
   const bbb = document.createElement('a');
+  bbb.className = 'dss-chip dss-chip--link';
   bbb.href = 'https://www.basketball-bund.net/club/id/' + club.clubId;
   bbb.target = '_blank';
   bbb.rel = 'noopener';
@@ -242,7 +244,7 @@ function renderHalls(halls) {
 
 function renderTeamCard(team, club, hallsById) {
   const card = document.createElement('div');
-  card.className = 'verein-team-card';
+  card.className = 'verein-team-card dss-card dss-card--hoverable';
 
   const header = document.createElement('div');
   header.className = 'verein-team-header';
@@ -255,7 +257,7 @@ function renderTeamCard(team, club, hallsById) {
   labelLink.appendChild(document.createTextNode(getTeamLabel(team, club.teams)));
   // Zusatz für Screenreader: wohin der Link führt (der sichtbare Text beginnt mit dem Teamnamen)
   const hidden = document.createElement('span');
-  hidden.className = 'sr-only';
+  hidden.className = 'dss-sr-only';
   hidden.textContent = ' – Tabelle und Spielplan';
   labelLink.appendChild(hidden);
   label.appendChild(labelLink);
@@ -371,7 +373,7 @@ async function loadTeamLiga(team, clubId, card) {
     } else if ((doc.tabelle || []).length === 0) {
       card._ligaEl.textContent = '';
       const badge = document.createElement('span');
-      badge.className = 'verein-badge-pokal';
+      badge.className = 'verein-badge-pokal dss-chip dss-chip--mono';
       badge.textContent = 'Pokal / KO-Turnier';
       card._ligaEl.appendChild(badge);
       card._ligaEl.appendChild(document.createTextNode(' ' + doc.liganame));
