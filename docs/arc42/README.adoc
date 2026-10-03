@@ -414,7 +414,7 @@ Die Geocoding-Strategie folgt dieser Priorität:
 
 Für Vereine ohne Koordinaten (`npm run geocode` und Phase 3 des Crawls, umgesetzt in `crawler/club-geocoder.ts`):
 
-1. **Vereinsname** (bevorzugt): Nominatim-Suche nach dem Vereinsnamen (ohne „e.V.“). Der Treffer zählt nur, wenn der Vereinsname darin vorkommt (`isPlausibleNameHit`). Die Ortsbezeichnung (`geocodedFrom`) stammt aus der Adresse des Treffers.
+1. **Vereinsname** (bevorzugt): Nominatim-Suche nach dem Vereinsnamen (ohne „e.V.“). Der Treffer zählt nur, wenn der Vereinsname darin vorkommt (`isPlausibleNameHit`). Die Ortsbezeichnung (`geocodedFrom`) stammt aus der Adresse des Treffers. Gegenprobe: Liegt der Treffer in einem anderen Ort als die sichere Heimhalle und mehr als 3 km von ihr entfernt (z. B. ein gleichnamiger Verein anderswo), gilt die Halle.
 2. **Heimhalle** (Fallback, `chooseHomeHall`): Die Hallen stammen aus Heimspielen. Liegen alle im selben Ort, gilt dieser. Sonst gilt der Ort, der im Vereinsnamen vorkommt, danach der Ort mit den meisten Hallen bzw. Heimspielen. Bei Gleichstand gilt die Heimhalle als unklar. Die Koordinate stammt aus der Hallenadresse (Straße, PLZ, Ort); die Ortsbezeichnung ist der Hallenort.
 3. **Ort aus dem Vereinsnamen** (letzter Fallback): `extractCityFromName` entfernt Rechtsform, Gründungsjahr und Teamnummern; Kürzel, Zahlen und Allerweltswörter („TV“, „Sportverein“) werden nicht geocodet.
 4. **Keine Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche; er wird in `data/geocoding-todo.json` vermerkt.

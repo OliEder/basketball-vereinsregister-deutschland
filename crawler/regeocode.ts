@@ -15,7 +15,7 @@
 
 import fs from 'fs';
 import { geocodeClub, GeocodeSource, Confidence } from './club-geocoder';
-import { distanceKm } from './check-geocoding';
+import { distanceKm } from './geo';
 import { loadExistingClubs, writeClubs } from './writer';
 import { ClubEntry } from './types';
 
@@ -56,6 +56,7 @@ export interface RegeocodeResult {
   suspect: boolean;
   source: GeocodeSource | null;
   confidence: Confidence | null;
+  nameHitRejected: boolean;
   before: { lat: number | null; lng: number | null; geocodedFrom: string | null };
   after: { lat: number; lng: number; geocodedFrom: string | null } | null;
   distanceKm: number | null;
@@ -110,7 +111,7 @@ async function regeocode(): Promise<void> {
     }
     const action = decide(hit, suspect, oldUnusable, unchanged);
 
-    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, before, after, distanceKm: dist, action });
+    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, nameHitRejected: !!hit?.nameHitRejected, before, after, distanceKm: dist, action });
 
     if (apply && action === 'changed' && after) {
       club.lat = after.lat;
@@ -131,6 +132,7 @@ async function regeocode(): Promise<void> {
     `Fertig: ${results.length} Vereine geprüft`,
     `  geändert:    ${count('changed')} (Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
     `  unverändert: ${count('unchanged')}`,
+    `  Namenstreffer wegen Widerspruch zur Heimhalle verworfen: ${results.filter(r => r.nameHitRejected).length}`,
     `  zu prüfen:   ${count('review')} (unsicheres Ergebnis, alte Koordinate brauchbar)`,
     `  beibehalten: ${count('kept')} (unverdächtig, kein Namenstreffer)`,
     `  ohne Ergebnis: ${count('no-result')}`,

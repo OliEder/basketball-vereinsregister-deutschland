@@ -5,6 +5,7 @@
 //   3. Ort aus dem Vereinsnamen
 import { geocodeDetailed, GeocodeHit } from './geocoder';
 import { extractCityFromName } from './extractor';
+import { distanceKm } from './geo';
 import { ClubEntry, Hall } from './types';
 
 type Coords = { lat: number; lng: number };
@@ -16,6 +17,8 @@ export type Confidence = 'high' | 'low';
 export interface ClubGeocode extends Coords {
   source: GeocodeSource;
   confidence: Confidence;
+  /** true, wenn ein plausibler Namenstreffer verworfen wurde, weil er den Hallen widerspricht */
+  nameHitRejected?: boolean;
   /** Ortsbezeichnung für die Anzeige; null, wenn nichts Brauchbares gefunden wurde */
   geocodedFrom: string | null;
 }
@@ -71,6 +74,17 @@ function baseOrt(ort: string): string {
   return ort.toLowerCase().split(/[\s\-/(]/)[0];
 }
 
+/** Gleicher Ort? Ignoriert Schreibweise, Bindestriche und Ortsteile ("Viersen - Dülken" ≙ "Dülken"). */
+export function sameOrt(a?: string | null, b?: string | null): boolean {
+  const norm = (s?: string | null) => (s ?? '').toLowerCase().replace(/[^a-zäöüß]/g, '');
+  const na = norm(a);
+  const nb = norm(b);
+  return na.length > 0 && nb.length > 0 && (na.includes(nb) || nb.includes(na));
+}
+
+/** Ab diesem Abstand (km) zwischen Namenstreffer und Heimhalle zählt der Treffer als Widerspruch. */
+const NAME_HALL_AGREE_KM = 3;
+
 export type HomeHallConfidence = 'single' | 'name' | 'majority';
 
 /**
@@ -115,24 +129,45 @@ export async function geocodeClub(
   const extracted = extractCityFromName(club.name);
   const fallbackLabel = home?.hall.ort ?? (isSaneCityLabel(extracted) ? extracted : null);
 
+  const hallCoords = async (): Promise<Coords | null> => {
+    if (!home) return null;
+    const hall = home.hall;
+    if (hall.lat != null && hall.lng != null) return { lat: hall.lat, lng: hall.lng };
+    const byHall = await geocode([hall.strasse, hall.plz, hall.ort].filter(Boolean).join(', '));
+    return byHall ? { lat: byHall.lat, lng: byHall.lng } : null;
+  };
+  const hallResult = (coords: Coords, extra: Partial<ClubGeocode> = {}): ClubGeocode => ({
+    ...coords,
+    source: 'hall',
+    confidence: home!.confidence === 'majority' ? 'low' : 'high',
+    geocodedFrom: home!.hall.ort ?? null,
+    ...extra
+  });
+
   // 1. Namenssuche (OpenStreetMap)
   const byName = await geocode(searchName(club.name));
+  let nameHitRejected = false;
   if (byName && isPlausibleNameHit(club.name, byName.displayName)) {
-    return { lat: byName.lat, lng: byName.lng, source: 'name', confidence: 'high', geocodedFrom: byName.city ?? fallbackLabel };
+    const nameResult: ClubGeocode = { lat: byName.lat, lng: byName.lng, source: 'name', confidence: 'high', geocodedFrom: byName.city ?? fallbackLabel };
+
+    // Gegenprobe: Liegt der Treffer in einem anderen Ort als die (sichere) Heimhalle, ist er verdächtig
+    // (z. B. gleichnamiger Verein anderswo). Dann entscheidet die Halle, außer beide liegen dicht beieinander.
+    const contradictsHalls =
+      !!home && home.confidence !== 'majority' && !!byName.city &&
+      !(club.halls ?? []).some(h => sameOrt(h.ort, byName.city));
+    if (!contradictsHalls) return nameResult;
+
+    const coords = await hallCoords();
+    if (!coords) return nameResult;
+    if (distanceKm(coords, byName) <= NAME_HALL_AGREE_KM) return nameResult;
+    nameHitRejected = true;
+    return hallResult(coords, { nameHitRejected });
   }
 
   // 2. Heimhalle
   if (home) {
-    const hall = home.hall;
-    let coords: Coords | null = hall.lat != null && hall.lng != null ? { lat: hall.lat, lng: hall.lng } : null;
-    if (!coords) {
-      const query = [hall.strasse, hall.plz, hall.ort].filter(Boolean).join(', ');
-      const byHall = await geocode(query);
-      if (byHall) coords = { lat: byHall.lat, lng: byHall.lng };
-    }
-    if (coords) {
-      return { ...coords, source: 'hall', confidence: home.confidence === 'majority' ? 'low' : 'high', geocodedFrom: hall.ort ?? null };
-    }
+    const coords = await hallCoords();
+    if (coords) return hallResult(coords);
   }
 
   // 3. Ort aus dem Namen (nur wenn er als Ort taugt)
