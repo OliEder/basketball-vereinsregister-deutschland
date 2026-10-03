@@ -68,6 +68,16 @@ describe('extractTeams', () => {
     ]);
   });
 
+  it('stores liga and rang when liga is given', () => {
+    const entries: BbbTableEntry[] = [
+      { rang: 3, team: { seasonTeamId: 1, teamPermanentId: 100, teamname: 'Bonn 1', teamnameSmall: 'Bonn', clubId: 10 } },
+    ];
+    const result = extractTeams(entries, 'Senioren', 'männlich', { ligaId: 55, liganame: 'Regionalliga' });
+    expect(result.get(10)).toEqual([
+      { teamPermanentId: 100, altersklasse: 'Senioren', geschlecht: 'männlich', ligaId: 55, liganame: 'Regionalliga', rang: 3, training: [] },
+    ]);
+  });
+
   it('skips entries with null clubId', () => {
     const entries: BbbTableEntry[] = [
       { rang: 1, team: { seasonTeamId: 1, teamPermanentId: 999, teamname: 'Sieger A/B', teamnameSmall: 'Sieger', clubId: null as any } },
