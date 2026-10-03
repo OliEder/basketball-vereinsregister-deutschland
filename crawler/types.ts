@@ -97,6 +97,12 @@ export interface BbbLiga {
   verbandName: string;
   akName?: string;
   geschlecht?: string;
+  seasonId?: number;
+  seasonName?: string;
+  skName?: string;
+  skEbeneName?: string | null;
+  bezirkName?: string | null;
+  kreisname?: string | null;
 }
 
 /** Auszug aus ligaData der BBB-API (Gebietsangaben der Liga) */

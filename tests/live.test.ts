@@ -45,3 +45,10 @@ describe('buildTeamIndex', () => {
     expect(buildTeamIndex([b, a])).toEqual({ '1': [1, 2], '2': [1], '3': [2] });
   });
 });
+
+describe('definedOnly', () => {
+  it('entfernt nur undefined-Felder', () => {
+    const { definedOnly } = require('../crawler/live');
+    expect(definedOnly({ a: 1, b: undefined, c: null, d: '' })).toEqual({ a: 1, c: null, d: '' });
+  });
+});
