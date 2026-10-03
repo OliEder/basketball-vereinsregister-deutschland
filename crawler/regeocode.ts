@@ -12,7 +12,8 @@
 //
 // Übernommen wird ein Ergebnis, wenn es sicher ist (Namenstreffer, eindeutige Heimhalle) oder die
 // alte Koordinate ohnehin unbrauchbar ist. Unsichere Ergebnisse bei brauchbarer alter Koordinate
-// erscheinen im Bericht als "review" und werden nicht übernommen.
+// erscheinen im Bericht als "review" und werden nicht übernommen. Ausnahme: Liegt das Ergebnis höchstens
+// SAME_SPOT_KM von der alten Koordinate, bestätigt es sie und ersetzt nur den Ortsnamen (z. B. "e.V.").
 
 import fs from 'fs';
 import { geocodeClub, GeocodeSource, Confidence, ClubGeocode } from './club-geocoder';
@@ -74,15 +75,20 @@ export interface RegeocodeResult {
   action: RegeocodeAction;
 }
 
+/** Liegt das neue Ergebnis höchstens so weit von der alten (brauchbaren) Koordinate, gilt es als bestätigt. */
+export const SAME_SPOT_KM = 3;
+
 export function decide(
   hit: { source: GeocodeSource; confidence: Confidence } | null,
   suspect: boolean,
   oldUnusable: boolean,
-  unchanged: boolean
+  unchanged: boolean,
+  sameSpot = false
 ): RegeocodeAction {
   if (!hit) return 'no-result';
   if (!suspect && hit.source !== 'name' && hit.source !== 'manual') return 'kept';
-  if (hit.confidence === 'low' && !oldUnusable) return 'review';
+  // Unsicherer Treffer bei brauchbarer alter Koordinate: nur prüfen lassen, außer er bestätigt sie (dann nur Ortsname neu)
+  if (hit.confidence === 'low' && !oldUnusable && !sameSpot) return 'review';
   return unchanged ? 'unchanged' : 'changed';
 }
 
@@ -230,7 +236,7 @@ async function regeocode(): Promise<void> {
       dist = club.lat != null && club.lng != null ? Math.round(distanceKm({ lat: club.lat, lng: club.lng }, hit) * 10) / 10 : null;
       unchanged = dist !== null && dist < 0.05 && after.geocodedFrom === club.geocodedFrom;
     }
-    const action = decide(hit, suspect, oldUnusable, unchanged);
+    const action = decide(hit, suspect, oldUnusable, unchanged, dist !== null && dist <= SAME_SPOT_KM);
     const check = after ? regions.check(club, after) : null;
     const region = check && check.region ? { name: check.region, level: check.level, distanceKm: check.distanceKm ?? 0, limitKm: check.limitKm ?? 0 } : null;
 
