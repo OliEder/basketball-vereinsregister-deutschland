@@ -1,5 +1,5 @@
 // tests/extractor.test.ts
-import { extractClubs, extractCityFromName, extractTeams, regionFields } from '../crawler/extractor';
+import { extractClubs, extractCityFromName, cityCandidates, extractTeams, regionFields } from '../crawler/extractor';
 import { BbbTableEntry, TeamEntry } from '../crawler/types';
 
 const makeEntry = (clubId: number, teamname: string, teamPermanentId: number): BbbTableEntry => ({
@@ -30,6 +30,50 @@ describe('extractCityFromName', () => {
 
   it('handles single word', () => {
     expect(extractCityFromName('München')).toBe('München');
+  });
+});
+
+describe('cityCandidates', () => {
+  it('entfernt Vereinskürzel, Rechtsform, Baskets und Basketball', () => {
+    expect(cityCandidates('SV Eidelstedt e.V.')).toEqual(['Eidelstedt']);
+    expect(cityCandidates('TSV Calw von 1846 e. V.')).toEqual(['Calw']);
+    expect(cityCandidates('DJK Adler Union Essen Frintrop e.V.')[0]).toBe('Frintrop');
+    expect(cityCandidates('Fibalon Baskets Regensburg')).toEqual(['Regensburg', 'Fibalon']);
+    expect(cityCandidates('FC Bayern Basketball')).toEqual(['Bayern']);
+    expect(cityCandidates('Basketball Club Dresden e.V.')).toEqual(['Dresden']);
+    expect(cityCandidates('Hamburger SV')).toContain('Hamburg');
+  });
+
+  it('liefert bei Adjektivformen die Grundform mit', () => {
+    expect(cityCandidates('Eckernförder MTV')).toEqual(['Eckernförder', 'Eckernförd', 'Eckernförde']);
+    expect(cityCandidates('Barmstedter MTV').slice(0, 2)).toEqual(['Barmstedter', 'Barmstedt']);
+    expect(cityCandidates('Mönchengladbacher TV')).toContain('Mönchengladbach');
+  });
+
+  it('lässt Orte mit Bindestrich und Schrägstrich heil', () => {
+    expect(cityCandidates('TuS Baden-Baden')).toEqual(['Baden-Baden']);
+    expect(cityCandidates('BG Marburg/Keltern')).toEqual(['Marburg']);
+    expect(cityCandidates('Post-SV Bonn 1926 e. V.')).toEqual(['Bonn']);
+  });
+
+  it('überspringt Jahreszahlen, "von" und Abkürzungen mit Punkt; Kürzel am Anfang eines Bindestrich-Worts fallen weg', () => {
+    expect(cityCandidates('TV von 1912 Verl e. V.')).toEqual(['Verl']);
+    expect(cityCandidates('TV 03 Wörth a.Rh. e. V.')).toEqual(['Wörth']);
+    expect(cityCandidates('DJK-Köln-Ost e.V.')).toEqual(['Köln-Ost']);
+    expect(cityCandidates('Blau-Weiß Merzen e. V.')[0]).toBe('Merzen');
+  });
+
+  it('gibt nichts zurück, wenn nur Kürzel übrig bleiben', () => {
+    expect(cityCandidates('TSV MTV')).toEqual([]);
+    expect(extractCityFromName('MTV')).toBe('MTV'); // wie bisher das letzte Wort
+  });
+});
+
+describe('extractCityFromName ohne Kürzel', () => {
+  it('nimmt nicht mehr das Kürzel am Ende', () => {
+    expect(extractCityFromName('Eckernförder MTV')).toBe('Eckernförder');
+    expect(extractCityFromName('Mönchengladbacher TV')).toBe('Mönchengladbacher');
+    expect(extractCityFromName('Hagener SV')).toBe('Hagener');
   });
 });
 

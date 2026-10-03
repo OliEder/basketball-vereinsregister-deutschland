@@ -138,7 +138,8 @@ describe('geocodeClub', () => {
 
     const g2 = jest.fn().mockResolvedValue(null);
     expect(await geocodeClub({ ...base, name: 'Altrahlstedter MTV 1893 e. V', halls: [] } as any, g2)).toBeNull();
-    expect(g2).toHaveBeenCalledTimes(1); // nur die Namenssuche, "MTV" wird nicht geocodet
+    // Namenssuche, dann die Ortsformen ohne Kürzel; "MTV" selbst wird nie geocodet
+    expect(g2.mock.calls.map(c => c[0])).toEqual(['Altrahlstedter MTV 1893', 'Altrahlstedter', 'Altrahlstedt', 'Altrahlstedte']);
   });
 
   it('returns null when nothing matches', async () => {
