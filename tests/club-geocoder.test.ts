@@ -138,7 +138,17 @@ describe('geocodeClub', () => {
 
     const g2 = jest.fn().mockResolvedValue(null);
     expect(await geocodeClub({ ...base, name: 'Altrahlstedter MTV 1893 e. V', halls: [] } as any, g2)).toBeNull();
-    expect(g2).toHaveBeenCalledTimes(1); // nur die Namenssuche, "MTV" wird nicht geocodet
+    // Namenssuche, dann die Ortsformen ohne Kürzel; "MTV" selbst wird nie geocodet
+    expect(g2.mock.calls.map(c => c[0])).toEqual(['Altrahlstedter MTV 1893', 'Altrahlstedter', 'Altrahlstedt', 'Altrahlstedte']);
+  });
+
+  it('searches OpenStreetMap with the whole club name, abbreviations included (only e.V. is dropped)', async () => {
+    const g = jest.fn().mockResolvedValue(null);
+    await geocodeClub({ ...base, name: 'TSV Calw von 1846 e. V.', halls: [] } as any, g);
+    expect(g.mock.calls[0][0]).toBe('TSV Calw von 1846');
+    g.mockClear();
+    await geocodeClub({ ...base, name: 'TV 03 Wörth a.Rh. e. V.', halls: [] } as any, g);
+    expect(g.mock.calls.map(c => c[0])).toEqual(['TV 03 Wörth a.Rh.', 'Wörth am Rhein', 'Wörth']);
   });
 
   it('returns null when nothing matches', async () => {

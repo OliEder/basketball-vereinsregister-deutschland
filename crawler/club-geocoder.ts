@@ -4,7 +4,7 @@
 //   2. Heimhalle (Hallen-Algorithmus, siehe chooseHomeHall)
 //   3. Ort aus dem Vereinsnamen
 import { geocodeDetailed, GeocodeHit } from './geocoder';
-import { extractCityFromName } from './extractor';
+import { extractCityFromName, cityCandidates, GENERIC_WORDS } from './extractor';
 import { distanceKm } from './geo';
 import { ClubEntry, Hall } from './types';
 
@@ -50,12 +50,6 @@ export function isPlausibleNameHit(clubName: string, displayName?: string): bool
   return tokens.filter(t => d.includes(t)).length >= Math.ceil(tokens.length / 2);
 }
 
-const GENERIC_WORDS = new Set([
-  'verein', 'turnverein', 'turngemeinde', 'turngemeine', 'sportverein', 'sportclub', 'sport-club', 'sports', 'club',
-  'basketball', 'basketballteam', 'basketballclub', 'baskets', 'united', 'akademie', 'eagles', 'falcons', 'towers',
-  'dragons', 'tigers', 'titans', 'giants', 'lakers', 'löwen', 'helden', 'keiler', 'scorpions', 'romans', 'bears',
-  'bats', 'squirrels', 'sportgemeinschaft', 'sportgemeinde', 'turnerbund', 'turnerschaft', 'turnvereinigung'
-]);
 
 /** Taugt ein Wort als Ortsbezeichnung? (nicht: Kürzel, Zahlen, Rechtsformen, Allerweltswörter) */
 export function isSaneCityLabel(label?: string | null): boolean {
@@ -176,10 +170,10 @@ export async function geocodeClub(
     if (coords && accept(coords, 'hall')) return hallResult(coords);
   }
 
-  // 3. Ort aus dem Namen (nur wenn er als Ort taugt)
-  if (isSaneCityLabel(extracted)) {
-    const byCity = await geocode(extracted);
-    if (byCity && accept(byCity, 'city')) return { lat: byCity.lat, lng: byCity.lng, source: 'city', confidence: 'low', geocodedFrom: extracted };
+  // 3. Ort aus dem Namen (ohne Vereinskürzel; nur Wörter, die als Ort taugen), wahrscheinlichster zuerst
+  for (const candidate of cityCandidates(club.name).filter(isSaneCityLabel).slice(0, 3)) {
+    const byCity = await geocode(candidate);
+    if (byCity && accept(byCity, 'city')) return { lat: byCity.lat, lng: byCity.lng, source: 'city', confidence: 'low', geocodedFrom: candidate };
   }
   return null;
 }
