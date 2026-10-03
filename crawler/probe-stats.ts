@@ -68,7 +68,9 @@ async function probeLiga(ligaId: number, delay: number): Promise<Record<string, 
     apiStatus: stat.json?.status,
     eintraege: entries.length,
     stand: stat.json?.data?.teamStatistik?.stand ?? null,
-    felderMitWert: fieldCoverage(entries)
+    felderMitWert: fieldCoverage(entries),
+    // Rohwerte des ersten Teams (Teamstatistik, keine Spielerdaten) zur Fehlersuche
+    ersterEintrag: entries[0] ? { ...entries[0], tableTeamEntry: undefined } : null
   };
   await sleep(delay);
 
@@ -83,6 +85,9 @@ async function probeLiga(ligaId: number, delay: number): Promise<Record<string, 
       http: box.status,
       matchId: played[0].matchId,
       statisticType: box.json?.data?.statisticType ?? null,
+      boxscoreVorhanden: box.json?.data?.matchBoxscore != null,
+      boxscoreSchluessel: Object.keys(box.json?.data?.matchBoxscore ?? {}),
+      heimRoh: box.json?.data?.matchBoxscore?.homeTotalStats ?? null,
       heim: nonZeroTotals(box.json?.data?.matchBoxscore?.homeTotalStats),
       gast: nonZeroTotals(box.json?.data?.matchBoxscore?.guestTotalStats)
     };
