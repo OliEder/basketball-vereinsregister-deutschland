@@ -41,7 +41,7 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 | Workflow | Auslöser | Zweck |
 |---|---|---|
 | **Monthly Crawler** | 1. des Monats, manuell | `crawl` (Vereine/Teams, ohne Geocoding), danach `geocode` (fehlende Koordinaten); committet `data/clubs.json` |
-| **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/` |
+| **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/`, erzeugt die statischen Vereins- und Regionsseiten samt Sitemap (`crawler/seo.ts`, URL-Zuordnung im Branch `url-store`) |
 | **Regeocode Clubs** | manuell | berechnet verdächtige Koordinaten neu (`scope=suspect\|all`); ohne `apply` nur Bericht auf dem Branch `regeocode-report`, mit `apply` wird `clubs.json` committet |
 | **Accessibility (WCAG 2.2)** | Pull Requests auf `portal/**`, manuell | Playwright + axe-core gegen das Portal (Fixtures, Light/Dark) |
 | **Spielorte (matchInfo)** | alle 6 Stunden, manuell | holt die Halle je Spiel aus `matchInfo` und legt sie dauerhaft im Branch `data-store` ab (Warteschlange mit Zeitbudget) |

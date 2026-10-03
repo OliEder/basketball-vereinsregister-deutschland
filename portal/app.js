@@ -2,6 +2,7 @@
 // Suchlogik läuft vollständig client-seitig
 
 let searchEngine = null;
+let urlMap = null;   // clubId → Pfad der statischen Vereinsseite (data/url-map.json), optional
 let map = null;
 let markerLayer = null;
 let lastResults = [];
@@ -73,9 +74,12 @@ async function geocodeCity(city) {
 
 async function loadClubs() {
   setStatus('Lade Vereinsdaten...');
+  const mapPromise = fetch('data/url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
   const res = await fetch('data/clubs.json');
   if (!res.ok) throw new Error('clubs.json konnte nicht geladen werden');
-  return res.json();
+  const clubs = await res.json();
+  urlMap = await mapPromise;
+  return clubs;
 }
 
 // --- Rendering ---
@@ -306,7 +310,7 @@ function renderClub(club) {
 
   const mehr = document.createElement('a');
   mehr.className = 'mehr-infos-btn dss-btn dss-btn--primary dss-btn--sm';
-  mehr.href = 'verein.html?id=' + club.clubId;
+  mehr.href = (urlMap && urlMap[String(club.clubId)]) || 'verein.html?id=' + club.clubId;
 
   const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   arrow.setAttribute('width', '12');

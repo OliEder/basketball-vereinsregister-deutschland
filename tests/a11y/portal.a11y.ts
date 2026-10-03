@@ -25,7 +25,9 @@ const search: Step = async page => {
 const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> = [
   { name: 'Startseite', url: '/index.html', ready: '#stats-bar:not(:empty)' },
   { name: 'Startseite mit Ergebnissen', url: '/index.html', ready: '.club-card', action: search },
-  { name: 'Vereinsseite', url: '/verein.html?id=1235', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
+  { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
+  { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
+  { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
   { name: 'Team-Seite', url: '/team.html?id=151009', ready: '.team-table' },
   { name: 'Team ohne Live-Daten', url: '/team.html?id=424242', ready: '.verein-error' }
 ];
@@ -207,4 +209,24 @@ test('Nächstes Spiel zeigt die gemeldete Halle ohne "Voraussichtlich"', async (
   await expect(page.locator('.next-game-venue-label')).toHaveText('Spielort');
   await expect(page.locator('.next-game-venue-note')).toHaveCount(0);
   await expect(page.locator('.next-game-map')).toHaveCount(1);
+});
+
+test('Alte Vereinsadresse leitet auf die statische Seite um', async ({ page }) => {
+  await open(page, '/verein.html?id=1235', 'light', '.verein-team-card');
+  await expect(page).toHaveURL(/\/bayern\/noerdlingen\/tsv-1861-noerdlingen\/$/);
+});
+
+test('Statische Vereinsseite: Canonical, Inhalt ohne JavaScript, Sitemap', async ({ page, request }) => {
+  const res = await request.get('/bayern/noerdlingen/tsv-1861-noerdlingen/');
+  const html = await res.text();
+  expect(html).toContain('<h1>TSV 1861 Nördlingen</h1>');
+  expect(html).toMatch(/rel="canonical" href="https:\/\/[^"]+\/bayern\/noerdlingen\/tsv-1861-noerdlingen\/"/);
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  expect(sitemap).toContain('/bayern/muenchen/mtsv-schwabing/');
+  expect((await (await request.get('/robots.txt')).text())).toContain('Sitemap:');
+});
+
+test('Startseite verlinkt die Regionen', async ({ page }) => {
+  await open(page, '/index.html', 'light', '#regions a');
+  await expect(page.locator('#regions a[href="bayern/"]')).toBeVisible();
 });
