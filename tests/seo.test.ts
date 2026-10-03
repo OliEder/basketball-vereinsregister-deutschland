@@ -1,4 +1,4 @@
-import { slugify, clubSlug, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -143,5 +143,45 @@ describe('buildSite', () => {
     expect(b.regions.map(r => r.slug)).toEqual(['bayern', 'bundesweit']);
     const out = injectRegionLinks('<nav><!--REGION-LINKS--></nav>', b.regions);
     expect(out).toContain('<a href="bayern/">Bayern</a>');
+  });
+});
+
+describe('Stadtteile und Alphabet', () => {
+  it('mainPlace fasst Stadtteile mit Leerzeichen-Bindestrich zur Stadt zusammen', () => {
+    expect(mainPlace('Köln - Porz')).toBe('Köln');
+    expect(mainPlace('Pulheim ¿ Stommeln')).toBe('Pulheim');
+    expect(mainPlace('Neustadt / Wied')).toBe('Neustadt / Wied');   // kein Stadtteil-Muster
+    expect(mainPlace('Halle (Saale)')).toBe('Halle (Saale)');
+  });
+
+  it('Stadtteile ohne Leerzeichen nur, wenn die Stadt selbst als Ort vorkommt', () => {
+    const known = knownOrte([club(1, 'A', 'Stuttgart'), club(2, 'B', 'Stuttgart-Degerloch'), club(3, 'C', 'Garmisch-Partenkirchen')]);
+    expect(mainPlace('Stuttgart-Degerloch', known)).toBe('Stuttgart');
+    expect(mainPlace('Garmisch-Partenkirchen', known)).toBe('Garmisch-Partenkirchen');
+    expect(mainPlace('Castrop-Rauxel')).toBe('Castrop-Rauxel');
+  });
+
+  it('Vereine in Stadtteilen landen unter der Stadt, der alte Stadtteil-Pfad wird zur Weiterleitung', () => {
+    const before = assignPaths([club(1, 'TV Porz', 'Köln - Porz'), club(2, 'SV Köln', 'Köln')]);
+    expect(before['1'].path).toBe('bayern/koeln/tv-porz/');
+    const prev: UrlMap = { '1': { path: 'bayern/koeln-porz/tv-porz/', history: [] } };
+    const after = assignPaths([club(1, 'TV Porz', 'Köln - Porz')], prev);
+    expect(after['1']).toEqual({ path: 'bayern/koeln/tv-porz/', history: ['bayern/koeln-porz/tv-porz/'] });
+  });
+
+  it('letterOf ordnet Umlaute ihrem Grundbuchstaben zu', () => {
+    expect(letterOf('Ärzte')).toBe('A');
+    expect(letterOf('über')).toBe('U');
+    expect(letterOf('1. FC')).toBe('#');
+  });
+
+  it('lange Listen bekommen Buchstabengruppen und eine Sprungleiste, kurze nicht', () => {
+    const mk = (n: number) => Array.from({ length: n }, (_, i) => ({ name: `${String.fromCharCode(65 + (i % 5))}-Ort ${i}`, href: `x/${i}/` }));
+    const long = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN) }] });
+    expect(long).toContain('aria-label="Alphabet"');
+    expect(long).toContain('href="bayern/#buchstabe-a"');
+    expect(long).toContain('<h2 id="buchstabe-a">A</h2>');
+    const short = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN - 1) }] });
+    expect(short).not.toContain('Alphabet');
   });
 });

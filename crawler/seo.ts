@@ -45,20 +45,44 @@ export interface ClubPlace {
   place: { slug: string; name: string };
 }
 
-export function placeOf(club: ClubEntry): ClubPlace {
+/** Ort der Heimhalle (roh, wie gemeldet); ohne Heimhalle der häufigste Hallenort. */
+export function rawOrt(club: ClubEntry): string | undefined {
+  const home = chooseHomeHall(club)?.hall.ort;
+  if (home) return home;
+  const counts = new Map<string, number>();
+  for (const h of club.halls ?? []) if (h.ort) counts.set(h.ort, (counts.get(h.ort) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+}
+
+/** Menge aller gemeldeten Orte (klein geschrieben): Grundlage, um Stadtteile "Stuttgart-Degerloch" zu erkennen. */
+export function knownOrte(clubs: ClubEntry[]): Set<string> {
+  const out = new Set<string>();
+  for (const c of clubs) { const o = rawOrt(c); if (o) out.add(o.replace(/\s+/g, ' ').trim().toLowerCase()); }
+  return out;
+}
+
+/**
+ * Stadtteile gehören zur Stadt: "Köln - Porz" und "Pulheim ¿ Stommeln" werden zu "Köln" und "Pulheim";
+ * "Stuttgart-Degerloch" nur, wenn "Stuttgart" selbst als Ort vorkommt (Garmisch-Partenkirchen bleibt).
+ */
+export function mainPlace(ort: string, known?: Set<string>): string {
+  const t = ort.replace(/\s+/g, ' ').trim();
+  const spaced = t.split(/\s[-–—¿]\s|\s?¿\s?/)[0].trim();
+  if (spaced.length >= 3 && spaced !== t) return spaced;
+  const i = t.indexOf('-');
+  if (i >= 4 && known?.has(t.slice(0, i).toLowerCase())) return t.slice(0, i);
+  return t;
+}
+
+export function placeOf(club: ClubEntry, known?: Set<string>): ClubPlace {
   const code = (club.vereinsnummer ?? '').slice(0, 2);
   const stateName = STATES[code];
   const state = stateName ? { slug: slugify(stateName), name: stateName } : NATIONAL;
 
-  const home = chooseHomeHall(club)?.hall.ort;
-  let ort = home;
-  if (!ort) {
-    const counts = new Map<string, number>();
-    for (const h of club.halls ?? []) if (h.ort) counts.set(h.ort, (counts.get(h.ort) ?? 0) + 1);
-    ort = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-  }
+  const raw = rawOrt(club);
+  const ort = raw ? mainPlace(raw, known) : undefined;
   const slug = ort ? slugify(ort) : '';
-  return { state, place: slug ? { slug, name: ort!.trim() } : NO_PLACE };
+  return { state, place: slug ? { slug, name: ort! } : NO_PLACE };
 }
 
 export interface UrlEntry { path: string; history: string[] }
@@ -72,8 +96,9 @@ export type UrlMap = Record<string, UrlEntry>;
 export function assignPaths(clubs: ClubEntry[], previous: UrlMap = {}): UrlMap {
   const sorted = [...clubs].sort((a, b) => a.clubId - b.clubId);
   const desired = new Map<number, string>();
+  const known = knownOrte(clubs);
   for (const c of sorted) {
-    const { state, place } = placeOf(c);
+    const { state, place } = placeOf(c, known);
     const slug = clubSlug(c.name) || `verein-${c.clubId}`;
     desired.set(c.clubId, `${state.slug}/${place.slug}/${slug}/`);
   }
@@ -300,11 +325,37 @@ ${crumbNav(crumbs)}
 
 export interface ListItem { name: string; href: string; note?: string }
 
+export const ALPHABET_MIN = 30;
+
+export function letterOf(name: string): string {
+  const c = name.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').charAt(0).toUpperCase();
+  return /[A-Z]/.test(c) ? c : '#';
+}
+
+/** Bei langen Listen: Gruppen je Anfangsbuchstabe plus Sprungleiste A–Z (Ziele mit Seitenpfad, wegen <base>). */
+function alphabetGroups(pagePath: string, items: ListItem[]): { nav: string; groups: { heading: string; id: string; items: ListItem[] }[] } {
+  const byLetter = new Map<string, ListItem[]>();
+  for (const it of items) {
+    const l = letterOf(it.name);
+    byLetter.set(l, [...(byLetter.get(l) ?? []), it]);
+  }
+  const letters = [...byLetter.keys()].sort((a, b) => (a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b)));
+  const nav = `      <nav class="seo-alphabet" aria-label="Alphabet"><ul>${letters.map(l => `<li><a href="${pagePath}#buchstabe-${l === '#' ? 'sonst' : l.toLowerCase()}">${l}</a></li>`).join('')}</ul></nav>`;
+  return { nav, groups: letters.map(l => ({ heading: l, id: `buchstabe-${l === '#' ? 'sonst' : l.toLowerCase()}`, items: byLetter.get(l)! })) };
+}
+
 export function renderListPage(opts: {
   base: string; pagePath: string; title: string; heading: string; intro: string;
   crumbs: { name: string; path: string }[]; groups: { heading?: string; items: ListItem[] }[];
 }): string {
-  const groups = opts.groups.map(g => `      ${g.heading ? `<h2>${esc(g.heading)}</h2>` : ''}
+  let alphabet = '';
+  let source: { heading?: string; id?: string; items: ListItem[] }[] = opts.groups;
+  if (opts.groups.length === 1 && !opts.groups[0].heading && opts.groups[0].items.length >= ALPHABET_MIN) {
+    const a = alphabetGroups(opts.pagePath, opts.groups[0].items);
+    alphabet = a.nav;
+    source = a.groups;
+  }
+  const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}"` : ''}>${esc(g.heading)}</h2>` : ''}
       <ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`).join('\n');
   const body = `${topbar()}
   <main class="verein-main">
@@ -312,6 +363,7 @@ ${crumbNav(opts.crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(opts.heading)}</h1>
       <p>${esc(opts.intro)}</p>
+${alphabet}
 ${groups}
     </div>
   </main>`;
@@ -353,6 +405,7 @@ export function buildSite(clubs: ClubEntry[], previous: UrlMap, base: string, la
   const urlMap = assignPaths(clubs, previous);
   const files = new Map<string, string>();
   const sitemapPaths: string[] = [];
+  const known = knownOrte(clubs);
   const currentPaths = new Set(Object.values(urlMap).map(e => e.path));
 
   type Group = { state: ClubPlace['state']; places: Map<string, { name: string; clubs: { club: ClubEntry; p: string }[] }> };
@@ -360,7 +413,7 @@ export function buildSite(clubs: ClubEntry[], previous: UrlMap, base: string, la
 
   for (const club of clubs) {
     const entry = urlMap[String(club.clubId)];
-    const cp = placeOf(club);
+    const cp = placeOf(club, known);
     // Stimmt der Pfad nicht mehr mit Land/Ort überein (Namens-ID-Variante), gehört der Verein trotzdem hierher.
     const [stateSlug, placeSlug] = entry.path.split('/');
     const sg = states.get(stateSlug) ?? { state: cp.state, places: new Map() };
