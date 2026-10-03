@@ -1,5 +1,5 @@
 // crawler/bbb-client.ts
-import { BbbVerband, BbbLiga, BbbTableEntry, BbbMatch, BbbSpielfeld } from './types';
+import { BbbVerband, BbbLiga, BbbLigaData, BbbTableEntry, BbbMatch, BbbSpielfeld } from './types';
 
 const BBB_BASE = 'https://www.basketball-bund.net/rest';
 const RATE_LIMIT_MS = 1100;
@@ -82,11 +82,16 @@ export class BbbClient {
   }
 
   async getTable(ligaId: number): Promise<BbbTableEntry[]> {
+    return (await this.getTableWithLiga(ligaId)).entries;
+  }
+
+  /** Tabelle samt Gebietsangaben (ligaData) derselben Liga, ohne zusätzlichen Request. */
+  async getTableWithLiga(ligaId: number): Promise<{ entries: BbbTableEntry[]; ligaData: BbbLigaData | null }> {
     await this.sleep(RATE_LIMIT_MS);
-    const data = await this.requestWithRetry<{ data: { tabelle: { entries: BbbTableEntry[] } } }>(
+    const data = await this.requestWithRetry<{ data: { ligaData?: BbbLigaData; tabelle: { entries: BbbTableEntry[] } } }>(
       `${BBB_BASE}/competition/table/id/${ligaId}`
     );
-    return data.data.tabelle?.entries ?? [];
+    return { entries: data.data.tabelle?.entries ?? [], ligaData: data.data.ligaData ?? null };
   }
 
   async getClubDetails(clubId: number): Promise<{ vereinsname: string; vereinsnummer: string } | null> {

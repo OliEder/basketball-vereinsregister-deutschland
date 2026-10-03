@@ -1,5 +1,5 @@
 // tests/extractor.test.ts
-import { extractClubs, extractCityFromName, extractTeams } from '../crawler/extractor';
+import { extractClubs, extractCityFromName, extractTeams, regionFields } from '../crawler/extractor';
 import { BbbTableEntry, TeamEntry } from '../crawler/types';
 
 const makeEntry = (clubId: number, teamname: string, teamPermanentId: number): BbbTableEntry => ({
@@ -110,5 +110,30 @@ describe('extractTeams', () => {
     const result = extractTeams(entries, 'Senioren', 'männlich');
     expect(result.get(10)).toHaveLength(1);
     expect(result.get(10)![0].teamPermanentId).toBe(100);
+  });
+});
+
+describe('regionFields / extractTeams mit ligaData', () => {
+  it('übernimmt Ebene, Bezirk und Kreis', () => {
+    expect(regionFields({ skEbeneName: 'Bezirk', bezirkName: 'Oberpfalz', kreisname: 'Regensburg' }))
+      .toEqual({ ebene: 'Bezirk', bezirk: 'Oberpfalz', kreis: 'Regensburg' });
+  });
+
+  it('lässt leere und fehlende Angaben weg', () => {
+    expect(regionFields({ skEbeneName: 'Verband', bezirkName: ' ', kreisname: null })).toEqual({ ebene: 'Verband' });
+    expect(regionFields(null)).toEqual({});
+    expect(regionFields(undefined)).toEqual({});
+  });
+
+  it('schreibt die Gebietsangaben in die Teams der Liga', () => {
+    const entries: BbbTableEntry[] = [
+      { rang: 1, team: { seasonTeamId: 1, teamPermanentId: 100, teamname: 'FC Tegernheim', teamnameSmall: 'TEG', clubId: 10 } },
+    ];
+    const result = extractTeams(entries, 'U14', 'weiblich', {
+      ligaId: 51961, liganame: 'U14 weiblich Bezirksoberliga',
+      ligaData: { skEbeneName: 'Bezirk', bezirkName: 'Oberpfalz' }
+    });
+    expect(result.get(10)![0]).toMatchObject({ ligaId: 51961, ebene: 'Bezirk', bezirk: 'Oberpfalz' });
+    expect(result.get(10)![0]).not.toHaveProperty('kreis');
   });
 });

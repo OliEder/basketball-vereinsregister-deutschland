@@ -48,7 +48,7 @@ async function crawl(): Promise<void> {
 
       for (const liga of ligen) {
         try {
-          const entries = await client.getTable(liga.ligaId);
+          const { entries, ligaData } = await client.getTableWithLiga(liga.ligaId);
           const clubs = extractClubs(entries, verband.id, verband.label);
           for (const club of clubs) {
             if (!allClubs.has(club.clubId)) {
@@ -57,7 +57,7 @@ async function crawl(): Promise<void> {
           }
           const altersklasse = liga.akName ?? '';
           const geschlecht = liga.geschlecht ?? '';
-          const teamsFromLiga = extractTeams(entries, altersklasse, geschlecht, { ligaId: liga.ligaId, liganame: liga.liganame });
+          const teamsFromLiga = extractTeams(entries, altersklasse, geschlecht, { ligaId: liga.ligaId, liganame: liga.liganame, ligaData });
           for (const [clubId, teams] of teamsFromLiga) {
             const existing = teamsByClub.get(clubId) ?? [];
             for (const team of teams) {
