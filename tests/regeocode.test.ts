@@ -58,7 +58,7 @@ describe('groupName', () => {
 
 describe('unifyGroups', () => {
   const res = (clubId: number, name: string, lat: number, lng: number, extra: Partial<RegeocodeResult> = {}): RegeocodeResult => ({
-    clubId, name, suspect: true, source: 'hall', confidence: 'high', nameHitRejected: false, group: null, groupAction: null,
+    clubId, name, suspect: true, source: 'hall', confidence: 'high', nameHitRejected: false, group: null, groupAction: null, region: null, regionRejected: [],
     before: { lat: 1, lng: 1, geocodedFrom: 'e.V.' },
     after: { lat, lng, geocodedFrom: 'Berlin' },
     distanceKm: 100, action: 'changed', ...extra

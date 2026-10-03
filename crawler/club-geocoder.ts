@@ -10,7 +10,7 @@ import { ClubEntry, Hall } from './types';
 
 type Coords = { lat: number; lng: number };
 type GeocodeFn = (query: string) => Promise<GeocodeHit | null>;
-export type GeocodeSource = 'name' | 'hall' | 'city';
+export type GeocodeSource = 'name' | 'hall' | 'city' | 'manual';
 /** high: Name-Treffer oder eindeutige Heimhalle; low: Mehrheitsentscheidung oder reiner Ortsname */
 export type Confidence = 'high' | 'low';
 
@@ -121,9 +121,14 @@ export function chooseHomeHall(club: Pick<ClubEntry, 'name' | 'halls'>): { hall:
   return null;
 }
 
+/**
+ * @param accept optionale Plausibilitätsprüfung (z. B. Region): Ein Treffer, den sie ablehnt, zählt nicht,
+ *   die Kette läuft mit der nächsten Quelle weiter.
+ */
 export async function geocodeClub(
   club: ClubEntry,
-  geocode: GeocodeFn = geocodeDetailed
+  geocode: GeocodeFn = geocodeDetailed,
+  accept: (coords: Coords, source: GeocodeSource) => boolean = () => true
 ): Promise<ClubGeocode | null> {
   const home = chooseHomeHall(club);
   const extracted = extractCityFromName(club.name);
@@ -147,7 +152,7 @@ export async function geocodeClub(
   // 1. Namenssuche (OpenStreetMap)
   const byName = await geocode(searchName(club.name));
   let nameHitRejected = false;
-  if (byName && isPlausibleNameHit(club.name, byName.displayName)) {
+  if (byName && isPlausibleNameHit(club.name, byName.displayName) && accept(byName, 'name')) {
     const nameResult: ClubGeocode = { lat: byName.lat, lng: byName.lng, source: 'name', confidence: 'high', geocodedFrom: byName.city ?? fallbackLabel };
 
     // Gegenprobe: Liegt der Treffer in einem anderen Ort als die (sichere) Heimhalle, ist er verdächtig
@@ -160,6 +165,7 @@ export async function geocodeClub(
     const coords = await hallCoords();
     if (!coords) return nameResult;
     if (distanceKm(coords, byName) <= NAME_HALL_AGREE_KM) return nameResult;
+    if (!accept(coords, 'hall')) return nameResult;
     nameHitRejected = true;
     return hallResult(coords, { nameHitRejected });
   }
@@ -167,13 +173,13 @@ export async function geocodeClub(
   // 2. Heimhalle
   if (home) {
     const coords = await hallCoords();
-    if (coords) return hallResult(coords);
+    if (coords && accept(coords, 'hall')) return hallResult(coords);
   }
 
   // 3. Ort aus dem Namen (nur wenn er als Ort taugt)
   if (isSaneCityLabel(extracted)) {
     const byCity = await geocode(extracted);
-    if (byCity) return { lat: byCity.lat, lng: byCity.lng, source: 'city', confidence: 'low', geocodedFrom: extracted };
+    if (byCity && accept(byCity, 'city')) return { lat: byCity.lat, lng: byCity.lng, source: 'city', confidence: 'low', geocodedFrom: extracted };
   }
   return null;
 }

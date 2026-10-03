@@ -1,6 +1,8 @@
 import { BbbClient } from './bbb-client';
 import { extractClubs, extractCityFromName, extractTeams } from './extractor';
 import { geocodeClub } from './club-geocoder';
+import { RegionIndex } from './region';
+import { isSuspect } from './regeocode';
 import { mergeAndWrite, loadExistingClubs } from './writer';
 import { ClubEntry, TeamEntry } from './types';
 
@@ -125,10 +127,12 @@ async function crawl(): Promise<void> {
   const toGeocode = Array.from(allClubs.values()).filter(c => c.lat === null);
   console.log(`${toGeocode.length} Vereine ohne Koordinaten.`);
 
+  // Treffer außerhalb von Bezirk bzw. Landesverband des Vereins werden verworfen
+  const regions = new RegionIndex(Array.from(allClubs.values()), c => c.lat != null && !isSuspect(c));
   let geocoded = 0;
   for (let i = 0; i < toGeocode.length; i++) {
     const club = toGeocode[i];
-    const coords = await geocodeClub(club);
+    const coords = await geocodeClub(club, undefined, c => regions.check(club, c).ok);
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;
