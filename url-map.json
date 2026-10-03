@@ -140,16 +140,20 @@
   "history": []
  },
  "136": {
-  "path": "nordrhein-westfalen/essen-ueberruhr/turnerbund-1900-essen-ueberruhr/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/turnerbund-1900-essen-ueberruhr/",
+  "history": [
+   "nordrhein-westfalen/essen-ueberruhr/turnerbund-1900-essen-ueberruhr/"
+  ]
  },
  "139": {
   "path": "mecklenburg-vorpommern/guestrow/sv-einheit-guestrow/",
   "history": []
  },
  "145": {
-  "path": "nordrhein-westfalen/duesseldorf-oberbilk/sv-alte-freunde-95-duesseldorf/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/sv-alte-freunde-95-duesseldorf/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-oberbilk/sv-alte-freunde-95-duesseldorf/"
+  ]
  },
  "147": {
   "path": "saarland/neunkirchen-wellesweiler/ssv-wellesweiler/",
@@ -160,8 +164,10 @@
   "history": []
  },
  "156": {
-  "path": "nordrhein-westfalen/aachen-brand/brander-turnverein-1883-aachen/",
-  "history": []
+  "path": "nordrhein-westfalen/aachen/brander-turnverein-1883-aachen/",
+  "history": [
+   "nordrhein-westfalen/aachen-brand/brander-turnverein-1883-aachen/"
+  ]
  },
  "161": {
   "path": "hessen/frankfurt-am-main/sg-enkheim/",
@@ -200,16 +206,20 @@
   "history": []
  },
  "193": {
-  "path": "nordrhein-westfalen/duesseldorf-bilk/djk-tusa-06-duesseldorf/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/djk-tusa-06-duesseldorf/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-bilk/djk-tusa-06-duesseldorf/"
+  ]
  },
  "196": {
   "path": "nordrhein-westfalen/siegen/bg-tvo-biggesee-tv-jahn-siegen/",
   "history": []
  },
  "200": {
-  "path": "nordrhein-westfalen/duesseldorf-kaiserswerth/isd-sportverein/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/isd-sportverein/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-kaiserswerth/isd-sportverein/"
+  ]
  },
  "203": {
   "path": "saarland/nalbach/tv-germania-nalbach/",
@@ -336,8 +346,10 @@
   "history": []
  },
  "291": {
-  "path": "nordrhein-westfalen/koeln-porz/hellenischer-sv-athena-porz/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/hellenischer-sv-athena-porz/",
+  "history": [
+   "nordrhein-westfalen/koeln-porz/hellenischer-sv-athena-porz/"
+  ]
  },
  "293": {
   "path": "sachsen-anhalt/wittenberg/mtv-von-1862-wittenberg/",
@@ -424,8 +436,10 @@
   "history": []
  },
  "341": {
-  "path": "nordrhein-westfalen/koeln-ostheim/djk-koeln-ost/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/djk-koeln-ost/",
+  "history": [
+   "nordrhein-westfalen/koeln-ostheim/djk-koeln-ost/"
+  ]
  },
  "342": {
   "path": "berlin/berlin/tus-lichterfelde/",
@@ -444,8 +458,10 @@
   "history": []
  },
  "355": {
-  "path": "nordrhein-westfalen/herne-eickel/gbc-hellas-herne/",
-  "history": []
+  "path": "nordrhein-westfalen/herne/gbc-hellas-herne/",
+  "history": [
+   "nordrhein-westfalen/herne-eickel/gbc-hellas-herne/"
+  ]
  },
  "356": {
   "path": "niedersachsen/weitere/mtv-schandelah-gardessen/",
@@ -468,8 +484,10 @@
   "history": []
  },
  "364": {
-  "path": "nordrhein-westfalen/koeln-porz/gsv-porz/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/gsv-porz/",
+  "history": [
+   "nordrhein-westfalen/koeln-porz/gsv-porz/"
+  ]
  },
  "365": {
   "path": "baden-wuerttemberg/wiesloch/tsg-1885-wiesloch/",
@@ -564,8 +582,10 @@
   "history": []
  },
  "399": {
-  "path": "saarland/saarbruecken-dudweiler/tus-herrensohr/",
-  "history": []
+  "path": "saarland/saarbruecken/tus-herrensohr/",
+  "history": [
+   "saarland/saarbruecken-dudweiler/tus-herrensohr/"
+  ]
  },
  "400": {
   "path": "nordrhein-westfalen/goch/tv-goch-1883/",
@@ -628,8 +648,10 @@
   "history": []
  },
  "430": {
-  "path": "nordrhein-westfalen/erkrath-hochdahl/tsv-hochdahl-64/",
-  "history": []
+  "path": "nordrhein-westfalen/erkrath/tsv-hochdahl-64/",
+  "history": [
+   "nordrhein-westfalen/erkrath-hochdahl/tsv-hochdahl-64/"
+  ]
  },
  "431": {
   "path": "nordrhein-westfalen/erkrath/tus-erkrath-1930/",
@@ -644,8 +666,10 @@
   "history": []
  },
  "438": {
-  "path": "hessen/giessen-wieseck/tsg-wieseck/",
-  "history": []
+  "path": "hessen/giessen/tsg-wieseck/",
+  "history": [
+   "hessen/giessen-wieseck/tsg-wieseck/"
+  ]
  },
  "441": {
   "path": "hessen/neu-isenburg/bc-neu-isenburg/",
@@ -744,8 +768,10 @@
   "history": []
  },
  "477": {
-  "path": "nordrhein-westfalen/troisdorf-sieglar/sieglarer-tv-1897/",
-  "history": []
+  "path": "nordrhein-westfalen/troisdorf/sieglarer-tv-1897/",
+  "history": [
+   "nordrhein-westfalen/troisdorf-sieglar/sieglarer-tv-1897/"
+  ]
  },
  "479": {
   "path": "bayern/rosenheim/sb-djk-rosenheim/",
@@ -768,12 +794,16 @@
   "history": []
  },
  "493": {
-  "path": "nordrhein-westfalen/hagen-hohenlimburg/tv-hohenlimburg-1871/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/tv-hohenlimburg-1871/",
+  "history": [
+   "nordrhein-westfalen/hagen-hohenlimburg/tv-hohenlimburg-1871/"
+  ]
  },
  "494": {
-  "path": "niedersachsen/osnabrueck-sutthausen/rw-sutthausen/",
-  "history": []
+  "path": "niedersachsen/osnabrueck/rw-sutthausen/",
+  "history": [
+   "niedersachsen/osnabrueck-sutthausen/rw-sutthausen/"
+  ]
  },
  "496": {
   "path": "baden-wuerttemberg/herrenberg/vfl-herrenberg/",
@@ -792,8 +822,10 @@
   "history": []
  },
  "501": {
-  "path": "nordrhein-westfalen/hagen-altenhagen/tsv-hagen-1860/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/tsv-hagen-1860/",
+  "history": [
+   "nordrhein-westfalen/hagen-altenhagen/tsv-hagen-1860/"
+  ]
  },
  "504": {
   "path": "bayern/goldbach/tv-1897-goldbach/",
@@ -864,8 +896,10 @@
   "history": []
  },
  "536": {
-  "path": "nordrhein-westfalen/pulheim-brauweiler/tus-schwarz-weiss-brauweiler/",
-  "history": []
+  "path": "nordrhein-westfalen/pulheim/tus-schwarz-weiss-brauweiler/",
+  "history": [
+   "nordrhein-westfalen/pulheim-brauweiler/tus-schwarz-weiss-brauweiler/"
+  ]
  },
  "537": {
   "path": "baden-wuerttemberg/karlsruhe/ts-durlach/",
@@ -948,8 +982,10 @@
   "history": []
  },
  "569": {
-  "path": "nordrhein-westfalen/essen-kettwig/kettwiger-sportverein-70-86/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/kettwiger-sportverein-70-86/",
+  "history": [
+   "nordrhein-westfalen/essen-kettwig/kettwiger-sportverein-70-86/"
+  ]
  },
  "571": {
   "path": "hessen/fritzlar/tus-fritzlar/",
@@ -980,8 +1016,10 @@
   "history": []
  },
  "587": {
-  "path": "nordrhein-westfalen/essen-schonnebeck/tusem-essen/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/tusem-essen/",
+  "history": [
+   "nordrhein-westfalen/essen-schonnebeck/tusem-essen/"
+  ]
  },
  "590": {
   "path": "bayern/ingolstadt/esv-ingolstadt-ringsee/",
@@ -1052,8 +1090,10 @@
   "history": []
  },
  "616": {
-  "path": "nordrhein-westfalen/essen-altendorf/djk-adler-union-essen-frintrop/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/djk-adler-union-essen-frintrop/",
+  "history": [
+   "nordrhein-westfalen/essen-altendorf/djk-adler-union-essen-frintrop/"
+  ]
  },
  "618": {
   "path": "nordrhein-westfalen/leverkusen/tus-opladen-von-1882/",
@@ -1408,8 +1448,10 @@
   "history": []
  },
  "755": {
-  "path": "baden-wuerttemberg/stuttgart-zuffenhausen/tv-89-zuffenhausen/",
-  "history": []
+  "path": "baden-wuerttemberg/stuttgart/tv-89-zuffenhausen/",
+  "history": [
+   "baden-wuerttemberg/stuttgart-zuffenhausen/tv-89-zuffenhausen/"
+  ]
  },
  "757": {
   "path": "nordrhein-westfalen/dorsten/bsv-wulfen/",
@@ -1432,8 +1474,10 @@
   "history": []
  },
  "762": {
-  "path": "rheinland-pfalz/koblenz-horchheim/bbc-horchheim/",
-  "history": []
+  "path": "rheinland-pfalz/koblenz/bbc-horchheim/",
+  "history": [
+   "rheinland-pfalz/koblenz-horchheim/bbc-horchheim/"
+  ]
  },
  "764": {
   "path": "bayern/guenzburg/tsv-wasserburg-guenzburg/",
@@ -1452,16 +1496,20 @@
   "history": []
  },
  "776": {
-  "path": "nordrhein-westfalen/dortmund-mengede/tv-1890-dortmund-mengede/",
-  "history": []
+  "path": "nordrhein-westfalen/dortmund/tv-1890-dortmund-mengede/",
+  "history": [
+   "nordrhein-westfalen/dortmund-mengede/tv-1890-dortmund-mengede/"
+  ]
  },
  "779": {
   "path": "nordrhein-westfalen/drolshagen/tus-09-drolshagen/",
   "history": []
  },
  "780": {
-  "path": "baden-wuerttemberg/stuttgart-sillenbuch/tsv-heumaden/",
-  "history": []
+  "path": "baden-wuerttemberg/stuttgart/tsv-heumaden/",
+  "history": [
+   "baden-wuerttemberg/stuttgart-sillenbuch/tsv-heumaden/"
+  ]
  },
  "781": {
   "path": "bayern/cham/asv-cham/",
@@ -1496,8 +1544,10 @@
   "history": []
  },
  "793": {
-  "path": "nordrhein-westfalen/dortmund-wickede/tv-arminius-1884-dtmd-wickede/",
-  "history": []
+  "path": "nordrhein-westfalen/dortmund/tv-arminius-1884-dtmd-wickede/",
+  "history": [
+   "nordrhein-westfalen/dortmund-wickede/tv-arminius-1884-dtmd-wickede/"
+  ]
  },
  "796": {
   "path": "hessen/gross-gerau/tv-gross-gerau/",
@@ -1516,8 +1566,10 @@
   "history": []
  },
  "801": {
-  "path": "nordrhein-westfalen/hagen-haspe/sv-70-hagen-haspe/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/sv-70-hagen-haspe/",
+  "history": [
+   "nordrhein-westfalen/hagen-haspe/sv-70-hagen-haspe/"
+  ]
  },
  "805": {
   "path": "bayern/rosenheim/tsv-1860-rosenheim/",
@@ -1540,8 +1592,10 @@
   "history": []
  },
  "814": {
-  "path": "nordrhein-westfalen/kreuztal-fellinghausen/tus-fellinghausen-1920/",
-  "history": []
+  "path": "nordrhein-westfalen/kreuztal/tus-fellinghausen-1920/",
+  "history": [
+   "nordrhein-westfalen/kreuztal-fellinghausen/tus-fellinghausen-1920/"
+  ]
  },
  "817": {
   "path": "berlin/berlin/berliner-sv-1892/",
@@ -1592,8 +1646,10 @@
   "history": []
  },
  "843": {
-  "path": "hessen/darmstadt-eberstadt/tv-eberstadt/",
-  "history": []
+  "path": "hessen/darmstadt/tv-eberstadt/",
+  "history": [
+   "hessen/darmstadt-eberstadt/tv-eberstadt/"
+  ]
  },
  "844": {
   "path": "nordrhein-westfalen/duisburg/basket-duisburg/",
@@ -1612,8 +1668,10 @@
   "history": []
  },
  "849": {
-  "path": "nordrhein-westfalen/hagen-emst/sc-concordia-hagen-1967/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/sc-concordia-hagen-1967/",
+  "history": [
+   "nordrhein-westfalen/hagen-emst/sc-concordia-hagen-1967/"
+  ]
  },
  "852": {
   "path": "rheinland-pfalz/neustadt-wied/sportfreunde-neustadt-wied/",
@@ -1632,8 +1690,10 @@
   "history": []
  },
  "856": {
-  "path": "nordrhein-westfalen/essen-altenessen/altenessener-turnverein-1886/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/altenessener-turnverein-1886/",
+  "history": [
+   "nordrhein-westfalen/essen-altenessen/altenessener-turnverein-1886/"
+  ]
  },
  "857": {
   "path": "bayern/zell-a-main/tg-zell-von-1862/",
@@ -1712,8 +1772,10 @@
   "history": []
  },
  "884": {
-  "path": "nordrhein-westfalen/essen-ruettenscheid/etb-schwarz-weiss-essen/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/etb-schwarz-weiss-essen/",
+  "history": [
+   "nordrhein-westfalen/essen-ruettenscheid/etb-schwarz-weiss-essen/"
+  ]
  },
  "886": {
   "path": "baden-wuerttemberg/karlsruhe/sg-eichenkreuz-karlsruhe/",
@@ -1728,8 +1790,10 @@
   "history": []
  },
  "889": {
-  "path": "niedersachsen/cuxhaven-franzenburg/tsv-altenwalde/",
-  "history": []
+  "path": "niedersachsen/cuxhaven/tsv-altenwalde/",
+  "history": [
+   "niedersachsen/cuxhaven-franzenburg/tsv-altenwalde/"
+  ]
  },
  "891": {
   "path": "baden-wuerttemberg/stuttgart/tus-stuttgart/",
@@ -1828,8 +1892,10 @@
   "history": []
  },
  "936": {
-  "path": "nordrhein-westfalen/essen-horst/mtg-horst/",
-  "history": []
+  "path": "nordrhein-westfalen/essen/mtg-horst/",
+  "history": [
+   "nordrhein-westfalen/essen-horst/mtg-horst/"
+  ]
  },
  "940": {
   "path": "thueringen/weimar/culture-city-weimar/",
@@ -1856,12 +1922,16 @@
   "history": []
  },
  "953": {
-  "path": "nordrhein-westfalen/gelsenkirchen-hassel/fc-schalke-04/",
-  "history": []
+  "path": "nordrhein-westfalen/gelsenkirchen/fc-schalke-04/",
+  "history": [
+   "nordrhein-westfalen/gelsenkirchen-hassel/fc-schalke-04/"
+  ]
  },
  "955": {
-  "path": "nordrhein-westfalen/koeln-roggendorf/sg-bp-bayer-koeln-worringen/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/sg-bp-bayer-koeln-worringen/",
+  "history": [
+   "nordrhein-westfalen/koeln-roggendorf/sg-bp-bayer-koeln-worringen/"
+  ]
  },
  "956": {
   "path": "baden-wuerttemberg/schwaikheim/tsv-schwaikheim/",
@@ -1960,8 +2030,10 @@
   "history": []
  },
  "1005": {
-  "path": "nordrhein-westfalen/neuss-allerheiligen/sv-1930-rosellen/",
-  "history": []
+  "path": "nordrhein-westfalen/neuss/sv-1930-rosellen/",
+  "history": [
+   "nordrhein-westfalen/neuss-allerheiligen/sv-1930-rosellen/"
+  ]
  },
  "1006": {
   "path": "baden-wuerttemberg/freiburg/usc-freiburg/",
@@ -2012,8 +2084,10 @@
   "history": []
  },
  "1027": {
-  "path": "nordrhein-westfalen/koeln-longerich/djk-koeln-nord-von-1960/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/djk-koeln-nord-von-1960/",
+  "history": [
+   "nordrhein-westfalen/koeln-longerich/djk-koeln-nord-von-1960/"
+  ]
  },
  "1028": {
   "path": "niedersachsen/hannover/turn-klubb-zu-hannover/",
@@ -2040,8 +2114,10 @@
   "history": []
  },
  "1036": {
-  "path": "nordrhein-westfalen/dortmund-hoerde/tv-einigkeit-dortmund-barop/",
-  "history": []
+  "path": "nordrhein-westfalen/dortmund/tv-einigkeit-dortmund-barop/",
+  "history": [
+   "nordrhein-westfalen/dortmund-hoerde/tv-einigkeit-dortmund-barop/"
+  ]
  },
  "1037": {
   "path": "niedersachsen/lohne/tus-bw-lohne/",
@@ -2092,8 +2168,10 @@
   "history": []
  },
  "1058": {
-  "path": "nordrhein-westfalen/wuppertal-barmen/polizei-sv-wuppertal-1921/",
-  "history": []
+  "path": "nordrhein-westfalen/wuppertal/polizei-sv-wuppertal-1921/",
+  "history": [
+   "nordrhein-westfalen/wuppertal-barmen/polizei-sv-wuppertal-1921/"
+  ]
  },
  "1060": {
   "path": "bayern/bruck-i-d-opf/spvgg-bruck/",
@@ -2104,8 +2182,10 @@
   "history": []
  },
  "1064": {
-  "path": "nordrhein-westfalen/wuppertal-barmen/barmer-tv-1846-korp-wuppertal/",
-  "history": []
+  "path": "nordrhein-westfalen/wuppertal/barmer-tv-1846-korp-wuppertal/",
+  "history": [
+   "nordrhein-westfalen/wuppertal-barmen/barmer-tv-1846-korp-wuppertal/"
+  ]
  },
  "1065": {
   "path": "rheinland-pfalz/maxdorf/tsg-maxdorf/",
@@ -2120,8 +2200,10 @@
   "history": []
  },
  "1068": {
-  "path": "nordrhein-westfalen/duesseldorf-oberbilk/tv-grafenberg-1888/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/tv-grafenberg-1888/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-oberbilk/tv-grafenberg-1888/"
+  ]
  },
  "1069": {
   "path": "niedersachsen/bergen/bsg-suedheide/",
@@ -2136,8 +2218,10 @@
   "history": []
  },
  "1079": {
-  "path": "nordrhein-westfalen/schloss-holte-stukenbrock/fc-stukenbrock/",
-  "history": []
+  "path": "nordrhein-westfalen/schloss-holte/fc-stukenbrock/",
+  "history": [
+   "nordrhein-westfalen/schloss-holte-stukenbrock/fc-stukenbrock/"
+  ]
  },
  "1080": {
   "path": "bayern/kolbermoor/sv-djk-kolbermoor/",
@@ -2200,8 +2284,10 @@
   "history": []
  },
  "1106": {
-  "path": "nordrhein-westfalen/herne-wanne/e-tus-wanne-28/",
-  "history": []
+  "path": "nordrhein-westfalen/herne/e-tus-wanne-28/",
+  "history": [
+   "nordrhein-westfalen/herne-wanne/e-tus-wanne-28/"
+  ]
  },
  "1108": {
   "path": "bayern/ingolstadt/psv-ingolstadt/",
@@ -2220,8 +2306,10 @@
   "history": []
  },
  "1113": {
-  "path": "nordrhein-westfalen/herzogenrath-kohlscheid/djk-elmar-kohlscheid/",
-  "history": []
+  "path": "nordrhein-westfalen/herzogenrath/djk-elmar-kohlscheid/",
+  "history": [
+   "nordrhein-westfalen/herzogenrath-kohlscheid/djk-elmar-kohlscheid/"
+  ]
  },
  "1114": {
   "path": "niedersachsen/helmstedt/helmstedter-sv/",
@@ -2348,8 +2436,10 @@
   "history": []
  },
  "1177": {
-  "path": "nordrhein-westfalen/gelsenkirchen-buer/basketball-gemeinschaft-buer/",
-  "history": []
+  "path": "nordrhein-westfalen/gelsenkirchen/basketball-gemeinschaft-buer/",
+  "history": [
+   "nordrhein-westfalen/gelsenkirchen-buer/basketball-gemeinschaft-buer/"
+  ]
  },
  "1178": {
   "path": "nordrhein-westfalen/dinslaken/sus-09-dinslaken/",
@@ -2412,8 +2502,10 @@
   "history": []
  },
  "1206": {
-  "path": "nordrhein-westfalen/duisburg-beeck/vfvb-ruhrort-laar/",
-  "history": []
+  "path": "nordrhein-westfalen/duisburg/vfvb-ruhrort-laar/",
+  "history": [
+   "nordrhein-westfalen/duisburg-beeck/vfvb-ruhrort-laar/"
+  ]
  },
  "1208": {
   "path": "nordrhein-westfalen/meckenheim/meckenheimer-sportverein/",
@@ -2432,8 +2524,10 @@
   "history": []
  },
  "1214": {
-  "path": "hessen/wiesbaden-naurod/tg-naurod/",
-  "history": []
+  "path": "hessen/wiesbaden/tg-naurod/",
+  "history": [
+   "hessen/wiesbaden-naurod/tg-naurod/"
+  ]
  },
  "1215": {
   "path": "nordrhein-westfalen/datteln/tv-datteln-09/",
@@ -2488,8 +2582,10 @@
   "history": []
  },
  "1236": {
-  "path": "nordrhein-westfalen/dortmund-wickede/basketballclub-do-wickede/",
-  "history": []
+  "path": "nordrhein-westfalen/dortmund/basketballclub-do-wickede/",
+  "history": [
+   "nordrhein-westfalen/dortmund-wickede/basketballclub-do-wickede/"
+  ]
  },
  "1237": {
   "path": "bayern/landsberg-am-lech/djk-landsberg/",
@@ -2548,8 +2644,10 @@
   "history": []
  },
  "1258": {
-  "path": "nordrhein-westfalen/gelsenkirchen-bulmke/csg-gelsenkirchen-bulmke/",
-  "history": []
+  "path": "nordrhein-westfalen/gelsenkirchen/csg-gelsenkirchen-bulmke/",
+  "history": [
+   "nordrhein-westfalen/gelsenkirchen-bulmke/csg-gelsenkirchen-bulmke/"
+  ]
  },
  "1260": {
   "path": "bayern/muenchen/tsv-muenchen-ost/",
@@ -2748,8 +2846,10 @@
   "history": []
  },
  "1350": {
-  "path": "nordrhein-westfalen/elsdorf-esch/asg-elsdorf/",
-  "history": []
+  "path": "nordrhein-westfalen/elsdorf/asg-elsdorf/",
+  "history": [
+   "nordrhein-westfalen/elsdorf-esch/asg-elsdorf/"
+  ]
  },
  "1351": {
   "path": "baden-wuerttemberg/durmersheim/tus-durmersheim/",
@@ -2760,24 +2860,32 @@
   "history": []
  },
  "1356": {
-  "path": "nordrhein-westfalen/hagen-vorhalle/tsv-vorhalle-1879/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/tsv-vorhalle-1879/",
+  "history": [
+   "nordrhein-westfalen/hagen-vorhalle/tsv-vorhalle-1879/"
+  ]
  },
  "1359": {
-  "path": "hessen/kelkheim-muenster/tus-hornau/",
-  "history": []
+  "path": "hessen/kelkheim/tus-hornau/",
+  "history": [
+   "hessen/kelkheim-muenster/tus-hornau/"
+  ]
  },
  "1361": {
   "path": "hamburg/lueneburg/mtv-treubund-lueneburg/",
   "history": []
  },
  "1362": {
-  "path": "nordrhein-westfalen/ratingen-lintorf/tus-lintorf-1908/",
-  "history": []
+  "path": "nordrhein-westfalen/ratingen/tus-lintorf-1908/",
+  "history": [
+   "nordrhein-westfalen/ratingen-lintorf/tus-lintorf-1908/"
+  ]
  },
  "1364": {
-  "path": "hessen/giessen-kleinlinden/tsv-klein-linden/",
-  "history": []
+  "path": "hessen/giessen/tsv-klein-linden/",
+  "history": [
+   "hessen/giessen-kleinlinden/tsv-klein-linden/"
+  ]
  },
  "1365": {
   "path": "bayern/straubing/djk-sb-straubing/",
@@ -2884,8 +2992,10 @@
   "history": []
  },
  "1405": {
-  "path": "nordrhein-westfalen/aachen-laurensberg/bg-aachen-djk-vaalserquartier/",
-  "history": []
+  "path": "nordrhein-westfalen/aachen/bg-aachen-djk-vaalserquartier/",
+  "history": [
+   "nordrhein-westfalen/aachen-laurensberg/bg-aachen-djk-vaalserquartier/"
+  ]
  },
  "1407": {
   "path": "baden-wuerttemberg/ehingen-donau/tsg-ehingen-donau-1848/",
@@ -2972,8 +3082,10 @@
   "history": []
  },
  "1442": {
-  "path": "berlin/berlin-neukoelln/tus-neukoelln/",
-  "history": []
+  "path": "berlin/berlin/tus-neukoelln/",
+  "history": [
+   "berlin/berlin-neukoelln/tus-neukoelln/"
+  ]
  },
  "1444": {
   "path": "nordrhein-westfalen/schwerte/schwerter-ts-1868/",
@@ -3048,8 +3160,10 @@
   "history": []
  },
  "1473": {
-  "path": "nordrhein-westfalen/duesseldorf-oberbilk/tus-maccabi-duesseldorf/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/tus-maccabi-duesseldorf/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-oberbilk/tus-maccabi-duesseldorf/"
+  ]
  },
  "1474": {
   "path": "nordrhein-westfalen/greven/sv-greven-2021/",
@@ -3104,8 +3218,10 @@
   "history": []
  },
  "1496": {
-  "path": "nordrhein-westfalen/aachen-eilendorf/eilendorfer-tv-1870/",
-  "history": []
+  "path": "nordrhein-westfalen/aachen/eilendorfer-tv-1870/",
+  "history": [
+   "nordrhein-westfalen/aachen-eilendorf/eilendorfer-tv-1870/"
+  ]
  },
  "1498": {
   "path": "bayern/lindau/tsv-1850-lindau/",
@@ -3128,8 +3244,10 @@
   "history": []
  },
  "1507": {
-  "path": "rheinland-pfalz/mainz-lerchenberg/sc-lerchenberg/",
-  "history": []
+  "path": "rheinland-pfalz/mainz/sc-lerchenberg/",
+  "history": [
+   "rheinland-pfalz/mainz-lerchenberg/sc-lerchenberg/"
+  ]
  },
  "1508": {
   "path": "rheinland-pfalz/kirchheimbolanden/tv-kirchheimbolanden/",
@@ -3148,8 +3266,10 @@
   "history": []
  },
  "1514": {
-  "path": "nordrhein-westfalen/bochum-gerthe/tv-gerthe-1911/",
-  "history": []
+  "path": "nordrhein-westfalen/bochum/tv-gerthe-1911/",
+  "history": [
+   "nordrhein-westfalen/bochum-gerthe/tv-gerthe-1911/"
+  ]
  },
  "1515": {
   "path": "baden-wuerttemberg/heidelberg/tsg-ziegelhausen/",
@@ -3188,8 +3308,10 @@
   "history": []
  },
  "1531": {
-  "path": "nordrhein-westfalen/bochum-langendreer/bc-langendreer/",
-  "history": []
+  "path": "nordrhein-westfalen/bochum/bc-langendreer/",
+  "history": [
+   "nordrhein-westfalen/bochum-langendreer/bc-langendreer/"
+  ]
  },
  "1532": {
   "path": "nordrhein-westfalen/rheine/tv-jahn-rheine-1885/",
@@ -3204,8 +3326,10 @@
   "history": []
  },
  "1535": {
-  "path": "nordrhein-westfalen/herne-sodingen/herner-turn-club-1880/",
-  "history": []
+  "path": "nordrhein-westfalen/herne/herner-turn-club-1880/",
+  "history": [
+   "nordrhein-westfalen/herne-sodingen/herner-turn-club-1880/"
+  ]
  },
  "1536": {
   "path": "nordrhein-westfalen/willich/willicher-turnverein-1892/",
@@ -3288,8 +3412,10 @@
   "history": []
  },
  "1597": {
-  "path": "hessen/bad-vilbel-dortelweil/sv-fun-ball-dortelweil/",
-  "history": []
+  "path": "hessen/bad-vilbel/sv-fun-ball-dortelweil/",
+  "history": [
+   "hessen/bad-vilbel-dortelweil/sv-fun-ball-dortelweil/"
+  ]
  },
  "1602": {
   "path": "berlin/berlin/sc-borussia-friedrichsfelde/",
@@ -3316,8 +3442,10 @@
   "history": []
  },
  "1625": {
-  "path": "niedersachsen/oldenburg-osternburg/tura-76-oldenburg/",
-  "history": []
+  "path": "niedersachsen/oldenburg/tura-76-oldenburg/",
+  "history": [
+   "niedersachsen/oldenburg-osternburg/tura-76-oldenburg/"
+  ]
  },
  "1626": {
   "path": "sachsen/coswig/sv-motor-soernewitz/",
@@ -3340,8 +3468,10 @@
   "history": []
  },
  "1642": {
-  "path": "nordrhein-westfalen/krefeld-fischeln/fischelner-turnverein-05/",
-  "history": []
+  "path": "nordrhein-westfalen/krefeld/fischelner-turnverein-05/",
+  "history": [
+   "nordrhein-westfalen/krefeld-fischeln/fischelner-turnverein-05/"
+  ]
  },
  "1647": {
   "path": "brandenburg/rathenow/bv-eberswalde-99/",
@@ -3544,16 +3674,20 @@
   "history": []
  },
  "1857": {
-  "path": "nordrhein-westfalen/koeln-rondorf/bg-koeln/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/bg-koeln/",
+  "history": [
+   "nordrhein-westfalen/koeln-rondorf/bg-koeln/"
+  ]
  },
  "1859": {
   "path": "nordrhein-westfalen/luedenscheid/baskets-luedenscheid/",
   "history": []
  },
  "1866": {
-  "path": "niedersachsen/lehrte-haemelerwald/sv-adler-haemelerwald/",
-  "history": []
+  "path": "niedersachsen/lehrte/sv-adler-haemelerwald/",
+  "history": [
+   "niedersachsen/lehrte-haemelerwald/sv-adler-haemelerwald/"
+  ]
  },
  "1875": {
   "path": "hessen/lollar/tsg-lollar/",
@@ -3564,8 +3698,10 @@
   "history": []
  },
  "1880": {
-  "path": "rheinland-pfalz/mainz-ebersheim/tsv-mainz-ebersheim/",
-  "history": []
+  "path": "rheinland-pfalz/mainz/tsv-mainz-ebersheim/",
+  "history": [
+   "rheinland-pfalz/mainz-ebersheim/tsv-mainz-ebersheim/"
+  ]
  },
  "1885": {
   "path": "mecklenburg-vorpommern/rostock/big-rostock/",
@@ -3576,8 +3712,10 @@
   "history": []
  },
  "1890": {
-  "path": "nordrhein-westfalen/solingen-graefrath/wmtv-solingen-1861/",
-  "history": []
+  "path": "nordrhein-westfalen/solingen/wmtv-solingen-1861/",
+  "history": [
+   "nordrhein-westfalen/solingen-graefrath/wmtv-solingen-1861/"
+  ]
  },
  "1896": {
   "path": "baden-wuerttemberg/kenzingen/auv-kenzingen/",
@@ -3764,8 +3902,10 @@
   "history": []
  },
  "2039": {
-  "path": "nordrhein-westfalen/viersen-duelken/sg-duelken-1860-95/",
-  "history": []
+  "path": "nordrhein-westfalen/viersen/sg-duelken-1860-95/",
+  "history": [
+   "nordrhein-westfalen/viersen-duelken/sg-duelken-1860-95/"
+  ]
  },
  "2040": {
   "path": "nordrhein-westfalen/nettetal/tv-breyell-1899/",
@@ -3952,8 +4092,10 @@
   "history": []
  },
  "2245": {
-  "path": "niedersachsen/leer-bingum/bsv-bingum/",
-  "history": []
+  "path": "niedersachsen/leer/bsv-bingum/",
+  "history": [
+   "niedersachsen/leer-bingum/bsv-bingum/"
+  ]
  },
  "2246": {
   "path": "bundesweit/herten/hertener-loewen/",
@@ -4156,8 +4298,10 @@
   "history": []
  },
  "3260": {
-  "path": "nordrhein-westfalen/wuppertal-barmen/hellas-wuppertal/",
-  "history": []
+  "path": "nordrhein-westfalen/wuppertal/hellas-wuppertal/",
+  "history": [
+   "nordrhein-westfalen/wuppertal-barmen/hellas-wuppertal/"
+  ]
  },
  "3280": {
   "path": "niedersachsen/oldenburg/hundsmuehler-tv/",
@@ -4184,8 +4328,10 @@
   "history": []
  },
  "3441": {
-  "path": "nordrhein-westfalen/wuppertal-elberfeld/kult-sport-wuppertal/",
-  "history": []
+  "path": "nordrhein-westfalen/wuppertal/kult-sport-wuppertal/",
+  "history": [
+   "nordrhein-westfalen/wuppertal-elberfeld/kult-sport-wuppertal/"
+  ]
  },
  "3444": {
   "path": "niedersachsen/wittingen/vfl-wittingen-suderwittingen/",
@@ -4220,12 +4366,16 @@
   "history": []
  },
  "3543": {
-  "path": "nordrhein-westfalen/koeln-ehrenfeld/bbv-koeln-nordwest/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/bbv-koeln-nordwest/",
+  "history": [
+   "nordrhein-westfalen/koeln-ehrenfeld/bbv-koeln-nordwest/"
+  ]
  },
  "3544": {
-  "path": "nordrhein-westfalen/koeln-pesch/bc-koeln-pesch-04/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/bc-koeln-pesch-04/",
+  "history": [
+   "nordrhein-westfalen/koeln-pesch/bc-koeln-pesch-04/"
+  ]
  },
  "3547": {
   "path": "nordrhein-westfalen/wuppertal/sv-bayer-wuppertal/",
@@ -4236,8 +4386,10 @@
   "history": []
  },
  "3557": {
-  "path": "baden-wuerttemberg/graben-neudorf/tsv-graben-neudorf/",
-  "history": []
+  "path": "baden-wuerttemberg/graben/tsv-graben-neudorf/",
+  "history": [
+   "baden-wuerttemberg/graben-neudorf/tsv-graben-neudorf/"
+  ]
  },
  "3565": {
   "path": "baden-wuerttemberg/eppingen/tv-eppingen/",
@@ -4276,12 +4428,16 @@
   "history": []
  },
  "3588": {
-  "path": "nordrhein-westfalen/koenigswinter-oberpleis/tus-1905-oberpleis/",
-  "history": []
+  "path": "nordrhein-westfalen/koenigswinter/tus-1905-oberpleis/",
+  "history": [
+   "nordrhein-westfalen/koenigswinter-oberpleis/tus-1905-oberpleis/"
+  ]
  },
  "3595": {
-  "path": "nordrhein-westfalen/xanten-luettingen/xanten-romans/",
-  "history": []
+  "path": "nordrhein-westfalen/xanten/xanten-romans/",
+  "history": [
+   "nordrhein-westfalen/xanten-luettingen/xanten-romans/"
+  ]
  },
  "3596": {
   "path": "nordrhein-westfalen/coesfeld/sg-coesfeld-06/",
@@ -4336,8 +4492,10 @@
   "history": []
  },
  "3641": {
-  "path": "bundesweit/koeln-bickendorf/rheinstars-koeln/",
-  "history": []
+  "path": "bundesweit/koeln/rheinstars-koeln-3641/",
+  "history": [
+   "bundesweit/koeln-bickendorf/rheinstars-koeln/"
+  ]
  },
  "3642": {
   "path": "bundesweit/bad-honnef/team-bonn-rhoendorf/",
@@ -4528,8 +4686,10 @@
   "history": []
  },
  "3801": {
-  "path": "nordrhein-westfalen/koeln-muengersdorf/davis-sports/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/davis-sports/",
+  "history": [
+   "nordrhein-westfalen/koeln-muengersdorf/davis-sports/"
+  ]
  },
  "3804": {
   "path": "nordrhein-westfalen/lippetal-herzfeld/1-sc-lippetal/",
@@ -4560,8 +4720,10 @@
   "history": []
  },
  "3833": {
-  "path": "bundesweit/herne-sodingen/herner-tc/",
-  "history": []
+  "path": "bundesweit/herne/herner-tc/",
+  "history": [
+   "bundesweit/herne-sodingen/herner-tc/"
+  ]
  },
  "3834": {
   "path": "bundesweit/marburg/bc-marburg/",
@@ -4576,8 +4738,10 @@
   "history": []
  },
  "3846": {
-  "path": "bundesweit/koeln-muelheim/wings-leverkusen/",
-  "history": []
+  "path": "bundesweit/koeln/wings-leverkusen/",
+  "history": [
+   "bundesweit/koeln-muelheim/wings-leverkusen/"
+  ]
  },
  "3851": {
   "path": "bundesweit/gruenberg/bender-baskets-gruenberg/",
@@ -4680,8 +4844,10 @@
   "history": []
  },
  "3946": {
-  "path": "bundesweit/koeln-bickendorf/bbv-rheinstars/",
-  "history": []
+  "path": "bundesweit/koeln/bbv-rheinstars/",
+  "history": [
+   "bundesweit/koeln-bickendorf/bbv-rheinstars/"
+  ]
  },
  "3947": {
   "path": "bundesweit/vechta/team-bonn-rhoendorf/",
@@ -4728,8 +4894,10 @@
   "history": []
  },
  "3975": {
-  "path": "bundesweit/hagen-altenhagen/phoenix-tsv-hagen-1860/",
-  "history": []
+  "path": "bundesweit/hagen/phoenix-tsv-hagen-1860/",
+  "history": [
+   "bundesweit/hagen-altenhagen/phoenix-tsv-hagen-1860/"
+  ]
  },
  "3976": {
   "path": "bundesweit/wedel/sc-rist-wedel/",
@@ -4788,8 +4956,10 @@
   "history": []
  },
  "4025": {
-  "path": "baden-wuerttemberg/freiburg-opfingen/tv-opfingen/",
-  "history": []
+  "path": "baden-wuerttemberg/freiburg/tv-opfingen/",
+  "history": [
+   "baden-wuerttemberg/freiburg-opfingen/tv-opfingen/"
+  ]
  },
  "4026": {
   "path": "bundesweit/weitere/phoenix-hagen/",
@@ -4812,8 +4982,10 @@
   "history": []
  },
  "4040": {
-  "path": "niedersachsen/osnabrueck-voxtrup/vfr-voxtrup/",
-  "history": []
+  "path": "niedersachsen/osnabrueck/vfr-voxtrup/",
+  "history": [
+   "niedersachsen/osnabrueck-voxtrup/vfr-voxtrup/"
+  ]
  },
  "4042": {
   "path": "nordrhein-westfalen/recklinghausen/etg-recklinghausen-12-32/",
@@ -4856,8 +5028,10 @@
   "history": []
  },
  "4064": {
-  "path": "bundesweit/duesseldorf-oberkassel/art-giants-duesseldorf/",
-  "history": []
+  "path": "bundesweit/duesseldorf/art-giants-duesseldorf/",
+  "history": [
+   "bundesweit/duesseldorf-oberkassel/art-giants-duesseldorf/"
+  ]
  },
  "4069": {
   "path": "niedersachsen/weitere/garbsener-sport-club-67/",
@@ -4892,8 +5066,10 @@
   "history": []
  },
  "4091": {
-  "path": "nordrhein-westfalen/kaarst-buettgen/bg-kaarst-buettgen/",
-  "history": []
+  "path": "nordrhein-westfalen/kaarst/bg-kaarst-buettgen/",
+  "history": [
+   "nordrhein-westfalen/kaarst-buettgen/bg-kaarst-buettgen/"
+  ]
  },
  "4095": {
   "path": "bremen/bremen/bsg-blumenthal-schwanewede/",
@@ -5004,8 +5180,10 @@
   "history": []
  },
  "4170": {
-  "path": "nordrhein-westfalen/bielefeld-ubbedissen/sv-ubbedissen-09/",
-  "history": []
+  "path": "nordrhein-westfalen/bielefeld/sv-ubbedissen-09/",
+  "history": [
+   "nordrhein-westfalen/bielefeld-ubbedissen/sv-ubbedissen-09/"
+  ]
  },
  "4172": {
   "path": "mecklenburg-vorpommern/greifswald/sg-greifswald/",
@@ -5096,8 +5274,10 @@
   "history": []
  },
  "4230": {
-  "path": "nordrhein-westfalen/duisburg-homberg/bg-niederrhein/",
-  "history": []
+  "path": "nordrhein-westfalen/duisburg/bg-niederrhein/",
+  "history": [
+   "nordrhein-westfalen/duisburg-homberg/bg-niederrhein/"
+  ]
  },
  "4233": {
   "path": "bayern/grossheubach/tsv-grossheubach-1900/",
@@ -5140,8 +5320,10 @@
   "history": []
  },
  "4257": {
-  "path": "nordrhein-westfalen/gelsenkirchen-buer/yeg-hassel-1993/",
-  "history": []
+  "path": "nordrhein-westfalen/gelsenkirchen/yeg-hassel-1993/",
+  "history": [
+   "nordrhein-westfalen/gelsenkirchen-buer/yeg-hassel-1993/"
+  ]
  },
  "4260": {
   "path": "baden-wuerttemberg/dornstadt/sv-tomerdingen/",
@@ -5204,20 +5386,26 @@
   "history": []
  },
  "4306": {
-  "path": "nordrhein-westfalen/koeln-bickendorf/rheinstars-koeln/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/rheinstars-koeln/",
+  "history": [
+   "nordrhein-westfalen/koeln-bickendorf/rheinstars-koeln/"
+  ]
  },
  "4307": {
-  "path": "nordrhein-westfalen/wuppertal-ronsdorf/sg-sued-west-baskets-wuppertal/",
-  "history": []
+  "path": "nordrhein-westfalen/wuppertal/sg-sued-west-baskets-wuppertal/",
+  "history": [
+   "nordrhein-westfalen/wuppertal-ronsdorf/sg-sued-west-baskets-wuppertal/"
+  ]
  },
  "4314": {
   "path": "baden-wuerttemberg/baden-baden/united-colors-baden-baden/",
   "history": []
  },
  "4317": {
-  "path": "niedersachsen/grossenkneten-huntlosen/tv-huntlosen/",
-  "history": []
+  "path": "niedersachsen/grossenkneten/tv-huntlosen/",
+  "history": [
+   "niedersachsen/grossenkneten-huntlosen/tv-huntlosen/"
+  ]
  },
  "4318": {
   "path": "bundesweit/vechta/sc-rasta-vechta/",
@@ -5272,8 +5460,10 @@
   "history": []
  },
  "4362": {
-  "path": "nordrhein-westfalen/hagen-altenhagen/sv-enten-hagen/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/sv-enten-hagen/",
+  "history": [
+   "nordrhein-westfalen/hagen-altenhagen/sv-enten-hagen/"
+  ]
  },
  "4363": {
   "path": "bayern/gerolzhofen/tv-1862-gerolzhofen/",
@@ -5288,8 +5478,10 @@
   "history": []
  },
  "4378": {
-  "path": "rheinland-pfalz/koblenz-luetzel/sg-luetzel-post-koblenz/",
-  "history": []
+  "path": "rheinland-pfalz/koblenz/sg-luetzel-post-koblenz/",
+  "history": [
+   "rheinland-pfalz/koblenz-luetzel/sg-luetzel-post-koblenz/"
+  ]
  },
  "4379": {
   "path": "sachsen/frohburg/bsv-einheit-frohburg/",
@@ -5324,8 +5516,10 @@
   "history": []
  },
  "4407": {
-  "path": "nordrhein-westfalen/koeln-bilderstoeckchen/djk-loewe-koeln/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/djk-loewe-koeln/",
+  "history": [
+   "nordrhein-westfalen/koeln-bilderstoeckchen/djk-loewe-koeln/"
+  ]
  },
  "4418": {
   "path": "bundesweit/weitere/tsve-1890-bielefeld/",
@@ -5392,8 +5586,10 @@
   "history": []
  },
  "4458": {
-  "path": "nordrhein-westfalen/duesseldorf-flingern/greek-baskets-duesseldorf/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/greek-baskets-duesseldorf/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-flingern/greek-baskets-duesseldorf/"
+  ]
  },
  "4461": {
   "path": "hessen/limburg/baskets-limburg/",
@@ -5424,8 +5620,10 @@
   "history": []
  },
  "4475": {
-  "path": "nordrhein-westfalen/duesseldorf-stockum/black-eagles/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/black-eagles/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-stockum/black-eagles/"
+  ]
  },
  "4476": {
   "path": "nordrhein-westfalen/duesseldorf/capitol-bascats-duesseldorf/",
@@ -5492,8 +5690,10 @@
   "history": []
  },
  "4511": {
-  "path": "nordrhein-westfalen/duesseldorf-oberkassel/sg-art-giants-duesseldorf/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/sg-art-giants-duesseldorf/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-oberkassel/sg-art-giants-duesseldorf/"
+  ]
  },
  "4512": {
   "path": "nordrhein-westfalen/telgte/sg-telgte-wolbeck-baskets/",
@@ -5524,8 +5724,10 @@
   "history": []
  },
  "4527": {
-  "path": "nordrhein-westfalen/koeln-buchheim/duennwalder-tv-1905/",
-  "history": []
+  "path": "nordrhein-westfalen/koeln/duennwalder-tv-1905/",
+  "history": [
+   "nordrhein-westfalen/koeln-buchheim/duennwalder-tv-1905/"
+  ]
  },
  "4529": {
   "path": "sachsen-anhalt/magdeburg/1-magdeburger-basketballclub/",
@@ -5720,8 +5922,10 @@
   "history": []
  },
  "4656": {
-  "path": "bundesweit/achim-uphusen/tsv-achim/",
-  "history": []
+  "path": "bundesweit/achim/tsv-achim/",
+  "history": [
+   "bundesweit/achim-uphusen/tsv-achim/"
+  ]
  },
  "4660": {
   "path": "bundesweit/hannover/hannover-united/",
@@ -5760,8 +5964,10 @@
   "history": []
  },
  "4679": {
-  "path": "bundesweit/essen-kupferdreh/turnverein-1877-essen-kupferdreh/",
-  "history": []
+  "path": "bundesweit/essen/turnverein-1877-essen-kupferdreh/",
+  "history": [
+   "bundesweit/essen-kupferdreh/turnverein-1877-essen-kupferdreh/"
+  ]
  },
  "4680": {
   "path": "bundesweit/luxembourg/hot-rolling-bears/",
@@ -5792,8 +5998,10 @@
   "history": []
  },
  "4692": {
-  "path": "bundesweit/koeln-muelheim/rbc-koeln-99ers/",
-  "history": []
+  "path": "bundesweit/koeln/rbc-koeln-99ers/",
+  "history": [
+   "bundesweit/koeln-muelheim/rbc-koeln-99ers/"
+  ]
  },
  "4693": {
   "path": "bundesweit/bergneustadt/tv-kleinwiedenest-1890/",
@@ -5812,8 +6020,10 @@
   "history": []
  },
  "4706": {
-  "path": "bundesweit/duesseldorf-bilk/sportfreunde-diakonie-bad-kreuznach/",
-  "history": []
+  "path": "bundesweit/duesseldorf/sportfreunde-diakonie-bad-kreuznach/",
+  "history": [
+   "bundesweit/duesseldorf-bilk/sportfreunde-diakonie-bad-kreuznach/"
+  ]
  },
  "4708": {
   "path": "bundesweit/frankfurt-am-main/rsc-frankfurt/",
@@ -5928,8 +6138,10 @@
   "history": []
  },
  "4786": {
-  "path": "hessen/giessen-kleinlinden/giessen-pointers/",
-  "history": []
+  "path": "hessen/giessen/giessen-pointers/",
+  "history": [
+   "hessen/giessen-kleinlinden/giessen-pointers/"
+  ]
  },
  "4787": {
   "path": "baden-wuerttemberg/blaufelden/tsv-1864-blaufelden/",
@@ -5940,8 +6152,10 @@
   "history": []
  },
  "4789": {
-  "path": "bundesweit/rostock-marienehe/spielgemeinschaft-rostock-greifswald/",
-  "history": []
+  "path": "bundesweit/rostock/spielgemeinschaft-rostock-greifswald/",
+  "history": [
+   "bundesweit/rostock-marienehe/spielgemeinschaft-rostock-greifswald/"
+  ]
  },
  "4791": {
   "path": "berlin/berlin/tuerkiyemspor-berlin-1978/",
@@ -5972,8 +6186,10 @@
   "history": []
  },
  "4802": {
-  "path": "nordrhein-westfalen/hagen-emst/djk-gruen-weiss-emst-1926/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/djk-gruen-weiss-emst-1926/",
+  "history": [
+   "nordrhein-westfalen/hagen-emst/djk-gruen-weiss-emst-1926/"
+  ]
  },
  "4804": {
   "path": "baden-wuerttemberg/asperg/sportbund-asperg/",
@@ -6208,8 +6424,10 @@
   "history": []
  },
  "4934": {
-  "path": "nordrhein-westfalen/solingen-kannenhof/hsv-solingen-graefrath-76/",
-  "history": []
+  "path": "nordrhein-westfalen/solingen/hsv-solingen-graefrath-76/",
+  "history": [
+   "nordrhein-westfalen/solingen-kannenhof/hsv-solingen-graefrath-76/"
+  ]
  },
  "4936": {
   "path": "bundesweit/bochum/vfl-viactiv-astroladies-bochum/",
@@ -6308,16 +6526,20 @@
   "history": []
  },
  "4983": {
-  "path": "bundesweit/hagen-altenhagen/bba-hagen/",
-  "history": []
+  "path": "bundesweit/hagen/bba-hagen/",
+  "history": [
+   "bundesweit/hagen-altenhagen/bba-hagen/"
+  ]
  },
  "4991": {
   "path": "bundesweit/berlin/sg-alba-wiesel-berlin/",
   "history": []
  },
  "4992": {
-  "path": "bundesweit/hagen-eilpe/bba-hagen/",
-  "history": []
+  "path": "bundesweit/hagen/bba-hagen-4992/",
+  "history": [
+   "bundesweit/hagen-eilpe/bba-hagen/"
+  ]
  },
  "4995": {
   "path": "bundesweit/berlin/alba-berlin-basketballteam-4995/",
@@ -6360,8 +6582,10 @@
   "history": []
  },
  "5012": {
-  "path": "bundesweit/koeln-bickendorf/cologne-regio-ladies/",
-  "history": []
+  "path": "bundesweit/koeln/cologne-regio-ladies/",
+  "history": [
+   "bundesweit/koeln-bickendorf/cologne-regio-ladies/"
+  ]
  },
  "5013": {
   "path": "saarland/saarbruecken/bbv-saarbruecken/",
@@ -6396,8 +6620,10 @@
   "history": []
  },
  "5038": {
-  "path": "bundesweit/duesseldorf-bilk/giants-duesseldorf/",
-  "history": []
+  "path": "bundesweit/duesseldorf/giants-duesseldorf/",
+  "history": [
+   "bundesweit/duesseldorf-bilk/giants-duesseldorf/"
+  ]
  },
  "5041": {
   "path": "bundesweit/vechta/rasta-vechta-ii/",
@@ -6444,8 +6670,10 @@
   "history": []
  },
  "5060": {
-  "path": "nordrhein-westfalen/pulheim-stommeln/leichtathletik-verein-stommeln/",
-  "history": []
+  "path": "nordrhein-westfalen/pulheim/leichtathletik-verein-stommeln/",
+  "history": [
+   "nordrhein-westfalen/pulheim-stommeln/leichtathletik-verein-stommeln/"
+  ]
  },
  "5061": {
   "path": "schleswig-holstein/hitzhusen/vfl-hitzhusen-von-1926/",
@@ -6500,8 +6728,10 @@
   "history": []
  },
  "5094": {
-  "path": "bundesweit/wuppertal-ronsdorf/young-lions-wuppertal/",
-  "history": []
+  "path": "bundesweit/wuppertal/young-lions-wuppertal/",
+  "history": [
+   "bundesweit/wuppertal-ronsdorf/young-lions-wuppertal/"
+  ]
  },
  "5095": {
   "path": "brandenburg/pritzwalk/elbland-towers/",
@@ -6544,8 +6774,10 @@
   "history": []
  },
  "5113": {
-  "path": "nordrhein-westfalen/duisburg-beeck/betriebssportkreisverband-duisburg-1961/",
-  "history": []
+  "path": "nordrhein-westfalen/duisburg/betriebssportkreisverband-duisburg-1961/",
+  "history": [
+   "nordrhein-westfalen/duisburg-beeck/betriebssportkreisverband-duisburg-1961/"
+  ]
  },
  "5115": {
   "path": "hessen/weilburg/tus-loehnberg-1909/",
@@ -6660,8 +6892,10 @@
   "history": []
  },
  "5156": {
-  "path": "nordrhein-westfalen/duesseldorf-garath/tsv-urdenbach-1894/",
-  "history": []
+  "path": "nordrhein-westfalen/duesseldorf/tsv-urdenbach-1894/",
+  "history": [
+   "nordrhein-westfalen/duesseldorf-garath/tsv-urdenbach-1894/"
+  ]
  },
  "5157": {
   "path": "rheinland-pfalz/neustadt-an-der-weinstrasse/tus-haardt-1886/",
@@ -7028,12 +7262,16 @@
   "history": []
  },
  "5304": {
-  "path": "nordrhein-westfalen/hagen-eilpe/bba-hagen/",
-  "history": []
+  "path": "nordrhein-westfalen/hagen/bba-hagen/",
+  "history": [
+   "nordrhein-westfalen/hagen-eilpe/bba-hagen/"
+  ]
  },
  "5305": {
-  "path": "nordrhein-westfalen/delbrueck-westenholz/bg-delbrueck-westwood/",
-  "history": []
+  "path": "nordrhein-westfalen/delbrueck/bg-delbrueck-westwood/",
+  "history": [
+   "nordrhein-westfalen/delbrueck-westenholz/bg-delbrueck-westwood/"
+  ]
  },
  "5306": {
   "path": "hessen/erlensee/sg-erla/",
