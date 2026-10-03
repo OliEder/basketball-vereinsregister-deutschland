@@ -44,7 +44,8 @@ export function extractClubs(
 export function extractTeams(
   entries: BbbTableEntry[],
   altersklasse: string,
-  geschlecht: string
+  geschlecht: string,
+  liga?: { ligaId: number; liganame: string }
 ): Map<number, TeamEntry[]> {
   const result = new Map<number, TeamEntry[]>();
 
@@ -56,7 +57,13 @@ export function extractTeams(
     const teams = result.get(clubId)!;
 
     if (!teams.some(t => t.teamPermanentId === teamPermanentId)) {
-      teams.push({ teamPermanentId, altersklasse, geschlecht, training: [] });
+      teams.push({
+        teamPermanentId,
+        altersklasse,
+        geschlecht,
+        ...(liga ? { ligaId: liga.ligaId, liganame: liga.liganame, rang: entry.rang } : {}),
+        training: []
+      });
     }
   }
 

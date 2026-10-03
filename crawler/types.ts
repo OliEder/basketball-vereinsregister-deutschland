@@ -25,6 +25,9 @@ export interface TeamEntry {
   teamNumber?: number;
   teamAkj?: string;
   teamAkjId?: number;
+  ligaId?: number;
+  liganame?: string;
+  rang?: number;
   training: TrainingSession[];
 }
 

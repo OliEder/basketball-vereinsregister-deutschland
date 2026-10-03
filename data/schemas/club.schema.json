@@ -60,6 +60,9 @@
           "teamNumber": { "type": "integer" },
           "teamAkj": { "type": "string" },
           "teamAkjId": { "type": "integer" },
+          "ligaId": { "type": "integer" },
+          "liganame": { "type": "string" },
+          "rang": { "type": "integer" },
           "training": {
             "type": "array",
             "items": {

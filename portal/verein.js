@@ -295,12 +295,19 @@ function renderTeams(club) {
     .forEach(team => {
       const card = renderTeamCard(team, club, hallsById);
       list.appendChild(card);
-      loadTeamLiga(team, club.clubId, card);
+      if (team.liganame) {
+        // Liga und Platz stammen aus dem Crawl (clubs.json) — kein Live-Abruf nötig
+        card._ligaEl.textContent = team.liganame;
+        card._ligaEl.classList.remove('verein-team-loading');
+        if (team.rang) card._rangEl.textContent = 'Platz ' + team.rang;
+      } else {
+        loadTeamLiga(team, club.clubId, card);
+      }
     });
 
   const note = document.createElement('p');
   note.className = 'verein-proxy-note';
-  note.textContent = 'Liga- und Tabellendaten werden live über corsproxy.io von basketball-bund.net geladen.';
+  note.textContent = 'Liga und Platz stammen aus dem letzten Crawl von basketball-bund.net; fehlende Angaben werden live über corsproxy.io nachgeladen.';
   section.appendChild(note);
 
   return section;

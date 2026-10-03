@@ -57,7 +57,7 @@ async function crawl(): Promise<void> {
           }
           const altersklasse = liga.akName ?? '';
           const geschlecht = liga.geschlecht ?? '';
-          const teamsFromLiga = extractTeams(entries, altersklasse, geschlecht);
+          const teamsFromLiga = extractTeams(entries, altersklasse, geschlecht, { ligaId: liga.ligaId, liganame: liga.liganame });
           for (const [clubId, teams] of teamsFromLiga) {
             const existing = teamsByClub.get(clubId) ?? [];
             for (const team of teams) {
