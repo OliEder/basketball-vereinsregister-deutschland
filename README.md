@@ -46,6 +46,7 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 | **Regeocode Clubs** | manuell | berechnet verdächtige Koordinaten neu (`scope=suspect\|all`); ohne `apply` nur Bericht auf dem Branch `regeocode-report`, mit `apply` wird `clubs.json` committet |
 | **Accessibility (WCAG 2.2)** | Pull Requests auf `portal/**`, manuell | Playwright + axe-core gegen das Portal (Fixtures, Light/Dark) |
 | **Probe Seasons** | manuell | sondiert Liga-ID-Blöcke je Saison und die Beispiel-IDs der API-Beschreibung; Bericht auf dem Branch `probe-seasons-report` |
+| **Probe Stats** | manuell | prüft, welche Teamstatistik-Felder je Liga befüllt sind; Bericht auf dem Branch `probe-stats-report` |
 | **Probe Live Crawl** | manuell | misst Dauer und Drosselung der BBB-API |
 | **Render AsciiDoc Documentation** | Änderungen an `docs/**/*.adoc` | erzeugt `docs/arc42/README.adoc` |
 
@@ -88,6 +89,7 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 | `npm run live` | Live-Crawl pro Liga (`--out`, `--concurrency`, `--delay`, `--limit`) |
 | `npm run test:a11y` | Barrierefreiheits-Tests (einmalig `npx playwright install chromium`) |
 | `npm run probe-seasons` | Liga-ID-Systematik und frühere Saisons sondieren |
+| `npm run probe-stats` | Erfassungstiefe der Teamstatistik je Liga prüfen |
 | `npm run probe-live` | Messung gegen die BBB-API |
 | `npm run crawl-halls`, `geocode-halls`, `merge-halls` | Hallen holen, geocodieren, in `clubs.json` übernehmen |
 | `npm run backfill-team-details` | holt `teamNumber`/`teamAkj` für Teams |
