@@ -8,10 +8,12 @@ Die Geocoding-Strategie folgt dieser Priorität:
 
 Für Vereine ohne Koordinaten (`npm run geocode` und Phase 3 des Crawls, umgesetzt in `crawler/club-geocoder.ts`):
 
-1. **Vereinsname** (bevorzugt): Nominatim-Suche nach dem Vereinsnamen (ohne „e.V.“).
-2. **Hallenadresse** (Fallback): Vorhandene Hallen-Koordinaten bzw. Geocoding der Hallenadresse (Straße, PLZ, Ort).
-3. **Ort aus dem Vereinsnamen** (`geocodedFrom`): Bisheriges Verhalten als letzter Fallback.
+1. **Vereinsname** (bevorzugt): Nominatim-Suche nach dem Vereinsnamen (ohne „e.V.“). Der Treffer zählt nur, wenn der Vereinsname darin vorkommt (`isPlausibleNameHit`). Die Ortsbezeichnung (`geocodedFrom`) stammt aus der Adresse des Treffers.
+2. **Heimhalle** (Fallback, `chooseHomeHall`): Die Hallen stammen aus Heimspielen. Liegen alle im selben Ort, gilt dieser. Sonst gilt der Ort, der im Vereinsnamen vorkommt, danach der Ort mit den meisten Hallen bzw. Heimspielen. Bei Gleichstand gilt die Heimhalle als unklar. Die Koordinate stammt aus der Hallenadresse (Straße, PLZ, Ort); die Ortsbezeichnung ist der Hallenort.
+3. **Ort aus dem Vereinsnamen** (letzter Fallback): `extractCityFromName` entfernt Rechtsform, Gründungsjahr und Teamnummern; Kürzel, Zahlen und Allerweltswörter („TV“, „Sportverein“) werden nicht geocodet.
 4. **Keine Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche; er wird in `data/geocoding-todo.json` vermerkt.
+
+Name und eindeutige Heimhalle gelten als sicher, Mehrheitsentscheidung und reiner Ortsname als unsicher. `npm run regeocode` übernimmt unsichere Ergebnisse nur, wenn die alte Koordinate unbrauchbar ist (fehlt oder liegt in einer „Müll-Gruppe“: von mindestens vier Vereinen mit verschiedenen Ortsbezeichnungen geteilt); sonst steht der Verein im Bericht als „review“.
 
 Bereits vorhandene Koordinaten werden dabei nicht überschrieben. Unabhängig davon übernimmt `npm run merge-halls` nach dem separaten Hallen-Crawl weiterhin die Hallen-Koordinaten (siehe ADR-004, ergänzt durch ADR-006). Das Log weist aus, wie viele Treffer aus Name, Halle und Ort stammen.
 

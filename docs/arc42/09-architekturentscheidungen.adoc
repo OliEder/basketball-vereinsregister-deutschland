@@ -97,7 +97,7 @@ Kein JavaScript-Framework (kein React, Vue, Svelte). Vanilla HTML, CSS und JS oh
 Der Ort, der aus dem Vereinsnamen abgeleitet wird (`geocodedFrom`), ist oft ungenau oder nicht vorhanden. Eine Suche nach dem vollständigen Vereinsnamen liefert häufig direkt die Vereinsadresse.
 
 *Entscheidung:*
-Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit dem Vereinsnamen abgefragt, danach die Hallenadresse und zuletzt der Ort aus dem Namen. Vorhandene Koordinaten bleiben unverändert.
+Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit dem Vereinsnamen abgefragt (nur plausible Treffer), danach die Heimhalle (Ort der Hallen, Vereinsname und Häufigkeit als Entscheidungshilfe) und zuletzt der Ort aus dem Namen. Vorhandene Koordinaten bleiben unverändert, außer sie sind nachweislich unbrauchbar (`npm run regeocode`).
 
 *Konsequenzen:*
 * (+) Mehr Vereine erhalten Koordinaten, oft genauer als nur der Ort
