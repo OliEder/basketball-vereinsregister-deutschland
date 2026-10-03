@@ -84,6 +84,15 @@ async function check(): Promise<void> {
     `Bericht: ${out}`
   ].join('\n');
   console.log(summary);
+
+  const worst = results
+    .filter(r => r.status === 'deviation')
+    .sort((a, b) => (b.distanceKm ?? 0) - (a.distanceKm ?? 0))
+    .slice(0, 40);
+  console.log('\nGrößte Abweichungen (Verein | bisher | Namenssuche | km):');
+  for (const r of worst) {
+    console.log(`  ${r.name} | ${r.current.geocodedFrom ?? '-'} | ${r.byName?.displayName ?? '-'} | ${r.distanceKm}`);
+  }
   if (process.env.GITHUB_STEP_SUMMARY) {
     fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '```\n' + summary + '\n```\n');
   }
