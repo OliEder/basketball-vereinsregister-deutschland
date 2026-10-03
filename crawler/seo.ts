@@ -360,7 +360,7 @@ function alphabetGroups(pagePath: string, items: ListItem[]): { nav: string; gro
 
 export function renderListPage(opts: {
   base: string; pagePath: string; title: string; heading: string; intro: string;
-  crumbs: { name: string; path: string }[]; groups: ListGroup[];
+  crumbs: { name: string; path: string }[]; groups: ListGroup[]; extraHtml?: string;
 }): string {
   let alphabet = '';
   let source: { heading?: string; id?: string; items: ListItem[] }[] = [];
@@ -381,6 +381,7 @@ ${crumbNav(opts.crumbs)}
       <p>${esc(opts.intro)}</p>
 ${alphabet}
 ${groups}
+${opts.extraHtml ?? ''}
     </div>
   </main>`;
   return shell({
@@ -571,6 +572,66 @@ export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, 
   return { files, map, sitemap, paths, byVerband, docs: byId };
 }
 
+// ---- Lokalderbys -------------------------------------------------------------------------------
+
+/** Ebene einer Liga: 0 Bundesligen, 1 Regionalliga, 2 Verband, 3 Bezirk, 4 Kreis (niedriger = höher). */
+export function ligaLevel(doc: LigaDoc, ebene?: string): number {
+  const v = doc.verbandName ?? '';
+  if (/bundesliga|bundesligen|deutsche meisterschaft/i.test(v)) return 0;
+  if (/^regionalliga/i.test(v)) return 1;
+  if (/rollstuhl/i.test(v)) return 2;
+  return ({ Verband: 2, Bezirk: 3, Kreis: 4 } as Record<string, number>)[ebene ?? ''] ?? 3;
+}
+
+export interface Derby { doc: LigaDoc; match: any; level: number }
+
+/**
+ * Spiele zweier verschiedener Vereine desselben Ortes. Berücksichtigt werden nur die beiden höchsten Ebenen,
+ * in denen der Ort überhaupt Derbys hat (ein Kreisliga-Derby neben einem Regionalliga-Derby zählt nicht).
+ */
+export function localDerbies(
+  docs: Iterable<LigaDoc>, placeKeyOf: (clubId: unknown) => string | null, slugOf: (clubId: unknown) => string | null,
+  levelOf: (doc: LigaDoc) => number
+): Map<string, Derby[]> {
+  const perPlace = new Map<string, Derby[]>();
+  for (const doc of docs) {
+    const level = levelOf(doc);
+    for (const m of doc.matches ?? []) {
+      const h = m?.homeTeam?.clubId, g = m?.guestTeam?.clubId;
+      if (h == null || g == null || h === g) continue;
+      const pk = placeKeyOf(h);
+      if (!pk || pk.endsWith(`/${NO_PLACE.slug}/`) || pk !== placeKeyOf(g)) continue;
+      if (slugOf(h) === slugOf(g)) continue;                  // derselbe Verein unter zwei Vereins-IDs
+      perPlace.set(pk, [...(perPlace.get(pk) ?? []), { doc, match: m, level }]);
+    }
+  }
+  for (const [pk, list] of perPlace) {
+    const levels = [...new Set(list.map(d => d.level))].sort((a, b) => a - b).slice(0, 2);
+    perPlace.set(pk, list.filter(d => levels.includes(d.level)));
+  }
+  return perPlace;
+}
+
+export function renderDerbies(derbies: Derby[], today: string, clubPaths: Record<string, string>, ligaPaths: Record<number, string>, placeName: string): string {
+  const key = (m: any) => `${m.kickoffDate ?? ''} ${m.kickoffTime ?? ''}`;
+  const open = derbies.filter(d => !d.match.result && !d.match.abgesagt && !d.match.verzicht && d.match.kickoffDate && d.match.kickoffDate >= today)
+    .sort((a, b) => key(a.match).localeCompare(key(b.match)) || a.level - b.level).slice(0, 10);
+  const done = derbies.filter(d => d.match.result && !d.match.abgesagt)
+    .sort((a, b) => key(b.match).localeCompare(key(a.match)) || a.level - b.level).slice(0, 5);
+  if (!open.length && !done.length) return '';
+  const row = (d: Derby): string => {
+    const m = d.match;
+    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
+    const lp = ligaPaths[d.doc.ligaId];
+    const score = m.result ? ` <strong>${esc(String(m.result))}</strong>` : '';
+    const liga = lp ? `<a href="${lp}">${esc(d.doc.liganame)}</a>` : esc(d.doc.liganame);
+    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths)} – ${teamCell(m.guestTeam, clubPaths)}${score} <span class="seo-note">${liga}</span></li>`;
+  };
+  return `      <h2>Lokalderbys in ${esc(placeName)}</h2>
+      <p>Spiele zweier Vereine aus ${esc(placeName)} in den höchsten Ligen des Ortes.</p>
+${open.length ? `      <h3>Nächste Derbys</h3><ul class="seo-matches">${open.map(row).join('')}</ul>\n` : ''}${done.length ? `      <h3>Letzte Derbys</h3><ul class="seo-matches">${done.map(row).join('')}</ul>\n` : ''}`;
+}
+
 export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; regions: { state: string; slug: string; clubs: number }[]; hasLiga: boolean }
 
 export function buildSite(
@@ -624,6 +685,17 @@ export function buildSite(
     }
   }
 
+  const ebeneByLiga = new Map<number, Map<string, number>>();
+  for (const c of clubs) for (const t of c.teams ?? []) {
+    if (t.ligaId == null || !t.ebene) continue;
+    const m = ebeneByLiga.get(t.ligaId) ?? new Map<string, number>();
+    m.set(t.ebene, (m.get(t.ebene) ?? 0) + 1);
+    ebeneByLiga.set(t.ligaId, m);
+  }
+  const ebeneOf = (id: number): string | undefined => [...(ebeneByLiga.get(id) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+  const slugById = new Map(clubs.map(c => [String(c.clubId), clubSlug(c.name)]));
+  const derbies = localDerbies(lb.docs.values(), placeKeyOfClub, id => slugById.get(String(id)) ?? null, d => ligaLevel(d, ebeneOf(d.ligaId)));
+
   const placeLigaGroup = (placeKey: string, placeName: string): ListGroup[] => {
     const perLiga = placeLigen.get(placeKey);
     if (!perLiga || !perLiga.size) return [];
@@ -664,7 +736,8 @@ export function buildSite(
         groups: [
           { items, alphabetic: true },
           ...placeLigaGroup(`${stateSlug}/${placeSlug}/`, pg.name)
-        ]
+        ],
+        extraHtml: renderDerbies(derbies.get(`${stateSlug}/${placeSlug}/`) ?? [], lastmod, clubPaths, lb.paths, pg.name)
       }));
       sitemapPaths.push(pagePath);
     }

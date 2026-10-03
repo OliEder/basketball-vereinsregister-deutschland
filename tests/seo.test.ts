@@ -1,4 +1,4 @@
-import { assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -259,5 +259,72 @@ describe('Ligaseiten', () => {
     expect(b.files.get('sitemap.xml')).toContain('/liga/bayern/kreisliga-a/<');
     expect(b.hasLiga).toBe(true);
     expect(injectRegionLinks('<!--REGION-LINKS-->', b.regions, true)).toContain('href="liga/"');
+  });
+});
+
+describe('Lokalderbys', () => {
+  const tm = (clubId: number, name: string) => ({ clubId, teamname: name, teamPermanentId: clubId });
+  const mk = (id: number, home: any, guest: any, date: string, result: string | null = null, extra: any = {}) =>
+    ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: home, guestTeam: guest, result, ...extra });
+  const L = (id: number, verband: string, matches: any[]): LigaDoc => ({ ligaId: id, liganame: `Liga ${id}`, verbandName: verband, tabelle: [], matches });
+  const place: Record<string, string> = { '1': 'bayern/ulm/', '2': 'bayern/ulm/', '3': 'bayern/ulm/', '4': 'bayern/neu-ulm/', '5': 'bayern/ulm/' };
+  const slug: Record<string, string> = { '1': 'a', '2': 'b', '3': 'c', '4': 'd', '5': 'a' };
+  const run = (docs: LigaDoc[], level = (d: LigaDoc) => ligaLevel(d, d.ligaId === 3 ? 'Kreis' : 'Verband')) =>
+    localDerbies(docs, id => place[String(id)] ?? null, id => slug[String(id)] ?? null, level);
+
+  it('Ebenen', () => {
+    expect(ligaLevel(L(1, 'Bundesligen', []))).toBe(0);
+    expect(ligaLevel(L(1, 'Regionalliga Nord', []))).toBe(1);
+    expect(ligaLevel(L(1, 'Bayern', []), 'Bezirk')).toBe(3);
+    expect(ligaLevel(L(1, 'Bayern', []))).toBe(3);
+  });
+
+  it('nur Spiele zweier Vereine desselben Ortes, nicht derselbe Verein unter zwei IDs', () => {
+    const d = run([L(1, 'Bayern', [
+      mk(1, tm(1, 'A'), tm(2, 'B'), '2026-10-10'),      // Derby
+      mk(2, tm(1, 'A'), tm(4, 'D'), '2026-10-11'),      // anderer Ort
+      mk(3, tm(1, 'A'), tm(5, 'A2'), '2026-10-12')      // gleicher Verein (Dublette)
+    ])]);
+    expect(d.get('bayern/ulm/')!.map(x => x.match.matchId)).toEqual([1]);
+  });
+
+  it('nur die zwei höchsten Ebenen, in denen der Ort Derbys hat', () => {
+    const docs = [
+      L(1, 'Regionalliga Süd', [mk(1, tm(1, 'A'), tm(2, 'B'), '2026-10-10')]),
+      L(2, 'Bayern', [mk(2, tm(1, 'A'), tm(3, 'C'), '2026-10-11')]),
+      L(3, 'Bayern', [mk(3, tm(2, 'B'), tm(3, 'C'), '2026-10-12')])   // Kreis (Ebene 4)
+    ];
+    const ids = run(docs).get('bayern/ulm/')!.map(x => x.match.matchId).sort();
+    expect(ids).toEqual([1, 2]);
+  });
+
+  it('Orte ohne bekannten Ort ("weitere") bilden keine Derbys', () => {
+    const d = localDerbies([L(1, 'Bayern', [mk(1, tm(1, 'A'), tm(2, 'B'), '2026-10-10')])], () => 'bayern/weitere/', id => String(id), () => 3);
+    expect(d.size).toBe(0);
+  });
+
+  it('Darstellung: kommende vor vergangenen, abgesagte fehlen, Vereine und Liga verlinkt', () => {
+    const doc = L(1, 'Bayern', [
+      mk(1, tm(1, 'TV <A>'), tm(2, 'B'), '2026-10-10'),
+      mk(2, tm(2, 'B'), tm(1, 'TV <A>'), '2026-09-20', '80:70'),
+      mk(3, tm(1, 'TV <A>'), tm(3, 'C'), '2026-10-17', null, { abgesagt: true })
+    ]);
+    const html = renderDerbies(run([doc]).get('bayern/ulm/')!, '2026-10-03', { '1': 'bayern/ulm/a/' }, { 1: 'liga/bayern/liga-1/' }, 'Ulm');
+    expect(html).toContain('Lokalderbys in Ulm');
+    expect(html).toContain('Nächste Derbys');
+    expect(html).toContain('Letzte Derbys');
+    expect(html).toContain('<a href="bayern/ulm/a/">TV &lt;A&gt;</a>');
+    expect(html).toContain('<strong>80:70</strong>');
+    expect(html).toContain('<a href="liga/bayern/liga-1/">Liga 1</a>');
+    expect(html).not.toContain('17.10.2026');
+    expect(renderDerbies([], '2026-10-03', {}, {}, 'Ulm')).toBe('');
+  });
+
+  it('buildSite zeigt Derbys auf der Ortsseite', () => {
+    const a = club(1, 'TV Ulm', 'Ulm', '0200001'), b = club(2, 'SV Ulm', 'Ulm', '0200002');
+    const doc = L(9, 'Bayern', [{ ...mk(1, tm(1, 'TV Ulm'), tm(2, 'SV Ulm'), '2026-12-01'), }]);
+    doc.tabelle = [{ rang: 1, team: tm(1, 'TV Ulm'), anzspiele: 0 }];
+    const out = buildSite([a, b], {}, BASE, '2026-10-03', { docs: [doc] });
+    expect(out.files.get('bayern/ulm/index.html')).toContain('Lokalderbys in Ulm');
   });
 });
