@@ -5,7 +5,8 @@ export const GENERIC_WORDS = new Set([
   'verein', 'turnverein', 'turngemeinde', 'turngemeine', 'sportverein', 'sportclub', 'sport-club', 'sports', 'club',
   'basketball', 'basketballteam', 'basketballclub', 'baskets', 'united', 'akademie', 'eagles', 'falcons', 'towers',
   'dragons', 'tigers', 'titans', 'giants', 'lakers', 'löwen', 'helden', 'keiler', 'scorpions', 'romans', 'bears',
-  'bats', 'squirrels', 'sportgemeinschaft', 'sportgemeinde', 'turnerbund', 'turnerschaft', 'turnvereinigung'
+  'bats', 'squirrels', 'sportgemeinschaft', 'sportgemeinde', 'turnerbund', 'turnerschaft', 'turnvereinigung',
+  'sport', 'live', 'team', 'allianz', 'vikings', 'roosters', 'dudes', 'bulls', 'ballers', 'tiger'
 ]);
 
 /** Übliche Vereinskürzel (zusätzlich zu allen Wörtern aus 2–6 Großbuchstaben wie SV, TSV, DJK, MTV). */

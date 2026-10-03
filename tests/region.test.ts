@@ -60,16 +60,24 @@ describe('RegionIndex', () => {
     expect(small.check(oberpfalz[0], { lat: 47.99, lng: 7.85 }).ok).toBe(true);
   });
 
-  it('fällt auf den Landesverband zurück, wenn der Bezirk zu klein ist', () => {
-    const others = [
-      ...oberpfalz,
-      club(11, 48.14, 11.58, {}, 'Oberbayern'), club(12, 48.20, 11.50, {}, 'Oberbayern'),
-      club(13, 47.90, 11.70, {}, 'Oberbayern'), club(14, 48.40, 11.75, {}, 'Oberbayern')
-    ];
-    const idx = new RegionIndex(others);
+  it('prüft das Bundesland mit festem Radius, auch wenn der Bezirk unbekannt oder zu klein ist', () => {
     const noBezirk = club(20, null, null, { teams: [] });
-    expect(idx.check(noBezirk, { lat: 49.0, lng: 12.1 })).toMatchObject({ ok: true, level: 'state' });
-    expect(idx.check(noBezirk, { lat: 53.55, lng: 9.99 }).ok).toBe(false); // Hamburg
+    expect(index.check(noBezirk, { lat: 49.0, lng: 12.1 })).toMatchObject({ ok: true, level: 'state' });
+    expect(index.check(noBezirk, { lat: 47.7, lng: 13.0 }).ok).toBe(true);  // Berchtesgaden/Passau-Rand
+    const hh = index.check(noBezirk, { lat: 53.55, lng: 9.99 });            // Hamburg für einen bayerischen Verein
+    expect(hh.ok).toBe(false);
+    expect(hh.level).toBe('state');
+    const hamburgClub = club(21, null, null, { teams: [] }, 'x', '0500005');
+    expect(index.check(hamburgClub, { lat: 53.7, lng: 10.0 }).ok).toBe(true);  // Norderstedt-Nähe
+    expect(index.check(hamburgClub, { lat: 52.5, lng: 13.4 }).ok).toBe(false); // Berlin
+  });
+
+  it('lässt Randlagen eines großen Bezirks zu (Grenze folgt der Streuung, nicht nur dem Median)', () => {
+    // viele Vereine nah am Zentrum, einige weit draußen: d50 klein, d90 groß
+    const core = Array.from({ length: 10 }, (_, i) => club(100 + i, 49.0 + i * 0.005, 12.1));
+    const edge = [club(120, 49.0, 13.0), club(121, 49.0, 13.1)];   // etwa 65 km östlich
+    const idx = new RegionIndex([...core, ...edge]);
+    expect(idx.check(core[0], { lat: 49.0, lng: 13.0 }).ok).toBe(true);
   });
 
   it('ignoriert Vereine, die nicht als Referenz gelten', () => {
