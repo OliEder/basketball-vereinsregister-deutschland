@@ -332,6 +332,8 @@ ${crumbNav(crumbs)}
     head: `  <meta name="club-id" content="${club.clubId}">\n  <script type="application/ld+json">${jsonLd(org)}</script>\n${breadcrumbLd(base, crumbs)}`,
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="favorites.js"></script>
+  <script src="report.js"></script>
   <script src="team-logic.js"></script>
   <script src="verein.js"></script>
 `
@@ -773,6 +775,8 @@ ${crumbNav(crumbs)}
     head: `  <meta name="team-id" content="${id}">\n  <script type="application/ld+json">${jsonLd(team)}</script>\n${events.map(e => `  <script type="application/ld+json">${jsonLd(e)}</script>\n`).join('')}${breadcrumbLd(base, crumbs)}`,
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="favorites.js"></script>
+  <script src="report.js"></script>
   <script src="team-logic.js"></script>
   <script src="team.js"></script>
 `

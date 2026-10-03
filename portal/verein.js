@@ -144,6 +144,8 @@ function renderClubHeader(club) {
   verband.className = 'verein-verband';
   verband.textContent = club.verbandName || '';
   text.appendChild(verband);
+  const favBtn = window.Favorites ? Favorites.button('club', { id: club.clubId, name: club.name }) : null;
+  if (favBtn) text.appendChild(favBtn);
   wrap.appendChild(text);
   return wrap;
 }
@@ -434,6 +436,15 @@ async function init() {
 
     const teamsSection = renderTeams(club);
     if (teamsSection) content.appendChild(teamsSection);
+
+    const report = window.Report ? Report.link({ kind: 'club', id: club.clubId, name: club.name }) : null;
+    if (report) {
+      const row = document.createElement('p');
+      row.className = 'report-row';
+      row.appendChild(document.createTextNode('Stimmt etwas nicht? '));
+      row.appendChild(report);
+      content.appendChild(row);
+    }
 
   } catch (err) {
     const isLoadError = err.message === 'clubs.json nicht ladbar';
