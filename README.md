@@ -42,12 +42,9 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 |---|---|---|
 | **Monthly Crawler** | 1. des Monats, manuell | `crawl` (Vereine/Teams, ohne Geocoding), danach `geocode` (fehlende Koordinaten); committet `data/clubs.json` |
 | **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/` |
-| **Check Geocoding** | manuell | prüft alle Koordinaten per Namenssuche, nur Bericht |
 | **Regeocode Clubs** | manuell | berechnet verdächtige Koordinaten neu (`scope=suspect\|all`); ohne `apply` nur Bericht auf dem Branch `regeocode-report`, mit `apply` wird `clubs.json` committet |
 | **Accessibility (WCAG 2.2)** | Pull Requests auf `portal/**`, manuell | Playwright + axe-core gegen das Portal (Fixtures, Light/Dark) |
-| **Probe Seasons** | manuell | sondiert Liga-ID-Blöcke je Saison und die Beispiel-IDs der API-Beschreibung; Bericht auf dem Branch `probe-seasons-report` |
 | **Probe Stats** | manuell | prüft, welche Teamstatistik-Felder je Liga befüllt sind; Bericht auf dem Branch `probe-stats-report` |
-| **Probe Live Crawl** | manuell | misst Dauer und Drosselung der BBB-API |
 | **Render AsciiDoc Documentation** | Änderungen an `docs/**/*.adoc` | erzeugt `docs/arc42/README.adoc` |
 
 ## Lokal entwickeln
@@ -86,12 +83,9 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 | `npm run geocode` | geocodiert Vereine ohne Koordinaten (Kette siehe unten) |
 | `npm run regeocode` | berechnet verdächtige Koordinaten neu, `--scope=suspect\|all`, `--apply` |
 | `npm run region-check` | listet Vereine, deren Koordinate weit außerhalb ihres Bezirks bzw. Landesverbands liegt (offline) |
-| `npm run check-geocoding` | vergleicht alle Koordinaten mit der Namenssuche, schreibt `geocoding-check.json` |
 | `npm run live` | Live-Crawl pro Liga (`--out`, `--concurrency`, `--delay`, `--limit`) |
 | `npm run test:a11y` | Barrierefreiheits-Tests (einmalig `npx playwright install chromium`) |
-| `npm run probe-seasons` | Liga-ID-Systematik und frühere Saisons sondieren |
 | `npm run probe-stats` | Erfassungstiefe der Teamstatistik je Liga prüfen |
-| `npm run probe-live` | Messung gegen die BBB-API |
 | `npm run crawl-halls`, `geocode-halls`, `merge-halls` | Hallen holen, geocodieren, in `clubs.json` übernehmen |
 | `npm run backfill-team-details` | holt `teamNumber`/`teamAkj` für Teams |
 | `npm run fix-names` | repariert Vereinsnamen und Orte aus den Club-Details |
