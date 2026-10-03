@@ -638,6 +638,16 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Ergänzung Teamseiten:* Für jedes Team, das in den Live-Daten vorkommt, entsteht eine Seite unter dem Pfad des Vereins (`/<land>/<ort>/<verein>/<team>/`, Teamname wie „herren“, „u16-maennlich“, nummerierte Teams mit Suffix). Ein Team gehört zur Vereinsseite mit der kleinsten Vereins-ID; Dubletten-Vereinsseiten bekommen keine Teamseiten. Die Seite enthält Tabellenplatz, Liga-Link, die nächsten und letzten fünf Spiele (mit Halle, wenn gemeldet) und JSON-LD (`SportsTeam`, `SportsEvent` nur für Spiele mit bestätigter Halle). `team.js` ersetzt den Inhalt im Browser durch die interaktive Fassung; die ID kommt aus `<meta name="team-id">`. Die Zuordnung (`team-map.json` im Branch `url-store`) wandert mit dem Verein, alte Pfade bleiben als Weiterleitung. `data/team-url-map.json` (teamPermanentId → Pfad) lässt Vereins-, Liga- und Teamseiten untereinander verlinken; die alte Adresse `team.html?id=…` leitet darauf um. Teams ohne Live-Daten haben keine eigene Seite und bleiben bei der alten Adresse.
 
+== ADR-010: Saison-Archiv im Branch season-archive
+
+*Status:* angenommen
+
+*Kontext:* Die BBB-API liefert nur die laufende Saison (ältere Liga-IDs antworten mit Status „1“, siehe `docs/bbb-api.md`). Die Live-Daten für das Portal werden alle 6 Stunden neu geholt und nicht im Repository abgelegt. Ohne eigene Sicherung gingen Tabellen und Ergebnisse mit dem Saisonwechsel verloren; Historie, Teamvergleiche und Statistiken über Saisons wären nie möglich.
+
+*Entscheidung:* `crawler/archive.ts` legt aus den Live-Daten je Saison (`2026-27`, aus `seasonName` der Ligaliste, sonst nach Datum mit Wechsel am 1. Juli) pro Liga eine Datei `<saison>/liga/<ligaId>.json.gz` mit Tabelle und allen Spielen an, dazu `<saison>/index.json` mit Verband, Ebene, Bezirk, Kreis, Anzahl Teams/Spiele und Prüfsumme. Nicht gespeichert werden `fetchedAt` (damit gleicher Stand gleichen Inhalt ergibt) sowie `venues` und `halls` (liegen im Branch `data-store`). Eine Liga wird nur ersetzt, wenn die neue Fassung Inhalt hat und nicht weniger gespielte Spiele als die archivierte; fehlende Ligen werden nie gelöscht. So kann eine unvollständige API-Antwort das Archiv nicht beschädigen. Der Pages-Workflow archiviert bei jedem Lauf und veröffentlicht höchstens einmal täglich (erster Lauf nach Mitternacht UTC oder manuell) in den Branch `season-archive`, den ein einziger Commit ersetzt (kleiner Verlauf, wie bei `data-store`). Ein Fehler beim Archivieren verhindert den Deploy nicht. Spielerdaten werden nicht gespeichert.
+
+*Folgen:* (+) Ergebnisse und Tabellen bleiben dauerhaft erhalten, ab dem Start der Archivierung lückenlos bis auf den Stand des letzten Tageslaufs. (+) Dieselbe Struktur trägt später Historie auf Team- und Ligaseiten und Boxscore-Summen. (−) Frühere Saisons vor dem Start sind nicht rekonstruierbar. (−) Pro Saison etwa 2 000 Dateien, geschätzt 15–25 MB; der Branch wird einmal täglich neu hochgeladen. (−) Eine Korrektur der API nach unten (weniger gespielte Spiele) wird bewusst nicht übernommen.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
