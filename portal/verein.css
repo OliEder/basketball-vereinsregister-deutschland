@@ -242,3 +242,6 @@
   .verein-club-header { flex-direction: column; }
   .verein-team-header { flex-direction: column; align-items: flex-start; }
 }
+
+.verein-team-link { color: inherit; text-decoration: none; }
+.verein-team-link:hover { text-decoration: underline; }

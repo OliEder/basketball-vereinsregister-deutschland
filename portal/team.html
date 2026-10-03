@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vereinsdetails — Basketball Vereinsregister</title>
+  <title>Team — Basketball Vereinsregister</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="verein.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="team.css">
   <script src="theme.js"></script>
   <script>initTheme();</script>
 </head>
@@ -19,11 +19,11 @@
   </div>
   <header class="verein-header">
     <div class="verein-header-inner">
-      <a href="index.html" class="back-link">
+      <a href="index.html" class="back-link" id="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M15.75 19.5 8.25 12l7.5-7.5"/>
         </svg>
-        Alle Vereine
+        Zurück
       </a>
       <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Zum Light-Modus wechseln" title="Theme wechseln">
         <svg id="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -37,12 +37,11 @@
     </div>
   </header>
   <main class="verein-main">
-    <div id="verein-content">
-      <div class="verein-loading">Lade Vereinsdaten…</div>
+    <div id="team-content">
+      <div class="verein-loading">Lade Teamdaten…</div>
     </div>
   </main>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="team-logic.js"></script>
-  <script src="verein.js"></script>
+  <script src="team.js"></script>
 </body>
 </html>
