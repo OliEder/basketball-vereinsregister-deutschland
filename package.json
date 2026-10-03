@@ -15,7 +15,8 @@
     "crawl-halls": "npx ts-node crawler/crawl-halls.ts",
     "merge-halls": "npx ts-node crawler/merge-halls.ts",
     "backfill-team-details": "npx ts-node crawler/backfill-team-details.ts",
-    "geocode-halls": "npx ts-node crawler/geocode-halls.ts"
+    "geocode-halls": "npx ts-node crawler/geocode-halls.ts",
+    "test:a11y": "npx playwright test"
   },
   "dependencies": {
     "ajv": "^8.18.0",
@@ -25,10 +26,13 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.56.1",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.0.0",
     "jest": "^29.7.0",
+    "leaflet": "^1.9.4",
     "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.0"

@@ -11,5 +11,5 @@
     "resolveJsonModule": true
   },
   "include": ["crawler/**/*", "api/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist", "portal"]
+  "exclude": ["node_modules", "dist", "portal", "tests/a11y"]
 }

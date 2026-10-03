@@ -360,7 +360,7 @@ function updateMap(results) {
       popup.appendChild(dist);
     }
 
-    const marker = L.marker([club.lat, club.lng])
+    const marker = L.marker([club.lat, club.lng], { title: club.name, alt: club.name })
       .bindPopup(popup)
       .addTo(markerLayer);
     bounds.push([club.lat, club.lng]);

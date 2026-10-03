@@ -1,0 +1,36 @@
+{
+ "ligaId": 60001,
+ "liganame": "Bayernpokal Herren",
+ "verbandName": "Bayern",
+ "fetchedAt": "2026-10-03T09:07:00.283Z",
+ "tabelle": [],
+ "matches": [
+  {
+   "matchId": 20,
+   "matchDay": 1,
+   "kickoffDate": "2099-11-20",
+   "kickoffTime": "19:00",
+   "homeTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 149795,
+    "teamPermanentId": 149794,
+    "teamname": "MTSV Schwabing",
+    "teamnameSmall": "MTSV",
+    "clubId": 924,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  }
+ ]
+}

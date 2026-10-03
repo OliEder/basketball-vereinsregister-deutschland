@@ -9,13 +9,17 @@
   --dark-3: #1f1f1f;
   --dark-4: #2a2a2a;
   --mid: #3a3a3a;
-  --muted: #888;
+  --muted: #b0b0b0;
+  --orange-text: #ff8a4d;
+  --btn-bg: #ff8240;
+  --btn-bg-hover: #ff9159;
+  --btn-fg: #0d0d0d;
   --light: #e8e8e8;
   --white: #f5f5f5;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --radius: 10px;
-  --link-color: #5ba3f5;
+  --link-color: #6fb0ff;
 }
 
 html { scroll-behavior: smooth; transition: background 0.25s; }
@@ -26,12 +30,16 @@ html.light {
   --dark-3: #ece9e3;
   --dark-4: #dbd7cf;
   --mid: #c8c3b8;
-  --muted: #6b6258;
+  --muted: #4f4740;
+  --orange-text: #923600;
+  --btn-bg: #923600;
+  --btn-bg-hover: #7a2d00;
+  --btn-fg: #ffffff;
   --light: #4a4640;
   --white: #1a1714;
   --orange: #d94f00;
   --orange-dim: #b03d00;
-  --link-color: #0070d4;
+  --link-color: #00509c;
 }
 
 body {
@@ -93,6 +101,7 @@ body {
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 12vw, 7rem);
+  overflow-wrap: anywhere;
   line-height: 0.95;
   letter-spacing: 0.02em;
   color: var(--white);
@@ -100,7 +109,7 @@ body {
 }
 
 .hero-accent {
-  color: var(--orange);
+  color: var(--orange-text);
   display: block;
 }
 
@@ -121,7 +130,7 @@ body {
 }
 
 #stats-bar span {
-  color: var(--orange);
+  color: var(--orange-text);
   font-weight: 600;
 }
 
@@ -165,8 +174,8 @@ main {
 .tab:hover { color: var(--light); }
 
 .tab.active {
-  color: var(--orange);
-  border-bottom-color: var(--orange);
+  color: var(--orange-text);
+  border-bottom-color: var(--orange-text);
 }
 
 .tab-content {
@@ -178,6 +187,7 @@ main {
 
 .filter-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.25rem;
@@ -191,6 +201,7 @@ main {
 }
 
 .filter-row select {
+  min-height: 44px;
   padding: 0.4rem 0.6rem;
   background: var(--dark-3);
   border: 1px solid var(--dark-4);
@@ -209,6 +220,7 @@ main {
 }
 
 .search-row input {
+  min-height: 44px;
   flex: 1;
   min-width: 180px;
   padding: 0.75rem 1rem;
@@ -223,7 +235,7 @@ main {
 }
 
 .search-row input::placeholder { color: var(--muted); }
-.search-row input:focus { border-color: var(--orange); }
+.search-row input:focus { border-color: var(--orange-text); }
 
 .search-row select {
   padding: 0.75rem 0.75rem;
@@ -239,8 +251,8 @@ main {
 
 .btn-primary {
   padding: 0.75rem 1.5rem;
-  background: var(--orange);
-  color: white;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   border: none;
   border-radius: 7px;
   font-family: var(--font-body);
@@ -251,7 +263,7 @@ main {
   transition: background 0.2s, transform 0.1s;
 }
 
-.btn-primary:hover { background: var(--orange-dim); }
+.btn-primary:hover { background: var(--btn-bg-hover); }
 .btn-primary:active { transform: scale(0.97); }
 
 /* ===== RESULTS ===== */
@@ -343,7 +355,7 @@ main {
 }
 
 .club-links a {
-  color: var(--orange);
+  color: var(--orange-text);
   text-decoration: none;
   font-size: 0.82rem;
   transition: opacity 0.15s;
@@ -353,7 +365,7 @@ main {
 
 .club-info-text {
   font-size: 0.82rem;
-  color: #666;
+  color: var(--muted);
   border-left: 2px solid var(--dark-4);
   padding-left: 0.65rem;
   margin-top: 0.4rem;
@@ -416,13 +428,16 @@ main {
 
 .team-badge--m {
   border-color: #3a5a7a;
-  color: #7ab8e8;
+  color: #9cc9f0;
 }
 
 .team-badge--w {
   border-color: #5a3a5a;
-  color: #d88fd8;
+  color: #e3a8e3;
 }
+
+html.light .team-badge--m { border-color: #7aa3c8; color: #1f4f7a; }
+html.light .team-badge--w { border-color: #b88ab8; color: #7a2f7a; }
 
 /* ===== CARD FOOTER ===== */
 .club-card-footer {
@@ -437,8 +452,8 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: var(--orange);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   border: none;
   border-radius: 6px;
   padding: 0.3rem 0.75rem;
@@ -451,7 +466,7 @@ main {
 }
 
 .mehr-infos-btn:hover {
-  background: var(--orange-dim);
+  background: var(--btn-bg-hover);
 }
 
 .mehr-infos-btn svg {
@@ -461,7 +476,7 @@ main {
 /* ===== CLUB ID ROW ===== */
 .club-id-row {
   font-size: 0.72rem;
-  color: #555;
+  color: var(--muted);
 }
 
 .club-id-copy {
@@ -470,12 +485,12 @@ main {
   cursor: pointer;
   padding: 0 2px;
   font-size: 0.85em;
-  color: #555;
+  color: var(--muted);
   vertical-align: middle;
   transition: color 0.15s;
 }
 
-.club-id-copy:hover { color: var(--muted); }
+.club-id-copy:hover { color: var(--light); }
 
 /* ===== FOOTER ===== */
 footer {
@@ -513,10 +528,14 @@ footer {
 }
 
 .feedback-link {
-  background: var(--orange);
-  color: var(--dark) !important;
+  background: var(--btn-bg);
+  color: var(--btn-fg) !important;
   border-radius: 99px;
   padding: 0.35rem 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
@@ -524,7 +543,7 @@ footer {
 
 .feedback-link:hover {
   opacity: 0.85;
-  color: var(--dark) !important;
+  color: var(--btn-fg) !important;
 }
 
 .support-links {
@@ -536,12 +555,15 @@ footer {
   border: 1px solid var(--dark-4);
   border-radius: 99px;
   padding: 0.3rem 0.8rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   transition: border-color 0.2s, color 0.2s !important;
 }
 
 .support-links a:hover {
-  border-color: var(--orange) !important;
-  color: var(--orange) !important;
+  border-color: var(--orange-text) !important;
+  color: var(--orange-text) !important;
 }
 
 /* ===== PROJECT TEASER ===== */
@@ -579,13 +601,13 @@ footer {
 }
 
 .project-card:hover {
-  border-color: var(--orange);
+  border-color: var(--orange-text);
 }
 
 .project-card svg {
   display: block;
   margin-bottom: 0.6rem;
-  color: var(--orange);
+  color: var(--orange-text);
 }
 
 .project-card-title {
@@ -613,8 +635,8 @@ footer {
   border: 1px solid var(--dark-4);
   border-radius: 6px;
   color: var(--white);
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -656,9 +678,12 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 500px) {
-  .hero-title { font-size: 3.5rem; }
+  .hero-title { font-size: clamp(2.5rem, 13vw, 3.5rem); }
   .club-card { flex-direction: column; }
   .search-row { flex-direction: column; }
   .btn-primary { width: 100%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
+
+/* Mindestgröße der Bedienelemente (WCAG 2.5.5, AAA: 44×44 px) */
+.btn-primary, .search-row select, .tab { min-height: 44px; }
