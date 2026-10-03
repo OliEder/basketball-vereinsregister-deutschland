@@ -4,6 +4,7 @@ const LIVE_BASE = 'data/live/';
 // Live-Daten (Tabellen/Spielpläne) werden vom Deploy-Workflow alle 6 Stunden erzeugt.
 let teamIndexPromise = null;
 const ligaCache = new Map();
+let teamUrlMap = null;   // data/team-url-map.json: Adressen der statischen Teamseiten (optional)
 
 function loadTeamIndex() {
   if (!teamIndexPromise) {
@@ -271,7 +272,7 @@ function renderTeamCard(team, club, hallsById) {
   const label = document.createElement('div');
   label.className = 'verein-team-label';
   const labelLink = document.createElement('a');
-  labelLink.href = 'team.html?id=' + encodeURIComponent(team.teamPermanentId);
+  labelLink.href = TeamLogic.teamHref(teamUrlMap, team.teamPermanentId);
   labelLink.className = 'verein-team-link';
   labelLink.appendChild(document.createTextNode(getTeamLabel(team, club.teams)));
   // Zusatz für Screenreader: wohin der Link führt (der sichtbare Text beginnt mit dem Teamnamen)
@@ -384,7 +385,7 @@ async function loadTeamLiga(team, clubId, card) {
 
     card._ligaEl.classList.remove('verein-team-loading');
     card._ligaEl.textContent = doc.liganame;
-    card._labelLink.href = 'team.html?id=' + encodeURIComponent(team.teamPermanentId) + '&liga=' + encodeURIComponent(doc.ligaId);
+    card._labelLink.href = TeamLogic.teamHref(teamUrlMap, team.teamPermanentId, doc.ligaId);
 
     const entry = TeamLogic.standingFor(doc.tabelle, team.teamPermanentId);
     if (entry) {
@@ -410,6 +411,7 @@ async function init() {
   }
 
   if (await redirectToStaticPage(clubId)) return;
+  teamUrlMap = await fetch('data/team-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
 
   try {
     const club = await loadClub(clubId);

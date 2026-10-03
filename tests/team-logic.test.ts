@@ -124,3 +124,12 @@ describe('venueForMatch', () => {
     expect(L.venueForMatch({}, null, 10, halls)).toBeNull();
   });
 });
+
+describe('teamHref', () => {
+  it('nimmt die statische Seite, sonst die Query-Adresse', () => {
+    expect(L.teamHref({ '5': 'bayern/ulm/tv/herren/' }, 5)).toBe('bayern/ulm/tv/herren/');
+    expect(L.teamHref({ '5': 'bayern/ulm/tv/herren/' }, 5, 9)).toBe('bayern/ulm/tv/herren/?liga=9');
+    expect(L.teamHref(null, 5, 9)).toBe('team.html?id=5&liga=9');
+    expect(L.teamHref({}, 5)).toBe('team.html?id=5');
+  });
+});

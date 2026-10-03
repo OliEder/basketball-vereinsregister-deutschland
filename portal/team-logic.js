@@ -168,8 +168,20 @@
     return wd + ', ' + m[3] + '.' + m[2] + '.' + m[1] + (time ? ' · ' + time : '');
   }
 
+  /**
+   * Adresse der Team-Seite: statische Seite aus data/team-url-map.json, sonst team.html?id=…
+   * (die alte Adresse leitet selbst auf die statische Seite um).
+   */
+  function teamHref(teamUrlMap, teamId, ligaId) {
+    var path = teamUrlMap && teamUrlMap[String(teamId)];
+    var liga = ligaId ? encodeURIComponent(ligaId) : '';
+    if (path) return path + (liga ? '?liga=' + liga : '');
+    return 'team.html?id=' + encodeURIComponent(teamId) + (liga ? '&liga=' + liga : '');
+  }
+
   return {
     parseResult: parseResult,
+    teamHref: teamHref,
     describeMatch: describeMatch,
     teamMatches: teamMatches,
     nextMatch: nextMatch,
