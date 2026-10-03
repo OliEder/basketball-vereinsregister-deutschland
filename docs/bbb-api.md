@@ -4,7 +4,7 @@ Beobachtungen aus dem Reverse Engineering der öffentlichen API, Stand 29. Oktob
 
 - **Basis-URL:** `https://www.basketball-bund.net/rest`
 - **Authentifizierung:** keine
-- **OpenAPI-Spezifikation:** [basketball-bund-net-api-V1.yaml](https://github.com/OliEder/basketball-bund-api/blob/main/basketball-bund-net-api-V1.yaml)
+- **OpenAPI-Spezifikation:** [basketball-bund-net-api-V1.yaml](https://github.com/OliEder/basketball-bund-api/blob/main/basketball-bund-net-api-V1.yaml) (abgeleitet aus denselben Beobachtungen, keine offizielle Spezifikation; der Logo-Pfad darin ist falsch, siehe unten)
 - **Rate-Limit:** nicht dokumentiert; wir halten uns an höchstens 1 Request pro Sekunde (Crawler: 300 ms Pause bei 4 parallelen Läufen im Live-Crawl, siehe `crawler/live.ts`).
 - **CORS:** Browser-Requests brauchen einen Proxy. Das Portal ruft die API deshalb nie direkt auf, sondern liest statische Dateien.
 
@@ -137,6 +137,9 @@ Die Halle eines Spiels steht nur in `matchInfo.spielfeld`, nicht im Spielplan. G
 |---|---|
 | `GET /team/id/{teamPermanentId}/matches` | alle Spiele eines Teams (vergangene und zukünftige) |
 | `GET /club/id/{clubId}/actualmatches?justHome={bool}&rangeDays={n}` | Spiele eines Vereins, enthält `club.vereinsname` und `club.vereinsnummer` |
+| `GET /media/team/{teamPermanentId}/logo` | Team-Logo als Bild (mit `teamPermanentId`, nicht `seasonTeamId`) |
+
+Die OpenAPI-Spezifikation nennt das Logo irrtümlich unter `/media/{teamPermanentId}/logo`; der Pfad mit `team/` ist der richtige.
 
 ## Filter-IDs
 
