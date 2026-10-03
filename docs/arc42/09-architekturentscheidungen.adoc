@@ -86,3 +86,20 @@ Kein JavaScript-Framework (kein React, Vue, Svelte). Vanilla HTML, CSS und JS oh
 * (+) Sehr schnelle Ladezeit (kein Bundle-Overhead)
 * (-) `app.js` wächst mit Features — ohne Modularisierung schwerer wartbar
 * (-) Keine TypeScript-Typsicherheit im Portal-Code
+
+---
+
+== ADR-006: Vereinsname als erste Quelle im automatischen Geocoding
+
+*Status:* Akzeptiert (ergänzt ADR-003 und ADR-004)
+
+*Kontext:*
+Der Ort, der aus dem Vereinsnamen abgeleitet wird (`geocodedFrom`), ist oft ungenau oder nicht vorhanden. Eine Suche nach dem vollständigen Vereinsnamen liefert häufig direkt die Vereinsadresse.
+
+*Entscheidung:*
+Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit dem Vereinsnamen abgefragt, danach die Hallenadresse und zuletzt der Ort aus dem Namen. Vorhandene Koordinaten bleiben unverändert.
+
+*Konsequenzen:*
+* (+) Mehr Vereine erhalten Koordinaten, oft genauer als nur der Ort
+* (-) Namenssuche kann bei generischen Namen falsche Treffer liefern; Qualität ist nach dem ersten Lauf zu prüfen
+* (-) Zusätzlicher Nominatim-Request pro Verein (Rate-Limit 1 Request/Sekunde)

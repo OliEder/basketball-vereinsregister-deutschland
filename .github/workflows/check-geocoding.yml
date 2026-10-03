@@ -1,0 +1,33 @@
+name: Check Geocoding
+
+# Einmalige/manuelle Kontrolle aller Vereinskoordinaten per Namenssuche.
+# Verändert keine Daten; der Bericht liegt als Artifact "geocoding-check" am Lauf (~35-40 min).
+on:
+  workflow_dispatch:
+    inputs:
+      threshold:
+        description: 'Abweichung in km, ab der ein Verein als Abweichung gilt'
+        default: '5'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Koordinaten per Namenssuche kontrollieren
+        run: npm run check-geocoding -- --threshold=${{ inputs.threshold }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: geocoding-check
+          path: geocoding-check.json

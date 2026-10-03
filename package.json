@@ -4,6 +4,7 @@
   "scripts": {
     "crawl": "npx ts-node crawler/index.ts",
     "geocode": "npx ts-node crawler/geocode.ts",
+    "check-geocoding": "npx ts-node crawler/check-geocoding.ts",
     "fix-names": "npx ts-node crawler/fix-names.ts",
     "api": "npx ts-node api/server.ts",
     "test": "npx jest --runInBand",
