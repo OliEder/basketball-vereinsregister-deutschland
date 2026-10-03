@@ -37,6 +37,7 @@ describe('decide', () => {
   it('only applies low confidence results when the old coordinate is unusable', () => {
     expect(decide(low, true, true, false)).toBe('changed');
     expect(decide(low, true, false, false)).toBe('review');
+    expect(decide(low, true, false, false, true)).toBe('changed');   // bestätigt die alte Koordinate: nur der Ortsname wird ersetzt
   });
   it('keeps unsuspicious clubs unless there is a name hit', () => {
     expect(decide(low, false, false, false)).toBe('kept');
