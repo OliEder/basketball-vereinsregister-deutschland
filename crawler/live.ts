@@ -25,12 +25,24 @@ export interface LigaMeta {
   verbandName: string;
   akName?: string;
   geschlecht?: string;
+  /** Saison und Gebiet laut Ligaliste; für das Saison-Archiv (crawler/archive.ts) */
+  seasonId?: number;
+  seasonName?: string;
+  skName?: string;
+  skEbeneName?: string | null;
+  bezirkName?: string | null;
+  kreisname?: string | null;
 }
 
 export interface LigaDoc extends LigaMeta {
   fetchedAt: string;
   tabelle: any[];
   matches: any[];
+}
+
+/** Entfernt undefined-Felder, damit die Dokumente ohne die neuen Angaben unverändert bleiben. */
+export function definedOnly<T extends Record<string, unknown>>(o: T): Partial<T> {
+  return Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined)) as Partial<T>;
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -106,7 +118,10 @@ async function listLigen(): Promise<LigaMeta[]> {
       if (ligen.length === 0) break;
       for (const l of ligen) {
         if (!byId.has(l.ligaId)) {
-          byId.set(l.ligaId, { ligaId: l.ligaId, liganame: l.liganame, verbandName: v.label, akName: l.akName, geschlecht: l.geschlecht });
+          byId.set(l.ligaId, {
+            ligaId: l.ligaId, liganame: l.liganame, verbandName: v.label, akName: l.akName, geschlecht: l.geschlecht,
+            ...definedOnly({ seasonId: l.seasonId, seasonName: l.seasonName, skName: l.skName, skEbeneName: l.skEbeneName, bezirkName: l.bezirkName, kreisname: l.kreisname })
+          });
         }
       }
       if (!hasMoreData) break;

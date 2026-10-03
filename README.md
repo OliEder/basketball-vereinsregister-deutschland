@@ -33,6 +33,7 @@ flowchart LR
 |---|---|---|---|
 | Vereine, Teams, Hallen, Koordinaten | Monthly Crawler | monatlich | `data/clubs.json` (im Repo, wird committet) |
 | Tabellen, Spielpläne | Live-Crawl pro Liga | alle 6 Stunden | `data/live/` (nur im Pages-Artefakt, nicht im Repo) |
+| Tabellen, Ergebnisse je Saison | Saison-Archiv aus den Live-Daten | täglich | Branch `season-archive` (`<saison>/liga/<id>.json.gz`) |
 
 Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId}`), die Spiele und Tabelle liefert, und schreibt `liga/<id>.json`, `team-index.json` (Team → Ligen) und `index.json`. Zwischen zwei Läufen bleiben die zuletzt gecachten Live-Daten erhalten, auch bei Portaländerungen. Beim Zusammenstellen des Artefakts entsteht außerdem `hall-index.json` (Club-ID → Heimhalle, `crawler/hall-index.ts`); die Team-Seite zeigt damit Spielort und Karte des nächsten Spiels. Der Ort gilt als voraussichtlich: bei Heimspielen die Heimhalle des eigenen Vereins, sonst die des gastgebenden Gegners.
 
@@ -41,7 +42,7 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 | Workflow | Auslöser | Zweck |
 |---|---|---|
 | **Monthly Crawler** | 1. des Monats, manuell | `crawl` (Vereine/Teams, ohne Geocoding), danach `geocode` (fehlende Koordinaten); committet `data/clubs.json` |
-| **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/`, erzeugt die statischen Vereins- und Regionsseiten samt Sitemap (`crawler/seo.ts`, URL-Zuordnung im Branch `url-store`) |
+| **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/`, erzeugt die statischen Vereins- und Regionsseiten samt Sitemap (`crawler/seo.ts`, URL-Zuordnung im Branch `url-store`) und sichert Tabellen und Ergebnisse jeder Saison (`crawler/archive.ts`, Branch `season-archive`, einmal täglich) |
 | **Regeocode Clubs** | manuell | berechnet verdächtige Koordinaten neu (`scope=suspect\|all`); ohne `apply` nur Bericht auf dem Branch `regeocode-report`, mit `apply` wird `clubs.json` committet |
 | **Accessibility (WCAG 2.2)** | Pull Requests auf `portal/**`, manuell | Playwright + axe-core gegen das Portal (Fixtures, Light/Dark) |
 | **Spielorte (matchInfo)** | alle 6 Stunden, manuell | holt die Halle je Spiel aus `matchInfo` und legt sie dauerhaft im Branch `data-store` ab (Warteschlange mit Zeitbudget) |

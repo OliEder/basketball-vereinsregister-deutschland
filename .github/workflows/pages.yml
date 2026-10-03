@@ -87,6 +87,44 @@ jobs:
           ref: data-store
           path: data-store
 
+      # Saison-Archiv (Branch season-archive): Tabellen und Ergebnisse dauerhaft sichern, die API liefert nur die laufende Saison.
+      # Ein Fehler hier verhindert den Deploy nicht.
+      - name: Saison archivieren
+        id: archive
+        continue-on-error: true
+        run: |
+          if git ls-remote --exit-code --heads origin season-archive >/dev/null 2>&1; then
+            git fetch --depth=1 origin season-archive
+            git worktree add season-archive FETCH_HEAD
+          else
+            mkdir season-archive
+          fi
+          npm run archive -- --live=_live --store=season-archive
+
+      # Veröffentlicht wird höchstens einmal täglich (erster Lauf nach Mitternacht UTC) oder auf Wunsch; der Branch
+      # wird durch genau einen Commit ersetzt. Das Archiv entsteht in einem eigenen Verzeichnis, nicht im Arbeitsbaum.
+      - name: Saison-Archiv sichern
+        if: ${{ steps.archive.outputs.changed == 'true' && github.ref == 'refs/heads/main' && github.event_name != 'push' }}
+        continue-on-error: true
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && [ "$HOUR" != "00" ] && [ "$HOUR" != "01" ]; then
+            echo "Archiv wird erst im ersten Lauf nach Mitternacht veröffentlicht."
+            exit 0
+          fi
+          OUT="$RUNNER_TEMP/season-archive-out"
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          cp -r season-archive/. "$OUT/"
+          rm -rf "$OUT/.git"
+          cd "$OUT"
+          git init -q -b season-archive
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "data: Saison-Archiv $(date -u +%F)"
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git push -f origin season-archive
+
       # URL-Zuordnung der statischen Vereinsseiten (Branch url-store); fehlt der Branch, beginnt sie leer
       - name: URL-Zuordnung holen
         run: |
