@@ -6,9 +6,14 @@ Vereine haben häufig ungenaue oder private Adressen als Vereinssitz. Spielfelde
 
 Die Geocoding-Strategie folgt dieser Priorität:
 
-1. **Hallen-Koordinaten** (bevorzugt): Nach `npm run merge-halls` werden die Koordinaten der gecrawlten Hallen in die Vereinsdaten übernommen.
-2. **Vereinsadresse** (Fallback): Falls keine Hallen vorhanden oder geocodet, wird der Vereinsort über Nominatim in Koordinaten umgewandelt.
-3. **Kein Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche.
+Für Vereine ohne Koordinaten (`npm run geocode` und Phase 3 des Crawls, umgesetzt in `crawler/club-geocoder.ts`):
+
+1. **Vereinsname** (bevorzugt): Nominatim-Suche nach dem Vereinsnamen (ohne „e.V.“).
+2. **Hallenadresse** (Fallback): Vorhandene Hallen-Koordinaten bzw. Geocoding der Hallenadresse (Straße, PLZ, Ort).
+3. **Ort aus dem Vereinsnamen** (`geocodedFrom`): Bisheriges Verhalten als letzter Fallback.
+4. **Keine Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche; er wird in `data/geocoding-todo.json` vermerkt.
+
+Bereits vorhandene Koordinaten werden dabei nicht überschrieben. Unabhängig davon übernimmt `npm run merge-halls` nach dem separaten Hallen-Crawl weiterhin die Hallen-Koordinaten (siehe ADR-004, ergänzt durch ADR-006). Das Log weist aus, wie viele Treffer aus Name, Halle und Ort stammen.
 
 Bekannte Einschränkung: Einige Vereine haben Hallen weit entfernt vom eigentlichen Vereinsort (z.B. Gastspielfelder). Diese Irrläufer können manuell in `clubs-enriched.json` korrigiert werden.
 
