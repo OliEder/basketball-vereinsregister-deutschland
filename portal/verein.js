@@ -1,10 +1,29 @@
-const BBB_BASE = 'https://www.basketball-bund.net/rest';
-const CORS_PROXY = 'https://corsproxy.io/?url=';
-
-function bbbFetch(url) {
-  return fetch(CORS_PROXY + encodeURIComponent(url));
-}
 const CLUBS_JSON = 'data/clubs.json';
+const LIVE_BASE = 'data/live/';
+
+// Live-Daten (Tabellen/Spielpläne) werden vom Deploy-Workflow alle 6 Stunden erzeugt.
+let teamIndexPromise = null;
+const ligaCache = new Map();
+
+function loadTeamIndex() {
+  if (!teamIndexPromise) {
+    teamIndexPromise = fetch(LIVE_BASE + 'team-index.json').then(r => {
+      if (!r.ok) throw new Error('team-index nicht ladbar');
+      return r.json();
+    });
+  }
+  return teamIndexPromise;
+}
+
+function loadLiga(ligaId) {
+  if (!ligaCache.has(ligaId)) {
+    ligaCache.set(ligaId, fetch(LIVE_BASE + 'liga/' + ligaId + '.json').then(r => {
+      if (!r.ok) throw new Error('Liga nicht ladbar');
+      return r.json();
+    }));
+  }
+  return ligaCache.get(ligaId);
+}
 
 function getClubIdFromUrl() {
   return new URLSearchParams(window.location.search).get('id');
@@ -230,7 +249,11 @@ function renderTeamCard(team, club, hallsById) {
 
   const label = document.createElement('div');
   label.className = 'verein-team-label';
-  label.textContent = getTeamLabel(team, club.teams);
+  const labelLink = document.createElement('a');
+  labelLink.href = 'team.html?id=' + encodeURIComponent(team.teamPermanentId);
+  labelLink.textContent = getTeamLabel(team, club.teams);
+  labelLink.className = 'verein-team-link';
+  label.appendChild(labelLink);
   header.appendChild(label);
 
   const rangEl = document.createElement('div');
@@ -270,6 +293,7 @@ function renderTeamCard(team, club, hallsById) {
 
   card._ligaEl = ligaEl;
   card._rangEl = rangEl;
+  card._labelLink = labelLink;
   return card;
 }
 
@@ -295,65 +319,53 @@ function renderTeams(club) {
     .forEach(team => {
       const card = renderTeamCard(team, club, hallsById);
       list.appendChild(card);
-      if (team.liganame) {
-        // Liga und Platz stammen aus dem Crawl (clubs.json) — kein Live-Abruf nötig
-        card._ligaEl.textContent = team.liganame;
-        card._ligaEl.classList.remove('verein-team-loading');
-        if (team.rang) card._rangEl.textContent = 'Platz ' + team.rang;
-      } else {
-        loadTeamLiga(team, club.clubId, card);
-      }
+      loadTeamLiga(team, club.clubId, card);
     });
 
   const note = document.createElement('p');
   note.className = 'verein-proxy-note';
-  note.textContent = 'Liga und Platz stammen aus dem letzten Crawl von basketball-bund.net; fehlende Angaben werden live über corsproxy.io nachgeladen.';
+  note.textContent = 'Liga und Tabellenplatz: Stand des letzten Abrufs von basketball-bund.net (alle 6 Stunden).';
   section.appendChild(note);
 
   return section;
 }
 
+function showStaticLiga(team, card) {
+  card._ligaEl.classList.remove('verein-team-loading');
+  if (team.liganame) {
+    card._ligaEl.textContent = team.liganame;
+    if (team.rang) card._rangEl.textContent = 'Platz ' + team.rang;
+  } else {
+    card._ligaEl.textContent = 'Liga nicht verfügbar';
+  }
+}
+
 async function loadTeamLiga(team, clubId, card) {
   try {
-    const matchRes = await bbbFetch(BBB_BASE + '/team/id/' + team.teamPermanentId + '/matches');
-    if (!matchRes.ok) throw new Error('matches nicht ladbar');
-    const matchData = await matchRes.json();
-    const matches = (matchData && matchData.data && matchData.data.matches) ? matchData.data.matches : [];
-    if (matches.length === 0) throw new Error('keine Matches');
+    const index = await loadTeamIndex();
+    const ligaIds = index[String(team.teamPermanentId)];
+    if (!ligaIds || !ligaIds.length) throw new Error('keine Live-Daten');
+    const docs = await Promise.all(ligaIds.map(loadLiga));
+    const doc = TeamLogic.pickPrimaryLiga(docs, team.teamPermanentId);
+    if (!doc) throw new Error('keine Liga');
 
-    const liga = matches[0] && matches[0].ligaData;
-    if (!liga || !liga.ligaId) throw new Error('keine ligaId');
-
-    card._ligaEl.textContent = liga.liganame || ('Liga ' + liga.ligaId);
     card._ligaEl.classList.remove('verein-team-loading');
+    card._ligaEl.textContent = doc.liganame;
+    card._labelLink.href = 'team.html?id=' + encodeURIComponent(team.teamPermanentId) + '&liga=' + encodeURIComponent(doc.ligaId);
 
-    const tableRes = await bbbFetch(BBB_BASE + '/competition/table/id/' + liga.ligaId);
-    if (!tableRes.ok) { const e = Object.assign(new Error('Tabelle nicht ladbar'), { _pokal: true }); throw e; }
-    const tableData = await tableRes.json();
-    const entries = (tableData && tableData.data && tableData.data.tabelle && tableData.data.tabelle.entries)
-      ? tableData.data.tabelle.entries : [];
-
-    if (entries.length === 0) { const e = Object.assign(new Error('keine Einträge'), { _pokal: true }); throw e; }
-
-    const entry = entries.find(e =>
-      String(e.team && e.team.clubId) === String(clubId) ||
-      String(e.team && e.team.teamPermanentId) === String(team.teamPermanentId)
-    );
-
+    const entry = TeamLogic.standingFor(doc.tabelle, team.teamPermanentId);
     if (entry) {
       card._rangEl.textContent = 'Platz ' + entry.rang;
-    }
-  } catch (err) {
-    card._ligaEl.classList.remove('verein-team-loading');
-    if (err && err._pokal) {
+    } else if ((doc.tabelle || []).length === 0) {
       card._ligaEl.textContent = '';
       const badge = document.createElement('span');
       badge.className = 'verein-badge-pokal';
       badge.textContent = 'Pokal / KO-Turnier';
       card._ligaEl.appendChild(badge);
-    } else {
-      card._ligaEl.textContent = 'Liga nicht verfügbar';
+      card._ligaEl.appendChild(document.createTextNode(' ' + doc.liganame));
     }
+  } catch (err) {
+    showStaticLiga(team, card);
   }
 }
 
