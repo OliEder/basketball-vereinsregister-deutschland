@@ -1,0 +1,68 @@
+name: Länderpolygone (BKG)
+
+# Erzeugt data/geo/laender.geojson aus dem BKG-Datensatz "Verwaltungsgebiete 1:250 000 (VG250)":
+# lädt das GeoPackage, nimmt die Landflächen (Ebene vg250_lan, GF = 4), rechnet nach WGS84 um und vereinfacht.
+# Datenlizenz Deutschland – Namensnennung – Version 2.0; Quellenvermerk und Veränderungshinweis stehen in der
+# Datei und im README (Abschnitt "Datenquellen und Lizenzen").
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  VG250_URL: https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/aktuell/vg250_01-01.utm32s.gpkg.ebenen.zip
+  DATENQUELLEN_URL: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: GDAL installieren
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq gdal-bin
+
+      # Der Quellenvermerk nennt das Jahr des Datenbezugs; das README muss dieselbe Jahreszahl tragen.
+      - name: Quellenvermerk im README prüfen
+        run: |
+          YEAR=$(date -u +%Y)
+          if ! grep -q "© \[BKG\](https://www.bkg.bund.de) ($YEAR)" README.md; then
+            echo "::error::README.md enthält den BKG-Quellenvermerk nicht für das Jahr $YEAR — Abschnitt 'Datenquellen und Lizenzen' anpassen."
+            exit 1
+          fi
+
+      - name: Datensatz laden und Länder ausschneiden
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/vg250.zip" "$VG250_URL"
+          unzip -q "$RUNNER_TEMP/vg250.zip" -d "$RUNNER_TEMP/vg250"
+          GPKG=$(find "$RUNNER_TEMP/vg250" -name '*.gpkg' | head -1)
+          echo "GeoPackage: $GPKG"
+          ogrinfo -so "$GPKG" | tee "$RUNNER_TEMP/layers.txt"
+          LAYER=$(sed -n 's/^[0-9]*: \([^ ]*\).*/\1/p' "$RUNNER_TEMP/layers.txt" | grep -i '^vg250_lan$' | head -1)
+          if [ -z "$LAYER" ]; then echo "::error::Ebene vg250_lan nicht gefunden (siehe Liste oben)"; exit 1; fi
+          ogr2ogr -f GeoJSON "$RUNNER_TEMP/raw.geojson" "$GPKG" "$LAYER" \
+            -where "GF = 4" -select GEN,SN_L -t_srs EPSG:4326 -simplify 0.003 -lco COORDINATE_PRECISION=4
+
+      - name: laender.geojson bauen
+        run: |
+          YEAR=$(date -u +%Y)
+          npm run geo-laender -- --in="$RUNNER_TEMP/raw.geojson" --out=data/geo/laender.geojson \
+            --attribution="© BKG ($YEAR) dl-de/by-2-0, Datenquellen: $DATENQUELLEN_URL" --source="$VG250_URL"
+
+      - name: Committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/geo/laender.geojson
+          git diff --staged --quiet || git commit -m "chore: Länderpolygone (BKG VG250) aktualisiert"
+          git pull --rebase origin main
+          git push

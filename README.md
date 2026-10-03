@@ -114,6 +114,18 @@ Jeder Treffer wird gegen die Region des Vereins geprüft (Bezirk aus den Ligen, 
 
 Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordinate, sofern ihre Ergebnisse höchstens 15 km auseinander liegen. Eine von mehreren Club-IDs genutzte Halle ist nie ein Grund, eine Koordinate abzulehnen. Details: [Kapitel 8 der Architekturdokumentation](docs/arc42/08-querschnittliche-konzepte.adoc).
 
+## Datenquellen und Lizenzen
+
+| Quelle | Verwendung | Lizenz / Hinweis |
+|---|---|---|
+| [basketball-bund.net](https://www.basketball-bund.net) | Vereine, Teams, Ligen, Tabellen, Spielpläne, Spielorte | öffentlich einsehbare Daten der Website, Rechte beim DBB bzw. den jeweiligen Rechteinhabern |
+| [OpenStreetMap](https://www.openstreetmap.org/copyright) (Nominatim, Kartenkacheln) | Koordinaten, Kartendarstellung | © OpenStreetMap-Mitwirkende, ODbL |
+| Bundesamt für Kartographie und Geodäsie | Länderpolygone für die Ortsprüfung (`data/geo/laender.geojson`, nicht Teil der Seitenanzeige) | siehe unten |
+
+**BKG, Verwaltungsgebiete 1:250 000 (VG250):** © [BKG](https://www.bkg.bund.de) (2026) [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0), Datenquellen: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
+
+*Veränderungshinweis:* Die Daten wurden bearbeitet: nur die Landflächen der 16 Länder, Geometrie vereinfacht, nach WGS84 (EPSG:4326) umgerechnet und auf Name und Länderschlüssel reduziert. Die Datei erzeugt der Workflow „Länderpolygone (BKG)“ (`crawler/geo-laender.ts`), Quellenvermerk und Änderungshinweis stehen auch in der Datei selbst.
+
 ## Projektstruktur
 
 ```
