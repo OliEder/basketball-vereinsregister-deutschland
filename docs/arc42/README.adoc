@@ -136,7 +136,7 @@ Das Vereinsregister steht zwischen der BBB-Datenquelle und dem Endnutzer. Es üb
 
 |basketball-bund.net API
 |→ Crawler (eingehend)
-|Liefert Verbands-, Liga-, Team- und Spielfelddaten als JSON. Kein Namens-Suche-Endpoint.
+|Liefert Verbands-, Liga-, Team- und Spielfelddaten als JSON. Kein Namens-Suche-Endpoint. Beobachtungen: `docs/bbb-api.md`; https://github.com/OliEder/basketball-bund-api/blob/main/basketball-bund-net-api-V1.yaml[OpenAPI-Spezifikation].
 
 |Nominatim (OpenStreetMap)
 |→ Crawler (eingehend)
