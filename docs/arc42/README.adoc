@@ -583,7 +583,6 @@ Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit 
 * (+) Namenstreffer werden nur übernommen, wenn der Vereinsname im Treffer vorkommt (`isPlausibleNameHit`)
 * (+) `npm run regeocode` (Workflow „Regeocode Clubs“) berechnet verdächtige Vereine neu; ohne `--apply` entsteht nur ein Bericht
 
-
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
