@@ -39,15 +39,26 @@ export function mergeHalls(base: Hall[], enriched: Hall[]): Hall[] {
   return Array.from(map.values());
 }
 
-export function mergeTeams(
-  base: TeamEntry[],
-  enriched: Array<{ teamPermanentId: number; training: TeamEntry['training'] }>
-): TeamEntry[] {
+type PrevTeam = {
+  teamPermanentId: number;
+  training: TeamEntry['training'];
+  teamNumber?: number;
+  teamAkj?: string;
+  teamAkjId?: number;
+};
+
+export function mergeTeams(base: TeamEntry[], enriched: PrevTeam[]): TeamEntry[] {
   const enrichedMap = new Map(enriched.map(t => [t.teamPermanentId, t]));
   return base.map(team => {
     const e = enrichedMap.get(team.teamPermanentId);
     if (!e) return team;
-    return { ...team, training: e.training };
+    // Details aus backfill-team-details (teamNumber/teamAkj/teamAkjId) bleiben erhalten,
+    // sofern der Crawl sie nicht selbst liefert.
+    const details: Partial<TeamEntry> = {};
+    if (team.teamNumber === undefined && e.teamNumber !== undefined) details.teamNumber = e.teamNumber;
+    if (team.teamAkj === undefined && e.teamAkj !== undefined) details.teamAkj = e.teamAkj;
+    if (team.teamAkjId === undefined && e.teamAkjId !== undefined) details.teamAkjId = e.teamAkjId;
+    return { ...team, ...details, training: e.training };
   });
 }
 
