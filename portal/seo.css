@@ -21,3 +21,17 @@
 }
 .seo-alphabet a:hover { background: var(--dss-hover-bg); }
 .seo-list-page h2[id] { scroll-margin-top: 1rem; }
+
+/* Ligaseiten */
+.seo-table-wrap { overflow-x: auto; margin: 0 0 1.5rem; border: 1px solid var(--dss-line); border-radius: 8px; }
+.seo-table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.seo-table th, .seo-table td { padding: 0.5rem 0.75rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--dss-line); }
+.seo-table th:nth-child(2), .seo-table td:nth-child(2) { text-align: left; white-space: normal; min-width: 11rem; }
+.seo-table th { color: var(--dss-fg); font-weight: 600; background: var(--dss-surface-2); }
+.seo-table a { color: var(--dss-link); display: inline-block; padding: 0.7rem 0; }
+.seo-table tbody tr:last-child td { border-bottom: 0; }
+.seo-matches { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.25rem; }
+.seo-matches li { padding: 0.35rem 0; border-bottom: 1px solid var(--dss-line); }
+.seo-matches a { color: var(--dss-link); display: inline-block; padding: 0.7rem 0; }
+.seo-table-wrap:focus-visible { outline: 3px solid var(--dss-link); outline-offset: 2px; }
+.seo-list a { display: inline-flex; align-items: center; min-height: 44px; }

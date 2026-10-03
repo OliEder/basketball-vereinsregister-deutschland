@@ -1,4 +1,4 @@
-import { slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -177,11 +177,87 @@ describe('Stadtteile und Alphabet', () => {
 
   it('lange Listen bekommen Buchstabengruppen und eine Sprungleiste, kurze nicht', () => {
     const mk = (n: number) => Array.from({ length: n }, (_, i) => ({ name: `${String.fromCharCode(65 + (i % 5))}-Ort ${i}`, href: `x/${i}/` }));
-    const long = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN) }] });
+    const long = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN), alphabetic: true }] });
     expect(long).toContain('aria-label="Alphabet"');
     expect(long).toContain('href="bayern/#buchstabe-a"');
     expect(long).toContain('<h2 id="buchstabe-a">A</h2>');
-    const short = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN - 1) }] });
+    const short = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN - 1), alphabetic: true }] });
     expect(short).not.toContain('Alphabet');
+  });
+});
+
+describe('Ligaseiten', () => {
+  const team = (id: number, clubId: number, name: string) => ({ teamPermanentId: id, clubId, teamname: name });
+  const row = (rang: number, t: any, sp: number, s: number, n: number) => ({ rang, team: t, anzspiele: sp, anzGewinnpunkte: s * 2, anzVerlustpunkte: n * 2, s, n, koerbe: 80 * sp, gegenKoerbe: 70 * sp, korbdiff: 10 * sp });
+  const liga = (id: number, name: string, over: Partial<LigaDoc> = {}): LigaDoc => ({
+    ligaId: id, liganame: name, verbandName: 'Bayern', akName: 'Senioren', geschlecht: 'männlich', fetchedAt: '2026-10-03T09:00:00Z',
+    tabelle: [row(1, team(1, 7, 'TV Regensburg'), 2, 2, 0), row(2, team(2, 99, 'SV Fremd'), 2, 1, 1), row(3, team(3, 8, 'DJK <b>'), 2, 0, 2), row(4, team(4, 9, 'Vierter'), 1, 0, 1)],
+    matches: [
+      { matchId: 1, kickoffDate: '2026-09-26', kickoffTime: '18:30', homeTeam: team(1, 7, 'TV Regensburg'), guestTeam: team(2, 99, 'SV Fremd'), result: '74:89' },
+      { matchId: 2, kickoffDate: '2026-10-10', kickoffTime: '17:00', homeTeam: team(2, 99, 'SV Fremd'), guestTeam: team(3, 8, 'DJK <b>'), result: null },
+      { matchId: 3, kickoffDate: '2026-10-11', homeTeam: team(1, 7, 'TV Regensburg'), guestTeam: team(3, 8, 'DJK <b>'), result: null, abgesagt: true }
+    ],
+    ...over
+  });
+
+  it('Pfad: liga/<verband>/<liga ohne Kürzel in Klammern>/, gleiche Namen mit ID', () => {
+    const w = ligaWishes([liga(2, 'Kreisliga A (KLA)'), liga(1, 'Kreisliga A (KLA)'), liga(3, 'Leer', { tabelle: [], matches: [] })]);
+    expect(w).toEqual([
+      { key: '1', desired: 'liga/bayern/kreisliga-a/' },
+      { key: '2', desired: 'liga/bayern/kreisliga-a/' }
+    ]);
+    const m = assignKeyed(w);
+    expect(m['1'].path).toBe('liga/bayern/kreisliga-a/');
+    expect(m['2'].path).toBe('liga/bayern/kreisliga-a-2/');
+  });
+
+  it('Saisonwechsel: neue Liga-ID übernimmt den Pfad der verschwundenen', () => {
+    const prev = assignKeyed(ligaWishes([liga(1, 'Kreisliga A')]));
+    const next = assignKeyed(ligaWishes([liga(500, 'Kreisliga A')]), prev);
+    expect(next['500'].path).toBe('liga/bayern/kreisliga-a/');
+    expect(next['1']).toBeUndefined();
+  });
+
+  it('Top 3 erst, wenn gespielt wurde', () => {
+    expect(top3Text(liga(1, 'X'))).toBe('1. TV Regensburg · 2. SV Fremd · 3. DJK <b>');
+    expect(top3(liga(1, 'X', { tabelle: liga(1, 'X').tabelle.map(e => ({ ...e, anzspiele: 0 })) }))).toEqual([]);
+  });
+
+  it('Seite: Tabelle, Spiele, Vereinslinks und Maskierung', () => {
+    const html = renderLigaPage({ base: BASE, doc: liga(1, 'Kreisliga A'), path: 'liga/bayern/kreisliga-a/', clubPaths: { '7': 'bayern/regensburg/tv-regensburg/' } });
+    expect(html).toContain('<base href="../../../">');
+    expect(html).toContain('<a href="bayern/regensburg/tv-regensburg/">TV Regensburg</a>');
+    expect(html).toContain('DJK &lt;b&gt;');
+    expect(html).not.toContain('DJK <b>');
+    expect(html).toContain('26.09.2026 18:30');
+    expect(html).toContain('<strong>74:89</strong>');
+    expect(html).toContain('Nächste Spiele');
+    expect(html).not.toContain('11.10.2026');     // abgesagt
+    expect(html).toContain('<th scope="col">Platz</th>');
+    expect(html).toContain('Aktuell: 1. TV Regensburg');
+  });
+
+  it('Verbandsseite und Übersicht, Weiterleitung bei geändertem Pfad', () => {
+    const prev = { '1': { path: 'liga/bayern/alt/', history: [] } };
+    const b = buildLigaPages([liga(1, 'Kreisliga A')], prev, BASE, {});
+    expect(b.files.get('liga/bayern/alt/index.html')).toContain('http-equiv="refresh"');
+    expect(b.files.get('liga/bayern/index.html')).toContain('Senioren · männlich');
+    expect(b.files.get('liga/index.html')).toContain('href="liga/bayern/"');
+    expect(b.sitemap).toEqual(expect.arrayContaining(['liga/bayern/kreisliga-a/', 'liga/bayern/', 'liga/']));
+    expect(b.sitemap).not.toContain('liga/bayern/alt/');
+  });
+
+  it('buildSite verlinkt Ligen auf Länder-, Orts- und Vereinsseiten', () => {
+    const c = club(7, 'TV Regensburg', 'Regensburg', '0200007', { teams: [{ teamPermanentId: 1, altersklasse: 'Senioren', geschlecht: 'männlich', ligaId: 1, liganame: 'Kreisliga A', training: [] } as any] });
+    const b = buildSite([c], {}, BASE, '2026-10-03', { docs: [liga(1, 'Kreisliga A')] });
+    expect(b.files.get('bayern/index.html')).toContain('href="liga/bayern/kreisliga-a/"');
+    expect(b.files.get('bayern/index.html')).toContain('Alle 1 Ligen in Bayern');
+    const ort = b.files.get('bayern/regensburg/index.html')!;
+    expect(ort).toContain('Ligen in Regensburg');
+    expect(ort).toContain('TV Regensburg: Platz 1');
+    expect(b.files.get('bayern/regensburg/tv-regensburg/index.html')).toContain('<a href="liga/bayern/kreisliga-a/">Kreisliga A</a>');
+    expect(b.files.get('sitemap.xml')).toContain('/liga/bayern/kreisliga-a/<');
+    expect(b.hasLiga).toBe(true);
+    expect(injectRegionLinks('<!--REGION-LINKS-->', b.regions, true)).toContain('href="liga/"');
   });
 });

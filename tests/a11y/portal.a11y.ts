@@ -28,6 +28,8 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
+  { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.seo-table' },
+  { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.seo-list a' },
   { name: 'Team-Seite', url: '/team.html?id=151009', ready: '.team-table' },
   { name: 'Team ohne Live-Daten', url: '/team.html?id=424242', ready: '.verein-error' }
 ];
@@ -229,4 +231,11 @@ test('Statische Vereinsseite: Canonical, Inhalt ohne JavaScript, Sitemap', async
 test('Startseite verlinkt die Regionen', async ({ page }) => {
   await open(page, '/index.html', 'light', '#regions a');
   await expect(page.locator('#regions a[href="bayern/"]')).toBeVisible();
+});
+
+test('Ligaseite: Tabelle mit Kopfzellen, Vereinslinks und Eintrag in der Sitemap', async ({ request }) => {
+  const html = await (await request.get('/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/')).text();
+  expect(html).toContain('<th scope="col">Mannschaft</th>');
+  expect(html).toContain('href="bayern/noerdlingen/tsv-1861-noerdlingen/"');
+  expect(await (await request.get('/sitemap.xml')).text()).toContain('/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/');
 });
