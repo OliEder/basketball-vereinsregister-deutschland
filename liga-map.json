@@ -1,0 +1,7042 @@
+{
+ "52185": {
+  "path": "liga/bayern/bezirkspokal-oberpfalz-damen-25-26/",
+  "history": []
+ },
+ "52497": {
+  "path": "liga/regionalliga-suedost/regionalliga-damen-hr-nord/",
+  "history": []
+ },
+ "52498": {
+  "path": "liga/regionalliga-suedost/regionalliga-damen-hr-sued/",
+  "history": []
+ },
+ "52513": {
+  "path": "liga/regionalliga-suedost/rld-vorbereitungsspiele/",
+  "history": []
+ },
+ "52514": {
+  "path": "liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/",
+  "history": []
+ },
+ "52515": {
+  "path": "liga/regionalliga-suedost/1-regionalliga-herren-hr-nord/",
+  "history": []
+ },
+ "52527": {
+  "path": "liga/regionalliga-suedost/2-regionalliga-nord/",
+  "history": []
+ },
+ "52528": {
+  "path": "liga/regionalliga-suedost/2-regionalliga-sued/",
+  "history": []
+ },
+ "52530": {
+  "path": "liga/bayern/bayernliga-herren-nord/",
+  "history": []
+ },
+ "52531": {
+  "path": "liga/bayern/bayernliga-herren-mitte/",
+  "history": []
+ },
+ "52532": {
+  "path": "liga/bayern/bayernliga-herren-sued/",
+  "history": []
+ },
+ "52533": {
+  "path": "liga/bayern/bayernliga-nord-damen/",
+  "history": []
+ },
+ "52534": {
+  "path": "liga/bayern/bayernliga-sued-damen/",
+  "history": []
+ },
+ "52535": {
+  "path": "liga/bayern/bayernliga-herren-vorbereitung/",
+  "history": []
+ },
+ "52536": {
+  "path": "liga/bayern/bayernliga-damen-vorbereitung/",
+  "history": []
+ },
+ "52539": {
+  "path": "liga/regionalliga-suedwest/regionalliga-baden-wuerttemberg-frauen/",
+  "history": []
+ },
+ "52661": {
+  "path": "liga/baden-wuerttemberg/bbw1-landesliga-maenner/",
+  "history": []
+ },
+ "52662": {
+  "path": "liga/baden-wuerttemberg/bbw1-landesliga-frauen/",
+  "history": []
+ },
+ "52663": {
+  "path": "liga/baden-wuerttemberg/bbw1-bezirksliga-maenner/",
+  "history": []
+ },
+ "52664": {
+  "path": "liga/baden-wuerttemberg/bbw1-bezirksliga-frauen/",
+  "history": []
+ },
+ "52665": {
+  "path": "liga/baden-wuerttemberg/bbw1-kreisliga-a-maenner/",
+  "history": []
+ },
+ "52666": {
+  "path": "liga/baden-wuerttemberg/bbw1-kreisliga-b1-maenner/",
+  "history": []
+ },
+ "52667": {
+  "path": "liga/baden-wuerttemberg/bbw1-kreisliga-b2-maenner/",
+  "history": []
+ },
+ "52774": {
+  "path": "liga/deutsche-meisterschaften/laenderspiele-2026-27/",
+  "history": []
+ },
+ "52791": {
+  "path": "liga/sachsen/oberliga-herren-sachsen/",
+  "history": []
+ },
+ "52792": {
+  "path": "liga/sachsen/oberliga-damen-sachsen/",
+  "history": []
+ },
+ "52793": {
+  "path": "liga/sachsen/landesliga-herren-sachsen-gruppe-1/",
+  "history": []
+ },
+ "52794": {
+  "path": "liga/sachsen/landesliga-herren-sachsen-gruppe-2/",
+  "history": []
+ },
+ "52795": {
+  "path": "liga/sachsen/landesliga-damen-sachsen/",
+  "history": []
+ },
+ "52802": {
+  "path": "liga/bayern/bezirksoberliga-herren/",
+  "history": []
+ },
+ "52803": {
+  "path": "liga/bayern/bezirksoberliga-damen/",
+  "history": []
+ },
+ "52804": {
+  "path": "liga/bayern/bezirkspokal-herren/",
+  "history": []
+ },
+ "52805": {
+  "path": "liga/bayern/kreispokal-herren/",
+  "history": []
+ },
+ "52806": {
+  "path": "liga/bayern/bezirkspokal-damen/",
+  "history": []
+ },
+ "52807": {
+  "path": "liga/bayern/bezirksliga-herren/",
+  "history": []
+ },
+ "52808": {
+  "path": "liga/bayern/bezirksliga-damen-a/",
+  "history": []
+ },
+ "52809": {
+  "path": "liga/bayern/bezirksliga-damen-b/",
+  "history": []
+ },
+ "52810": {
+  "path": "liga/bayern/bezirksklasse-herren/",
+  "history": []
+ },
+ "52811": {
+  "path": "liga/bayern/kreisliga-herren-a/",
+  "history": []
+ },
+ "52812": {
+  "path": "liga/bayern/kreisliga-herren-b/",
+  "history": []
+ },
+ "52845": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinland-herren/",
+  "history": []
+ },
+ "52846": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinland-damen/",
+  "history": []
+ },
+ "52847": {
+  "path": "liga/rheinland-pfalz/bezirksliga-trier-herren/",
+  "history": []
+ },
+ "52848": {
+  "path": "liga/rheinland-pfalz/a-klasse-trier-herren/",
+  "history": []
+ },
+ "52859": {
+  "path": "liga/regionalliga-suedwest/2-regionalliga-herren-nord/",
+  "history": []
+ },
+ "52860": {
+  "path": "liga/regionalliga-suedwest/regionalliga-damen-nord/",
+  "history": []
+ },
+ "52872": {
+  "path": "liga/deutscher-rollstuhlbasketball/rbbl/",
+  "history": []
+ },
+ "52873": {
+  "path": "liga/deutscher-rollstuhlbasketball/rbbl2-division-a/",
+  "history": []
+ },
+ "52874": {
+  "path": "liga/deutscher-rollstuhlbasketball/rbbl2-division-b/",
+  "history": []
+ },
+ "52875": {
+  "path": "liga/deutscher-rollstuhlbasketball/regionalliga-1/",
+  "history": []
+ },
+ "52876": {
+  "path": "liga/deutscher-rollstuhlbasketball/regionalliga-2/",
+  "history": []
+ },
+ "52877": {
+  "path": "liga/deutscher-rollstuhlbasketball/regionalliga-3/",
+  "history": []
+ },
+ "52878": {
+  "path": "liga/deutscher-rollstuhlbasketball/oberliga-1/",
+  "history": []
+ },
+ "52879": {
+  "path": "liga/deutscher-rollstuhlbasketball/oberliga-2/",
+  "history": []
+ },
+ "52880": {
+  "path": "liga/deutscher-rollstuhlbasketball/oberliga-3/",
+  "history": []
+ },
+ "52881": {
+  "path": "liga/deutscher-rollstuhlbasketball/oberliga-4/",
+  "history": []
+ },
+ "52882": {
+  "path": "liga/deutscher-rollstuhlbasketball/oberliga-5/",
+  "history": []
+ },
+ "52883": {
+  "path": "liga/deutscher-rollstuhlbasketball/landesliga-1/",
+  "history": []
+ },
+ "52884": {
+  "path": "liga/deutscher-rollstuhlbasketball/landesliga-2/",
+  "history": []
+ },
+ "52885": {
+  "path": "liga/deutscher-rollstuhlbasketball/landesliga-3/",
+  "history": []
+ },
+ "52886": {
+  "path": "liga/deutscher-rollstuhlbasketball/landesliga-4/",
+  "history": []
+ },
+ "52893": {
+  "path": "liga/rheinland-pfalz/oberliga-rheinland-pfalz-saar-herren/",
+  "history": []
+ },
+ "52894": {
+  "path": "liga/rheinland-pfalz/bezirksliga-rheinhessen-herren/",
+  "history": []
+ },
+ "52918": {
+  "path": "liga/hessen/herren-bezirksliga/",
+  "history": []
+ },
+ "52919": {
+  "path": "liga/hessen/damen-bezirksliga/",
+  "history": []
+ },
+ "52920": {
+  "path": "liga/hessen/u18-bezirksliga/",
+  "history": []
+ },
+ "52922": {
+  "path": "liga/hessen/u16-bezirksliga-maennlich-gruppe-2/",
+  "history": []
+ },
+ "52923": {
+  "path": "liga/hessen/u16-bezirksliga-weiblich/",
+  "history": []
+ },
+ "52924": {
+  "path": "liga/hessen/mixed-u14-bezirksliga-gruppe-1/",
+  "history": []
+ },
+ "52925": {
+  "path": "liga/hessen/u14-bezirksliga-weiblich/",
+  "history": []
+ },
+ "52926": {
+  "path": "liga/hessen/u12-bezirksliga-gruppe-1/",
+  "history": []
+ },
+ "52927": {
+  "path": "liga/hessen/u12-bezirksliga-weiblich/",
+  "history": []
+ },
+ "52928": {
+  "path": "liga/hessen/u10-bezirksliga/",
+  "history": []
+ },
+ "52929": {
+  "path": "liga/hessen/u10-bezirksliga-weiblich/",
+  "history": []
+ },
+ "52933": {
+  "path": "liga/hessen/damen-kreisliga/",
+  "history": []
+ },
+ "52934": {
+  "path": "liga/hessen/maennliche-u18-kreisliga/",
+  "history": []
+ },
+ "52935": {
+  "path": "liga/hessen/maennl-u16-kreisliga/",
+  "history": []
+ },
+ "52937": {
+  "path": "liga/hessen/mixed-u14-kreisliga-gruppe-2/",
+  "history": []
+ },
+ "52938": {
+  "path": "liga/hessen/mixed-u14-kreisliga-gruppe-1/",
+  "history": []
+ },
+ "52939": {
+  "path": "liga/hessen/weibliche-u14-kreisliga/",
+  "history": []
+ },
+ "52940": {
+  "path": "liga/hessen/u12-kreisliga-gruppe-2/",
+  "history": []
+ },
+ "52941": {
+  "path": "liga/hessen/u12-kreisliga-gruppe-1/",
+  "history": []
+ },
+ "52942": {
+  "path": "liga/hessen/u12-kreisliga-gruppe-3/",
+  "history": []
+ },
+ "52944": {
+  "path": "liga/hessen/u10-kreisliga-1/",
+  "history": []
+ },
+ "52945": {
+  "path": "liga/hessen/u10-kreisliga-2/",
+  "history": []
+ },
+ "52946": {
+  "path": "liga/hessen/herren-kreisliga-a/",
+  "history": []
+ },
+ "52947": {
+  "path": "liga/hessen/herren-kreisliga-b-gruppe-1/",
+  "history": []
+ },
+ "52948": {
+  "path": "liga/hessen/herren-kreisliga-b-gruppe-2/",
+  "history": []
+ },
+ "52949": {
+  "path": "liga/hessen/herren-kreisliga-c-gruppe-1/",
+  "history": []
+ },
+ "52950": {
+  "path": "liga/hessen/herren-kreisliga-c-gruppe-2/",
+  "history": []
+ },
+ "52953": {
+  "path": "liga/rheinland-pfalz/oberliga-rheinland-pfalz-saar-damen/",
+  "history": []
+ },
+ "52972": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-1/",
+  "history": []
+ },
+ "52973": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-2/",
+  "history": []
+ },
+ "52974": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-3/",
+  "history": []
+ },
+ "52975": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-4/",
+  "history": []
+ },
+ "52976": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-5/",
+  "history": []
+ },
+ "53030": {
+  "path": "liga/baden-wuerttemberg/bbw2-bezirkspokal-maenner-ue35/",
+  "history": []
+ },
+ "53031": {
+  "path": "liga/baden-wuerttemberg/bbw2-landesliga-maenner/",
+  "history": []
+ },
+ "53032": {
+  "path": "liga/baden-wuerttemberg/bbw2-landesliga-frauen/",
+  "history": []
+ },
+ "53034": {
+  "path": "liga/baden-wuerttemberg/bbw2-u18-maennlich-landesliga/",
+  "history": []
+ },
+ "53036": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-weiblich-landesliga/",
+  "history": []
+ },
+ "53037": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-weiblich-landesliga/",
+  "history": []
+ },
+ "53038": {
+  "path": "liga/baden-wuerttemberg/bbw2-bezirkspokal-maenner-herbstserie/",
+  "history": []
+ },
+ "53039": {
+  "path": "liga/baden-wuerttemberg/bbw2-bezirkspokal-frauen-herbstserie/",
+  "history": []
+ },
+ "53041": {
+  "path": "liga/baden-wuerttemberg/bbw2-bezirksliga-nord-maenner/",
+  "history": []
+ },
+ "53042": {
+  "path": "liga/baden-wuerttemberg/bbw2-bezirksliga-sued-maenner/",
+  "history": []
+ },
+ "53043": {
+  "path": "liga/baden-wuerttemberg/bbw2-u18-maennlich-bezirksliga-nord/",
+  "history": []
+ },
+ "53044": {
+  "path": "liga/baden-wuerttemberg/bbw2-u18-maennlich-bezirksliga-sued/",
+  "history": []
+ },
+ "53046": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-maennlich-bezirksliga-sued/",
+  "history": []
+ },
+ "53048": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-maennlich-kreisliga-nord/",
+  "history": []
+ },
+ "53049": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-bezirksliga-nord/",
+  "history": []
+ },
+ "53050": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-bezirksliga-sued/",
+  "history": []
+ },
+ "53054": {
+  "path": "liga/baden-wuerttemberg/bbw2-u12-sued-gruppe-1/",
+  "history": []
+ },
+ "53055": {
+  "path": "liga/baden-wuerttemberg/bbw2-u12-sued-gruppe-2/",
+  "history": []
+ },
+ "53056": {
+  "path": "liga/baden-wuerttemberg/bbw2-u12-sued-gruppe-3/",
+  "history": []
+ },
+ "53058": {
+  "path": "liga/baden-wuerttemberg/bbw2-u10-turniertage/",
+  "history": []
+ },
+ "53073": {
+  "path": "liga/baden-wuerttemberg/bbw2-kreispokal-maenner-herbstserie/",
+  "history": []
+ },
+ "53074": {
+  "path": "liga/baden-wuerttemberg/bbw2-kreisliga-a-nord-maenner/",
+  "history": []
+ },
+ "53075": {
+  "path": "liga/baden-wuerttemberg/bbw2-kreisliga-a-sued-maenner/",
+  "history": []
+ },
+ "53077": {
+  "path": "liga/baden-wuerttemberg/bbw2-kreisliga-b-nord-maenner/",
+  "history": []
+ },
+ "53079": {
+  "path": "liga/baden-wuerttemberg/bbw2-season-opening-u12/",
+  "history": []
+ },
+ "53088": {
+  "path": "liga/regionalliga-suedwest/1-regionalliga-suedwest/",
+  "history": []
+ },
+ "53113": {
+  "path": "liga/niedersachsen/testspiele-os/",
+  "history": []
+ },
+ "53115": {
+  "path": "liga/niedersachsen/testspiele-os-u12-und-juenger/",
+  "history": []
+ },
+ "53121": {
+  "path": "liga/niedersachsen/kreisklasse-herren-platzierungsspiele/",
+  "history": []
+ },
+ "53128": {
+  "path": "liga/niedersachsen/u16w-regionsklasse/",
+  "history": []
+ },
+ "53129": {
+  "path": "liga/niedersachsen/u14w-regionsklasse/",
+  "history": []
+ },
+ "53142": {
+  "path": "liga/bundesligen/wnbl-gruppe-2/",
+  "history": []
+ },
+ "53143": {
+  "path": "liga/bundesligen/wnbl-gruppe-1/",
+  "history": []
+ },
+ "53144": {
+  "path": "liga/bundesligen/wnbl-gruppe-4/",
+  "history": []
+ },
+ "53145": {
+  "path": "liga/bundesligen/wnbl-gruppe-3/",
+  "history": []
+ },
+ "53213": {
+  "path": "liga/hessen/oberliga-weiblich-u18/",
+  "history": []
+ },
+ "53214": {
+  "path": "liga/hessen/oberliga-weiblich-u16/",
+  "history": []
+ },
+ "53215": {
+  "path": "liga/hessen/oberliga-weiblich-u14/",
+  "history": []
+ },
+ "53216": {
+  "path": "liga/hessen/oberliga-weiblich-u12/",
+  "history": []
+ },
+ "53217": {
+  "path": "liga/hessen/landesliga-weiblich-u16/",
+  "history": []
+ },
+ "53229": {
+  "path": "liga/regionalliga-suedwest/1-regionalliga-suedwest-halbfinale/",
+  "history": []
+ },
+ "53230": {
+  "path": "liga/regionalliga-suedwest/1-regionalliga-suedwest-finale/",
+  "history": []
+ },
+ "53237": {
+  "path": "liga/sachsen-anhalt/oberliga-herren/",
+  "history": []
+ },
+ "53239": {
+  "path": "liga/sachsen-anhalt/oberliga-damen/",
+  "history": []
+ },
+ "53240": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-mu17-vorrunde/",
+  "history": []
+ },
+ "53241": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-wu16/",
+  "history": []
+ },
+ "53244": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu15/",
+  "history": []
+ },
+ "53248": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-mu14-vorrunde/",
+  "history": []
+ },
+ "53249": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-wu14/",
+  "history": []
+ },
+ "53252": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu13-vorrunde/",
+  "history": []
+ },
+ "53253": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu13-finalrunde-a/",
+  "history": []
+ },
+ "53254": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu13-finalrunde-b/",
+  "history": []
+ },
+ "53255": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-mu12-vorrunde/",
+  "history": []
+ },
+ "53256": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu12-finalrunde-a/",
+  "history": []
+ },
+ "53257": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu12-finalrunde-b/",
+  "history": []
+ },
+ "53258": {
+  "path": "liga/sachsen/mitteldeutsche-liga-wu12/",
+  "history": []
+ },
+ "53259": {
+  "path": "liga/brandenburg/mitteldeutsche-liga-mu11/",
+  "history": []
+ },
+ "53261": {
+  "path": "liga/sachsen-anhalt/landesliga-herren-st-1/",
+  "history": []
+ },
+ "53262": {
+  "path": "liga/sachsen/landesliga-herren-st-2/",
+  "history": []
+ },
+ "53263": {
+  "path": "liga/sachsen-anhalt/landesliga-maennlich-u20/",
+  "history": []
+ },
+ "53264": {
+  "path": "liga/sachsen-anhalt/landesliga-maennlich-u18/",
+  "history": []
+ },
+ "53266": {
+  "path": "liga/sachsen-anhalt/landesliga-weiblich-u16/",
+  "history": []
+ },
+ "53267": {
+  "path": "liga/sachsen-anhalt/landesliga-maennlich-u14/",
+  "history": []
+ },
+ "53268": {
+  "path": "liga/sachsen-anhalt/landesliga-weiblich-u14/",
+  "history": []
+ },
+ "53269": {
+  "path": "liga/sachsen-anhalt/landesliga-maennlich-u12/",
+  "history": []
+ },
+ "53271": {
+  "path": "liga/sachsen-anhalt/bezirksliga-herren-nord-harz/",
+  "history": []
+ },
+ "53272": {
+  "path": "liga/sachsen-anhalt/bezirksliga-herren-sued/",
+  "history": []
+ },
+ "53273": {
+  "path": "liga/sachsen-anhalt/bezirksliga-herren-anhalt/",
+  "history": []
+ },
+ "53274": {
+  "path": "liga/sachsen-anhalt/bezl-halle-harz-maennlich-u18/",
+  "history": []
+ },
+ "53275": {
+  "path": "liga/sachsen-anhalt/bezl-magdeburg-altmark-maennlich-u18/",
+  "history": []
+ },
+ "53276": {
+  "path": "liga/sachsen-anhalt/bezl-magdeburg-altmark-harz-maennlich-u16/",
+  "history": []
+ },
+ "53278": {
+  "path": "liga/sachsen-anhalt/bezl-sued-anhalt-harz-maennlich-u16/",
+  "history": []
+ },
+ "53280": {
+  "path": "liga/sachsen-anhalt/bezl-weiblich-u16/",
+  "history": []
+ },
+ "53281": {
+  "path": "liga/sachsen-anhalt/bezl-magdeburg-altmark-maennlich-u14/",
+  "history": []
+ },
+ "53282": {
+  "path": "liga/sachsen-anhalt/bezl-halle-weissenfels-maennlich-u14/",
+  "history": []
+ },
+ "53283": {
+  "path": "liga/sachsen-anhalt/bezl-harz-maennlich-u14/",
+  "history": []
+ },
+ "53284": {
+  "path": "liga/sachsen-anhalt/bezl-anhalt-maennlich-u14/",
+  "history": []
+ },
+ "53287": {
+  "path": "liga/sachsen-anhalt/bezl-magdeburg-maennlich-u12/",
+  "history": []
+ },
+ "53288": {
+  "path": "liga/sachsen-anhalt/bezl-halle-anhalt-weissenfels-maennlich-u12/",
+  "history": []
+ },
+ "53289": {
+  "path": "liga/sachsen-anhalt/bezl-harz-maennlich-u12/",
+  "history": []
+ },
+ "53290": {
+  "path": "liga/sachsen-anhalt/bezl-altmark-maennlich-u12/",
+  "history": []
+ },
+ "53292": {
+  "path": "liga/sachsen-anhalt/spielrunde-u11-mixed/",
+  "history": []
+ },
+ "53294": {
+  "path": "liga/sachsen-anhalt/spielrunde-u10-mixed-altmark-magdeburg/",
+  "history": []
+ },
+ "53295": {
+  "path": "liga/sachsen-anhalt/spielrunde-u10-mixed-ost-sued/",
+  "history": []
+ },
+ "53296": {
+  "path": "liga/sachsen-anhalt/bezl-u18-maennlich-finalturnier/",
+  "history": []
+ },
+ "53297": {
+  "path": "liga/sachsen-anhalt/bezl-u16-maennlich-finalturnier/",
+  "history": []
+ },
+ "53298": {
+  "path": "liga/sachsen-anhalt/bezl-u14-maennlich-finalturnier/",
+  "history": []
+ },
+ "53299": {
+  "path": "liga/sachsen-anhalt/bezl-u12-maennlich-finalturnier/",
+  "history": []
+ },
+ "53300": {
+  "path": "liga/sachsen-anhalt/seniorenliga-herren-ue40/",
+  "history": []
+ },
+ "53301": {
+  "path": "liga/sachsen-anhalt/seniorenmeisterschaften-herren-ue40/",
+  "history": []
+ },
+ "53302": {
+  "path": "liga/sachsen-anhalt/seniorenmeisterschaften-herren-ue35/",
+  "history": []
+ },
+ "53305": {
+  "path": "liga/sachsen-anhalt/bvsa-ligapokal-herren/",
+  "history": []
+ },
+ "53306": {
+  "path": "liga/sachsen-anhalt/bvsa-ligapokal-damen/",
+  "history": []
+ },
+ "53316": {
+  "path": "liga/regionalliga-suedwest/regionalliga-baden-wuerttemberg-maenner/",
+  "history": []
+ },
+ "53322": {
+  "path": "liga/baden-wuerttemberg/oberliga-wuerttemberg-maenner/",
+  "history": []
+ },
+ "53323": {
+  "path": "liga/baden-wuerttemberg/oberliga-baden-maenner/",
+  "history": []
+ },
+ "53324": {
+  "path": "liga/baden-wuerttemberg/oberliga-wuerttemberg-frauen/",
+  "history": []
+ },
+ "53325": {
+  "path": "liga/baden-wuerttemberg/oberliga-baden-frauen/",
+  "history": []
+ },
+ "53368": {
+  "path": "liga/rheinland-pfalz/jugendoberliga-rp-s-u14m/",
+  "history": []
+ },
+ "53369": {
+  "path": "liga/rheinland-pfalz/jugendoberliga-rp-s-u16w/",
+  "history": []
+ },
+ "53454": {
+  "path": "liga/hessen/bezirksliga-herren-ue35/",
+  "history": []
+ },
+ "53455": {
+  "path": "liga/hessen/bezirksliga-herren/",
+  "history": []
+ },
+ "53457": {
+  "path": "liga/hessen/bezirksliga-mu18/",
+  "history": []
+ },
+ "53458": {
+  "path": "liga/hessen/bezirksliga-mu16/",
+  "history": []
+ },
+ "53459": {
+  "path": "liga/hessen/bezirksliga-mixed-u14/",
+  "history": []
+ },
+ "53461": {
+  "path": "liga/hessen/bezirksliga-mixed-u12/",
+  "history": []
+ },
+ "53462": {
+  "path": "liga/hessen/bezirksliga-mixed-u10/",
+  "history": []
+ },
+ "53463": {
+  "path": "liga/hessen/kreisliga-herren/",
+  "history": []
+ },
+ "53470": {
+  "path": "liga/hamburg/herren-oberliga/",
+  "history": []
+ },
+ "53471": {
+  "path": "liga/hamburg/damen-oberliga/",
+  "history": []
+ },
+ "53472": {
+  "path": "liga/hamburg/herren-pokal/",
+  "history": []
+ },
+ "53473": {
+  "path": "liga/hamburg/damen-pokal/",
+  "history": []
+ },
+ "53479": {
+  "path": "liga/hamburg/herren-stadtliga-ost/",
+  "history": []
+ },
+ "53480": {
+  "path": "liga/hamburg/herren-stadtliga-west/",
+  "history": []
+ },
+ "53481": {
+  "path": "liga/hamburg/damen-stadtliga/",
+  "history": []
+ },
+ "53484": {
+  "path": "liga/hamburg/herren-bezirksliga-a/",
+  "history": []
+ },
+ "53485": {
+  "path": "liga/hamburg/herren-bezirksliga-b/",
+  "history": []
+ },
+ "53486": {
+  "path": "liga/hamburg/herren-bezirksliga-c/",
+  "history": []
+ },
+ "53487": {
+  "path": "liga/hamburg/damen-bezirksliga-ost/",
+  "history": []
+ },
+ "53488": {
+  "path": "liga/hamburg/damen-bezirksliga-west/",
+  "history": []
+ },
+ "53490": {
+  "path": "liga/hamburg/herren-senioren-ii-west/",
+  "history": []
+ },
+ "53491": {
+  "path": "liga/hamburg/herren-kreisliga-a/",
+  "history": []
+ },
+ "53492": {
+  "path": "liga/hamburg/herren-kreisliga-b/",
+  "history": []
+ },
+ "53493": {
+  "path": "liga/hamburg/herren-kreisliga-c/",
+  "history": []
+ },
+ "53496": {
+  "path": "liga/hamburg/jugend-m18-l/",
+  "history": []
+ },
+ "53497": {
+  "path": "liga/hamburg/jugend-w18-l/",
+  "history": []
+ },
+ "53498": {
+  "path": "liga/hamburg/jugend-m16-l/",
+  "history": []
+ },
+ "53499": {
+  "path": "liga/hamburg/jugend-w16-l/",
+  "history": []
+ },
+ "53500": {
+  "path": "liga/hamburg/jugend-m14-l/",
+  "history": []
+ },
+ "53501": {
+  "path": "liga/hamburg/jugend-w14-l/",
+  "history": []
+ },
+ "53509": {
+  "path": "liga/hamburg/jugend-m18-a/",
+  "history": []
+ },
+ "53510": {
+  "path": "liga/hamburg/jugend-w18-a/",
+  "history": []
+ },
+ "53511": {
+  "path": "liga/hamburg/jugend-m16-a/",
+  "history": []
+ },
+ "53512": {
+  "path": "liga/hamburg/jugend-w16-a/",
+  "history": []
+ },
+ "53513": {
+  "path": "liga/hamburg/jugend-m14-ao/",
+  "history": []
+ },
+ "53514": {
+  "path": "liga/hamburg/jugend-m14-aw/",
+  "history": []
+ },
+ "53515": {
+  "path": "liga/hamburg/jugend-w14-a/",
+  "history": []
+ },
+ "53517": {
+  "path": "liga/hamburg/jugend-m13-a/",
+  "history": []
+ },
+ "53518": {
+  "path": "liga/hamburg/jugend-m12-a/",
+  "history": []
+ },
+ "53519": {
+  "path": "liga/hamburg/jugend-m12-a-53519/",
+  "history": []
+ },
+ "53520": {
+  "path": "liga/hamburg/jugend-w12-a/",
+  "history": []
+ },
+ "53521": {
+  "path": "liga/hamburg/jugend-m11-a/",
+  "history": []
+ },
+ "53522": {
+  "path": "liga/hamburg/jugend-m10-a/",
+  "history": []
+ },
+ "53523": {
+  "path": "liga/hamburg/jugend-w10-a/",
+  "history": []
+ },
+ "53524": {
+  "path": "liga/hamburg/jugend-m09-a/",
+  "history": []
+ },
+ "53525": {
+  "path": "liga/hamburg/jugend-w09a/",
+  "history": []
+ },
+ "53526": {
+  "path": "liga/hamburg/jugend-m08-a/",
+  "history": []
+ },
+ "53536": {
+  "path": "liga/hamburg/jugend-m18-b/",
+  "history": []
+ },
+ "53537": {
+  "path": "liga/hamburg/jugend-m18-b-53537/",
+  "history": []
+ },
+ "53539": {
+  "path": "liga/hamburg/jugend-m16-b/",
+  "history": []
+ },
+ "53540": {
+  "path": "liga/hamburg/jugend-m16-b-53540/",
+  "history": []
+ },
+ "53541": {
+  "path": "liga/hamburg/jugend-m16-b-53541/",
+  "history": []
+ },
+ "53542": {
+  "path": "liga/hamburg/jugend-w16-b/",
+  "history": []
+ },
+ "53543": {
+  "path": "liga/hamburg/jugend-m14-b/",
+  "history": []
+ },
+ "53544": {
+  "path": "liga/hamburg/jugend-m14-b-53544/",
+  "history": []
+ },
+ "53545": {
+  "path": "liga/hamburg/jugend-w14-b/",
+  "history": []
+ },
+ "53546": {
+  "path": "liga/hamburg/jugend-m12-b/",
+  "history": []
+ },
+ "53547": {
+  "path": "liga/hamburg/jugend-m12-b-53547/",
+  "history": []
+ },
+ "53548": {
+  "path": "liga/hamburg/jugend-w12-b/",
+  "history": []
+ },
+ "53549": {
+  "path": "liga/hamburg/jugend-m11-b/",
+  "history": []
+ },
+ "53550": {
+  "path": "liga/hamburg/jugend-m10-b/",
+  "history": []
+ },
+ "53552": {
+  "path": "liga/hamburg/jugend-w10-b/",
+  "history": []
+ },
+ "53553": {
+  "path": "liga/hamburg/jugend-m09-b/",
+  "history": []
+ },
+ "53556": {
+  "path": "liga/hamburg/jugend-m16-c/",
+  "history": []
+ },
+ "53557": {
+  "path": "liga/hamburg/jugend-m16-c-53557/",
+  "history": []
+ },
+ "53558": {
+  "path": "liga/hamburg/jugend-m14-c/",
+  "history": []
+ },
+ "53559": {
+  "path": "liga/hamburg/jugend-m14-c-53559/",
+  "history": []
+ },
+ "53561": {
+  "path": "liga/hamburg/jugend-m12-c/",
+  "history": []
+ },
+ "53563": {
+  "path": "liga/hamburg/jugend-w12-c/",
+  "history": []
+ },
+ "53564": {
+  "path": "liga/hamburg/jugend-m10-c/",
+  "history": []
+ },
+ "53565": {
+  "path": "liga/hamburg/jugend-m09-c/",
+  "history": []
+ },
+ "53568": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-gruppe-a/",
+  "history": []
+ },
+ "53574": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-gruppe-b/",
+  "history": []
+ },
+ "53577": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u18weiblich/",
+  "history": []
+ },
+ "53580": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16-weiblich/",
+  "history": []
+ },
+ "53581": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-offen-gruppe-a/",
+  "history": []
+ },
+ "53582": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-offen-gruppe-b/",
+  "history": []
+ },
+ "53585": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-weiblich-gr-a/",
+  "history": []
+ },
+ "53586": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-weiblich-gr-b/",
+  "history": []
+ },
+ "53588": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12-weiblich-gruppe-a/",
+  "history": []
+ },
+ "53589": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o-gruppe-b/",
+  "history": []
+ },
+ "53590": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o-gruppe-c/",
+  "history": []
+ },
+ "53597": {
+  "path": "liga/nordrhein-westfalen/kreisliga-el-u18m/",
+  "history": []
+ },
+ "53598": {
+  "path": "liga/nordrhein-westfalen/kreisliga-el-u16m/",
+  "history": []
+ },
+ "53601": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o-gruppe-a/",
+  "history": []
+ },
+ "53632": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-vr-weibliche-u18/",
+  "history": []
+ },
+ "53633": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-vr-weibliche-u16/",
+  "history": []
+ },
+ "53634": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-2-vr-weibliche-u16/",
+  "history": []
+ },
+ "53635": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-vr-weibliche-u14/",
+  "history": []
+ },
+ "53636": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-2-vr-weibliche-u14/",
+  "history": []
+ },
+ "53637": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-vr-weibliche-u12/",
+  "history": []
+ },
+ "53638": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-2-vr-weibliche-u12/",
+  "history": []
+ },
+ "53639": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-weibliche-u10/",
+  "history": []
+ },
+ "53640": {
+  "path": "liga/nordrhein-westfalen/erftliga-offene-u14/",
+  "history": []
+ },
+ "53641": {
+  "path": "liga/nordrhein-westfalen/erftliga-offene-u12/",
+  "history": []
+ },
+ "53642": {
+  "path": "liga/nordrhein-westfalen/erftliga-offene-u10/",
+  "history": []
+ },
+ "53643": {
+  "path": "liga/nordrhein-westfalen/erftliga-herren/",
+  "history": []
+ },
+ "53644": {
+  "path": "liga/nordrhein-westfalen/erftliga-maennlich-u18/",
+  "history": []
+ },
+ "53645": {
+  "path": "liga/nordrhein-westfalen/erftliga-maennlich-u16/",
+  "history": []
+ },
+ "53663": {
+  "path": "liga/niedersachsen/regionsliga-herren/",
+  "history": []
+ },
+ "53664": {
+  "path": "liga/niedersachsen/regionsliga-damen/",
+  "history": []
+ },
+ "53666": {
+  "path": "liga/niedersachsen/u18m-regionsliga/",
+  "history": []
+ },
+ "53667": {
+  "path": "liga/niedersachsen/u16m-regionsliga/",
+  "history": []
+ },
+ "53668": {
+  "path": "liga/niedersachsen/u16w-regionsliga/",
+  "history": []
+ },
+ "53669": {
+  "path": "liga/niedersachsen/u14m-regionsliga-nord/",
+  "history": []
+ },
+ "53670": {
+  "path": "liga/niedersachsen/u14w-regionsliga/",
+  "history": []
+ },
+ "53673": {
+  "path": "liga/niedersachsen/u12m-regionsliga/",
+  "history": []
+ },
+ "53674": {
+  "path": "liga/niedersachsen/u12w-regionsliga/",
+  "history": []
+ },
+ "53675": {
+  "path": "liga/niedersachsen/u10m-regionsliga/",
+  "history": []
+ },
+ "53678": {
+  "path": "liga/niedersachsen/regionsklasse-herren/",
+  "history": []
+ },
+ "53679": {
+  "path": "liga/niedersachsen/u18m-regionsklasse/",
+  "history": []
+ },
+ "53680": {
+  "path": "liga/niedersachsen/u16m-regionsklasse/",
+  "history": []
+ },
+ "53682": {
+  "path": "liga/niedersachsen/u14m-regionsklasse/",
+  "history": []
+ },
+ "53684": {
+  "path": "liga/niedersachsen/u12m-regionsklasse-nord/",
+  "history": []
+ },
+ "53685": {
+  "path": "liga/niedersachsen/u12m-regionsklasse-sued/",
+  "history": []
+ },
+ "53686": {
+  "path": "liga/niedersachsen/u10m/",
+  "history": []
+ },
+ "53687": {
+  "path": "liga/niedersachsen/u10w/",
+  "history": []
+ },
+ "53688": {
+  "path": "liga/niedersachsen/u8/",
+  "history": []
+ },
+ "53689": {
+  "path": "liga/niedersachsen/kreisliga-herren/",
+  "history": []
+ },
+ "53690": {
+  "path": "liga/niedersachsen/kreisklasse-herren-nord/",
+  "history": []
+ },
+ "53691": {
+  "path": "liga/niedersachsen/kreisklasse-herren-sued/",
+  "history": []
+ },
+ "53694": {
+  "path": "liga/niedersachsen/regionspokal-herren/",
+  "history": []
+ },
+ "53700": {
+  "path": "liga/baden-wuerttemberg/bbw1-u18m-landesliga/",
+  "history": []
+ },
+ "53701": {
+  "path": "liga/baden-wuerttemberg/bbw1-u16m-landesliga/",
+  "history": []
+ },
+ "53702": {
+  "path": "liga/baden-wuerttemberg/bbw1-u14m-landesliga/",
+  "history": []
+ },
+ "53703": {
+  "path": "liga/baden-wuerttemberg/bbw1-u18m-bezirksliga/",
+  "history": []
+ },
+ "53704": {
+  "path": "liga/baden-wuerttemberg/bbw1-u16m-bezirksliga/",
+  "history": []
+ },
+ "53705": {
+  "path": "liga/baden-wuerttemberg/bbw1-u14m-bezirksliga/",
+  "history": []
+ },
+ "53706": {
+  "path": "liga/baden-wuerttemberg/bbw1-u16m-kreisliga/",
+  "history": []
+ },
+ "53707": {
+  "path": "liga/baden-wuerttemberg/bbw1-u14m-kreisliga/",
+  "history": []
+ },
+ "53709": {
+  "path": "liga/bayern/mfr-bezirksoberliga-herren/",
+  "history": []
+ },
+ "53710": {
+  "path": "liga/bayern/mfr-bezirksoberliga-damen/",
+  "history": []
+ },
+ "53711": {
+  "path": "liga/bayern/mfr-bezirksliga-herren/",
+  "history": []
+ },
+ "53712": {
+  "path": "liga/bayern/mfr-bezirksklasse-herren/",
+  "history": []
+ },
+ "53713": {
+  "path": "liga/bayern/mfr-bezirksklasse-damen/",
+  "history": []
+ },
+ "53716": {
+  "path": "liga/bayern/mfr-kreisliga-herren-nord/",
+  "history": []
+ },
+ "53717": {
+  "path": "liga/bayern/mfr-kreisliga-herren-sued/",
+  "history": []
+ },
+ "53718": {
+  "path": "liga/bayern/mfr-kreisliga-herren-mitte/",
+  "history": []
+ },
+ "53720": {
+  "path": "liga/bayern/mfr-kreisliga-damen/",
+  "history": []
+ },
+ "53721": {
+  "path": "liga/nordrhein-westfalen/jkl1u18m-bbk-niers/",
+  "history": []
+ },
+ "53722": {
+  "path": "liga/nordrhein-westfalen/jkl1u16m-bbk-niers/",
+  "history": []
+ },
+ "53723": {
+  "path": "liga/nordrhein-westfalen/jkl1u14o-bbk-niers/",
+  "history": []
+ },
+ "53724": {
+  "path": "liga/nordrhein-westfalen/jkl1u12o-bbk-niers/",
+  "history": []
+ },
+ "53725": {
+  "path": "liga/bayern/bezirksoberliga-herren-bolh-2026-27/",
+  "history": []
+ },
+ "53727": {
+  "path": "liga/bayern/bezirksliga-herren-bzlh-w-gruppe-west-2026-27/",
+  "history": []
+ },
+ "53728": {
+  "path": "liga/bayern/bezirksliga-herren-bzlh-o-gruppe-ost-2026-27/",
+  "history": []
+ },
+ "53729": {
+  "path": "liga/bayern/bezirksklasse-herren-mi-bkh-mitte-2026-27/",
+  "history": []
+ },
+ "53731": {
+  "path": "liga/bayern/nord-bezirksklasse-herren-2026-27/",
+  "history": []
+ },
+ "53732": {
+  "path": "liga/bayern/bezirksklasse-herren-suedost-so-bkh-2026-27/",
+  "history": []
+ },
+ "53733": {
+  "path": "liga/bayern/west-bezirksklasse-herren-we-bkh-2026-27/",
+  "history": []
+ },
+ "53735": {
+  "path": "liga/bayern/kreisliga-herren-a-mi-klha-2026-27/",
+  "history": []
+ },
+ "53736": {
+  "path": "liga/bayern/kreisliga-herren-b-mi-klhb-2026-27/",
+  "history": []
+ },
+ "53737": {
+  "path": "liga/bayern/kreisliga-herren-suedost-so-klh-2026-27/",
+  "history": []
+ },
+ "53738": {
+  "path": "liga/bayern/west-kreisliga-herren-we-klh-2026-27/",
+  "history": []
+ },
+ "53739": {
+  "path": "liga/bayern/kreisklasse-herren-a-mi-kkha-2026-27/",
+  "history": []
+ },
+ "53740": {
+  "path": "liga/bayern/kreisklasse-herren-b-nordgruppe-mi-kkhb-n-2026-27/",
+  "history": []
+ },
+ "53741": {
+  "path": "liga/bayern/kreisklasse-herren-b-suedgruppe-mi-kkhb-s-2026-27/",
+  "history": []
+ },
+ "53742": {
+  "path": "liga/bayern/kreisklasse-herren-suedost-so-kkh-2026-27/",
+  "history": []
+ },
+ "53743": {
+  "path": "liga/bayern/west-kreisklasse-herren-we-kkh-2026-27/",
+  "history": []
+ },
+ "53744": {
+  "path": "liga/bayern/bezirksoberliga-u18-ml-bol18m-2026-27/",
+  "history": []
+ },
+ "53745": {
+  "path": "liga/bayern/bezirksoberliga-u18-wbl-bol18w-2026-27/",
+  "history": []
+ },
+ "53746": {
+  "path": "liga/bayern/bezirksliga-u18-ml-bzl18m-2026-27/",
+  "history": []
+ },
+ "53747": {
+  "path": "liga/bayern/bezirksklasse-u18m-nordgruppe-mi-bk18m-n-2026-27/",
+  "history": []
+ },
+ "53748": {
+  "path": "liga/bayern/bezirksklasse-u18m-suedgruppe-mi-bk18m-s-2026-27/",
+  "history": []
+ },
+ "53749": {
+  "path": "liga/bayern/nord-bezirksklasse-u18m-2026-27/",
+  "history": []
+ },
+ "53750": {
+  "path": "liga/bayern/bezirksklasse-suedost-so-bk18m-u18m-2026-27/",
+  "history": []
+ },
+ "53751": {
+  "path": "liga/bayern/west-bezirksklasse-u18m-a-we-bk18m-a-2026-27/",
+  "history": []
+ },
+ "53752": {
+  "path": "liga/bayern/kreisliga-u18m-mi-kl18m-2026-27/",
+  "history": []
+ },
+ "53755": {
+  "path": "liga/bayern/u18-wbl-kreisliga-kue-kl18w-2026-27/",
+  "history": []
+ },
+ "53767": {
+  "path": "liga/niedersachsen/testspiele-os-53767/",
+  "history": []
+ },
+ "53768": {
+  "path": "liga/niedersachsen/testspiele-os-u20-u14/",
+  "history": []
+ },
+ "53769": {
+  "path": "liga/bayern/bezirksoberliga-u16-ml-bol16m-2026-27/",
+  "history": []
+ },
+ "53770": {
+  "path": "liga/bayern/bezirksoberliga-u16-wbl-bol16w-2026-27/",
+  "history": []
+ },
+ "53771": {
+  "path": "liga/bayern/bezirksliga-u16-ml-bzl16m-2026-27/",
+  "history": []
+ },
+ "53772": {
+  "path": "liga/bayern/bezirksklasse-u16m-nord-mi-bk16m-n-2026-27/",
+  "history": []
+ },
+ "53773": {
+  "path": "liga/bayern/bezirksklasse-u16m-sued-mi-bk16m-s-2026-27/",
+  "history": []
+ },
+ "53774": {
+  "path": "liga/bayern/nord-bezirksklasse-u16m-2026-27/",
+  "history": []
+ },
+ "53775": {
+  "path": "liga/bayern/bezirksklasse-suedost-so-bk16m-u16m-2026-27/",
+  "history": []
+ },
+ "53776": {
+  "path": "liga/bayern/west-bezirksklasse-u16m-we-bk16m-2026-27/",
+  "history": []
+ },
+ "53778": {
+  "path": "liga/bayern/kreisliga-u16m-nord-mi-kl16m-n-2026-27/",
+  "history": []
+ },
+ "53779": {
+  "path": "liga/bayern/kreisliga-u16m-suedost-so-kl16m-2026-27/",
+  "history": []
+ },
+ "53780": {
+  "path": "liga/bayern/west-kreisliga-u16m-a-we-kl16m-a-2026-27/",
+  "history": []
+ },
+ "53781": {
+  "path": "liga/bayern/west-kreisliga-u16m-b-we-kl16m-b-2026-27/",
+  "history": []
+ },
+ "53782": {
+  "path": "liga/bayern/west-kreisliga-u16w-a-we-kl16w-a-2026-27/",
+  "history": []
+ },
+ "53783": {
+  "path": "liga/bayern/west-kreisliga-u16w-c-we-kl16w-c-2026-27/",
+  "history": []
+ },
+ "53785": {
+  "path": "liga/bayern/west-kreisliga-u16w-b-we-kl16w-b-2026-27/",
+  "history": []
+ },
+ "53788": {
+  "path": "liga/bayern/kreisklasse-u16m-mi-kk16m-2026-27/",
+  "history": []
+ },
+ "53790": {
+  "path": "liga/bayern/bezirksoberliga-u14-ml-bol14m-2026-27/",
+  "history": []
+ },
+ "53791": {
+  "path": "liga/bayern/bezirksoberliga-u14-wbl-bol14w-2026-27/",
+  "history": []
+ },
+ "53792": {
+  "path": "liga/bayern/bezirksliga-u14-ml-bzl14m-2026-27/",
+  "history": []
+ },
+ "53793": {
+  "path": "liga/bayern/bezirksklasse-u14m-nordgruppe-mi-bk14m-n-2026-27/",
+  "history": []
+ },
+ "53794": {
+  "path": "liga/bayern/bezirksklasse-u14m-suedgruppe-mi-bk14m-s-2026-27/",
+  "history": []
+ },
+ "53795": {
+  "path": "liga/bayern/nord-bezirksklasse-u14m-2026-27/",
+  "history": []
+ },
+ "53796": {
+  "path": "liga/bayern/bezirksklasse-suedost-u14m-so-bk14m-2026-27/",
+  "history": []
+ },
+ "53797": {
+  "path": "liga/bayern/west-bezirksklasse-u14m-we-bk14m-2026-27/",
+  "history": []
+ },
+ "53798": {
+  "path": "liga/bayern/kreisliga-u14m-nord-mi-kl14m-n-2026-27/",
+  "history": []
+ },
+ "53799": {
+  "path": "liga/bayern/kreisliga-u14m-sued-mi-kl14m-s-2026-27/",
+  "history": []
+ },
+ "53801": {
+  "path": "liga/bayern/kreisliga-u14m-suedost-so-kl14m-2026-27/",
+  "history": []
+ },
+ "53802": {
+  "path": "liga/bayern/west-kreisliga-u14m-we-kl14m-2026-27/",
+  "history": []
+ },
+ "53803": {
+  "path": "liga/bayern/west-kreisliga-u14w-b-we-kl14w-b-2026-27/",
+  "history": []
+ },
+ "53804": {
+  "path": "liga/bayern/west-kreisliga-u14w-a-we-kl14w-a-2026-27/",
+  "history": []
+ },
+ "53805": {
+  "path": "liga/bayern/west-kreisliga-u14w-c-we-kl14w-c-2026-27/",
+  "history": []
+ },
+ "53807": {
+  "path": "liga/bayern/kreisklasse-u14m-mi-kk14m-2026-27/",
+  "history": []
+ },
+ "53808": {
+  "path": "liga/bayern/west-kreisklasse-u14m-a-we-kk14m-a-2026-27/",
+  "history": []
+ },
+ "53809": {
+  "path": "liga/bayern/west-kreisklasse-u14m-b-we-kk14m-b-2026-27/",
+  "history": []
+ },
+ "53810": {
+  "path": "liga/bayern/bezirksoberliga-u12-ml-bol12m-26-27/",
+  "history": []
+ },
+ "53811": {
+  "path": "liga/bayern/bezirksoberliga-u12-wbl-bol12w-26-27/",
+  "history": []
+ },
+ "53812": {
+  "path": "liga/bayern/bezirksliga-u12-ml-bzl12m-26-27/",
+  "history": []
+ },
+ "53813": {
+  "path": "liga/bayern/bezirksklasse-u12m-nord-mi-bk12m-n-2026-27/",
+  "history": []
+ },
+ "53814": {
+  "path": "liga/bayern/bezirksklasse-u12m-sued-mi-bk12m-s-2026-27/",
+  "history": []
+ },
+ "53815": {
+  "path": "liga/bayern/nord-bezirksklasse-u12m-2026-27/",
+  "history": []
+ },
+ "53816": {
+  "path": "liga/bayern/bezirksklasse-suedost-so-bk12-u12m-26-27/",
+  "history": []
+ },
+ "53817": {
+  "path": "liga/bayern/west-bezirksklasse-u12m-we-bk12m-2026-27/",
+  "history": []
+ },
+ "53818": {
+  "path": "liga/bayern/bezirksklasse-u12w-kue-bk12w-2026-27/",
+  "history": []
+ },
+ "53819": {
+  "path": "liga/bayern/kreisliga-u12-nordgruppe-mi-kl12m-n-26-27/",
+  "history": []
+ },
+ "53820": {
+  "path": "liga/bayern/kreisliga-u12-suedgruppe-mi-kl12m-s-26-27/",
+  "history": []
+ },
+ "53823": {
+  "path": "liga/bayern/kl-u12m-suedost-so-kl12-26-27/",
+  "history": []
+ },
+ "53825": {
+  "path": "liga/bayern/west-kreisliga-u12m-we-kl12m-2026-27/",
+  "history": []
+ },
+ "53826": {
+  "path": "liga/bayern/kreisliga-u12w-nordgruppe-kue-kl12w-n-26-27/",
+  "history": []
+ },
+ "53827": {
+  "path": "liga/bayern/kreisliga-u12w-suedgruppe-kue-klu12w-s-26-27/",
+  "history": []
+ },
+ "53828": {
+  "path": "liga/bayern/kreisliga-u12w-westgruppe-kue-kl12w-w-26-27/",
+  "history": []
+ },
+ "53829": {
+  "path": "liga/bayern/kreisliga-u12w-zentralgruppe-kue-kl12w-z-26-27/",
+  "history": []
+ },
+ "53832": {
+  "path": "liga/bayern/kreisklasse-u12-mittignordgruppe-mi-kk12m-mn-26-27/",
+  "history": []
+ },
+ "53833": {
+  "path": "liga/bayern/kreisklasse-u12-nordgruppe-mi-kk12m-n-26-27/",
+  "history": []
+ },
+ "53834": {
+  "path": "liga/bayern/kreisklasse-u12-mittigostgruppe-mi-kk12m-mo-26-27/",
+  "history": []
+ },
+ "53835": {
+  "path": "liga/bayern/kreisklasse-u12-suedgruppe-mi-kk12m-s-26-27/",
+  "history": []
+ },
+ "53840": {
+  "path": "liga/bayern/west-kreisklasse-u12m-a-we-kk12m-a-2026-27/",
+  "history": []
+ },
+ "53841": {
+  "path": "liga/bayern/west-kreisklasse-u12m-b-we-kk12m-b-2026-27/",
+  "history": []
+ },
+ "53844": {
+  "path": "liga/schleswig-holstein/hol/",
+  "history": []
+ },
+ "53845": {
+  "path": "liga/schleswig-holstein/dol/",
+  "history": []
+ },
+ "53846": {
+  "path": "liga/schleswig-holstein/hll/",
+  "history": []
+ },
+ "53847": {
+  "path": "liga/schleswig-holstein/dll/",
+  "history": []
+ },
+ "53848": {
+  "path": "liga/schleswig-holstein/hbln/",
+  "history": []
+ },
+ "53849": {
+  "path": "liga/schleswig-holstein/hbls/",
+  "history": []
+ },
+ "53850": {
+  "path": "liga/schleswig-holstein/hbkn/",
+  "history": []
+ },
+ "53851": {
+  "path": "liga/schleswig-holstein/hbks/",
+  "history": []
+ },
+ "53853": {
+  "path": "liga/schleswig-holstein/dbl/",
+  "history": []
+ },
+ "53854": {
+  "path": "liga/schleswig-holstein/ballco-bvsh-cup-herren/",
+  "history": []
+ },
+ "53855": {
+  "path": "liga/schleswig-holstein/ballco-bvsh-cup-damen/",
+  "history": []
+ },
+ "53858": {
+  "path": "liga/bayern/nord-bezirksklasse-u10m-2026-27/",
+  "history": []
+ },
+ "53859": {
+  "path": "liga/bayern/nord-bezirksklasse-u8m-2026-27/",
+  "history": []
+ },
+ "53860": {
+  "path": "liga/bayern/bezirksoberliga-u10-bol10m-26-27/",
+  "history": []
+ },
+ "53861": {
+  "path": "liga/bayern/bezirksoberliga-u10-wbl-bol10w-26-27/",
+  "history": []
+ },
+ "53863": {
+  "path": "liga/bayern/bezirksklasse-suedost-u10m-so-bk10m-26-27/",
+  "history": []
+ },
+ "53864": {
+  "path": "liga/bayern/kreisliga-u10-zentralnordgruppe-mi-kl10m-zn-26-27/",
+  "history": []
+ },
+ "53865": {
+  "path": "liga/bayern/kreisliga-u10-nordgruppe-mi-kl10m-n-26-27/",
+  "history": []
+ },
+ "53866": {
+  "path": "liga/bayern/kreisliga-u10-suedgruppe-mi-kl10m-s-26-27/",
+  "history": []
+ },
+ "53867": {
+  "path": "liga/bayern/west-kreisliga-u10m-a-we-kl10m-a-2026-27/",
+  "history": []
+ },
+ "53868": {
+  "path": "liga/bayern/kreisliga-u10w-westgruppe-kue-kl10w-w-26-27/",
+  "history": []
+ },
+ "53869": {
+  "path": "liga/bayern/kreisliga-u10w-zentraleregruppe-kue-kl10w-z-26-27/",
+  "history": []
+ },
+ "53870": {
+  "path": "liga/bayern/kreisklasse-u10-nordgruppe-mi-kk10m-n-26-27/",
+  "history": []
+ },
+ "53871": {
+  "path": "liga/bayern/kreisklasse-u10-zentralgruppe-mi-kk10m-z-26-27/",
+  "history": []
+ },
+ "53872": {
+  "path": "liga/bayern/kreisklasse-u10-suedgruppe-mi-kk10m-s-26-27/",
+  "history": []
+ },
+ "53875": {
+  "path": "liga/bayern/bezirksoberliga-damen-bold-26-27/",
+  "history": []
+ },
+ "53876": {
+  "path": "liga/bayern/bezirksliga-damen-bzld-26-27/",
+  "history": []
+ },
+ "53877": {
+  "path": "liga/baden-wuerttemberg/bbw3-landesliga-maenner/",
+  "history": []
+ },
+ "53878": {
+  "path": "liga/baden-wuerttemberg/bbw3-landesliga-frauen/",
+  "history": []
+ },
+ "53879": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18m-landesliga/",
+  "history": []
+ },
+ "53880": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18-weiblich/",
+  "history": []
+ },
+ "53882": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-landesliga/",
+  "history": []
+ },
+ "53883": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16-weiblich-1/",
+  "history": []
+ },
+ "53884": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16-weiblich-2/",
+  "history": []
+ },
+ "53885": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-landesliga/",
+  "history": []
+ },
+ "53886": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14-weiblich-1/",
+  "history": []
+ },
+ "53887": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-landesliga/",
+  "history": []
+ },
+ "53888": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12-weiblich-1/",
+  "history": []
+ },
+ "53889": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12-weiblich-2/",
+  "history": []
+ },
+ "53890": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10w-winterliga/",
+  "history": []
+ },
+ "53891": {
+  "path": "liga/baden-wuerttemberg/bbw3-u8-winterliga/",
+  "history": []
+ },
+ "53892": {
+  "path": "liga/baden-wuerttemberg/bbw3-bezirkspokal-maenner/",
+  "history": []
+ },
+ "53893": {
+  "path": "liga/baden-wuerttemberg/bbw3-bezirkspokal-frauen/",
+  "history": []
+ },
+ "53894": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18m-bezirkspokal/",
+  "history": []
+ },
+ "53896": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-bezirkspokal/",
+  "history": []
+ },
+ "53897": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-bezirkspokal/",
+  "history": []
+ },
+ "53899": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-bezirkspokal/",
+  "history": []
+ },
+ "53914": {
+  "path": "liga/baden-wuerttemberg/bbw3-bezirksliga-1-maenner/",
+  "history": []
+ },
+ "53915": {
+  "path": "liga/baden-wuerttemberg/bbw3-bezirksliga-2-maenner/",
+  "history": []
+ },
+ "53916": {
+  "path": "liga/baden-wuerttemberg/bbw3-bezirksliga-frauen/",
+  "history": []
+ },
+ "53917": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18m-bezirksliga-1/",
+  "history": []
+ },
+ "53918": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18m-bezirksliga-2/",
+  "history": []
+ },
+ "53920": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-bezirksliga-1/",
+  "history": []
+ },
+ "53923": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-bezirksliga-2/",
+  "history": []
+ },
+ "53924": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-bezirksliga-1/",
+  "history": []
+ },
+ "53926": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-bezirksliga-2/",
+  "history": []
+ },
+ "53930": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-bezirksliga-1/",
+  "history": []
+ },
+ "53941": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-a-1-maenner/",
+  "history": []
+ },
+ "53943": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-a-3-maenner/",
+  "history": []
+ },
+ "53944": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-a-2-maenner/",
+  "history": []
+ },
+ "53946": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-kreisliga-a1/",
+  "history": []
+ },
+ "53948": {
+  "path": "liga/baden-wuerttemberg/bbw3-u16m-kreisliga-a2/",
+  "history": []
+ },
+ "53950": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-kreisliga-a1/",
+  "history": []
+ },
+ "53952": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14m-kreisliga-a2/",
+  "history": []
+ },
+ "53955": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-kreisliga-a1/",
+  "history": []
+ },
+ "53956": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-kreisliga-a2/",
+  "history": []
+ },
+ "53959": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-kreisliga-a3/",
+  "history": []
+ },
+ "53960": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-a-winterliga/",
+  "history": []
+ },
+ "53963": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-b-winterliga/",
+  "history": []
+ },
+ "53965": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-c-winterliga/",
+  "history": []
+ },
+ "53966": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-d-winterliga/",
+  "history": []
+ },
+ "53969": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-e-winterliga/",
+  "history": []
+ },
+ "53987": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-b-1-maenner/",
+  "history": []
+ },
+ "53988": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-b-2-maenner/",
+  "history": []
+ },
+ "53990": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-b-3-maenner/",
+  "history": []
+ },
+ "53993": {
+  "path": "liga/baden-wuerttemberg/bbw3-kreisliga-b-4-maenner/",
+  "history": []
+ },
+ "54005": {
+  "path": "liga/baden-wuerttemberg/bbw3-testspiele-nordwuerttemberg/",
+  "history": []
+ },
+ "54006": {
+  "path": "liga/baden-wuerttemberg/bbw3-testspiele-minis-nordwuerttemberg/",
+  "history": []
+ },
+ "54026": {
+  "path": "liga/baden-wuerttemberg/bbw3-u18m-kreisliga-a/",
+  "history": []
+ },
+ "54048": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-f-winterliga/",
+  "history": []
+ },
+ "54049": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-g-winterliga/",
+  "history": []
+ },
+ "54099": {
+  "path": "liga/bundesligen/wnbl-testspielliga/",
+  "history": []
+ },
+ "54101": {
+  "path": "liga/bayern/nord-bezirksklasse-damen-4x4-2026-27/",
+  "history": []
+ },
+ "54105": {
+  "path": "liga/schleswig-holstein/ue40m/",
+  "history": []
+ },
+ "54109": {
+  "path": "liga/schleswig-holstein/m18-bezirksliga-sued/",
+  "history": []
+ },
+ "54110": {
+  "path": "liga/schleswig-holstein/m16-bezirksliga-nord/",
+  "history": []
+ },
+ "54112": {
+  "path": "liga/schleswig-holstein/m16-bezirksliga-sued/",
+  "history": []
+ },
+ "54120": {
+  "path": "liga/schleswig-holstein/m12-bezirksliga-mitte/",
+  "history": []
+ },
+ "54121": {
+  "path": "liga/schleswig-holstein/m12-bezirksliga-nord/",
+  "history": []
+ },
+ "54122": {
+  "path": "liga/schleswig-holstein/m12-bezirksliga-sued/",
+  "history": []
+ },
+ "54123": {
+  "path": "liga/schleswig-holstein/m14-bezirksliga-mitte/",
+  "history": []
+ },
+ "54124": {
+  "path": "liga/schleswig-holstein/m14-bezirksliga-nord/",
+  "history": []
+ },
+ "54125": {
+  "path": "liga/schleswig-holstein/m14-bezirksliga-sued/",
+  "history": []
+ },
+ "54131": {
+  "path": "liga/schleswig-holstein/m18-vorrunde-nordost/",
+  "history": []
+ },
+ "54132": {
+  "path": "liga/schleswig-holstein/m18-vorrunde-nord/",
+  "history": []
+ },
+ "54133": {
+  "path": "liga/schleswig-holstein/m18-vorrunde-suedost/",
+  "history": []
+ },
+ "54134": {
+  "path": "liga/schleswig-holstein/m18-vorrunde-sued/",
+  "history": []
+ },
+ "54136": {
+  "path": "liga/niedersachsen/oberliga-herren-ost/",
+  "history": []
+ },
+ "54137": {
+  "path": "liga/bremen/oberliga-herren-west/",
+  "history": []
+ },
+ "54138": {
+  "path": "liga/niedersachsen/oberliga-damen-ost/",
+  "history": []
+ },
+ "54139": {
+  "path": "liga/bremen/oberliga-damen-west/",
+  "history": []
+ },
+ "54140": {
+  "path": "liga/niedersachsen/landesliga-herren-1/",
+  "history": []
+ },
+ "54141": {
+  "path": "liga/niedersachsen/landesliga-herren-2/",
+  "history": []
+ },
+ "54142": {
+  "path": "liga/bremen/landesliga-herren-3/",
+  "history": []
+ },
+ "54143": {
+  "path": "liga/niedersachsen/landesliga-herren-4/",
+  "history": []
+ },
+ "54144": {
+  "path": "liga/bremen/landesliga-damen-2/",
+  "history": []
+ },
+ "54145": {
+  "path": "liga/bremen/landesliga-damen-1/",
+  "history": []
+ },
+ "54146": {
+  "path": "liga/niedersachsen/landesliga-maennlich-u18-nord/",
+  "history": []
+ },
+ "54147": {
+  "path": "liga/niedersachsen/landesliga-maennlich-u18-sued/",
+  "history": []
+ },
+ "54148": {
+  "path": "liga/niedersachsen/landesliga-maennlich-u18-west/",
+  "history": []
+ },
+ "54149": {
+  "path": "liga/bremen/landesliga-weiblich-u18/",
+  "history": []
+ },
+ "54150": {
+  "path": "liga/bremen/landesliga-maennlich-u16-nord/",
+  "history": []
+ },
+ "54151": {
+  "path": "liga/bremen/landesliga-maennlich-u16-west/",
+  "history": []
+ },
+ "54152": {
+  "path": "liga/niedersachsen/landesliga-maennlich-u16-sued/",
+  "history": []
+ },
+ "54160": {
+  "path": "liga/bremen/landesliga-u12-west/",
+  "history": []
+ },
+ "54161": {
+  "path": "liga/bremen/landesliga-u12-sued/",
+  "history": []
+ },
+ "54162": {
+  "path": "liga/bremen/landesliga-u12-nord/",
+  "history": []
+ },
+ "54163": {
+  "path": "liga/niedersachsen/landesliga-wu12/",
+  "history": []
+ },
+ "54165": {
+  "path": "liga/bremen/regionsliga-nord-herren/",
+  "history": []
+ },
+ "54166": {
+  "path": "liga/bremen/regionsliga-sued-herren/",
+  "history": []
+ },
+ "54167": {
+  "path": "liga/bremen/regionsliga-mixed/",
+  "history": []
+ },
+ "54169": {
+  "path": "liga/bremen/regionsliga-sued-mu18/",
+  "history": []
+ },
+ "54170": {
+  "path": "liga/bremen/regionsliga-nord-mu18/",
+  "history": []
+ },
+ "54172": {
+  "path": "liga/bremen/regionsliga-nord-mu16/",
+  "history": []
+ },
+ "54173": {
+  "path": "liga/niedersachsen/regionsliga-ost-mu16/",
+  "history": []
+ },
+ "54175": {
+  "path": "liga/bremen/regionsliga-wu16/",
+  "history": []
+ },
+ "54176": {
+  "path": "liga/bremen/regionsliga-nord-mu14/",
+  "history": []
+ },
+ "54177": {
+  "path": "liga/bremen/regionsliga-ost-mu14/",
+  "history": []
+ },
+ "54178": {
+  "path": "liga/bremen/regionsliga-west-mu14/",
+  "history": []
+ },
+ "54179": {
+  "path": "liga/bremen/regionsliga-sued-mu14/",
+  "history": []
+ },
+ "54180": {
+  "path": "liga/bremen/regionsliga-wu14/",
+  "history": []
+ },
+ "54182": {
+  "path": "liga/bremen/regionsliga-ost-mu12/",
+  "history": []
+ },
+ "54183": {
+  "path": "liga/bremen/regionsliga-sued-mu12/",
+  "history": []
+ },
+ "54184": {
+  "path": "liga/bremen/regionsliga-west-mu12/",
+  "history": []
+ },
+ "54185": {
+  "path": "liga/bremen/regionsliga-suedost-mu12/",
+  "history": []
+ },
+ "54186": {
+  "path": "liga/bremen/regionsliga-mitte-mu12/",
+  "history": []
+ },
+ "54187": {
+  "path": "liga/bremen/regionsliga-wu12/",
+  "history": []
+ },
+ "54188": {
+  "path": "liga/niedersachsen/regionsliga-sued-u10/",
+  "history": []
+ },
+ "54189": {
+  "path": "liga/bremen/regionsliga-nord-u10/",
+  "history": []
+ },
+ "54197": {
+  "path": "liga/bremen/regionsklasse-sued-herren/",
+  "history": []
+ },
+ "54198": {
+  "path": "liga/bremen/regionsklasse-nord-herren/",
+  "history": []
+ },
+ "54199": {
+  "path": "liga/bremen/regionsklasse-mu16/",
+  "history": []
+ },
+ "54200": {
+  "path": "liga/bremen/regionsklasse-mu14/",
+  "history": []
+ },
+ "54201": {
+  "path": "liga/niedersachsen/regionspokal-herren-54201/",
+  "history": []
+ },
+ "54205": {
+  "path": "liga/niedersachsen/testspiele-region-lg-hb-neu/",
+  "history": []
+ },
+ "54206": {
+  "path": "liga/bremen/landesliga-damen-3/",
+  "history": []
+ },
+ "54207": {
+  "path": "liga/bremen/landesliga-vorrunde-nord-weiblich-u16/",
+  "history": []
+ },
+ "54209": {
+  "path": "liga/niedersachsen/landesliga-vorrunde-maennlich-u14-sued/",
+  "history": []
+ },
+ "54210": {
+  "path": "liga/bremen/landesliga-vorrunde-maennlich-u14-nord/",
+  "history": []
+ },
+ "54211": {
+  "path": "liga/bremen/landesliga-vorrunde-sued-weiblich-u14/",
+  "history": []
+ },
+ "54212": {
+  "path": "liga/niedersachsen/nbv-pokal-herren/",
+  "history": []
+ },
+ "54213": {
+  "path": "liga/niedersachsen/nbv-pokal-damen/",
+  "history": []
+ },
+ "54262": {
+  "path": "liga/niedersachsen/u9-nbv-minicup-gruppe-a/",
+  "history": []
+ },
+ "54263": {
+  "path": "liga/niedersachsen/u9-nbv-minicup-gruppe-b/",
+  "history": []
+ },
+ "54264": {
+  "path": "liga/niedersachsen/u9-nbv-minicup-finalrunden/",
+  "history": []
+ },
+ "54303": {
+  "path": "liga/bayern/bayernliga-u16-maennlich-nord/",
+  "history": []
+ },
+ "54304": {
+  "path": "liga/bayern/bayernliga-u16-maennlich-sued/",
+  "history": []
+ },
+ "54305": {
+  "path": "liga/bayern/bayernliga-u16-maennlich-mitte/",
+  "history": []
+ },
+ "54306": {
+  "path": "liga/bayern/bayernliga-u16-weiblich-sued/",
+  "history": []
+ },
+ "54307": {
+  "path": "liga/bayern/bayernliga-u16-weiblich-nord/",
+  "history": []
+ },
+ "54308": {
+  "path": "liga/bayern/bayernliga-u14-maennlich-einteilungsrunde-nord/",
+  "history": []
+ },
+ "54309": {
+  "path": "liga/bayern/bayernliga-u14-maennlich-einteilungsrunde-sued/",
+  "history": []
+ },
+ "54310": {
+  "path": "liga/bayern/bayernliga-u14-weiblich-einteilungsrunde-nord/",
+  "history": []
+ },
+ "54311": {
+  "path": "liga/bayern/bayernliga-u14-weiblich-einteilungsrunde-sued/",
+  "history": []
+ },
+ "54348": {
+  "path": "liga/bayern/landesliga-u20-maennlich-nord/",
+  "history": []
+ },
+ "54350": {
+  "path": "liga/bayern/landesliga-u18-m-einteilungsrunde-ost/",
+  "history": []
+ },
+ "54351": {
+  "path": "liga/bayern/landesliga-u18-m-einteilungsrunde-west/",
+  "history": []
+ },
+ "54352": {
+  "path": "liga/bayern/landesliga-u14-maennlich-nord/",
+  "history": []
+ },
+ "54353": {
+  "path": "liga/bayern/landesliga-u14-maennlich-sued/",
+  "history": []
+ },
+ "54354": {
+  "path": "liga/bayern/landesliga-u12-weiblich-nord/",
+  "history": []
+ },
+ "54372": {
+  "path": "liga/schleswig-holstein/m16-vorrunde-nord/",
+  "history": []
+ },
+ "54373": {
+  "path": "liga/schleswig-holstein/m16-vorrunde-nordost/",
+  "history": []
+ },
+ "54374": {
+  "path": "liga/schleswig-holstein/m16-vorrunde-sued/",
+  "history": []
+ },
+ "54375": {
+  "path": "liga/schleswig-holstein/m16-vorrunde-suedost/",
+  "history": []
+ },
+ "54379": {
+  "path": "liga/schleswig-holstein/m14-vorrunde-nord/",
+  "history": []
+ },
+ "54380": {
+  "path": "liga/schleswig-holstein/m14-vorrunde-sued/",
+  "history": []
+ },
+ "54381": {
+  "path": "liga/schleswig-holstein/m14-vorrunde-suedost/",
+  "history": []
+ },
+ "54382": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-damen-gruppe-a/",
+  "history": []
+ },
+ "54383": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-damen-gruppe-b/",
+  "history": []
+ },
+ "54387": {
+  "path": "liga/schleswig-holstein/m12-vorrunde-mitte/",
+  "history": []
+ },
+ "54388": {
+  "path": "liga/schleswig-holstein/m12-vorrunde-nord/",
+  "history": []
+ },
+ "54389": {
+  "path": "liga/schleswig-holstein/m12-vorrunde-sued/",
+  "history": []
+ },
+ "54391": {
+  "path": "liga/schleswig-holstein/u11/",
+  "history": []
+ },
+ "54392": {
+  "path": "liga/schleswig-holstein/jpo-u18/",
+  "history": []
+ },
+ "54393": {
+  "path": "liga/schleswig-holstein/jpo-u16/",
+  "history": []
+ },
+ "54394": {
+  "path": "liga/schleswig-holstein/jpo-u14/",
+  "history": []
+ },
+ "54395": {
+  "path": "liga/schleswig-holstein/jpo-u12/",
+  "history": []
+ },
+ "54396": {
+  "path": "liga/schleswig-holstein/w18-oberliga/",
+  "history": []
+ },
+ "54399": {
+  "path": "liga/schleswig-holstein/w12-oberliga/",
+  "history": []
+ },
+ "54408": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-herren/",
+  "history": []
+ },
+ "54418": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-2-vr-weibliche-u18/",
+  "history": []
+ },
+ "54419": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-herren-bochum/",
+  "history": []
+ },
+ "54423": {
+  "path": "liga/rheinland-pfalz/bezirksliga-pfalz-herren/",
+  "history": []
+ },
+ "54424": {
+  "path": "liga/rheinland-pfalz/bvp-pokal-herren/",
+  "history": []
+ },
+ "54425": {
+  "path": "liga/rheinland-pfalz/bvp-pokal-damen/",
+  "history": []
+ },
+ "54426": {
+  "path": "liga/rheinland-pfalz/a-klasse-pfalz-herren/",
+  "history": []
+ },
+ "54427": {
+  "path": "liga/rheinland-pfalz/b-klasse-pfalz-herren/",
+  "history": []
+ },
+ "54436": {
+  "path": "liga/rheinland-pfalz/u20-ml-pfalz/",
+  "history": []
+ },
+ "54437": {
+  "path": "liga/rheinland-pfalz/u18-ml-pfalz/",
+  "history": []
+ },
+ "54440": {
+  "path": "liga/rheinland-pfalz/u16-ml-pfalz-1/",
+  "history": []
+ },
+ "54441": {
+  "path": "liga/rheinland-pfalz/u16-ml-pfalz-2/",
+  "history": []
+ },
+ "54443": {
+  "path": "liga/rheinland-pfalz/u16-wbl-pfalz/",
+  "history": []
+ },
+ "54444": {
+  "path": "liga/rheinland-pfalz/u14-ml-pfalz-1/",
+  "history": []
+ },
+ "54445": {
+  "path": "liga/rheinland-pfalz/u14-ml-pfalz-2/",
+  "history": []
+ },
+ "54447": {
+  "path": "liga/rheinland-pfalz/u12-mix-pfalz-3/",
+  "history": []
+ },
+ "54448": {
+  "path": "liga/rheinland-pfalz/u12-mix-pfalz-2/",
+  "history": []
+ },
+ "54453": {
+  "path": "liga/bayern/bezirksoberliga-herren-26-27/",
+  "history": []
+ },
+ "54454": {
+  "path": "liga/bayern/bezirksoberliga-damen-26-27/",
+  "history": []
+ },
+ "54457": {
+  "path": "liga/bayern/bezirksoberliga-u20-maennlich-26-27/",
+  "history": []
+ },
+ "54459": {
+  "path": "liga/bayern/bezirksoberliga-u18-maennlich-26-27/",
+  "history": []
+ },
+ "54460": {
+  "path": "liga/bayern/bezirksoberliga-u18-weiblich-26-27/",
+  "history": []
+ },
+ "54461": {
+  "path": "liga/bayern/bezirksoberliga-u16-maennlich-26-27/",
+  "history": []
+ },
+ "54462": {
+  "path": "liga/bayern/bezirksoberliga-u16-weiblich-26-27/",
+  "history": []
+ },
+ "54466": {
+  "path": "liga/bayern/bezirksoberliga-u14-maennlich-26-27/",
+  "history": []
+ },
+ "54467": {
+  "path": "liga/bayern/bezirksoberliga-u14-weiblich-26-27/",
+  "history": []
+ },
+ "54471": {
+  "path": "liga/bayern/bezirksoberliga-u12-gemischt-26-27/",
+  "history": []
+ },
+ "54472": {
+  "path": "liga/bayern/bezirksoberliga-u12-weiblich-26-27/",
+  "history": []
+ },
+ "54473": {
+  "path": "liga/bayern/bezirksoberliga-u10-gemischt-26-27/",
+  "history": []
+ },
+ "54474": {
+  "path": "liga/bayern/bezirksoberliga-u10-weiblich-26-27/",
+  "history": []
+ },
+ "54475": {
+  "path": "liga/bayern/bezirksoberliga-u9-gemischt-26-27/",
+  "history": []
+ },
+ "54476": {
+  "path": "liga/bayern/bezirksoberliga-u8-gemischt-26-27/",
+  "history": []
+ },
+ "54480": {
+  "path": "liga/bayern/schwaben-vorbereitung-herren-26-27/",
+  "history": []
+ },
+ "54482": {
+  "path": "liga/bayern/bezirkspokal-herren-26-27/",
+  "history": []
+ },
+ "54484": {
+  "path": "liga/bayern/bezirksliga-herren-sued-26-27/",
+  "history": []
+ },
+ "54485": {
+  "path": "liga/bayern/bezirksliga-herren-nord-26-27/",
+  "history": []
+ },
+ "54486": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-nord-26-27/",
+  "history": []
+ },
+ "54487": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-sued-26-27/",
+  "history": []
+ },
+ "54488": {
+  "path": "liga/bayern/bezirksliga-u16-maennlich-nord-26-27/",
+  "history": []
+ },
+ "54489": {
+  "path": "liga/bayern/bezirksliga-u16-maennlich-sued-26-27/",
+  "history": []
+ },
+ "54490": {
+  "path": "liga/bayern/bezirksliga-u16-maennlich-mitte-26-27/",
+  "history": []
+ },
+ "54491": {
+  "path": "liga/bayern/bezirksliga-u14-maennlich-nord-26-27/",
+  "history": []
+ },
+ "54492": {
+  "path": "liga/bayern/bezirksliga-u14-maennlich-sued-26-27/",
+  "history": []
+ },
+ "54494": {
+  "path": "liga/bayern/bezirksliga-u14-maennlich-mitte-26-27/",
+  "history": []
+ },
+ "54495": {
+  "path": "liga/bayern/bezirksliga-u12-gemischt-nord-26-27/",
+  "history": []
+ },
+ "54496": {
+  "path": "liga/bayern/bezirksliga-u12-gemischt-sued-26-27/",
+  "history": []
+ },
+ "54497": {
+  "path": "liga/bayern/bezirksliga-u12-gemischt-mitte-26-27/",
+  "history": []
+ },
+ "54498": {
+  "path": "liga/bayern/bezirksliga-u10-gemischt-nord-26-27/",
+  "history": []
+ },
+ "54499": {
+  "path": "liga/bayern/bezirksliga-u10-gemischt-sued-26-27/",
+  "history": []
+ },
+ "54507": {
+  "path": "liga/bayern/bezirksklasse-herren-nord-26-27/",
+  "history": []
+ },
+ "54508": {
+  "path": "liga/bayern/bezirksklasse-herren-mitte-26-27/",
+  "history": []
+ },
+ "54509": {
+  "path": "liga/bayern/bezirksklasse-herren-sued-26-27/",
+  "history": []
+ },
+ "54512": {
+  "path": "liga/schleswig-holstein/u10-nord/",
+  "history": []
+ },
+ "54513": {
+  "path": "liga/schleswig-holstein/u10-sued/",
+  "history": []
+ },
+ "54515": {
+  "path": "liga/schleswig-holstein/m18-bezirksliga-nord/",
+  "history": []
+ },
+ "54525": {
+  "path": "liga/schleswig-holstein/w14-oberliga/",
+  "history": []
+ },
+ "54526": {
+  "path": "liga/schleswig-holstein/w14-landesliga/",
+  "history": []
+ },
+ "54527": {
+  "path": "liga/niedersachsen/regionsliga-herren-54527/",
+  "history": []
+ },
+ "54528": {
+  "path": "liga/niedersachsen/regionsliga-damen-54528/",
+  "history": []
+ },
+ "54529": {
+  "path": "liga/niedersachsen/regionsliga-u18-maennlich/",
+  "history": []
+ },
+ "54531": {
+  "path": "liga/niedersachsen/regionsliga-u16-maennlich-1/",
+  "history": []
+ },
+ "54532": {
+  "path": "liga/niedersachsen/regionsliga-u16-maennlich-2/",
+  "history": []
+ },
+ "54533": {
+  "path": "liga/niedersachsen/regionsliga-u16-weiblich/",
+  "history": []
+ },
+ "54534": {
+  "path": "liga/niedersachsen/regionsliga-u14-maennlich-1/",
+  "history": []
+ },
+ "54535": {
+  "path": "liga/niedersachsen/regionsliga-u14-maennlich-2/",
+  "history": []
+ },
+ "54536": {
+  "path": "liga/niedersachsen/regionsliga-u14-weiblich/",
+  "history": []
+ },
+ "54537": {
+  "path": "liga/niedersachsen/regionsliga-u12-maennlich/",
+  "history": []
+ },
+ "54538": {
+  "path": "liga/niedersachsen/regionsliga-u12-weiblich/",
+  "history": []
+ },
+ "54540": {
+  "path": "liga/niedersachsen/regionsklasse-herren-ost/",
+  "history": []
+ },
+ "54541": {
+  "path": "liga/niedersachsen/regionsklasse-herren-west/",
+  "history": []
+ },
+ "54542": {
+  "path": "liga/niedersachsen/regionsklasse-u18-maennlich/",
+  "history": []
+ },
+ "54543": {
+  "path": "liga/niedersachsen/regionsklasse-u16-maennlich-1/",
+  "history": []
+ },
+ "54544": {
+  "path": "liga/niedersachsen/regionsklasse-u16-maennlich-2/",
+  "history": []
+ },
+ "54545": {
+  "path": "liga/niedersachsen/regionsklasse-u14-maennlich-2/",
+  "history": []
+ },
+ "54546": {
+  "path": "liga/niedersachsen/regionsklasse-u14-maennlich-3/",
+  "history": []
+ },
+ "54547": {
+  "path": "liga/niedersachsen/regionsklasse-u14-maennlich-1/",
+  "history": []
+ },
+ "54548": {
+  "path": "liga/niedersachsen/regionsklasse-u12-maennlich-2/",
+  "history": []
+ },
+ "54549": {
+  "path": "liga/niedersachsen/regionsklasse-u12-maennlich-3/",
+  "history": []
+ },
+ "54550": {
+  "path": "liga/niedersachsen/regionsklasse-u12-maennlich-1/",
+  "history": []
+ },
+ "54551": {
+  "path": "liga/niedersachsen/regionsklasse-u10-1/",
+  "history": []
+ },
+ "54552": {
+  "path": "liga/niedersachsen/regionsklasse-u10-2/",
+  "history": []
+ },
+ "54553": {
+  "path": "liga/niedersachsen/kreisliga-herren-ost/",
+  "history": []
+ },
+ "54554": {
+  "path": "liga/niedersachsen/kreisliga-herren-west/",
+  "history": []
+ },
+ "54555": {
+  "path": "liga/niedersachsen/vorbereitungsspiele-hannover-jugend/",
+  "history": []
+ },
+ "54558": {
+  "path": "liga/schleswig-holstein/w16-oberliga/",
+  "history": []
+ },
+ "54559": {
+  "path": "liga/schleswig-holstein/w16-landesliga/",
+  "history": []
+ },
+ "54569": {
+  "path": "liga/regionalliga-west/1-regionalliga-herren/",
+  "history": []
+ },
+ "54570": {
+  "path": "liga/regionalliga-west/2-regionalliga-1-herren/",
+  "history": []
+ },
+ "54571": {
+  "path": "liga/regionalliga-west/2-regionalliga-2-herren/",
+  "history": []
+ },
+ "54572": {
+  "path": "liga/regionalliga-west/wbv-pokal-herren/",
+  "history": []
+ },
+ "54573": {
+  "path": "liga/regionalliga-west/wbv-pokal-damen/",
+  "history": []
+ },
+ "54574": {
+  "path": "liga/nordrhein-westfalen/oberliga-1-herren/",
+  "history": []
+ },
+ "54575": {
+  "path": "liga/nordrhein-westfalen/oberliga-2-herren/",
+  "history": []
+ },
+ "54576": {
+  "path": "liga/nordrhein-westfalen/oberliga-3-herren/",
+  "history": []
+ },
+ "54577": {
+  "path": "liga/nordrhein-westfalen/oberliga-4-herren/",
+  "history": []
+ },
+ "54578": {
+  "path": "liga/nordrhein-westfalen/landesliga-01-herren/",
+  "history": []
+ },
+ "54579": {
+  "path": "liga/nordrhein-westfalen/landesliga-02-herren/",
+  "history": []
+ },
+ "54580": {
+  "path": "liga/nordrhein-westfalen/landesliga-03-herren/",
+  "history": []
+ },
+ "54581": {
+  "path": "liga/nordrhein-westfalen/landesliga-04-herren/",
+  "history": []
+ },
+ "54582": {
+  "path": "liga/nordrhein-westfalen/landesliga-05-herren/",
+  "history": []
+ },
+ "54583": {
+  "path": "liga/nordrhein-westfalen/landesliga-06-herren/",
+  "history": []
+ },
+ "54584": {
+  "path": "liga/nordrhein-westfalen/landesliga-07-herren/",
+  "history": []
+ },
+ "54585": {
+  "path": "liga/nordrhein-westfalen/landesliga-08-herren/",
+  "history": []
+ },
+ "54586": {
+  "path": "liga/regionalliga-west/regionalliga-damen/",
+  "history": []
+ },
+ "54587": {
+  "path": "liga/nordrhein-westfalen/oberliga-1-damen/",
+  "history": []
+ },
+ "54588": {
+  "path": "liga/nordrhein-westfalen/oberliga-2-damen/",
+  "history": []
+ },
+ "54589": {
+  "path": "liga/nordrhein-westfalen/landesliga-1-damen/",
+  "history": []
+ },
+ "54591": {
+  "path": "liga/nordrhein-westfalen/landesliga-2-damen/",
+  "history": []
+ },
+ "54592": {
+  "path": "liga/rheinland-pfalz/jugendoberliga-rp-s-u18m/",
+  "history": []
+ },
+ "54593": {
+  "path": "liga/rheinland-pfalz/jugendoberliga-rp-s-u16m/",
+  "history": []
+ },
+ "54594": {
+  "path": "liga/nordrhein-westfalen/landesliga-3-damen/",
+  "history": []
+ },
+ "54595": {
+  "path": "liga/nordrhein-westfalen/landesliga-4-damen/",
+  "history": []
+ },
+ "54596": {
+  "path": "liga/nordrhein-westfalen/landesliga-5-damen/",
+  "history": []
+ },
+ "54597": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-damen-vorrundengruppe-a/",
+  "history": []
+ },
+ "54598": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-1-damen-vorrundengruppe-b/",
+  "history": []
+ },
+ "54599": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-2-damen/",
+  "history": []
+ },
+ "54600": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-3-damen/",
+  "history": []
+ },
+ "54601": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-4-damen/",
+  "history": []
+ },
+ "54602": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-5-damen/",
+  "history": []
+ },
+ "54603": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-6-damen/",
+  "history": []
+ },
+ "54604": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-01-herren/",
+  "history": []
+ },
+ "54605": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-02-herren/",
+  "history": []
+ },
+ "54606": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-03-herren/",
+  "history": []
+ },
+ "54607": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-04-herren/",
+  "history": []
+ },
+ "54608": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-7-damen/",
+  "history": []
+ },
+ "54609": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-05-herren/",
+  "history": []
+ },
+ "54610": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-06-herren/",
+  "history": []
+ },
+ "54611": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-07-herren/",
+  "history": []
+ },
+ "54612": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-landesliga/",
+  "history": []
+ },
+ "54613": {
+  "path": "liga/saarland/landesliga-saar-herren-2026-2027/",
+  "history": []
+ },
+ "54614": {
+  "path": "liga/saarland/bezirksliga-saar-herren-2026-2027/",
+  "history": []
+ },
+ "54615": {
+  "path": "liga/saarland/kreisliga-saar-herren-2026-2027/",
+  "history": []
+ },
+ "54619": {
+  "path": "liga/saarland/landesliga-saar-damen-2026-2027/",
+  "history": []
+ },
+ "54623": {
+  "path": "liga/rheinland-pfalz/u18m-rheinhessen/",
+  "history": []
+ },
+ "54624": {
+  "path": "liga/rheinland-pfalz/u14m-rheinhessen/",
+  "history": []
+ },
+ "54625": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-8-damen/",
+  "history": []
+ },
+ "54626": {
+  "path": "liga/hessen/oberliga-herren/",
+  "history": []
+ },
+ "54627": {
+  "path": "liga/hessen/oberliga-damen/",
+  "history": []
+ },
+ "54628": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-16-herren/",
+  "history": []
+ },
+ "54629": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-15-herren/",
+  "history": []
+ },
+ "54630": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-14-herren/",
+  "history": []
+ },
+ "54631": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-13-herren/",
+  "history": []
+ },
+ "54632": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-12-herren/",
+  "history": []
+ },
+ "54633": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-11-herren/",
+  "history": []
+ },
+ "54634": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-10-herren/",
+  "history": []
+ },
+ "54635": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-09-herren/",
+  "history": []
+ },
+ "54636": {
+  "path": "liga/nordrhein-westfalen/bezirksliga-08-herren/",
+  "history": []
+ },
+ "54639": {
+  "path": "liga/hessen/landesliga-nord-herren/",
+  "history": []
+ },
+ "54640": {
+  "path": "liga/hessen/landesliga-sued-herren/",
+  "history": []
+ },
+ "54641": {
+  "path": "liga/hessen/landesliga-nord-damen/",
+  "history": []
+ },
+ "54642": {
+  "path": "liga/hessen/landesliga-sued-damen/",
+  "history": []
+ },
+ "54654": {
+  "path": "liga/sachsen-anhalt/bezirksliga-herren-halle/",
+  "history": []
+ },
+ "54656": {
+  "path": "liga/sachsen-anhalt/seniorenmeisterschaften-damen-ue40/",
+  "history": []
+ },
+ "54657": {
+  "path": "liga/hessen/bezirksliga-herren-54657/",
+  "history": []
+ },
+ "54658": {
+  "path": "liga/hessen/bezirksliga-damen/",
+  "history": []
+ },
+ "54659": {
+  "path": "liga/hessen/bezirksliga-mu18-54659/",
+  "history": []
+ },
+ "54661": {
+  "path": "liga/hessen/bezirksliga-mu16-54661/",
+  "history": []
+ },
+ "54662": {
+  "path": "liga/hessen/bezirksliga-wu16/",
+  "history": []
+ },
+ "54663": {
+  "path": "liga/hessen/bezirksliga-mu14/",
+  "history": []
+ },
+ "54664": {
+  "path": "liga/hessen/bezirksliga-wu14/",
+  "history": []
+ },
+ "54665": {
+  "path": "liga/hessen/bezirksliga-wu12/",
+  "history": []
+ },
+ "54666": {
+  "path": "liga/hessen/kreisliga-mu16/",
+  "history": []
+ },
+ "54667": {
+  "path": "liga/hessen/kreisliga-mu14/",
+  "history": []
+ },
+ "54668": {
+  "path": "liga/hessen/kreisliga-herren-a/",
+  "history": []
+ },
+ "54669": {
+  "path": "liga/hessen/kreisliga-herren-b/",
+  "history": []
+ },
+ "54670": {
+  "path": "liga/hessen/kreisliga-herren-c/",
+  "history": []
+ },
+ "54674": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-herren/",
+  "history": []
+ },
+ "54675": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-wu18/",
+  "history": []
+ },
+ "54676": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-wu16/",
+  "history": []
+ },
+ "54677": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-wu14/",
+  "history": []
+ },
+ "54678": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-wu12/",
+  "history": []
+ },
+ "54679": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-wu10/",
+  "history": []
+ },
+ "54680": {
+  "path": "liga/niedersachsen/regionsklasse-braunschweig-herren/",
+  "history": []
+ },
+ "54681": {
+  "path": "liga/niedersachsen/kreisliga-braunschweig-herren-nord/",
+  "history": []
+ },
+ "54682": {
+  "path": "liga/niedersachsen/kreisliga-braunschweig-herren-sued/",
+  "history": []
+ },
+ "54683": {
+  "path": "liga/niedersachsen/regionspokal-braunschweig-herren/",
+  "history": []
+ },
+ "54684": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-senioren/",
+  "history": []
+ },
+ "54685": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-u18/",
+  "history": []
+ },
+ "54686": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-seniorinnen/",
+  "history": []
+ },
+ "54687": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-u16/",
+  "history": []
+ },
+ "54688": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-u14/",
+  "history": []
+ },
+ "54689": {
+  "path": "liga/niedersachsen/testspiele-braunschweig-u12/",
+  "history": []
+ },
+ "54690": {
+  "path": "liga/sachsen-anhalt/landesliga-weiblich-u12/",
+  "history": []
+ },
+ "54701": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-maennliche-jugend-u18/",
+  "history": []
+ },
+ "54703": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-offen-jugend-u16/",
+  "history": []
+ },
+ "54704": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-offen-jugend-u14/",
+  "history": []
+ },
+ "54706": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-offen-jugend-u10/",
+  "history": []
+ },
+ "54708": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-herren/",
+  "history": []
+ },
+ "54709": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-damen/",
+  "history": []
+ },
+ "54711": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-u16/",
+  "history": []
+ },
+ "54712": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-u14/",
+  "history": []
+ },
+ "54713": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-u12/",
+  "history": []
+ },
+ "54714": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-u10/",
+  "history": []
+ },
+ "54715": {
+  "path": "liga/niedersachsen/regionsklasse-goettingen-u12/",
+  "history": []
+ },
+ "54716": {
+  "path": "liga/thueringen/ue40m-meisterschaften-thueringen/",
+  "history": []
+ },
+ "54717": {
+  "path": "liga/thueringen/ue35m-meisterschaften-thueringen/",
+  "history": []
+ },
+ "54718": {
+  "path": "liga/thueringen/oberliga-herren/",
+  "history": []
+ },
+ "54721": {
+  "path": "liga/thueringen/oberliga-damen/",
+  "history": []
+ },
+ "54724": {
+  "path": "liga/thueringen/u19-weiblich/",
+  "history": []
+ },
+ "54725": {
+  "path": "liga/thueringen/u16-maennlich-ost/",
+  "history": []
+ },
+ "54727": {
+  "path": "liga/thueringen/u16-maennlich-west/",
+  "history": []
+ },
+ "54728": {
+  "path": "liga/thueringen/pokal-herren/",
+  "history": []
+ },
+ "54729": {
+  "path": "liga/thueringen/pokal-damen/",
+  "history": []
+ },
+ "54735": {
+  "path": "liga/thueringen/landesliga-herren-west/",
+  "history": []
+ },
+ "54736": {
+  "path": "liga/thueringen/landesliga-herren-ost/",
+  "history": []
+ },
+ "54737": {
+  "path": "liga/thueringen/u19-maennlich/",
+  "history": []
+ },
+ "54740": {
+  "path": "liga/thueringen/u16-weiblich/",
+  "history": []
+ },
+ "54741": {
+  "path": "liga/thueringen/u14-maennlich-ost/",
+  "history": []
+ },
+ "54742": {
+  "path": "liga/thueringen/u14-maennlich-west/",
+  "history": []
+ },
+ "54743": {
+  "path": "liga/thueringen/u14-weiblich/",
+  "history": []
+ },
+ "54744": {
+  "path": "liga/thueringen/u12-mix-ost/",
+  "history": []
+ },
+ "54745": {
+  "path": "liga/thueringen/u12-mix-west/",
+  "history": []
+ },
+ "54748": {
+  "path": "liga/thueringen/u12-weiblich/",
+  "history": []
+ },
+ "54749": {
+  "path": "liga/thueringen/u10-spielrunde/",
+  "history": []
+ },
+ "54754": {
+  "path": "liga/niedersachsen/regionsliga-goettingen-u14-weiblich/",
+  "history": []
+ },
+ "54755": {
+  "path": "liga/bayern/opf-bezirksoberliga-herren-2026-27/",
+  "history": []
+ },
+ "54757": {
+  "path": "liga/niedersachsen/regionsliga-herren-ol-of/",
+  "history": []
+ },
+ "54758": {
+  "path": "liga/niedersachsen/regionsliga-damen-ol-of/",
+  "history": []
+ },
+ "54759": {
+  "path": "liga/niedersachsen/regionsliga-u18-ol-of/",
+  "history": []
+ },
+ "54760": {
+  "path": "liga/niedersachsen/regionsliga-u16-ol-of-vorrunde/",
+  "history": []
+ },
+ "54762": {
+  "path": "liga/niedersachsen/regionsliga-u16-ol-of-low/",
+  "history": []
+ },
+ "54763": {
+  "path": "liga/niedersachsen/regionsliga-u16-ol-of-high/",
+  "history": []
+ },
+ "54764": {
+  "path": "liga/niedersachsen/regionsliga-u14-ol-of-vorrunde/",
+  "history": []
+ },
+ "54765": {
+  "path": "liga/niedersachsen/regionsliga-u14-ol-of-high/",
+  "history": []
+ },
+ "54766": {
+  "path": "liga/niedersachsen/regionsliga-u14-ol-of-low/",
+  "history": []
+ },
+ "54767": {
+  "path": "liga/niedersachsen/regionsliga-u14-ol-of-middle/",
+  "history": []
+ },
+ "54768": {
+  "path": "liga/niedersachsen/regionsliga-u12-ol-of-high/",
+  "history": []
+ },
+ "54769": {
+  "path": "liga/niedersachsen/regionsliga-u12-ol-of-vorrunde/",
+  "history": []
+ },
+ "54770": {
+  "path": "liga/niedersachsen/regionsliga-u12-ol-of-low/",
+  "history": []
+ },
+ "54771": {
+  "path": "liga/niedersachsen/regionsliga-u10-ol-of/",
+  "history": []
+ },
+ "54772": {
+  "path": "liga/niedersachsen/regionsklasse-herren-ol-of/",
+  "history": []
+ },
+ "54773": {
+  "path": "liga/niedersachsen/kreisliga-herren-ost-54773/",
+  "history": []
+ },
+ "54774": {
+  "path": "liga/niedersachsen/kreisliga-herren-west-54774/",
+  "history": []
+ },
+ "54775": {
+  "path": "liga/niedersachsen/regionspokal-herren-oldenburg-ostfriesland/",
+  "history": []
+ },
+ "54777": {
+  "path": "liga/niedersachsen/testspiele-herren/",
+  "history": []
+ },
+ "54778": {
+  "path": "liga/niedersachsen/testspiele-jugend/",
+  "history": []
+ },
+ "54780": {
+  "path": "liga/bremen/regionsliga-sued-mu16/",
+  "history": []
+ },
+ "54791": {
+  "path": "liga/niedersachsen/landesliga-vorrunde-sued-weiblich-u16/",
+  "history": []
+ },
+ "54792": {
+  "path": "liga/bayern/opf-bezirksliga-herren-2026-27/",
+  "history": []
+ },
+ "54793": {
+  "path": "liga/bayern/opf-bezirksklasse-herren-2026-27/",
+  "history": []
+ },
+ "54795": {
+  "path": "liga/nordrhein-westfalen/koop-un-mbk-do-u18/",
+  "history": []
+ },
+ "54796": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-vorrunde-a/",
+  "history": []
+ },
+ "54797": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-vorrunde-b/",
+  "history": []
+ },
+ "54798": {
+  "path": "liga/bayern/west-kreisliga-ue40-we-klue40-2026-27/",
+  "history": []
+ },
+ "54801": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-u18/",
+  "history": []
+ },
+ "54802": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-u16/",
+  "history": []
+ },
+ "54803": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-u14/",
+  "history": []
+ },
+ "54804": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-u12/",
+  "history": []
+ },
+ "54805": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-u10/",
+  "history": []
+ },
+ "54809": {
+  "path": "liga/niedersachsen/regionsvorrunde-sued-braunschweig-mu18/",
+  "history": []
+ },
+ "54811": {
+  "path": "liga/niedersachsen/regionsvorrunde-nord-braunschweig-mu18/",
+  "history": []
+ },
+ "54812": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-mu18/",
+  "history": []
+ },
+ "54813": {
+  "path": "liga/niedersachsen/regionsklasse-braunschweig-mu18/",
+  "history": []
+ },
+ "54814": {
+  "path": "liga/baden-wuerttemberg/bbw-u12m-jol-gruppe-b/",
+  "history": []
+ },
+ "54818": {
+  "path": "liga/niedersachsen/landesliga-vorrunde-nord-weiblich-u14/",
+  "history": []
+ },
+ "54819": {
+  "path": "liga/regionalliga-nord/1-regionalliga-herren/",
+  "history": []
+ },
+ "54820": {
+  "path": "liga/regionalliga-nord/1-regionalliga-damen/",
+  "history": []
+ },
+ "54821": {
+  "path": "liga/regionalliga-nord/2-regionalliga-damen-nord/",
+  "history": []
+ },
+ "54822": {
+  "path": "liga/regionalliga-nord/2-regionalliga-damen-ost/",
+  "history": []
+ },
+ "54823": {
+  "path": "liga/regionalliga-nord/2-regionalliga-damen-west/",
+  "history": []
+ },
+ "54826": {
+  "path": "liga/regionalliga-nord/2-regionalliga-herren-west/",
+  "history": []
+ },
+ "54828": {
+  "path": "liga/niedersachsen/regionsvorrunde-nord-braunschweig-mu16/",
+  "history": []
+ },
+ "54829": {
+  "path": "liga/niedersachsen/regionsvorrunde-mitte-braunschweig-mu16/",
+  "history": []
+ },
+ "54830": {
+  "path": "liga/niedersachsen/regionsvorrunde-sued-braunschweig-mu16/",
+  "history": []
+ },
+ "54831": {
+  "path": "liga/regionalliga-nord/2-regionalliga-herren-ost/",
+  "history": []
+ },
+ "54832": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-mu16/",
+  "history": []
+ },
+ "54833": {
+  "path": "liga/niedersachsen/regionsklasse-braunschweig-mu16/",
+  "history": []
+ },
+ "54834": {
+  "path": "liga/regionalliga-nord/2-regionalliga-herren-nord/",
+  "history": []
+ },
+ "54843": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-kreis-en/",
+  "history": []
+ },
+ "54848": {
+  "path": "liga/niedersachsen/regionsvorrunde-nordwest-braunschweig-mu14/",
+  "history": []
+ },
+ "54849": {
+  "path": "liga/niedersachsen/regionsvorrunde-nordost-braunschweig-mu14/",
+  "history": []
+ },
+ "54850": {
+  "path": "liga/niedersachsen/regionsvorrunde-suedwest-braunschweig-mu14/",
+  "history": []
+ },
+ "54851": {
+  "path": "liga/niedersachsen/regionsvorrunde-suedost-braunschweig-mu14/",
+  "history": []
+ },
+ "54852": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-mu14/",
+  "history": []
+ },
+ "54853": {
+  "path": "liga/niedersachsen/regionsklasse-braunschweig-mu14/",
+  "history": []
+ },
+ "54856": {
+  "path": "liga/niedersachsen/kreisliga-braunschweig-mu14/",
+  "history": []
+ },
+ "54857": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-mu12/",
+  "history": []
+ },
+ "54858": {
+  "path": "liga/niedersachsen/regionsklasse-braunschweig-mu12/",
+  "history": []
+ },
+ "54862": {
+  "path": "liga/niedersachsen/regionsvorrunde-nord-braunschweig-mu12/",
+  "history": []
+ },
+ "54863": {
+  "path": "liga/niedersachsen/regionsvorrunde-mitte-braunschweig-mu12/",
+  "history": []
+ },
+ "54864": {
+  "path": "liga/niedersachsen/regionsvorrunde-sued-braunschweig-mu12/",
+  "history": []
+ },
+ "54866": {
+  "path": "liga/niedersachsen/kreisliga-braunschweig-mu12/",
+  "history": []
+ },
+ "54867": {
+  "path": "liga/niedersachsen/regionsliga-braunschweig-mu10/",
+  "history": []
+ },
+ "54887": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u18-weiblich/",
+  "history": []
+ },
+ "54888": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u18-weiblich/",
+  "history": []
+ },
+ "54889": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u18-weiblich/",
+  "history": []
+ },
+ "54890": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u18-weiblich/",
+  "history": []
+ },
+ "54891": {
+  "path": "liga/bayern/opf-bezirksklasse-damen-2026-27/",
+  "history": []
+ },
+ "54892": {
+  "path": "liga/nordrhein-westfalen/1-regionalliga-u16-weiblich/",
+  "history": []
+ },
+ "54893": {
+  "path": "liga/nordrhein-westfalen/2-regionalliga-u16-weiblich/",
+  "history": []
+ },
+ "54894": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u16-weiblich/",
+  "history": []
+ },
+ "54895": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u16-weiblich/",
+  "history": []
+ },
+ "54896": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u16-weiblich/",
+  "history": []
+ },
+ "54897": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u16-weiblich/",
+  "history": []
+ },
+ "54899": {
+  "path": "liga/rheinland-pfalz/u16-maennlich-vorrunde-gruppe-1/",
+  "history": []
+ },
+ "54900": {
+  "path": "liga/rheinland-pfalz/u16-maennlich-vorrunde-gruppe-2/",
+  "history": []
+ },
+ "54901": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-vorrunde-gruppe-2/",
+  "history": []
+ },
+ "54902": {
+  "path": "liga/nordrhein-westfalen/1-regionalliga-u14-weiblich/",
+  "history": []
+ },
+ "54903": {
+  "path": "liga/nordrhein-westfalen/2-regionalliga-u14-weiblich/",
+  "history": []
+ },
+ "54904": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u14-weiblich/",
+  "history": []
+ },
+ "54905": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u14-weiblich/",
+  "history": []
+ },
+ "54906": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u14-weiblich/",
+  "history": []
+ },
+ "54907": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u14-weiblich/",
+  "history": []
+ },
+ "54910": {
+  "path": "liga/bremen/regionsklasse-ost-herren/",
+  "history": []
+ },
+ "54912": {
+  "path": "liga/rheinland-pfalz/u18-maennlich-koblenz/",
+  "history": []
+ },
+ "54915": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-vorrunde-gruppe-1/",
+  "history": []
+ },
+ "54920": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-herren/",
+  "history": []
+ },
+ "54923": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u12-weiblich/",
+  "history": []
+ },
+ "54924": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u12-weiblich/",
+  "history": []
+ },
+ "54925": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u12-weiblich/",
+  "history": []
+ },
+ "54926": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u12-weiblich/",
+  "history": []
+ },
+ "54928": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u10-weiblich/",
+  "history": []
+ },
+ "54935": {
+  "path": "liga/nordrhein-westfalen/1-jugendregionalliga-u14-offen/",
+  "history": []
+ },
+ "54936": {
+  "path": "liga/nordrhein-westfalen/2-jugendregionalliga-u14-offen/",
+  "history": []
+ },
+ "54937": {
+  "path": "liga/nordrhein-westfalen/1-jugendregionalliga-u18-maennlich/",
+  "history": []
+ },
+ "54938": {
+  "path": "liga/nordrhein-westfalen/1-jugendregionalliga-u16-maennlich/",
+  "history": []
+ },
+ "54939": {
+  "path": "liga/nordrhein-westfalen/2-jugendregionalliga-u18-maennlich/",
+  "history": []
+ },
+ "54940": {
+  "path": "liga/nordrhein-westfalen/2-jugendregionalliga-u16-maennlich/",
+  "history": []
+ },
+ "54944": {
+  "path": "liga/sachsen-anhalt/mitteldeutsche-liga-mu14-finalrunde-a/",
+  "history": []
+ },
+ "54946": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu14-finalrunde-b/",
+  "history": []
+ },
+ "54949": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu17-finalrunde-a/",
+  "history": []
+ },
+ "54950": {
+  "path": "liga/sachsen/mitteldeutsche-liga-mu17-finalrunde-b/",
+  "history": []
+ },
+ "54951": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u18-maennlich/",
+  "history": []
+ },
+ "54952": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u18-maennlich/",
+  "history": []
+ },
+ "54953": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u18-maennlich/",
+  "history": []
+ },
+ "54955": {
+  "path": "liga/sachsen/bezirksliga-leipzig-herren/",
+  "history": []
+ },
+ "54956": {
+  "path": "liga/sachsen/bezirksliga-leipzig-damen/",
+  "history": []
+ },
+ "54958": {
+  "path": "liga/sachsen/bezirksklasse-leipzig-herren/",
+  "history": []
+ },
+ "54959": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u18-maennlich/",
+  "history": []
+ },
+ "54960": {
+  "path": "liga/sachsen/bezirkspokal-herren-leipzig/",
+  "history": []
+ },
+ "54962": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u16-maennlich/",
+  "history": []
+ },
+ "54963": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u16-maennlich/",
+  "history": []
+ },
+ "54964": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u16-maennlich/",
+  "history": []
+ },
+ "54965": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-1-u16-maennlich/",
+  "history": []
+ },
+ "54966": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-2-u16-maennlich/",
+  "history": []
+ },
+ "54967": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-3-u16-maennlich/",
+  "history": []
+ },
+ "54968": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-4-u16-maennlich/",
+  "history": []
+ },
+ "54973": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u14-offen/",
+  "history": []
+ },
+ "54974": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u14-offen/",
+  "history": []
+ },
+ "54975": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u14-offen/",
+  "history": []
+ },
+ "54976": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-1-u14-offen/",
+  "history": []
+ },
+ "54977": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-2-u14-offen/",
+  "history": []
+ },
+ "54978": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-3-u14-offen/",
+  "history": []
+ },
+ "54979": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-4-u14-offen/",
+  "history": []
+ },
+ "54980": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u12-offen/",
+  "history": []
+ },
+ "54981": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u12-offen/",
+  "history": []
+ },
+ "54982": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u12-offen/",
+  "history": []
+ },
+ "54983": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-4-u12-offen/",
+  "history": []
+ },
+ "54984": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-1-u12-offen/",
+  "history": []
+ },
+ "54985": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-2-u12-offen/",
+  "history": []
+ },
+ "54986": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-3-u12-offen/",
+  "history": []
+ },
+ "54987": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-4-u12-offen/",
+  "history": []
+ },
+ "54988": {
+  "path": "liga/nordrhein-westfalen/kreisliga-kreis-en-u12-mix/",
+  "history": []
+ },
+ "54990": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-1-u10-offen/",
+  "history": []
+ },
+ "54991": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-2-u10-offen/",
+  "history": []
+ },
+ "54992": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-1-u10-offen/",
+  "history": []
+ },
+ "54993": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-2-u10-offen/",
+  "history": []
+ },
+ "54994": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-3-u10-offen/",
+  "history": []
+ },
+ "54995": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-4-u10-offen/",
+  "history": []
+ },
+ "54996": {
+  "path": "liga/nordrhein-westfalen/jugendlandesliga-5-u10-offen/",
+  "history": []
+ },
+ "54997": {
+  "path": "liga/nordrhein-westfalen/jugendoberliga-3-u10-offen/",
+  "history": []
+ },
+ "54998": {
+  "path": "liga/nordrhein-westfalen/jugendpokal-u18-maennlich/",
+  "history": []
+ },
+ "54999": {
+  "path": "liga/nordrhein-westfalen/jugendpokal-u16-maennlich/",
+  "history": []
+ },
+ "55001": {
+  "path": "liga/bayern/bezirksklasse-damen-ost-kue-bkdo-2026-27/",
+  "history": []
+ },
+ "55004": {
+  "path": "liga/bayern/bezirksklasse-damen-west-kue-bkdw-2026-27/",
+  "history": []
+ },
+ "55006": {
+  "path": "liga/bayern/kreisliga-damen-ost-kue-kldo-2026-27/",
+  "history": []
+ },
+ "55008": {
+  "path": "liga/bayern/kreisliga-damen-west-kue-kldw-2026-27/",
+  "history": []
+ },
+ "55009": {
+  "path": "liga/brandenburg/oberliga-herren-hauptrunde/",
+  "history": []
+ },
+ "55011": {
+  "path": "liga/bayern/kreisliga-u16m-sued-mi-kl16m-s-2026-27/",
+  "history": []
+ },
+ "55012": {
+  "path": "liga/rheinland-pfalz/u18-maennlich-trier-hr/",
+  "history": []
+ },
+ "55013": {
+  "path": "liga/rheinland-pfalz/u16-maennlich-trier/",
+  "history": []
+ },
+ "55014": {
+  "path": "liga/baden-wuerttemberg/bbw4-landesliga-maenner/",
+  "history": []
+ },
+ "55015": {
+  "path": "liga/baden-wuerttemberg/bbw4-landesliga-frauen/",
+  "history": []
+ },
+ "55016": {
+  "path": "liga/baden-wuerttemberg/bezirkspokal-26-27/",
+  "history": []
+ },
+ "55018": {
+  "path": "liga/baden-wuerttemberg/bbw4-bezirksliga-ost/",
+  "history": []
+ },
+ "55019": {
+  "path": "liga/baden-wuerttemberg/bbw4-bezirksliga-west/",
+  "history": []
+ },
+ "55022": {
+  "path": "liga/baden-wuerttemberg/bbw4-kreisliga-nord/",
+  "history": []
+ },
+ "55023": {
+  "path": "liga/baden-wuerttemberg/bbw4-kreisliga-ost/",
+  "history": []
+ },
+ "55024": {
+  "path": "liga/baden-wuerttemberg/bbw4-kreisliga-sued/",
+  "history": []
+ },
+ "55025": {
+  "path": "liga/baden-wuerttemberg/bbw4-kreisliga-west/",
+  "history": []
+ },
+ "55031": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u18-mnl/",
+  "history": []
+ },
+ "55032": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u16-mnl/",
+  "history": []
+ },
+ "55033": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u16-wbl/",
+  "history": []
+ },
+ "55034": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u14-mnl/",
+  "history": []
+ },
+ "55035": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u14-wbl/",
+  "history": []
+ },
+ "55036": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u12-mix/",
+  "history": []
+ },
+ "55038": {
+  "path": "liga/sachsen/bezirksliga-leipzig-u10mix/",
+  "history": []
+ },
+ "55040": {
+  "path": "liga/berlin/herren-oberliga-a/",
+  "history": []
+ },
+ "55041": {
+  "path": "liga/berlin/herren-oberliga-b/",
+  "history": []
+ },
+ "55042": {
+  "path": "liga/berlin/herren-landesliga-a/",
+  "history": []
+ },
+ "55044": {
+  "path": "liga/sachsen/bezirksklasse-leipzig-u14-mnl/",
+  "history": []
+ },
+ "55045": {
+  "path": "liga/berlin/herren-landesliga-b/",
+  "history": []
+ },
+ "55046": {
+  "path": "liga/berlin/herren-bezirksliga-a/",
+  "history": []
+ },
+ "55047": {
+  "path": "liga/berlin/herren-bezirksliga-b/",
+  "history": []
+ },
+ "55048": {
+  "path": "liga/berlin/herren-bezirksliga-c/",
+  "history": []
+ },
+ "55049": {
+  "path": "liga/berlin/herren-kreisliga-a/",
+  "history": []
+ },
+ "55050": {
+  "path": "liga/berlin/herren-kreisliga-b/",
+  "history": []
+ },
+ "55051": {
+  "path": "liga/berlin/herren-kreisliga-c/",
+  "history": []
+ },
+ "55053": {
+  "path": "liga/sachsen/bezirksklasse-leipzig-u12mix/",
+  "history": []
+ },
+ "55054": {
+  "path": "liga/berlin/damen-oberliga/",
+  "history": []
+ },
+ "55055": {
+  "path": "liga/berlin/damen-landesliga-a/",
+  "history": []
+ },
+ "55056": {
+  "path": "liga/berlin/damen-landesliga-b/",
+  "history": []
+ },
+ "55057": {
+  "path": "liga/berlin/damen-bezirksliga/",
+  "history": []
+ },
+ "55060": {
+  "path": "liga/nordrhein-westfalen/kreisliga-kreis-en-u14-mix/",
+  "history": []
+ },
+ "55062": {
+  "path": "liga/nordrhein-westfalen/u14-mix/",
+  "history": []
+ },
+ "55063": {
+  "path": "liga/nordrhein-westfalen/u12of/",
+  "history": []
+ },
+ "55064": {
+  "path": "liga/nordrhein-westfalen/u10-of/",
+  "history": []
+ },
+ "55067": {
+  "path": "liga/sachsen-anhalt/testspiele-bvsa/",
+  "history": []
+ },
+ "55068": {
+  "path": "liga/sachsen-anhalt/lm16-qualifikation-odm/",
+  "history": []
+ },
+ "55069": {
+  "path": "liga/sachsen-anhalt/landesliga-maennlich-u16/",
+  "history": []
+ },
+ "55070": {
+  "path": "liga/sachsen-anhalt/lm14-qualifikation-odm/",
+  "history": []
+ },
+ "55074": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-zwischenrunde-a/",
+  "history": []
+ },
+ "55079": {
+  "path": "liga/sachsen/bezirksliga-chemnitz-zwischenrunde-b/",
+  "history": []
+ },
+ "55108": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u18-ml/",
+  "history": []
+ },
+ "55109": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u16-ml/",
+  "history": []
+ },
+ "55110": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u14-ml/",
+  "history": []
+ },
+ "55111": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u12-ml/",
+  "history": []
+ },
+ "55112": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u12-wbl/",
+  "history": []
+ },
+ "55113": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u10-mix/",
+  "history": []
+ },
+ "55114": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u9-mix/",
+  "history": []
+ },
+ "55115": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u8-mix/",
+  "history": []
+ },
+ "55116": {
+  "path": "liga/sachsen/bezirksliga-dresden-herren-masters-40/",
+  "history": []
+ },
+ "55117": {
+  "path": "liga/sachsen/bezirksliga-dresden-herren/",
+  "history": []
+ },
+ "55118": {
+  "path": "liga/sachsen/rookie-liga-dresden-ml/",
+  "history": []
+ },
+ "55119": {
+  "path": "liga/sachsen/rookie-liga-dresden-wbl/",
+  "history": []
+ },
+ "55120": {
+  "path": "liga/sachsen/bezirksliga-dresden-u18-ml/",
+  "history": []
+ },
+ "55121": {
+  "path": "liga/sachsen/bezirksliga-dresden-u18-wbl/",
+  "history": []
+ },
+ "55122": {
+  "path": "liga/sachsen/bezirksliga-dresden-u16-ml/",
+  "history": []
+ },
+ "55123": {
+  "path": "liga/sachsen/bezirksliga-dresden-ost-u16-mix/",
+  "history": []
+ },
+ "55124": {
+  "path": "liga/sachsen/bezirksliga-dresden-u16-wbl/",
+  "history": []
+ },
+ "55125": {
+  "path": "liga/sachsen/bezirksliga-dresden-u14-ml/",
+  "history": []
+ },
+ "55126": {
+  "path": "liga/sachsen/bezirksliga-dresden-u14-wbl/",
+  "history": []
+ },
+ "55127": {
+  "path": "liga/sachsen/bezirksliga-dresden-u12-mix/",
+  "history": []
+ },
+ "55128": {
+  "path": "liga/sachsen/bezirksliga-dresden-u10-mix/",
+  "history": []
+ },
+ "55129": {
+  "path": "liga/sachsen/bezirksliga-dresden-u9-mix/",
+  "history": []
+ },
+ "55130": {
+  "path": "liga/sachsen/bezirksliga-dresden-u8-mix/",
+  "history": []
+ },
+ "55132": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-herren/",
+  "history": []
+ },
+ "55134": {
+  "path": "liga/sachsen-anhalt/bezl-anhalt-maennlich-u18/",
+  "history": []
+ },
+ "55154": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-herren-play-offs/",
+  "history": []
+ },
+ "55155": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u18-ml-final-four/",
+  "history": []
+ },
+ "55156": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u16-ml-final-four/",
+  "history": []
+ },
+ "55157": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u14-ml-final-four/",
+  "history": []
+ },
+ "55158": {
+  "path": "liga/sachsen/bezirksoberliga-dresden-u12-ml-final-four/",
+  "history": []
+ },
+ "55159": {
+  "path": "liga/sachsen/bezirksliga-dresden-herren-play-offs/",
+  "history": []
+ },
+ "55160": {
+  "path": "liga/sachsen/bezirksliga-dresden-u18-ml-final-four/",
+  "history": []
+ },
+ "55161": {
+  "path": "liga/sachsen/bezirksliga-dresden-u16-ml-final-four/",
+  "history": []
+ },
+ "55162": {
+  "path": "liga/sachsen/bezirksliga-dresden-u14-ml-final-four/",
+  "history": []
+ },
+ "55163": {
+  "path": "liga/sachsen/bezirkspokal-dresden-herren/",
+  "history": []
+ },
+ "55164": {
+  "path": "liga/sachsen/bezirkspokal-dresden-damen/",
+  "history": []
+ },
+ "55168": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-ostwestfalen-west/",
+  "history": []
+ },
+ "55169": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-ostwestfalen-ost/",
+  "history": []
+ },
+ "55171": {
+  "path": "liga/niedersachsen/oberliga-maennlich-u18/",
+  "history": []
+ },
+ "55173": {
+  "path": "liga/bremen/oberliga-maennlich-u16/",
+  "history": []
+ },
+ "55175": {
+  "path": "liga/niedersachsen/u14m-regionsliga-sued/",
+  "history": []
+ },
+ "55177": {
+  "path": "liga/niedersachsen/herren-kreisliga-relegation/",
+  "history": []
+ },
+ "55178": {
+  "path": "liga/rheinland-pfalz/u18w-rheinlandliga/",
+  "history": []
+ },
+ "55180": {
+  "path": "liga/rheinland-pfalz/u12w-kreis-koblenz/",
+  "history": []
+ },
+ "55181": {
+  "path": "liga/rheinland-pfalz/u14w-kreis-koblenz/",
+  "history": []
+ },
+ "55182": {
+  "path": "liga/rheinland-pfalz/u12mix-vorrunde-kreis-koblenz-gr-1/",
+  "history": []
+ },
+ "55183": {
+  "path": "liga/rheinland-pfalz/u12mix-vorrunde-kreis-koblenz-gr-2/",
+  "history": []
+ },
+ "55188": {
+  "path": "liga/rheinland-pfalz/u10mix-kreis-koblenz/",
+  "history": []
+ },
+ "55191": {
+  "path": "liga/berlin/mu12-oberliga-a/",
+  "history": []
+ },
+ "55192": {
+  "path": "liga/berlin/mu12-oberliga-b/",
+  "history": []
+ },
+ "55193": {
+  "path": "liga/brandenburg/landesliga-herren/",
+  "history": []
+ },
+ "55194": {
+  "path": "liga/berlin/mu12-landesliga-a/",
+  "history": []
+ },
+ "55196": {
+  "path": "liga/rheinland-pfalz/u12mix-vorrunde-kreis-koblenz-gr-3/",
+  "history": []
+ },
+ "55197": {
+  "path": "liga/berlin/mu12-landesliga-b/",
+  "history": []
+ },
+ "55198": {
+  "path": "liga/brandenburg/bezirksliga-herren-nord/",
+  "history": []
+ },
+ "55199": {
+  "path": "liga/brandenburg/bezirksliga-herren-sued/",
+  "history": []
+ },
+ "55200": {
+  "path": "liga/berlin/mu12-bezirksliga-a/",
+  "history": []
+ },
+ "55201": {
+  "path": "liga/brandenburg/bestenliga-herren-ue35/",
+  "history": []
+ },
+ "55202": {
+  "path": "liga/berlin/mu12-bezirksliga-b/",
+  "history": []
+ },
+ "55203": {
+  "path": "liga/berlin/wu12-oberliga/",
+  "history": []
+ },
+ "55205": {
+  "path": "liga/berlin/mini-u11-fortgeschrittene-1/",
+  "history": []
+ },
+ "55206": {
+  "path": "liga/brandenburg/landesliga-damen/",
+  "history": []
+ },
+ "55207": {
+  "path": "liga/brandenburg/bestenliga-herren-ue40/",
+  "history": []
+ },
+ "55208": {
+  "path": "liga/brandenburg/oberliga-damen/",
+  "history": []
+ },
+ "55209": {
+  "path": "liga/berlin/mini-u10-fortgeschrittene-1/",
+  "history": []
+ },
+ "55210": {
+  "path": "liga/berlin/mini-u10-fortgeschrittene-2/",
+  "history": []
+ },
+ "55211": {
+  "path": "liga/brandenburg/oberliga-weiblich-u18/",
+  "history": []
+ },
+ "55212": {
+  "path": "liga/berlin/mini-u10-anfaenger-1/",
+  "history": []
+ },
+ "55213": {
+  "path": "liga/berlin/mini-u10-anfaenger-2/",
+  "history": []
+ },
+ "55214": {
+  "path": "liga/brandenburg/oberliga-weiblich-u16/",
+  "history": []
+ },
+ "55215": {
+  "path": "liga/berlin/mini-wu10-anfaenger-1/",
+  "history": []
+ },
+ "55216": {
+  "path": "liga/brandenburg/oberliga-weiblich-u14/",
+  "history": []
+ },
+ "55217": {
+  "path": "liga/hessen/landesliga-maennlich-u18-a/",
+  "history": []
+ },
+ "55218": {
+  "path": "liga/hessen/landesliga-maennlich-u18-b/",
+  "history": []
+ },
+ "55219": {
+  "path": "liga/hessen/landesliga-maennlich-u16-a/",
+  "history": []
+ },
+ "55220": {
+  "path": "liga/hessen/landesliga-maennlich-u16-b/",
+  "history": []
+ },
+ "55221": {
+  "path": "liga/brandenburg/bestenliga-weiblich-u12/",
+  "history": []
+ },
+ "55222": {
+  "path": "liga/brandenburg/oberliga-maennlich-u20/",
+  "history": []
+ },
+ "55223": {
+  "path": "liga/brandenburg/oberliga-maennlich-u18/",
+  "history": []
+ },
+ "55224": {
+  "path": "liga/brandenburg/oberliga-maennlich-u16/",
+  "history": []
+ },
+ "55225": {
+  "path": "liga/brandenburg/jugend-leistungsliga-u15/",
+  "history": []
+ },
+ "55226": {
+  "path": "liga/brandenburg/oberliga-maennlich-u14/",
+  "history": []
+ },
+ "55227": {
+  "path": "liga/brandenburg/jugend-leistungsliga-u13/",
+  "history": []
+ },
+ "55228": {
+  "path": "liga/brandenburg/landesliga-maennlich-u18/",
+  "history": []
+ },
+ "55229": {
+  "path": "liga/brandenburg/landesliga-maennlich-u16/",
+  "history": []
+ },
+ "55230": {
+  "path": "liga/brandenburg/landesliga-maennlich-u14/",
+  "history": []
+ },
+ "55242": {
+  "path": "liga/hessen/landesliga-mixed-u12-b/",
+  "history": []
+ },
+ "55243": {
+  "path": "liga/hessen/landesliga-mixed-u12-a/",
+  "history": []
+ },
+ "55244": {
+  "path": "liga/berlin/mini-wu10-anfaenger-2/",
+  "history": []
+ },
+ "55245": {
+  "path": "liga/berlin/mini-u9-fortgeschrittene/",
+  "history": []
+ },
+ "55246": {
+  "path": "liga/brandenburg/fortgeschrittene-liga-u11-mix/",
+  "history": []
+ },
+ "55247": {
+  "path": "liga/hessen/oberliga-maennlich-u18/",
+  "history": []
+ },
+ "55248": {
+  "path": "liga/hessen/oberliga-maennlich-u16/",
+  "history": []
+ },
+ "55249": {
+  "path": "liga/hessen/oberliga-mixed-u12-a/",
+  "history": []
+ },
+ "55252": {
+  "path": "liga/brandenburg/bestenliga-maennlich-u12/",
+  "history": []
+ },
+ "55253": {
+  "path": "liga/berlin/mini-u9-neulinge/",
+  "history": []
+ },
+ "55254": {
+  "path": "liga/berlin/mini-wu9-anfaenger/",
+  "history": []
+ },
+ "55255": {
+  "path": "liga/berlin/mini-u11-fortgeschrittene-2/",
+  "history": []
+ },
+ "55256": {
+  "path": "liga/berlin/mini-u11-fortgeschrittene-3/",
+  "history": []
+ },
+ "55257": {
+  "path": "liga/berlin/mini-u11-anfaenger-1/",
+  "history": []
+ },
+ "55258": {
+  "path": "liga/berlin/mini-u11-anfaenger-2/",
+  "history": []
+ },
+ "55259": {
+  "path": "liga/brandenburg/bbv-pokal-damen/",
+  "history": []
+ },
+ "55260": {
+  "path": "liga/brandenburg/bbv-pokal-herren/",
+  "history": []
+ },
+ "55262": {
+  "path": "liga/berlin/mu18-landesliga-a/",
+  "history": []
+ },
+ "55263": {
+  "path": "liga/berlin/mu18-landesliga-b/",
+  "history": []
+ },
+ "55264": {
+  "path": "liga/berlin/mu18-bezirksliga-a/",
+  "history": []
+ },
+ "55265": {
+  "path": "liga/berlin/mu18-bezirksliga-b/",
+  "history": []
+ },
+ "55267": {
+  "path": "liga/berlin/mu16-landesliga-a/",
+  "history": []
+ },
+ "55268": {
+  "path": "liga/berlin/mu16-landesliga-b/",
+  "history": []
+ },
+ "55269": {
+  "path": "liga/berlin/mu16-bezirksliga-a/",
+  "history": []
+ },
+ "55271": {
+  "path": "liga/berlin/mu16-bezirksliga-b/",
+  "history": []
+ },
+ "55272": {
+  "path": "liga/niedersachsen/regionsklasse-u10-3/",
+  "history": []
+ },
+ "55273": {
+  "path": "liga/berlin/mu16-bezirksliga-c/",
+  "history": []
+ },
+ "55274": {
+  "path": "liga/berlin/mu16-kreisliga/",
+  "history": []
+ },
+ "55275": {
+  "path": "liga/berlin/mu14-oberliga-a/",
+  "history": []
+ },
+ "55276": {
+  "path": "liga/berlin/mu14-oberliga-b/",
+  "history": []
+ },
+ "55277": {
+  "path": "liga/berlin/mu14-landesliga-a/",
+  "history": []
+ },
+ "55278": {
+  "path": "liga/berlin/mu14-landesliga-b/",
+  "history": []
+ },
+ "55279": {
+  "path": "liga/berlin/mu14-landesliga-c/",
+  "history": []
+ },
+ "55280": {
+  "path": "liga/berlin/mu14-bezirksliga-a/",
+  "history": []
+ },
+ "55281": {
+  "path": "liga/berlin/mu14-bezirksliga-b/",
+  "history": []
+ },
+ "55282": {
+  "path": "liga/berlin/mu14-bezirksliga-c/",
+  "history": []
+ },
+ "55283": {
+  "path": "liga/berlin/mu14-kreisliga/",
+  "history": []
+ },
+ "55285": {
+  "path": "liga/berlin/wu18-oberliga/",
+  "history": []
+ },
+ "55321": {
+  "path": "liga/bayern/bezirksoberliga-u20-maennlich/",
+  "history": []
+ },
+ "55322": {
+  "path": "liga/bayern/bezirksoberliga-u18-weiblich/",
+  "history": []
+ },
+ "55323": {
+  "path": "liga/bayern/bezirksliga-ue55-maennlich/",
+  "history": []
+ },
+ "55327": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-einteilungsrunde-a/",
+  "history": []
+ },
+ "55330": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-einteilungsrunde-b/",
+  "history": []
+ },
+ "55331": {
+  "path": "liga/rheinland-pfalz/rheinhessen-u16-w/",
+  "history": []
+ },
+ "55333": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-meisterschaftsspiele/",
+  "history": []
+ },
+ "55336": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-spiele-um-platz-5-8/",
+  "history": []
+ },
+ "55337": {
+  "path": "liga/bayern/bezirksliga-u18-maennlich-spiele-um-platz-9-12/",
+  "history": []
+ },
+ "55341": {
+  "path": "liga/berlin/mu12-oberliga-c/",
+  "history": []
+ },
+ "55351": {
+  "path": "liga/rheinland-pfalz/u12-rheinhessen-gruppe-a/",
+  "history": []
+ },
+ "55352": {
+  "path": "liga/rheinland-pfalz/u12-rheinhessen-gruppe-b/",
+  "history": []
+ },
+ "55353": {
+  "path": "liga/nordrhein-westfalen/kreisliga-lippe/",
+  "history": []
+ },
+ "55355": {
+  "path": "liga/rheinland-pfalz/a-klasse-rheinhessen-herren/",
+  "history": []
+ },
+ "55356": {
+  "path": "liga/sachsen/jugendoberliga-u18-maennlich/",
+  "history": []
+ },
+ "55357": {
+  "path": "liga/sachsen/jugendoberliga-u18-weiblich/",
+  "history": []
+ },
+ "55358": {
+  "path": "liga/sachsen/jugendoberliga-u16-maennlich/",
+  "history": []
+ },
+ "55359": {
+  "path": "liga/sachsen/jugendoberliga-u16-weiblich/",
+  "history": []
+ },
+ "55360": {
+  "path": "liga/sachsen/jugendoberliga-u14-maennlich/",
+  "history": []
+ },
+ "55361": {
+  "path": "liga/sachsen/jugendoberliga-u14-weiblich/",
+  "history": []
+ },
+ "55362": {
+  "path": "liga/sachsen/jugendoberliga-u12-maennlich/",
+  "history": []
+ },
+ "55363": {
+  "path": "liga/sachsen/jugendoberliga-u11-maennlich/",
+  "history": []
+ },
+ "55364": {
+  "path": "liga/sachsen/jugendoberliga-u10/",
+  "history": []
+ },
+ "55365": {
+  "path": "liga/sachsen/jugendoberliga-u8/",
+  "history": []
+ },
+ "55366": {
+  "path": "liga/sachsen/finalfour-u16m-jol/",
+  "history": []
+ },
+ "55367": {
+  "path": "liga/sachsen/final-four-u14m-jol/",
+  "history": []
+ },
+ "55369": {
+  "path": "liga/sachsen/jugendoberliga-u12-weiblich/",
+  "history": []
+ },
+ "55371": {
+  "path": "liga/sachsen/jugendoberliga-u13-maennlich/",
+  "history": []
+ },
+ "55372": {
+  "path": "liga/sachsen/u18-maennlich-sachsenmeisterschaft-finalrunde/",
+  "history": []
+ },
+ "55373": {
+  "path": "liga/sachsen/u16-maennlich-sachsenmeisterschaft-vorrunde-gruppe-b/",
+  "history": []
+ },
+ "55374": {
+  "path": "liga/sachsen/u16-maennlich-sachsenmeisterschaft-vorrunde-gruppe-a/",
+  "history": []
+ },
+ "55375": {
+  "path": "liga/sachsen/u16-maennlich-sachsenmeisterschaft-finalrunde/",
+  "history": []
+ },
+ "55376": {
+  "path": "liga/sachsen/u16-weiblich-sachsenmeisterschaft-finalrunde/",
+  "history": []
+ },
+ "55377": {
+  "path": "liga/sachsen/u14-maennlich-sachsenmeisterschaft-vorrunde-gruppe-a/",
+  "history": []
+ },
+ "55378": {
+  "path": "liga/sachsen/u14-maennlich-sachsenmeisterschaft-vorrunde-gruppe-b/",
+  "history": []
+ },
+ "55379": {
+  "path": "liga/sachsen/u14-maennlich-sachsenmeisterschaft-finalrunde/",
+  "history": []
+ },
+ "55380": {
+  "path": "liga/sachsen/u14-weiblich-sachsenmeisterschaft/",
+  "history": []
+ },
+ "55381": {
+  "path": "liga/sachsen/u12-maennlich-sachsenmeisterschaft-vorrunde-gruppe-a/",
+  "history": []
+ },
+ "55382": {
+  "path": "liga/sachsen/u12-maennlich-sachsenmeisterschaft-vorrunde-gruppe-b/",
+  "history": []
+ },
+ "55383": {
+  "path": "liga/sachsen/u12-maennlich-sachsenmeisterschaft-finalrunde/",
+  "history": []
+ },
+ "55384": {
+  "path": "liga/sachsen/u12-weiblich-sachsenmeisterschaft/",
+  "history": []
+ },
+ "55385": {
+  "path": "liga/nordrhein-westfalen/kreisliga-hellweg/",
+  "history": []
+ },
+ "55406": {
+  "path": "liga/rheinland-pfalz/bezirksliga-koblenz-herren/",
+  "history": []
+ },
+ "55407": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-herren-55407/",
+  "history": []
+ },
+ "55408": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-grp-a/",
+  "history": []
+ },
+ "55409": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-grp-b/",
+  "history": []
+ },
+ "55411": {
+  "path": "liga/bayern/west-kreisliga-u10m-b-we-kl10m-b-2026-27/",
+  "history": []
+ },
+ "55413": {
+  "path": "liga/bayern/west-bezirksklasse-u10m-we-bk10m-2026-27/",
+  "history": []
+ },
+ "55416": {
+  "path": "liga/bayern/west-bezirksklasse-u14w-we-bku14w-2026-27/",
+  "history": []
+ },
+ "55418": {
+  "path": "liga/bayern/west-bezirksklasse-u16w-we-bku16w-2026-27/",
+  "history": []
+ },
+ "55419": {
+  "path": "liga/bayern/bezirksoberliga-u20-ml-bol20m-2026-27/",
+  "history": []
+ },
+ "55423": {
+  "path": "liga/bayern/west-bezirksklasse-u18m-b-we-bk18m-b-2026-27/",
+  "history": []
+ },
+ "55424": {
+  "path": "liga/berlin/wu18-landesliga/",
+  "history": []
+ },
+ "55425": {
+  "path": "liga/berlin/wu14-landesliga/",
+  "history": []
+ },
+ "55426": {
+  "path": "liga/berlin/wu14-bezirksliga-a/",
+  "history": []
+ },
+ "55427": {
+  "path": "liga/berlin/wu14-bezirksliga-b/",
+  "history": []
+ },
+ "55428": {
+  "path": "liga/berlin/wu16-bezirksliga/",
+  "history": []
+ },
+ "55429": {
+  "path": "liga/berlin/wu16-landesliga/",
+  "history": []
+ },
+ "55431": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16w-dne-niers-wuppertal/",
+  "history": []
+ },
+ "55433": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14w-dne-wuppertal/",
+  "history": []
+ },
+ "55435": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12w-dne-niers-wuppertal/",
+  "history": []
+ },
+ "55438": {
+  "path": "liga/bundesligen/kreisliga-u18m-suedost-so-kl18m-2026-27/",
+  "history": []
+ },
+ "55439": {
+  "path": "liga/nordrhein-westfalen/kreisliga-paderborn/",
+  "history": []
+ },
+ "55441": {
+  "path": "liga/bayern/bezirksklasse-u18w-kue-bk18w-2026-27/",
+  "history": []
+ },
+ "55445": {
+  "path": "liga/rheinland-pfalz/u12-mix-trier-vorrunde-1/",
+  "history": []
+ },
+ "55446": {
+  "path": "liga/rheinland-pfalz/u12-mix-trier-vorrunde-3/",
+  "history": []
+ },
+ "55447": {
+  "path": "liga/rheinland-pfalz/u12-mix-trier-vorrunde-2/",
+  "history": []
+ },
+ "55449": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12-offen-gruppe-a/",
+  "history": []
+ },
+ "55451": {
+  "path": "liga/rheinland-pfalz/u12-mix-trier-vorrunde-4/",
+  "history": []
+ },
+ "55453": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12offengruppe-b/",
+  "history": []
+ },
+ "55457": {
+  "path": "liga/nordrhein-westfalen/kreilsiga-u12-weiblich-gruppe-b/",
+  "history": []
+ },
+ "55458": {
+  "path": "liga/rheinland-pfalz/u10-mix-trier-vorrunde-1/",
+  "history": []
+ },
+ "55459": {
+  "path": "liga/rheinland-pfalz/u10-mix-trier-vorrunde-2/",
+  "history": []
+ },
+ "55460": {
+  "path": "liga/rheinland-pfalz/u10-mix-trier-vorrunde-3/",
+  "history": []
+ },
+ "55463": {
+  "path": "liga/rheinland-pfalz/u10-mix-trier-vorrunde-4/",
+  "history": []
+ },
+ "55464": {
+  "path": "liga/rheinland-pfalz/a-klasse-koblenz-herren-gruppe-1/",
+  "history": []
+ },
+ "55465": {
+  "path": "liga/rheinland-pfalz/a-klasse-koblenz-herren-gruppe-2/",
+  "history": []
+ },
+ "55467": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-u16ml/",
+  "history": []
+ },
+ "55469": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-u18ml/",
+  "history": []
+ },
+ "55472": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-u18wbl/",
+  "history": []
+ },
+ "55473": {
+  "path": "liga/rheinland-pfalz/landesliga-rheinhessen-pfalz-u14wbl/",
+  "history": []
+ },
+ "55479": {
+  "path": "liga/rheinland-pfalz/u12-mix-pfalz-1/",
+  "history": []
+ },
+ "55480": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-a/",
+  "history": []
+ },
+ "55481": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-b/",
+  "history": []
+ },
+ "55482": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-a/",
+  "history": []
+ },
+ "55483": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-b/",
+  "history": []
+ },
+ "55484": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-a/",
+  "history": []
+ },
+ "55485": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-b/",
+  "history": []
+ },
+ "55487": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-c/",
+  "history": []
+ },
+ "55489": {
+  "path": "liga/baden-wuerttemberg/bbw4-kreisliga-mitte/",
+  "history": []
+ },
+ "55490": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-a/",
+  "history": []
+ },
+ "55491": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-b/",
+  "history": []
+ },
+ "55495": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u18m-dne-wuppertal/",
+  "history": []
+ },
+ "55499": {
+  "path": "liga/nordrhein-westfalen/kreisliga-hagen-gruppe-a/",
+  "history": []
+ },
+ "55500": {
+  "path": "liga/nordrhein-westfalen/kreisliga-hagen-gruppe-b/",
+  "history": []
+ },
+ "55506": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-essen/",
+  "history": []
+ },
+ "55507": {
+  "path": "liga/berlin/wu12-landesliga-a/",
+  "history": []
+ },
+ "55508": {
+  "path": "liga/berlin/wu12-landesliga-b/",
+  "history": []
+ },
+ "55509": {
+  "path": "liga/berlin/wu12-bezirksliga-a/",
+  "history": []
+ },
+ "55510": {
+  "path": "liga/berlin/wu12-bezirksliga-b/",
+  "history": []
+ },
+ "55511": {
+  "path": "liga/berlin/mini-u11-anfaenger-3/",
+  "history": []
+ },
+ "55512": {
+  "path": "liga/berlin/mini-wu11-fortgeschrittene/",
+  "history": []
+ },
+ "55514": {
+  "path": "liga/berlin/mini-u10-neulinge/",
+  "history": []
+ },
+ "55515": {
+  "path": "liga/berlin/mini-u8-fortgeschrittene/",
+  "history": []
+ },
+ "55516": {
+  "path": "liga/berlin/mini-u8-anfaenger/",
+  "history": []
+ },
+ "55517": {
+  "path": "liga/berlin/wu16-oberliga-vorrunde/",
+  "history": []
+ },
+ "55518": {
+  "path": "liga/berlin/wu16-kreisliga/",
+  "history": []
+ },
+ "55519": {
+  "path": "liga/berlin/mu20-landesliga/",
+  "history": []
+ },
+ "55520": {
+  "path": "liga/berlin/mu20-bezirksliga/",
+  "history": []
+ },
+ "55521": {
+  "path": "liga/berlin/mu16-landesliga-c/",
+  "history": []
+ },
+ "55522": {
+  "path": "liga/berlin/mu13-oberliga/",
+  "history": []
+ },
+ "55524": {
+  "path": "liga/bayern/bm-bayernliga-herren-2026/",
+  "history": []
+ },
+ "55526": {
+  "path": "liga/bayern/bm-bayernliga-damen-2026/",
+  "history": []
+ },
+ "55527": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-essen/",
+  "history": []
+ },
+ "55528": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-herren-gruppe-a/",
+  "history": []
+ },
+ "55529": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-herren-gruppe-b/",
+  "history": []
+ },
+ "55530": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u20-m/",
+  "history": []
+ },
+ "55532": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u18-m/",
+  "history": []
+ },
+ "55533": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u16-m-gruppe-a/",
+  "history": []
+ },
+ "55534": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u16-m-gruppe-b/",
+  "history": []
+ },
+ "55535": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u14-offen-gruppe-a/",
+  "history": []
+ },
+ "55536": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u14-offen-gruppe-b/",
+  "history": []
+ },
+ "55537": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u12-offen-gruppe-a/",
+  "history": []
+ },
+ "55538": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u12-offen-gruppe-b/",
+  "history": []
+ },
+ "55539": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-herren-ue40/",
+  "history": []
+ },
+ "55540": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-herren-ue35/",
+  "history": []
+ },
+ "55541": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-herren/",
+  "history": []
+ },
+ "55544": {
+  "path": "liga/mecklenburg-vorpommern/landesliga-herren-west/",
+  "history": []
+ },
+ "55545": {
+  "path": "liga/mecklenburg-vorpommern/landesliga-herren-ost/",
+  "history": []
+ },
+ "55547": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u10-offen-gruppe-a/",
+  "history": []
+ },
+ "55549": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ms-u10-offen-gruppe-b/",
+  "history": []
+ },
+ "55551": {
+  "path": "liga/berlin/mu13-bezirksliga/",
+  "history": []
+ },
+ "55552": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-vr1/",
+  "history": []
+ },
+ "55553": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-vr2/",
+  "history": []
+ },
+ "55554": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-vr3/",
+  "history": []
+ },
+ "55556": {
+  "path": "liga/rheinland-pfalz/u18-maennlich-trier-rr/",
+  "history": []
+ },
+ "55560": {
+  "path": "liga/mecklenburg-vorpommern/mv-pokal-herren/",
+  "history": []
+ },
+ "55563": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u20-mix/",
+  "history": []
+ },
+ "55566": {
+  "path": "liga/mecklenburg-vorpommern/quali-u18-ost-mix/",
+  "history": []
+ },
+ "55567": {
+  "path": "liga/mecklenburg-vorpommern/quali-u18-west-mix/",
+  "history": []
+ },
+ "55568": {
+  "path": "liga/bayern/ufr-bezirksoberliga-herren/",
+  "history": []
+ },
+ "55569": {
+  "path": "liga/bayern/ufr-bezirksliga-herren/",
+  "history": []
+ },
+ "55570": {
+  "path": "liga/bayern/ufr-bezirksklasse-herren-ost/",
+  "history": []
+ },
+ "55571": {
+  "path": "liga/bayern/ufr-bezirksklasse-herren-west/",
+  "history": []
+ },
+ "55572": {
+  "path": "liga/bayern/ufr-bezirksoberliga-damen/",
+  "history": []
+ },
+ "55575": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u18-mix/",
+  "history": []
+ },
+ "55576": {
+  "path": "liga/mecklenburg-vorpommern/jtfo/",
+  "history": []
+ },
+ "55577": {
+  "path": "liga/mecklenburg-vorpommern/testspiele-bvmv/",
+  "history": []
+ },
+ "55579": {
+  "path": "liga/mecklenburg-vorpommern/landesliga-u18-mix/",
+  "history": []
+ },
+ "55580": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u12-mix/",
+  "history": []
+ },
+ "55581": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u16-mix/",
+  "history": []
+ },
+ "55585": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u16-weiblich/",
+  "history": []
+ },
+ "55588": {
+  "path": "liga/mecklenburg-vorpommern/oberliga-u14-mix/",
+  "history": []
+ },
+ "55590": {
+  "path": "liga/mecklenburg-vorpommern/landesliga-u14-mix/",
+  "history": []
+ },
+ "55601": {
+  "path": "liga/rheinland-pfalz/u16m-rheinhessen/",
+  "history": []
+ },
+ "55602": {
+  "path": "liga/nordrhein-westfalen/jkl1u10o-bbk-niers/",
+  "history": []
+ },
+ "55603": {
+  "path": "liga/berlin/mu20-oberliga-vorrunde/",
+  "history": []
+ },
+ "55604": {
+  "path": "liga/berlin/mu18-oberliga-vorrunde/",
+  "history": []
+ },
+ "55605": {
+  "path": "liga/berlin/mu16-oberliga-vorrunde/",
+  "history": []
+ },
+ "55606": {
+  "path": "liga/berlin/wu14-oberliga-vorrunde/",
+  "history": []
+ },
+ "55608": {
+  "path": "liga/berlin/mini-u9-anfaenger/",
+  "history": []
+ },
+ "55648": {
+  "path": "liga/baden-wuerttemberg/bbw-u14m-jol-gruppe-b/",
+  "history": []
+ },
+ "55649": {
+  "path": "liga/baden-wuerttemberg/bbw-u14m-jol-gruppe-a/",
+  "history": []
+ },
+ "55650": {
+  "path": "liga/baden-wuerttemberg/bbw-u16m-jol-gruppe-a/",
+  "history": []
+ },
+ "55651": {
+  "path": "liga/baden-wuerttemberg/bbw-u16m-jol-gruppe-b/",
+  "history": []
+ },
+ "55655": {
+  "path": "liga/baden-wuerttemberg/bbw-u18-maennlich-regionalliga/",
+  "history": []
+ },
+ "55657": {
+  "path": "liga/baden-wuerttemberg/bbw-u18-weiblich-regionalliga/",
+  "history": []
+ },
+ "55659": {
+  "path": "liga/baden-wuerttemberg/bbw-u16-maennlich-regionalliga/",
+  "history": []
+ },
+ "55660": {
+  "path": "liga/baden-wuerttemberg/bbw-u16-weiblich-regionalliga/",
+  "history": []
+ },
+ "55663": {
+  "path": "liga/baden-wuerttemberg/bbw-u14-maennlich-regionalliga/",
+  "history": []
+ },
+ "55664": {
+  "path": "liga/baden-wuerttemberg/bbw-u14-weiblich-regionalliga/",
+  "history": []
+ },
+ "55670": {
+  "path": "liga/baden-wuerttemberg/bbw-u18m-jol-gruppe-b/",
+  "history": []
+ },
+ "55671": {
+  "path": "liga/baden-wuerttemberg/bbw-u18m-jol-gruppe-a/",
+  "history": []
+ },
+ "55675": {
+  "path": "liga/baden-wuerttemberg/bbw-u12m-jol-gruppe-a/",
+  "history": []
+ },
+ "55676": {
+  "path": "liga/baden-wuerttemberg/bbw-u12m-jol-gruppe-c/",
+  "history": []
+ },
+ "55684": {
+  "path": "liga/saarland/maennliche-u-18-landesliga-saar/",
+  "history": []
+ },
+ "55685": {
+  "path": "liga/saarland/maennliche-u-16-landesliga-saar/",
+  "history": []
+ },
+ "55695": {
+  "path": "liga/saarland/weibliche-u-17-landesliga-saar/",
+  "history": []
+ },
+ "55696": {
+  "path": "liga/saarland/weibliche-u-15-landesliga-saar/",
+  "history": []
+ },
+ "55699": {
+  "path": "liga/bayern/bezirksklasse-u10-gemischt-26-27/",
+  "history": []
+ },
+ "55701": {
+  "path": "liga/bayern/bezirksliga-u12-gemischt-mitte-nord-26-27/",
+  "history": []
+ },
+ "55702": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-2026-2027/",
+  "history": []
+ },
+ "55704": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u10-offen-gruppe-a/",
+  "history": []
+ },
+ "55706": {
+  "path": "liga/niedersachsen/regionsklasse-goettingen-herren/",
+  "history": []
+ },
+ "55707": {
+  "path": "liga/nordrhein-westfalen/u18m-kl-essen/",
+  "history": []
+ },
+ "55708": {
+  "path": "liga/nordrhein-westfalen/u16m-kl-essen/",
+  "history": []
+ },
+ "55709": {
+  "path": "liga/nordrhein-westfalen/u14o-kl-essen/",
+  "history": []
+ },
+ "55714": {
+  "path": "liga/nordrhein-westfalen/u10o-kl-essen/",
+  "history": []
+ },
+ "55715": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u10-offen-gruppe-b/",
+  "history": []
+ },
+ "55720": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u18-maennlich-gruppe-a/",
+  "history": []
+ },
+ "55721": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u18-maennlich-gruppe-b/",
+  "history": []
+ },
+ "55722": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u16-maennlich-gruppe-a/",
+  "history": []
+ },
+ "55723": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u16-maennlich-gruppe-b/",
+  "history": []
+ },
+ "55724": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u16-maennlich-gruppe-c/",
+  "history": []
+ },
+ "55725": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u14-offen-gruppe-a/",
+  "history": []
+ },
+ "55726": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u14-offen-gruppe-b/",
+  "history": []
+ },
+ "55727": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u14-offen-gruppe-c/",
+  "history": []
+ },
+ "55728": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u12-offen-gruppe-a/",
+  "history": []
+ },
+ "55729": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u12-offen-gruppe-b/",
+  "history": []
+ },
+ "55730": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u12-offen-gruppe-c/",
+  "history": []
+ },
+ "55738": {
+  "path": "liga/bundesligen/1-bundesliga/",
+  "history": []
+ },
+ "55743": {
+  "path": "liga/bundesligen/dbbl-pokal-runde-1/",
+  "history": []
+ },
+ "55744": {
+  "path": "liga/bundesligen/dbbl-pokal-runde-2/",
+  "history": []
+ },
+ "55746": {
+  "path": "liga/bundesligen/2-dbbl-nord/",
+  "history": []
+ },
+ "55749": {
+  "path": "liga/bundesligen/2-dbbl-sued/",
+  "history": []
+ },
+ "55770": {
+  "path": "liga/nordrhein-westfalen/u16m/",
+  "history": []
+ },
+ "55774": {
+  "path": "liga/nordrhein-westfalen/testspiele-u14/",
+  "history": []
+ },
+ "55775": {
+  "path": "liga/nordrhein-westfalen/testspiele-u12/",
+  "history": []
+ },
+ "55802": {
+  "path": "liga/bundesligen/1-bundesliga-55802/",
+  "history": []
+ },
+ "55807": {
+  "path": "liga/bundesligen/bbl-pokal-1-8-finale/",
+  "history": []
+ },
+ "55809": {
+  "path": "liga/bundesligen/bbl-pokal-1-runde/",
+  "history": []
+ },
+ "55811": {
+  "path": "liga/bundesligen/herren-proa/",
+  "history": []
+ },
+ "55815": {
+  "path": "liga/bundesligen/herren-prob-nord/",
+  "history": []
+ },
+ "55817": {
+  "path": "liga/bundesligen/herren-prob-sued/",
+  "history": []
+ },
+ "55891": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-weiblich-gr-a/",
+  "history": []
+ },
+ "55892": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-weiblich-gr-b/",
+  "history": []
+ },
+ "55897": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-weiblich-platzierung/",
+  "history": []
+ },
+ "55903": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-maennlich-gr-a/",
+  "history": []
+ },
+ "55904": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-maennlich-gr-b/",
+  "history": []
+ },
+ "55924": {
+  "path": "liga/bundesligen/bl-vorbereitungsspiele-2026/",
+  "history": []
+ },
+ "55938": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u12mix/",
+  "history": []
+ },
+ "55939": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u10-mix/",
+  "history": []
+ },
+ "55940": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u16m/",
+  "history": []
+ },
+ "55943": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u14mix-gruppe-a/",
+  "history": []
+ },
+ "55944": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u14mix-gruppe-b/",
+  "history": []
+ },
+ "55946": {
+  "path": "liga/nordrhein-westfalen/kreisliga-mettmann-u18m/",
+  "history": []
+ },
+ "55947": {
+  "path": "liga/nordrhein-westfalen/rbk-kreisliga-herren/",
+  "history": []
+ },
+ "55948": {
+  "path": "liga/nordrhein-westfalen/rbk-kreisliga-u18-maennlich/",
+  "history": []
+ },
+ "55949": {
+  "path": "liga/nordrhein-westfalen/rbk-kreisliga-u16-maennlich/",
+  "history": []
+ },
+ "55950": {
+  "path": "liga/nordrhein-westfalen/rbk-kreisliga-u14-offen/",
+  "history": []
+ },
+ "55951": {
+  "path": "liga/nordrhein-westfalen/rbk-kreisliga-u12-offen/",
+  "history": []
+ },
+ "55952": {
+  "path": "liga/hessen/bezirksliga-herren-55952/",
+  "history": []
+ },
+ "55953": {
+  "path": "liga/hessen/bezirksliga-damen-55953/",
+  "history": []
+ },
+ "55954": {
+  "path": "liga/hessen/kreisliga-a-herren-ost/",
+  "history": []
+ },
+ "55955": {
+  "path": "liga/hessen/kreisliga-a-herren-west/",
+  "history": []
+ },
+ "55956": {
+  "path": "liga/hessen/kreisliga-a-damen/",
+  "history": []
+ },
+ "55957": {
+  "path": "liga/hessen/kreisliga-b-herren-ost/",
+  "history": []
+ },
+ "55958": {
+  "path": "liga/hessen/kreisliga-b-herren-west/",
+  "history": []
+ },
+ "55959": {
+  "path": "liga/hessen/kreisliga-c-herren-ost/",
+  "history": []
+ },
+ "55960": {
+  "path": "liga/hessen/kreisliga-c-herren-west/",
+  "history": []
+ },
+ "55961": {
+  "path": "liga/hessen/kreis-a-wu14/",
+  "history": []
+ },
+ "55962": {
+  "path": "liga/hessen/bezirk-wu18/",
+  "history": []
+ },
+ "55963": {
+  "path": "liga/hessen/bezirk-wu16/",
+  "history": []
+ },
+ "55964": {
+  "path": "liga/hessen/kreis-wu16/",
+  "history": []
+ },
+ "55966": {
+  "path": "liga/hessen/kreis-a-wu12/",
+  "history": []
+ },
+ "55969": {
+  "path": "liga/hessen/bezirk-wu10/",
+  "history": []
+ },
+ "55970": {
+  "path": "liga/hessen/bezirk-x10/",
+  "history": []
+ },
+ "55971": {
+  "path": "liga/hessen/kreis-a-x10/",
+  "history": []
+ },
+ "55972": {
+  "path": "liga/hessen/kreis-b-west-x10/",
+  "history": []
+ },
+ "55973": {
+  "path": "liga/hessen/kreis-b-mitte-x10/",
+  "history": []
+ },
+ "55974": {
+  "path": "liga/hessen/kreis-b-x12/",
+  "history": []
+ },
+ "55975": {
+  "path": "liga/hessen/kreis-a-nord-x12/",
+  "history": []
+ },
+ "55976": {
+  "path": "liga/hessen/kreis-a-ost-x12/",
+  "history": []
+ },
+ "55981": {
+  "path": "liga/hessen/bezirk-x12/",
+  "history": []
+ },
+ "56004": {
+  "path": "liga/bayern/ufr-bezirksliga-u20-maennlich/",
+  "history": []
+ },
+ "56005": {
+  "path": "liga/bayern/ufr-bezirksliga-u18-maennlich/",
+  "history": []
+ },
+ "56006": {
+  "path": "liga/bayern/ufr-bezirksliga-u18-weiblich/",
+  "history": []
+ },
+ "56007": {
+  "path": "liga/bayern/ufr-bezirksliga-u16-maennlich/",
+  "history": []
+ },
+ "56008": {
+  "path": "liga/bayern/ufr-bezirksliga-u16-weiblich/",
+  "history": []
+ },
+ "56009": {
+  "path": "liga/bayern/ufr-bezirksliga-u14-weiblich/",
+  "history": []
+ },
+ "56010": {
+  "path": "liga/bayern/ufr-bezirksliga-u10-mix-2/",
+  "history": []
+ },
+ "56011": {
+  "path": "liga/bayern/ufr-bezirksliga-u10-mix-3/",
+  "history": []
+ },
+ "56012": {
+  "path": "liga/bayern/ufr-bezirksliga-u9-mix/",
+  "history": []
+ },
+ "56013": {
+  "path": "liga/bayern/ufr-bezirksliga-u8-mix/",
+  "history": []
+ },
+ "56014": {
+  "path": "liga/bayern/ufr-kreisliga-u18-maennlich/",
+  "history": []
+ },
+ "56015": {
+  "path": "liga/bayern/ufr-kreisliga-u16-maennlich/",
+  "history": []
+ },
+ "56017": {
+  "path": "liga/bayern/ufr-bezirksliga-u10-mix-1/",
+  "history": []
+ },
+ "56019": {
+  "path": "liga/bayern/ufr-bezirksliga-u12-weiblich/",
+  "history": []
+ },
+ "56021": {
+  "path": "liga/bayern/ufr-bezirksliga-u10-weiblich/",
+  "history": []
+ },
+ "56025": {
+  "path": "liga/bayern/ufr-einteilungsrunde-1-u14-maennlich/",
+  "history": []
+ },
+ "56026": {
+  "path": "liga/bayern/ufr-einteilungsrunde-2-u14-maennlich/",
+  "history": []
+ },
+ "56027": {
+  "path": "liga/bayern/ufr-einteilungsrunde-3-u14-maennlich/",
+  "history": []
+ },
+ "56032": {
+  "path": "liga/bayern/ufr-einteilungsrunde-1-u12-mix/",
+  "history": []
+ },
+ "56033": {
+  "path": "liga/bayern/ufr-einteilungsrunde-3-u12-mix/",
+  "history": []
+ },
+ "56034": {
+  "path": "liga/bayern/ufr-einteilungsrunde-2-u12-mix/",
+  "history": []
+ },
+ "56035": {
+  "path": "liga/bayern/ufr-einteilungsrunde-4-u12-mix/",
+  "history": []
+ },
+ "56036": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u18-maennlich/",
+  "history": []
+ },
+ "56037": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u16-maennlich/",
+  "history": []
+ },
+ "56038": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u14-offen/",
+  "history": []
+ },
+ "56039": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u12-offen/",
+  "history": []
+ },
+ "56040": {
+  "path": "liga/nordrhein-westfalen/jugendkreisliga-u10-offen/",
+  "history": []
+ },
+ "56043": {
+  "path": "liga/saarland/mixed-u-14-landesliga-vorrunde/",
+  "history": []
+ },
+ "56044": {
+  "path": "liga/saarland/mixed-u-14-bezirksliga-vorrunde/",
+  "history": []
+ },
+ "56045": {
+  "path": "liga/nordrhein-westfalen/klh-niers/",
+  "history": []
+ },
+ "56052": {
+  "path": "liga/bayern/bm-ue35-herren/",
+  "history": []
+ },
+ "56053": {
+  "path": "liga/bayern/bm-ue35-damen-gruppe-a/",
+  "history": []
+ },
+ "56058": {
+  "path": "liga/bayern/bm-ue40-herren-vorrunde-a/",
+  "history": []
+ },
+ "56059": {
+  "path": "liga/bayern/bm-ue40-herren-vorrunde-b/",
+  "history": []
+ },
+ "56060": {
+  "path": "liga/bayern/bm-ue40-herren-vorrunde-c/",
+  "history": []
+ },
+ "56061": {
+  "path": "liga/bayern/bm-ue40-damen/",
+  "history": []
+ },
+ "56062": {
+  "path": "liga/saarland/mixed-u-12-landesliga-vorrunde/",
+  "history": []
+ },
+ "56063": {
+  "path": "liga/saarland/mixed-u-12-bezirksliga-vorrunde/",
+  "history": []
+ },
+ "56064": {
+  "path": "liga/saarland/mixed-u-12-kreisliga-vorrunde/",
+  "history": []
+ },
+ "56067": {
+  "path": "liga/bayern/mfr-bezirkspokal-herren/",
+  "history": []
+ },
+ "56068": {
+  "path": "liga/bayern/mfr-bezirkspokal-damen/",
+  "history": []
+ },
+ "56069": {
+  "path": "liga/nordrhein-westfalen/1-klh-koeln/",
+  "history": []
+ },
+ "56070": {
+  "path": "liga/nordrhein-westfalen/testspiele-26-27/",
+  "history": []
+ },
+ "56071": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u18m/",
+  "history": []
+ },
+ "56072": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16m-fortgeschrittene/",
+  "history": []
+ },
+ "56073": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-offen-fortgeschrittene/",
+  "history": []
+ },
+ "56074": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12-offen-fortgeschrittene/",
+  "history": []
+ },
+ "56075": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u10o/",
+  "history": []
+ },
+ "56077": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-gruppe-a/",
+  "history": []
+ },
+ "56078": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-gruppe-b/",
+  "history": []
+ },
+ "56084": {
+  "path": "liga/hamburg/herren-senioren-ii-ost/",
+  "history": []
+ },
+ "56086": {
+  "path": "liga/hamburg/jugend-m13-b/",
+  "history": []
+ },
+ "56089": {
+  "path": "liga/hamburg/jugend-m12-c-56089/",
+  "history": []
+ },
+ "56091": {
+  "path": "liga/hamburg/jugend-m11a/",
+  "history": []
+ },
+ "56093": {
+  "path": "liga/hamburg/jugend-m14-l-56093/",
+  "history": []
+ },
+ "56095": {
+  "path": "liga/hamburg/jugend-w14-b-56095/",
+  "history": []
+ },
+ "56097": {
+  "path": "liga/bayern/bm-ue35-damen-gruppe-b/",
+  "history": []
+ },
+ "56102": {
+  "path": "liga/bundesligen/nbbl-cup-nord/",
+  "history": []
+ },
+ "56103": {
+  "path": "liga/bundesligen/nbbl-cup-sued/",
+  "history": []
+ },
+ "56106": {
+  "path": "liga/bundesligen/jbbl-cup-nord/",
+  "history": []
+ },
+ "56107": {
+  "path": "liga/bundesligen/jbbl-cup-sued/",
+  "history": []
+ },
+ "56109": {
+  "path": "liga/hessen/maennliche-u16-bezirksliga-gruppe-1/",
+  "history": []
+ },
+ "56111": {
+  "path": "liga/hessen/weibliche-u16-kreisliga-a-k/",
+  "history": []
+ },
+ "56113": {
+  "path": "liga/hessen/weibliche-u18-bezirksliga/",
+  "history": []
+ },
+ "56124": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-1/",
+  "history": []
+ },
+ "56125": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-2/",
+  "history": []
+ },
+ "56126": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-3/",
+  "history": []
+ },
+ "56127": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-4/",
+  "history": []
+ },
+ "56128": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-5/",
+  "history": []
+ },
+ "56129": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-6/",
+  "history": []
+ },
+ "56130": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-7/",
+  "history": []
+ },
+ "56131": {
+  "path": "liga/bundesligen/nbbl-einteilungsrunde-gruppe-8/",
+  "history": []
+ },
+ "56144": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-1/",
+  "history": []
+ },
+ "56145": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-10/",
+  "history": []
+ },
+ "56146": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-11/",
+  "history": []
+ },
+ "56147": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-12/",
+  "history": []
+ },
+ "56148": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-2/",
+  "history": []
+ },
+ "56149": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-3/",
+  "history": []
+ },
+ "56150": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-4/",
+  "history": []
+ },
+ "56151": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-5/",
+  "history": []
+ },
+ "56152": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-6/",
+  "history": []
+ },
+ "56153": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-7/",
+  "history": []
+ },
+ "56154": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-8/",
+  "history": []
+ },
+ "56155": {
+  "path": "liga/bundesligen/jbbl-einteilungsrunde-gruppe-9/",
+  "history": []
+ },
+ "56156": {
+  "path": "liga/bayern/mfr-u20m-bezirksoberliga/",
+  "history": []
+ },
+ "56157": {
+  "path": "liga/bayern/mfr-u20w-bezirksoberliga/",
+  "history": []
+ },
+ "56158": {
+  "path": "liga/bayern/mfr-u18m-bezirksoberliga/",
+  "history": []
+ },
+ "56159": {
+  "path": "liga/bayern/mfr-u18w-bezirksoberliga/",
+  "history": []
+ },
+ "56160": {
+  "path": "liga/bayern/mfr-u16m-bezirksoberliga/",
+  "history": []
+ },
+ "56161": {
+  "path": "liga/bayern/mfr-u16w-bezirksoberliga/",
+  "history": []
+ },
+ "56162": {
+  "path": "liga/bayern/mfr-u14m-bezirksoberliga/",
+  "history": []
+ },
+ "56163": {
+  "path": "liga/bayern/mfr-u14w-bezirksoberliga/",
+  "history": []
+ },
+ "56165": {
+  "path": "liga/bayern/mfr-u12-mix-bezirksoberliga/",
+  "history": []
+ },
+ "56166": {
+  "path": "liga/bayern/mfr-u12w-bezirksoberliga/",
+  "history": []
+ },
+ "56167": {
+  "path": "liga/bayern/mfr-u11-mix-bezirksoberliga/",
+  "history": []
+ },
+ "56168": {
+  "path": "liga/bayern/mfr-u10-mix-bezirksoberliga-einteilungsrunde/",
+  "history": []
+ },
+ "56169": {
+  "path": "liga/bayern/mfr-u10w-bezirksoberliga/",
+  "history": []
+ },
+ "56170": {
+  "path": "liga/bayern/mfr-u9-mix-bezirksoberliga/",
+  "history": []
+ },
+ "56171": {
+  "path": "liga/bayern/mfr-u8-mix-bezirksoberliga/",
+  "history": []
+ },
+ "56175": {
+  "path": "liga/bayern/mfr-u14m-bezirksliga/",
+  "history": []
+ },
+ "56176": {
+  "path": "liga/bayern/mfr-u12-mix-bezirksliga-sued/",
+  "history": []
+ },
+ "56177": {
+  "path": "liga/bayern/mfr-u12-mix-bezirksliga-nord/",
+  "history": []
+ },
+ "56179": {
+  "path": "liga/bayern/mfr-u18m-kreisliga-nord/",
+  "history": []
+ },
+ "56180": {
+  "path": "liga/bayern/mfr-u18m-kreisliga-sued/",
+  "history": []
+ },
+ "56181": {
+  "path": "liga/bayern/mfr-u18w-kreisliga/",
+  "history": []
+ },
+ "56182": {
+  "path": "liga/bayern/mfr-u16m-kreisliga-nord/",
+  "history": []
+ },
+ "56183": {
+  "path": "liga/bayern/mfr-u16m-kreisliga-sued/",
+  "history": []
+ },
+ "56185": {
+  "path": "liga/bayern/mfr-u14m-kreisliga-mitte/",
+  "history": []
+ },
+ "56186": {
+  "path": "liga/bayern/mfr-u14m-kreisliga-nord/",
+  "history": []
+ },
+ "56187": {
+  "path": "liga/bayern/mfr-u14m-kreisliga-sued/",
+  "history": []
+ },
+ "56189": {
+  "path": "liga/bayern/mfr-u12-mix-kreisliga-2/",
+  "history": []
+ },
+ "56190": {
+  "path": "liga/bayern/mfr-u12-mix-kreisliga-3/",
+  "history": []
+ },
+ "56191": {
+  "path": "liga/bayern/mfr-u12w-kreisliga-nord/",
+  "history": []
+ },
+ "56192": {
+  "path": "liga/bayern/mfr-u10-mix-kreisliga-1/",
+  "history": []
+ },
+ "56194": {
+  "path": "liga/bayern/mfr-u10-mix-kreisliga-4/",
+  "history": []
+ },
+ "56196": {
+  "path": "liga/bayern/mfr-u10-mix-kreisliga-3/",
+  "history": []
+ },
+ "56197": {
+  "path": "liga/bayern/mfr-u10-mix-kreisliga-2/",
+  "history": []
+ },
+ "56204": {
+  "path": "liga/bayern/mfr-u12-mix-kreisliga-4/",
+  "history": []
+ },
+ "56206": {
+  "path": "liga/hessen/weibliche-u12-kreisliga/",
+  "history": []
+ },
+ "56208": {
+  "path": "liga/hessen/weibliche-u10-kreisliga/",
+  "history": []
+ },
+ "56210": {
+  "path": "liga/bayern/mfr-u16m-bezirksliga/",
+  "history": []
+ },
+ "56212": {
+  "path": "liga/bayern/mfr-u14w-kreisliga/",
+  "history": []
+ },
+ "56217": {
+  "path": "liga/thueringen/landesliga-herren-mitte/",
+  "history": []
+ },
+ "56220": {
+  "path": "liga/hessen/bezirk-ost-mu14/",
+  "history": []
+ },
+ "56221": {
+  "path": "liga/hessen/bezirk-west-mu14/",
+  "history": []
+ },
+ "56224": {
+  "path": "liga/hessen/kreis-b-mu14/",
+  "history": []
+ },
+ "56226": {
+  "path": "liga/berlin/herren-bbv-pokal/",
+  "history": []
+ },
+ "56227": {
+  "path": "liga/hessen/bezirksmeisterschaft-mue40/",
+  "history": []
+ },
+ "56228": {
+  "path": "liga/hessen/bezirksmeisterschaft-mue35/",
+  "history": []
+ },
+ "56229": {
+  "path": "liga/berlin/damen-bbv-pokal/",
+  "history": []
+ },
+ "56230": {
+  "path": "liga/berlin/mu17-bbv-pokal/",
+  "history": []
+ },
+ "56231": {
+  "path": "liga/berlin/wu17-bbv-pokal/",
+  "history": []
+ },
+ "56232": {
+  "path": "liga/berlin/mu15-bbv-pokal/",
+  "history": []
+ },
+ "56233": {
+  "path": "liga/berlin/wu15-bbv-pokal/",
+  "history": []
+ },
+ "56234": {
+  "path": "liga/berlin/wu13-bbv-pokal/",
+  "history": []
+ },
+ "56235": {
+  "path": "liga/berlin/herren-ue45/",
+  "history": []
+ },
+ "56238": {
+  "path": "liga/niedersachsen/regionsliga-u8/",
+  "history": []
+ },
+ "56249": {
+  "path": "liga/nordrhein-westfalen/kreisliga-vorrunde-d-ne/",
+  "history": []
+ },
+ "56251": {
+  "path": "liga/nordrhein-westfalen/tg1881/",
+  "history": []
+ },
+ "56256": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16m-einsteiger/",
+  "history": []
+ },
+ "56259": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-offen-einsteiger/",
+  "history": []
+ },
+ "56260": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12-offen-einsteiger/",
+  "history": []
+ },
+ "56262": {
+  "path": "liga/niedersachsen/testspiele-damen/",
+  "history": []
+ },
+ "56265": {
+  "path": "liga/berlin/testspiele-berlin/",
+  "history": []
+ },
+ "56266": {
+  "path": "liga/berlin/testspiele-landesauswahl/",
+  "history": []
+ },
+ "56268": {
+  "path": "liga/hessen/mixed-u14-bezirksliga-gruppe-2/",
+  "history": []
+ },
+ "56270": {
+  "path": "liga/hessen/mixed-u12-gruppe-2/",
+  "history": []
+ },
+ "56271": {
+  "path": "liga/niedersachsen/regionspokal-herren-hannover/",
+  "history": []
+ },
+ "56273": {
+  "path": "liga/baden-wuerttemberg/bbw3-u14-weiblich-2/",
+  "history": []
+ },
+ "56275": {
+  "path": "liga/baden-wuerttemberg/bbw3-u12m-bezirksliga-2/",
+  "history": []
+ },
+ "56278": {
+  "path": "liga/baden-wuerttemberg/bbw3-u10-gruppe-h-winterliga/",
+  "history": []
+ },
+ "56279": {
+  "path": "liga/hessen/bezirk-ost-mu18/",
+  "history": []
+ },
+ "56280": {
+  "path": "liga/hessen/bezirk-west-mu18/",
+  "history": []
+ },
+ "56281": {
+  "path": "liga/hessen/kreis-mu18/",
+  "history": []
+ },
+ "56282": {
+  "path": "liga/hessen/bezirk-ost-mu16/",
+  "history": []
+ },
+ "56283": {
+  "path": "liga/hessen/bezirk-west-mu16/",
+  "history": []
+ },
+ "56284": {
+  "path": "liga/hessen/kreis-ost-mu16/",
+  "history": []
+ },
+ "56285": {
+  "path": "liga/hessen/kreis-west-mu16/",
+  "history": []
+ },
+ "56286": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-a/",
+  "history": []
+ },
+ "56287": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-b/",
+  "history": []
+ },
+ "56288": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u18-maennlich/",
+  "history": []
+ },
+ "56289": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16-maennlich/",
+  "history": []
+ },
+ "56290": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u14-offen/",
+  "history": []
+ },
+ "56295": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12-offen/",
+  "history": []
+ },
+ "56305": {
+  "path": "liga/bayern/bbv-pokal-u16-maennlich/",
+  "history": []
+ },
+ "56306": {
+  "path": "liga/rheinland-pfalz/bvp-ue35-herren/",
+  "history": []
+ },
+ "56310": {
+  "path": "liga/rheinland-pfalz/bvp-ue40-herren/",
+  "history": []
+ },
+ "56312": {
+  "path": "liga/rheinland-pfalz/bvp-ue40-damen/",
+  "history": []
+ },
+ "56314": {
+  "path": "liga/nordrhein-westfalen/testspiele-kreis-aachen/",
+  "history": []
+ },
+ "56317": {
+  "path": "liga/baden-wuerttemberg/bbw1-kreisliga-u12-mix/",
+  "history": []
+ },
+ "56319": {
+  "path": "liga/nordrhein-westfalen/u12o-kl-essen/",
+  "history": []
+ },
+ "56320": {
+  "path": "liga/baden-wuerttemberg/bbw4-u20-landesliga-ost/",
+  "history": []
+ },
+ "56322": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-landesliga/",
+  "history": []
+ },
+ "56326": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-bezirksliga-nord/",
+  "history": []
+ },
+ "56328": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-bezirksliga-ost/",
+  "history": []
+ },
+ "56329": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-bezirksliga-nordost/",
+  "history": []
+ },
+ "56330": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-bezirksliga-sued/",
+  "history": []
+ },
+ "56331": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-landesliga/",
+  "history": []
+ },
+ "56332": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-nord/",
+  "history": []
+ },
+ "56333": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-suedost/",
+  "history": []
+ },
+ "56334": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-ost/",
+  "history": []
+ },
+ "56335": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-west/",
+  "history": []
+ },
+ "56336": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-nordost/",
+  "history": []
+ },
+ "56337": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-bezirksliga-suedwest/",
+  "history": []
+ },
+ "56338": {
+  "path": "liga/baden-wuerttemberg/bbw4-u16-weiblich-landesliga/",
+  "history": []
+ },
+ "56339": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-weibl-landesliga-ost/",
+  "history": []
+ },
+ "56340": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-landesliga/",
+  "history": []
+ },
+ "56341": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-ost-1/",
+  "history": []
+ },
+ "56342": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-nordost/",
+  "history": []
+ },
+ "56343": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-ost-2/",
+  "history": []
+ },
+ "56344": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-nordwest/",
+  "history": []
+ },
+ "56345": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-sued/",
+  "history": []
+ },
+ "56346": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-bezirksliga-west/",
+  "history": []
+ },
+ "56347": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-ost-2/",
+  "history": []
+ },
+ "56348": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-west/",
+  "history": []
+ },
+ "56349": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-nord/",
+  "history": []
+ },
+ "56350": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-ost-1/",
+  "history": []
+ },
+ "56351": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-sued/",
+  "history": []
+ },
+ "56352": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-bezirksliga-nordwest/",
+  "history": []
+ },
+ "56353": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-weibl-landesliga-west/",
+  "history": []
+ },
+ "56354": {
+  "path": "liga/baden-wuerttemberg/bbw4-u10-bezirksliga-ost-1/",
+  "history": []
+ },
+ "56355": {
+  "path": "liga/baden-wuerttemberg/bbw4-u10-bezirksliga-nord-1/",
+  "history": []
+ },
+ "56356": {
+  "path": "liga/baden-wuerttemberg/bbw4-u10-bezirksliga-ost-2/",
+  "history": []
+ },
+ "56357": {
+  "path": "liga/baden-wuerttemberg/bbw4-u10-bezirksliga-nord-2/",
+  "history": []
+ },
+ "56358": {
+  "path": "liga/baden-wuerttemberg/bbw4-u10-bezirksliga-west/",
+  "history": []
+ },
+ "56403": {
+  "path": "liga/niedersachsen/regionspokal-goettingen-herren/",
+  "history": []
+ },
+ "56408": {
+  "path": "liga/hessen/landesverbandsturnier/",
+  "history": []
+ },
+ "56409": {
+  "path": "liga/hessen/landesverbandsturnier-56409/",
+  "history": []
+ },
+ "56410": {
+  "path": "liga/hessen/kreis-a-mitte-x12/",
+  "history": []
+ },
+ "56411": {
+  "path": "liga/baden-wuerttemberg/bbw4-u20-landesliga-west/",
+  "history": []
+ },
+ "56416": {
+  "path": "liga/baden-wuerttemberg/bbw2-u12-sued-gruppe-4/",
+  "history": []
+ },
+ "56417": {
+  "path": "liga/baden-wuerttemberg/bbw2-u12-sued-gruppe-5/",
+  "history": []
+ },
+ "56418": {
+  "path": "liga/baden-wuerttemberg/bbw2-u18-weiblich-landesliga/",
+  "history": []
+ },
+ "56419": {
+  "path": "liga/hessen/kreis-a-ost-mu14/",
+  "history": []
+ },
+ "56420": {
+  "path": "liga/hessen/oberliga-mixed-u14/",
+  "history": []
+ },
+ "56421": {
+  "path": "liga/hessen/oberliga-mixed-u12-b/",
+  "history": []
+ },
+ "56422": {
+  "path": "liga/hessen/kreis-a-mitte-mu14/",
+  "history": []
+ },
+ "56423": {
+  "path": "liga/hessen/landesliga-mixed-u14-a/",
+  "history": []
+ },
+ "56424": {
+  "path": "liga/hessen/landesliga-mixed-u14-b/",
+  "history": []
+ },
+ "56425": {
+  "path": "liga/hessen/kreis-b-wu12/",
+  "history": []
+ },
+ "56426": {
+  "path": "liga/hessen/kreis-b-wu14/",
+  "history": []
+ },
+ "56427": {
+  "path": "liga/baden-wuerttemberg/bbw1-bezirksliga-u12-mix/",
+  "history": []
+ },
+ "56428": {
+  "path": "liga/bayern/mfr-u12-mix-kreisliga-1/",
+  "history": []
+ },
+ "56429": {
+  "path": "liga/bayern/mfr-u12w-kreisliga-sued/",
+  "history": []
+ },
+ "56430": {
+  "path": "liga/hessen/maennl-u16-kreisliga-gruppe-2/",
+  "history": []
+ },
+ "56431": {
+  "path": "liga/hessen/mixed-u10-kreisliga-gruppe-3/",
+  "history": []
+ },
+ "56432": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-kreispokal/",
+  "history": []
+ },
+ "56434": {
+  "path": "liga/niedersachsen/stuetzpunktturnier-osnabrueck/",
+  "history": []
+ },
+ "56439": {
+  "path": "liga/baden-wuerttemberg/bbw4-u14-weibl-landesliga-west/",
+  "history": []
+ },
+ "56440": {
+  "path": "liga/nordrhein-westfalen/kreisliga-herren-bbk-wuppertal-26-27/",
+  "history": []
+ },
+ "56441": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-kreisliga-nord/",
+  "history": []
+ },
+ "56442": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-weiblich-bezirksliga/",
+  "history": []
+ },
+ "56446": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u16-wuppertal/",
+  "history": []
+ },
+ "56447": {
+  "path": "liga/nordrhein-westfalen/kreisliga-u12o-wuppertal/",
+  "history": []
+ },
+ "56448": {
+  "path": "liga/niedersachsen/testspiele-senioren/",
+  "history": []
+ },
+ "56449": {
+  "path": "liga/niedersachsen/testspiele-jugend-56449/",
+  "history": []
+ },
+ "56450": {
+  "path": "liga/bayern/opf-bezirkspokal-damen-26-27/",
+  "history": []
+ },
+ "56451": {
+  "path": "liga/bayern/opf-bezirkspokal-herren-26-27/",
+  "history": []
+ },
+ "56455": {
+  "path": "liga/nordrhein-westfalen/herren-kreisliga/",
+  "history": []
+ },
+ "56457": {
+  "path": "liga/bayern/u18-maennlich-bezirksoberliga/",
+  "history": []
+ },
+ "56458": {
+  "path": "liga/bayern/u16-maennlich-bezirksoberliga/",
+  "history": []
+ },
+ "56460": {
+  "path": "liga/bayern/u16-maennlich-bezirksliga/",
+  "history": []
+ },
+ "56461": {
+  "path": "liga/bayern/u14-maennlich-bezirksoberliga/",
+  "history": []
+ },
+ "56462": {
+  "path": "liga/bayern/u14-maennlich-bezirksliga/",
+  "history": []
+ },
+ "56463": {
+  "path": "liga/bayern/u18-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56464": {
+  "path": "liga/bayern/u16-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56465": {
+  "path": "liga/bayern/u14-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56466": {
+  "path": "liga/bayern/u12-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56467": {
+  "path": "liga/bayern/u10-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56468": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-weiblich-bezirkspokal/",
+  "history": []
+ },
+ "56470": {
+  "path": "liga/bundesligen/bbw1-landesliga-u16w/",
+  "history": []
+ },
+ "56472": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-10-o/",
+  "history": []
+ },
+ "56473": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-12-offen/",
+  "history": []
+ },
+ "56474": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-14-offen/",
+  "history": []
+ },
+ "56475": {
+  "path": "liga/baden-wuerttemberg/bbw4-u18-weiblich-landesliga/",
+  "history": []
+ },
+ "56479": {
+  "path": "liga/baden-wuerttemberg/bbw4-u12-weibl-landesliga-ost/",
+  "history": []
+ },
+ "56480": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-12-weiblich/",
+  "history": []
+ },
+ "56481": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-16-weiblich/",
+  "history": []
+ },
+ "56482": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-offen-jugend-u12-liga-a/",
+  "history": []
+ },
+ "56483": {
+  "path": "liga/nordrhein-westfalen/kreisliga-ostwestfalen-offen-jugend-u12-liga-b/",
+  "history": []
+ },
+ "56484": {
+  "path": "liga/berlin/mini-wu11-anfaenger/",
+  "history": []
+ },
+ "56486": {
+  "path": "liga/berlin/mu13-landesliga/",
+  "history": []
+ },
+ "56488": {
+  "path": "liga/nordrhein-westfalen/1-kreisliga-herren-dortmund/",
+  "history": []
+ },
+ "56489": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-dortmund/",
+  "history": []
+ },
+ "56491": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-weiblich-bezirkspokal/",
+  "history": []
+ },
+ "56492": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-weiblich-bezirksliga/",
+  "history": []
+ },
+ "56493": {
+  "path": "liga/nordrhein-westfalen/bochumer-basketballtag/",
+  "history": []
+ },
+ "56494": {
+  "path": "liga/nordrhein-westfalen/u10-koop-kreisliga/",
+  "history": []
+ },
+ "56495": {
+  "path": "liga/saarland/weibliche-u-13-landesliga/",
+  "history": []
+ },
+ "56496": {
+  "path": "liga/nordrhein-westfalen/u14w-koop-kreisliga/",
+  "history": []
+ },
+ "56497": {
+  "path": "liga/nordrhein-westfalen/u12-koop-kreisliga/",
+  "history": []
+ },
+ "56499": {
+  "path": "liga/nordrhein-westfalen/u10w-koop-kreisliga/",
+  "history": []
+ },
+ "56500": {
+  "path": "liga/rheinland-pfalz/rheinhessen-ue-35-m/",
+  "history": []
+ },
+ "56503": {
+  "path": "liga/bayern/kreisliga-u12w-zentralsuedgruppe-kue-kl12w-zs-26-27/",
+  "history": []
+ },
+ "56504": {
+  "path": "liga/bayern/kreisliga-u10-zentralsuedgruppe-mi-kl10m-zs-26-27/",
+  "history": []
+ },
+ "56509": {
+  "path": "liga/nordrhein-westfalen/u18-koop-kreisliga/",
+  "history": []
+ },
+ "56511": {
+  "path": "liga/sachsen/vorbereitungsliga/",
+  "history": []
+ },
+ "56524": {
+  "path": "liga/baden-wuerttemberg/bbw1-landesliga-u18-weiblich/",
+  "history": []
+ },
+ "56526": {
+  "path": "liga/baden-wuerttemberg/bbw2-u14-maennlich-kreisliga-sued/",
+  "history": []
+ },
+ "56527": {
+  "path": "liga/hamburg/herren-pokal-runde-2/",
+  "history": []
+ },
+ "56528": {
+  "path": "liga/sachsen/testspiel-liga-dresden/",
+  "history": []
+ },
+ "56529": {
+  "path": "liga/niedersachsen/pst-tkh-u12w/",
+  "history": []
+ },
+ "56535": {
+  "path": "liga/hessen/bezirksmeisterschaft-seniorinnen-ue35/",
+  "history": []
+ },
+ "56538": {
+  "path": "liga/sachsen/testspielliga-u14m/",
+  "history": []
+ },
+ "56539": {
+  "path": "liga/brandenburg/bbv-vorbereitungsliga/",
+  "history": []
+ },
+ "56540": {
+  "path": "liga/baden-wuerttemberg/bbw1-u12-landesliga/",
+  "history": []
+ },
+ "56541": {
+  "path": "liga/saarland/bv-saar-pokal-herren-2026-2027/",
+  "history": []
+ },
+ "56554": {
+  "path": "liga/nordrhein-westfalen/test-ha-26-27/",
+  "history": []
+ },
+ "56556": {
+  "path": "liga/nordrhein-westfalen/tuev-nord-unifiedliga/",
+  "history": []
+ },
+ "56558": {
+  "path": "liga/baden-wuerttemberg/bbw1-u10w-spielrunde/",
+  "history": []
+ },
+ "56559": {
+  "path": "liga/bayern/kreisliga-u12-zentralgruppe-mi-kl12m-z-26-27/",
+  "history": []
+ },
+ "56560": {
+  "path": "liga/bayern/kreisklasse-u12-mittigsuedgruppe-mi-kk12m-ms-26-27/",
+  "history": []
+ },
+ "56561": {
+  "path": "liga/rheinland-pfalz/bvrp-pokal-herren/",
+  "history": []
+ },
+ "56563": {
+  "path": "liga/bayern/vorbereitungsspiele-turniere/",
+  "history": []
+ },
+ "56564": {
+  "path": "liga/bayern/vorbereitungsspiele-einzelspiele/",
+  "history": []
+ },
+ "56566": {
+  "path": "liga/rheinland-pfalz/u-10-mix-rheinhessen/",
+  "history": []
+ },
+ "56569": {
+  "path": "liga/baden-wuerttemberg/bbw1-u14w-landesliga/",
+  "history": []
+ },
+ "56570": {
+  "path": "liga/nordrhein-westfalen/u10-kreisliga/",
+  "history": []
+ },
+ "56571": {
+  "path": "liga/nordrhein-westfalen/u12-kreisliga/",
+  "history": []
+ },
+ "56572": {
+  "path": "liga/nordrhein-westfalen/u14-kreisliga/",
+  "history": []
+ },
+ "56574": {
+  "path": "liga/nordrhein-westfalen/u18-kreisliga/",
+  "history": []
+ },
+ "56575": {
+  "path": "liga/baden-wuerttemberg/bbw1-u14w-bezirksliga/",
+  "history": []
+ },
+ "56576": {
+  "path": "liga/baden-wuerttemberg/bbw1-u12w-landesliga-staffel-1/",
+  "history": []
+ },
+ "56578": {
+  "path": "liga/baden-wuerttemberg/bbw1-u12w-landesliga-staffel-2/",
+  "history": []
+ },
+ "56581": {
+  "path": "liga/nordrhein-westfalen/jugenkreisliga-u16-ha-bo-en/",
+  "history": []
+ },
+ "56583": {
+  "path": "liga/nordrhein-westfalen/jugenkreisliga-u14-ha-bo/",
+  "history": []
+ },
+ "56584": {
+  "path": "liga/bayern/vorrunde-u12-mix-1/",
+  "history": []
+ },
+ "56586": {
+  "path": "liga/nordrhein-westfalen/koop-leistungsliga/",
+  "history": []
+ },
+ "56587": {
+  "path": "liga/rheinland-pfalz/bvrp-pokal-damen/",
+  "history": []
+ },
+ "56588": {
+  "path": "liga/regionalliga-suedwest/vorbereitungsspiele/",
+  "history": []
+ },
+ "56589": {
+  "path": "liga/baden-wuerttemberg/bbw1-u10-spielrunde/",
+  "history": []
+ },
+ "56590": {
+  "path": "liga/thueringen/olh-vorbereitungsspiele/",
+  "history": []
+ },
+ "56591": {
+  "path": "liga/nordrhein-westfalen/kl-dortmund-u-16-maennlich/",
+  "history": []
+ },
+ "56592": {
+  "path": "liga/deutsche-meisterschaften/bjl-2026-maennlich-platzierungsspiele/",
+  "history": []
+ },
+ "56594": {
+  "path": "liga/nordrhein-westfalen/kreisleistungsliga-u16-koop-un-do-bo-en/",
+  "history": []
+ },
+ "56595": {
+  "path": "liga/bayern/u20-maennlich-bezirksoberliga/",
+  "history": []
+ },
+ "56596": {
+  "path": "liga/bayern/u20-weiblich-bezirksoberliga/",
+  "history": []
+ },
+ "56597": {
+  "path": "liga/saarland/bv-saar-pokal-damen-2026-2027/",
+  "history": []
+ },
+ "56598": {
+  "path": "liga/nordrhein-westfalen/u16-kreisliga/",
+  "history": []
+ },
+ "56599": {
+  "path": "liga/baden-wuerttemberg/turnier-kaderlehrgang/",
+  "history": []
+ },
+ "56605": {
+  "path": "liga/baden-wuerttemberg/bbw2-u16-maennlich-bezirksliga-nord-update-21-09-2026/",
+  "history": []
+ },
+ "56607": {
+  "path": "liga/rheinland-pfalz/bvrp-meisterschaft-ue-35-herren/",
+  "history": []
+ },
+ "56608": {
+  "path": "liga/rheinland-pfalz/bvrp-meisterschaft-ue-40-herren/",
+  "history": []
+ },
+ "56610": {
+  "path": "liga/baden-wuerttemberg/bbw1-u10mix-turnierrunde/",
+  "history": []
+ },
+ "56611": {
+  "path": "liga/baden-wuerttemberg/bbw1-u8-turnierrunde/",
+  "history": []
+ },
+ "56612": {
+  "path": "liga/bayern/bezirksoberliga-u10-weiblich/",
+  "history": []
+ },
+ "56613": {
+  "path": "liga/bayern/bezirksoberliga-u12-weiblich/",
+  "history": []
+ },
+ "56614": {
+  "path": "liga/bayern/bezirksoberliga-u14-weiblich/",
+  "history": []
+ },
+ "56615": {
+  "path": "liga/bayern/bezirksoberliga-u16-weiblich/",
+  "history": []
+ },
+ "56616": {
+  "path": "liga/bayern/vorrunde-u10-mix-1/",
+  "history": []
+ },
+ "56618": {
+  "path": "liga/bayern/vorrunde-u10-mix-2/",
+  "history": []
+ },
+ "56619": {
+  "path": "liga/bayern/vorrunde-u10-mix-3/",
+  "history": []
+ },
+ "56620": {
+  "path": "liga/bayern/vorrunde-u10-mix-4/",
+  "history": []
+ },
+ "56621": {
+  "path": "liga/bayern/vorrunde-u10-mix-5/",
+  "history": []
+ },
+ "56622": {
+  "path": "liga/bayern/vorrunde-u10-mix-6/",
+  "history": []
+ },
+ "56623": {
+  "path": "liga/bayern/vorrunde-u12-mix-2/",
+  "history": []
+ },
+ "56624": {
+  "path": "liga/bayern/vorrunde-u12-mix-3/",
+  "history": []
+ },
+ "56625": {
+  "path": "liga/bayern/vorrunde-u12-mix-4/",
+  "history": []
+ },
+ "56626": {
+  "path": "liga/bayern/vorrunde-u12-mix-5/",
+  "history": []
+ },
+ "56627": {
+  "path": "liga/bayern/vorrunde-u12-mix-6/",
+  "history": []
+ },
+ "56628": {
+  "path": "liga/bayern/vorrunde-u12-mix-7/",
+  "history": []
+ },
+ "56629": {
+  "path": "liga/bayern/bezirksoberliga-u14-maennlich/",
+  "history": []
+ },
+ "56630": {
+  "path": "liga/bayern/bezirksliga-u14-maennlich-a/",
+  "history": []
+ },
+ "56631": {
+  "path": "liga/bayern/bezirksliga-u14-maennlich-b/",
+  "history": []
+ },
+ "56632": {
+  "path": "liga/bayern/bezirksklasse-u14-maennlich-a/",
+  "history": []
+ },
+ "56633": {
+  "path": "liga/bayern/bezirksklasse-u14-maennlich-b/",
+  "history": []
+ },
+ "56634": {
+  "path": "liga/bayern/bezirksoberliga-u16-maennlich/",
+  "history": []
+ },
+ "56635": {
+  "path": "liga/bayern/bezirksliga-u16-maennlich/",
+  "history": []
+ },
+ "56636": {
+  "path": "liga/bayern/bezirksklasse-u16-maennlich/",
+  "history": []
+ },
+ "56638": {
+  "path": "liga/rheinland-pfalz/bvrp-meisterschaft-ue-40-weiblich/",
+  "history": []
+ },
+ "56639": {
+  "path": "liga/thueringen/landesverbandsturnier-jahrgang-2012/",
+  "history": []
+ },
+ "56640": {
+  "path": "liga/thueringen/landesverbandsvergleiche-jahrgang-2014/",
+  "history": []
+ },
+ "56643": {
+  "path": "liga/saarland/bv-saar-pokal-maennliche-u-18-2026-2027/",
+  "history": []
+ },
+ "56645": {
+  "path": "liga/saarland/bv-saar-pokal-mixed-u-14-2026-2027/",
+  "history": []
+ },
+ "56646": {
+  "path": "liga/saarland/bv-saar-pokal-mixed-u-12-2026-2027/",
+  "history": []
+ },
+ "56673": {
+  "path": "liga/saarland/bv-saar-pokal-maennliche-u-16-2026-2027/",
+  "history": []
+ }
+}
