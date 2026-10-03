@@ -601,7 +601,6 @@ Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live
 * (-) Daten sind bis zu 6 Stunden alt
 * (-) Ein Saison-Archiv (Historie, Teamvergleiche) ist damit noch nicht abgedeckt
 
-
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
