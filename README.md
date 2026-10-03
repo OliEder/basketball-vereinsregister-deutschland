@@ -7,7 +7,7 @@ Findet Basketballvereine und Teams in Deutschland — per Namens- oder Umkreissu
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-olivermarcus.eder-yellow?logo=buy-me-a-coffee)](https://buymeacoffee.com/olivermarcus.eder)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-OliEder-blue?logo=ko-fi)](https://ko-fi.com/OliEder)
 
-Datenquelle: REST-API von [basketball-bund.net](https://www.basketball-bund.net). Koordinaten stammen von [Nominatim](https://nominatim.openstreetmap.org) (OpenStreetMap).
+Datenquelle: REST-API von [basketball-bund.net](https://www.basketball-bund.net). Beobachtungen zur API stehen in [docs/bbb-api.md](docs/bbb-api.md), die [OpenAPI-Spezifikation](https://github.com/OliEder/basketball-bund-api/blob/main/basketball-bund-net-api-V1.yaml) liegt in einem eigenen Repository. Koordinaten stammen von [Nominatim](https://nominatim.openstreetmap.org) (OpenStreetMap).
 
 ## Was das Portal kann
 
