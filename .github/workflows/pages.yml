@@ -170,6 +170,11 @@ jobs:
             git push origin HEAD:url-store
           fi
 
+      # Kalender-Abo je Team (ics/<teamId>.ics) mit den Spielorten aus data-store; ein Fehler verhindert den Deploy nicht
+      - name: Kalender erzeugen
+        continue-on-error: true
+        run: npm run ics -- --live=_site/data/live --out=_site/ics --team-urls=_site/data/team-url-map.json
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3

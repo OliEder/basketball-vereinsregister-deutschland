@@ -1,0 +1,211 @@
+// Kalender-Abo: eine .ics-Datei je Team (ics/<teamPermanentId>.ics) aus den Live-Daten samt Spielorten.
+//
+//   npx ts-node crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…]
+//
+// Die Datei heißt nach der Team-ID und bleibt daher stabil, auch wenn ein Verein auf eine andere Seite umzieht.
+// Enthalten sind Spiele ab 7 Tage zurück (Ergebnis in der Beschreibung) und alle kommenden. Der Spielort steht nur,
+// wenn die Halle aus matchInfo gemeldet ist (liga/<id>.json: venues und halls, siehe apply-venues.ts).
+// Zeiten sind deutsche Ortszeit und werden als UTC ausgegeben; Kalender-Apps rechnen sie in die eigene Zeitzone um.
+import fs from 'fs';
+import path from 'path';
+import { DEFAULT_BASE } from './seo';
+
+export interface IcsMatch {
+  matchId: number;
+  kickoffDate?: string;
+  kickoffTime?: string;
+  homeTeam?: { teamPermanentId?: number; teamname?: string };
+  guestTeam?: { teamPermanentId?: number; teamname?: string };
+  result?: string | null;
+  abgesagt?: boolean;
+  verzicht?: boolean;
+}
+
+export interface IcsHall { bezeichnung?: string; strasse?: string | null; plz?: string | null; ort?: string | null; lat?: number | null; lng?: number | null }
+
+export interface IcsLiga {
+  ligaId: number;
+  liganame: string;
+  fetchedAt?: string;
+  matches: IcsMatch[];
+  venues?: Record<string, number | string>;
+  halls?: Record<string, IcsHall>;
+}
+
+/** RFC 5545: Backslash, Semikolon, Komma und Zeilenumbrüche maskieren. */
+export function escapeText(s: string): string {
+  return s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+}
+
+/** Zeilen auf höchstens 75 Oktette kürzen (Fortsetzung mit Leerzeichen), ohne ein UTF-8-Zeichen zu teilen. */
+export function foldLine(line: string): string {
+  if (Buffer.byteLength(line, 'utf-8') <= 75) return line;
+  const out: string[] = [];
+  let cur = '';
+  let limit = 75;
+  for (const ch of line) {
+    if (Buffer.byteLength(cur + ch, 'utf-8') > limit) {
+      out.push(cur);
+      cur = ' ';
+      limit = 75;   // die Fortsetzungszeile zählt das führende Leerzeichen mit
+    }
+    cur += ch;
+  }
+  out.push(cur);
+  return out.join('\r\n');
+}
+
+function berlinOffsetMinutes(utcMs: number): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Berlin', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+  }).formatToParts(new Date(utcMs));
+  const get = (t: string): number => Number(parts.find(p => p.type === t)!.value);
+  return Math.round((Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute')) - utcMs) / 60000);
+}
+
+/** Deutsche Ortszeit (YYYY-MM-DD, HH:MM) → UTC in Millisekunden; berücksichtigt Sommer- und Winterzeit. */
+export function berlinToUtc(date: string, time: string): number {
+  const [y, m, d] = date.split('-').map(Number);
+  const [hh, mm] = time.split(':').map(Number);
+  const guess = Date.UTC(y, m - 1, d, hh, mm);
+  const off1 = berlinOffsetMinutes(guess);
+  let utc = guess - off1 * 60000;
+  const off2 = berlinOffsetMinutes(utc);
+  if (off2 !== off1) utc = guess - off2 * 60000;
+  return utc;
+}
+
+export function formatUtc(ms: number): string {
+  return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+}
+
+const dateCompact = (d: string): string => d.replace(/-/g, '');
+
+function addDays(date: string, n: number): string {
+  const [y, m, d] = date.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
+}
+
+const MATCH_MINUTES = 120;
+
+export function locationOf(hall: IcsHall | undefined): string | null {
+  if (!hall || !hall.bezeichnung) return null;
+  const place = [hall.plz, hall.ort].filter(Boolean).join(' ');
+  return [hall.bezeichnung, hall.strasse, place].filter(Boolean).join(', ');
+}
+
+export interface CalendarOptions {
+  teamId: number;
+  name: string;
+  ligen: IcsLiga[];
+  today: string;                  // YYYY-MM-DD
+  pageUrl?: string;
+  stamp: string;                  // ISO-Zeitpunkt für DTSTAMP (Stand der Daten, damit gleicher Stand gleiche Datei ergibt)
+}
+
+export function buildCalendar(o: CalendarOptions): string {
+  const from = addDays(o.today, -7);
+  const lines: string[] = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Basketball Vereinsregister//Spielplan//DE',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    `X-WR-CALNAME:${escapeText(`${o.name} – Basketball`)}`,
+    `NAME:${escapeText(`${o.name} – Basketball`)}`,
+    'X-WR-TIMEZONE:Europe/Berlin',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT6H',
+    'X-PUBLISHED-TTL:PT6H'
+  ];
+  if (o.pageUrl) lines.push(`X-WR-CALDESC:${escapeText(`Spielplan von ${o.name}. Aktuelle Tabelle und Ergebnisse: ${o.pageUrl}`)}`);
+
+  const stamp = formatUtc(Date.parse(o.stamp));
+  const seen = new Set<number>();
+  const events: { start: string; lines: string[] }[] = [];
+
+  for (const liga of o.ligen) {
+    for (const m of liga.matches ?? []) {
+      const home = m.homeTeam?.teamPermanentId === o.teamId;
+      const guest = m.guestTeam?.teamPermanentId === o.teamId;
+      if (!(home || guest) || !m.kickoffDate || m.kickoffDate < from || seen.has(m.matchId)) continue;
+      seen.add(m.matchId);
+
+      const cancelled = !!m.abgesagt || !!m.verzicht;
+      const summary = `${m.homeTeam?.teamname ?? '?'} – ${m.guestTeam?.teamname ?? '?'}`;
+      const ev: string[] = ['BEGIN:VEVENT', `UID:m${m.matchId}-t${o.teamId}@vereinsregister`, `DTSTAMP:${stamp}`];
+      if (m.kickoffTime && /^\d{1,2}:\d{2}$/.test(m.kickoffTime)) {
+        const start = berlinToUtc(m.kickoffDate, m.kickoffTime.padStart(5, '0'));
+        ev.push(`DTSTART:${formatUtc(start)}`, `DTEND:${formatUtc(start + MATCH_MINUTES * 60000)}`);
+      } else {
+        ev.push(`DTSTART;VALUE=DATE:${dateCompact(m.kickoffDate)}`, `DTEND;VALUE=DATE:${dateCompact(addDays(m.kickoffDate, 1))}`);
+      }
+      ev.push(`SUMMARY:${escapeText(summary)}`);
+
+      const hallId = liga.venues?.[String(m.matchId)];
+      const hall = hallId != null ? liga.halls?.[String(hallId)] : undefined;
+      const loc = locationOf(hall);
+      if (loc) {
+        ev.push(`LOCATION:${escapeText(loc)}`);
+        if (typeof hall!.lat === 'number' && typeof hall!.lng === 'number') ev.push(`GEO:${hall!.lat};${hall!.lng}`);
+      }
+      const desc = [liga.liganame];
+      if (m.result) desc.push(`Ergebnis: ${m.result}`);
+      if (m.verzicht) desc.push('Verzicht');
+      else if (m.abgesagt) desc.push('Abgesagt');
+      ev.push(`DESCRIPTION:${escapeText(desc.join('\n'))}`);
+      if (cancelled) ev.push('STATUS:CANCELLED');
+      ev.push('END:VEVENT');
+      events.push({ start: `${m.kickoffDate} ${m.kickoffTime ?? ''}`, lines: ev });
+    }
+  }
+
+  events.sort((a, b) => a.start.localeCompare(b.start));
+  for (const e of events) lines.push(...e.lines);
+  lines.push('END:VCALENDAR');
+  return lines.map(foldLine).join('\r\n') + '\r\n';
+}
+
+/** teamPermanentId → Name und Ligen, in denen das Team in Tabelle oder Spielplan vorkommt. */
+export function collectTeams(docs: IcsLiga[]): Map<number, { name: string; ligen: IcsLiga[] }> {
+  const out = new Map<number, { name: string; ligen: IcsLiga[] }>();
+  const add = (t: { teamPermanentId?: number; teamname?: string } | undefined, doc: IcsLiga) => {
+    if (!t?.teamPermanentId) return;
+    const e = out.get(t.teamPermanentId) ?? { name: t.teamname ?? `Team ${t.teamPermanentId}`, ligen: [] };
+    if (!e.ligen.includes(doc)) e.ligen.push(doc);
+    out.set(t.teamPermanentId, e);
+  };
+  for (const doc of docs) {
+    for (const e of (doc as any).tabelle ?? []) add(e?.team, doc);
+    for (const m of doc.matches ?? []) { add(m.homeTeam, doc); add(m.guestTeam, doc); }
+  }
+  return out;
+}
+
+function arg(name: string): string | undefined {
+  return process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3);
+}
+
+function main(): void {
+  const live = arg('live') ?? '_site/data/live';
+  const out = arg('out') ?? '_site/ics';
+  const base = (arg('base') ?? process.env.SITE_BASE ?? DEFAULT_BASE).replace(/\/$/, '');
+  const teamUrlsFile = arg('team-urls');
+  const teamUrls: Record<string, string> = teamUrlsFile && fs.existsSync(teamUrlsFile) ? JSON.parse(fs.readFileSync(teamUrlsFile, 'utf-8')) : {};
+
+  const dir = path.join(live, 'liga');
+  if (!fs.existsSync(dir)) { console.log(`Keine Live-Daten in ${live}; keine Kalender.`); return; }
+  const docs: IcsLiga[] = fs.readdirSync(dir).filter(f => f.endsWith('.json'))
+    .map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8')));
+  const today = new Date().toISOString().slice(0, 10);
+
+  fs.mkdirSync(out, { recursive: true });
+  const teams = collectTeams(docs);
+  for (const [teamId, t] of teams) {
+    const stamp = t.ligen.map(l => l.fetchedAt ?? '').sort().pop() || new Date().toISOString();
+    const page = teamUrls[String(teamId)] ? `${base}/${teamUrls[String(teamId)]}` : undefined;
+    fs.writeFileSync(path.join(out, `${teamId}.ics`), buildCalendar({ teamId, name: t.name, ligen: t.ligen, today, pageUrl: page, stamp }), 'utf-8');
+  }
+  console.log(`Kalender: ${teams.size} Teams → ${out}`);
+}
+
+if (require.main === module) main();

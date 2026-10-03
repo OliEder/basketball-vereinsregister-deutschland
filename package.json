@@ -13,6 +13,7 @@
     "geo-laender": "npx ts-node crawler/geo-laender.ts",
     "seo": "npx ts-node crawler/seo.ts",
     "archive": "npx ts-node crawler/archive.ts",
+    "ics": "npx ts-node crawler/ics.ts",
     "apply-venues": "npx ts-node crawler/apply-venues.ts",
     "fix-names": "npx ts-node crawler/fix-names.ts",
     "api": "npx ts-node api/server.ts",

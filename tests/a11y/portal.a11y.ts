@@ -290,3 +290,17 @@ test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async (
   expect(decodeURIComponent(href!)).toContain('objekt=Verein 1235');
   await expect(link).toHaveAttribute('target', '_blank');
 });
+
+test('Kalender-Abo: webcal-Link, Datei und Inhalt mit Spielort', async ({ page, request }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await expect(page.getByRole('link', { name: 'Kalender abonnieren' })).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009.ics');
+  await expect(page.getByRole('link', { name: /Als Datei/ })).toHaveAttribute('href', 'http://localhost:4173/ics/151009.ics');
+
+  const res = await request.get('/ics/151009.ics');
+  expect(res.headers()['content-type']).toContain('text/calendar');
+  const ics = (await res.text()).replace(/\r\n /g, '');
+  expect(ics).toContain('BEGIN:VCALENDAR');
+  expect(ics).toContain('X-WR-CALNAME:TSV 1861 Nördlingen – Basketball');
+  expect(ics).toContain('BEGIN:VEVENT');
+  expect(ics).toContain('LOCATION:Sporthalle Schwabing (gemeldet)');     // Halle aus matchInfo (Fixture)
+});
