@@ -24,9 +24,18 @@ function logoEl(teamId, name, size) {
   return wrap;
 }
 
+// Adresslisten der statischen Seiten (data/team-url-map.json, data/url-map.json); beide sind optional
+let teamUrlMap = null;
+let clubUrlMap = null;
+
+async function loadUrlMaps() {
+  const get = url => fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  [teamUrlMap, clubUrlMap] = await Promise.all([get('data/team-url-map.json'), get('data/url-map.json')]);
+}
+
 function teamLink(teamId, ligaId, text) {
   const a = el('a', null, text);
-  a.href = 'team.html?id=' + encodeURIComponent(teamId) + (ligaId ? '&liga=' + encodeURIComponent(ligaId) : '');
+  a.href = TeamLogic.teamHref(teamUrlMap, teamId, ligaId);
   return a;
 }
 
@@ -286,9 +295,18 @@ function renderLiga(docs, doc, teamId, container, hallIndex) {
 
 async function init() {
   const params = new URLSearchParams(window.location.search);
-  const teamId = params.get('id');
+  // Statische Teamseiten (/<land>/<ort>/<verein>/<team>/) tragen die ID im Head, alte Adressen in der Query
+  const meta = document.querySelector('meta[name="team-id"]');
+  const isStatic = !!meta;
+  const teamId = params.get('id') || (meta && meta.getAttribute('content'));
   const wantedLiga = params.get('liga');
   if (!teamId) { message('Keine Team-ID angegeben.'); return; }
+
+  await loadUrlMaps();
+  if (!isStatic && teamUrlMap && teamUrlMap[String(teamId)]) {
+    location.replace(TeamLogic.teamHref(teamUrlMap, teamId, wantedLiga));
+    return;
+  }
 
   let index;
   try {
@@ -327,7 +345,7 @@ async function init() {
   const sub = el('div', 'team-sub');
   if (clubId != null) {
     const back = document.getElementById('back-link');
-    if (back) { back.href = 'verein.html?id=' + encodeURIComponent(clubId); back.lastChild.textContent = ' Zum Verein'; }
+    if (back) { back.href = (clubUrlMap && clubUrlMap[String(clubId)]) || 'verein.html?id=' + encodeURIComponent(clubId); back.lastChild.textContent = ' Zum Verein'; }
   }
   const ligaLabel = el('span', null);
   sub.appendChild(ligaLabel);
@@ -350,7 +368,7 @@ async function init() {
   function select() {
     ligaLabel.textContent = current.liganame + ' · ' + current.verbandName;
     document.querySelectorAll('.team-liga-btn[data-liga]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.liga === String(current.ligaId))));
-    history.replaceState(null, '', '?id=' + encodeURIComponent(teamId) + '&liga=' + encodeURIComponent(current.ligaId));
+    if (!isStatic) history.replaceState(null, '', '?id=' + encodeURIComponent(teamId) + '&liga=' + encodeURIComponent(current.ligaId));
     renderLiga(docs, current, teamId, body, hallIndex);
   }
   select();

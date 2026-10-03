@@ -1,4 +1,4 @@
-import { localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -326,5 +326,78 @@ describe('Lokalderbys', () => {
     doc.tabelle = [{ rang: 1, team: tm(1, 'TV Ulm'), anzspiele: 0 }];
     const out = buildSite([a, b], {}, BASE, '2026-10-03', { docs: [doc] });
     expect(out.files.get('bayern/ulm/index.html')).toContain('Lokalderbys in Ulm');
+  });
+});
+
+describe('Teamseiten', () => {
+  const tm = (id: number, clubId: number, name: string) => ({ teamPermanentId: id, clubId, teamname: name });
+  const team = (id: number, ak: string, g: string, nr = 1) => ({ teamPermanentId: id, altersklasse: ak, geschlecht: g, teamNumber: nr, ligaId: 1, liganame: 'Kreisliga A', training: [] } as any);
+  const c = club(7, 'TV Regensburg', 'Regensburg', '0200007', { teams: [team(70, 'Senioren', 'männlich'), team(71, 'U16', 'männlich'), team(72, 'Senioren', 'männlich', 2)] });
+  const doc: LigaDoc = {
+    ligaId: 1, liganame: 'Kreisliga A', verbandName: 'Bayern', fetchedAt: '2026-10-03T09:00:00Z',
+    tabelle: [{ rang: 2, team: tm(70, 7, 'TV Regensburg'), anzspiele: 2, s: 1, n: 1 }],
+    matches: [
+      { matchId: 5, kickoffDate: '2026-10-10', kickoffTime: '18:00', homeTeam: tm(70, 7, 'TV Regensburg'), guestTeam: tm(99, 50, 'SV Fremd'), result: null },
+      { matchId: 6, kickoffDate: '2026-09-20', kickoffTime: '18:00', homeTeam: tm(99, 50, 'SV Fremd'), guestTeam: tm(70, 7, 'TV Regensburg'), result: '60:70' },
+      { matchId: 7, kickoffDate: '2026-10-17', homeTeam: tm(70, 7, 'TV Regensburg'), guestTeam: tm(99, 50, 'SV Fremd'), result: null }
+    ],
+    venues: { '5': 11 }, halls: { '11': { bezeichnung: 'Halle <1>', strasse: 'Weg 1', plz: '93047', ort: 'Regensburg' } }
+  } as any;
+
+  it('Slug aus dem Teamnamen, nummerierte Teams unterscheiden sich', () => {
+    expect(teamSlug(team(1, 'Senioren', 'männlich'))).toBe('herren');
+    expect(teamSlug(team(1, 'Senioren', 'weiblich'))).toBe('frauen');
+    expect(teamSlug(team(1, 'U16', 'männlich'))).toBe('u16-maennlich');
+    expect(teamSlug(team(1, 'Senioren', 'männlich', 2))).toBe('herren-2');
+  });
+
+  it('Pfadwünsche: unter dem Vereinspfad, ein Team nur einmal', () => {
+    const w = teamWishes([
+      { club: c, team: c.teams[0] as any, clubPath: 'bayern/regensburg/tv-regensburg/' },
+      { club: club(8, 'TV Regensburg', 'Regensburg'), team: c.teams[0] as any, clubPath: 'bayern/regensburg/tv-regensburg-8/' }
+    ]);
+    expect(w).toEqual([{ key: '70', desired: 'bayern/regensburg/tv-regensburg/herren/' }]);
+  });
+
+  it('teamLigen und primaryLiga', () => {
+    const m = teamLigen([doc]);
+    expect([...m.keys()].sort()).toEqual([70, 99]);
+    expect(primaryLiga(m.get(70)!, 70)).toBe(doc);
+  });
+
+  it('Seite: Platz, Spiele mit Halle, vs./@, Verlinkung und strukturierte Daten', () => {
+    const html = renderTeamPage({
+      base: BASE, ref: { club: c, team: c.teams[0] as any, clubPath: 'bayern/regensburg/tv-regensburg/' }, path: 'bayern/regensburg/tv-regensburg/herren/',
+      docs: [doc], clubPaths: { '7': 'bayern/regensburg/tv-regensburg/' }, ligaPaths: { 1: 'liga/bayern/kreisliga-a/' },
+      teamPaths: { '70': 'bayern/regensburg/tv-regensburg/herren/' }, today: '2026-10-03', cp: placeOf(c), clubUrl: 'bayern/regensburg/tv-regensburg/'
+    });
+    expect(html).toContain('<base href="../../../../">');
+    expect(html).toContain('<meta name="team-id" content="70">');
+    expect(html).toContain('id="team-content"');
+    expect(html).toContain('Platz 2 (2 Spiele, 1 Siege, 1 Niederlagen)');
+    expect(html).toContain('Halle &lt;1&gt;, Regensburg');
+    expect(html).toContain('<span class="seo-note">vs.</span>');
+    expect(html).toContain('<span class="seo-note">@</span>');
+    expect(html).toContain('<a href="liga/bayern/kreisliga-a/">Kreisliga A</a>');
+    expect(html).toContain('"@type":"SportsTeam"');
+    expect((html.match(/"@type":"SportsEvent"/g) ?? []).length).toBe(1);       // nur das Spiel mit bestätigter Halle
+    expect(html).toContain('60:70');
+  });
+
+  it('buildSite: Team-, Vereins- und Ligaseite verlinken sich, Umzug erzeugt Weiterleitung', () => {
+    const before = buildSite([club(7, 'TV Regensburg', 'Passau', '0200007', { teams: c.teams })], {}, BASE, '2026-10-03', { docs: [doc] });
+    const moved = buildSite([c], before.urlMap, BASE, '2026-10-03', { docs: [doc], previousTeams: before.teamMap });
+    expect(moved.files.get('bayern/regensburg/tv-regensburg/herren/index.html')).toContain('SportsTeam');
+    expect(moved.files.get('bayern/passau/tv-regensburg/herren/index.html')).toContain('http-equiv="refresh"');
+    expect(moved.files.get('bayern/regensburg/tv-regensburg/index.html')).toContain('<a href="bayern/regensburg/tv-regensburg/herren/">Herren</a>');
+    expect(moved.files.get('liga/bayern/kreisliga-a/index.html')).toContain('href="bayern/regensburg/tv-regensburg/herren/"');
+    expect(moved.files.get('sitemap.xml')).toContain('/bayern/regensburg/tv-regensburg/herren/<');
+    expect(moved.files.get('sitemap.xml')).not.toContain('passau/tv-regensburg/herren');
+    expect(moved.teamMap['70'].history).toEqual(['bayern/passau/tv-regensburg/herren/']);
+  });
+
+  it('ohne Live-Daten entstehen keine Teamseiten', () => {
+    const out = buildSite([c], {}, BASE, '2026-10-03');
+    expect([...out.files.keys()].some(k => k.endsWith('/herren/index.html'))).toBe(false);
   });
 });
