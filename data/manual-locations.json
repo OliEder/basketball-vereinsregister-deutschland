@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "clubId": 839,
+    "name": "Homburger Turngemeinde 1846 e.V.",
+    "zip": "61348",
+    "city": "Bad Homburg v.d.H.",
+    "note": "Vereinsverzeichnis der Stadt Bad Homburg (Niederstedter Weg 2)"
+  },
+  {
+    "clubId": 4796,
+    "name": "TV Altenstadt 1873 e.V.",
+    "zip": "73312",
+    "city": "Geislingen an der Steige",
+    "note": "Vereinsanschrift Filsstr. 51 (Suchtreffer); Halle in Geislingen"
+  },
+  {
+    "clubId": 463,
+    "name": "TuS Ensdorf",
+    "zip": "66806",
+    "city": "Ensdorf",
+    "note": "abgeleitet aus der Großsporthalle Ensdorf; kein Impressum gefunden"
+  },
+  {
+    "clubId": 473,
+    "name": "SV Saaldorf",
+    "zip": "83416",
+    "city": "Saaldorf-Surheim",
+    "note": "abgeleitet aus der Mehrzweckhalle Saaldorf; kein Impressum gefunden"
+  },
+  {
+    "clubId": 476,
+    "name": "FC Hertha Hilkerode",
+    "zip": "37115",
+    "city": "Duderstadt",
+    "note": "Hilkerode ist ein Ortsteil von Duderstadt; Halle in Duderstadt; kein Impressum gefunden"
+  },
+  {
+    "clubId": 1849,
+    "name": "SV S-W Marienfeld 1930 e.V.",
+    "zip": "33428",
+    "city": "Harsewinkel",
+    "note": "Ortsteil Marienfeld, Kreis Gütersloh; PLZ aus Allgemeinwissen, nicht aus der Quelle"
+  },
+  {
+    "clubId": 2606,
+    "name": "TV Falkenberg e. V.",
+    "zip": "28865",
+    "city": "Lilienthal",
+    "note": "Zum Schoofmoor 16 (Telefonverzeichnis); Halle in Lilienthal"
+  },
+  {
+    "clubId": 3758,
+    "name": "SC Lüchow",
+    "zip": "29439",
+    "city": "Lüchow (Wendland)",
+    "note": "sc-luechow.de (Schulweg 4); der Geocoder fand ein anderes Lüchow bei Berlin"
+  },
+  {
+    "clubId": 5198,
+    "name": "TSV Baskets Aufbau",
+    "zip": "37308",
+    "city": "Heilbad Heiligenstadt",
+    "note": "Basketballabteilung des TSV Aufbau 1952 Heiligenstadt; Dreifelderhalle im Park"
+  },
+  {
+    "clubId": 5338,
+    "name": "sport live e.V.",
+    "zip": "18435",
+    "city": "Stralsund",
+    "note": "sportlive-ev.de (Heinrich-Heine-Ring 78)"
+  },
+  {
+    "clubId": 5354,
+    "name": "VDB Sport in der Vietnamesische-Brücken e.V.",
+    "zip": "10365",
+    "city": "Berlin",
+    "note": "Sitz des Mutterverbands Vietnamesisch-Deutsche Brücke (Herzbergstr. 128-139); eigene Anschrift nicht gefunden"
+  },
+  {
+    "clubId": 5405,
+    "name": "BASKETS Rookie Academy",
+    "zip": "39326",
+    "city": "Wolmirstedt",
+    "note": "Heimspielstätte Halle der Freundschaft (Humanas Rookie Academy); Vereinssitz nicht belegt"
+  },
+  {
+    "clubId": 4144,
+    "name": "LINDEN DUDES e.V.",
+    "zip": "30453",
+    "city": "Hannover",
+    "note": "Stadtteil Linden/Limmer; PLZ der Heimhalle Gymnasium Limmer; Vereinsanschrift nicht gefunden"
+  },
+  {
+    "clubId": 4867,
+    "name": "BSG Usinger Land",
+    "zip": "61250",
+    "city": "Usingen",
+    "note": "Haupthalle Neue Halle CWS; Alternative Neu-Anspach 61267; Sitz nicht belegt"
+  },
+  {
+    "clubId": 5232,
+    "name": "SG Frisian Vikings",
+    "zip": "25899",
+    "city": "Niebüll",
+    "note": "Spielgemeinschaft; Heimhalle Gemeinschaftsschule Halle 2; Sitz nicht belegt"
+  }
+]
