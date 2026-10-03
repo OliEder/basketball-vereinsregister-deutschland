@@ -28,6 +28,13 @@
     "note": "Vereinsverzeichnis der Stadt Bad Homburg (Niederstedter Weg 2)"
   },
   {
+    "clubId": 1106,
+    "name": "E. TuS Wanne 28 e. V.",
+    "zip": "44649",
+    "city": "Herne-Wanne",
+    "note": "Halle: SH der Realschule Crange, 44649 Herne-Wanne"
+  },
+  {
     "clubId": 1849,
     "name": "SV S-W Marienfeld 1930 e.V.",
     "zip": "33428",
@@ -56,6 +63,27 @@
     "note": "Stadtteil Linden/Limmer; PLZ der Heimhalle Gymnasium Limmer; Vereinsanschrift nicht gefunden"
   },
   {
+    "clubId": 4262,
+    "name": "SFB 94 e.V.",
+    "zip": "14770",
+    "city": "Brandenburg an der Havel",
+    "note": "Hallen in Brandenburg an der Havel (14770/14776); Vereinsnummer Brandenburg"
+  },
+  {
+    "clubId": 4642,
+    "name": "RSB Thuringia Bulls e.V.",
+    "zip": "99189",
+    "city": "Elxleben",
+    "note": "Halle: REHA-Sport-Bildungszentrum, 99189 Elxleben (bei Erfurt); Sitz nicht belegt"
+  },
+  {
+    "clubId": 4717,
+    "name": "SG Heidelberg-Kirchheim e. V.",
+    "zip": "69124",
+    "city": "Heidelberg",
+    "note": "Geschäftsstelle Pleikartsförster Straße 130, 69124 Heidelberg-Kirchheim (sgk-sport.de, Angabe des Betreibers)"
+  },
+  {
     "clubId": 4796,
     "name": "TV Altenstadt 1873 e.V.",
     "zip": "73312",
@@ -82,6 +110,13 @@
     "zip": "25899",
     "city": "Niebüll",
     "note": "Spielgemeinschaft; Heimhalle Gemeinschaftsschule Halle 2; Sitz nicht belegt"
+  },
+  {
+    "clubId": 5287,
+    "name": "SpVgg Erdweg e.V. 1957",
+    "zip": "85253",
+    "city": "Erdweg",
+    "note": "Halle: Schulsporthalle Erdweg, 85253 Erdweg"
   },
   {
     "clubId": 5338,
