@@ -150,3 +150,41 @@ describe('manuelle Orte', () => {
     expect(decide({ source: 'hall', confidence: 'high' }, false, false, false)).toBe('kept');
   });
 });
+
+import { parseLaender, distanceToBorderKm } from '../crawler/geo-laender';
+
+describe('RegionIndex mit Länderpolygonen', () => {
+  // Bayern als Rechteck 47–50 °N, 10–13 °E; Baden-Württemberg westlich davon
+  const rect = (name: string, x0: number, y0: number, x1: number, y1: number) => ({
+    type: 'Feature', properties: { GEN: name }, geometry: { type: 'Polygon', coordinates: [[[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0]]] }
+  });
+  const laender = parseLaender({ attribution: 'Test', features: [rect('Bayern', 10, 47, 13, 50), rect('Baden-Württemberg', 7, 47, 10, 50)] });
+  const idx = new RegionIndex([], () => true, { laender });
+  const by = club(1, null, null, { teams: [] });
+
+  it('nimmt Punkte im eigenen Land und lässt Wasser/Randlagen in der Toleranz zu', () => {
+    expect(idx.check(by, { lat: 48.5, lng: 11.5 })).toMatchObject({ ok: true, level: 'state' });
+    expect(idx.check(by, { lat: 48.5, lng: 10.05 }).ok).toBe(true);  // im Nachbarland, aber etwa 4 km hinter der Grenze
+    expect(idx.check(by, { lat: 50.05, lng: 11.5 }).ok).toBe(true);  // 5 km hinter dem Rand, kein Land dahinter
+  });
+
+  it('lehnt Punkte klar außerhalb ab und nennt den Abstand zum Rand', () => {
+    const r = idx.check(by, { lat: 48.5, lng: 9.0 });             // mitten in Baden-Württemberg
+    expect(r.ok).toBe(false);
+    expect(r.level).toBe('state');
+    expect(r.distanceKm).toBeGreaterThan(60);
+    expect(idx.check(by, { lat: 53.55, lng: 9.99 }).ok).toBe(false); // Hamburg
+  });
+
+  it('mit laender: null gelten die festen Radien', () => {
+    const fallback = new RegionIndex([], () => true, { laender: null });
+    expect(fallback.check(by, { lat: 48.5, lng: 9.0 }).ok).toBe(true);   // innerhalb des Bayern-Radius
+    expect(fallback.check(by, { lat: 53.55, lng: 9.99 }).ok).toBe(false);
+  });
+
+  it('distanceToBorderKm misst zum Rand, auch von innen', () => {
+    const land = laender.features.find(f => f.name === 'Bayern')!;
+    expect(distanceToBorderKm(land, { lat: 48.5, lng: 10.0 })).toBeLessThan(0.5);
+    expect(distanceToBorderKm(land, { lat: 48.5, lng: 11.5 })).toBeGreaterThan(100);
+  });
+});
