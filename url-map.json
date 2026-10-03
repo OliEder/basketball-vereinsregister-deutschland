@@ -1,0 +1,7302 @@
+{
+ "31": {
+  "path": "baden-wuerttemberg/ludwigsburg/bsg-basket-ludwigsburg/",
+  "history": []
+ },
+ "34": {
+  "path": "bayern/burglengenfeld/tv-1875-burglengenfeld/",
+  "history": []
+ },
+ "36": {
+  "path": "niedersachsen/weitere/tsv-thedinghausen/",
+  "history": []
+ },
+ "39": {
+  "path": "sachsen/weitere/chemnitzer-wsv/",
+  "history": []
+ },
+ "40": {
+  "path": "nordrhein-westfalen/muenster/sc-westfalia-kinderhaus-1920/",
+  "history": []
+ },
+ "42": {
+  "path": "bayern/friedberg/sportfreunde-friedberg/",
+  "history": []
+ },
+ "50": {
+  "path": "nordrhein-westfalen/weitere/stolberger-turngemeinde-1883/",
+  "history": []
+ },
+ "51": {
+  "path": "nordrhein-westfalen/weitere/turnverein-jahn-plettenberg/",
+  "history": []
+ },
+ "60": {
+  "path": "bayern/weismain/tv-1904-weismain/",
+  "history": []
+ },
+ "62": {
+  "path": "niedersachsen/spelle/sg-bramsche-1966/",
+  "history": []
+ },
+ "68": {
+  "path": "niedersachsen/petersfehn/tus-frei-weg-petersfehn-1904/",
+  "history": []
+ },
+ "69": {
+  "path": "baden-wuerttemberg/haiterbach/kkk-haiterbach/",
+  "history": []
+ },
+ "79": {
+  "path": "bayern/altdorf/tv-1881-altdorf/",
+  "history": []
+ },
+ "80": {
+  "path": "sachsen/leipzig/sfv-knorke-96-leipzig/",
+  "history": []
+ },
+ "85": {
+  "path": "mecklenburg-vorpommern/wismar/polizeisportverein-wismar/",
+  "history": []
+ },
+ "88": {
+  "path": "sachsen/wurzen/basketballverein-1950-wurzen/",
+  "history": []
+ },
+ "89": {
+  "path": "sachsen/chemnitz/sport-und-spielverein-chemnitz/",
+  "history": []
+ },
+ "91": {
+  "path": "thueringen/gera/1-bv-gera-66/",
+  "history": []
+ },
+ "97": {
+  "path": "bayern/stadtbergen/bg-leitershofen-stadtbergen/",
+  "history": []
+ },
+ "98": {
+  "path": "sachsen-anhalt/osterwieck/sportclub-osterwieck/",
+  "history": []
+ },
+ "99": {
+  "path": "saarland/wadgassen/schaffhausen-96ers/",
+  "history": []
+ },
+ "103": {
+  "path": "bayern/aichach/tsv-aichach/",
+  "history": []
+ },
+ "104": {
+  "path": "bayern/muenchen/bc-hellenen-muenchen/",
+  "history": []
+ },
+ "108": {
+  "path": "sachsen-anhalt/salzwedel/psv-salzwedel/",
+  "history": []
+ },
+ "112": {
+  "path": "sachsen/zwickau/basketballclub-zwickau/",
+  "history": []
+ },
+ "115": {
+  "path": "hamburg/hamburg/s-s-d-nikola-tesla/",
+  "history": []
+ },
+ "116": {
+  "path": "baden-wuerttemberg/sigmaringen/tb-sigmaringen/",
+  "history": []
+ },
+ "117": {
+  "path": "baden-wuerttemberg/stockach/tg-stockach/",
+  "history": []
+ },
+ "119": {
+  "path": "baden-wuerttemberg/oehringen/tsg-oehringen/",
+  "history": []
+ },
+ "120": {
+  "path": "baden-wuerttemberg/esslingen-zell/bv-hellas-esslingen/",
+  "history": []
+ },
+ "121": {
+  "path": "nordrhein-westfalen/kirchlengern/fc-rot-weiss-kirchlengern/",
+  "history": []
+ },
+ "123": {
+  "path": "sachsen/dresden/basketball-club-dresden/",
+  "history": []
+ },
+ "128": {
+  "path": "berlin/berlin/berlin-baskets/",
+  "history": []
+ },
+ "129": {
+  "path": "niedersachsen/wiesmoor/tg-wiesmoor-von-1930/",
+  "history": []
+ },
+ "134": {
+  "path": "nordrhein-westfalen/koeln/turnverein-dellbrueck/",
+  "history": []
+ },
+ "136": {
+  "path": "nordrhein-westfalen/essen-ueberruhr/turnerbund-1900-essen-ueberruhr/",
+  "history": []
+ },
+ "139": {
+  "path": "mecklenburg-vorpommern/guestrow/sv-einheit-guestrow/",
+  "history": []
+ },
+ "145": {
+  "path": "nordrhein-westfalen/duesseldorf-oberbilk/sv-alte-freunde-95-duesseldorf/",
+  "history": []
+ },
+ "147": {
+  "path": "saarland/neunkirchen-wellesweiler/ssv-wellesweiler/",
+  "history": []
+ },
+ "153": {
+  "path": "bremen/bremen/tus-huchting/",
+  "history": []
+ },
+ "156": {
+  "path": "nordrhein-westfalen/aachen-brand/brander-turnverein-1883-aachen/",
+  "history": []
+ },
+ "161": {
+  "path": "hessen/frankfurt-am-main/sg-enkheim/",
+  "history": []
+ },
+ "167": {
+  "path": "bremen/bremen/bremen-1860/",
+  "history": []
+ },
+ "169": {
+  "path": "baden-wuerttemberg/rottweil/tsv-ebingen/",
+  "history": []
+ },
+ "171": {
+  "path": "baden-wuerttemberg/holzgerlingen/sv-holzgerlingen/",
+  "history": []
+ },
+ "172": {
+  "path": "baden-wuerttemberg/neuenstadt/tsv-neuenstadt/",
+  "history": []
+ },
+ "173": {
+  "path": "baden-wuerttemberg/muensingen/wsv-mehrstetten/",
+  "history": []
+ },
+ "175": {
+  "path": "sachsen-anhalt/halle/justabs-halle/",
+  "history": []
+ },
+ "179": {
+  "path": "nordrhein-westfalen/bonn/baskets-bonn/",
+  "history": []
+ },
+ "184": {
+  "path": "nordrhein-westfalen/duesseldorf/turngemeinde-v-1881-duesseldorf/",
+  "history": []
+ },
+ "193": {
+  "path": "nordrhein-westfalen/duesseldorf-bilk/djk-tusa-06-duesseldorf/",
+  "history": []
+ },
+ "196": {
+  "path": "nordrhein-westfalen/siegen/bg-tvo-biggesee-tv-jahn-siegen/",
+  "history": []
+ },
+ "200": {
+  "path": "nordrhein-westfalen/duesseldorf-kaiserswerth/isd-sportverein/",
+  "history": []
+ },
+ "203": {
+  "path": "saarland/nalbach/tv-germania-nalbach/",
+  "history": []
+ },
+ "206": {
+  "path": "nordrhein-westfalen/weitere/tv-von-1912-verl/",
+  "history": []
+ },
+ "208": {
+  "path": "sachsen/ottendorf-okrilla/bbc-ottendorf-okrilla/",
+  "history": []
+ },
+ "209": {
+  "path": "nordrhein-westfalen/ahaus/vfl-ahaus-1892/",
+  "history": []
+ },
+ "212": {
+  "path": "berlin/berlin/tc-69-berlin-wilmersdorf/",
+  "history": []
+ },
+ "216": {
+  "path": "bayern/miesbach/tv-1863-miesbach/",
+  "history": []
+ },
+ "217": {
+  "path": "bayern/plattling/tsv-plattling/",
+  "history": []
+ },
+ "220": {
+  "path": "bayern/vierkirchen/sc-vierkirchen/",
+  "history": []
+ },
+ "226": {
+  "path": "mecklenburg-vorpommern/rostock/rostock-seawolves/",
+  "history": []
+ },
+ "227": {
+  "path": "brandenburg/schwedt/bg-94-schwedt/",
+  "history": []
+ },
+ "228": {
+  "path": "brandenburg/strausberg/ksc-strausberg/",
+  "history": []
+ },
+ "234": {
+  "path": "bremen/bremen/tus-komet-arsten/",
+  "history": []
+ },
+ "237": {
+  "path": "saarland/merzig/borussia-merzig/",
+  "history": []
+ },
+ "239": {
+  "path": "baden-wuerttemberg/rastatt/tv-1919-rastatt-rheinau/",
+  "history": []
+ },
+ "245": {
+  "path": "nordrhein-westfalen/wuelfrath/turnerbund-wuelfrath-1891/",
+  "history": []
+ },
+ "249": {
+  "path": "nordrhein-westfalen/moenchengladbach/moenchengladbacher-tv/",
+  "history": []
+ },
+ "250": {
+  "path": "nordrhein-westfalen/coesfeld/djk-vorwaerts-lette/",
+  "history": []
+ },
+ "251": {
+  "path": "niedersachsen/harsefeld/tus-harsefeld/",
+  "history": []
+ },
+ "254": {
+  "path": "niedersachsen/bassum/tsv-bassum/",
+  "history": []
+ },
+ "255": {
+  "path": "niedersachsen/bersenbrueck/tus-bersenbrueck/",
+  "history": []
+ },
+ "259": {
+  "path": "bayern/pettstadt/sv-1928-pettstadt/",
+  "history": []
+ },
+ "264": {
+  "path": "rheinland-pfalz/altenkirchen/altenkirchener-sg-1883/",
+  "history": []
+ },
+ "266": {
+  "path": "niedersachsen/celle/tus-celle/",
+  "history": []
+ },
+ "275": {
+  "path": "sachsen-anhalt/gardelegen/ssg-der-jugend-93-gardelegen/",
+  "history": []
+ },
+ "276": {
+  "path": "bayern/hilpoltstein/tv-1879-hilpoltstein/",
+  "history": []
+ },
+ "277": {
+  "path": "bayern/wendelstein/sc-grossschwarzenlohe/",
+  "history": []
+ },
+ "278": {
+  "path": "bayern/wuerzburg/sv-oberduerrbach-1959/",
+  "history": []
+ },
+ "279": {
+  "path": "bayern/oberschleissheim/tsv-schleissheim/",
+  "history": []
+ },
+ "280": {
+  "path": "nordrhein-westfalen/marl/marler-basketball-club-94/",
+  "history": []
+ },
+ "284": {
+  "path": "hessen/darmstadt/bc-helios-darmstadt/",
+  "history": []
+ },
+ "286": {
+  "path": "sachsen/nossen/sv-lok-nossen/",
+  "history": []
+ },
+ "291": {
+  "path": "nordrhein-westfalen/koeln-porz/hellenischer-sv-athena-porz/",
+  "history": []
+ },
+ "293": {
+  "path": "sachsen-anhalt/wittenberg/mtv-von-1862-wittenberg/",
+  "history": []
+ },
+ "296": {
+  "path": "sachsen-anhalt/zerbst/tv-gut-heil-zerbst/",
+  "history": []
+ },
+ "300": {
+  "path": "bayern/waldbrunn/sv-waldbrunn/",
+  "history": []
+ },
+ "305": {
+  "path": "niedersachsen/merzen/blau-weiss-merzen/",
+  "history": []
+ },
+ "307": {
+  "path": "nordrhein-westfalen/meinerzhagen/tus-meinerzhagen-1877/",
+  "history": []
+ },
+ "309": {
+  "path": "thueringen/erfurt/motor-gispersleben/",
+  "history": []
+ },
+ "310": {
+  "path": "baden-wuerttemberg/ulm-soeflingen/tsg-soeflingen-1864/",
+  "history": []
+ },
+ "311": {
+  "path": "baden-wuerttemberg/metzingen/tus-metzingen/",
+  "history": []
+ },
+ "316": {
+  "path": "berlin/berlin/athletik-club-berlin/",
+  "history": []
+ },
+ "318": {
+  "path": "brandenburg/lauchhammer/bg-lauchhammer-1950/",
+  "history": []
+ },
+ "320": {
+  "path": "rheinland-pfalz/woerth/tv-03-woerth-a-rh/",
+  "history": []
+ },
+ "321": {
+  "path": "niedersachsen/northeim/club-spiel-und-sport-northeim/",
+  "history": []
+ },
+ "322": {
+  "path": "bayern/markt-schwaben/tv-von-1895-markt-schwaben/",
+  "history": []
+ },
+ "323": {
+  "path": "brandenburg/fuerstenwalde/wsg-fuerstenwalde/",
+  "history": []
+ },
+ "325": {
+  "path": "niedersachsen/hannover/tus-bothfeld-04/",
+  "history": []
+ },
+ "327": {
+  "path": "thueringen/gotha/big-basketball-in-gotha/",
+  "history": []
+ },
+ "328": {
+  "path": "hessen/dieburg/turnverein-1863-dieburg/",
+  "history": []
+ },
+ "333": {
+  "path": "bayern/litzendorf/bg-litzendorf/",
+  "history": []
+ },
+ "336": {
+  "path": "hamburg/hamburg/rissener-sportverein-v-1949/",
+  "history": []
+ },
+ "337": {
+  "path": "niedersachsen/scheessel/bg-89-rotenburg-scheessel/",
+  "history": []
+ },
+ "340": {
+  "path": "hessen/kirchhain/tsv-kirchhain/",
+  "history": []
+ },
+ "341": {
+  "path": "nordrhein-westfalen/koeln-ostheim/djk-koeln-ost/",
+  "history": []
+ },
+ "342": {
+  "path": "berlin/berlin/tus-lichterfelde/",
+  "history": []
+ },
+ "345": {
+  "path": "bayern/burghausen/sv-wacker-burghausen/",
+  "history": []
+ },
+ "347": {
+  "path": "bayern/weiden-i-d-opf/tb-weiden/",
+  "history": []
+ },
+ "352": {
+  "path": "hessen/wettenberg-krofdorf/tsv-krofdorf-gleiberg/",
+  "history": []
+ },
+ "355": {
+  "path": "nordrhein-westfalen/herne-eickel/gbc-hellas-herne/",
+  "history": []
+ },
+ "356": {
+  "path": "niedersachsen/weitere/mtv-schandelah-gardessen/",
+  "history": []
+ },
+ "358": {
+  "path": "mecklenburg-vorpommern/ribnitz-damgarten/psv-ribnitz-damgarten/",
+  "history": []
+ },
+ "360": {
+  "path": "berlin/berlin/tsv-rudow-1888/",
+  "history": []
+ },
+ "362": {
+  "path": "berlin/berlin/vfb-hermsdorf/",
+  "history": []
+ },
+ "363": {
+  "path": "bayern/augsburg/tv-1847-augsburg/",
+  "history": []
+ },
+ "364": {
+  "path": "nordrhein-westfalen/koeln-porz/gsv-porz/",
+  "history": []
+ },
+ "365": {
+  "path": "baden-wuerttemberg/wiesloch/tsg-1885-wiesloch/",
+  "history": []
+ },
+ "366": {
+  "path": "bayern/icking/tus-geretsried/",
+  "history": []
+ },
+ "367": {
+  "path": "bayern/neustadt-an-der-aisch/ttv-neustadt/",
+  "history": []
+ },
+ "368": {
+  "path": "bayern/amorbach/tsv-amorbach-1863/",
+  "history": []
+ },
+ "370": {
+  "path": "hessen/langen/tv-1862-langen/",
+  "history": []
+ },
+ "371": {
+  "path": "nordrhein-westfalen/arnsberg/sv-09-arnsberg/",
+  "history": []
+ },
+ "376": {
+  "path": "baden-wuerttemberg/freiberg/mamo-baskets-freiberg/",
+  "history": []
+ },
+ "377": {
+  "path": "rheinland-pfalz/bad-bergzabern/tv-bad-bergzabern/",
+  "history": []
+ },
+ "378": {
+  "path": "rheinland-pfalz/saulheim/tus-1897-saulheim/",
+  "history": []
+ },
+ "380": {
+  "path": "rheinland-pfalz/konz/tg-konz-karthaus-1885/",
+  "history": []
+ },
+ "381": {
+  "path": "rheinland-pfalz/emmelshausen/tsv-emmelshausen/",
+  "history": []
+ },
+ "382": {
+  "path": "nordrhein-westfalen/oberhausen/tv-jahn-1911-koenigshardt/",
+  "history": []
+ },
+ "383": {
+  "path": "hessen/fulda/ft-1848-fulda/",
+  "history": []
+ },
+ "384": {
+  "path": "hessen/gruenberg/tsv-1883-gruenberg/",
+  "history": []
+ },
+ "385": {
+  "path": "niedersachsen/lehrte/lehrter-sv-v-1874/",
+  "history": []
+ },
+ "386": {
+  "path": "hessen/frankfurt-am-main/tus-makkabi-frankfurt/",
+  "history": []
+ },
+ "387": {
+  "path": "baden-wuerttemberg/bruchsal/tsg-bruchsal/",
+  "history": []
+ },
+ "388": {
+  "path": "bayern/diedorf/tsv-diedorf/",
+  "history": []
+ },
+ "389": {
+  "path": "bayern/bamberg/djk-don-bosco-bamberg/",
+  "history": []
+ },
+ "391": {
+  "path": "hessen/bad-laasphe-gennernbach/sg-wallau-laasphe/",
+  "history": []
+ },
+ "395": {
+  "path": "bayern/wuerzburg/tsv-grombuehl/",
+  "history": []
+ },
+ "397": {
+  "path": "baden-wuerttemberg/loerrach/cvjm-loerrach/",
+  "history": []
+ },
+ "398": {
+  "path": "bayern/neustadt-a-d-waldnaab/djk-neustadt-a-d-waldnaab/",
+  "history": []
+ },
+ "399": {
+  "path": "saarland/saarbruecken-dudweiler/tus-herrensohr/",
+  "history": []
+ },
+ "400": {
+  "path": "nordrhein-westfalen/goch/tv-goch-1883/",
+  "history": []
+ },
+ "404": {
+  "path": "bayern/baunach/fc-baunach-1911/",
+  "history": []
+ },
+ "408": {
+  "path": "bremen/heidelberg/deutscher-basketball-bund-hb/",
+  "history": []
+ },
+ "409": {
+  "path": "nordrhein-westfalen/paderborn/paderborn-baskets-91/",
+  "history": []
+ },
+ "410": {
+  "path": "nordrhein-westfalen/dortmund/asc-09-dortmund/",
+  "history": []
+ },
+ "411": {
+  "path": "rheinland-pfalz/trier/trimmelter-sv/",
+  "history": []
+ },
+ "414": {
+  "path": "berlin/berlin/city-basket-berlin/",
+  "history": []
+ },
+ "415": {
+  "path": "bayern/lohr/tsv-1846-lohr/",
+  "history": []
+ },
+ "417": {
+  "path": "bayern/erding/spvgg-altenerding/",
+  "history": []
+ },
+ "418": {
+  "path": "bayern/hersbruck/tv-1861-hersbruck/",
+  "history": []
+ },
+ "422": {
+  "path": "rheinland-pfalz/ingelheim/tg-nieder-ingelheim/",
+  "history": []
+ },
+ "424": {
+  "path": "berlin/berlin/dbv-charlottenburg/",
+  "history": []
+ },
+ "426": {
+  "path": "nordrhein-westfalen/haltern/alter-turnverein-haltern/",
+  "history": []
+ },
+ "428": {
+  "path": "bayern/tegernheim/fc-tegernheim/",
+  "history": []
+ },
+ "429": {
+  "path": "nordrhein-westfalen/langenfeld/sg-langenfeld-92-72/",
+  "history": []
+ },
+ "430": {
+  "path": "nordrhein-westfalen/erkrath-hochdahl/tsv-hochdahl-64/",
+  "history": []
+ },
+ "431": {
+  "path": "nordrhein-westfalen/erkrath/tus-erkrath-1930/",
+  "history": []
+ },
+ "432": {
+  "path": "niedersachsen/belm/sv-concordia-belm-powe/",
+  "history": []
+ },
+ "436": {
+  "path": "nordrhein-westfalen/dortmund/tsg-1868-dortmund-schueren/",
+  "history": []
+ },
+ "438": {
+  "path": "hessen/giessen-wieseck/tsg-wieseck/",
+  "history": []
+ },
+ "441": {
+  "path": "hessen/neu-isenburg/bc-neu-isenburg/",
+  "history": []
+ },
+ "443": {
+  "path": "niedersachsen/seesen/mtv-seesen/",
+  "history": []
+ },
+ "444": {
+  "path": "niedersachsen/wedemark/mtv-mellendorf/",
+  "history": []
+ },
+ "445": {
+  "path": "nordrhein-westfalen/gronau/sv-vorwaerts-gronau-09/",
+  "history": []
+ },
+ "446": {
+  "path": "bayern/treuchtlingen/vfl-treuchtlingen/",
+  "history": []
+ },
+ "447": {
+  "path": "nordrhein-westfalen/moenchengladbach/spvg-05-07-odenkirchen/",
+  "history": []
+ },
+ "449": {
+  "path": "nordrhein-westfalen/erkelenz/tv-erkelenz-1860/",
+  "history": []
+ },
+ "451": {
+  "path": "rheinland-pfalz/arzbach/tv-arzbach/",
+  "history": []
+ },
+ "452": {
+  "path": "rheinland-pfalz/mainz/asc-theresianum/",
+  "history": []
+ },
+ "455": {
+  "path": "nordrhein-westfalen/monheim/bg-monheim/",
+  "history": []
+ },
+ "456": {
+  "path": "nordrhein-westfalen/leverkusen/tv-hitdorf/",
+  "history": []
+ },
+ "457": {
+  "path": "bayern/rott-am-inn/asv-rott-am-inn/",
+  "history": []
+ },
+ "459": {
+  "path": "berlin/berlin/einheit-pankow/",
+  "history": []
+ },
+ "460": {
+  "path": "bayern/herzogenaurach/ts-herzogenaurach/",
+  "history": []
+ },
+ "463": {
+  "path": "saarland/ensdorf/tus-ensdorf/",
+  "history": []
+ },
+ "465": {
+  "path": "nordrhein-westfalen/leichlingen/leichlinger-tv-1883/",
+  "history": []
+ },
+ "466": {
+  "path": "nordrhein-westfalen/hilden/tus-hilden-1896/",
+  "history": []
+ },
+ "468": {
+  "path": "nordrhein-westfalen/freudenberg-bueschergrund/tv-freudenberg-von-1894/",
+  "history": []
+ },
+ "470": {
+  "path": "niedersachsen/westerstede/tsg-westerstede/",
+  "history": []
+ },
+ "472": {
+  "path": "hessen/wetzlar/tv-1847-wetzlar/",
+  "history": []
+ },
+ "473": {
+  "path": "bayern/saaldorf/sv-saaldorf/",
+  "history": []
+ },
+ "474": {
+  "path": "nordrhein-westfalen/haan/haaner-turnverein-1863/",
+  "history": []
+ },
+ "475": {
+  "path": "nordrhein-westfalen/lohmar/tv-lohmar/",
+  "history": []
+ },
+ "476": {
+  "path": "niedersachsen/duderstadt/fc-hertha-hilkerode/",
+  "history": []
+ },
+ "477": {
+  "path": "nordrhein-westfalen/troisdorf-sieglar/sieglarer-tv-1897/",
+  "history": []
+ },
+ "479": {
+  "path": "bayern/rosenheim/sb-djk-rosenheim/",
+  "history": []
+ },
+ "481": {
+  "path": "nordrhein-westfalen/neunkirchen-seelscheid/tsv-seelscheid-1920/",
+  "history": []
+ },
+ "484": {
+  "path": "baden-wuerttemberg/bretten/turnverein-1846-bretten/",
+  "history": []
+ },
+ "485": {
+  "path": "hessen/aschaffenburg/ts-klein-krotzenburg/",
+  "history": []
+ },
+ "488": {
+  "path": "nordrhein-westfalen/emmerich/foerderkr-bb-in-emmerich-1990/",
+  "history": []
+ },
+ "493": {
+  "path": "nordrhein-westfalen/hagen-hohenlimburg/tv-hohenlimburg-1871/",
+  "history": []
+ },
+ "494": {
+  "path": "niedersachsen/osnabrueck-sutthausen/rw-sutthausen/",
+  "history": []
+ },
+ "496": {
+  "path": "baden-wuerttemberg/herrenberg/vfl-herrenberg/",
+  "history": []
+ },
+ "498": {
+  "path": "nordrhein-westfalen/niederkassel/turn-und-spielverein-mondorf/",
+  "history": []
+ },
+ "499": {
+  "path": "hamburg/hamburg/sv-nettelnburg-allermoehe/",
+  "history": []
+ },
+ "500": {
+  "path": "hessen/frankfurt-am-main/eintracht-frankfurt/",
+  "history": []
+ },
+ "501": {
+  "path": "nordrhein-westfalen/hagen-altenhagen/tsv-hagen-1860/",
+  "history": []
+ },
+ "504": {
+  "path": "bayern/goldbach/tv-1897-goldbach/",
+  "history": []
+ },
+ "505": {
+  "path": "nordrhein-westfalen/troisdorf/troisdorfer-lg-1966/",
+  "history": []
+ },
+ "509": {
+  "path": "hessen/seeheim-jugenheim/s-c-bergstrasse/",
+  "history": []
+ },
+ "511": {
+  "path": "nordrhein-westfalen/hagen/s-v-cosmos-hagen-87/",
+  "history": []
+ },
+ "512": {
+  "path": "rheinland-pfalz/zell-kaimt/tv-zell/",
+  "history": []
+ },
+ "513": {
+  "path": "rheinland-pfalz/landau/asv-46-landau/",
+  "history": []
+ },
+ "517": {
+  "path": "hamburg/hamburg/eimsbuetteler-turnverband/",
+  "history": []
+ },
+ "520": {
+  "path": "nordrhein-westfalen/huerth/huerther-bc/",
+  "history": []
+ },
+ "521": {
+  "path": "nordrhein-westfalen/detmold/detmolder-sv-von-1860-1956/",
+  "history": []
+ },
+ "523": {
+  "path": "nordrhein-westfalen/warendorf/warendorfer-su-1972/",
+  "history": []
+ },
+ "528": {
+  "path": "bayern/trostberg/tsv-trostberg-1863/",
+  "history": []
+ },
+ "529": {
+  "path": "rheinland-pfalz/lutzerath/ssg-lutzerather-hoehe/",
+  "history": []
+ },
+ "530": {
+  "path": "niedersachsen/aurich/mtv-aurich/",
+  "history": []
+ },
+ "531": {
+  "path": "nordrhein-westfalen/koeln/sport-club-janus/",
+  "history": []
+ },
+ "533": {
+  "path": "hessen/hofheim/tv-hofheim/",
+  "history": []
+ },
+ "534": {
+  "path": "baden-wuerttemberg/heidelberg/sg-heidelberg-kirchheim/",
+  "history": []
+ },
+ "535": {
+  "path": "bayern/erlenbach/sv-germania-erlenbach/",
+  "history": []
+ },
+ "536": {
+  "path": "nordrhein-westfalen/pulheim-brauweiler/tus-schwarz-weiss-brauweiler/",
+  "history": []
+ },
+ "537": {
+  "path": "baden-wuerttemberg/karlsruhe/ts-durlach/",
+  "history": []
+ },
+ "538": {
+  "path": "baden-wuerttemberg/stuttgart/sportvg-feuerbach/",
+  "history": []
+ },
+ "541": {
+  "path": "bayern/erlangen/tb-1888-erlangen/",
+  "history": []
+ },
+ "544": {
+  "path": "baden-wuerttemberg/eberbach/tv-eberbach/",
+  "history": []
+ },
+ "545": {
+  "path": "bayern/pfaffenhofen/mtv-pfaffenhofen/",
+  "history": []
+ },
+ "546": {
+  "path": "bayern/regensburg/ts-regensburg/",
+  "history": []
+ },
+ "547": {
+  "path": "rheinland-pfalz/oppenheim/tv-oppenheim/",
+  "history": []
+ },
+ "548": {
+  "path": "rheinland-pfalz/oppenheim/tv-1848-gimbsheim/",
+  "history": []
+ },
+ "550": {
+  "path": "niedersachsen/brake/sv-brake/",
+  "history": []
+ },
+ "551": {
+  "path": "thueringen/hermsdorf/tv-1887-germania-hermsdorf/",
+  "history": []
+ },
+ "552": {
+  "path": "niedersachsen/uplengen-remels/tus-augustfehn/",
+  "history": []
+ },
+ "555": {
+  "path": "berlin/berlin/tsc-berlin/",
+  "history": []
+ },
+ "556": {
+  "path": "niedersachsen/norden/norder-tv-von-1861/",
+  "history": []
+ },
+ "558": {
+  "path": "bayern/fuerth/tv-fuerth-1860/",
+  "history": []
+ },
+ "559": {
+  "path": "niedersachsen/weener/tus-weener/",
+  "history": []
+ },
+ "562": {
+  "path": "niedersachsen/bad-rothenfelde/tc-bad-rothenfelde/",
+  "history": []
+ },
+ "563": {
+  "path": "rheinland-pfalz/trier/mjc-trier/",
+  "history": []
+ },
+ "565": {
+  "path": "niedersachsen/salzgitter-bad/sv-union-salzgitter/",
+  "history": []
+ },
+ "567": {
+  "path": "niedersachsen/salzdahlum/mtv-salzdahlum/",
+  "history": []
+ },
+ "568": {
+  "path": "nordrhein-westfalen/leverkusen/sc-fast-break-leverkusen/",
+  "history": []
+ },
+ "569": {
+  "path": "nordrhein-westfalen/essen-kettwig/kettwiger-sportverein-70-86/",
+  "history": []
+ },
+ "571": {
+  "path": "hessen/fritzlar/tus-fritzlar/",
+  "history": []
+ },
+ "572": {
+  "path": "thueringen/erfurt/usv-erfurt/",
+  "history": []
+ },
+ "574": {
+  "path": "bayern/wertingen/bsc-wertingen/",
+  "history": []
+ },
+ "575": {
+  "path": "bayern/muenchen/muenchen-basket/",
+  "history": []
+ },
+ "581": {
+  "path": "bayern/schwabach/tv-48-schwabach/",
+  "history": []
+ },
+ "582": {
+  "path": "sachsen/leipzig/usc-leipzig/",
+  "history": []
+ },
+ "584": {
+  "path": "sachsen/dresden/hsg-lokomotive-htw-dresden/",
+  "history": []
+ },
+ "587": {
+  "path": "nordrhein-westfalen/essen-schonnebeck/tusem-essen/",
+  "history": []
+ },
+ "590": {
+  "path": "bayern/ingolstadt/esv-ingolstadt-ringsee/",
+  "history": []
+ },
+ "595": {
+  "path": "rheinland-pfalz/clausen/tv-1894-clausen/",
+  "history": []
+ },
+ "598": {
+  "path": "rheinland-pfalz/treis-karden/tus-treis-karden/",
+  "history": []
+ },
+ "599": {
+  "path": "baden-wuerttemberg/heidenheim/sb-heidenheim/",
+  "history": []
+ },
+ "600": {
+  "path": "bayern/muenchen/tsv-milbertshofen/",
+  "history": []
+ },
+ "602": {
+  "path": "bayern/kemmern/sc-kemmern-1930/",
+  "history": []
+ },
+ "603": {
+  "path": "bayern/ottobeuren/tsv-ottobeuren/",
+  "history": []
+ },
+ "604": {
+  "path": "bayern/weidenberg/sv-weidenberg/",
+  "history": []
+ },
+ "605": {
+  "path": "bayern/aschaffenburg/tus-1863-aschaffenburg-damm/",
+  "history": []
+ },
+ "606": {
+  "path": "bayern/muenchen/mtv-1879-muenchen/",
+  "history": []
+ },
+ "607": {
+  "path": "bayern/groebenzell/slama-jama-groebenzell/",
+  "history": []
+ },
+ "609": {
+  "path": "baden-wuerttemberg/leonberg/sv-leonberg-eltingen/",
+  "history": []
+ },
+ "610": {
+  "path": "brandenburg/cottbus/bbc-cottbus/",
+  "history": []
+ },
+ "611": {
+  "path": "bayern/roth/spvgg-roth/",
+  "history": []
+ },
+ "612": {
+  "path": "brandenburg/bernau/ssv-lokomotive-bernau/",
+  "history": []
+ },
+ "613": {
+  "path": "brandenburg/potsdam/usv-potsdam/",
+  "history": []
+ },
+ "614": {
+  "path": "nordrhein-westfalen/leverkusen/tsv-bayer-04-leverkusen/",
+  "history": []
+ },
+ "616": {
+  "path": "nordrhein-westfalen/essen-altendorf/djk-adler-union-essen-frintrop/",
+  "history": []
+ },
+ "618": {
+  "path": "nordrhein-westfalen/leverkusen/tus-opladen-von-1882/",
+  "history": []
+ },
+ "619": {
+  "path": "bayern/muenchen/fc-bayern-muenchen/",
+  "history": []
+ },
+ "620": {
+  "path": "hamburg/hamburg/deutscher-basketball-bund-hh/",
+  "history": []
+ },
+ "621": {
+  "path": "niedersachsen/bad-laer/s-v-bad-laer/",
+  "history": []
+ },
+ "622": {
+  "path": "baden-wuerttemberg/aalen/aalener-sportallianz/",
+  "history": []
+ },
+ "623": {
+  "path": "saarland/st-wendel/tv-st-wendel/",
+  "history": []
+ },
+ "624": {
+  "path": "bayern/seeon/sv-seeon/",
+  "history": []
+ },
+ "625": {
+  "path": "saarland/st-ingbert/tv-st-ingbert/",
+  "history": []
+ },
+ "629": {
+  "path": "bayern/brannenburg/tsv-brannenburg/",
+  "history": []
+ },
+ "632": {
+  "path": "niedersachsen/neustadt/tsv-bordenau/",
+  "history": []
+ },
+ "633": {
+  "path": "niedersachsen/langenhagen/sportclub-langenhagen/",
+  "history": []
+ },
+ "634": {
+  "path": "niedersachsen/hannover/cvjm-hannover/",
+  "history": []
+ },
+ "635": {
+  "path": "baden-wuerttemberg/sinsheim/tv-sinsheim/",
+  "history": []
+ },
+ "636": {
+  "path": "baden-wuerttemberg/karlsruhe/ssc-karlsruhe/",
+  "history": []
+ },
+ "637": {
+  "path": "bayern/zapfendorf/sv-zapfendorf-1920/",
+  "history": []
+ },
+ "641": {
+  "path": "baden-wuerttemberg/st-blasien/sv-kolleg-st-blasien/",
+  "history": []
+ },
+ "642": {
+  "path": "bayern/erlangen/cvjm-erlangen/",
+  "history": []
+ },
+ "643": {
+  "path": "niedersachsen/vechta/sc-rasta-vechta/",
+  "history": []
+ },
+ "644": {
+  "path": "nordrhein-westfalen/paderborn/sc-g-w-1920-paderborn/",
+  "history": []
+ },
+ "645": {
+  "path": "niedersachsen/gifhorn/mtv-gifhorn/",
+  "history": []
+ },
+ "648": {
+  "path": "niedersachsen/burgdorf-heessel/heesseler-sv/",
+  "history": []
+ },
+ "649": {
+  "path": "nordrhein-westfalen/kamp-lintfort/bg-kamp-lintfort-1954/",
+  "history": []
+ },
+ "650": {
+  "path": "baden-wuerttemberg/kehl/kehler-turnerschaft/",
+  "history": []
+ },
+ "651": {
+  "path": "bayern/oberhaid/rsc-concordia-oberhaid/",
+  "history": []
+ },
+ "652": {
+  "path": "nordrhein-westfalen/wesel/weseler-tv-1860/",
+  "history": []
+ },
+ "654": {
+  "path": "nordrhein-westfalen/bonn/bonner-sv-roleber-1919/",
+  "history": []
+ },
+ "655": {
+  "path": "bayern/gruenwald/tsv-gruenwald/",
+  "history": []
+ },
+ "657": {
+  "path": "niedersachsen/wolfsburg/vfl-wolfsburg/",
+  "history": []
+ },
+ "658": {
+  "path": "bayern/woernsmuehl/sc-woernsmuehl/",
+  "history": []
+ },
+ "661": {
+  "path": "bremen/bremen/tv-bremen-1875/",
+  "history": []
+ },
+ "662": {
+  "path": "baden-wuerttemberg/tauberbischofsheim/tsv-tauberbischofsheim/",
+  "history": []
+ },
+ "664": {
+  "path": "bayern/sonthofen/tsv-sonthofen/",
+  "history": []
+ },
+ "665": {
+  "path": "bayern/bamberg/ttl-basketball-bamberg/",
+  "history": []
+ },
+ "666": {
+  "path": "rheinland-pfalz/weitere/ts-rodalben/",
+  "history": []
+ },
+ "667": {
+  "path": "baden-wuerttemberg/waiblingen/vfl-waiblingen/",
+  "history": []
+ },
+ "669": {
+  "path": "bayern/arnstein/tb-arnstein/",
+  "history": []
+ },
+ "673": {
+  "path": "nordrhein-westfalen/werl/djk-gruen-weiss-werl/",
+  "history": []
+ },
+ "674": {
+  "path": "nordrhein-westfalen/lengerich/tv-lengerich-v-1879/",
+  "history": []
+ },
+ "675": {
+  "path": "sachsen-anhalt/grosskayna/sv-grosskayna/",
+  "history": []
+ },
+ "676": {
+  "path": "schleswig-holstein/luebeck/luebecker-turnerschaft-von-1854/",
+  "history": []
+ },
+ "678": {
+  "path": "nordrhein-westfalen/loehne/turnverein-loehne-bhf-v-1902/",
+  "history": []
+ },
+ "682": {
+  "path": "nordrhein-westfalen/oberhausen/new-basket-92-oberhausen/",
+  "history": []
+ },
+ "683": {
+  "path": "nordrhein-westfalen/kirchhundem/tv-kirchhundem-1920/",
+  "history": []
+ },
+ "685": {
+  "path": "hessen/lahnau-atzbach/tsv-atzbach/",
+  "history": []
+ },
+ "687": {
+  "path": "hamburg/hamburg/gruen-weiss-eimsbuettel/",
+  "history": []
+ },
+ "693": {
+  "path": "niedersachsen/bad-essen/tus-bad-essen/",
+  "history": []
+ },
+ "694": {
+  "path": "nordrhein-westfalen/ennepetal/tg-voerde-von-1862/",
+  "history": []
+ },
+ "696": {
+  "path": "baden-wuerttemberg/ueberlingen/bc-ueberlingen/",
+  "history": []
+ },
+ "697": {
+  "path": "nordrhein-westfalen/muelheim-an-der-ruhr/tsv-viktoria-1898-muelheim/",
+  "history": []
+ },
+ "699": {
+  "path": "nordrhein-westfalen/koeln/deutzer-tv-1878/",
+  "history": []
+ },
+ "700": {
+  "path": "bayern/ottobrunn/tsv-ottobrunn/",
+  "history": []
+ },
+ "702": {
+  "path": "hessen/dreieich/sv-dreieichenhain/",
+  "history": []
+ },
+ "704": {
+  "path": "bayern/sonnen/djk-sonnen/",
+  "history": []
+ },
+ "705": {
+  "path": "niedersachsen/jever/sg-cleverns-sandel/",
+  "history": []
+ },
+ "710": {
+  "path": "bayern/garmisch-partenkirchen/tsv-partenkirchen/",
+  "history": []
+ },
+ "712": {
+  "path": "bayern/bayreuth/bsc-bayreuth-saas/",
+  "history": []
+ },
+ "713": {
+  "path": "niedersachsen/goslar/mtv-goslar/",
+  "history": []
+ },
+ "714": {
+  "path": "bayern/grafing/tsv-1864-grafing/",
+  "history": []
+ },
+ "717": {
+  "path": "baden-wuerttemberg/pfinztal-bergh/tsv-berghausen/",
+  "history": []
+ },
+ "718": {
+  "path": "bayern/ansbach/tsv-ansbach/",
+  "history": []
+ },
+ "720": {
+  "path": "bayern/glonn/wsv-glonn/",
+  "history": []
+ },
+ "721": {
+  "path": "hessen/frankfurt-am-main/psv-gw-frankfurt/",
+  "history": []
+ },
+ "723": {
+  "path": "berlin/berlin/ssv-intercor-berlin/",
+  "history": []
+ },
+ "724": {
+  "path": "bayern/bad-aibling/tus-bad-aibling-1861/",
+  "history": []
+ },
+ "725": {
+  "path": "nordrhein-westfalen/waltrop/gymnastikverein-waltrop-1961/",
+  "history": []
+ },
+ "726": {
+  "path": "baden-wuerttemberg/aichwald/asv-aichwald/",
+  "history": []
+ },
+ "728": {
+  "path": "bayern/weitere/tv-osterhofen/",
+  "history": []
+ },
+ "729": {
+  "path": "baden-wuerttemberg/derendingen/tv-derendingen/",
+  "history": []
+ },
+ "730": {
+  "path": "niedersachsen/lamstedt/tsv-lamstedt/",
+  "history": []
+ },
+ "731": {
+  "path": "baden-wuerttemberg/ellwangen/tsv-ellwangen-1846/",
+  "history": []
+ },
+ "733": {
+  "path": "hessen/heppenheim/tv-heppenheim/",
+  "history": []
+ },
+ "734": {
+  "path": "baden-wuerttemberg/nuertingen/tg-nuertingen/",
+  "history": []
+ },
+ "735": {
+  "path": "rheinland-pfalz/trier/etus-trier/",
+  "history": []
+ },
+ "736": {
+  "path": "niedersachsen/oldenburg/oldenburger-tb/",
+  "history": []
+ },
+ "737": {
+  "path": "mecklenburg-vorpommern/neubrandenburg/sv-turbine-neubrandenburg/",
+  "history": []
+ },
+ "738": {
+  "path": "baden-wuerttemberg/stuttgart/spvgg-moehringen-1887/",
+  "history": []
+ },
+ "739": {
+  "path": "niedersachsen/quakenbrueck/tsv-quakenbrueck/",
+  "history": []
+ },
+ "740": {
+  "path": "niedersachsen/hildesheim/eintracht-hildesheim/",
+  "history": []
+ },
+ "741": {
+  "path": "bayern/bad-toelz/sv-bad-toelz/",
+  "history": []
+ },
+ "742": {
+  "path": "nordrhein-westfalen/bonn/bg-bonn-92/",
+  "history": []
+ },
+ "743": {
+  "path": "nordrhein-westfalen/dortmund/svd-49-dortmund/",
+  "history": []
+ },
+ "744": {
+  "path": "nordrhein-westfalen/castrop-rauxel/castroper-bc/",
+  "history": []
+ },
+ "746": {
+  "path": "hessen/rotenburg/tg-rotenburg/",
+  "history": []
+ },
+ "747": {
+  "path": "bayern/oberhaching/tsv-oh-deisenhofen/",
+  "history": []
+ },
+ "748": {
+  "path": "nordrhein-westfalen/bad-sassendorf/tus-bad-sassendorf/",
+  "history": []
+ },
+ "749": {
+  "path": "niedersachsen/meppen/tv-meppen/",
+  "history": []
+ },
+ "753": {
+  "path": "rheinland-pfalz/bitburg/tv-bitburg/",
+  "history": []
+ },
+ "754": {
+  "path": "niedersachsen/neustadt/tsv-neustadt/",
+  "history": []
+ },
+ "755": {
+  "path": "baden-wuerttemberg/stuttgart-zuffenhausen/tv-89-zuffenhausen/",
+  "history": []
+ },
+ "757": {
+  "path": "nordrhein-westfalen/dorsten/bsv-wulfen/",
+  "history": []
+ },
+ "758": {
+  "path": "nordrhein-westfalen/dorsten/bg-dorsten/",
+  "history": []
+ },
+ "759": {
+  "path": "berlin/berlin/berliner-sc/",
+  "history": []
+ },
+ "760": {
+  "path": "schleswig-holstein/reinbek/tsv-reinbek-von-1892/",
+  "history": []
+ },
+ "761": {
+  "path": "baden-wuerttemberg/hd-boxberg/tb-rohrbach-boxberg/",
+  "history": []
+ },
+ "762": {
+  "path": "rheinland-pfalz/koblenz-horchheim/bbc-horchheim/",
+  "history": []
+ },
+ "764": {
+  "path": "bayern/guenzburg/tsv-wasserburg-guenzburg/",
+  "history": []
+ },
+ "765": {
+  "path": "baden-wuerttemberg/schelklingen/tus-urspringschule/",
+  "history": []
+ },
+ "766": {
+  "path": "bayern/olching/tsv-olching/",
+  "history": []
+ },
+ "768": {
+  "path": "nordrhein-westfalen/unna/tv-unna-1861/",
+  "history": []
+ },
+ "776": {
+  "path": "nordrhein-westfalen/dortmund-mengede/tv-1890-dortmund-mengede/",
+  "history": []
+ },
+ "779": {
+  "path": "nordrhein-westfalen/drolshagen/tus-09-drolshagen/",
+  "history": []
+ },
+ "780": {
+  "path": "baden-wuerttemberg/stuttgart-sillenbuch/tsv-heumaden/",
+  "history": []
+ },
+ "781": {
+  "path": "bayern/cham/asv-cham/",
+  "history": []
+ },
+ "782": {
+  "path": "nordrhein-westfalen/dortmund/dortmunder-tg-von-1873/",
+  "history": []
+ },
+ "785": {
+  "path": "nordrhein-westfalen/bocholt/tsv-bocholt-von-1867-1896/",
+  "history": []
+ },
+ "786": {
+  "path": "nordrhein-westfalen/raesfeld-erle/sv-eintracht-erle-69/",
+  "history": []
+ },
+ "787": {
+  "path": "nordrhein-westfalen/borken/rsv-borken-22/",
+  "history": []
+ },
+ "790": {
+  "path": "baden-wuerttemberg/heidelberg/tsv-wieblingen/",
+  "history": []
+ },
+ "791": {
+  "path": "berlin/berlin/bbc-90-koepenick/",
+  "history": []
+ },
+ "792": {
+  "path": "baden-wuerttemberg/gerlingen/ksg-gerlingen/",
+  "history": []
+ },
+ "793": {
+  "path": "nordrhein-westfalen/dortmund-wickede/tv-arminius-1884-dtmd-wickede/",
+  "history": []
+ },
+ "796": {
+  "path": "hessen/gross-gerau/tv-gross-gerau/",
+  "history": []
+ },
+ "797": {
+  "path": "nordrhein-westfalen/dortmund/tsc-eintracht-von-1848-95-dortmund/",
+  "history": []
+ },
+ "798": {
+  "path": "rheinland-pfalz/worms-horchheim/tg-1846-worms/",
+  "history": []
+ },
+ "799": {
+  "path": "hessen/roedermark-urberach/mtv-urberach-1901/",
+  "history": []
+ },
+ "801": {
+  "path": "nordrhein-westfalen/hagen-haspe/sv-70-hagen-haspe/",
+  "history": []
+ },
+ "805": {
+  "path": "bayern/rosenheim/tsv-1860-rosenheim/",
+  "history": []
+ },
+ "808": {
+  "path": "rheinland-pfalz/kaiserslautern/1-fc-kaiserslautern/",
+  "history": []
+ },
+ "809": {
+  "path": "baden-wuerttemberg/ettlingen/tsv-ettlingen/",
+  "history": []
+ },
+ "811": {
+  "path": "hessen/kronberg/mtv-kronberg/",
+  "history": []
+ },
+ "812": {
+  "path": "bayern/karlstadt/tsv-karlstadt/",
+  "history": []
+ },
+ "814": {
+  "path": "nordrhein-westfalen/kreuztal-fellinghausen/tus-fellinghausen-1920/",
+  "history": []
+ },
+ "817": {
+  "path": "berlin/berlin/berliner-sv-1892/",
+  "history": []
+ },
+ "818": {
+  "path": "bayern/ingolstadt/mtv-1881-ingolstadt/",
+  "history": []
+ },
+ "821": {
+  "path": "nordrhein-westfalen/frechen/tus-blau-weiss-koenigsdorf/",
+  "history": []
+ },
+ "823": {
+  "path": "niedersachsen/melle/sc-melle-03/",
+  "history": []
+ },
+ "824": {
+  "path": "hessen/gernsheim/tsv-gernsheim/",
+  "history": []
+ },
+ "830": {
+  "path": "nordrhein-westfalen/hagen/bsc-hagen/",
+  "history": []
+ },
+ "833": {
+  "path": "bayern/starnberg/tsv-starnberg-von-1880/",
+  "history": []
+ },
+ "834": {
+  "path": "bayern/neuoetting/tsv-neuoetting/",
+  "history": []
+ },
+ "835": {
+  "path": "niedersachsen/sulingen/tus-sulingen/",
+  "history": []
+ },
+ "836": {
+  "path": "nordrhein-westfalen/bad-honnef/dragons-rhoendorf-1912/",
+  "history": []
+ },
+ "839": {
+  "path": "hessen/bad-homburg-v-d-h/homburger-turngemeinde-1846/",
+  "history": []
+ },
+ "841": {
+  "path": "nordrhein-westfalen/gladbeck/tv-gladbeck-1912/",
+  "history": []
+ },
+ "843": {
+  "path": "hessen/darmstadt-eberstadt/tv-eberstadt/",
+  "history": []
+ },
+ "844": {
+  "path": "nordrhein-westfalen/duisburg/basket-duisburg/",
+  "history": []
+ },
+ "845": {
+  "path": "nordrhein-westfalen/hennef/hennefer-turnverein-1895/",
+  "history": []
+ },
+ "846": {
+  "path": "hessen/wiesbaden/bc-wiesbaden/",
+  "history": []
+ },
+ "847": {
+  "path": "niedersachsen/lingen/mtv-lingen/",
+  "history": []
+ },
+ "849": {
+  "path": "nordrhein-westfalen/hagen-emst/sc-concordia-hagen-1967/",
+  "history": []
+ },
+ "852": {
+  "path": "rheinland-pfalz/neustadt-wied/sportfreunde-neustadt-wied/",
+  "history": []
+ },
+ "853": {
+  "path": "nordrhein-westfalen/rheinbach/sg-pallotti-rheinbach/",
+  "history": []
+ },
+ "854": {
+  "path": "nordrhein-westfalen/radevormwald/radevormwalder-tv-1859/",
+  "history": []
+ },
+ "855": {
+  "path": "baden-wuerttemberg/moessingen/spvgg-moessingen/",
+  "history": []
+ },
+ "856": {
+  "path": "nordrhein-westfalen/essen-altenessen/altenessener-turnverein-1886/",
+  "history": []
+ },
+ "857": {
+  "path": "bayern/zell-a-main/tg-zell-von-1862/",
+  "history": []
+ },
+ "860": {
+  "path": "bayern/augsburg/djk-augsburg-nord/",
+  "history": []
+ },
+ "861": {
+  "path": "bayern/murnau/esv-staffelsee/",
+  "history": []
+ },
+ "862": {
+  "path": "niedersachsen/osnabrueck/osnabruecker-tb/",
+  "history": []
+ },
+ "863": {
+  "path": "hessen/giessen/mtv-1846-giessen/",
+  "history": []
+ },
+ "864": {
+  "path": "nordrhein-westfalen/leopoldshoehe/bc-leopoldshoehe/",
+  "history": []
+ },
+ "865": {
+  "path": "niedersachsen/lindhorst/tus-jahn-lindhorst/",
+  "history": []
+ },
+ "866": {
+  "path": "nordrhein-westfalen/schlangen/vfl-schlangen/",
+  "history": []
+ },
+ "869": {
+  "path": "nordrhein-westfalen/kerpen/tv-viktoria-blatzheim-1920/",
+  "history": []
+ },
+ "870": {
+  "path": "niedersachsen/esens/tus-esens/",
+  "history": []
+ },
+ "873": {
+  "path": "bayern/schweinfurt/djk-schweinfurt/",
+  "history": []
+ },
+ "874": {
+  "path": "sachsen/freiberg/atsv-freiberg/",
+  "history": []
+ },
+ "875": {
+  "path": "nordrhein-westfalen/bruehl/bruehler-tv-1879/",
+  "history": []
+ },
+ "876": {
+  "path": "bayern/kaufbeuren/djk-kaufbeuren/",
+  "history": []
+ },
+ "878": {
+  "path": "nordrhein-westfalen/pulheim/pulheimer-sc-1924-57/",
+  "history": []
+ },
+ "879": {
+  "path": "nordrhein-westfalen/frechen/ts-von-1896-frechen/",
+  "history": []
+ },
+ "881": {
+  "path": "baden-wuerttemberg/schwetzingen/tv-schwetzingen/",
+  "history": []
+ },
+ "882": {
+  "path": "thueringen/ilmenau/sv-tu-ilmenau/",
+  "history": []
+ },
+ "883": {
+  "path": "sachsen/dresden/usv-tu-dresden/",
+  "history": []
+ },
+ "884": {
+  "path": "nordrhein-westfalen/essen-ruettenscheid/etb-schwarz-weiss-essen/",
+  "history": []
+ },
+ "886": {
+  "path": "baden-wuerttemberg/karlsruhe/sg-eichenkreuz-karlsruhe/",
+  "history": []
+ },
+ "887": {
+  "path": "nordrhein-westfalen/leverkusen/bbz-opladen/",
+  "history": []
+ },
+ "888": {
+  "path": "bayern/rattelsdorf/spvgg-rattelsdorf/",
+  "history": []
+ },
+ "889": {
+  "path": "niedersachsen/cuxhaven-franzenburg/tsv-altenwalde/",
+  "history": []
+ },
+ "891": {
+  "path": "baden-wuerttemberg/stuttgart/tus-stuttgart/",
+  "history": []
+ },
+ "892": {
+  "path": "hessen/weitere/ft-doernigheim/",
+  "history": []
+ },
+ "893": {
+  "path": "berlin/berlin/ssc-suedwest/",
+  "history": []
+ },
+ "894": {
+  "path": "nordrhein-westfalen/koeln/djk-suedwest-20-27-koeln/",
+  "history": []
+ },
+ "895": {
+  "path": "bayern/wuerzburg/sf-waschkuech-wuerzburg/",
+  "history": []
+ },
+ "899": {
+  "path": "bayern/muenchen/tsv-muenchen-von-1860/",
+  "history": []
+ },
+ "900": {
+  "path": "hessen/buedingen/bv-buedingen-dohlberg-tigers/",
+  "history": []
+ },
+ "903": {
+  "path": "rheinland-pfalz/germersheim/turnerschaft-1863-germersheim/",
+  "history": []
+ },
+ "904": {
+  "path": "niedersachsen/tostedt/mtv-tostedt-von-1879/",
+  "history": []
+ },
+ "905": {
+  "path": "baden-wuerttemberg/stuttgart/tv-cannstatt/",
+  "history": []
+ },
+ "906": {
+  "path": "bayern/wuerzburg/tg-48-wuerzburg/",
+  "history": []
+ },
+ "910": {
+  "path": "hessen/darmstadt/sv-98-darmstadt/",
+  "history": []
+ },
+ "912": {
+  "path": "niedersachsen/oldenburg/buergerfelder-tb/",
+  "history": []
+ },
+ "914": {
+  "path": "hessen/kassel/act-kassel/",
+  "history": []
+ },
+ "915": {
+  "path": "hessen/bensheim/vfl-bensheim/",
+  "history": []
+ },
+ "916": {
+  "path": "schleswig-holstein/kappeln/tsv-kappeln/",
+  "history": []
+ },
+ "918": {
+  "path": "baden-wuerttemberg/goeppingen/ts-goeppingen/",
+  "history": []
+ },
+ "920": {
+  "path": "hessen/baunatal/ksv-baunatal/",
+  "history": []
+ },
+ "922": {
+  "path": "hamburg/uetersen/tsv-uetersen/",
+  "history": []
+ },
+ "924": {
+  "path": "bayern/muenchen/mtsv-schwabing/",
+  "history": []
+ },
+ "925": {
+  "path": "baden-wuerttemberg/tuebingen/sv-03-tuebingen/",
+  "history": []
+ },
+ "927": {
+  "path": "niedersachsen/hohnstorf-elbe/tus-hohnstorf-elbe/",
+  "history": []
+ },
+ "931": {
+  "path": "hessen/dillenburg/tv-1843-dillenburg/",
+  "history": []
+ },
+ "933": {
+  "path": "berlin/berlin/sc-siemensstadt/",
+  "history": []
+ },
+ "936": {
+  "path": "nordrhein-westfalen/essen-horst/mtg-horst/",
+  "history": []
+ },
+ "940": {
+  "path": "thueringen/weimar/culture-city-weimar/",
+  "history": []
+ },
+ "941": {
+  "path": "berlin/berlin/bg-zehlendorf/",
+  "history": []
+ },
+ "942": {
+  "path": "bayern/kissing/kissinger-sc/",
+  "history": []
+ },
+ "943": {
+  "path": "bayern/ebermannstadt/tsv-ebermannstadt/",
+  "history": []
+ },
+ "944": {
+  "path": "niedersachsen/buxtehude/sg-buxtehude-altkloster/",
+  "history": []
+ },
+ "946": {
+  "path": "bayern/gersthofen/tsv-1909-gersthofen/",
+  "history": []
+ },
+ "953": {
+  "path": "nordrhein-westfalen/gelsenkirchen-hassel/fc-schalke-04/",
+  "history": []
+ },
+ "955": {
+  "path": "nordrhein-westfalen/koeln-roggendorf/sg-bp-bayer-koeln-worringen/",
+  "history": []
+ },
+ "956": {
+  "path": "baden-wuerttemberg/schwaikheim/tsv-schwaikheim/",
+  "history": []
+ },
+ "957": {
+  "path": "hessen/babenhausen/tv-babenhausen/",
+  "history": []
+ },
+ "959": {
+  "path": "baden-wuerttemberg/biberach/tg-biberach/",
+  "history": []
+ },
+ "961": {
+  "path": "bayern/muenchen/ts-jahn-muenchen/",
+  "history": []
+ },
+ "965": {
+  "path": "nordrhein-westfalen/sprockhoevel/tsg-sprockhoevel-1881/",
+  "history": []
+ },
+ "974": {
+  "path": "hessen/bad-wildungen/vfl-bad-wildungen/",
+  "history": []
+ },
+ "976": {
+  "path": "niedersachsen/oldersum/tv-oldersum-von-1921/",
+  "history": []
+ },
+ "977": {
+  "path": "bayern/muenchen/djk-sb-muenchen/",
+  "history": []
+ },
+ "979": {
+  "path": "baden-wuerttemberg/backnang/tsg-backnang/",
+  "history": []
+ },
+ "980": {
+  "path": "schleswig-holstein/luebeck/tus-luebeck/",
+  "history": []
+ },
+ "983": {
+  "path": "baden-wuerttemberg/rottenburg/tv-rottenburg/",
+  "history": []
+ },
+ "985": {
+  "path": "rheinland-pfalz/bad-kreuznach/vfl-bad-kreuznach/",
+  "history": []
+ },
+ "986": {
+  "path": "schleswig-holstein/bad-oldesloe/vfl-oldesloe/",
+  "history": []
+ },
+ "988": {
+  "path": "schleswig-holstein/eckernfoerde/eckernfoerder-mtv/",
+  "history": []
+ },
+ "989": {
+  "path": "niedersachsen/boerssum/mtv-boerssum/",
+  "history": []
+ },
+ "990": {
+  "path": "schleswig-holstein/schleswig/tsv-schleswig/",
+  "history": []
+ },
+ "992": {
+  "path": "niedersachsen/braunschweig/tsv-schapen/",
+  "history": []
+ },
+ "994": {
+  "path": "bayern/muenchen/sv-wb-allianz-muenchen/",
+  "history": []
+ },
+ "995": {
+  "path": "sachsen-anhalt/halle-saale/sv-halle/",
+  "history": []
+ },
+ "996": {
+  "path": "niedersachsen/cloppenburg/sc-sternbusch/",
+  "history": []
+ },
+ "999": {
+  "path": "berlin/berlin/reinickendorfer-fuechse/",
+  "history": []
+ },
+ "1002": {
+  "path": "baden-wuerttemberg/billigheim/tsv-billigheim/",
+  "history": []
+ },
+ "1003": {
+  "path": "berlin/berlin/bc-lichterfelde/",
+  "history": []
+ },
+ "1004": {
+  "path": "bayern/hof/tsv-hof-1861/",
+  "history": []
+ },
+ "1005": {
+  "path": "nordrhein-westfalen/neuss-allerheiligen/sv-1930-rosellen/",
+  "history": []
+ },
+ "1006": {
+  "path": "baden-wuerttemberg/freiburg/usc-freiburg/",
+  "history": []
+ },
+ "1009": {
+  "path": "schleswig-holstein/bargteheide/tsv-bargteheide/",
+  "history": []
+ },
+ "1011": {
+  "path": "nordrhein-westfalen/oberhausen/tc-sterkrade-69/",
+  "history": []
+ },
+ "1014": {
+  "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/",
+  "history": []
+ },
+ "1016": {
+  "path": "bayern/eggolsheim/djk-eggolsheim/",
+  "history": []
+ },
+ "1017": {
+  "path": "niedersachsen/braunschweig/sg-braunschweig/",
+  "history": []
+ },
+ "1019": {
+  "path": "nordrhein-westfalen/bottrop/djk-adler-07-bottrop/",
+  "history": []
+ },
+ "1020": {
+  "path": "baden-wuerttemberg/schwaebisch-gmuend-strassdorf/tsb-schwaebisch-gmuend/",
+  "history": []
+ },
+ "1022": {
+  "path": "rheinland-pfalz/boppard/ssv-buchholz/",
+  "history": []
+ },
+ "1024": {
+  "path": "baden-wuerttemberg/stuttgart/mtv-stuttgart/",
+  "history": []
+ },
+ "1025": {
+  "path": "niedersachsen/braunschweig/tura-braunschweig/",
+  "history": []
+ },
+ "1026": {
+  "path": "bremen/bremerhaven/1-bc-bremerhaven/",
+  "history": []
+ },
+ "1027": {
+  "path": "nordrhein-westfalen/koeln-longerich/djk-koeln-nord-von-1960/",
+  "history": []
+ },
+ "1028": {
+  "path": "niedersachsen/hannover/turn-klubb-zu-hannover/",
+  "history": []
+ },
+ "1029": {
+  "path": "nordrhein-westfalen/bornheim/sg-sechtem-1971/",
+  "history": []
+ },
+ "1030": {
+  "path": "baden-wuerttemberg/stuttgart/esv-rot-weiss-stuttgart/",
+  "history": []
+ },
+ "1032": {
+  "path": "hessen/bad-schwalbach/tv-1861-bad-schwalbach-j-p/",
+  "history": []
+ },
+ "1034": {
+  "path": "nordrhein-westfalen/erftstadt/sportgemeinschaft-erftstadt/",
+  "history": []
+ },
+ "1035": {
+  "path": "bayern/penzberg/tsv-1898-penzberg/",
+  "history": []
+ },
+ "1036": {
+  "path": "nordrhein-westfalen/dortmund-hoerde/tv-einigkeit-dortmund-barop/",
+  "history": []
+ },
+ "1037": {
+  "path": "niedersachsen/lohne/tus-bw-lohne/",
+  "history": []
+ },
+ "1038": {
+  "path": "baden-wuerttemberg/riedlingen/bcg-riedlingen/",
+  "history": []
+ },
+ "1041": {
+  "path": "baden-wuerttemberg/schopfheim/tsg-schopfheim/",
+  "history": []
+ },
+ "1044": {
+  "path": "hamburg/ahrensburg/ahrensburger-tsv-von-1874/",
+  "history": []
+ },
+ "1045": {
+  "path": "rheinland-pfalz/weitere/tv-kusel/",
+  "history": []
+ },
+ "1047": {
+  "path": "hessen/bad-hersfeld/tv-hersfeld-1848/",
+  "history": []
+ },
+ "1048": {
+  "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/",
+  "history": []
+ },
+ "1049": {
+  "path": "bayern/marktheidenfeld/tv-marktheidenfeld/",
+  "history": []
+ },
+ "1052": {
+  "path": "sachsen/bischofswerda/deutscher-basketball-bund-sn/",
+  "history": []
+ },
+ "1055": {
+  "path": "bayern/baldham/tsv-vaterstetten/",
+  "history": []
+ },
+ "1056": {
+  "path": "bayern/augsburg/tsv-haunstetten/",
+  "history": []
+ },
+ "1057": {
+  "path": "bayern/gundelsheim/sv-gundelsheim/",
+  "history": []
+ },
+ "1058": {
+  "path": "nordrhein-westfalen/wuppertal-barmen/polizei-sv-wuppertal-1921/",
+  "history": []
+ },
+ "1060": {
+  "path": "bayern/bruck-i-d-opf/spvgg-bruck/",
+  "history": []
+ },
+ "1061": {
+  "path": "bayern/schrobenhausen/ssv-schrobenhausen/",
+  "history": []
+ },
+ "1064": {
+  "path": "nordrhein-westfalen/wuppertal-barmen/barmer-tv-1846-korp-wuppertal/",
+  "history": []
+ },
+ "1065": {
+  "path": "rheinland-pfalz/maxdorf/tsg-maxdorf/",
+  "history": []
+ },
+ "1066": {
+  "path": "rheinland-pfalz/bingen/rhein-nahe-baskets/",
+  "history": []
+ },
+ "1067": {
+  "path": "bayern/germering/sv-germering/",
+  "history": []
+ },
+ "1068": {
+  "path": "nordrhein-westfalen/duesseldorf-oberbilk/tv-grafenberg-1888/",
+  "history": []
+ },
+ "1069": {
+  "path": "niedersachsen/bergen/bsg-suedheide/",
+  "history": []
+ },
+ "1071": {
+  "path": "sachsen/markkleeberg/tsg-markkleeberg-v-1903/",
+  "history": []
+ },
+ "1078": {
+  "path": "bayern/freyung/tv-freyung/",
+  "history": []
+ },
+ "1079": {
+  "path": "nordrhein-westfalen/schloss-holte-stukenbrock/fc-stukenbrock/",
+  "history": []
+ },
+ "1080": {
+  "path": "bayern/kolbermoor/sv-djk-kolbermoor/",
+  "history": []
+ },
+ "1081": {
+  "path": "schleswig-holstein/husum/husumer-sv-seit-1875/",
+  "history": []
+ },
+ "1082": {
+  "path": "nordrhein-westfalen/borgholzhausen/tv-jahn-1919-borgholzh-bhf/",
+  "history": []
+ },
+ "1084": {
+  "path": "baden-wuerttemberg/eberbach/tsv-schoenau/",
+  "history": []
+ },
+ "1085": {
+  "path": "baden-wuerttemberg/sindelfingen/vfl-sindelfingen/",
+  "history": []
+ },
+ "1090": {
+  "path": "baden-wuerttemberg/ravensburg/tsb-ravensburg/",
+  "history": []
+ },
+ "1092": {
+  "path": "niedersachsen/hagen/hagener-sv/",
+  "history": []
+ },
+ "1094": {
+  "path": "niedersachsen/osnabrueck/tsv-osnabrueck/",
+  "history": []
+ },
+ "1096": {
+  "path": "hessen/sulzbach/tsg-sulzbach/",
+  "history": []
+ },
+ "1097": {
+  "path": "baden-wuerttemberg/neckargemuend/tv-neckargemuend/",
+  "history": []
+ },
+ "1098": {
+  "path": "berlin/berlin/sv-empor-berlin/",
+  "history": []
+ },
+ "1100": {
+  "path": "baden-wuerttemberg/pliezhausen/tsv-pliezhausen-1902/",
+  "history": []
+ },
+ "1102": {
+  "path": "niedersachsen/barsinghausen/tsv-barsinghausen/",
+  "history": []
+ },
+ "1104": {
+  "path": "sachsen-anhalt/weissenfels/ssv-einheit-weissenfels/",
+  "history": []
+ },
+ "1105": {
+  "path": "sachsen-anhalt/halle-saale/sv-htb-halle/",
+  "history": []
+ },
+ "1106": {
+  "path": "nordrhein-westfalen/herne-wanne/e-tus-wanne-28/",
+  "history": []
+ },
+ "1108": {
+  "path": "bayern/ingolstadt/psv-ingolstadt/",
+  "history": []
+ },
+ "1109": {
+  "path": "hessen/darmstadt/bc-darmstadt/",
+  "history": []
+ },
+ "1110": {
+  "path": "niedersachsen/rastede/vfl-rastede/",
+  "history": []
+ },
+ "1111": {
+  "path": "bayern/lichtenfels/ts-lichtenfels/",
+  "history": []
+ },
+ "1113": {
+  "path": "nordrhein-westfalen/herzogenrath-kohlscheid/djk-elmar-kohlscheid/",
+  "history": []
+ },
+ "1114": {
+  "path": "niedersachsen/helmstedt/helmstedter-sv/",
+  "history": []
+ },
+ "1115": {
+  "path": "baden-wuerttemberg/laupheim/tsv-laupheim-1862/",
+  "history": []
+ },
+ "1117": {
+  "path": "baden-wuerttemberg/singen/esv-suedstern-singen/",
+  "history": []
+ },
+ "1119": {
+  "path": "hamburg/hamburg/tsg-bergedorf-von-1860/",
+  "history": []
+ },
+ "1120": {
+  "path": "baden-wuerttemberg/kornwestheim/skizunft-kornwestheim/",
+  "history": []
+ },
+ "1121": {
+  "path": "bayern/fuerstenfeldbruck/tus-fuerstenfeldbruck/",
+  "history": []
+ },
+ "1124": {
+  "path": "baden-wuerttemberg/crailsheim/tsv-crailsheim/",
+  "history": []
+ },
+ "1126": {
+  "path": "niedersachsen/walsrode/tv-jahn-walsrode/",
+  "history": []
+ },
+ "1127": {
+  "path": "niedersachsen/wallenhorst-rulle/tus-eintracht-rulle/",
+  "history": []
+ },
+ "1130": {
+  "path": "nordrhein-westfalen/eschweiler/bv-88-gymnasium-eschweiler/",
+  "history": []
+ },
+ "1132": {
+  "path": "hessen/weiterstadt/sportgemeinde-1886-weiterstadt/",
+  "history": []
+ },
+ "1134": {
+  "path": "sachsen-anhalt/zoerbig/sv-zoerbig/",
+  "history": []
+ },
+ "1137": {
+  "path": "rheinland-pfalz/zweibruecken/vt-zweibruecken-1861-97/",
+  "history": []
+ },
+ "1138": {
+  "path": "bayern/unterhaching/tsv-unterhaching/",
+  "history": []
+ },
+ "1140": {
+  "path": "bayern/gars/tsv-gars/",
+  "history": []
+ },
+ "1145": {
+  "path": "hamburg/seevetal/bg-harburg-hittfeld/",
+  "history": []
+ },
+ "1146": {
+  "path": "bayern/mammendorf/sv-mammendorf/",
+  "history": []
+ },
+ "1148": {
+  "path": "bayern/kronach/ts-1861-kronach/",
+  "history": []
+ },
+ "1149": {
+  "path": "schleswig-holstein/kiel/kieler-tb/",
+  "history": []
+ },
+ "1150": {
+  "path": "berlin/berlin/koepenicker-sv-ajax/",
+  "history": []
+ },
+ "1152": {
+  "path": "baden-wuerttemberg/karlsruhe/djk-karlsruhe-ost/",
+  "history": []
+ },
+ "1153": {
+  "path": "baden-wuerttemberg/schwaebisch-hall/tsg-schwaebisch-hall/",
+  "history": []
+ },
+ "1157": {
+  "path": "niedersachsen/laatzen/vfl-grasdorf/",
+  "history": []
+ },
+ "1159": {
+  "path": "niedersachsen/herzberg/mtv-herzberg/",
+  "history": []
+ },
+ "1160": {
+  "path": "saarland/illingen/tv-1894-illingen/",
+  "history": []
+ },
+ "1166": {
+  "path": "bayern/weilheim/tsv-weilheim/",
+  "history": []
+ },
+ "1167": {
+  "path": "sachsen-anhalt/magdeburg/usc-magdeburg/",
+  "history": []
+ },
+ "1168": {
+  "path": "sachsen-anhalt/weitere/g-muths-1860-quedlinburg/",
+  "history": []
+ },
+ "1169": {
+  "path": "niedersachsen/nordenham/sv-nordenham/",
+  "history": []
+ },
+ "1171": {
+  "path": "sachsen-anhalt/halle-saale/usv-halle/",
+  "history": []
+ },
+ "1173": {
+  "path": "niedersachsen/bramsche/tus-bramsche/",
+  "history": []
+ },
+ "1177": {
+  "path": "nordrhein-westfalen/gelsenkirchen-buer/basketball-gemeinschaft-buer/",
+  "history": []
+ },
+ "1178": {
+  "path": "nordrhein-westfalen/dinslaken/sus-09-dinslaken/",
+  "history": []
+ },
+ "1180": {
+  "path": "niedersachsen/georgsmarienhuette/sf-oesede/",
+  "history": []
+ },
+ "1181": {
+  "path": "hamburg/hamburg/hamburger-turnerbund-von-1862/",
+  "history": []
+ },
+ "1183": {
+  "path": "niedersachsen/loeningen/vfl-loeningen/",
+  "history": []
+ },
+ "1184": {
+  "path": "nordrhein-westfalen/soest/bc-1970-soest/",
+  "history": []
+ },
+ "1185": {
+  "path": "rheinland-pfalz/trier/tvg-baskets-trier/",
+  "history": []
+ },
+ "1188": {
+  "path": "bayern/neuburg-an-der-donau/tsv-1862-neuburg/",
+  "history": []
+ },
+ "1189": {
+  "path": "nordrhein-westfalen/iserlohn/tus-iserlohn-1846/",
+  "history": []
+ },
+ "1191": {
+  "path": "hamburg/hamburg/walddoerfer-sportverein/",
+  "history": []
+ },
+ "1193": {
+  "path": "nordrhein-westfalen/menden/sv-menden-1864/",
+  "history": []
+ },
+ "1195": {
+  "path": "hessen/pfungstadt/djk-scc-pfungstadt/",
+  "history": []
+ },
+ "1197": {
+  "path": "baden-wuerttemberg/marbach-am-neckar/tv-marbach/",
+  "history": []
+ },
+ "1202": {
+  "path": "baden-wuerttemberg/karlsruhe/esg-frankonia-karlsruhe/",
+  "history": []
+ },
+ "1203": {
+  "path": "hamburg/hamburg/sc-ottensen/",
+  "history": []
+ },
+ "1204": {
+  "path": "nordrhein-westfalen/grevenbroich/bsg-blau-weiss-grevenbroich/",
+  "history": []
+ },
+ "1206": {
+  "path": "nordrhein-westfalen/duisburg-beeck/vfvb-ruhrort-laar/",
+  "history": []
+ },
+ "1208": {
+  "path": "nordrhein-westfalen/meckenheim/meckenheimer-sportverein/",
+  "history": []
+ },
+ "1209": {
+  "path": "niedersachsen/goettingen/bg-74-goettingen/",
+  "history": []
+ },
+ "1212": {
+  "path": "bayern/wasserburg/tsv-1880-wasserburg/",
+  "history": []
+ },
+ "1213": {
+  "path": "hamburg/norderstedt/tura-harksheide/",
+  "history": []
+ },
+ "1214": {
+  "path": "hessen/wiesbaden-naurod/tg-naurod/",
+  "history": []
+ },
+ "1215": {
+  "path": "nordrhein-westfalen/datteln/tv-datteln-09/",
+  "history": []
+ },
+ "1216": {
+  "path": "bayern/landshut/tg-landshut/",
+  "history": []
+ },
+ "1219": {
+  "path": "niedersachsen/beverstedt/sg-beverstedt/",
+  "history": []
+ },
+ "1220": {
+  "path": "nordrhein-westfalen/salzkotten/tsv-tudorf-1919/",
+  "history": []
+ },
+ "1221": {
+  "path": "nordrhein-westfalen/hamm/tus-1859-hamm/",
+  "history": []
+ },
+ "1222": {
+  "path": "bayern/breitenguessbach/tsv-breitenguessbach/",
+  "history": []
+ },
+ "1223": {
+  "path": "rheinland-pfalz/schweich/tus-mosella-schweich/",
+  "history": []
+ },
+ "1224": {
+  "path": "nordrhein-westfalen/emsdetten/tv-emsdetten-1898/",
+  "history": []
+ },
+ "1225": {
+  "path": "bayern/traunstein/tv-traunstein/",
+  "history": []
+ },
+ "1228": {
+  "path": "bayern/muenchen/tsv-muenchen-forstenried/",
+  "history": []
+ },
+ "1232": {
+  "path": "baden-wuerttemberg/st-ilgen/fc-bad-st-ilgen/",
+  "history": []
+ },
+ "1233": {
+  "path": "baden-wuerttemberg/giengen/tsg-giengen/",
+  "history": []
+ },
+ "1235": {
+  "path": "bayern/noerdlingen/tsv-1861-noerdlingen/",
+  "history": []
+ },
+ "1236": {
+  "path": "nordrhein-westfalen/dortmund-wickede/basketballclub-do-wickede/",
+  "history": []
+ },
+ "1237": {
+  "path": "bayern/landsberg-am-lech/djk-landsberg/",
+  "history": []
+ },
+ "1238": {
+  "path": "bayern/freising/tsv-jahn-freising/",
+  "history": []
+ },
+ "1239": {
+  "path": "rheinland-pfalz/linz/bbc-linz/",
+  "history": []
+ },
+ "1240": {
+  "path": "rheinland-pfalz/weitere/tv-06-bad-neuenahr/",
+  "history": []
+ },
+ "1244": {
+  "path": "baden-wuerttemberg/schorndorf/sg-schorndorf-1846/",
+  "history": []
+ },
+ "1245": {
+  "path": "hamburg/hamburg/hamburger-turnerschaft-v-1816/",
+  "history": []
+ },
+ "1249": {
+  "path": "hessen/hochheim/tg-hochheim/",
+  "history": []
+ },
+ "1250": {
+  "path": "thueringen/jena/usv-jena/",
+  "history": []
+ },
+ "1251": {
+  "path": "niedersachsen/alfeld/sv-alfeld/",
+  "history": []
+ },
+ "1252": {
+  "path": "nordrhein-westfalen/wuerselen/weidener-tv-1869/",
+  "history": []
+ },
+ "1253": {
+  "path": "niedersachsen/stade/vfl-stade/",
+  "history": []
+ },
+ "1254": {
+  "path": "baden-wuerttemberg/renningen/tsv-malmsheim/",
+  "history": []
+ },
+ "1255": {
+  "path": "nordrhein-westfalen/duelmen/tv-1884-duelmen/",
+  "history": []
+ },
+ "1256": {
+  "path": "bayern/ismaning/tsv-ismaning/",
+  "history": []
+ },
+ "1258": {
+  "path": "nordrhein-westfalen/gelsenkirchen-bulmke/csg-gelsenkirchen-bulmke/",
+  "history": []
+ },
+ "1260": {
+  "path": "bayern/muenchen/tsv-muenchen-ost/",
+  "history": []
+ },
+ "1262": {
+  "path": "hamburg/hamburg/hamburger-sv/",
+  "history": []
+ },
+ "1264": {
+  "path": "nordrhein-westfalen/aachen/djk-frankenberg-1912-aachen/",
+  "history": []
+ },
+ "1265": {
+  "path": "hessen/dietzenbach/sc-steinberg/",
+  "history": []
+ },
+ "1268": {
+  "path": "baden-wuerttemberg/emmendingen/tb-emmendingen/",
+  "history": []
+ },
+ "1271": {
+  "path": "niedersachsen/goettingen/asc-46-goettingen/",
+  "history": []
+ },
+ "1272": {
+  "path": "nordrhein-westfalen/dormagen/tsv-bayer-dormagen/",
+  "history": []
+ },
+ "1273": {
+  "path": "bayern/coburg/bbc-coburg/",
+  "history": []
+ },
+ "1274": {
+  "path": "baden-wuerttemberg/buchen/tsv-buchen/",
+  "history": []
+ },
+ "1275": {
+  "path": "niedersachsen/weitere/sc-wildeshausen/",
+  "history": []
+ },
+ "1277": {
+  "path": "niedersachsen/braunschweig/braunschweiger-sc-acosta/",
+  "history": []
+ },
+ "1279": {
+  "path": "hamburg/hamburg/tv-grossflottbek-von-1901/",
+  "history": []
+ },
+ "1280": {
+  "path": "bayern/ochsenfurt/tv-ochsenfurt/",
+  "history": []
+ },
+ "1281": {
+  "path": "berlin/berlin/alba-berlin-basketballteam/",
+  "history": []
+ },
+ "1283": {
+  "path": "bayern/kulmbach/ats-kulmbach/",
+  "history": []
+ },
+ "1285": {
+  "path": "baden-wuerttemberg/fellbach/sportverein-fellbach-1890/",
+  "history": []
+ },
+ "1289": {
+  "path": "baden-wuerttemberg/freiburg/tv-freiburg-herdern/",
+  "history": []
+ },
+ "1295": {
+  "path": "nordrhein-westfalen/lippstadt/ltv-lippstadt-von-1848/",
+  "history": []
+ },
+ "1296": {
+  "path": "nordrhein-westfalen/euskirchen/djk-konvikt-bad-muenstereifel/",
+  "history": []
+ },
+ "1299": {
+  "path": "rheinland-pfalz/heidesheim/tsg-heidesheim/",
+  "history": []
+ },
+ "1300": {
+  "path": "nordrhein-westfalen/bad-driburg/tv-jahn-bad-driburg/",
+  "history": []
+ },
+ "1301": {
+  "path": "bayern/traunstein/djk-traunstein/",
+  "history": []
+ },
+ "1305": {
+  "path": "nordrhein-westfalen/hattingen/sg-welper-1893/",
+  "history": []
+ },
+ "1306": {
+  "path": "hessen/obertshausen/teutonia-hausen/",
+  "history": []
+ },
+ "1307": {
+  "path": "nordrhein-westfalen/zuelpich/tus-chlodwig-1896-zuelpich/",
+  "history": []
+ },
+ "1309": {
+  "path": "niedersachsen/grossburgwedel/ts-grossburgwedel/",
+  "history": []
+ },
+ "1310": {
+  "path": "bayern/donauwoerth/vsc-donauwoerth/",
+  "history": []
+ },
+ "1312": {
+  "path": "baden-wuerttemberg/neckarsulm/sportunion-neckarsulm/",
+  "history": []
+ },
+ "1314": {
+  "path": "hamburg/wedel/sc-rist-wedel/",
+  "history": []
+ },
+ "1315": {
+  "path": "nordrhein-westfalen/muelheim-an-der-ruhr/muelheimer-tg-1856/",
+  "history": []
+ },
+ "1316": {
+  "path": "hamburg/hamburg/sv-polizei-hamburg/",
+  "history": []
+ },
+ "1317": {
+  "path": "baden-wuerttemberg/leinfelden-echterdingen/tv-echterdingen/",
+  "history": []
+ },
+ "1320": {
+  "path": "nordrhein-westfalen/duesseldorf/art-77-90-duesseldorf/",
+  "history": []
+ },
+ "1326": {
+  "path": "saarland/saarbruecken/atsv-saarbruecken/",
+  "history": []
+ },
+ "1327": {
+  "path": "baden-wuerttemberg/heidelberg/heidelberger-tv/",
+  "history": []
+ },
+ "1328": {
+  "path": "bayern/laufach/kusg-laufach/",
+  "history": []
+ },
+ "1330": {
+  "path": "baden-wuerttemberg/heiligkreuzsteinach/vfl-heiligkreuzsteinach/",
+  "history": []
+ },
+ "1331": {
+  "path": "hamburg/hamburg/atsv-von-1899/",
+  "history": []
+ },
+ "1332": {
+  "path": "nordrhein-westfalen/kamen/tv-suedkamen-1986/",
+  "history": []
+ },
+ "1334": {
+  "path": "bayern/vilshofen/turngemeine-vilshofen-1876/",
+  "history": []
+ },
+ "1336": {
+  "path": "baden-wuerttemberg/senden/tv-senden-ay/",
+  "history": []
+ },
+ "1338": {
+  "path": "brandenburg/eisenhuettenstadt/eisenhuettenstaedter-bv-1971/",
+  "history": []
+ },
+ "1341": {
+  "path": "nordrhein-westfalen/luebbecke/tus-von-1865-luebbecke/",
+  "history": []
+ },
+ "1342": {
+  "path": "niedersachsen/delmenhorst/tv-delmenhorst/",
+  "history": []
+ },
+ "1343": {
+  "path": "hessen/kassel/cvjm-kassel/",
+  "history": []
+ },
+ "1344": {
+  "path": "nordrhein-westfalen/kamen/tv-germania-1876-kaiserau/",
+  "history": []
+ },
+ "1345": {
+  "path": "hamburg/buchholz/blau-weiss-buchholz/",
+  "history": []
+ },
+ "1347": {
+  "path": "bayern/oerlenbach/sg-oerlenbach-ebenhausen/",
+  "history": []
+ },
+ "1349": {
+  "path": "nordrhein-westfalen/lemgo/tv-lemgo-von-1863/",
+  "history": []
+ },
+ "1350": {
+  "path": "nordrhein-westfalen/elsdorf-esch/asg-elsdorf/",
+  "history": []
+ },
+ "1351": {
+  "path": "baden-wuerttemberg/durmersheim/tus-durmersheim/",
+  "history": []
+ },
+ "1352": {
+  "path": "rheinland-pfalz/nieder-olm/djk-nieder-olm/",
+  "history": []
+ },
+ "1356": {
+  "path": "nordrhein-westfalen/hagen-vorhalle/tsv-vorhalle-1879/",
+  "history": []
+ },
+ "1359": {
+  "path": "hessen/kelkheim-muenster/tus-hornau/",
+  "history": []
+ },
+ "1361": {
+  "path": "hamburg/lueneburg/mtv-treubund-lueneburg/",
+  "history": []
+ },
+ "1362": {
+  "path": "nordrhein-westfalen/ratingen-lintorf/tus-lintorf-1908/",
+  "history": []
+ },
+ "1364": {
+  "path": "hessen/giessen-kleinlinden/tsv-klein-linden/",
+  "history": []
+ },
+ "1365": {
+  "path": "bayern/straubing/djk-sb-straubing/",
+  "history": []
+ },
+ "1366": {
+  "path": "nordrhein-westfalen/kleve/vfl-merkur-95-kleve/",
+  "history": []
+ },
+ "1368": {
+  "path": "baden-wuerttemberg/linkenheim-hochstetten/bv-linkenheim/",
+  "history": []
+ },
+ "1369": {
+  "path": "hessen/hanau/tg-1837-hanau/",
+  "history": []
+ },
+ "1370": {
+  "path": "hamburg/elmshorn/elmshorner-mtv/",
+  "history": []
+ },
+ "1371": {
+  "path": "bayern/bad-reichenhall/tsv-bad-reichenhall/",
+  "history": []
+ },
+ "1372": {
+  "path": "baden-wuerttemberg/elchingen/sv-oberelchingen/",
+  "history": []
+ },
+ "1376": {
+  "path": "bayern/weissenburg/tsv-1860-weissenburg/",
+  "history": []
+ },
+ "1378": {
+  "path": "hessen/oberursel/tsg-1861-oberursel/",
+  "history": []
+ },
+ "1379": {
+  "path": "niedersachsen/stelingen/tsv-stelingen/",
+  "history": []
+ },
+ "1380": {
+  "path": "baden-wuerttemberg/weil-am-rhein/tv-weil/",
+  "history": []
+ },
+ "1384": {
+  "path": "baden-wuerttemberg/bad-saeckingen/tv-bad-saeckingen/",
+  "history": []
+ },
+ "1387": {
+  "path": "bayern/feldkirchen-westerham/tv-feldkirchen/",
+  "history": []
+ },
+ "1391": {
+  "path": "nordrhein-westfalen/bonn/post-sv-bonn-1926/",
+  "history": []
+ },
+ "1392": {
+  "path": "nordrhein-westfalen/dueren/1-bbc-dueren-the-wizards/",
+  "history": []
+ },
+ "1393": {
+  "path": "bayern/holzkirchen/tus-holzkirchen/",
+  "history": []
+ },
+ "1394": {
+  "path": "baden-wuerttemberg/leimen/kusg-leimen/",
+  "history": []
+ },
+ "1395": {
+  "path": "hessen/butzbach/tsv-1846-butzbach/",
+  "history": []
+ },
+ "1397": {
+  "path": "nordrhein-westfalen/borchen-kirchborchen/sc-borchen-1926-32/",
+  "history": []
+ },
+ "1398": {
+  "path": "nordrhein-westfalen/juelich/juelicher-tv-1885/",
+  "history": []
+ },
+ "1399": {
+  "path": "baden-wuerttemberg/heilbronn-sontheim/tsg-heilbronn/",
+  "history": []
+ },
+ "1400": {
+  "path": "bayern/schwandorf/tsv-1880-schwandorf/",
+  "history": []
+ },
+ "1401": {
+  "path": "niedersachsen/bovenden/sv-bovenden/",
+  "history": []
+ },
+ "1402": {
+  "path": "nordrhein-westfalen/ibbenbueren/tv-ibbenbueren-1860/",
+  "history": []
+ },
+ "1403": {
+  "path": "hessen/gross-umstadt/tv-gross-umstadt/",
+  "history": []
+ },
+ "1404": {
+  "path": "niedersachsen/helpsen/tv-bergkrug/",
+  "history": []
+ },
+ "1405": {
+  "path": "nordrhein-westfalen/aachen-laurensberg/bg-aachen-djk-vaalserquartier/",
+  "history": []
+ },
+ "1407": {
+  "path": "baden-wuerttemberg/ehingen-donau/tsg-ehingen-donau-1848/",
+  "history": []
+ },
+ "1409": {
+  "path": "hamburg/hamburg/hausbruch-neugrabener-ts/",
+  "history": []
+ },
+ "1411": {
+  "path": "hessen/seligenstadt/tgs-seligenstadt/",
+  "history": []
+ },
+ "1412": {
+  "path": "hamburg/hamburg/sv-st-georg/",
+  "history": []
+ },
+ "1413": {
+  "path": "baden-wuerttemberg/rottweil/tsv-rottweil/",
+  "history": []
+ },
+ "1414": {
+  "path": "niedersachsen/koenigslutter/tsg-koenigslutter/",
+  "history": []
+ },
+ "1415": {
+  "path": "nordrhein-westfalen/neuss/tg-neuss-von-1848/",
+  "history": []
+ },
+ "1419": {
+  "path": "hessen/rossdorf/skg-rossdorf/",
+  "history": []
+ },
+ "1421": {
+  "path": "nordrhein-westfalen/remscheid/lenneper-tg-1860/",
+  "history": []
+ },
+ "1422": {
+  "path": "bayern/vilsbiburg/tsv-vilsbiburg/",
+  "history": []
+ },
+ "1423": {
+  "path": "niedersachsen/georgsmarienhuette/tv-georgsmarienhuette/",
+  "history": []
+ },
+ "1425": {
+  "path": "bayern/peiting/tsv-peiting/",
+  "history": []
+ },
+ "1426": {
+  "path": "niedersachsen/osnabrueck/osnabruecker-sc/",
+  "history": []
+ },
+ "1428": {
+  "path": "baden-wuerttemberg/sandhausen/tg-sandhausen/",
+  "history": []
+ },
+ "1430": {
+  "path": "nordrhein-westfalen/ochtrup/sc-arminia-ochtrup-1912/",
+  "history": []
+ },
+ "1431": {
+  "path": "niedersachsen/neuenkirchen-voerden/tv-voerden/",
+  "history": []
+ },
+ "1432": {
+  "path": "baden-wuerttemberg/kirchheim-teck/vfl-kirchheim-teck/",
+  "history": []
+ },
+ "1437": {
+  "path": "hessen/gelnhausen/bc-gelnhausen/",
+  "history": []
+ },
+ "1438": {
+  "path": "schleswig-holstein/kiel/ft-vorwaerts-kiel-von-1901/",
+  "history": []
+ },
+ "1439": {
+  "path": "nordrhein-westfalen/froendenberg/gsv-froendenberg/",
+  "history": []
+ },
+ "1441": {
+  "path": "nordrhein-westfalen/gevelsberg/se-gevelsberg-1877/",
+  "history": []
+ },
+ "1442": {
+  "path": "berlin/berlin-neukoelln/tus-neukoelln/",
+  "history": []
+ },
+ "1444": {
+  "path": "nordrhein-westfalen/schwerte/schwerter-ts-1868/",
+  "history": []
+ },
+ "1446": {
+  "path": "baden-wuerttemberg/salem/hc-salem/",
+  "history": []
+ },
+ "1449": {
+  "path": "bayern/puchheim/fc-puchheim/",
+  "history": []
+ },
+ "1452": {
+  "path": "bayern/meitingen/tsv-1925-meitingen/",
+  "history": []
+ },
+ "1453": {
+  "path": "bayern/ludwigsstadt/tsv-ludwigsstadt/",
+  "history": []
+ },
+ "1455": {
+  "path": "niedersachsen/luthe/tsv-luthe/",
+  "history": []
+ },
+ "1457": {
+  "path": "baden-wuerttemberg/heidelberg/usc-heidelberg/",
+  "history": []
+ },
+ "1460": {
+  "path": "hamburg/hamburg/bramfelder-sv-von-1945/",
+  "history": []
+ },
+ "1461": {
+  "path": "nordrhein-westfalen/breckerfeld/tus-breckerfeld-1877/",
+  "history": []
+ },
+ "1463": {
+  "path": "hessen/offenbach/eosc-offenbach/",
+  "history": []
+ },
+ "1464": {
+  "path": "bayern/fuerth/tv-vach/",
+  "history": []
+ },
+ "1465": {
+  "path": "niedersachsen/goettingen/sc-weende/",
+  "history": []
+ },
+ "1466": {
+  "path": "nordrhein-westfalen/meerbusch/osterather-tv-1893/",
+  "history": []
+ },
+ "1467": {
+  "path": "nordrhein-westfalen/luedinghausen/s-c-union-08-luedinghausen/",
+  "history": []
+ },
+ "1468": {
+  "path": "schleswig-holstein/schwentinetal/tsv-klausdorf-von-1916/",
+  "history": []
+ },
+ "1469": {
+  "path": "bayern/pfarrkirchen/tus-1860-pfarrkirchen/",
+  "history": []
+ },
+ "1470": {
+  "path": "nordrhein-westfalen/aachen/haarener-turner-eintracht/",
+  "history": []
+ },
+ "1472": {
+  "path": "bayern/eichstaett/djk-eichstaett/",
+  "history": []
+ },
+ "1473": {
+  "path": "nordrhein-westfalen/duesseldorf-oberbilk/tus-maccabi-duesseldorf/",
+  "history": []
+ },
+ "1474": {
+  "path": "nordrhein-westfalen/greven/sv-greven-2021/",
+  "history": []
+ },
+ "1476": {
+  "path": "bayern/nuernberg/post-sv-nuernberg/",
+  "history": []
+ },
+ "1477": {
+  "path": "bremen/bremen/bts-neustadt/",
+  "history": []
+ },
+ "1478": {
+  "path": "bremen/osterholz-scharmbeck/bc-vsk-osterholz-scharmbeck/",
+  "history": []
+ },
+ "1479": {
+  "path": "bayern/passau/tv-1862-passau/",
+  "history": []
+ },
+ "1484": {
+  "path": "niedersachsen/hameln/vfl-hameln/",
+  "history": []
+ },
+ "1485": {
+  "path": "nordrhein-westfalen/krefeld/huelser-sportverein/",
+  "history": []
+ },
+ "1487": {
+  "path": "niedersachsen/ilsede/vt-union-gross-ilsede/",
+  "history": []
+ },
+ "1488": {
+  "path": "nordrhein-westfalen/nottuln/sv-djk-g-w-nottuln-1919/",
+  "history": []
+ },
+ "1489": {
+  "path": "nordrhein-westfalen/muenster/ubc-muenster/",
+  "history": []
+ },
+ "1490": {
+  "path": "nordrhein-westfalen/kamen/bsc-kamen/",
+  "history": []
+ },
+ "1493": {
+  "path": "rheinland-pfalz/wittlich/wittlicher-turnverein-1883/",
+  "history": []
+ },
+ "1494": {
+  "path": "niedersachsen/wolfenbuettel/spvgg-halchter-linden/",
+  "history": []
+ },
+ "1496": {
+  "path": "nordrhein-westfalen/aachen-eilendorf/eilendorfer-tv-1870/",
+  "history": []
+ },
+ "1498": {
+  "path": "bayern/lindau/tsv-1850-lindau/",
+  "history": []
+ },
+ "1500": {
+  "path": "hessen/langgoens/tsv-lang-goens/",
+  "history": []
+ },
+ "1502": {
+  "path": "baden-wuerttemberg/konstanz/tv-konstanz/",
+  "history": []
+ },
+ "1505": {
+  "path": "bayern/dachau/tsv-1865-dachau/",
+  "history": []
+ },
+ "1506": {
+  "path": "hessen/frankfurt-bockenheim/ftg-frankfurt/",
+  "history": []
+ },
+ "1507": {
+  "path": "rheinland-pfalz/mainz-lerchenberg/sc-lerchenberg/",
+  "history": []
+ },
+ "1508": {
+  "path": "rheinland-pfalz/kirchheimbolanden/tv-kirchheimbolanden/",
+  "history": []
+ },
+ "1510": {
+  "path": "niedersachsen/eicklingen/tus-eicklingen/",
+  "history": []
+ },
+ "1511": {
+  "path": "berlin/berlin/vfl-lichtenrade/",
+  "history": []
+ },
+ "1512": {
+  "path": "bayern/augsburg/tg-viktoria-augsburg/",
+  "history": []
+ },
+ "1514": {
+  "path": "nordrhein-westfalen/bochum-gerthe/tv-gerthe-1911/",
+  "history": []
+ },
+ "1515": {
+  "path": "baden-wuerttemberg/heidelberg/tsg-ziegelhausen/",
+  "history": []
+ },
+ "1518": {
+  "path": "nordrhein-westfalen/muenster/tsc-muenster-gievenbeck/",
+  "history": []
+ },
+ "1519": {
+  "path": "baden-wuerttemberg/renchen/bg-renchen/",
+  "history": []
+ },
+ "1520": {
+  "path": "bayern/memmingen/tv-memmingen/",
+  "history": []
+ },
+ "1521": {
+  "path": "bayern/nordhalben/atsv-1862-nordhalben/",
+  "history": []
+ },
+ "1522": {
+  "path": "nordrhein-westfalen/bielefeld/sv-brackwede/",
+  "history": []
+ },
+ "1525": {
+  "path": "nordrhein-westfalen/salzkotten/tv-1864-salzkotten/",
+  "history": []
+ },
+ "1526": {
+  "path": "nordrhein-westfalen/bielefeld/tsve-1890-bielefeld/",
+  "history": []
+ },
+ "1527": {
+  "path": "bayern/haar/tsv-haar/",
+  "history": []
+ },
+ "1531": {
+  "path": "nordrhein-westfalen/bochum-langendreer/bc-langendreer/",
+  "history": []
+ },
+ "1532": {
+  "path": "nordrhein-westfalen/rheine/tv-jahn-rheine-1885/",
+  "history": []
+ },
+ "1533": {
+  "path": "hessen/karben-gross-karben/tv-1894-okarben/",
+  "history": []
+ },
+ "1534": {
+  "path": "nordrhein-westfalen/aachen/aachener-tg-1862/",
+  "history": []
+ },
+ "1535": {
+  "path": "nordrhein-westfalen/herne-sodingen/herner-turn-club-1880/",
+  "history": []
+ },
+ "1536": {
+  "path": "nordrhein-westfalen/willich/willicher-turnverein-1892/",
+  "history": []
+ },
+ "1539": {
+  "path": "niedersachsen/leer/fortuna-logabirum/",
+  "history": []
+ },
+ "1543": {
+  "path": "bayern/veitshoechheim/tg-1877-veitshoechheim/",
+  "history": []
+ },
+ "1544": {
+  "path": "baden-wuerttemberg/karlsbad-langensteinbach/bg-karlsbad/",
+  "history": []
+ },
+ "1545": {
+  "path": "rheinland-pfalz/kaisersesch/tus-kaisersesch/",
+  "history": []
+ },
+ "1553": {
+  "path": "brandenburg/potsdam/sc-potsdam/",
+  "history": []
+ },
+ "1556": {
+  "path": "berlin/berlin/hellas-basket-berlin/",
+  "history": []
+ },
+ "1557": {
+  "path": "hessen/marburg/bc-marburg/",
+  "history": []
+ },
+ "1559": {
+  "path": "berlin/berlin/pfeffersport/",
+  "history": []
+ },
+ "1560": {
+  "path": "hessen/geisenheim/ssv-st-ursula-geisenheim/",
+  "history": []
+ },
+ "1563": {
+  "path": "baden-wuerttemberg/filderstadt-plattenhardt/tsv-plattenhardt/",
+  "history": []
+ },
+ "1565": {
+  "path": "bayern/oberasbach/tsv-1946-altenberg/",
+  "history": []
+ },
+ "1578": {
+  "path": "bayern/wolnzach/tsv-1884-wolnzach/",
+  "history": []
+ },
+ "1580": {
+  "path": "brandenburg/mahlow/mahlower-sv-1977/",
+  "history": []
+ },
+ "1583": {
+  "path": "sachsen-anhalt/niederndodeleben/tsv-niederndodeleben/",
+  "history": []
+ },
+ "1588": {
+  "path": "berlin/berlin/weddinger-wiesel/",
+  "history": []
+ },
+ "1589": {
+  "path": "nordrhein-westfalen/herten/hertener-loewen/",
+  "history": []
+ },
+ "1590": {
+  "path": "thueringen/zeulenroda/sportverein-1975-zeulenroda/",
+  "history": []
+ },
+ "1591": {
+  "path": "saarland/voelklingen/baskets-98-voelklingen-warndt/",
+  "history": []
+ },
+ "1594": {
+  "path": "bayern/feuchtwangen/tus-1861-feuchtwangen/",
+  "history": []
+ },
+ "1597": {
+  "path": "hessen/bad-vilbel-dortelweil/sv-fun-ball-dortelweil/",
+  "history": []
+ },
+ "1602": {
+  "path": "berlin/berlin/sc-borussia-friedrichsfelde/",
+  "history": []
+ },
+ "1611": {
+  "path": "nordrhein-westfalen/weitere/tus-makkabi-dortmund/",
+  "history": []
+ },
+ "1615": {
+  "path": "hessen/frankfurt-am-main/tsv-bonames/",
+  "history": []
+ },
+ "1620": {
+  "path": "schleswig-holstein/luebeck/mtv-luebeck/",
+  "history": []
+ },
+ "1621": {
+  "path": "nordrhein-westfalen/krefeld/sportclub-krefeld-1905/",
+  "history": []
+ },
+ "1622": {
+  "path": "bayern/bad-neustadt-a-d-saale/tsv-brendlorenzen/",
+  "history": []
+ },
+ "1625": {
+  "path": "niedersachsen/oldenburg-osternburg/tura-76-oldenburg/",
+  "history": []
+ },
+ "1626": {
+  "path": "sachsen/coswig/sv-motor-soernewitz/",
+  "history": []
+ },
+ "1627": {
+  "path": "bayern/lauf-a-d-pegnitz/tv-1877-lauf/",
+  "history": []
+ },
+ "1631": {
+  "path": "baden-wuerttemberg/hockenheim/bac-hockenheim/",
+  "history": []
+ },
+ "1632": {
+  "path": "baden-wuerttemberg/steinenbronn/tsv-steinenbronn/",
+  "history": []
+ },
+ "1641": {
+  "path": "nordrhein-westfalen/recklinghausen/tuw-recklinghausen-sued-1886/",
+  "history": []
+ },
+ "1642": {
+  "path": "nordrhein-westfalen/krefeld-fischeln/fischelner-turnverein-05/",
+  "history": []
+ },
+ "1647": {
+  "path": "brandenburg/rathenow/bv-eberswalde-99/",
+  "history": []
+ },
+ "1649": {
+  "path": "brandenburg/teltow/rsve-teltow-kleinm-stahnsdorf/",
+  "history": []
+ },
+ "1651": {
+  "path": "nordrhein-westfalen/werne/lippebaskets-werne/",
+  "history": []
+ },
+ "1660": {
+  "path": "bayern/bayreuth/bbc-bayreuth/",
+  "history": []
+ },
+ "1664": {
+  "path": "nordrhein-westfalen/ahlen/djk-vorwaerts-19-ahlen/",
+  "history": []
+ },
+ "1665": {
+  "path": "baden-wuerttemberg/wangen/mtg-wangen/",
+  "history": []
+ },
+ "1667": {
+  "path": "bayern/schwindegg/sv-schwindegg/",
+  "history": []
+ },
+ "1668": {
+  "path": "sachsen/chemnitz/niners-chemnitz/",
+  "history": []
+ },
+ "1674": {
+  "path": "bayern/hassfurt/tv-1861-hassfurt/",
+  "history": []
+ },
+ "1676": {
+  "path": "berlin/berlin/tiergarten-isc-99/",
+  "history": []
+ },
+ "1680": {
+  "path": "berlin/berlin/vereinigung-adler-1912/",
+  "history": []
+ },
+ "1685": {
+  "path": "hessen/altenstadt-oberau/vfl-altenstadt/",
+  "history": []
+ },
+ "1690": {
+  "path": "baden-wuerttemberg/staufen/tv-staufen/",
+  "history": []
+ },
+ "1694": {
+  "path": "sachsen/zittau/hsg-turbine-zittau/",
+  "history": []
+ },
+ "1697": {
+  "path": "baden-wuerttemberg/weingarten/tv-weingarten/",
+  "history": []
+ },
+ "1700": {
+  "path": "mecklenburg-vorpommern/schwerin/psv-schwerin/",
+  "history": []
+ },
+ "1707": {
+  "path": "hamburg/hamburg/bg-hamburg-west/",
+  "history": []
+ },
+ "1709": {
+  "path": "sachsen-anhalt/wolmirstedt/baskets-wolmirstedt/",
+  "history": []
+ },
+ "1711": {
+  "path": "brandenburg/ludwigsfelde/basketballverein-ludwigsfelde/",
+  "history": []
+ },
+ "1713": {
+  "path": "niedersachsen/spelle/scsv-spelle-venhaus/",
+  "history": []
+ },
+ "1715": {
+  "path": "rheinland-pfalz/speyer/sg-tv-duerkheim-bb-int-speyer/",
+  "history": []
+ },
+ "1716": {
+  "path": "sachsen/leipzig/basketballverein-leipzig/",
+  "history": []
+ },
+ "1726": {
+  "path": "mecklenburg-vorpommern/warin/tsg-warin/",
+  "history": []
+ },
+ "1727": {
+  "path": "bayern/nuernberg/esv-fluegelrad/",
+  "history": []
+ },
+ "1735": {
+  "path": "sachsen/frankenberg/tsv-dittersbach/",
+  "history": []
+ },
+ "1736": {
+  "path": "niedersachsen/bueckeburg/ts-rusbend/",
+  "history": []
+ },
+ "1744": {
+  "path": "baden-wuerttemberg/ostfildern/tv-nellingen/",
+  "history": []
+ },
+ "1746": {
+  "path": "brandenburg/panketal-ot-schwanebeck/sg-schwanebeck-98/",
+  "history": []
+ },
+ "1756": {
+  "path": "niedersachsen/cuxhaven/rot-weiss-cuxhaven/",
+  "history": []
+ },
+ "1758": {
+  "path": "hessen/idstein/tv-idstein/",
+  "history": []
+ },
+ "1761": {
+  "path": "sachsen/grimma/sv-1919-grimma/",
+  "history": []
+ },
+ "1770": {
+  "path": "niedersachsen/peine-voehrum/tsv-arminia-voehrum/",
+  "history": []
+ },
+ "1772": {
+  "path": "baden-wuerttemberg/remseck/bg-remseck/",
+  "history": []
+ },
+ "1783": {
+  "path": "bayern/wertheim/sg-wartberg-kreuzw-wertheim/",
+  "history": []
+ },
+ "1788": {
+  "path": "baden-wuerttemberg/kupferzell/tsv-kupferzell/",
+  "history": []
+ },
+ "1789": {
+  "path": "niedersachsen/wolfenbuettel/mtv-bg-wolfenbuettel/",
+  "history": []
+ },
+ "1790": {
+  "path": "bayern/heroldsberg/tuspo-heroldsberg/",
+  "history": []
+ },
+ "1796": {
+  "path": "hessen/aschaffenburg/sg-a-burg-eiche-offenbach/",
+  "history": []
+ },
+ "1810": {
+  "path": "bayern/dorfen/tsv-dorfen/",
+  "history": []
+ },
+ "1812": {
+  "path": "baden-wuerttemberg/dossenheim/tsg-dossenheim/",
+  "history": []
+ },
+ "1819": {
+  "path": "niedersachsen/braunschweig/tsv-voelkenrode/",
+  "history": []
+ },
+ "1820": {
+  "path": "bayern/etting/tsv-etting-ingolstadt/",
+  "history": []
+ },
+ "1834": {
+  "path": "rheinland-pfalz/speyer/sg-towers-speyer-schifferstadt/",
+  "history": []
+ },
+ "1837": {
+  "path": "niedersachsen/wasbuettel/mtv-wasbuettel/",
+  "history": []
+ },
+ "1840": {
+  "path": "hamburg/hamburg/bc-hamburg/",
+  "history": []
+ },
+ "1844": {
+  "path": "sachsen-anhalt/magdeburg/msv-boerde-1949/",
+  "history": []
+ },
+ "1846": {
+  "path": "hamburg/hamburg/sc-alstertal-langenhorn/",
+  "history": []
+ },
+ "1849": {
+  "path": "nordrhein-westfalen/weitere/sv-s-w-marienfeld-1930/",
+  "history": []
+ },
+ "1854": {
+  "path": "nordrhein-westfalen/luenen/bg-luenen-91/",
+  "history": []
+ },
+ "1855": {
+  "path": "thueringen/eisenach/bv-eisenach-tigers/",
+  "history": []
+ },
+ "1857": {
+  "path": "nordrhein-westfalen/koeln-rondorf/bg-koeln/",
+  "history": []
+ },
+ "1859": {
+  "path": "nordrhein-westfalen/luedenscheid/baskets-luedenscheid/",
+  "history": []
+ },
+ "1866": {
+  "path": "niedersachsen/lehrte-haemelerwald/sv-adler-haemelerwald/",
+  "history": []
+ },
+ "1875": {
+  "path": "hessen/lollar/tsg-lollar/",
+  "history": []
+ },
+ "1876": {
+  "path": "rheinland-pfalz/montabaur/bbc-montabaur/",
+  "history": []
+ },
+ "1880": {
+  "path": "rheinland-pfalz/mainz-ebersheim/tsv-mainz-ebersheim/",
+  "history": []
+ },
+ "1885": {
+  "path": "mecklenburg-vorpommern/rostock/big-rostock/",
+  "history": []
+ },
+ "1887": {
+  "path": "bayern/schwarzenfeld/1-fc-schwarzenfeld/",
+  "history": []
+ },
+ "1890": {
+  "path": "nordrhein-westfalen/solingen-graefrath/wmtv-solingen-1861/",
+  "history": []
+ },
+ "1896": {
+  "path": "baden-wuerttemberg/kenzingen/auv-kenzingen/",
+  "history": []
+ },
+ "1910": {
+  "path": "bayern/freilassing/tsv-1896-freilassing/",
+  "history": []
+ },
+ "1913": {
+  "path": "hessen/frankfurt-am-main/ts-1856-frankfurt-griesheim/",
+  "history": []
+ },
+ "1917": {
+  "path": "rheinland-pfalz/edenkoben/tv-1848-edenkoben/",
+  "history": []
+ },
+ "1921": {
+  "path": "bayern/lauben/sg-heising-kottern/",
+  "history": []
+ },
+ "1924": {
+  "path": "thueringen/saalfeld/1-ssv-saalfeld/",
+  "history": []
+ },
+ "1932": {
+  "path": "bayern/bamberg/freak-city-bamberg/",
+  "history": []
+ },
+ "1934": {
+  "path": "bayern/peissenberg/tsv-peissenberg/",
+  "history": []
+ },
+ "1935": {
+  "path": "bayern/weitere/fc-anadolu-bayern/",
+  "history": []
+ },
+ "1936": {
+  "path": "bayern/poing/sg-poing/",
+  "history": []
+ },
+ "1937": {
+  "path": "bayern/pressath/djk-pressath/",
+  "history": []
+ },
+ "1939": {
+  "path": "bayern/hemau/sportgruppe-hohenschambach/",
+  "history": []
+ },
+ "1940": {
+  "path": "bayern/utting/tsv-utting/",
+  "history": []
+ },
+ "1942": {
+  "path": "bayern/polling/sv-polling/",
+  "history": []
+ },
+ "1943": {
+  "path": "bayern/garching/vfr-garching/",
+  "history": []
+ },
+ "1946": {
+  "path": "bayern/schwabmuenchen/tsv-1863-schwabmuenchen/",
+  "history": []
+ },
+ "1950": {
+  "path": "bayern/nuernberg/nuernberger-basketball-club/",
+  "history": []
+ },
+ "1952": {
+  "path": "bayern/burgsinn/tv-burgsinn-1889/",
+  "history": []
+ },
+ "1954": {
+  "path": "bayern/muensterschwarzach/djk-muensterschwarzach/",
+  "history": []
+ },
+ "1956": {
+  "path": "bayern/schweinfurt/tg-1848-schweinfurt/",
+  "history": []
+ },
+ "1958": {
+  "path": "bayern/seefeld-hechendorf/tsv-hechendorf/",
+  "history": []
+ },
+ "1959": {
+  "path": "baden-wuerttemberg/calw/tsv-calw-von-1846/",
+  "history": []
+ },
+ "1963": {
+  "path": "berlin/berlin/friedenauer-tsc/",
+  "history": []
+ },
+ "1964": {
+  "path": "baden-wuerttemberg/ladenburg/lsv-ladenburg/",
+  "history": []
+ },
+ "1965": {
+  "path": "nordrhein-westfalen/recklinghausen/citybasket-recklinghausen/",
+  "history": []
+ },
+ "1966": {
+  "path": "rheinland-pfalz/mainz/sv-goethe-mainz/",
+  "history": []
+ },
+ "1967": {
+  "path": "bundesweit/braunschweig/bma365-bamberg-baskets/",
+  "history": []
+ },
+ "1968": {
+  "path": "bundesweit/berlin/alba-berlin/",
+  "history": []
+ },
+ "1969": {
+  "path": "bundesweit/bonn/telekom-baskets-bonn/",
+  "history": []
+ },
+ "1970": {
+  "path": "bundesweit/braunschweig/basketball-loewen-braunschweig/",
+  "history": []
+ },
+ "1974": {
+  "path": "bundesweit/oldenburg/ewe-baskets-oldenburg/",
+  "history": []
+ },
+ "1975": {
+  "path": "bundesweit/frankfurt-am-main/skyliners/",
+  "history": []
+ },
+ "1976": {
+  "path": "bundesweit/trier/vet-concept-gladiators-trier/",
+  "history": []
+ },
+ "1977": {
+  "path": "bundesweit/weissenfels/syntainics-mbc/",
+  "history": []
+ },
+ "1980": {
+  "path": "bundesweit/ludwigsburg/mhp-riesen-ludwigsburg/",
+  "history": []
+ },
+ "1995": {
+  "path": "sachsen-anhalt/aschersleben/aschersleben-tigers-bc/",
+  "history": []
+ },
+ "2001": {
+  "path": "berlin/berlin/bass-berlin/",
+  "history": []
+ },
+ "2005": {
+  "path": "mecklenburg-vorpommern/neustrelitz/wsv-neustrelitz/",
+  "history": []
+ },
+ "2009": {
+  "path": "schleswig-holstein/schwarzenbek/tsv-schwarzenbek/",
+  "history": []
+ },
+ "2018": {
+  "path": "hessen/vellmar/tsv-1892-vellmar/",
+  "history": []
+ },
+ "2021": {
+  "path": "baden-wuerttemberg/mannheim/sg-mannheim/",
+  "history": []
+ },
+ "2023": {
+  "path": "sachsen/chemnitz/sg-adelsberg/",
+  "history": []
+ },
+ "2030": {
+  "path": "sachsen/chemnitz/esv-lokomotive-chemnitz/",
+  "history": []
+ },
+ "2032": {
+  "path": "sachsen/schkeuditz/sc-eintracht-schkeuditz/",
+  "history": []
+ },
+ "2036": {
+  "path": "baden-wuerttemberg/kirchentellinsfurt/tb-kirchentellinsfurt/",
+  "history": []
+ },
+ "2037": {
+  "path": "hessen/michelstadt/bc-odenwald-dragons/",
+  "history": []
+ },
+ "2039": {
+  "path": "nordrhein-westfalen/viersen-duelken/sg-duelken-1860-95/",
+  "history": []
+ },
+ "2040": {
+  "path": "nordrhein-westfalen/nettetal/tv-breyell-1899/",
+  "history": []
+ },
+ "2042": {
+  "path": "baden-wuerttemberg/lauchringen/tv-lauchringen-1925/",
+  "history": []
+ },
+ "2043": {
+  "path": "hessen/heusenstamm/tsv-heusenstamm/",
+  "history": []
+ },
+ "2044": {
+  "path": "baden-wuerttemberg/tamm/bg-tamm-bietigheim/",
+  "history": []
+ },
+ "2046": {
+  "path": "niedersachsen/edemissen/tsv-edemissen/",
+  "history": []
+ },
+ "2047": {
+  "path": "baden-wuerttemberg/buehl/tv-buehl/",
+  "history": []
+ },
+ "2050": {
+  "path": "nordrhein-westfalen/muenster/djk-wacker-mecklenbeck/",
+  "history": []
+ },
+ "2060": {
+  "path": "nordrhein-westfalen/bielefeld/1-afc-bielefeld-bulldogs/",
+  "history": []
+ },
+ "2063": {
+  "path": "bayern/bischberg/baskets-bischberg/",
+  "history": []
+ },
+ "2081": {
+  "path": "nordrhein-westfalen/remscheid/remscheider-sv-von-1897/",
+  "history": []
+ },
+ "2088": {
+  "path": "schleswig-holstein/flensburg/tsb-flensburg/",
+  "history": []
+ },
+ "2095": {
+  "path": "schleswig-holstein/ratzeburg/ratzeburger-sv/",
+  "history": []
+ },
+ "2100": {
+  "path": "nordrhein-westfalen/guetersloh/guetersloher-tv-von-1879-e/",
+  "history": []
+ },
+ "2101": {
+  "path": "nordrhein-westfalen/rheda-wiedenbrueck/djk-gruen-weiss-rheda/",
+  "history": []
+ },
+ "2102": {
+  "path": "bayern/toeging/tus-toeging/",
+  "history": []
+ },
+ "2103": {
+  "path": "nordrhein-westfalen/neunkirchen-seelscheid/tv-neunkirchen/",
+  "history": []
+ },
+ "2114": {
+  "path": "sachsen-anhalt/kalbe-milde/vfl-kalbe-milde/",
+  "history": []
+ },
+ "2126": {
+  "path": "bayern/kitzingen/tg-kitzingen-1848/",
+  "history": []
+ },
+ "2128": {
+  "path": "bundesweit/weitere/sg-braunschweig/",
+  "history": []
+ },
+ "2133": {
+  "path": "bundesweit/bremen/eisbaeren-bremerhaven/",
+  "history": []
+ },
+ "2137": {
+  "path": "bundesweit/goettingen/bg-goettingen/",
+  "history": []
+ },
+ "2139": {
+  "path": "bundesweit/hagen/phoenix-hagen/",
+  "history": []
+ },
+ "2140": {
+  "path": "bundesweit/iserlohn/iserlohn-kangaroos/",
+  "history": []
+ },
+ "2143": {
+  "path": "bundesweit/paderborn/paderborn-baskets/",
+  "history": []
+ },
+ "2144": {
+  "path": "bundesweit/bad-honnef/dragons-rhoendorf/",
+  "history": []
+ },
+ "2150": {
+  "path": "bundesweit/ilshofen/hakro-merlins-crailsheim/",
+  "history": []
+ },
+ "2153": {
+  "path": "bundesweit/weitere/mlp-academics-heidelberg/",
+  "history": []
+ },
+ "2157": {
+  "path": "bundesweit/langen/tv-langen/",
+  "history": []
+ },
+ "2161": {
+  "path": "bundesweit/nuernberg/nuernberg-falcons-bc/",
+  "history": []
+ },
+ "2164": {
+  "path": "bayern/prien/tus-prien-a-chiemsee-1878/",
+  "history": []
+ },
+ "2177": {
+  "path": "sachsen-anhalt/dessau-rosslau/basketball-club-anhalt/",
+  "history": []
+ },
+ "2178": {
+  "path": "nordrhein-westfalen/lindlar/tus-lindlar-1925/",
+  "history": []
+ },
+ "2180": {
+  "path": "niedersachsen/nienburg/tkw-nienburg/",
+  "history": []
+ },
+ "2183": {
+  "path": "hessen/trebur/tv-1886-trebur/",
+  "history": []
+ },
+ "2185": {
+  "path": "hessen/ober-ramstadt/bg-ober-ramstadt/",
+  "history": []
+ },
+ "2190": {
+  "path": "hessen/muehlheim-am-main/sv-dietesheim/",
+  "history": []
+ },
+ "2191": {
+  "path": "schleswig-holstein/geesthacht/bg-herzogtum-lauenburg/",
+  "history": []
+ },
+ "2195": {
+  "path": "nordrhein-westfalen/brilon/turnverein-1884-brilon/",
+  "history": []
+ },
+ "2197": {
+  "path": "niedersachsen/oldenburg/sv-ofenerdiek/",
+  "history": []
+ },
+ "2202": {
+  "path": "baden-wuerttemberg/nagold/vfl-nagold/",
+  "history": []
+ },
+ "2205": {
+  "path": "baden-wuerttemberg/offenburg/etsv-jahn-offenburg/",
+  "history": []
+ },
+ "2216": {
+  "path": "schleswig-holstein/kiel/ellerbeker-turnvereinigung/",
+  "history": []
+ },
+ "2218": {
+  "path": "nordrhein-westfalen/muenster/tus-hiltrup-1930/",
+  "history": []
+ },
+ "2226": {
+  "path": "hessen/frankfurt-am-main/turnverein-niederrad/",
+  "history": []
+ },
+ "2236": {
+  "path": "schleswig-holstein/trittau/tsv-trittau-von-1899/",
+  "history": []
+ },
+ "2242": {
+  "path": "rheinland-pfalz/hassloch/bbv-gorillas-hassloch/",
+  "history": []
+ },
+ "2245": {
+  "path": "niedersachsen/leer-bingum/bsv-bingum/",
+  "history": []
+ },
+ "2246": {
+  "path": "bundesweit/herten/hertener-loewen/",
+  "history": []
+ },
+ "2266": {
+  "path": "nordrhein-westfalen/buende/buender-tv-westfalia-1862/",
+  "history": []
+ },
+ "2267": {
+  "path": "nordrhein-westfalen/herzogenrath/sg-herzogenrath-baesweiler/",
+  "history": []
+ },
+ "2270": {
+  "path": "hamburg/hamburg/niendorfer-tsv-von-1919/",
+  "history": []
+ },
+ "2280": {
+  "path": "nordrhein-westfalen/soest/soest-falcons/",
+  "history": []
+ },
+ "2281": {
+  "path": "nordrhein-westfalen/mettmann/mettmann-sport/",
+  "history": []
+ },
+ "2298": {
+  "path": "rheinland-pfalz/bendorf/djk-bendorf/",
+  "history": []
+ },
+ "2300": {
+  "path": "niedersachsen/weitere/tsv-kraehenwinkel-kaltenweide/",
+  "history": []
+ },
+ "2301": {
+  "path": "nordrhein-westfalen/nettetal/tv-lobberich-1861/",
+  "history": []
+ },
+ "2302": {
+  "path": "hessen/friedberg/tg-friedberg/",
+  "history": []
+ },
+ "2334": {
+  "path": "niedersachsen/braunschweig/eintracht-braunschweig/",
+  "history": []
+ },
+ "2361": {
+  "path": "hamburg/hamburg/altrahlstedter-mtv-1893/",
+  "history": []
+ },
+ "2375": {
+  "path": "nordrhein-westfalen/herford/tg-herford-1860/",
+  "history": []
+ },
+ "2392": {
+  "path": "hamburg/weitere/meiendorfer-sv/",
+  "history": []
+ },
+ "2394": {
+  "path": "hamburg/weitere/djk-hamburg/",
+  "history": []
+ },
+ "2437": {
+  "path": "baden-wuerttemberg/isny-im-allgaeu/tv-1846-isny/",
+  "history": []
+ },
+ "2456": {
+  "path": "rheinland-pfalz/lahnstein/bbv-lahnstein/",
+  "history": []
+ },
+ "2486": {
+  "path": "niedersachsen/wolfsburg/tv-jahn-wolfsburg/",
+  "history": []
+ },
+ "2494": {
+  "path": "nordrhein-westfalen/hueckelhoven/tv-hueckelhoven-ratheim/",
+  "history": []
+ },
+ "2495": {
+  "path": "bremen/bremen/tsv-osterholz-tenever/",
+  "history": []
+ },
+ "2497": {
+  "path": "nordrhein-westfalen/gummersbach/vfl-gummersbach-von-1861/",
+  "history": []
+ },
+ "2500": {
+  "path": "bayern/hoehenkirchen-siegertsbrunn/spvgg-hoehenkirchen/",
+  "history": []
+ },
+ "2553": {
+  "path": "niedersachsen/edewecht/vfl-edewecht/",
+  "history": []
+ },
+ "2606": {
+  "path": "niedersachsen/lilienthal/tv-falkenberg/",
+  "history": []
+ },
+ "2633": {
+  "path": "schleswig-holstein/moelln/moellner-sv/",
+  "history": []
+ },
+ "2639": {
+  "path": "schleswig-holstein/kronshagen/tsv-kronshagen-von-1924/",
+  "history": []
+ },
+ "2666": {
+  "path": "schleswig-holstein/gettorf/gettorfer-tv-von-1889/",
+  "history": []
+ },
+ "2690": {
+  "path": "rheinland-pfalz/idar-oberstein/tv-oberstein/",
+  "history": []
+ },
+ "2692": {
+  "path": "bayern/muenchen/tsv-maccabi-muenchen/",
+  "history": []
+ },
+ "2708": {
+  "path": "niedersachsen/bad-muender/tuspo-bad-muender/",
+  "history": []
+ },
+ "2714": {
+  "path": "bayern/dingolfing/tv-dingolfing-1868/",
+  "history": []
+ },
+ "2752": {
+  "path": "rheinland-pfalz/ramstein-miesenbach/tv-03-ramstein/",
+  "history": []
+ },
+ "2765": {
+  "path": "nordrhein-westfalen/velbert/velberter-sportgemeinschaft/",
+  "history": []
+ },
+ "2766": {
+  "path": "baden-wuerttemberg/karlsruhe/post-suedstadt-karlsruhe/",
+  "history": []
+ },
+ "2773": {
+  "path": "bayern/waldkraiburg/vfl-waldkraiburg/",
+  "history": []
+ },
+ "2836": {
+  "path": "baden-wuerttemberg/eppelheim/djk-eppelheim/",
+  "history": []
+ },
+ "2847": {
+  "path": "bayern/buchloe/vfl-buchloe/",
+  "history": []
+ },
+ "2873": {
+  "path": "niedersachsen/langenhagen/tsv-godshorn/",
+  "history": []
+ },
+ "2901": {
+  "path": "bayern/koenigsbrunn/tsv-koenigsbrunn/",
+  "history": []
+ },
+ "2908": {
+  "path": "niedersachsen/damme/osc-damme/",
+  "history": []
+ },
+ "2939": {
+  "path": "nordrhein-westfalen/weitere/s-v-hellas-troisdorf/",
+  "history": []
+ },
+ "2959": {
+  "path": "saarland/bexbach/sc-frankenholz/",
+  "history": []
+ },
+ "2975": {
+  "path": "nordrhein-westfalen/wegberg/tus-1900-wegberg/",
+  "history": []
+ },
+ "2977": {
+  "path": "bayern/augsburg/tsv-schwaben-augsburg/",
+  "history": []
+ },
+ "2998": {
+  "path": "rheinland-pfalz/mehlingen/bbc-mehlingen/",
+  "history": []
+ },
+ "3060": {
+  "path": "hessen/gladenbach/tv-gladenbach/",
+  "history": []
+ },
+ "3066": {
+  "path": "schleswig-holstein/weitere/tsv-westerland/",
+  "history": []
+ },
+ "3080": {
+  "path": "bayern/poing/sv-heimstetten/",
+  "history": []
+ },
+ "3150": {
+  "path": "bayern/traunreut/tus-traunreut/",
+  "history": []
+ },
+ "3170": {
+  "path": "niedersachsen/lengede/turnerbund-lengede/",
+  "history": []
+ },
+ "3260": {
+  "path": "nordrhein-westfalen/wuppertal-barmen/hellas-wuppertal/",
+  "history": []
+ },
+ "3280": {
+  "path": "niedersachsen/oldenburg/hundsmuehler-tv/",
+  "history": []
+ },
+ "3285": {
+  "path": "baden-wuerttemberg/ulm-wiblingen/tv-wiblingen/",
+  "history": []
+ },
+ "3287": {
+  "path": "baden-wuerttemberg/balingen/tsg-balingen/",
+  "history": []
+ },
+ "3332": {
+  "path": "mecklenburg-vorpommern/roebel/tsv-90-roebel-mueritz/",
+  "history": []
+ },
+ "3372": {
+  "path": "baden-wuerttemberg/bad-mergentheim/tv-bad-mergentheim/",
+  "history": []
+ },
+ "3379": {
+  "path": "niedersachsen/braunschweig/tsc-vahdet-braunschweig/",
+  "history": []
+ },
+ "3441": {
+  "path": "nordrhein-westfalen/wuppertal-elberfeld/kult-sport-wuppertal/",
+  "history": []
+ },
+ "3444": {
+  "path": "niedersachsen/wittingen/vfl-wittingen-suderwittingen/",
+  "history": []
+ },
+ "3487": {
+  "path": "sachsen-anhalt/weitere/asv-1902-sangerhausen/",
+  "history": []
+ },
+ "3501": {
+  "path": "bundesweit/neu-ulm/ratiopharm-ulm/",
+  "history": []
+ },
+ "3503": {
+  "path": "rheinland-pfalz/sinzig/postsportverein-remagen/",
+  "history": []
+ },
+ "3515": {
+  "path": "mecklenburg-vorpommern/ueckermuende/sv-einheit-ueckermuende/",
+  "history": []
+ },
+ "3528": {
+  "path": "sachsen/leipzig/sv-automation-61-leipzig/",
+  "history": []
+ },
+ "3529": {
+  "path": "sachsen/dresden/dresden-titans/",
+  "history": []
+ },
+ "3534": {
+  "path": "sachsen-anhalt/stendal/bbc-stendal/",
+  "history": []
+ },
+ "3543": {
+  "path": "nordrhein-westfalen/koeln-ehrenfeld/bbv-koeln-nordwest/",
+  "history": []
+ },
+ "3544": {
+  "path": "nordrhein-westfalen/koeln-pesch/bc-koeln-pesch-04/",
+  "history": []
+ },
+ "3547": {
+  "path": "nordrhein-westfalen/wuppertal/sv-bayer-wuppertal/",
+  "history": []
+ },
+ "3556": {
+  "path": "nordrhein-westfalen/bad-oeynhausen/1-bsv-wulferdingsen/",
+  "history": []
+ },
+ "3557": {
+  "path": "baden-wuerttemberg/graben-neudorf/tsv-graben-neudorf/",
+  "history": []
+ },
+ "3565": {
+  "path": "baden-wuerttemberg/eppingen/tv-eppingen/",
+  "history": []
+ },
+ "3569": {
+  "path": "baden-wuerttemberg/ettenheim/bg-ettenheim/",
+  "history": []
+ },
+ "3571": {
+  "path": "nordrhein-westfalen/essen/crobaskets-essen/",
+  "history": []
+ },
+ "3572": {
+  "path": "baden-wuerttemberg/stuttgart/tschuleteros-stuttgart/",
+  "history": []
+ },
+ "3576": {
+  "path": "bayern/gauting/gautinger-sportclub/",
+  "history": []
+ },
+ "3582": {
+  "path": "schleswig-holstein/rendsburg/basketball-club-rendsburg/",
+  "history": []
+ },
+ "3584": {
+  "path": "hamburg/hamburg/sg-harburg-baskets/",
+  "history": []
+ },
+ "3585": {
+  "path": "bayern/hirschaid/bg-regnitztal/",
+  "history": []
+ },
+ "3587": {
+  "path": "niedersachsen/vechelde/mtv-vechelde/",
+  "history": []
+ },
+ "3588": {
+  "path": "nordrhein-westfalen/koenigswinter-oberpleis/tus-1905-oberpleis/",
+  "history": []
+ },
+ "3595": {
+  "path": "nordrhein-westfalen/xanten-luettingen/xanten-romans/",
+  "history": []
+ },
+ "3596": {
+  "path": "nordrhein-westfalen/coesfeld/sg-coesfeld-06/",
+  "history": []
+ },
+ "3598": {
+  "path": "hessen/bad-sooden-allendorf/bsg-06-werra-meissner/",
+  "history": []
+ },
+ "3606": {
+  "path": "thueringen/jena/ladybaskets-jena/",
+  "history": []
+ },
+ "3609": {
+  "path": "nordrhein-westfalen/herford/bbg-herford/",
+  "history": []
+ },
+ "3616": {
+  "path": "bundesweit/goeppingen/bozic-estriche-knights-kirchheim/",
+  "history": []
+ },
+ "3620": {
+  "path": "bundesweit/neu-ulm/ratiopharm-ulm-3620/",
+  "history": []
+ },
+ "3623": {
+  "path": "bundesweit/muenchen/fc-bayern-muenchen-basketball/",
+  "history": []
+ },
+ "3627": {
+  "path": "bundesweit/ludwigsburg/porsche-bba-ludwigsburg/",
+  "history": []
+ },
+ "3628": {
+  "path": "bundesweit/schelklingen/team-urspring/",
+  "history": []
+ },
+ "3631": {
+  "path": "bundesweit/frankfurt-am-main/eintracht-frankfurt-skyliners/",
+  "history": []
+ },
+ "3636": {
+  "path": "bundesweit/jena/science-city-jena/",
+  "history": []
+ },
+ "3638": {
+  "path": "bundesweit/oldenburg/baskets-juniors-oldenburg/",
+  "history": []
+ },
+ "3639": {
+  "path": "bundesweit/paderborn/paderborn-baskets-3639/",
+  "history": []
+ },
+ "3641": {
+  "path": "bundesweit/koeln-bickendorf/rheinstars-koeln/",
+  "history": []
+ },
+ "3642": {
+  "path": "bundesweit/bad-honnef/team-bonn-rhoendorf/",
+  "history": []
+ },
+ "3644": {
+  "path": "bundesweit/leverkusen/bayer-giants-leverkusen/",
+  "history": []
+ },
+ "3646": {
+  "path": "bundesweit/berlin/alba-berlin-3646/",
+  "history": []
+ },
+ "3651": {
+  "path": "bundesweit/halle-saale/mitteldeutsche-basketball-academy/",
+  "history": []
+ },
+ "3653": {
+  "path": "bundesweit/goettingen/sartorius-juniors/",
+  "history": []
+ },
+ "3656": {
+  "path": "nordrhein-westfalen/schwelm/sg-schwelmer-bask-06-re-schwelm/",
+  "history": []
+ },
+ "3657": {
+  "path": "berlin/berlin/basketball-club-aska/",
+  "history": []
+ },
+ "3664": {
+  "path": "brandenburg/glienicke-nordbahn/bv-starwings-glienicke/",
+  "history": []
+ },
+ "3665": {
+  "path": "bayern/weitere/tv-1863-bad-koetzting/",
+  "history": []
+ },
+ "3673": {
+  "path": "sachsen-anhalt/sandersdorf/bg-bsw-06/",
+  "history": []
+ },
+ "3674": {
+  "path": "schleswig-holstein/eutin/bg-ostholstein/",
+  "history": []
+ },
+ "3687": {
+  "path": "berlin/berlin/basket-dragons-marzahn/",
+  "history": []
+ },
+ "3688": {
+  "path": "baden-wuerttemberg/ehingen-donau/team-ehingen-urspringschule/",
+  "history": []
+ },
+ "3691": {
+  "path": "hamburg/quickborn/basketballclub-quickborn/",
+  "history": []
+ },
+ "3693": {
+  "path": "sachsen-anhalt/weissenfels/mbc-weissenfels/",
+  "history": []
+ },
+ "3695": {
+  "path": "schleswig-holstein/hohenwestedt/mtsv-hohenwestedt/",
+  "history": []
+ },
+ "3696": {
+  "path": "schleswig-holstein/nortorf/tus-nortorf/",
+  "history": []
+ },
+ "3698": {
+  "path": "schleswig-holstein/neumuenster/ts-einfeld/",
+  "history": []
+ },
+ "3700": {
+  "path": "schleswig-holstein/itzehoe/itzehoe-eagles/",
+  "history": []
+ },
+ "3701": {
+  "path": "schleswig-holstein/hohenwestedt/ts-schenefeld/",
+  "history": []
+ },
+ "3709": {
+  "path": "schleswig-holstein/norderstedt/1-sc-norderstedt/",
+  "history": []
+ },
+ "3710": {
+  "path": "schleswig-holstein/bad-segeberg/mtv-segeberg/",
+  "history": []
+ },
+ "3711": {
+  "path": "schleswig-holstein/barmstedt/barmstedter-mtv/",
+  "history": []
+ },
+ "3717": {
+  "path": "hessen/alzenau/sg-basket-union-alzenau-muehlheim/",
+  "history": []
+ },
+ "3719": {
+  "path": "nordrhein-westfalen/dortmund/bb-unity-dortmund-07/",
+  "history": []
+ },
+ "3722": {
+  "path": "hessen/fulda/dafks-kontakt-fulda/",
+  "history": []
+ },
+ "3724": {
+  "path": "bayern/neunburg-v-w/sv-schwarzhofen/",
+  "history": []
+ },
+ "3729": {
+  "path": "nordrhein-westfalen/geldern/gruen-weiss-vernum-1949/",
+  "history": []
+ },
+ "3733": {
+  "path": "niedersachsen/aschendorf/tus-aschendorf/",
+  "history": []
+ },
+ "3737": {
+  "path": "baden-wuerttemberg/vaihingen-an-der-enz/bsg-vaihingen-sachsenheim/",
+  "history": []
+ },
+ "3741": {
+  "path": "baden-wuerttemberg/stuttgart/bbc-stuttgart/",
+  "history": []
+ },
+ "3743": {
+  "path": "bayern/grosswallstadt/bg-elsenfeld-grosswallstadt/",
+  "history": []
+ },
+ "3747": {
+  "path": "baden-wuerttemberg/weinheim/bg-tsv-viernheim-tsg-weinheim/",
+  "history": []
+ },
+ "3749": {
+  "path": "bundesweit/jena/science-city-jena-3749/",
+  "history": []
+ },
+ "3753": {
+  "path": "bundesweit/speyer/ahorn-camp-baskets/",
+  "history": []
+ },
+ "3754": {
+  "path": "bundesweit/kleinmachnow/tks-49ers/",
+  "history": []
+ },
+ "3757": {
+  "path": "berlin/teltow/rsv-eintracht/",
+  "history": []
+ },
+ "3758": {
+  "path": "niedersachsen/weitere/sc-luechow/",
+  "history": []
+ },
+ "3759": {
+  "path": "niedersachsen/hardegsen/hardegsen-baskets-07/",
+  "history": []
+ },
+ "3765": {
+  "path": "hessen/frankfurt-am-main/fraport-skyliners/",
+  "history": []
+ },
+ "3771": {
+  "path": "sachsen-anhalt/halle-saale/bbc-halle/",
+  "history": []
+ },
+ "3773": {
+  "path": "nordrhein-westfalen/beverungen/hlc-hoexter/",
+  "history": []
+ },
+ "3777": {
+  "path": "bayern/uffenheim/sg-bomhard-schule-uffenheim/",
+  "history": []
+ },
+ "3780": {
+  "path": "brandenburg/woltersdorf/sv-1919-woltersdorf/",
+  "history": []
+ },
+ "3784": {
+  "path": "bremen/bremen/bremer-tv-friesen-v-1891/",
+  "history": []
+ },
+ "3789": {
+  "path": "bundesweit/bremerhaven/eisbaeren-bremerhaven/",
+  "history": []
+ },
+ "3791": {
+  "path": "bundesweit/viernheim/rhein-neckar-metropolitans/",
+  "history": []
+ },
+ "3801": {
+  "path": "nordrhein-westfalen/koeln-muengersdorf/davis-sports/",
+  "history": []
+ },
+ "3804": {
+  "path": "nordrhein-westfalen/lippetal-herzfeld/1-sc-lippetal/",
+  "history": []
+ },
+ "3807": {
+  "path": "nordrhein-westfalen/wuppertal/btv-ronsdorf-graben-1892/",
+  "history": []
+ },
+ "3810": {
+  "path": "nordrhein-westfalen/rahden/tuspo-09-rahden/",
+  "history": []
+ },
+ "3814": {
+  "path": "baden-wuerttemberg/stuttgart/tv-obertuerkheim/",
+  "history": []
+ },
+ "3817": {
+  "path": "nordrhein-westfalen/juechen/fsv-juechen-1984/",
+  "history": []
+ },
+ "3829": {
+  "path": "bundesweit/noerdlingen/eigner-angels-noerdlingen/",
+  "history": []
+ },
+ "3830": {
+  "path": "bundesweit/freiburg/eisvoegel-usc-freiburg/",
+  "history": []
+ },
+ "3833": {
+  "path": "bundesweit/herne-sodingen/herner-tc/",
+  "history": []
+ },
+ "3834": {
+  "path": "bundesweit/marburg/bc-marburg/",
+  "history": []
+ },
+ "3836": {
+  "path": "bundesweit/saarlouis/saarlouis-royals/",
+  "history": []
+ },
+ "3841": {
+  "path": "bundesweit/bonn/talents-bonnrhoendorf/",
+  "history": []
+ },
+ "3846": {
+  "path": "bundesweit/koeln-muelheim/wings-leverkusen/",
+  "history": []
+ },
+ "3851": {
+  "path": "bundesweit/gruenberg/bender-baskets-gruenberg/",
+  "history": []
+ },
+ "3855": {
+  "path": "bundesweit/mainz/asc-theresianum-mainz/",
+  "history": []
+ },
+ "3860": {
+  "path": "bundesweit/wuerzburg/qool-sharks-wuerzburg/",
+  "history": []
+ },
+ "3872": {
+  "path": "nordrhein-westfalen/finnentrop/fc-finnentrop-1979/",
+  "history": []
+ },
+ "3880": {
+  "path": "nordrhein-westfalen/monschau/tv-eintracht-muetzenich-1921/",
+  "history": []
+ },
+ "3883": {
+  "path": "bayern/lindenberg/tv-1858-lindenberg-basketball/",
+  "history": []
+ },
+ "3890": {
+  "path": "niedersachsen/mueden-aller/tus-mueden-dieckhorst/",
+  "history": []
+ },
+ "3893": {
+  "path": "niedersachsen/wilhelmshaven/wilhelmshavener-ssv/",
+  "history": []
+ },
+ "3899": {
+  "path": "bundesweit/bayreuth/cybex-talents-bbc-bayreuth/",
+  "history": []
+ },
+ "3907": {
+  "path": "sachsen/chemnitz/chemcats-chemnitz/",
+  "history": []
+ },
+ "3909": {
+  "path": "bayern/muenchen/esv-muenchen/",
+  "history": []
+ },
+ "3911": {
+  "path": "hessen/muenster/tv-muenster/",
+  "history": []
+ },
+ "3913": {
+  "path": "nordrhein-westfalen/essen/turnvereinigung-steele-1863/",
+  "history": []
+ },
+ "3919": {
+  "path": "bundesweit/rendsburg/buchhorn-bau-twisters-rendsburg/",
+  "history": []
+ },
+ "3923": {
+  "path": "bundesweit/oldenburg/baskets-juniors-oldenburg-3923/",
+  "history": []
+ },
+ "3924": {
+  "path": "bundesweit/hamburg/hamburg-towers/",
+  "history": []
+ },
+ "3926": {
+  "path": "bundesweit/vechta/paderborn-baskets/",
+  "history": []
+ },
+ "3928": {
+  "path": "bundesweit/goettingen/sartorius-youngsters/",
+  "history": []
+ },
+ "3932": {
+  "path": "bundesweit/muenster/ubc-muenster/",
+  "history": []
+ },
+ "3933": {
+  "path": "bundesweit/berlin/alba-berlin-3933/",
+  "history": []
+ },
+ "3934": {
+  "path": "bundesweit/berlin/dbv-berlin-tiger/",
+  "history": []
+ },
+ "3936": {
+  "path": "bundesweit/chemnitz/niners-chemnitz-academy/",
+  "history": []
+ },
+ "3937": {
+  "path": "bundesweit/potsdam/basketball-talents-potsdam/",
+  "history": []
+ },
+ "3939": {
+  "path": "bundesweit/leipzig/mitteldeutsche-basketball-academy/",
+  "history": []
+ },
+ "3942": {
+  "path": "bundesweit/leverkusen/bayer-giants-leverkusen-3942/",
+  "history": []
+ },
+ "3946": {
+  "path": "bundesweit/koeln-bickendorf/bbv-rheinstars/",
+  "history": []
+ },
+ "3947": {
+  "path": "bundesweit/vechta/team-bonn-rhoendorf/",
+  "history": []
+ },
+ "3948": {
+  "path": "bundesweit/trier/young-gladiators-trier/",
+  "history": []
+ },
+ "3950": {
+  "path": "bundesweit/frankfurt-am-main/eintracht-frankfurt-skyliners-3950/",
+  "history": []
+ },
+ "3959": {
+  "path": "bundesweit/ludwigsburg/porsche-bba-ludwigsburg-3959/",
+  "history": []
+ },
+ "3960": {
+  "path": "bundesweit/weitere/ps-karlsruhe-lions/",
+  "history": []
+ },
+ "3961": {
+  "path": "bundesweit/schelklingen/team-urspring-3961/",
+  "history": []
+ },
+ "3962": {
+  "path": "bundesweit/neu-ulm/ratiopharm-ulm-3962/",
+  "history": []
+ },
+ "3964": {
+  "path": "bundesweit/muenchen/fc-bayern-muenchen-basketball-3964/",
+  "history": []
+ },
+ "3967": {
+  "path": "bundesweit/crailsheim/hakro-merlins-crailsheim/",
+  "history": []
+ },
+ "3971": {
+  "path": "bundesweit/bayreuth/cybex-talents-bbc-bayreuth-3971/",
+  "history": []
+ },
+ "3972": {
+  "path": "bundesweit/jena/science-city-jena-3972/",
+  "history": []
+ },
+ "3975": {
+  "path": "bundesweit/hagen-altenhagen/phoenix-tsv-hagen-1860/",
+  "history": []
+ },
+ "3976": {
+  "path": "bundesweit/wedel/sc-rist-wedel/",
+  "history": []
+ },
+ "3983": {
+  "path": "bundesweit/hofheim/rhein-main-baskets/",
+  "history": []
+ },
+ "3986": {
+  "path": "berlin/berlin/berlin-tiger/",
+  "history": []
+ },
+ "3988": {
+  "path": "bundesweit/neuss/tg-neuss-junior-tigers/",
+  "history": []
+ },
+ "3994": {
+  "path": "bundesweit/weitere/chemcats-chemnitz/",
+  "history": []
+ },
+ "3996": {
+  "path": "bundesweit/berlin/tus-lichterfelde-basketball/",
+  "history": []
+ },
+ "3998": {
+  "path": "bundesweit/freiburg/usc-freiburg/",
+  "history": []
+ },
+ "4001": {
+  "path": "bundesweit/heidelberg/basket-girls-rhein-neckar/",
+  "history": []
+ },
+ "4004": {
+  "path": "bundesweit/ludwigsburg/porsche-bba-ludwigsburg-4004/",
+  "history": []
+ },
+ "4011": {
+  "path": "bundesweit/wedel/sc-rist-wedel-4011/",
+  "history": []
+ },
+ "4012": {
+  "path": "bundesweit/leverkusen/bayer-giants-leverkusen-4012/",
+  "history": []
+ },
+ "4013": {
+  "path": "bundesweit/frankfurt-am-main/skyliners-juniors/",
+  "history": []
+ },
+ "4014": {
+  "path": "bundesweit/neu-ulm/orangeacademy/",
+  "history": []
+ },
+ "4019": {
+  "path": "bundesweit/rotenburg/bg-89-avides-hurricanes/",
+  "history": []
+ },
+ "4025": {
+  "path": "baden-wuerttemberg/freiburg-opfingen/tv-opfingen/",
+  "history": []
+ },
+ "4026": {
+  "path": "bundesweit/weitere/phoenix-hagen/",
+  "history": []
+ },
+ "4029": {
+  "path": "sachsen/bischofswerda/tv-1848-bischofswerda/",
+  "history": []
+ },
+ "4031": {
+  "path": "niedersachsen/weitere/mtv-salzhausen-von-1866/",
+  "history": []
+ },
+ "4032": {
+  "path": "brandenburg/rathenow/red-eagles-rathenow/",
+  "history": []
+ },
+ "4037": {
+  "path": "baden-wuerttemberg/vs-schwenningen/bv-villingen-schwenningen/",
+  "history": []
+ },
+ "4040": {
+  "path": "niedersachsen/osnabrueck-voxtrup/vfr-voxtrup/",
+  "history": []
+ },
+ "4042": {
+  "path": "nordrhein-westfalen/recklinghausen/etg-recklinghausen-12-32/",
+  "history": []
+ },
+ "4043": {
+  "path": "bayern/roedental/sg-roedental/",
+  "history": []
+ },
+ "4049": {
+  "path": "baden-wuerttemberg/essingen/tsv-essingen/",
+  "history": []
+ },
+ "4050": {
+  "path": "sachsen-anhalt/magdeburg/elbe-baskets/",
+  "history": []
+ },
+ "4052": {
+  "path": "rheinland-pfalz/rockenhausen/bbc-fastbreakers-rockenhausen/",
+  "history": []
+ },
+ "4056": {
+  "path": "brandenburg/nauen/sv-leonardo-da-vinci-nauen/",
+  "history": []
+ },
+ "4058": {
+  "path": "bundesweit/muenchen/kickz-ibam/",
+  "history": []
+ },
+ "4059": {
+  "path": "bundesweit/berlin/berlin-dreams/",
+  "history": []
+ },
+ "4062": {
+  "path": "bundesweit/berlin/tus-lichterfelde/",
+  "history": []
+ },
+ "4063": {
+  "path": "bundesweit/muenchen/kickz-ibam-4063/",
+  "history": []
+ },
+ "4064": {
+  "path": "bundesweit/duesseldorf-oberkassel/art-giants-duesseldorf/",
+  "history": []
+ },
+ "4069": {
+  "path": "niedersachsen/weitere/garbsener-sport-club-67/",
+  "history": []
+ },
+ "4073": {
+  "path": "bundesweit/muenchen/ts-jahn-muenchen/",
+  "history": []
+ },
+ "4078": {
+  "path": "baden-wuerttemberg/donaueschingen/tv-donaueschingen/",
+  "history": []
+ },
+ "4079": {
+  "path": "baden-wuerttemberg/karlsruhe/kit-sc-karlsruhe/",
+  "history": []
+ },
+ "4080": {
+  "path": "hessen/ebsdorfergrund/rsv-heskem-1926/",
+  "history": []
+ },
+ "4082": {
+  "path": "bundesweit/bernau/lok-bernau/",
+  "history": []
+ },
+ "4083": {
+  "path": "bundesweit/schwelm/en-baskets-schwelm/",
+  "history": []
+ },
+ "4087": {
+  "path": "bundesweit/stadtbergen/bg-hessing-leitershofen/",
+  "history": []
+ },
+ "4091": {
+  "path": "nordrhein-westfalen/kaarst-buettgen/bg-kaarst-buettgen/",
+  "history": []
+ },
+ "4095": {
+  "path": "bremen/bremen/bsg-blumenthal-schwanewede/",
+  "history": []
+ },
+ "4110": {
+  "path": "saarland/saarlouis/djk-saarlouis-roden/",
+  "history": []
+ },
+ "4111": {
+  "path": "nordrhein-westfalen/bruehl/kahramanlar-die-bruehler-helden/",
+  "history": []
+ },
+ "4113": {
+  "path": "thueringen/muehlhausen/bbc-muehlhausen-2010/",
+  "history": []
+ },
+ "4114": {
+  "path": "berlin/berlin/sv-neukoelln-09/",
+  "history": []
+ },
+ "4117": {
+  "path": "sachsen/leipzig/leipzig-lakers/",
+  "history": []
+ },
+ "4121": {
+  "path": "niedersachsen/hannover/hanover-basketball-dragons/",
+  "history": []
+ },
+ "4122": {
+  "path": "sachsen-anhalt/zoerbig/basketball-verband-sachsen-anhalt/",
+  "history": []
+ },
+ "4127": {
+  "path": "baden-wuerttemberg/neu-ulm/bbu-01/",
+  "history": []
+ },
+ "4128": {
+  "path": "baden-wuerttemberg/schramberg/sg-schramberg/",
+  "history": []
+ },
+ "4130": {
+  "path": "hessen/alsfeld/tv-alsfeld/",
+  "history": []
+ },
+ "4132": {
+  "path": "thueringen/erfurt/basketball-club-erfurt/",
+  "history": []
+ },
+ "4135": {
+  "path": "bayern/wuerzburg/wuerzburg-baskets-akademie/",
+  "history": []
+ },
+ "4138": {
+  "path": "bundesweit/hamburg/hamburg-towers-4138/",
+  "history": []
+ },
+ "4139": {
+  "path": "bundesweit/wuerzburg/vr-bank-wuerzburg-baskets-akademie/",
+  "history": []
+ },
+ "4141": {
+  "path": "bundesweit/wuerzburg/vr-bank-wuerzburg-baskets-akademie-4141/",
+  "history": []
+ },
+ "4144": {
+  "path": "niedersachsen/hannover/linden-dudes/",
+  "history": []
+ },
+ "4146": {
+  "path": "nordrhein-westfalen/steinfurt/turnerbund-burgsteinfurt-1862/",
+  "history": []
+ },
+ "4148": {
+  "path": "hamburg/pinneberg/bg-halstenbek-pinneberg/",
+  "history": []
+ },
+ "4152": {
+  "path": "baden-wuerttemberg/ingelfingen/tsv-ingelfingen/",
+  "history": []
+ },
+ "4154": {
+  "path": "bundesweit/osnabrueck/girolive-panthers-osnabrueck/",
+  "history": []
+ },
+ "4157": {
+  "path": "bundesweit/goettingen/bg74-veilchen-ladies/",
+  "history": []
+ },
+ "4160": {
+  "path": "bundesweit/weitere/ts-jahn-muenchen/",
+  "history": []
+ },
+ "4162": {
+  "path": "bundesweit/muenchen/fc-bayern-muenchen-basketball-4162/",
+  "history": []
+ },
+ "4163": {
+  "path": "bundesweit/wuerzburg/fitness-first-wuerzburg-baskets/",
+  "history": []
+ },
+ "4164": {
+  "path": "bundesweit/weitere/art-giants-duesseldorf/",
+  "history": []
+ },
+ "4167": {
+  "path": "bundesweit/sandersdorf/bsw-sixers/",
+  "history": []
+ },
+ "4170": {
+  "path": "nordrhein-westfalen/bielefeld-ubbedissen/sv-ubbedissen-09/",
+  "history": []
+ },
+ "4172": {
+  "path": "mecklenburg-vorpommern/greifswald/sg-greifswald/",
+  "history": []
+ },
+ "4175": {
+  "path": "brandenburg/oranienburg/oranienburger-basketball-verein/",
+  "history": []
+ },
+ "4184": {
+  "path": "hamburg/hamburg/hamburg-warriors-basketball-akademie/",
+  "history": []
+ },
+ "4185": {
+  "path": "niedersachsen/grossefehn/tsv-holtrop/",
+  "history": []
+ },
+ "4188": {
+  "path": "niedersachsen/nordhorn/vfl-weisse-elf-nordhorn/",
+  "history": []
+ },
+ "4189": {
+  "path": "niedersachsen/achim/bg-bierden-bassen-achim/",
+  "history": []
+ },
+ "4194": {
+  "path": "berlin/berlin/freibeuter-2010/",
+  "history": []
+ },
+ "4198": {
+  "path": "thueringen/jena/science-city-jena/",
+  "history": []
+ },
+ "4200": {
+  "path": "sachsen/goerlitz/goerlitzer-bc-squirrels/",
+  "history": []
+ },
+ "4201": {
+  "path": "niedersachsen/saterland-ramsloh/sv-blau-weiss-ramsloh/",
+  "history": []
+ },
+ "4204": {
+  "path": "rheinland-pfalz/hoehr-grenzhausen/sportfreunde-hoehr-grenzhausen/",
+  "history": []
+ },
+ "4206": {
+  "path": "bremen/bremen/basketball-lesum-vegesack/",
+  "history": []
+ },
+ "4207": {
+  "path": "thueringen/nordhausen/sg-leimbach/",
+  "history": []
+ },
+ "4209": {
+  "path": "nordrhein-westfalen/bochum/vfl-astrostars-bochum-1848/",
+  "history": []
+ },
+ "4213": {
+  "path": "bundesweit/muenster/ubc-muenster-4213/",
+  "history": []
+ },
+ "4214": {
+  "path": "bundesweit/hanau/tg-1837-hanau-a-v/",
+  "history": []
+ },
+ "4215": {
+  "path": "bundesweit/chemnitz/niners-chemnitz-academy-4215/",
+  "history": []
+ },
+ "4217": {
+  "path": "bundesweit/recklinghausen/metropol-youngstars/",
+  "history": []
+ },
+ "4219": {
+  "path": "bundesweit/dresden/dresden-titans/",
+  "history": []
+ },
+ "4222": {
+  "path": "bundesweit/weitere/wings-leverkusen/",
+  "history": []
+ },
+ "4225": {
+  "path": "bundesweit/braunschweig/girls-baskets-braunschweig-wolfenbuettel/",
+  "history": []
+ },
+ "4228": {
+  "path": "bundesweit/muenchen/mtv-muenchen-1879/",
+  "history": []
+ },
+ "4230": {
+  "path": "nordrhein-westfalen/duisburg-homberg/bg-niederrhein/",
+  "history": []
+ },
+ "4233": {
+  "path": "bayern/grossheubach/tsv-grossheubach-1900/",
+  "history": []
+ },
+ "4234": {
+  "path": "hessen/frankfurt-am-main/sc-riedberg/",
+  "history": []
+ },
+ "4235": {
+  "path": "hessen/moerfelden/tgs-1896-walldorf/",
+  "history": []
+ },
+ "4237": {
+  "path": "bayern/muenchen/tsv-trudering-basketball/",
+  "history": []
+ },
+ "4240": {
+  "path": "bundesweit/westerstede/baskets-juniors-tsg-westerstede/",
+  "history": []
+ },
+ "4241": {
+  "path": "bundesweit/dresden/dresden-titans-4241/",
+  "history": []
+ },
+ "4243": {
+  "path": "baden-wuerttemberg/muehlacker/tv-muehlacker/",
+  "history": []
+ },
+ "4245": {
+  "path": "nordrhein-westfalen/bonn/sg-chateau-bonn-1983/",
+  "history": []
+ },
+ "4251": {
+  "path": "hamburg/hamburg/sc-condor-von-1956/",
+  "history": []
+ },
+ "4254": {
+  "path": "bundesweit/weitere/rhein-main-baskets/",
+  "history": []
+ },
+ "4257": {
+  "path": "nordrhein-westfalen/gelsenkirchen-buer/yeg-hassel-1993/",
+  "history": []
+ },
+ "4260": {
+  "path": "baden-wuerttemberg/dornstadt/sv-tomerdingen/",
+  "history": []
+ },
+ "4262": {
+  "path": "brandenburg/brandenburg/sfb-94/",
+  "history": []
+ },
+ "4270": {
+  "path": "nordrhein-westfalen/moenchengladbach/rheydter-turnverein-1847/",
+  "history": []
+ },
+ "4275": {
+  "path": "hamburg/hamburg/hamburg-harvestehuder-tv-von-1872/",
+  "history": []
+ },
+ "4278": {
+  "path": "baden-wuerttemberg/tuebingen/sv-pfrondorf-1903/",
+  "history": []
+ },
+ "4280": {
+  "path": "bundesweit/weitere/hakro-merlins-crailsheim/",
+  "history": []
+ },
+ "4282": {
+  "path": "bundesweit/giessen/roth-energie-bba-giessen-46ers/",
+  "history": []
+ },
+ "4289": {
+  "path": "bundesweit/gotha/rockets/",
+  "history": []
+ },
+ "4292": {
+  "path": "bundesweit/giessen/roth-energie-bba-giessen-46ers-4292/",
+  "history": []
+ },
+ "4294": {
+  "path": "bundesweit/berlin/alba-berlin-4294/",
+  "history": []
+ },
+ "4295": {
+  "path": "bundesweit/wuerzburg/tg-main-sharks-wuerzburg/",
+  "history": []
+ },
+ "4297": {
+  "path": "nordrhein-westfalen/herne/ruhrpott-baskets-herne/",
+  "history": []
+ },
+ "4303": {
+  "path": "bayern/langquaid/tv-schierling/",
+  "history": []
+ },
+ "4304": {
+  "path": "bayern/burghausen/tv-1868-burghausen/",
+  "history": []
+ },
+ "4305": {
+  "path": "rheinland-pfalz/andernach/djk-andernach/",
+  "history": []
+ },
+ "4306": {
+  "path": "nordrhein-westfalen/koeln-bickendorf/rheinstars-koeln/",
+  "history": []
+ },
+ "4307": {
+  "path": "nordrhein-westfalen/wuppertal-ronsdorf/sg-sued-west-baskets-wuppertal/",
+  "history": []
+ },
+ "4314": {
+  "path": "baden-wuerttemberg/baden-baden/united-colors-baden-baden/",
+  "history": []
+ },
+ "4317": {
+  "path": "niedersachsen/grossenkneten-huntlosen/tv-huntlosen/",
+  "history": []
+ },
+ "4318": {
+  "path": "bundesweit/vechta/sc-rasta-vechta/",
+  "history": []
+ },
+ "4321": {
+  "path": "bundesweit/giessen/giessen-46ers/",
+  "history": []
+ },
+ "4323": {
+  "path": "bundesweit/berlin/tus-lichterfelde-basketball-4323/",
+  "history": []
+ },
+ "4326": {
+  "path": "bundesweit/braunschweig/eintracht-braunschweig-lion-pride/",
+  "history": []
+ },
+ "4328": {
+  "path": "bundesweit/bochum/vfl-sparkassenstars-bochum/",
+  "history": []
+ },
+ "4331": {
+  "path": "baden-wuerttemberg/ostfildern/tb-ruit/",
+  "history": []
+ },
+ "4332": {
+  "path": "niedersachsen/weitere/sv-gross-schwuelper/",
+  "history": []
+ },
+ "4336": {
+  "path": "nordrhein-westfalen/schwerte/holzpfosten-schwerte-05/",
+  "history": []
+ },
+ "4337": {
+  "path": "bayern/langenzenn/sv-burggrafenhof/",
+  "history": []
+ },
+ "4339": {
+  "path": "nordrhein-westfalen/rheinberg/tus-08-rheinberg/",
+  "history": []
+ },
+ "4344": {
+  "path": "berlin/berlin/fbl-berlin/",
+  "history": []
+ },
+ "4348": {
+  "path": "bayern/knetzgau/maintal-baskets-hassberge/",
+  "history": []
+ },
+ "4358": {
+  "path": "niedersachsen/weyhe/sportverein-weyhe/",
+  "history": []
+ },
+ "4362": {
+  "path": "nordrhein-westfalen/hagen-altenhagen/sv-enten-hagen/",
+  "history": []
+ },
+ "4363": {
+  "path": "bayern/gerolzhofen/tv-1862-gerolzhofen/",
+  "history": []
+ },
+ "4367": {
+  "path": "bundesweit/muenchen/ts-jahn-muenchen-4367/",
+  "history": []
+ },
+ "4377": {
+  "path": "niedersachsen/hannover/muehlenberger-sv/",
+  "history": []
+ },
+ "4378": {
+  "path": "rheinland-pfalz/koblenz-luetzel/sg-luetzel-post-koblenz/",
+  "history": []
+ },
+ "4379": {
+  "path": "sachsen/frohburg/bsv-einheit-frohburg/",
+  "history": []
+ },
+ "4395": {
+  "path": "hamburg/hamburg/vsk-blau-weiss-ellas-v-1981/",
+  "history": []
+ },
+ "4397": {
+  "path": "bayern/bad-staffelstein/tsv-1860-staffelstein/",
+  "history": []
+ },
+ "4400": {
+  "path": "niedersachsen/osnabrueck/bbc-osnabrueck/",
+  "history": []
+ },
+ "4402": {
+  "path": "baden-wuerttemberg/tettnang/bg-bodensee/",
+  "history": []
+ },
+ "4403": {
+  "path": "baden-wuerttemberg/stuttgart/regio-team-stuttgart/",
+  "history": []
+ },
+ "4404": {
+  "path": "bundesweit/itzehoe/itzehoe-eagles/",
+  "history": []
+ },
+ "4406": {
+  "path": "hessen/giessen/basketball-akademie-giessen-46ers/",
+  "history": []
+ },
+ "4407": {
+  "path": "nordrhein-westfalen/koeln-bilderstoeckchen/djk-loewe-koeln/",
+  "history": []
+ },
+ "4418": {
+  "path": "bundesweit/weitere/tsve-1890-bielefeld/",
+  "history": []
+ },
+ "4423": {
+  "path": "bundesweit/admannshagen-bargeshagen/rostock-seawolves/",
+  "history": []
+ },
+ "4428": {
+  "path": "bundesweit/strullendorf/freak-city-bamberg/",
+  "history": []
+ },
+ "4435": {
+  "path": "nordrhein-westfalen/kerpen/ssk-kerpen/",
+  "history": []
+ },
+ "4436": {
+  "path": "sachsen/bad-dueben/sv-bad-dueben/",
+  "history": []
+ },
+ "4437": {
+  "path": "bundesweit/keltern/rutronik-stars-keltern/",
+  "history": []
+ },
+ "4438": {
+  "path": "niedersachsen/zetel/turn-und-sportverein-zetel/",
+  "history": []
+ },
+ "4439": {
+  "path": "bundesweit/weitere/sb-djk-rosenheim/",
+  "history": []
+ },
+ "4440": {
+  "path": "nordrhein-westfalen/bergisch-gladbach/sg-bergische-loewen/",
+  "history": []
+ },
+ "4443": {
+  "path": "baden-wuerttemberg/weinstadt-endersbach/sg-weinstadt/",
+  "history": []
+ },
+ "4445": {
+  "path": "bundesweit/koeln/rheinstars-koeln/",
+  "history": []
+ },
+ "4446": {
+  "path": "niedersachsen/schwarmstedt/mtv-schwarmstedt-von-1909/",
+  "history": []
+ },
+ "4447": {
+  "path": "bremen/bremerhaven/eisbaeren-bremerhaven/",
+  "history": []
+ },
+ "4451": {
+  "path": "bundesweit/bad-homburg-v-d-h/falcons-bad-homburg/",
+  "history": []
+ },
+ "4453": {
+  "path": "bundesweit/wasserburg/tsv-1880-wasserburg/",
+  "history": []
+ },
+ "4455": {
+  "path": "bundesweit/quakenbrueck/artland-dragons/",
+  "history": []
+ },
+ "4458": {
+  "path": "nordrhein-westfalen/duesseldorf-flingern/greek-baskets-duesseldorf/",
+  "history": []
+ },
+ "4461": {
+  "path": "hessen/limburg/baskets-limburg/",
+  "history": []
+ },
+ "4465": {
+  "path": "hessen/woelfersheim/tg-1891-melbach/",
+  "history": []
+ },
+ "4466": {
+  "path": "berlin/berlin/bc-lions-moabit-21/",
+  "history": []
+ },
+ "4467": {
+  "path": "schleswig-holstein/kaltenkirchen/bsg-kisdorf-kaltenkirchen/",
+  "history": []
+ },
+ "4468": {
+  "path": "bayern/neumarkt/fibalon-baskets-neumarkt/",
+  "history": []
+ },
+ "4470": {
+  "path": "baden-wuerttemberg/bopfingen/tv-bopfingen-1861/",
+  "history": []
+ },
+ "4473": {
+  "path": "hamburg/hamburg/africa-united-sports-club/",
+  "history": []
+ },
+ "4475": {
+  "path": "nordrhein-westfalen/duesseldorf-stockum/black-eagles/",
+  "history": []
+ },
+ "4476": {
+  "path": "nordrhein-westfalen/duesseldorf/capitol-bascats-duesseldorf/",
+  "history": []
+ },
+ "4477": {
+  "path": "bayern/muenchen/tsv-muenchen-solln/",
+  "history": []
+ },
+ "4479": {
+  "path": "sachsen-anhalt/burg/burg-towers/",
+  "history": []
+ },
+ "4480": {
+  "path": "baden-wuerttemberg/bad-boll/tsv-bad-boll/",
+  "history": []
+ },
+ "4482": {
+  "path": "bayern/muenchen/fv-jahn-muenchen/",
+  "history": []
+ },
+ "4484": {
+  "path": "sachsen/plauen/basketball-club-vogtland/",
+  "history": []
+ },
+ "4485": {
+  "path": "bundesweit/stuttgart/regioteam-stuttgart-basketball-aid-seven/",
+  "history": []
+ },
+ "4491": {
+  "path": "bundesweit/muenchen/ts-jahn-muenchen-4491/",
+  "history": []
+ },
+ "4494": {
+  "path": "bundesweit/badbergen/young-rasta-dragons/",
+  "history": []
+ },
+ "4498": {
+  "path": "rheinland-pfalz/trier/gladiators-trier/",
+  "history": []
+ },
+ "4499": {
+  "path": "sachsen/leipzig/roter-stern-leipzig-99/",
+  "history": []
+ },
+ "4501": {
+  "path": "bundesweit/muenchen/fc-bayern-basketball-ii/",
+  "history": []
+ },
+ "4502": {
+  "path": "bundesweit/karlsruhe/ps-karlsruhe-lions/",
+  "history": []
+ },
+ "4506": {
+  "path": "bundesweit/hannover/tk-hannover-luchse/",
+  "history": []
+ },
+ "4508": {
+  "path": "bayern/neu-ulm/bbu-01-sektion-by/",
+  "history": []
+ },
+ "4510": {
+  "path": "hamburg/hamburg/st-pauli-bats/",
+  "history": []
+ },
+ "4511": {
+  "path": "nordrhein-westfalen/duesseldorf-oberkassel/sg-art-giants-duesseldorf/",
+  "history": []
+ },
+ "4512": {
+  "path": "nordrhein-westfalen/telgte/sg-telgte-wolbeck-baskets/",
+  "history": []
+ },
+ "4517": {
+  "path": "sachsen-anhalt/bernburg/basket-bears-bernburg/",
+  "history": []
+ },
+ "4518": {
+  "path": "berlin/berlin/tsc-spandau/",
+  "history": []
+ },
+ "4519": {
+  "path": "schleswig-holstein/tornesch/tus-esingen/",
+  "history": []
+ },
+ "4520": {
+  "path": "hessen/rimbach/turngenossenschaft-1886-rimbach/",
+  "history": []
+ },
+ "4522": {
+  "path": "hamburg/hamburg/hamburg-towers/",
+  "history": []
+ },
+ "4526": {
+  "path": "bayern/muenchen/ackermannbogen/",
+  "history": []
+ },
+ "4527": {
+  "path": "nordrhein-westfalen/koeln-buchheim/duennwalder-tv-1905/",
+  "history": []
+ },
+ "4529": {
+  "path": "sachsen-anhalt/magdeburg/1-magdeburger-basketballclub/",
+  "history": []
+ },
+ "4533": {
+  "path": "nordrhein-westfalen/bonn/bissv/",
+  "history": []
+ },
+ "4534": {
+  "path": "bayern/nuernberg/atv-1873-frankonia-nuernberg/",
+  "history": []
+ },
+ "4538": {
+  "path": "mecklenburg-vorpommern/kluetz/sc-ostseebad-boltenhagen/",
+  "history": []
+ },
+ "4541": {
+  "path": "niedersachsen/krummhoern-pewsum/tus-pewsum/",
+  "history": []
+ },
+ "4542": {
+  "path": "nordrhein-westfalen/minden/sv-1860-minden/",
+  "history": []
+ },
+ "4543": {
+  "path": "bundesweit/neu-ulm/orangeacademy-4543/",
+  "history": []
+ },
+ "4550": {
+  "path": "bundesweit/neu-ulm/orangeacademy-4550/",
+  "history": []
+ },
+ "4552": {
+  "path": "bundesweit/osnabrueck/bramfelder-sv/",
+  "history": []
+ },
+ "4556": {
+  "path": "baden-wuerttemberg/stuttgart/croatia-stuttgart/",
+  "history": []
+ },
+ "4558": {
+  "path": "rheinland-pfalz/hermeskeil/tv-hermeskeil-1911/",
+  "history": []
+ },
+ "4562": {
+  "path": "hessen/wiesbaden/lsv-wiesbaden/",
+  "history": []
+ },
+ "4563": {
+  "path": "rheinland-pfalz/lambsheim/eintracht-lambsheim/",
+  "history": []
+ },
+ "4565": {
+  "path": "bayern/feucht/tsv-1904-feucht/",
+  "history": []
+ },
+ "4570": {
+  "path": "bayern/muenchen/svn-muenchen/",
+  "history": []
+ },
+ "4572": {
+  "path": "nordrhein-westfalen/witten/sg-witten-baskets/",
+  "history": []
+ },
+ "4575": {
+  "path": "bundesweit/coburg/bbc-coburg/",
+  "history": []
+ },
+ "4582": {
+  "path": "nordrhein-westfalen/meckenheim/future-sports/",
+  "history": []
+ },
+ "4584": {
+  "path": "baden-wuerttemberg/fellbach/tsv-schmiden/",
+  "history": []
+ },
+ "4586": {
+  "path": "baden-wuerttemberg/heidelberg/basket-ladies-kurpfalz/",
+  "history": []
+ },
+ "4587": {
+  "path": "baden-wuerttemberg/baiersbronn/bsg-freudenstadt-baiersbronn/",
+  "history": []
+ },
+ "4588": {
+  "path": "schleswig-holstein/reinfeld/sv-preussen-von-1909-reinfeld/",
+  "history": []
+ },
+ "4589": {
+  "path": "bayern/graefelfing/tsv-graefelfing/",
+  "history": []
+ },
+ "4592": {
+  "path": "rheinland-pfalz/anhausen/bbc-anhausen-thalhausen/",
+  "history": []
+ },
+ "4593": {
+  "path": "sachsen/grossenhain/sv-motor-grossenhain/",
+  "history": []
+ },
+ "4595": {
+  "path": "hessen/lich/lich-basketball/",
+  "history": []
+ },
+ "4600": {
+  "path": "berlin/berlin/berliner-tsc/",
+  "history": []
+ },
+ "4601": {
+  "path": "niedersachsen/celle/vfl-westercelle/",
+  "history": []
+ },
+ "4602": {
+  "path": "thueringen/greiz/greizer-sportverein-bullets/",
+  "history": []
+ },
+ "4605": {
+  "path": "bayern/weitere/sskc-poseidon-aschaffenburg/",
+  "history": []
+ },
+ "4611": {
+  "path": "bundesweit/admannshagen-bargeshagen/rostock-seawolves-4611/",
+  "history": []
+ },
+ "4613": {
+  "path": "bundesweit/heidelberg/usc-academics-heidelberg/",
+  "history": []
+ },
+ "4615": {
+  "path": "bundesweit/dresden/dresden-titans-4615/",
+  "history": []
+ },
+ "4618": {
+  "path": "bundesweit/berlin/friedenauer-tsc/",
+  "history": []
+ },
+ "4619": {
+  "path": "bundesweit/heidelberg/usc-academics-heidelberg-4619/",
+  "history": []
+ },
+ "4625": {
+  "path": "bundesweit/jena/brandenburgischer-praeventions-u-rehabilitationssportverein/",
+  "history": []
+ },
+ "4627": {
+  "path": "bundesweit/leipzig/leipziger-behinderten-und-reha-sportverein/",
+  "history": []
+ },
+ "4629": {
+  "path": "bundesweit/berlin/rbc-96-halle/",
+  "history": []
+ },
+ "4630": {
+  "path": "bundesweit/muenchen/jena-caputs/",
+  "history": []
+ },
+ "4634": {
+  "path": "bundesweit/berlin/alba-berlin-basketballteam/",
+  "history": []
+ },
+ "4635": {
+  "path": "bundesweit/berlin/rsc-berlin/",
+  "history": []
+ },
+ "4636": {
+  "path": "bundesweit/berlin/sportgemeinschaft-handicap-berlin/",
+  "history": []
+ },
+ "4642": {
+  "path": "bundesweit/elxleben/rsb-thuringia-bulls/",
+  "history": []
+ },
+ "4646": {
+  "path": "bundesweit/kiel/blau-weiss-buchholz/",
+  "history": []
+ },
+ "4647": {
+  "path": "bundesweit/weitere/tsv-nusse-nusse-rams/",
+  "history": []
+ },
+ "4648": {
+  "path": "bundesweit/hamburg/hamburger-sport-verein-abteilung-rollstuhlsport/",
+  "history": []
+ },
+ "4651": {
+  "path": "bundesweit/meppen/1-kieler-gesundheit-und-rehasportverein/",
+  "history": []
+ },
+ "4654": {
+  "path": "bundesweit/oldenburg/rsc-oldenburg/",
+  "history": []
+ },
+ "4656": {
+  "path": "bundesweit/achim-uphusen/tsv-achim/",
+  "history": []
+ },
+ "4660": {
+  "path": "bundesweit/hannover/hannover-united/",
+  "history": []
+ },
+ "4663": {
+  "path": "bundesweit/braunschweig/mtv-braunschweig/",
+  "history": []
+ },
+ "4664": {
+  "path": "bundesweit/meppen/rsc-osnabrueck/",
+  "history": []
+ },
+ "4665": {
+  "path": "bundesweit/badbergen/sv-vorwaerts-nordhorn-1919/",
+  "history": []
+ },
+ "4668": {
+  "path": "bundesweit/meppen/bsg-emsland/",
+  "history": []
+ },
+ "4669": {
+  "path": "bundesweit/haren-niederlande/h-s-v-basketball/",
+  "history": []
+ },
+ "4673": {
+  "path": "bundesweit/paderborn/ahorn-panther-paderborn/",
+  "history": []
+ },
+ "4677": {
+  "path": "bundesweit/krefeld/handicap-sport-wuppertal/",
+  "history": []
+ },
+ "4678": {
+  "path": "bundesweit/wiesbaden/rbg-dortmund-51/",
+  "history": []
+ },
+ "4679": {
+  "path": "bundesweit/essen-kupferdreh/turnverein-1877-essen-kupferdreh/",
+  "history": []
+ },
+ "4680": {
+  "path": "bundesweit/luxembourg/hot-rolling-bears/",
+  "history": []
+ },
+ "4682": {
+  "path": "bundesweit/weitere/sus-bertlich-abt-reha-sport/",
+  "history": []
+ },
+ "4685": {
+  "path": "bundesweit/duisburg/bsg-duisburg-buchholz/",
+  "history": []
+ },
+ "4686": {
+  "path": "bundesweit/krefeld/ig-basket-bears-05/",
+  "history": []
+ },
+ "4688": {
+  "path": "bundesweit/muenster/ubc-muenster-abt-rollstuhlbasketball/",
+  "history": []
+ },
+ "4689": {
+  "path": "bundesweit/warendorf/bbc-muensterland/",
+  "history": []
+ },
+ "4690": {
+  "path": "bundesweit/warendorf/rsc-bergheim/",
+  "history": []
+ },
+ "4692": {
+  "path": "bundesweit/koeln-muelheim/rbc-koeln-99ers/",
+  "history": []
+ },
+ "4693": {
+  "path": "bundesweit/bergneustadt/tv-kleinwiedenest-1890/",
+  "history": []
+ },
+ "4696": {
+  "path": "bundesweit/bonn/asv-bonn/",
+  "history": []
+ },
+ "4700": {
+  "path": "bundesweit/wetzlar/rsv-lahn-dill-gmbh/",
+  "history": []
+ },
+ "4703": {
+  "path": "bundesweit/trier/rsc-rollis-trier/",
+  "history": []
+ },
+ "4706": {
+  "path": "bundesweit/duesseldorf-bilk/sportfreunde-diakonie-bad-kreuznach/",
+  "history": []
+ },
+ "4708": {
+  "path": "bundesweit/frankfurt-am-main/rsc-frankfurt/",
+  "history": []
+ },
+ "4711": {
+  "path": "bundesweit/wiesbaden/sportverein-rhinos-wiesbaden/",
+  "history": []
+ },
+ "4716": {
+  "path": "bundesweit/heidelberg/lux-rollers-a-s-b-l/",
+  "history": []
+ },
+ "4717": {
+  "path": "bundesweit/bonn/sg-heidelberg-kirchheim/",
+  "history": []
+ },
+ "4718": {
+  "path": "bundesweit/frankfurt-am-main/mtv-stuttgart-wheelers/",
+  "history": []
+ },
+ "4719": {
+  "path": "bundesweit/weiden-i-d-opf/rollstuhlsport-und-kulturverein-tuebingen/",
+  "history": []
+ },
+ "4721": {
+  "path": "bundesweit/weitere/tsv-ellwangen/",
+  "history": []
+ },
+ "4724": {
+  "path": "bundesweit/pforzheim/psc-pforzheim/",
+  "history": []
+ },
+ "4728": {
+  "path": "bundesweit/muenchen/rollstuhlbasketball-muenchen/",
+  "history": []
+ },
+ "4730": {
+  "path": "bundesweit/muenchen/usc-muenchen-rollstuhlsport/",
+  "history": []
+ },
+ "4733": {
+  "path": "bundesweit/ingolstadt/bvsv-ingolstadt/",
+  "history": []
+ },
+ "4734": {
+  "path": "bundesweit/erdweg/sportverein-sv-reha-augsburg/",
+  "history": []
+ },
+ "4742": {
+  "path": "bundesweit/nuernberg/rollstuhlsportclub-nuernberg/",
+  "history": []
+ },
+ "4745": {
+  "path": "bundesweit/weiden-i-d-opf/bvs-weiden/",
+  "history": []
+ },
+ "4746": {
+  "path": "bundesweit/ingolstadt/sg-beni-uni-regensburg/",
+  "history": []
+ },
+ "4750": {
+  "path": "bundesweit/bayreuth/rsv-bayreuth/",
+  "history": []
+ },
+ "4756": {
+  "path": "bundesweit/salzburg-oesterreich/rsv-salzburg/",
+  "history": []
+ },
+ "4757": {
+  "path": "bundesweit/ebbs-oesterreich/rsc-tirol/",
+  "history": []
+ },
+ "4758": {
+  "path": "bundesweit/muenchen/drs-rollstuhlbasketball/",
+  "history": []
+ },
+ "4763": {
+  "path": "nordrhein-westfalen/essen/djk-franz-sales-haus/",
+  "history": []
+ },
+ "4770": {
+  "path": "bundesweit/chemnitz/niners-chemnitz/",
+  "history": []
+ },
+ "4771": {
+  "path": "bundesweit/lueneburg/rbv-lueneburg/",
+  "history": []
+ },
+ "4775": {
+  "path": "sachsen/limbach-oberfrohna/tv-oberfrohna-1862/",
+  "history": []
+ },
+ "4777": {
+  "path": "nordrhein-westfalen/juechen/sg-rot-weiss-gierath-48-62/",
+  "history": []
+ },
+ "4778": {
+  "path": "bundesweit/weiterstadt/team-suedhessen/",
+  "history": []
+ },
+ "4779": {
+  "path": "bundesweit/tuebingen/tigers-tuebingen/",
+  "history": []
+ },
+ "4780": {
+  "path": "bundesweit/muenster/uni-baskets-muenster/",
+  "history": []
+ },
+ "4781": {
+  "path": "bundesweit/erfurt/catl-basketball-loewen/",
+  "history": []
+ },
+ "4786": {
+  "path": "hessen/giessen-kleinlinden/giessen-pointers/",
+  "history": []
+ },
+ "4787": {
+  "path": "baden-wuerttemberg/blaufelden/tsv-1864-blaufelden/",
+  "history": []
+ },
+ "4788": {
+  "path": "hessen/schwalbach-a-t/tg-schwalbach-1887/",
+  "history": []
+ },
+ "4789": {
+  "path": "bundesweit/rostock-marienehe/spielgemeinschaft-rostock-greifswald/",
+  "history": []
+ },
+ "4791": {
+  "path": "berlin/berlin/tuerkiyemspor-berlin-1978/",
+  "history": []
+ },
+ "4792": {
+  "path": "baden-wuerttemberg/offenburg-zell-weierbach/tv-1904-zell-weierbach/",
+  "history": []
+ },
+ "4793": {
+  "path": "schleswig-holstein/kiel/kieler-foerde-baskets/",
+  "history": []
+ },
+ "4794": {
+  "path": "niedersachsen/wilhelmshaven/jade-giants/",
+  "history": []
+ },
+ "4795": {
+  "path": "niedersachsen/goettingen/pro-basketball-goettingen/",
+  "history": []
+ },
+ "4796": {
+  "path": "baden-wuerttemberg/heidenheim/tv-altenstadt-1873/",
+  "history": []
+ },
+ "4797": {
+  "path": "baden-wuerttemberg/freiburg/basketball-freizeit-club-freiburg/",
+  "history": []
+ },
+ "4802": {
+  "path": "nordrhein-westfalen/hagen-emst/djk-gruen-weiss-emst-1926/",
+  "history": []
+ },
+ "4804": {
+  "path": "baden-wuerttemberg/asperg/sportbund-asperg/",
+  "history": []
+ },
+ "4808": {
+  "path": "bundesweit/nuernberg/nuernberg-falcons/",
+  "history": []
+ },
+ "4810": {
+  "path": "bundesweit/viernheim/rhein-neckar-metropolitans-4810/",
+  "history": []
+ },
+ "4811": {
+  "path": "bundesweit/berlin/sg-bernau-berlin-nord/",
+  "history": []
+ },
+ "4813": {
+  "path": "bundesweit/braunschweig/sg-junior-loewen-braunschweig/",
+  "history": []
+ },
+ "4816": {
+  "path": "bundesweit/erfurt/basketball-loewen-erfurt/",
+  "history": []
+ },
+ "4817": {
+  "path": "bundesweit/weiterstadt/team-suedhessen-4817/",
+  "history": []
+ },
+ "4819": {
+  "path": "bundesweit/braunschweig/sg-junior-loewen-braunschweig-4819/",
+  "history": []
+ },
+ "4839": {
+  "path": "bayern/nuernberg/tuspo-1888-nuernberg/",
+  "history": []
+ },
+ "4840": {
+  "path": "niedersachsen/oldenburg/tus-eversten-von-1894/",
+  "history": []
+ },
+ "4842": {
+  "path": "hessen/rossdorf/bg-darmstadt-rossdorf/",
+  "history": []
+ },
+ "4843": {
+  "path": "hessen/offenbach/fc-asteras-offenbach/",
+  "history": []
+ },
+ "4844": {
+  "path": "hessen/ober-moerlen/tv-1901-fortuna-ober-moerlen/",
+  "history": []
+ },
+ "4846": {
+  "path": "hessen/bad-vilbel/ssv-heilsberg/",
+  "history": []
+ },
+ "4848": {
+  "path": "bundesweit/chemnitz/chemcats-chemnitz/",
+  "history": []
+ },
+ "4849": {
+  "path": "bundesweit/dillingen/dillingen-diamonds/",
+  "history": []
+ },
+ "4850": {
+  "path": "bundesweit/hamburg/veolia-towers-hamburg/",
+  "history": []
+ },
+ "4851": {
+  "path": "bundesweit/oberhaching/tsv-oberhaching-tropics/",
+  "history": []
+ },
+ "4854": {
+  "path": "nordrhein-westfalen/muenster/bsv-roxel/",
+  "history": []
+ },
+ "4855": {
+  "path": "brandenburg/potsdam/redhawks-potsdam/",
+  "history": []
+ },
+ "4858": {
+  "path": "niedersachsen/emden/sv-blau-weiss-borssum/",
+  "history": []
+ },
+ "4859": {
+  "path": "berlin/berlin/sv-rot-weiss-viktoria-mitte-08/",
+  "history": []
+ },
+ "4862": {
+  "path": "hessen/frankfurt-am-main/tv-1875-ffm-sindlingen/",
+  "history": []
+ },
+ "4866": {
+  "path": "bundesweit/zwickau/rb-zwickau/",
+  "history": []
+ },
+ "4867": {
+  "path": "hessen/usingen/bsg-usinger-land/",
+  "history": []
+ },
+ "4870": {
+  "path": "niedersachsen/stadthagen/vfl-1877-stadthagen/",
+  "history": []
+ },
+ "4871": {
+  "path": "bayern/aschheim/fc-aschheim/",
+  "history": []
+ },
+ "4872": {
+  "path": "bayern/illertissen/bg-illertal/",
+  "history": []
+ },
+ "4873": {
+  "path": "bayern/gerbrunn/tsv-1877-gerbrunn/",
+  "history": []
+ },
+ "4874": {
+  "path": "rheinland-pfalz/frankenthal/sg-ludwigshafen-frankenthal/",
+  "history": []
+ },
+ "4875": {
+  "path": "hessen/frankfurt-am-main/fc-gudesding-frankfurt/",
+  "history": []
+ },
+ "4876": {
+  "path": "hessen/ruesselsheim/bg-ruesselsheim-taunusstein/",
+  "history": []
+ },
+ "4877": {
+  "path": "thueringen/erfurt/basketball-loewen/",
+  "history": []
+ },
+ "4878": {
+  "path": "bundesweit/amberg/witt-oberpfalz-hunters/",
+  "history": []
+ },
+ "4886": {
+  "path": "bundesweit/heidelberg/usc-bascats-heidelberg/",
+  "history": []
+ },
+ "4887": {
+  "path": "bundesweit/recklinghausen/metropolitain-girls-recklinghausen-herne/",
+  "history": []
+ },
+ "4888": {
+  "path": "bundesweit/weitere/sg-bernau-berlin-nord/",
+  "history": []
+ },
+ "4891": {
+  "path": "brandenburg/potsdam/kings-und-queens-basketball-potsdam/",
+  "history": []
+ },
+ "4892": {
+  "path": "nordrhein-westfalen/neuss/tsv-norf/",
+  "history": []
+ },
+ "4894": {
+  "path": "bundesweit/koblenz/epg-baskets-koblenz/",
+  "history": []
+ },
+ "4895": {
+  "path": "bundesweit/chemnitz/niners-chemnitz-4895/",
+  "history": []
+ },
+ "4897": {
+  "path": "bayern/amberg/tv-amberg-sulzbach-bsg/",
+  "history": []
+ },
+ "4898": {
+  "path": "bayern/goldbach/bb-akademie-bayerischer-untermain/",
+  "history": []
+ },
+ "4901": {
+  "path": "bundesweit/nuernberg/nuernberg-falcons-4901/",
+  "history": []
+ },
+ "4902": {
+  "path": "mecklenburg-vorpommern/schwerin/sv-gruen-weiss-schwerin/",
+  "history": []
+ },
+ "4904": {
+  "path": "nordrhein-westfalen/aachen/aachener-interkultureller-fsv/",
+  "history": []
+ },
+ "4905": {
+  "path": "sachsen-anhalt/halle/topnados/",
+  "history": []
+ },
+ "4907": {
+  "path": "bremen/bremerhaven/bremerhaven-united/",
+  "history": []
+ },
+ "4908": {
+  "path": "bundesweit/muenchen/bbu-01/",
+  "history": []
+ },
+ "4909": {
+  "path": "niedersachsen/barendorf/tus-barendorf-von-1866/",
+  "history": []
+ },
+ "4911": {
+  "path": "bayern/weitere/tsv-sulzberg/",
+  "history": []
+ },
+ "4913": {
+  "path": "bayern/tegernheim/team-oberpfalz/",
+  "history": []
+ },
+ "4917": {
+  "path": "hessen/grossen-linden/tv-1892-grossen-linden/",
+  "history": []
+ },
+ "4925": {
+  "path": "sachsen/eilenburg/vfb-eilenburg/",
+  "history": []
+ },
+ "4926": {
+  "path": "sachsen/bautzen/bautzen-tigers/",
+  "history": []
+ },
+ "4927": {
+  "path": "bundesweit/heidelberg/mlp-academics-heidelberg/",
+  "history": []
+ },
+ "4932": {
+  "path": "bundesweit/weimar/vimodrom-baskets-jena/",
+  "history": []
+ },
+ "4933": {
+  "path": "bundesweit/stuttgart/lou-s-foodtruck-mtv-stuttgart/",
+  "history": []
+ },
+ "4934": {
+  "path": "nordrhein-westfalen/solingen-kannenhof/hsv-solingen-graefrath-76/",
+  "history": []
+ },
+ "4936": {
+  "path": "bundesweit/bochum/vfl-viactiv-astroladies-bochum/",
+  "history": []
+ },
+ "4938": {
+  "path": "bayern/nuernberg/nuernberg-falcons/",
+  "history": []
+ },
+ "4939": {
+  "path": "bundesweit/magdeburg/sbb-baskets-wolmirstedt/",
+  "history": []
+ },
+ "4941": {
+  "path": "niedersachsen/braunschweig/sg-usv-braunschweig/",
+  "history": []
+ },
+ "4942": {
+  "path": "bundesweit/wolfenbuettel/team-wolfenbuettel-bothfeld/",
+  "history": []
+ },
+ "4948": {
+  "path": "nordrhein-westfalen/recklinghausen/fc-96-recklinghausen/",
+  "history": []
+ },
+ "4949": {
+  "path": "baden-wuerttemberg/lahr/tv-lahr-von-1846/",
+  "history": []
+ },
+ "4952": {
+  "path": "bayern/weitere/atsv-windischeschenbach/",
+  "history": []
+ },
+ "4955": {
+  "path": "berlin/berlin/mitte-supersonics/",
+  "history": []
+ },
+ "4957": {
+  "path": "hessen/weiterstadt/skg-graefenhausen/",
+  "history": []
+ },
+ "4958": {
+  "path": "niedersachsen/garbsen/ttt-nord-garbsen/",
+  "history": []
+ },
+ "4963": {
+  "path": "nordrhein-westfalen/kempen-st-hubert/vt-kempen-1859/",
+  "history": []
+ },
+ "4964": {
+  "path": "bayern/neusaess/tsv-neusaess/",
+  "history": []
+ },
+ "4966": {
+  "path": "brandenburg/hennigsdorf/sportverein-stahl-hennigsdorf/",
+  "history": []
+ },
+ "4969": {
+  "path": "nordrhein-westfalen/nettetal/tsv-kaldenkirchen-1885-07/",
+  "history": []
+ },
+ "4971": {
+  "path": "bayern/raubling/tus-raubling/",
+  "history": []
+ },
+ "4974": {
+  "path": "mecklenburg-vorpommern/friedland/tsv-friedland-1814/",
+  "history": []
+ },
+ "4975": {
+  "path": "thueringen/altenburg/sv-lerchenberg-altenburg/",
+  "history": []
+ },
+ "4976": {
+  "path": "sachsen-anhalt/koethen/koethener-keiler/",
+  "history": []
+ },
+ "4978": {
+  "path": "bremen/bremen/sportgemeinschaft-bremen-ost/",
+  "history": []
+ },
+ "4979": {
+  "path": "baden-wuerttemberg/goeppingen/frisch-auf-goeppingen/",
+  "history": []
+ },
+ "4980": {
+  "path": "brandenburg/templin/templiner-sv-lokomotive-1951/",
+  "history": []
+ },
+ "4981": {
+  "path": "niedersachsen/goslar/tsg-jerstedt-1888/",
+  "history": []
+ },
+ "4982": {
+  "path": "bundesweit/frankfurt-am-main/team-frankfurt/",
+  "history": []
+ },
+ "4983": {
+  "path": "bundesweit/hagen-altenhagen/bba-hagen/",
+  "history": []
+ },
+ "4991": {
+  "path": "bundesweit/berlin/sg-alba-wiesel-berlin/",
+  "history": []
+ },
+ "4992": {
+  "path": "bundesweit/hagen-eilpe/bba-hagen/",
+  "history": []
+ },
+ "4995": {
+  "path": "bundesweit/berlin/alba-berlin-basketballteam-4995/",
+  "history": []
+ },
+ "4997": {
+  "path": "bundesweit/bad-honnef/talents-bonnrhoendorf/",
+  "history": []
+ },
+ "4998": {
+  "path": "bundesweit/stuttgart/mtv-stuttgart-1843/",
+  "history": []
+ },
+ "4999": {
+  "path": "bundesweit/bad-homburg-v-d-h/junior-falcons-homburg/",
+  "history": []
+ },
+ "5004": {
+  "path": "bundesweit/duesseldorf/rhein-bascats-duesseldorf/",
+  "history": []
+ },
+ "5005": {
+  "path": "bundesweit/berlin/bass-berlin/",
+  "history": []
+ },
+ "5007": {
+  "path": "bundesweit/nuernberg/post-sv-nuernberg/",
+  "history": []
+ },
+ "5009": {
+  "path": "rheinland-pfalz/ruebenach/bsg-ruebenach-urbar/",
+  "history": []
+ },
+ "5010": {
+  "path": "niedersachsen/schellerten/tv-garmissen-ahstedt-von-1911/",
+  "history": []
+ },
+ "5011": {
+  "path": "hamburg/hamburg/fc-st-pauli-von-1910/",
+  "history": []
+ },
+ "5012": {
+  "path": "bundesweit/koeln-bickendorf/cologne-regio-ladies/",
+  "history": []
+ },
+ "5013": {
+  "path": "saarland/saarbruecken/bbv-saarbruecken/",
+  "history": []
+ },
+ "5016": {
+  "path": "bundesweit/halle-saale/syntainics-mbc/",
+  "history": []
+ },
+ "5017": {
+  "path": "bundesweit/berlin/bg-zehlendorf/",
+  "history": []
+ },
+ "5020": {
+  "path": "bayern/weitere/artio-nuernberg/",
+  "history": []
+ },
+ "5022": {
+  "path": "baden-wuerttemberg/eislingen/ksg-eislingen/",
+  "history": []
+ },
+ "5023": {
+  "path": "bundesweit/freiburg/eisvoegel-usc-freiburg-2/",
+  "history": []
+ },
+ "5024": {
+  "path": "niedersachsen/uelzen/bg-true-lions/",
+  "history": []
+ },
+ "5035": {
+  "path": "hessen/oberursel/turnverein-1891-stierstadt/",
+  "history": []
+ },
+ "5038": {
+  "path": "bundesweit/duesseldorf-bilk/giants-duesseldorf/",
+  "history": []
+ },
+ "5041": {
+  "path": "bundesweit/vechta/rasta-vechta-ii/",
+  "history": []
+ },
+ "5042": {
+  "path": "bundesweit/ludwigsburg/porsche-bba-ludwigsburg-5042/",
+  "history": []
+ },
+ "5046": {
+  "path": "bundesweit/rostock/rostock-seawolves/",
+  "history": []
+ },
+ "5047": {
+  "path": "berlin/berlin/neukoelln-minotaurs/",
+  "history": []
+ },
+ "5049": {
+  "path": "baden-wuerttemberg/waldkirch/sv-waldkirch/",
+  "history": []
+ },
+ "5051": {
+  "path": "bayern/weitere/tv-floss-1908/",
+  "history": []
+ },
+ "5052": {
+  "path": "berlin/berlin/tsv-sportuniversum-berlin-2019/",
+  "history": []
+ },
+ "5053": {
+  "path": "rheinland-pfalz/bingen/tus-1861-bingen-buedesheim/",
+  "history": []
+ },
+ "5055": {
+  "path": "bayern/hoechstadt-an-der-aisch/esc-hoechstadt/",
+  "history": []
+ },
+ "5057": {
+  "path": "niedersachsen/bremen/ftsv-jahn-brinkum/",
+  "history": []
+ },
+ "5059": {
+  "path": "hamburg/winsen/bc-winsen-baskets/",
+  "history": []
+ },
+ "5060": {
+  "path": "nordrhein-westfalen/pulheim-stommeln/leichtathletik-verein-stommeln/",
+  "history": []
+ },
+ "5061": {
+  "path": "schleswig-holstein/hitzhusen/vfl-hitzhusen-von-1926/",
+  "history": []
+ },
+ "5064": {
+  "path": "hamburg/hamburg/basketball-club-altona/",
+  "history": []
+ },
+ "5066": {
+  "path": "hessen/weitere/tsg-1862-bad-karlshafen/",
+  "history": []
+ },
+ "5073": {
+  "path": "baden-wuerttemberg/eberbach/bc-boars-eberbach/",
+  "history": []
+ },
+ "5074": {
+  "path": "bayern/simbach-am-inn/tsv-simbach-a-inn-1864/",
+  "history": []
+ },
+ "5076": {
+  "path": "brandenburg/neuenhagen/sg-rot-weiss-neuenhagen/",
+  "history": []
+ },
+ "5077": {
+  "path": "baden-wuerttemberg/geislingen/tsg-zell-unter-aichelberg/",
+  "history": []
+ },
+ "5078": {
+  "path": "baden-wuerttemberg/weikersheim/tsv-1863-weikersheim/",
+  "history": []
+ },
+ "5080": {
+  "path": "bayern/muenchen/sportfreunde-bih-muenchen-2021/",
+  "history": []
+ },
+ "5082": {
+  "path": "bundesweit/hamburg/ntsv-wildcats/",
+  "history": []
+ },
+ "5083": {
+  "path": "bundesweit/osnabrueck/charisma-young-bulls/",
+  "history": []
+ },
+ "5087": {
+  "path": "bundesweit/stuttgart/mtv-stuttgart-1843-5087/",
+  "history": []
+ },
+ "5091": {
+  "path": "bundesweit/muenchen/djk-sportbund-muenchen/",
+  "history": []
+ },
+ "5094": {
+  "path": "bundesweit/wuppertal-ronsdorf/young-lions-wuppertal/",
+  "history": []
+ },
+ "5095": {
+  "path": "brandenburg/pritzwalk/elbland-towers/",
+  "history": []
+ },
+ "5097": {
+  "path": "nordrhein-westfalen/augustdorf/tusg-1920-augustdorf/",
+  "history": []
+ },
+ "5098": {
+  "path": "bundesweit/wetzlar/rsv-lahn-dill/",
+  "history": []
+ },
+ "5100": {
+  "path": "bundesweit/osnabrueck/bbc-osnabrueck/",
+  "history": []
+ },
+ "5102": {
+  "path": "nordrhein-westfalen/hamminkeln/sv-blau-weiss-dingden-1920/",
+  "history": []
+ },
+ "5104": {
+  "path": "baden-wuerttemberg/oberndorf/tv-oberndorf-1861/",
+  "history": []
+ },
+ "5109": {
+  "path": "schleswig-holstein/schoenberg/tsv-schoenberg/",
+  "history": []
+ },
+ "5110": {
+  "path": "rheinland-pfalz/kaiserslautern/kaiserslautern-thunderbolts/",
+  "history": []
+ },
+ "5111": {
+  "path": "nordrhein-westfalen/geldern/ttc-blau-weiss-geldern-veert/",
+  "history": []
+ },
+ "5112": {
+  "path": "sachsen/pirna/esv-lok-pirna/",
+  "history": []
+ },
+ "5113": {
+  "path": "nordrhein-westfalen/duisburg-beeck/betriebssportkreisverband-duisburg-1961/",
+  "history": []
+ },
+ "5115": {
+  "path": "hessen/weilburg/tus-loehnberg-1909/",
+  "history": []
+ },
+ "5116": {
+  "path": "berlin/berlin/mongolische-basketball-freunde-mbf-berlin/",
+  "history": []
+ },
+ "5117": {
+  "path": "thueringen/meiningen/ballsportfreunde-meiningen/",
+  "history": []
+ },
+ "5118": {
+  "path": "hessen/kassel/tg-1861-witzenhausen/",
+  "history": []
+ },
+ "5120": {
+  "path": "bundesweit/bayreuth/bbc-bayreuth/",
+  "history": []
+ },
+ "5122": {
+  "path": "bundesweit/rostock/seawolves-academy/",
+  "history": []
+ },
+ "5124": {
+  "path": "bundesweit/fellbach/sv-fellbach-flashers/",
+  "history": []
+ },
+ "5126": {
+  "path": "bayern/ingolstadt/fc-gerolfing-1930/",
+  "history": []
+ },
+ "5127": {
+  "path": "niedersachsen/gehrden/sv-gehrden-von-1900/",
+  "history": []
+ },
+ "5128": {
+  "path": "bayern/wunsiedel/tv-wunsiedel-1861/",
+  "history": []
+ },
+ "5129": {
+  "path": "saarland/hasborn/sc-hasborn/",
+  "history": []
+ },
+ "5130": {
+  "path": "nordrhein-westfalen/weitere/remscheider-turnverein-von-1861-korp/",
+  "history": []
+ },
+ "5131": {
+  "path": "nordrhein-westfalen/boenen/tv-germania-flierich-lenningsen-1891/",
+  "history": []
+ },
+ "5133": {
+  "path": "baden-wuerttemberg/stuttgart/kk-srbija-stuttgart/",
+  "history": []
+ },
+ "5134": {
+  "path": "baden-wuerttemberg/weissach/tsv-weissach/",
+  "history": []
+ },
+ "5135": {
+  "path": "bayern/regensburg/serbischer-club-donau-regensburg/",
+  "history": []
+ },
+ "5140": {
+  "path": "nordrhein-westfalen/burscheid/rbs-burscheid-1963/",
+  "history": []
+ },
+ "5141": {
+  "path": "bayern/memmelsdorf/sv-1923-memmelsdorf/",
+  "history": []
+ },
+ "5143": {
+  "path": "bayern/pocking/fc-1960-indling/",
+  "history": []
+ },
+ "5144": {
+  "path": "bundesweit/weitere/tuwi-adenau/",
+  "history": []
+ },
+ "5145": {
+  "path": "sachsen-anhalt/merseburg/schkopau-baskets/",
+  "history": []
+ },
+ "5146": {
+  "path": "nordrhein-westfalen/bonn/lions-sports-club-bonn/",
+  "history": []
+ },
+ "5148": {
+  "path": "brandenburg/nauen/fsv-rot-weiss-prenzlau/",
+  "history": []
+ },
+ "5149": {
+  "path": "schleswig-holstein/wasbek/sportverein-wasbek-von-1947/",
+  "history": []
+ },
+ "5150": {
+  "path": "niedersachsen/lehrte/postsportverein-rot-gold-lehrte/",
+  "history": []
+ },
+ "5151": {
+  "path": "niedersachsen/langenhagen/sfk-hannover-1996/",
+  "history": []
+ },
+ "5154": {
+  "path": "bayern/weitere/sportklub-heuchling-1920/",
+  "history": []
+ },
+ "5155": {
+  "path": "bayern/muenchen/chinesischer-sportverein-muenchen/",
+  "history": []
+ },
+ "5156": {
+  "path": "nordrhein-westfalen/duesseldorf-garath/tsv-urdenbach-1894/",
+  "history": []
+ },
+ "5157": {
+  "path": "rheinland-pfalz/neustadt-an-der-weinstrasse/tus-haardt-1886/",
+  "history": []
+ },
+ "5158": {
+  "path": "rheinland-pfalz/sinzig/sc-bad-bodendorf/",
+  "history": []
+ },
+ "5159": {
+  "path": "bayern/muenchen/hwkt-hard-work-knox-talent-e-v/",
+  "history": []
+ },
+ "5162": {
+  "path": "bundesweit/leipzig/usc-magdeburg/",
+  "history": []
+ },
+ "5163": {
+  "path": "baden-wuerttemberg/ulm-wiblingen/fc-srbija-ulm/",
+  "history": []
+ },
+ "5164": {
+  "path": "baden-wuerttemberg/tuebingen/tsv-lustnau/",
+  "history": []
+ },
+ "5166": {
+  "path": "rheinland-pfalz/deidesheim/sg-tsg-deidesheim-nw-haardt/",
+  "history": []
+ },
+ "5167": {
+  "path": "schleswig-holstein/felde/tus-felde/",
+  "history": []
+ },
+ "5168": {
+  "path": "sachsen-anhalt/schoenebeck/union-1861-schoenebeck/",
+  "history": []
+ },
+ "5169": {
+  "path": "bayern/pommersfelden/sv-steppach/",
+  "history": []
+ },
+ "5172": {
+  "path": "bundesweit/vechta/rasta-academy/",
+  "history": []
+ },
+ "5173": {
+  "path": "bundesweit/duisburg/basket-duisburg/",
+  "history": []
+ },
+ "5180": {
+  "path": "bundesweit/vechta/rasta-academy-5180/",
+  "history": []
+ },
+ "5181": {
+  "path": "bundesweit/muenchen/tsv-muenchen-ost/",
+  "history": []
+ },
+ "5183": {
+  "path": "hessen/homberg/fc-homberg-1924/",
+  "history": []
+ },
+ "5184": {
+  "path": "sachsen-anhalt/quedlinburg/bg-gm-panthers-qlb-hbs/",
+  "history": []
+ },
+ "5186": {
+  "path": "niedersachsen/seelze/sg-seelze-ahlem/",
+  "history": []
+ },
+ "5187": {
+  "path": "sachsen/dresden/dresden-urbanics/",
+  "history": []
+ },
+ "5189": {
+  "path": "bundesweit/osnabrueck/junior-team-osnabrueck-artland/",
+  "history": []
+ },
+ "5193": {
+  "path": "nordrhein-westfalen/arnsberg/turnverein-herdringen-1902/",
+  "history": []
+ },
+ "5194": {
+  "path": "brandenburg/premnitz/wild-ducks-havelland/",
+  "history": []
+ },
+ "5196": {
+  "path": "nordrhein-westfalen/wachtendonk/tsv-wachtendonk-wankum-1910/",
+  "history": []
+ },
+ "5197": {
+  "path": "hessen/frankfurt-am-main/daff/",
+  "history": []
+ },
+ "5198": {
+  "path": "thueringen/heiligenstadt/tsv-baskets-aufbau/",
+  "history": []
+ },
+ "5199": {
+  "path": "bundesweit/essen/etb-miners/",
+  "history": []
+ },
+ "5200": {
+  "path": "bundesweit/neustadt/tsv-neustadt-temps-shooters/",
+  "history": []
+ },
+ "5201": {
+  "path": "bundesweit/wuerzburg/vr-bank-wuerzburg-baskets-akademie-5201/",
+  "history": []
+ },
+ "5203": {
+  "path": "bundesweit/nuernberg/die-nuernberg-falcons/",
+  "history": []
+ },
+ "5204": {
+  "path": "baden-wuerttemberg/oberndorf/tv-engen-1847/",
+  "history": []
+ },
+ "5205": {
+  "path": "baden-wuerttemberg/bad-waldsee/tg-1848-bad-waldsee/",
+  "history": []
+ },
+ "5208": {
+  "path": "bundesweit/hamburg/eimsbuetteler-turnverband/",
+  "history": []
+ },
+ "5209": {
+  "path": "bundesweit/oberhausen/new-basket-oberhausen/",
+  "history": []
+ },
+ "5210": {
+  "path": "nordrhein-westfalen/bielefeld/basketballclub-disciples-bielefeld/",
+  "history": []
+ },
+ "5211": {
+  "path": "nordrhein-westfalen/bielefeld/vfl-1949-theesen/",
+  "history": []
+ },
+ "5212": {
+  "path": "bundesweit/leimen/basket-ladies-kurpfalz/",
+  "history": []
+ },
+ "5214": {
+  "path": "baden-wuerttemberg/winterbach/vfl-winterbach-1883/",
+  "history": []
+ },
+ "5215": {
+  "path": "baden-wuerttemberg/ditzingen/alkar-bc-ditzingen/",
+  "history": []
+ },
+ "5216": {
+  "path": "baden-wuerttemberg/ma-seckenheim/sv-98-07-seckenheim/",
+  "history": []
+ },
+ "5217": {
+  "path": "baden-wuerttemberg/fronreute/sportverein-blitzenreute/",
+  "history": []
+ },
+ "5218": {
+  "path": "bayern/parkstein/sv-parkstein-1946/",
+  "history": []
+ },
+ "5219": {
+  "path": "hamburg/hamburg/20hoop-hh-eppendorf/",
+  "history": []
+ },
+ "5220": {
+  "path": "niedersachsen/weitere/tsv-okel/",
+  "history": []
+ },
+ "5221": {
+  "path": "baden-wuerttemberg/biberach/sportverein-gebrazhofen/",
+  "history": []
+ },
+ "5222": {
+  "path": "bayern/muenchen/sv-muenchen-west/",
+  "history": []
+ },
+ "5225": {
+  "path": "bayern/taufkirchen-bei-muenchen/sv-djk-taufkirchen/",
+  "history": []
+ },
+ "5226": {
+  "path": "niedersachsen/gifhorn/sc-bosphorus-gifhorn/",
+  "history": []
+ },
+ "5227": {
+  "path": "nordrhein-westfalen/niederkassel/spvgg-luelsdorf-ranzel-1959/",
+  "history": []
+ },
+ "5230": {
+  "path": "schleswig-holstein/weitere/tsv-nahe-von-1924/",
+  "history": []
+ },
+ "5232": {
+  "path": "schleswig-holstein/niebuell/sg-frisian-vikings/",
+  "history": []
+ },
+ "5233": {
+  "path": "sachsen-anhalt/genthin/genthin-basketball/",
+  "history": []
+ },
+ "5234": {
+  "path": "nordrhein-westfalen/oberhausen/ruhrbaskets-oberhausen/",
+  "history": []
+ },
+ "5237": {
+  "path": "hessen/schwalmstadt/sv-treysa-red-caps/",
+  "history": []
+ },
+ "5238": {
+  "path": "sachsen/weitere/oschatzer-turnverein-1847/",
+  "history": []
+ },
+ "5239": {
+  "path": "berlin/berlin/nonstop-berlin/",
+  "history": []
+ },
+ "5240": {
+  "path": "hessen/reinheim/tv-1888-reinheim/",
+  "history": []
+ },
+ "5241": {
+  "path": "mecklenburg-vorpommern/seebad-ahlbeck/hsv-insel-usedom/",
+  "history": []
+ },
+ "5242": {
+  "path": "mecklenburg-vorpommern/bergen-auf-ruegen/skv-gruener-berg/",
+  "history": []
+ },
+ "5244": {
+  "path": "baden-wuerttemberg/schwaigern/tsv-schwaigern/",
+  "history": []
+ },
+ "5245": {
+  "path": "nordrhein-westfalen/selm/psv-bork-1945/",
+  "history": []
+ },
+ "5246": {
+  "path": "thueringen/sondershausen/sportclub-unstrutbaeren-rossleben/",
+  "history": []
+ },
+ "5247": {
+  "path": "bayern/berg/biberkor-basketball-und-funsport/",
+  "history": []
+ },
+ "5249": {
+  "path": "bayern/graben/sv-untermeitingen/",
+  "history": []
+ },
+ "5250": {
+  "path": "sachsen/groitzsch/sv-groitzsch/",
+  "history": []
+ },
+ "5252": {
+  "path": "baden-wuerttemberg/weingarten/sv-ochsenhausen/",
+  "history": []
+ },
+ "5253": {
+  "path": "thueringen/sondershausen/hachelbicher-sv/",
+  "history": []
+ },
+ "5254": {
+  "path": "mecklenburg-vorpommern/teterow/teterow-roosters/",
+  "history": []
+ },
+ "5255": {
+  "path": "sachsen/riesa/sportclub-riesa/",
+  "history": []
+ },
+ "5256": {
+  "path": "niedersachsen/wesendorf/sv-gross-oesingen-von-1910/",
+  "history": []
+ },
+ "5257": {
+  "path": "saarland/illingen/sg-saarland-baskets/",
+  "history": []
+ },
+ "5258": {
+  "path": "niedersachsen/isernhagen-kirchhorst/steller-sportverein-kirchhorst-von-1932/",
+  "history": []
+ },
+ "5259": {
+  "path": "niedersachsen/weitere/mtv-von-1902-nordstemmen/",
+  "history": []
+ },
+ "5260": {
+  "path": "bayern/weitere/foerderverein-basketball-tsv-muenchen-ost/",
+  "history": []
+ },
+ "5261": {
+  "path": "brandenburg/koenigs-wusterhausen/bg-red-dragons-koenigs-wusterhausen/",
+  "history": []
+ },
+ "5264": {
+  "path": "bundesweit/halle-saale/team-halle/",
+  "history": []
+ },
+ "5267": {
+  "path": "bundesweit/weitere/academy-potsdam/",
+  "history": []
+ },
+ "5268": {
+  "path": "bundesweit/bonn/team-baskets-bonn-koeln-rag/",
+  "history": []
+ },
+ "5274": {
+  "path": "bundesweit/weitere/freak-city-bamberg/",
+  "history": []
+ },
+ "5280": {
+  "path": "bundesweit/halle-saale/mitteldeutsche-basketball-academy-5280/",
+  "history": []
+ },
+ "5283": {
+  "path": "bundesweit/weitere/vfl-astrostars-bochum/",
+  "history": []
+ },
+ "5286": {
+  "path": "nordrhein-westfalen/heiligenhaus/h-town-united/",
+  "history": []
+ },
+ "5287": {
+  "path": "bundesweit/erdweg/spvgg-erdweg-1957/",
+  "history": []
+ },
+ "5289": {
+  "path": "bundesweit/quakenbrueck/sv-eidelstedt/",
+  "history": []
+ },
+ "5290": {
+  "path": "bayern/tegernsee/turnverein-tegernsee-1888/",
+  "history": []
+ },
+ "5291": {
+  "path": "sachsen/aue-bad-schlema/basketball-club-erzgebirge/",
+  "history": []
+ },
+ "5296": {
+  "path": "schleswig-holstein/jevenstedt/tus-jevenstedt-von-1919/",
+  "history": []
+ },
+ "5297": {
+  "path": "rheinland-pfalz/kaiserslautern/sg-1-fc-kaiserslautern-bbc-mehlingen/",
+  "history": []
+ },
+ "5298": {
+  "path": "nordrhein-westfalen/koeln/sport-und-kulturverein-roter-stern-koeln/",
+  "history": []
+ },
+ "5299": {
+  "path": "bundesweit/berlin/behinderten-sportverein-steglitz/",
+  "history": []
+ },
+ "5300": {
+  "path": "bundesweit/quakenbrueck/artland-dragons-5300/",
+  "history": []
+ },
+ "5301": {
+  "path": "schleswig-holstein/kiel/wiker-sportverein-von-1929/",
+  "history": []
+ },
+ "5303": {
+  "path": "baden-wuerttemberg/karlsruhe/sportgemeinschaft-karlsruhe/",
+  "history": []
+ },
+ "5304": {
+  "path": "nordrhein-westfalen/hagen-eilpe/bba-hagen/",
+  "history": []
+ },
+ "5305": {
+  "path": "nordrhein-westfalen/delbrueck-westenholz/bg-delbrueck-westwood/",
+  "history": []
+ },
+ "5306": {
+  "path": "hessen/erlensee/sg-erla/",
+  "history": []
+ },
+ "5307": {
+  "path": "bayern/bamberg/sg-tsg-post-sv-bamberg/",
+  "history": []
+ },
+ "5308": {
+  "path": "bayern/weitere/tsg-mantel-weiherhammer/",
+  "history": []
+ },
+ "5309": {
+  "path": "berlin/berlin/berliner-turner-verein-von-1850/",
+  "history": []
+ },
+ "5310": {
+  "path": "nordrhein-westfalen/beckum/tv-beckum-1892/",
+  "history": []
+ },
+ "5312": {
+  "path": "bundesweit/huerth/huerther-bc/",
+  "history": []
+ },
+ "5313": {
+  "path": "bundesweit/bamberg/medikamente-per-klick-bamberg-baskets/",
+  "history": []
+ },
+ "5314": {
+  "path": "bundesweit/neu-ulm/bbu-01/",
+  "history": []
+ },
+ "5316": {
+  "path": "bayern/buttenheim/fsv-1921-phoenix-buttenheim/",
+  "history": []
+ },
+ "5317": {
+  "path": "nordrhein-westfalen/wesseling/sportschule-aslan-wesseling/",
+  "history": []
+ },
+ "5318": {
+  "path": "baden-wuerttemberg/pforzheim/goldstadt-united/",
+  "history": []
+ },
+ "5319": {
+  "path": "rheinland-pfalz/weitere/grundschulliga-rhein-lahn/",
+  "history": []
+ },
+ "5320": {
+  "path": "nordrhein-westfalen/bonn/bonn-ballers-club-53/",
+  "history": []
+ },
+ "5321": {
+  "path": "berlin/weitere/bbv-landestrainer/",
+  "history": []
+ },
+ "5322": {
+  "path": "niedersachsen/weitere/tus-weene/",
+  "history": []
+ },
+ "5323": {
+  "path": "sachsen-anhalt/weitere/bbc-red-eagles-zerbst/",
+  "history": []
+ },
+ "5324": {
+  "path": "baden-wuerttemberg/stuttgart/skg-botnang/",
+  "history": []
+ },
+ "5328": {
+  "path": "nordrhein-westfalen/weitere/atv-von-1850-hueckeswagen/",
+  "history": []
+ },
+ "5332": {
+  "path": "rheinland-pfalz/weitere/postsportverein-mainz/",
+  "history": []
+ },
+ "5333": {
+  "path": "rheinland-pfalz/weitere/lions-adenau/",
+  "history": []
+ },
+ "5334": {
+  "path": "bayern/weitere/swc-regensburg/",
+  "history": []
+ },
+ "5338": {
+  "path": "mecklenburg-vorpommern/weitere/sport-live/",
+  "history": []
+ },
+ "5340": {
+  "path": "niedersachsen/weitere/nbc-baskets-nordhorn/",
+  "history": []
+ },
+ "5343": {
+  "path": "nordrhein-westfalen/weitere/turn-und-spielverein-06-waldbroel/",
+  "history": []
+ },
+ "5344": {
+  "path": "nordrhein-westfalen/weitere/turnerbund-oberhausen-1889/",
+  "history": []
+ },
+ "5346": {
+  "path": "bayern/weitere/tsv-eintracht-karlsfeld/",
+  "history": []
+ },
+ "5347": {
+  "path": "thueringen/weitere/sportverein-soemmerda/",
+  "history": []
+ },
+ "5349": {
+  "path": "bayern/weitere/djk-nuernberg-eibach/",
+  "history": []
+ },
+ "5351": {
+  "path": "baden-wuerttemberg/weitere/vfr-umkirch-1923/",
+  "history": []
+ },
+ "5352": {
+  "path": "rheinland-pfalz/weitere/girls-academy-rhein-lahn/",
+  "history": []
+ },
+ "5353": {
+  "path": "hessen/weitere/skg-rodgau-1888/",
+  "history": []
+ },
+ "5354": {
+  "path": "berlin/weitere/vdb-sport-in-der-vietnamesische-bruecken/",
+  "history": []
+ },
+ "5355": {
+  "path": "hessen/weitere/tsv-dreieichenhain/",
+  "history": []
+ },
+ "5356": {
+  "path": "niedersachsen/weitere/tus-lehmden-von-1908/",
+  "history": []
+ },
+ "5357": {
+  "path": "saarland/weitere/bc-saarbruecken/",
+  "history": []
+ },
+ "5359": {
+  "path": "nordrhein-westfalen/weitere/turnverein-wanne-1885/",
+  "history": []
+ },
+ "5360": {
+  "path": "nordrhein-westfalen/weitere/djk-sportgemeinschaft-altenessen/",
+  "history": []
+ },
+ "5362": {
+  "path": "hessen/weitere/turn-und-sportgemeinde-frankfurt-am-main-oberrad-1872/",
+  "history": []
+ },
+ "5364": {
+  "path": "bundesweit/weitere/hamburg-towers/",
+  "history": []
+ },
+ "5370": {
+  "path": "niedersachsen/weitere/tsv-bildung-peine/",
+  "history": []
+ },
+ "5371": {
+  "path": "niedersachsen/weitere/bg-godshorn-langenhagen/",
+  "history": []
+ },
+ "5375": {
+  "path": "bundesweit/weitere/westdogs/",
+  "history": []
+ },
+ "5378": {
+  "path": "saarland/weitere/royals-nachwuchs-saar/",
+  "history": []
+ },
+ "5380": {
+  "path": "bundesweit/weitere/sg-saar-mosel/",
+  "history": []
+ },
+ "5381": {
+  "path": "bayern/weitere/psv-muenchen/",
+  "history": []
+ },
+ "5382": {
+  "path": "nordrhein-westfalen/weitere/moenchengladbach-scorpions/",
+  "history": []
+ },
+ "5383": {
+  "path": "nordrhein-westfalen/weitere/sg-voerde-schwelm/",
+  "history": []
+ },
+ "5384": {
+  "path": "berlin/weitere/turn-und-sportclub-wannsee-1896/",
+  "history": []
+ },
+ "5386": {
+  "path": "nordrhein-westfalen/weitere/rollstuhlbasketballclub-koeln-99ers/",
+  "history": []
+ },
+ "5389": {
+  "path": "bundesweit/weitere/ubc-muenster/",
+  "history": []
+ },
+ "5390": {
+  "path": "bundesweit/weitere/scala-hamburg/",
+  "history": []
+ },
+ "5392": {
+  "path": "bundesweit/weitere/bba-hagen/",
+  "history": []
+ },
+ "5393": {
+  "path": "bundesweit/weitere/culture-city-weimar/",
+  "history": []
+ },
+ "5394": {
+  "path": "bundesweit/weitere/tsg-schoeller-si-ravens-reutlingen/",
+  "history": []
+ },
+ "5396": {
+  "path": "baden-wuerttemberg/weitere/basketball-club-albstadt/",
+  "history": []
+ },
+ "5400": {
+  "path": "sachsen/weitere/sebnitzer-sportverein-08/",
+  "history": []
+ },
+ "5401": {
+  "path": "sachsen/weitere/sportclub-hoyerswerda/",
+  "history": []
+ },
+ "5402": {
+  "path": "niedersachsen/weitere/afrikanischer-sportverein-hannover/",
+  "history": []
+ },
+ "5403": {
+  "path": "niedersachsen/weitere/t-c-gifhorn/",
+  "history": []
+ },
+ "5404": {
+  "path": "thueringen/weitere/elster-baskets-greiz/",
+  "history": []
+ },
+ "5405": {
+  "path": "sachsen-anhalt/weitere/baskets-rookie-academy/",
+  "history": []
+ },
+ "5408": {
+  "path": "nordrhein-westfalen/weitere/sc-1885-huckarde-rahm/",
+  "history": []
+ },
+ "5410": {
+  "path": "bundesweit/weitere/bbc-osnabrueck/",
+  "history": []
+ },
+ "5413": {
+  "path": "thueringen/weitere/paradise-city-jena/",
+  "history": []
+ },
+ "5414": {
+  "path": "bayern/weitere/pockings/",
+  "history": []
+ },
+ "5416": {
+  "path": "baden-wuerttemberg/weitere/sg-haiterbach-nagold/",
+  "history": []
+ }
+}
