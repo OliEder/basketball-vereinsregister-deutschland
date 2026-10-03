@@ -44,6 +44,7 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 | **Deploy GitHub Pages** | Push auf `main`, alle 6 Stunden, manuell | Live-Crawl (bei Zeitplan/manuell), baut das Pages-Artefakt aus `portal/`, `data/clubs.json` und `data/live/` |
 | **Regeocode Clubs** | manuell | berechnet verdächtige Koordinaten neu (`scope=suspect\|all`); ohne `apply` nur Bericht auf dem Branch `regeocode-report`, mit `apply` wird `clubs.json` committet |
 | **Accessibility (WCAG 2.2)** | Pull Requests auf `portal/**`, manuell | Playwright + axe-core gegen das Portal (Fixtures, Light/Dark) |
+| **Spielorte (matchInfo)** | alle 6 Stunden, manuell | holt die Halle je Spiel aus `matchInfo` und legt sie dauerhaft im Branch `data-store` ab (Warteschlange mit Zeitbudget) |
 | **Probe Stats** | manuell | prüft, welche Teamstatistik-Felder je Liga befüllt sind; Bericht auf dem Branch `probe-stats-report` |
 | **Render AsciiDoc Documentation** | Änderungen an `docs/**/*.adoc` | erzeugt `docs/arc42/README.adoc` |
 
@@ -85,6 +86,7 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 | `npm run region-check` | listet Vereine, deren Koordinate weit außerhalb ihres Bezirks bzw. Landesverbands liegt (offline) |
 | `npm run live` | Live-Crawl pro Liga (`--out`, `--concurrency`, `--delay`, `--limit`) |
 | `npm run test:a11y` | Barrierefreiheits-Tests (einmalig `npx playwright install chromium`) |
+| `npm run venues` | Spielorte aus `matchInfo` holen, inkrementell (`--source`, `--store`, `--budget-min`, `--max`) |
 | `npm run probe-stats` | Erfassungstiefe der Teamstatistik je Liga prüfen |
 | `npm run crawl-halls`, `geocode-halls`, `merge-halls` | Hallen holen, geocodieren, in `clubs.json` übernehmen |
 | `npm run backfill-team-details` | holt `teamNumber`/`teamAkj` für Teams |

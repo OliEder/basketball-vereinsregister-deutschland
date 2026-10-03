@@ -72,7 +72,7 @@ export function buildTeamIndex(docs: LigaDoc[]): Record<string, number[]> {
   return out;
 }
 
-async function fetchJson(url: string, fetchFn: typeof fetch = globalThis.fetch): Promise<any> {
+export async function fetchJson(url: string, fetchFn: typeof fetch = globalThis.fetch): Promise<any> {
   for (let attempt = 1; ; attempt++) {
     try {
       const res = await fetchFn(url, { headers: HEADERS });
