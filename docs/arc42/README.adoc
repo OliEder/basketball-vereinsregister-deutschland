@@ -619,6 +619,8 @@ Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live
 
 *Folgen:* (+) Last auf der BBB-API bleibt gering, ein Ausfall kostet nur einen Lauf. (+) Derselbe Speicher dient später Saison-Archiv und Boxscore-Summen. (−) Der Rückstand der gespielten Spiele ist erst nach etwa neun Tagen abgearbeitet. (−) Der Speicher ist eine zweite Datenquelle neben `clubs.json`.
 
+*Einbindung:* Beim Zusammenstellen des Pages-Artefakts holt der Deploy den Branch `data-store` und legt mit `crawler/apply-venues.ts` in jede `liga/<id>.json` zwei Felder: `venues` (Spiel-ID → Hallen-ID, nur bekannte Hallen) und `halls` (die dort vorkommenden Hallen mit Adresse; Koordinaten aus `clubs.json` über die Spielfeld-ID). Die Team-Seite zeigt für das nächste Spiel die gemeldete Halle; fehlt sie noch, bleibt es bei der „voraussichtlichen“ Heimhalle aus `hall-index.json`. Fehlt der Branch, entfallen nur die Hallen.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
