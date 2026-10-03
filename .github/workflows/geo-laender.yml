@@ -56,7 +56,7 @@ jobs:
         run: |
           YEAR=$(date -u +%Y)
           npm run geo-laender -- --in="$RUNNER_TEMP/raw.geojson" --out=data/geo/laender.geojson \
-            --attribution="© BKG ($YEAR) dl-de/by-2-0, Datenquellen: $DATENQUELLEN_URL" --source="$VG250_URL"
+            --attribution="© BKG ($YEAR) dl-de/by-2-0 (Daten verändert), Datenquellen: $DATENQUELLEN_URL" --source="$VG250_URL"
 
       - name: Committen
         run: |

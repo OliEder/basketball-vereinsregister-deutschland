@@ -9,6 +9,7 @@
 // liegt, passt nicht zum Verein. Es braucht also keine Tabelle "Bezirk → Ort".
 import { distanceKm } from './geo';
 import { ClubEntry } from './types';
+import { Laender, defaultLaender, distanceToBorderKm, stateAt } from './geo-laender';
 
 type Point = { lat: number; lng: number };
 
@@ -94,11 +95,19 @@ export interface RegionOptions {
   /** Erlaubter Abstand als Vielfaches des Median-Abstands bzw. des 90-%-Abstands; der größere Wert gilt */
   factorMedian?: number;
   factorP90?: number;
+  /**
+   * Länderpolygone (BKG). Standard: data/geo/laender.geojson, falls vorhanden; null erzwingt die festen Radien.
+   * Ein Punkt außerhalb des Landes des Vereins gilt noch als passend, wenn er höchstens borderToleranceKm vom Rand
+   * entfernt liegt (Vereine nahe der Landesgrenze spielen im Nachbarland, Kooperationen, Vereinfachung der Polygone).
+   */
+  laender?: Laender | null;
+  borderToleranceKm?: number;
 }
 
 export class RegionIndex {
   private bezirke = new Map<string, Group>();
-  private opt: Required<RegionOptions>;
+  private opt: Required<Omit<RegionOptions, 'laender'>>;
+  private laender: Laender | null;
 
   /**
    * @param clubs alle Vereine
@@ -106,9 +115,10 @@ export class RegionIndex {
    */
   constructor(clubs: ClubEntry[], isReference: (c: ClubEntry) => boolean = () => true, options: RegionOptions = {}) {
     this.opt = {
-      minBezirk: 4, minLimitBezirkKm: 40, factorMedian: 4, factorP90: 1.5,
+      minBezirk: 4, minLimitBezirkKm: 40, factorMedian: 4, factorP90: 1.5, borderToleranceKm: 15,
       ...options
     };
+    this.laender = options.laender === undefined ? defaultLaender() : options.laender;
     const byBezirk = new Map<string, Point[]>();
     for (const c of clubs) {
       if (c.lat == null || c.lng == null || !isReference(c)) continue;
@@ -125,11 +135,21 @@ export class RegionIndex {
     const st = stateOf(club.vereinsnummer);
     if (!st) return { ok: true, level: 'none', region: null, distanceKm: null, limitKm: null };
 
-    // 1. Bundesland: fester Mittelpunkt und Radius, unabhängig von der Datenqualität
+    // 1. Bundesland: amtliche Grenzen (BKG), sonst fester Mittelpunkt und Radius; unabhängig von der Datenqualität
     const geo = STATE_GEO[st];
-    const dState = distanceKm(geo, coord);
-    if (dState > geo.radiusKm) {
-      return { ok: false, level: 'state', region: stateName(st), distanceKm: Math.round(dState), limitKm: geo.radiusKm };
+    const land = this.laender?.features.find(f => f.name === stateName(st));
+    if (land) {
+      if (stateAt(this.laender!, coord) !== land.name) {
+        const d = distanceToBorderKm(land, coord);
+        if (d > this.opt.borderToleranceKm) {
+          return { ok: false, level: 'state', region: stateName(st), distanceKm: Math.round(d), limitKm: this.opt.borderToleranceKm };
+        }
+      }
+    } else {
+      const dState = distanceKm(geo, coord);
+      if (dState > geo.radiusKm) {
+        return { ok: false, level: 'state', region: stateName(st), distanceKm: Math.round(dState), limitKm: geo.radiusKm };
+      }
     }
 
     // 2. Bezirk: Schwerpunkt der Vereine mit verlässlicher Koordinate; die Grenze folgt der tatsächlichen Streuung
@@ -140,6 +160,6 @@ export class RegionIndex {
       const limit = Math.max(this.opt.minLimitBezirkKm, this.opt.factorMedian * bg.d50, this.opt.factorP90 * bg.d90);
       return { ok: d <= limit, level: 'bezirk', region: `${stateName(st)} / ${b}`, distanceKm: Math.round(d), limitKm: Math.round(limit) };
     }
-    return { ok: true, level: 'state', region: stateName(st), distanceKm: Math.round(dState), limitKm: geo.radiusKm };
+    return { ok: true, level: 'state', region: stateName(st), distanceKm: Math.round(distanceKm(geo, coord)), limitKm: geo.radiusKm };
   }
 }

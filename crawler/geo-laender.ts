@@ -83,14 +83,38 @@ export function stateAt(laender: Laender, point: { lat: number; lng: number }): 
   return null;
 }
 
-/** Abstand eines Punktes zum nächsten Eckpunkt des Landes in km (grob; für "knapp daneben"-Toleranz). */
-export function nearestVertexKm(land: LandFeature, point: { lat: number; lng: number }, distance: (a: any, b: any) => number): number {
+const KM_PER_DEG = 111.32;
+
+/** Kleinster Abstand (km) von einem Punkt zu den Rändern des Landes (Außenringe und Löcher), ebene Näherung. */
+export function distanceToBorderKm(land: LandFeature, point: { lat: number; lng: number }): number {
+  const cos = Math.cos((point.lat * Math.PI) / 180);
   let best = Infinity;
-  for (const poly of land.polygons) for (const [x, y] of poly[0]) {
-    const d = distance(point, { lat: y, lng: x });
-    if (d < best) best = d;
+  for (const poly of land.polygons) {
+    for (const ring of poly) {
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const ax = (ring[j][0] - point.lng) * cos * KM_PER_DEG;
+        const ay = (ring[j][1] - point.lat) * KM_PER_DEG;
+        const bx = (ring[i][0] - point.lng) * cos * KM_PER_DEG;
+        const by = (ring[i][1] - point.lat) * KM_PER_DEG;
+        const dx = bx - ax;
+        const dy = by - ay;
+        const len2 = dx * dx + dy * dy;
+        const t = len2 === 0 ? 0 : Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len2));
+        const d = Math.hypot(ax + t * dx, ay + t * dy);
+        if (d < best) best = d;
+      }
+    }
   }
   return best;
+}
+
+const DEFAULT_FILE = path.resolve(__dirname, '..', 'data', 'geo', 'laender.geojson');
+let cached: Laender | null | undefined;
+
+/** Länderpolygone aus data/geo/laender.geojson (einmal geladen); null, wenn die Datei fehlt. */
+export function defaultLaender(): Laender | null {
+  if (cached === undefined) cached = loadLaender(DEFAULT_FILE);
+  return cached;
 }
 
 // ---- Aufbereitung der Rohdatei (Ausgabe von ogr2ogr) -----------------------------------------------
