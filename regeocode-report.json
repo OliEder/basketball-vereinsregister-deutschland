@@ -1,0 +1,769 @@
+[
+  {
+    "clubId": 463,
+    "name": "TuS Ensdorf",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Saarland",
+      "level": "state",
+      "distanceKm": 17,
+      "limitKm": 55
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 49.302357,
+      "lng": 6.7814907,
+      "geocodedFrom": "Ensdorf"
+    },
+    "after": {
+      "lat": 49.302357,
+      "lng": 6.7814907,
+      "geocodedFrom": "Ensdorf"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 473,
+    "name": "SV Saaldorf",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Bayern / Oberbayern",
+      "level": "bezirk",
+      "distanceKm": 101,
+      "limitKm": 156
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 47.8796379,
+      "lng": 12.9280005,
+      "geocodedFrom": "Saaldorf-Surheim"
+    },
+    "after": {
+      "lat": 47.8796379,
+      "lng": 12.9280005,
+      "geocodedFrom": "Saaldorf-Surheim"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 476,
+    "name": "FC Hertha Hilkerode",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Niedersachsen / Region Göttingen",
+      "level": "bezirk",
+      "distanceKm": 23,
+      "limitKm": 43
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 51.5248609,
+      "lng": 10.2586852,
+      "geocodedFrom": "Duderstadt"
+    },
+    "after": {
+      "lat": 51.5248609,
+      "lng": 10.2586852,
+      "geocodedFrom": "Duderstadt"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 662,
+    "name": "TSV Tauberbischofsheim",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "name 74 km",
+      "hall 74 km",
+      "city 74 km"
+    ],
+    "before": {
+      "lat": 49.6229682,
+      "lng": 9.6627138,
+      "geocodedFrom": "Tauberbischofsheim"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 835,
+    "name": "TuS Sulingen",
+    "suspect": true,
+    "source": "name",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Niedersachsen / Region Hannover",
+      "level": "bezirk",
+      "distanceKm": 70,
+      "limitKm": 70
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.6828374,
+      "lng": 8.8018923,
+      "geocodedFrom": "Sulingen"
+    },
+    "after": {
+      "lat": 52.678966,
+      "lng": 8.830577,
+      "geocodedFrom": "Sulingen"
+    },
+    "distanceKm": 2,
+    "action": "changed"
+  },
+  {
+    "clubId": 839,
+    "name": "Homburger Turngemeinde 1846 e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Hessen / Frankfurt",
+      "level": "bezirk",
+      "distanceKm": 11,
+      "limitKm": 47
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 50.2259962,
+      "lng": 8.6240956,
+      "geocodedFrom": "Bad Homburg v.d.H."
+    },
+    "after": {
+      "lat": 50.2259962,
+      "lng": 8.6240956,
+      "geocodedFrom": "Bad Homburg v.d.H."
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 1078,
+    "name": "TV Freyung",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "name 161 km",
+      "hall 161 km",
+      "city 161 km"
+    ],
+    "before": {
+      "lat": 48.8081923,
+      "lng": 13.54737,
+      "geocodedFrom": "Freyung"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 1106,
+    "name": "E. TuS Wanne 28 e. V.",
+    "suspect": true,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Nordrhein-Westfalen",
+      "level": "state",
+      "distanceKm": 29,
+      "limitKm": 170
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 51.4206227,
+      "lng": 6.9584991,
+      "geocodedFrom": "V."
+    },
+    "after": {
+      "lat": 51.533177,
+      "lng": 7.1512278,
+      "geocodedFrom": "Herne-Wanne"
+    },
+    "distanceKm": 18.3,
+    "action": "changed"
+  },
+  {
+    "clubId": 1264,
+    "name": "DJK Frankenberg 1912 Aachen",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "hall 51 km",
+      "city 52 km",
+      "city 265 km"
+    ],
+    "before": {
+      "lat": 50.7672749,
+      "lng": 6.1012436,
+      "geocodedFrom": "Aachen"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 1361,
+    "name": "MTV Treubund Lüneburg",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "name 21 km",
+      "hall 18 km",
+      "city 20 km",
+      "city 22 km"
+    ],
+    "before": {
+      "lat": 53.248706,
+      "lng": 10.407855,
+      "geocodedFrom": "Lüneburg"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 1594,
+    "name": "TuS 1861 Feuchtwangen",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "name 61 km",
+      "hall 62 km",
+      "city 61 km"
+    ],
+    "before": {
+      "lat": 49.1678603,
+      "lng": 10.3313268,
+      "geocodedFrom": "Feuchtwangen"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 1849,
+    "name": "SV S-W Marienfeld 1930 e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Nordrhein-Westfalen / Kreis Ostwestfalen",
+      "level": "bezirk",
+      "distanceKm": 31,
+      "limitKm": 78
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 51.9710642,
+      "lng": 8.2148752,
+      "geocodedFrom": "Harsewinkel"
+    },
+    "after": {
+      "lat": 51.9710642,
+      "lng": 8.2148752,
+      "geocodedFrom": "Harsewinkel"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 2606,
+    "name": "TV Falkenberg e. V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Niedersachsen / Region Lüneburg",
+      "level": "bezirk",
+      "distanceKm": 35,
+      "limitKm": 209
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 53.1687137,
+      "lng": 8.8964489,
+      "geocodedFrom": "Lilienthal"
+    },
+    "after": {
+      "lat": 53.1687137,
+      "lng": 8.8964489,
+      "geocodedFrom": "Lilienthal"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 3758,
+    "name": "SC Lüchow",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Niedersachsen / Region Lüneburg",
+      "level": "bezirk",
+      "distanceKm": 118,
+      "limitKm": 209
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.9851101,
+      "lng": 11.1593294,
+      "geocodedFrom": "Lüchow (Wendland)"
+    },
+    "after": {
+      "lat": 52.9851101,
+      "lng": 11.1593294,
+      "geocodedFrom": "Lüchow (Wendland)"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 4144,
+    "name": "LINDEN DUDES e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Niedersachsen / Region Hannover",
+      "level": "bezirk",
+      "distanceKm": 4,
+      "limitKm": 70
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.3707385,
+      "lng": 9.6836852,
+      "geocodedFrom": "Hannover"
+    },
+    "after": {
+      "lat": 52.3707385,
+      "lng": 9.6836852,
+      "geocodedFrom": "Hannover"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 4262,
+    "name": "SFB 94 e.V.",
+    "suspect": true,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Brandenburg",
+      "level": "state",
+      "distanceKm": 47,
+      "limitKm": 150
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.8455492,
+      "lng": 13.2461296,
+      "geocodedFrom": "e.V."
+    },
+    "after": {
+      "lat": 52.4062539,
+      "lng": 12.5131811,
+      "geocodedFrom": "Brandenburg an der Havel"
+    },
+    "distanceKm": 69.5,
+    "action": "changed"
+  },
+  {
+    "clubId": 4461,
+    "name": "Baskets Limburg e.V.",
+    "suspect": true,
+    "source": null,
+    "confidence": null,
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [
+      "hall 54 km",
+      "city 53 km"
+    ],
+    "before": {
+      "lat": 50.3863168,
+      "lng": 8.0500445,
+      "geocodedFrom": "Limburg"
+    },
+    "after": null,
+    "distanceKm": null,
+    "action": "no-result"
+  },
+  {
+    "clubId": 4642,
+    "name": "RSB Thuringia Bulls e.V.",
+    "suspect": true,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [],
+    "before": {
+      "lat": 52.5119683,
+      "lng": 13.2783539,
+      "geocodedFrom": "e.V."
+    },
+    "after": {
+      "lat": 51.0488379,
+      "lng": 10.9358292,
+      "geocodedFrom": "Elxleben"
+    },
+    "distanceKm": 229,
+    "action": "changed"
+  },
+  {
+    "clubId": 4717,
+    "name": "SG Heidelberg-Kirchheim e. V.",
+    "suspect": true,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [],
+    "before": {
+      "lat": 50.9199624,
+      "lng": 13.342765,
+      "geocodedFrom": "V."
+    },
+    "after": {
+      "lat": 49.3751034,
+      "lng": 8.6464286,
+      "geocodedFrom": "Heidelberg"
+    },
+    "distanceKm": 376.1,
+    "action": "changed"
+  },
+  {
+    "clubId": 4796,
+    "name": "TV Altenstadt 1873 e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Baden-Württemberg / Alb/Bodensee",
+      "level": "bezirk",
+      "distanceKm": 55,
+      "limitKm": 209
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 48.6100462,
+      "lng": 9.8321828,
+      "geocodedFrom": "Geislingen an der Steige"
+    },
+    "after": {
+      "lat": 48.6100462,
+      "lng": 9.8321828,
+      "geocodedFrom": "Geislingen an der Steige"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 4867,
+    "name": "BSG Usinger Land",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Hessen / Frankfurt",
+      "level": "bezirk",
+      "distanceKm": 27,
+      "limitKm": 47
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 50.3477499,
+      "lng": 8.5312449,
+      "geocodedFrom": "Usingen"
+    },
+    "after": {
+      "lat": 50.3477499,
+      "lng": 8.5312449,
+      "geocodedFrom": "Usingen"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5198,
+    "name": "TSV Baskets Aufbau",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Thüringen",
+      "level": "state",
+      "distanceKm": 76,
+      "limitKm": 110
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 51.3335326,
+      "lng": 10.1536019,
+      "geocodedFrom": "Heilbad Heiligenstadt"
+    },
+    "after": {
+      "lat": 51.3335326,
+      "lng": 10.1536019,
+      "geocodedFrom": "Heilbad Heiligenstadt"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5232,
+    "name": "SG Frisian Vikings",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Schleswig-Holstein",
+      "level": "state",
+      "distanceKm": 90,
+      "limitKm": 170
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 54.7892824,
+      "lng": 8.8346687,
+      "geocodedFrom": "Niebüll"
+    },
+    "after": {
+      "lat": 54.7892824,
+      "lng": 8.8346687,
+      "geocodedFrom": "Niebüll"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5287,
+    "name": "SpVgg Erdweg e.V. 1957",
+    "suspect": true,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": null,
+    "regionRejected": [],
+    "before": {
+      "lat": 51.500882,
+      "lng": 6.6362783,
+      "geocodedFrom": "e.V."
+    },
+    "after": {
+      "lat": 48.3327255,
+      "lng": 11.283275,
+      "geocodedFrom": "Erdweg"
+    },
+    "distanceKm": 484.4,
+    "action": "changed"
+  },
+  {
+    "clubId": 5338,
+    "name": "sport live e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Mecklenburg-Vorpommern",
+      "level": "state",
+      "distanceKm": 71,
+      "limitKm": 190
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 54.3286878,
+      "lng": 13.0665926,
+      "geocodedFrom": "Stralsund"
+    },
+    "after": {
+      "lat": 54.3286878,
+      "lng": 13.0665926,
+      "geocodedFrom": "Stralsund"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5354,
+    "name": "VDB Sport in der Vietnamesische-Brücken e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Berlin",
+      "level": "state",
+      "distanceKm": 6,
+      "limitKm": 55
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.5208199,
+      "lng": 13.495787,
+      "geocodedFrom": "Berlin"
+    },
+    "after": {
+      "lat": 52.5208199,
+      "lng": 13.495787,
+      "geocodedFrom": "Berlin"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5405,
+    "name": "BASKETS Rookie Academy",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Sachsen-Anhalt",
+      "level": "state",
+      "distanceKm": 43,
+      "limitKm": 150
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 52.2831565,
+      "lng": 11.6212395,
+      "geocodedFrom": "Wolmirstedt"
+    },
+    "after": {
+      "lat": 52.2831565,
+      "lng": 11.6212395,
+      "geocodedFrom": "Wolmirstedt"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  },
+  {
+    "clubId": 5414,
+    "name": "PockingS e.V.",
+    "suspect": false,
+    "source": "manual",
+    "confidence": "high",
+    "nameHitRejected": false,
+    "group": null,
+    "groupAction": null,
+    "region": {
+      "name": "Bayern / Oberbayern",
+      "level": "bezirk",
+      "distanceKm": 129,
+      "limitKm": 156
+    },
+    "regionRejected": [],
+    "before": {
+      "lat": 48.3954106,
+      "lng": 13.3278379,
+      "geocodedFrom": "Pocking"
+    },
+    "after": {
+      "lat": 48.3954106,
+      "lng": 13.3278379,
+      "geocodedFrom": "Pocking"
+    },
+    "distanceKm": 0,
+    "action": "unchanged"
+  }
+]
