@@ -95,12 +95,14 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 | `npm run backfill-team-details` | holt `teamNumber`/`teamAkj` für Teams |
 | `npm run fix-names` | repariert Vereinsnamen und Orte aus den Club-Details |
 
-## Barrierefreiheit
+## Design und Barrierefreiheit
+
+Das Portal nutzt das [DSS Design System](https://github.com/OliEder/dss-design-system): `portal/dss/tokens.css` (Kopie der Design-Tokens) und `portal/dss/components.css` (framework-freie Komponenten mit den Klassennamen `dss-*`). Eigene Seitenlayouts stehen in `style.css`, `verein.css` und `team.css`. Neue Bausteine entstehen zuerst in `components.css` und werden ins Design System zurückgegeben.
 
 `npm run test:a11y` prüft Startseite, Vereins- und Team-Seiten (Light/Dark) mit axe-core:
 
 - **AA-Gate:** WCAG 2.0–2.2 A/AA dürfen keine Verstöße haben, dazu Tastatur-Fokus und Reflow bei 320 px.
-- **AAA-Ratchet:** Verstöße gegen AAA (erhöhter Kontrast 7:1, Zielgröße 44 px) werden in `tests/a11y/aaa-baseline.json` festgehalten und dürfen nur sinken. Offen: Kontrast des `.hero-badge` (6,34:1) und drei kleine Klickziele. Baseline neu schreiben: `UPDATE_A11Y_BASELINE=1 npm run test:a11y`.
+- **AAA-Ratchet:** Verstöße gegen AAA (erhöhter Kontrast 7:1, Zielgröße 44 px) werden in `tests/a11y/aaa-baseline.json` festgehalten und dürfen nur steigen, wenn man sie bewusst akzeptiert. Aktuell ist die Baseline leer. Baseline neu schreiben: `UPDATE_A11Y_BASELINE=1 npm run test:a11y`.
 - Automatische Tests decken nur einen Teil von WCAG ab; Kriterien wie 3.1.5 (Lesbarkeit) brauchen eine manuelle Prüfung.
 
 ## Geocoding

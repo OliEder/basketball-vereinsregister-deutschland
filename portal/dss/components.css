@@ -1,0 +1,252 @@
+/* ──────────────────────────────────────────────────────────────
+   DSS Design System · Vanilla-CSS-Komponenten · v0.7 (Entwurf)
+   ──────────────────────────────────────────────────────────────
+   Framework-freie Umsetzung der Svelte-Komponenten (gleiche
+   Klassennamen wie in svelte/*.svelte), ergänzt um Bausteine, die
+   das Vereinsregister braucht: Chip, Select, Link, Eyebrow, Stat,
+   List-Row, Topbar, Empty-State.
+
+   Voraussetzung: tokens.css. Theme über data-theme="light|dark"
+   auf <html> oder automatisch per prefers-color-scheme.
+
+   Alle Farben laufen über die semantischen Variablen --dss-*,
+   damit Light und Dark ohne Komponenten-Overrides funktionieren.
+   ─────────────────────────────────────────────────────────── */
+
+/* ── Semantische Aliase · Light ─────────────────────────────── */
+:root {
+  --dss-fg:          var(--ink-900);   /* starker Text */
+  --dss-fg-soft:     var(--ink-700);   /* Fließtext */
+  --dss-mute:        var(--n-600);     /* Sekundärtext, AAA auf Surface */
+  --dss-line:        var(--n-200);
+  --dss-line-strong: var(--n-300);
+  --dss-surface:     var(--n-0);       /* Karten */
+  --dss-surface-2:   var(--n-100);     /* Eingabefelder, flache Flächen */
+  --dss-link:        var(--sky-800);
+  --dss-accent-text: var(--amber-800);
+  --dss-btn-bg:      var(--ink-800);
+  --dss-btn-bg-hover: var(--ink-700);
+  --dss-btn-fg:      var(--ink-0);
+  --dss-cta-bg:      var(--amber-400);
+  --dss-cta-bg-hover: var(--amber-500);
+  --dss-cta-fg:      var(--ink-1000);
+  --dss-hover-bg:    var(--ink-50);
+  --dss-selected-bg: var(--amber-50);
+  --dss-chip-sky-bg: var(--sky-100);   --dss-chip-sky-fg: var(--sky-800);
+  --dss-chip-amber-bg: var(--amber-100); --dss-chip-amber-fg: var(--amber-900);
+  --dss-chip-ok-bg:  var(--ok-soft);   --dss-chip-ok-fg:  var(--ok-text);
+  --dss-chip-err-bg: var(--err-soft);  --dss-chip-err-fg: var(--err-text);
+  --dss-chip-warn-bg: var(--warn-soft); --dss-chip-warn-fg: var(--warn-text);
+}
+
+/* ── Semantische Aliase · Dark ──────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --dss-fg: var(--n-50);        --dss-fg-soft: var(--n-200);
+    --dss-mute: var(--n-400);
+    --dss-line: var(--n-800);     --dss-line-strong: var(--n-700);
+    --dss-surface: var(--n-950);  --dss-surface-2: var(--n-900);
+    --dss-link: var(--sky-300);   --dss-accent-text: var(--amber-300);
+    --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--ink-1000);
+    --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-amber));
+    --dss-chip-sky-bg: oklch(0.30 0.07 var(--h-sky));   --dss-chip-sky-fg: var(--sky-200);
+    --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-amber)); --dss-chip-amber-fg: var(--amber-200);
+    --dss-chip-ok-bg: oklch(0.30 0.06 150);  --dss-chip-ok-fg: oklch(0.85 0.12 150);
+    --dss-chip-err-bg: oklch(0.30 0.08 27);  --dss-chip-err-fg: oklch(0.88 0.09 27);
+    --dss-chip-warn-bg: oklch(0.32 0.06 75); --dss-chip-warn-fg: oklch(0.90 0.10 80);
+  }
+}
+:root[data-theme="dark"] {
+  --dss-fg: var(--n-50);        --dss-fg-soft: var(--n-200);
+  --dss-mute: var(--n-400);
+  --dss-line: var(--n-800);     --dss-line-strong: var(--n-700);
+  --dss-surface: var(--n-950);  --dss-surface-2: var(--n-900);
+  --dss-link: var(--sky-300);   --dss-accent-text: var(--amber-300);
+  --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--ink-1000);
+  --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-amber));
+  --dss-chip-sky-bg: oklch(0.30 0.07 var(--h-sky));   --dss-chip-sky-fg: var(--sky-200);
+  --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-amber)); --dss-chip-amber-fg: var(--amber-200);
+  --dss-chip-ok-bg: oklch(0.30 0.06 150);  --dss-chip-ok-fg: oklch(0.85 0.12 150);
+  --dss-chip-err-bg: oklch(0.30 0.08 27);  --dss-chip-err-fg: oklch(0.88 0.09 27);
+  --dss-chip-warn-bg: oklch(0.32 0.06 75); --dss-chip-warn-fg: oklch(0.90 0.10 80);
+}
+
+/* ── Basis ──────────────────────────────────────────────────── */
+.dss-sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.dss-eyebrow {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute);
+}
+.dss-link {
+  color: var(--dss-link); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.dss-link:hover { text-decoration-thickness: 2px; }
+.dss-link:focus-visible, .dss-btn:focus-visible, .dss-tab:focus-visible,
+.dss-select:focus-visible, .dss-chip--link:focus-visible {
+  outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px;
+}
+
+/* ── Button ─────────────────────────────────────────────────── */
+.dss-btn {
+  appearance: none; border: 0; font-family: var(--font-body); font-weight: 600;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--space-2); text-decoration: none; white-space: nowrap;
+  transition: transform 0.08s, background 0.12s, box-shadow 0.12s;
+}
+.dss-btn:active { transform: scale(0.98); }
+.dss-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.dss-btn--primary { background: var(--dss-btn-bg); color: var(--dss-btn-fg); border-radius: var(--radius-md); }
+.dss-btn--primary:hover:not(:disabled) { background: var(--dss-btn-bg-hover); }
+.dss-btn--amber { background: var(--dss-cta-bg); color: var(--dss-cta-fg); border-radius: var(--radius-md); }
+.dss-btn--amber:hover:not(:disabled) { background: var(--dss-cta-bg-hover); }
+.dss-btn--secondary { background: var(--dss-surface-2); color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line); }
+.dss-btn--secondary:hover:not(:disabled) { background: var(--dss-line); }
+.dss-btn--ghost { background: transparent; color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
+.dss-btn--ghost:hover:not(:disabled) { background: var(--dss-hover-bg); }
+.dss-btn--sm { height: var(--touch-sm); padding: 0 14px; font-size: 13px; }
+.dss-btn--md { height: var(--touch-sm); padding: 0 18px; font-size: 14px; }
+.dss-btn--lg { height: var(--touch-md); padding: 0 22px; font-size: 15px; border-radius: var(--radius-lg); }
+.dss-btn--icon { width: var(--touch-sm); height: var(--touch-sm); padding: 0; }
+
+/* ── Eingabefelder ──────────────────────────────────────────── */
+.dss-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.dss-field-label { font-weight: 600; font-size: 12.5px; color: var(--dss-fg); }
+.dss-input-group {
+  display: flex; align-items: stretch; border: 1px solid var(--dss-line-strong);
+  border-radius: var(--radius-md); background: var(--dss-surface); overflow: hidden;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+.dss-input-group:focus-within { border-color: var(--dss-fg); box-shadow: 0 0 0 var(--ring-w) var(--ring-color); }
+.dss-input {
+  flex: 1; min-width: 0; appearance: none; border: 0; outline: 0; background: transparent;
+  height: var(--fld-h-touch); padding: 0 14px; font-family: var(--font-body); font-size: 15px; color: var(--dss-fg);
+}
+.dss-input::placeholder { color: var(--dss-mute); }
+.dss-addon { display: inline-flex; align-items: center; padding: 0 0 0 14px; color: var(--dss-mute); }
+.dss-select {
+  appearance: none; height: var(--fld-h-default); padding: 0 36px 0 12px;
+  border: 1px solid var(--dss-line-strong); border-radius: var(--radius-md);
+  background: var(--dss-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23888' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--dss-fg); font-family: var(--font-body); font-size: 14px; cursor: pointer;
+}
+
+/* ── Karte ──────────────────────────────────────────────────── */
+.dss-card {
+  display: flex; flex-direction: column; background: var(--dss-surface);
+  border-radius: var(--radius-lg); color: var(--dss-fg); text-decoration: none; overflow: hidden;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+.dss-card--default { border: 1px solid var(--dss-line); }
+.dss-card--elevated { border: 0; box-shadow: var(--shadow-md), 0 0 0 1px var(--dss-line); }
+.dss-card--flat { background: var(--dss-surface-2); border: 0; }
+.dss-card--hoverable { border: 1px solid var(--dss-line); cursor: pointer; }
+.dss-card--hoverable:hover, .dss-card--hoverable:focus-within {
+  border-color: var(--dss-line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px);
+}
+.dss-card-head { padding: 14px 18px 0; font-family: var(--font-display); font-weight: 600; }
+.dss-card-body { flex: 1; min-width: 0; }
+.dss-card-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px;
+  background: var(--dss-surface-2); border-top: 1px solid var(--dss-line);
+  font-family: var(--font-mono); font-size: 11px; color: var(--dss-mute);
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+}
+.dss-card--pad-sm .dss-card-body { padding: 12px 14px; }
+.dss-card--pad-md .dss-card-body { padding: 18px 20px; }
+.dss-card--pad-lg .dss-card-body { padding: 24px 28px; }
+
+/* ── Tabs ───────────────────────────────────────────────────── */
+.dss-tabs { display: flex; gap: 0; font-family: var(--font-body); }
+.dss-tab {
+  appearance: none; border: 0; background: transparent; color: var(--dss-fg-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: inherit; font-weight: 600; white-space: nowrap; text-decoration: none;
+  transition: background 0.12s, color 0.12s, box-shadow 0.12s;
+}
+.dss-tabs--md .dss-tab { min-height: 44px; padding: 0 14px; font-size: 14px; }
+.dss-tabs--underline { border-bottom: 1px solid var(--dss-line); gap: var(--space-1); }
+.dss-tabs--underline .dss-tab { border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.dss-tabs--underline .dss-tab:hover { color: var(--dss-fg); }
+.dss-tabs--underline .dss-tab.is-active,
+.dss-tabs--underline .dss-tab[aria-pressed="true"],
+.dss-tabs--underline .dss-tab[aria-selected="true"] { color: var(--dss-fg); border-bottom-color: var(--amber-400); }
+.dss-tabs--segmented { display: inline-flex; padding: 3px; background: var(--dss-surface-2); border-radius: var(--radius-md); gap: 2px; }
+.dss-tabs--segmented .dss-tab { border-radius: calc(var(--radius-md) - 2px); }
+.dss-tabs--segmented .dss-tab:hover:not(.is-active):not([aria-pressed="true"]) { background: var(--dss-line); }
+.dss-tabs--segmented .dss-tab.is-active,
+.dss-tabs--segmented .dss-tab[aria-pressed="true"] { background: var(--dss-surface); color: var(--dss-fg); box-shadow: var(--shadow-sm); }
+.dss-tabs--pills { flex-wrap: wrap; gap: var(--space-2); }
+.dss-tabs--pills .dss-tab {
+  border-radius: var(--radius-full); border: 1px solid var(--dss-line); background: var(--dss-surface);
+  min-height: 44px; padding: 6px 14px; font-size: 13px;
+  max-width: 100%; white-space: normal; text-align: left;
+}
+.dss-tabs--pills .dss-tab:hover:not(.is-active):not([aria-pressed="true"]) { border-color: var(--dss-line-strong); color: var(--dss-fg); }
+.dss-tabs--pills .dss-tab.is-active,
+.dss-tabs--pills .dss-tab[aria-pressed="true"] { background: var(--dss-btn-bg); border-color: var(--dss-btn-bg); color: var(--dss-btn-fg); }
+
+/* ── Chip / Status ──────────────────────────────────────────── */
+.dss-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; min-height: 24px;
+  border-radius: var(--radius-full); font-size: 12px; font-weight: 600; line-height: 1.2;
+  background: var(--dss-surface-2); color: var(--dss-fg-soft); box-shadow: inset 0 0 0 1px var(--dss-line);
+}
+.dss-chip--sky { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); box-shadow: none; }
+.dss-chip--amber { background: var(--dss-chip-amber-bg); color: var(--dss-chip-amber-fg); box-shadow: none; }
+.dss-chip--ok { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); box-shadow: none; }
+.dss-chip--err { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); box-shadow: none; }
+.dss-chip--warn { background: var(--dss-chip-warn-bg); color: var(--dss-chip-warn-fg); box-shadow: none; }
+.dss-chip--mono { font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; }
+.dss-chip--link { text-decoration: none; min-height: 44px; padding: 0 14px; font-size: 13px; }
+.dss-chip--link:hover { box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
+
+/* ── Stat-Kachel ────────────────────────────────────────────── */
+.dss-stat { background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: var(--radius-lg); padding: 14px 16px; }
+.dss-stat-value { font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--dss-fg); line-height: 1.1; }
+.dss-stat-label { margin-top: 4px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+
+/* ── Tabelle ────────────────────────────────────────────────── */
+.dss-frame { border: 1px solid var(--dss-line); border-radius: 14px; background: var(--dss-surface); overflow: hidden; color: var(--dss-fg); }
+.dss-table-scroll { overflow-x: auto; }
+.dss-tbl { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 14px; color: inherit; }
+.dss-tbl th, .dss-tbl td { text-align: left; padding: 0 14px; vertical-align: middle; white-space: nowrap; }
+.dss-tbl th {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dss-mute); background: var(--dss-surface-2); height: 38px; border-bottom: 1px solid var(--dss-line);
+}
+.dss-tbl td { height: 48px; border-bottom: 1px solid var(--dss-line); color: var(--dss-fg-soft); }
+.dss-tbl tbody tr:last-child td { border-bottom: 0; }
+.dss-tbl tbody tr:hover td { background: var(--dss-hover-bg); }
+.dss-tbl th.num, .dss-tbl td.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; }
+.dss-tbl td.num.lead { color: var(--dss-fg); font-weight: 700; }
+.dss-tbl th.center, .dss-tbl td.center { text-align: center; }
+.dss-tbl tr.is-own td { background: var(--dss-selected-bg); color: var(--dss-fg); font-weight: 600; }
+.dss-tbl--compact td { height: 40px; font-size: 13.5px; padding: 0 12px; }
+.dss-tbl--compact th { padding: 0 12px; }
+
+/* ── Listenzeile (Spielplan) ────────────────────────────────── */
+.dss-rows { display: flex; flex-direction: column; border: 1px solid var(--dss-line); border-radius: 14px; background: var(--dss-surface); overflow: hidden; }
+.dss-row { display: grid; align-items: center; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--dss-line); }
+.dss-row:last-child { border-bottom: 0; }
+.dss-row--match { grid-template-columns: 9rem 1fr auto; }
+.dss-row-when { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--dss-fg-soft); }
+.dss-row-main { min-width: 0; display: flex; align-items: center; gap: 8px; }
+.dss-row-score { font-family: var(--font-mono); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; color: var(--dss-fg); white-space: nowrap; }
+
+/* ── Top-Leiste ─────────────────────────────────────────────── */
+.dss-topbar { border-bottom: 1px solid var(--dss-line); background: color-mix(in oklch, var(--dss-surface) 92%, transparent); }
+.dss-topbar-inner { max-width: 880px; margin: 0 auto; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* ── Leerer / Fehler-Zustand ────────────────────────────────── */
+.dss-empty { text-align: center; padding: 40px 20px; color: var(--dss-mute); font-size: 14px; }
+.dss-empty a { color: var(--dss-link); }

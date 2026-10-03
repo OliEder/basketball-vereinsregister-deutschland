@@ -1,24 +1,10 @@
 {
-  "Startseite (light)": {
-    "axe:color-contrast-enhanced": 1
-  },
-  "Startseite (dark)": {
-    "axe:color-contrast-enhanced": 1
-  },
-  "Startseite mit Ergebnissen (light)": {
-    "axe:color-contrast-enhanced": 1,
-    "2.5.5-zielgroesse-44px": 2
-  },
-  "Startseite mit Ergebnissen (dark)": {
-    "axe:color-contrast-enhanced": 1,
-    "2.5.5-zielgroesse-44px": 2
-  },
-  "Vereinsseite (light)": {
-    "2.5.5-zielgroesse-44px": 1
-  },
-  "Vereinsseite (dark)": {
-    "2.5.5-zielgroesse-44px": 1
-  },
+  "Startseite (light)": {},
+  "Startseite (dark)": {},
+  "Startseite mit Ergebnissen (light)": {},
+  "Startseite mit Ergebnissen (dark)": {},
+  "Vereinsseite (light)": {},
+  "Vereinsseite (dark)": {},
   "Team-Seite (light)": {},
   "Team-Seite (dark)": {},
   "Team ohne Live-Daten (light)": {},

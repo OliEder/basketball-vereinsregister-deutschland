@@ -88,6 +88,16 @@ function debounce(fn, ms) {
   };
 }
 
+// Kürzel für den Logo-Platzhalter: Anfangsbuchstaben der Namensteile ohne Rechtsform
+function clubInitials(name) {
+  const words = String(name || '')
+    .replace(/\be\.?\s?V\.?/gi, ' ')
+    .split(/[\s/\-]+/)
+    .filter(w => /^[A-Za-zÄÖÜäöü]/.test(w));
+  const letters = words.slice(0, 3).map(w => w[0].toUpperCase()).join('');
+  return letters || '·';
+}
+
 function createLogoEl(club) {
   if (club.logoUrl) {
     const img = document.createElement('img');
@@ -97,14 +107,16 @@ function createLogoEl(club) {
     img.addEventListener('error', () => {
       const placeholder = document.createElement('div');
       placeholder.className = 'club-logo-placeholder';
-      placeholder.textContent = '🏀';
+      placeholder.setAttribute('aria-hidden', 'true');
+      placeholder.textContent = clubInitials(club.name);
       img.parentNode.replaceChild(placeholder, img);
     });
     return img;
   }
   const placeholder = document.createElement('div');
   placeholder.className = 'club-logo-placeholder';
-  placeholder.textContent = '🏀';
+  placeholder.setAttribute('aria-hidden', 'true');
+  placeholder.textContent = clubInitials(club.name);
   return placeholder;
 }
 
@@ -232,11 +244,11 @@ function renderTeamBadges(club) {
     const badge = document.createElement('span');
     const geschlecht = team.geschlecht || '';
     if (geschlecht === 'männlich') {
-      badge.className = 'team-badge team-badge--m';
+      badge.className = 'team-badge dss-chip dss-chip--sky';
     } else if (geschlecht === 'weiblich') {
-      badge.className = 'team-badge team-badge--w';
+      badge.className = 'team-badge dss-chip dss-chip--amber';
     } else {
-      badge.className = 'team-badge';
+      badge.className = 'team-badge dss-chip';
     }
     badge.textContent = getBadgeLabel(team);
     wrap.appendChild(badge);
@@ -247,7 +259,7 @@ function renderTeamBadges(club) {
 
 function renderClub(club) {
   const card = document.createElement('div');
-  card.className = 'club-card';
+  card.className = 'club-card dss-card dss-card--hoverable';
 
   card.appendChild(createLogoEl(club));
 
@@ -281,6 +293,7 @@ function renderClub(club) {
   const copyBtn = document.createElement('button');
   copyBtn.className = 'club-id-copy';
   copyBtn.title = 'Club-ID kopieren';
+  copyBtn.setAttribute('aria-label', 'Club-ID kopieren');
   copyBtn.textContent = '\uD83D\uDCCB';
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(String(club.clubId)).then(() => {
@@ -292,7 +305,7 @@ function renderClub(club) {
   footer.appendChild(clubIdRow);
 
   const mehr = document.createElement('a');
-  mehr.className = 'mehr-infos-btn';
+  mehr.className = 'mehr-infos-btn dss-btn dss-btn--primary dss-btn--sm';
   mehr.href = 'verein.html?id=' + club.clubId;
 
   const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -486,11 +499,17 @@ loadClubs()
         [hallCount, 'Spielstätten']
       ];
       parts.forEach(([num, label], i) => {
-        if (i > 0) statsBar.appendChild(document.createTextNode('\u00a0·\u00a0'));
+        const item = document.createElement('div');
+        item.className = 'hero-stat';
         const s = document.createElement('span');
+        s.className = 'hero-stat-num';
         s.textContent = num;
-        statsBar.appendChild(s);
-        statsBar.appendChild(document.createTextNode('\u00a0' + label));
+        const l = document.createElement('span');
+        l.className = 'hero-stat-label';
+        l.textContent = label;
+        item.appendChild(s);
+        item.appendChild(l);
+        statsBar.appendChild(item);
       });
     }
   })

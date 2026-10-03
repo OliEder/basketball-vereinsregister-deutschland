@@ -1,9 +1,6 @@
 function applyTheme(theme) {
-  if (theme === 'light') {
-    document.documentElement.classList.add('light');
-  } else {
-    document.documentElement.classList.remove('light');
-  }
+  // DSS: data-theme="light|dark" auf <html>
+  document.documentElement.setAttribute('data-theme', theme);
   // Update button icons if DOM is ready
   const sun = document.getElementById('theme-icon-sun');
   const moon = document.getElementById('theme-icon-moon');
@@ -14,7 +11,8 @@ function applyTheme(theme) {
 }
 
 function initTheme() {
-  const stored = localStorage.getItem('theme');
+  let stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) { /* Speicher blockiert */ }
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = stored || (prefersDark ? 'dark' : 'light');
   applyTheme(theme);
@@ -24,8 +22,8 @@ function initTheme() {
 }
 
 function toggleTheme() {
-  const current = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   const next = current === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) { /* Speicher blockiert */ }
   applyTheme(next);
 }
