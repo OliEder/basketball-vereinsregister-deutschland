@@ -63,6 +63,9 @@
           "ligaId": { "type": "integer" },
           "liganame": { "type": "string" },
           "rang": { "type": "integer" },
+          "ebene": { "type": "string" },
+          "bezirk": { "type": "string" },
+          "kreis": { "type": "string" },
           "training": {
             "type": "array",
             "items": {

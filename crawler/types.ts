@@ -28,6 +28,11 @@ export interface TeamEntry {
   ligaId?: number;
   liganame?: string;
   rang?: number;
+  /** Spielebene der Liga (z. B. "Verband", "Bezirk", "Kreis") aus ligaData */
+  ebene?: string;
+  /** Bezirk und Kreis der Liga; Grundlage der Ortsvalidierung */
+  bezirk?: string;
+  kreis?: string;
   training: TrainingSession[];
 }
 
@@ -92,6 +97,13 @@ export interface BbbLiga {
   verbandName: string;
   akName?: string;
   geschlecht?: string;
+}
+
+/** Auszug aus ligaData der BBB-API (Gebietsangaben der Liga) */
+export interface BbbLigaData {
+  skEbeneName?: string | null;
+  bezirkName?: string | null;
+  kreisname?: string | null;
 }
 
 export interface BbbTeam {

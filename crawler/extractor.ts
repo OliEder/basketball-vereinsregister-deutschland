@@ -1,5 +1,5 @@
 // crawler/extractor.ts
-import { BbbTableEntry, ClubEntry, TeamEntry } from './types';
+import { BbbLigaData, BbbTableEntry, ClubEntry, TeamEntry } from './types';
 
 export function extractCityFromName(name: string): string {
   // Rechtsform, Gründungsjahr und Teamnummern am Ende entfernen, bis nichts mehr passt:
@@ -53,11 +53,27 @@ export function extractClubs(
 }
 
 
+/** Gebietsangaben der Liga; leere Werte und Platzhalter entfallen. */
+export function regionFields(ligaData?: BbbLigaData | null): Pick<TeamEntry, 'ebene' | 'bezirk' | 'kreis'> {
+  const clean = (v?: string | null) => {
+    const t = v?.trim();
+    return t ? t : undefined;
+  };
+  const out: Pick<TeamEntry, 'ebene' | 'bezirk' | 'kreis'> = {};
+  const ebene = clean(ligaData?.skEbeneName);
+  const bezirk = clean(ligaData?.bezirkName);
+  const kreis = clean(ligaData?.kreisname);
+  if (ebene) out.ebene = ebene;
+  if (bezirk) out.bezirk = bezirk;
+  if (kreis) out.kreis = kreis;
+  return out;
+}
+
 export function extractTeams(
   entries: BbbTableEntry[],
   altersklasse: string,
   geschlecht: string,
-  liga?: { ligaId: number; liganame: string }
+  liga?: { ligaId: number; liganame: string; ligaData?: BbbLigaData | null }
 ): Map<number, TeamEntry[]> {
   const result = new Map<number, TeamEntry[]>();
 
@@ -73,7 +89,7 @@ export function extractTeams(
         teamPermanentId,
         altersklasse,
         geschlecht,
-        ...(liga ? { ligaId: liga.ligaId, liganame: liga.liganame, rang: entry.rang } : {}),
+        ...(liga ? { ligaId: liga.ligaId, liganame: liga.liganame, rang: entry.rang, ...regionFields(liga.ligaData) } : {}),
         training: []
       });
     }

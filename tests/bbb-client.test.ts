@@ -78,6 +78,30 @@ describe('BbbClient', () => {
   });
 });
 
+describe('BbbClient.getTableWithLiga', () => {
+  it('liefert Tabelle und ligaData aus demselben Request', async () => {
+    const mockFetch = makeFetch({
+      status: '0',
+      data: {
+        ligaData: { skEbeneName: 'Bezirk', bezirkName: 'Oberpfalz', kreisname: 'Regensburg' },
+        tabelle: { entries: [{ rang: 1, team: { clubId: 1977 } }] }
+      }
+    });
+    const client = new BbbClient(mockFetch as any);
+
+    const result = await client.getTableWithLiga(51961);
+    expect(result.entries).toHaveLength(1);
+    expect(result.ligaData?.bezirkName).toBe('Oberpfalz');
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('ligaData ist null, wenn die API sie nicht liefert', async () => {
+    const mockFetch = makeFetch({ status: '0', data: { tabelle: { entries: [] } } });
+    const client = new BbbClient(mockFetch as any);
+    expect((await client.getTableWithLiga(1)).ligaData).toBeNull();
+  });
+});
+
 describe('BbbClient.getSpielplan', () => {
   it('returns home matches for a team', async () => {
     const mockFetch = makeFetch({

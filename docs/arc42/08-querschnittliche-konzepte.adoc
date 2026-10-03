@@ -17,6 +17,8 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin mit mehreren IDs) werden im Regeocode v
 
 Name und eindeutige Heimhalle gelten als sicher, Mehrheitsentscheidung und reiner Ortsname als unsicher. `npm run regeocode` übernimmt unsichere Ergebnisse nur, wenn die alte Koordinate unbrauchbar ist (fehlt oder liegt in einer „Müll-Gruppe“: von mindestens vier Vereinen mit verschiedenen Ortsbezeichnungen geteilt); sonst steht der Verein im Bericht als „review“.
 
+Gebietsangaben (in Vorbereitung): Der Crawl speichert pro Team `ebene`, `bezirk` und `kreis` der Liga (`ligaData` der Tabellen-Abfrage, kein zusätzlicher Request). Daraus soll eine Ortsvalidierung entstehen, die Koordinaten außerhalb des Bezirks bzw. Kreises des Vereins ablehnt. Für Vereine ohne Bezirk (Bundesliga, Regionalliga, Rollstuhl) bleibt nur die Vereinsnummer (01–16 = Landesverband).
+
 Bereits vorhandene Koordinaten werden dabei nicht überschrieben. Unabhängig davon übernimmt `npm run merge-halls` nach dem separaten Hallen-Crawl weiterhin die Hallen-Koordinaten (siehe ADR-004, ergänzt durch ADR-006). Das Log weist aus, wie viele Treffer aus Name, Halle und Ort stammen.
 
 Bekannte Einschränkung: Einige Vereine haben Hallen weit entfernt vom eigentlichen Vereinsort (z.B. Gastspielfelder). Diese Irrläufer können manuell in `clubs-enriched.json` korrigiert werden.
