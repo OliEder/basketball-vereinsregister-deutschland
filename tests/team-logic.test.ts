@@ -102,3 +102,25 @@ describe('initials', () => {
     expect(L.initials('')).toBe('·');
   });
 });
+
+describe('venueForMatch', () => {
+  const halls = { '10': { bezeichnung: 'Heimhalle (geschätzt)', ort: 'Bonn' } };
+  const d = L.describeMatch(m({ matchId: 77, homeTeam: t(1, 'A', 10), guestTeam: t(2, 'B', 20) }), 1);
+
+  it('bevorzugt die gemeldete Halle aus den Live-Daten', () => {
+    const doc = { venues: { '77': 5 }, halls: { '5': { bezeichnung: 'Echte Halle', ort: 'Köln', lat: 50.9, lng: 6.9 } } };
+    const r = L.venueForMatch(doc, d, 10, halls);
+    expect(r.confirmed).toBe(true);
+    expect(r.venue.bezeichnung).toBe('Echte Halle');
+  });
+
+  it('fällt auf die voraussichtliche Heimhalle zurück', () => {
+    expect(L.venueForMatch({}, d, 10, halls)).toEqual({ venue: halls['10'], confirmed: false });
+    expect(L.venueForMatch({ venues: { '77': 9 }, halls: {} }, d, 10, halls).confirmed).toBe(false);
+  });
+
+  it('liefert null, wenn weder noch bekannt ist', () => {
+    expect(L.venueForMatch({}, d, 10, null)).toBeNull();
+    expect(L.venueForMatch({}, null, 10, halls)).toBeNull();
+  });
+});

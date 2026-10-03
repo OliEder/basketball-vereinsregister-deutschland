@@ -38,7 +38,7 @@ describe('stateOf / primaryBezirk', () => {
 });
 
 describe('RegionIndex', () => {
-  const index = new RegionIndex(oberpfalz);
+  const index = new RegionIndex(oberpfalz, () => true, { laender: null });
 
   it('akzeptiert Koordinaten im Bezirk', () => {
     const r = index.check(oberpfalz[0], { lat: 49.2, lng: 12.4 });
@@ -56,7 +56,7 @@ describe('RegionIndex', () => {
   it('prüft nichts, wenn die Region unbekannt ist (Bundesliga, zu wenig Vergleichsvereine)', () => {
     const bl = club(50, null, null, {}, 'Oberpfalz', '2202001');
     expect(index.check(bl, { lat: 47.99, lng: 7.85 })).toMatchObject({ ok: true, level: 'none' });
-    const small = new RegionIndex(oberpfalz.slice(0, 2));
+    const small = new RegionIndex(oberpfalz.slice(0, 2), () => true, { laender: null });
     expect(small.check(oberpfalz[0], { lat: 47.99, lng: 7.85 }).ok).toBe(true);
   });
 
@@ -76,13 +76,13 @@ describe('RegionIndex', () => {
     // viele Vereine nah am Zentrum, einige weit draußen: d50 klein, d90 groß
     const core = Array.from({ length: 10 }, (_, i) => club(100 + i, 49.0 + i * 0.005, 12.1));
     const edge = [club(120, 49.0, 13.0), club(121, 49.0, 13.1)];   // etwa 65 km östlich
-    const idx = new RegionIndex([...core, ...edge]);
+    const idx = new RegionIndex([...core, ...edge], () => true, { laender: null });
     expect(idx.check(core[0], { lat: 49.0, lng: 13.0 }).ok).toBe(true);
   });
 
   it('ignoriert Vereine, die nicht als Referenz gelten', () => {
     const junk = [club(30, 47.99, 7.85), club(31, 47.99, 7.85), club(32, 47.99, 7.85), club(33, 47.99, 7.85)];
-    const idx = new RegionIndex([...oberpfalz, ...junk], c => c.clubId < 30);
+    const idx = new RegionIndex([...oberpfalz, ...junk], c => c.clubId < 30, { laender: null });
     expect(idx.check(oberpfalz[0], { lat: 49.0, lng: 12.1 }).ok).toBe(true);
     expect(idx.check(oberpfalz[0], { lat: 47.99, lng: 7.85 }).ok).toBe(false);
   });

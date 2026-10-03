@@ -77,6 +77,14 @@ jobs:
           path: _live
           key: live-${{ github.run_id }}
 
+      # Spielorte (Branch data-store, vom Workflow "Spielorte" gepflegt); fehlt der Branch, entfallen nur die Hallen
+      - name: Spielorte holen
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: data-store
+          path: data-store
+
       - name: Deploy-Artefakt zusammenstellen
         run: |
           mkdir -p _site/data/schemas
@@ -89,6 +97,7 @@ jobs:
             mkdir -p _site/data/live
             cp -r _live/. _site/data/live/
           fi
+          [ -d data-store ] && npm run apply-venues -- --dir=_site/data/live --store=data-store || true
 
       - uses: actions/configure-pages@v4
 
