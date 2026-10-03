@@ -36,6 +36,15 @@ describe('mergeTeams', () => {
     expect(result[0].geschlecht).toBe('männlich');
   });
 
+  it('keeps teamNumber/teamAkj/teamAkjId from previous data', () => {
+    const base: TeamEntry[] = [
+      { teamPermanentId: 100, altersklasse: 'Senioren', geschlecht: 'männlich', training: [] }
+    ];
+    const prev = [{ teamPermanentId: 100, training: [], teamNumber: 2, teamAkj: 'Senioren II', teamAkjId: 1 }];
+    const result = mergeTeams(base, prev);
+    expect(result[0]).toMatchObject({ teamNumber: 2, teamAkj: 'Senioren II', teamAkjId: 1 });
+  });
+
   it('does not overwrite altersklasse/geschlecht from enriched', () => {
     const base: TeamEntry[] = [
       { teamPermanentId: 100, altersklasse: 'U16', geschlecht: 'weiblich', training: [] }
