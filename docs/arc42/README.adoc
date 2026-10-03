@@ -609,6 +609,16 @@ Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live
 * (-) Daten sind bis zu 6 Stunden alt
 * (-) Ein Saison-Archiv (Historie, Teamvergleiche) ist damit noch nicht abgedeckt
 
+== ADR-008: Spielorte inkrementell aus matchInfo, dauerhaft im Branch data-store
+
+*Status:* angenommen
+
+*Kontext:* Die Halle eines Spiels steht nur in `match/id/{id}/matchInfo` (eine Anfrage je Spiel). Bei rund 120 000 Spielen pro Saison und etwa 2 Anfragen pro Sekunde wären das 15 Stunden am Stück. Gebraucht werden die echten Hallen für den Teaser des nächsten Spiels, die Kalender-Abos (ICS) und den Hallenzähler (Heimspiele je Halle und Saison); für die Boxscores wird dieselbe Strategie gelten.
+
+*Entscheidung:* `crawler/venues.ts` führt eine Warteschlange mit Zeitbudget pro Lauf (Standard 25 Minuten, alle 6 Stunden). Reihenfolge: Spiele der nächsten 14 Tage ohne Eintrag, Auffrischung der nächsten 7 Tage (Verlegungen, höchstens einmal am Tag), weitere kommende Spiele, zuletzt gespielte Spiele. Der Speicher `venues.json` (Spiel-ID → Halle, Abruftag), `halls.json` und `status.json` liegt im Branch `data-store`, den der Workflow nach jedem Lauf als einen einzigen Commit ersetzt (kleiner Verlauf). Welche Spiele es gibt, liest der Lauf aus den veröffentlichten Live-Daten. Bei mehr als 20 % Fehlern bricht der Lauf ab und sichert nur, was bis dahin geholt wurde; abgesagte Spiele und Verzichte werden nicht abgefragt, eine unbekannte Halle wird nach 7 Tagen erneut versucht.
+
+*Folgen:* (+) Last auf der BBB-API bleibt gering, ein Ausfall kostet nur einen Lauf. (+) Derselbe Speicher dient später Saison-Archiv und Boxscore-Summen. (−) Der Rückstand der gespielten Spiele ist erst nach etwa neun Tagen abgearbeitet. (−) Der Speicher ist eine zweite Datenquelle neben `clubs.json`.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
