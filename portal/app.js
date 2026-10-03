@@ -2,6 +2,7 @@
 // Suchlogik läuft vollständig client-seitig
 
 let searchEngine = null;
+let teamUrlMap = null;   // data/team-url-map.json (optional)
 let urlMap = null;   // clubId → Pfad der statischen Vereinsseite (data/url-map.json), optional
 let map = null;
 let markerLayer = null;
@@ -75,6 +76,7 @@ async function geocodeCity(city) {
 async function loadClubs() {
   setStatus('Lade Vereinsdaten...');
   const mapPromise = fetch('data/url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
+  fetch('data/team-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null).then(m => { teamUrlMap = m; renderFavorites(); });
   const res = await fetch('data/clubs.json');
   if (!res.ok) throw new Error('clubs.json konnte nicht geladen werden');
   const clubs = await res.json();
@@ -491,6 +493,7 @@ document.getElementById('geschlecht-filter').addEventListener('change', () => re
 loadClubs()
   .then(clubs => {
     searchEngine = new SearchEngine(clubs);
+    if (typeof renderFavorites === 'function') renderFavorites();   // Vereinsadressen (urlMap) sind jetzt geladen
     setStatus(clubs.length + ' Vereine geladen. Bereit zur Suche.');
 
     const teamCount = clubs.reduce((sum, c) => sum + (c.teams ? c.teams.length : 0), 0);
@@ -520,3 +523,93 @@ loadClubs()
   .catch(() => {
     setStatus('Fehler: Vereinsdaten konnten nicht geladen werden.');
   });
+
+// --- Meine Teams und Vereine (Favoriten, nur im Browser gespeichert) ---
+
+const favLive = { index: null, docs: new Map() };
+
+async function favJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(url);
+  return res.json();
+}
+
+function favToday() {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+/** Nächstes Spiel eines Teams aus den Live-Daten, oder null (keine Daten, kein Spiel). */
+async function favNextGame(teamId) {
+  try {
+    if (!favLive.index) favLive.index = await favJson('data/live/team-index.json');
+    const ids = favLive.index[String(teamId)];
+    if (!ids || !ids.length) return null;
+    const docs = await Promise.all(ids.map(id => {
+      if (!favLive.docs.has(id)) favLive.docs.set(id, favJson('data/live/liga/' + id + '.json'));
+      return favLive.docs.get(id);
+    }));
+    const doc = TeamLogic.pickPrimaryLiga(docs, teamId);
+    if (!doc) return null;
+    return { doc, next: TeamLogic.nextMatch(TeamLogic.teamMatches(doc.matches, teamId), favToday()) };
+  } catch (e) {
+    return null;
+  }
+}
+
+function favItem(kind, entry, href) {
+  const li = document.createElement('li');
+  li.className = 'fav-item';
+  const main = document.createElement('div');
+  main.className = 'fav-main';
+  const a = document.createElement('a');
+  a.className = 'fav-name';
+  a.href = href;
+  a.textContent = entry.name;
+  main.appendChild(a);
+  const sub = document.createElement('span');
+  sub.className = 'fav-sub';
+  sub.textContent = kind === 'club' ? 'Verein' : 'Team';
+  main.appendChild(sub);
+  li.appendChild(main);
+
+  const rm = document.createElement('button');
+  rm.type = 'button';
+  rm.className = 'fav-remove dss-btn dss-btn--ghost dss-btn--sm';
+  rm.textContent = 'Entfernen';
+  rm.setAttribute('aria-label', entry.name + ' aus Meine Teams und Vereine entfernen');
+  rm.addEventListener('click', () => Favorites.toggleFavorite(kind, entry));
+  li.appendChild(rm);
+  return { li, sub };
+}
+
+async function renderFavorites() {
+  const section = document.getElementById('favorites');
+  const list = document.getElementById('fav-list');
+  if (!section || !list || !window.Favorites || typeof TeamLogic === 'undefined') return;
+  const state = Favorites.load();
+  list.textContent = '';
+  if (!state.teams.length && !state.clubs.length) { section.hidden = true; return; }
+  section.hidden = false;
+
+  state.teams.forEach(t => {
+    const { li, sub } = favItem('team', t, TeamLogic.teamHref(teamUrlMap, t.id));
+    list.appendChild(li);
+    favNextGame(t.id).then(r => {
+      if (!r) return;
+      const n = r.next;
+      sub.textContent = n && n.match
+        ? 'Nächstes Spiel: ' + TeamLogic.formatKickoff(n.match.kickoffDate, n.match.kickoffTime) + ' · ' + (n.isHome ? 'vs. ' : '@ ') + (n.opponent ? n.opponent.teamname : '?')
+        : 'Kein Spiel angesetzt · ' + r.doc.liganame;
+    });
+  });
+  state.clubs.forEach(c => {
+    const { li } = favItem('club', c, (urlMap && urlMap[String(c.id)]) || 'verein.html?id=' + encodeURIComponent(c.id));
+    list.appendChild(li);
+  });
+}
+
+window.addEventListener('favorites:changed', renderFavorites);
+window.addEventListener('storage', e => { if (e.key === Favorites.KEY) renderFavorites(); });
+renderFavorites();

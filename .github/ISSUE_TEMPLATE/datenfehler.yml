@@ -1,0 +1,41 @@
+name: Datenfehler melden
+description: Ein Verein, Team, Ort oder eine Halle stimmt nicht
+title: "Datenfehler: "
+labels: ["daten"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für den Hinweis! Bitte keine personenbezogenen Daten (Namen von Spielerinnen und Spielern, Telefonnummern) eintragen.
+  - type: input
+    id: page
+    attributes:
+      label: Seite
+      description: Adresse der Seite mit dem Fehler (wird beim Klick auf "Fehler melden" vorausgefüllt)
+    validations:
+      required: true
+  - type: input
+    id: objekt
+    attributes:
+      label: Verein, Team oder Liga
+      description: Wird vorausgefüllt
+  - type: dropdown
+    id: art
+    attributes:
+      label: Was stimmt nicht?
+      options:
+        - Ort oder Karte (falscher Standort)
+        - Halle oder Spielort
+        - Team fehlt oder ist falsch zugeordnet
+        - Liga, Tabelle oder Spielplan
+        - Name oder Logo
+        - Sonstiges
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Was ist richtig?
+      description: Wenn möglich mit richtiger Adresse (PLZ und Ort) oder einem Link zur Vereinsseite
+    validations:
+      required: true

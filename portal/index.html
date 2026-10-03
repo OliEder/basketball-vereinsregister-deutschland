@@ -53,6 +53,12 @@
   </header>
 
   <main>
+    <section id="favorites" class="fav-panel dss-card dss-card--default" aria-labelledby="fav-title" hidden>
+      <h2 id="fav-title" class="fav-title">Meine Teams und Vereine</h2>
+      <p class="fav-note">Nur auf diesem Gerät gespeichert.</p>
+      <ul id="fav-list" class="fav-list"></ul>
+    </section>
+
     <section class="search-panel dss-card dss-card--elevated">
       <div class="search-tabs dss-tabs dss-tabs--underline dss-tabs--md">
         <button class="tab dss-tab is-active" data-tab="name">Nach Name</button>
@@ -153,6 +159,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="team-logic.js"></script>
+  <script src="favorites.js"></script>
   <script src="app.js"></script>
   <script>
     // Tab switching

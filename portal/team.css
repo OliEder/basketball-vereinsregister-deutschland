@@ -1,6 +1,6 @@
 /* Team-Seite: Layout. Tabellen, Zeilen, Tabs und Kacheln stammen aus dss/components.css. */
 
-.team-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.35rem; }
+.team-head { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 0.35rem; }
 .team-head .team-title { margin: 0; }
 .team-title { font-weight: 800; font-size: clamp(1.7rem, 5vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 0.35rem; }
 .team-sub { color: var(--dss-fg-soft); font-size: 0.95rem; margin-bottom: 1rem; }

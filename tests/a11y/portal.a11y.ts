@@ -22,8 +22,16 @@ const search: Step = async page => {
   await page.click('#name-btn');
 };
 
+const withFavorites: Step = async page => {
+  await page.evaluate(() => {
+    localStorage.setItem('vr:favorites', JSON.stringify({ v: 1, teams: [{ id: '151009', name: 'TSV 1861 Nördlingen', clubId: '1235' }], clubs: [{ id: '1235', name: 'TSV 1861 Nördlingen' }] }));
+    window.dispatchEvent(new CustomEvent('favorites:changed'));
+  });
+};
+
 const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> = [
   { name: 'Startseite', url: '/index.html', ready: '#stats-bar:not(:empty)' },
+  { name: 'Startseite mit Favoriten', url: '/index.html', ready: '.fav-item', action: withFavorites },
   { name: 'Startseite mit Ergebnissen', url: '/index.html', ready: '.club-card', action: search },
   { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
@@ -253,4 +261,32 @@ test('Statische Teamseite: Inhalt ohne JavaScript, Verlinkung und strukturierte 
   expect(html).toContain('"@type":"SportsTeam"');
   expect(html).toContain('href="liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/"');
   expect(await (await request.get('/sitemap.xml')).text()).toContain('/bayern/noerdlingen/tsv-1861-noerdlingen/herren/');
+});
+
+test('Favoriten: Team merken, auf der Startseite wiederfinden und entfernen', async ({ page }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  const star = page.locator('.team-head .fav-btn');
+  await expect(star).toHaveAttribute('aria-pressed', 'false');
+  await star.click();
+  await expect(star).toHaveAttribute('aria-pressed', 'true');
+  await expect(star).toContainText('Gemerkt');
+
+  await page.goto('/index.html');
+  const item = page.locator('.fav-item');
+  await expect(item).toHaveCount(1);
+  await expect(item.locator('.fav-name')).toHaveText('TSV 1861 Nördlingen');
+  await expect(item.locator('.fav-name')).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/herren\/$/);
+  await expect(item.locator('.fav-sub')).toContainText('Nächstes Spiel');     // aus den Live-Daten
+  await item.getByRole('button', { name: /entfernen/i }).click();
+  await expect(page.locator('#favorites')).toBeHidden();
+});
+
+test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async ({ page }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '.verein-team-card');
+  const link = page.getByRole('link', { name: /Fehler melden/ });
+  const href = await link.getAttribute('href');
+  expect(href).toContain('github.com/OliEder/basketball-vereinsregister-deutschland/issues/new?template=datenfehler.yml');
+  expect(decodeURIComponent(href!)).toContain('page=http://localhost:4173/bayern/noerdlingen/tsv-1861-noerdlingen/');
+  expect(decodeURIComponent(href!)).toContain('objekt=Verein 1235');
+  await expect(link).toHaveAttribute('target', '_blank');
 });

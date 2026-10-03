@@ -291,6 +291,12 @@ function renderLiga(docs, doc, teamId, container, hallIndex) {
   container.appendChild(renderTable(doc, teamId));
   container.appendChild(renderSchedule(list, doc.ligaId));
   container.appendChild(el('div', 'team-updated', 'Stand: ' + new Date(doc.fetchedAt).toLocaleString('de-DE') + ' · wird alle 6 Stunden aktualisiert'));
+  const report = window.Report ? Report.link({ kind: 'team', id: teamId, name: TeamLogic.teamName(doc, teamId) || 'Team ' + teamId }) : null;
+  if (report) {
+    const row = el('p', 'report-row', 'Stimmt etwas nicht? ');
+    row.appendChild(report);
+    container.appendChild(row);
+  }
 }
 
 async function init() {
@@ -340,6 +346,8 @@ async function init() {
   const head = el('div', 'team-head');
   head.appendChild(logoEl(teamId, name, 'xl'));
   head.appendChild(el('h1', 'team-title', name));
+  const favBtn = window.Favorites ? Favorites.button('team', { id: teamId, name: name, clubId: clubId }) : null;
+  if (favBtn) head.appendChild(favBtn);
   content.appendChild(head);
 
   const sub = el('div', 'team-sub');
