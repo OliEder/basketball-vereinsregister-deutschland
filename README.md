@@ -85,6 +85,7 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 | `npm run crawl` | Verbände → Ligen → Tabellen, ergänzt Club-Details, optional Geocoding (`--skip-geocoding`) |
 | `npm run geocode` | geocodiert Vereine ohne Koordinaten (Kette siehe unten) |
 | `npm run regeocode` | berechnet verdächtige Koordinaten neu, `--scope=suspect\|all`, `--apply` |
+| `npm run region-check` | listet Vereine, deren Koordinate weit außerhalb ihres Bezirks bzw. Landesverbands liegt (offline) |
 | `npm run check-geocoding` | vergleicht alle Koordinaten mit der Namenssuche, schreibt `geocoding-check.json` |
 | `npm run live` | Live-Crawl pro Liga (`--out`, `--concurrency`, `--delay`, `--limit`) |
 | `npm run test:a11y` | Barrierefreiheits-Tests (einmalig `npx playwright install chromium`) |
@@ -112,6 +113,8 @@ Für Vereine ohne Koordinaten gilt diese Reihenfolge (`crawler/club-geocoder.ts`
 1. **Namenssuche** bei Nominatim, nur plausible Treffer. Liegt der Treffer in einem anderen Ort als die sichere Heimhalle, gilt die Halle.
 2. **Heimhalle**: alle Hallen im selben Ort → dieser; Hallenort im Vereinsnamen → dieser; sonst die Mehrheit.
 3. **Ort aus dem Vereinsnamen**, nur wenn er als Ort taugt (keine Kürzel, Zahlen, Allerweltswörter).
+
+Jeder Treffer wird gegen die Region des Vereins geprüft (Bezirk aus den Ligen, sonst Landesverband aus der Vereinsnummer); liegt er weit außerhalb, zählt er nicht und die nächste Quelle kommt an die Reihe. Orte, die sich nicht automatisch finden lassen, stehen mit PLZ und Ort in `data/manual-locations.json` und haben Vorrang.
 
 Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordinate, sofern ihre Ergebnisse höchstens 15 km auseinander liegen. Eine von mehreren Club-IDs genutzte Halle ist nie ein Grund, eine Koordinate abzulehnen. Details: [Kapitel 8 der Architekturdokumentation](docs/arc42/08-querschnittliche-konzepte.adoc).
 

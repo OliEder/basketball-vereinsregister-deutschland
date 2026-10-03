@@ -21,7 +21,7 @@ async function geocodeAll(): Promise<void> {
   console.log(`${toGeocode.length} Vereine ohne Koordinaten werden geocodiert...`);
 
   let done = 0;
-  const bySource: Record<GeocodeSource, number> = { name: 0, hall: 0, city: 0 };
+  const bySource: Record<GeocodeSource, number> = { name: 0, hall: 0, city: 0, manual: 0 };
   for (let i = 0; i < toGeocode.length; i++) {
     const club = toGeocode[i];
     const coords = await geocodeClub(club);

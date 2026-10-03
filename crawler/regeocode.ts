@@ -3,9 +3,10 @@
 //
 //   npm run regeocode [-- --scope=suspect|all] [-- --apply] [-- --out=regeocode-report.json]
 //
-// scope=suspect (Standard): Vereine, deren geocodedFrom eine Rechtsform ("e.V.") oder leer ist
-//   oder deren Koordinate in einer "Müll-Gruppe" liegt (von mindestens 4 Vereinen mit
-//   verschiedenen Ortsbezeichnungen geteilt, z. B. ein Standardpunkt).
+// scope=suspect (Standard): Vereine, deren geocodedFrom eine Rechtsform ("e.V.") oder leer ist,
+//   deren Koordinate in einer "Müll-Gruppe" liegt (von mindestens 4 Vereinen mit
+//   verschiedenen Ortsbezeichnungen geteilt, z. B. ein Standardpunkt) oder weit außerhalb ihres
+//   Bezirks bzw. Landesverbands liegt (siehe region.ts).
 // scope=all: alle Vereine. Hier werden bestehende Koordinaten nur durch einen plausiblen
 //   Namenstreffer ersetzt.
 //
@@ -14,8 +15,10 @@
 // erscheinen im Bericht als "review" und werden nicht übernommen.
 
 import fs from 'fs';
-import { geocodeClub, GeocodeSource, Confidence } from './club-geocoder';
+import { geocodeClub, GeocodeSource, Confidence, ClubGeocode } from './club-geocoder';
+import { geocodeDetailed } from './geocoder';
 import { distanceKm } from './geo';
+import { RegionIndex, RegionCheck } from './region';
 import { loadExistingClubs, writeClubs } from './writer';
 import { ClubEntry } from './types';
 
@@ -61,6 +64,10 @@ export interface RegeocodeResult {
   /** Gruppe gleichnamiger Club-IDs, falls vorhanden */
   group: string | null;
   groupAction: GroupAction | null;
+  /** Region des Vereins (Bezirk bzw. Landesverband), falls bekannt, und Abstand des Ergebnisses zu ihrem Schwerpunkt */
+  region: { name: string; level: RegionCheck['level']; distanceKm: number; limitKm: number } | null;
+  /** Treffer, die wegen der Region verworfen wurden, z. B. "name 312 km"; leer = nichts verworfen */
+  regionRejected: string[];
   before: { lat: number | null; lng: number | null; geocodedFrom: string | null };
   after: { lat: number; lng: number; geocodedFrom: string | null } | null;
   distanceKm: number | null;
@@ -74,7 +81,7 @@ export function decide(
   unchanged: boolean
 ): RegeocodeAction {
   if (!hit) return 'no-result';
-  if (!suspect && hit.source !== 'name') return 'kept';
+  if (!suspect && hit.source !== 'name' && hit.source !== 'manual') return 'kept';
   if (hit.confidence === 'low' && !oldUnusable) return 'review';
   return unchanged ? 'unchanged' : 'changed';
 }
@@ -137,6 +144,44 @@ export function unifyGroups(
   }
 }
 
+/** Von Hand gepflegter Ort eines Vereins (data/manual-locations.json); hat Vorrang vor allem anderen. */
+export interface ManualLocation {
+  clubId: number;
+  /** PLZ und Ort genügen (keine Straße); alternativ direkt lat/lng */
+  zip?: string;
+  city?: string;
+  lat?: number;
+  lng?: number;
+  note?: string;
+}
+
+export const MANUAL_PATH = 'data/manual-locations.json';
+
+export function loadManualLocations(file = MANUAL_PATH): Map<number, ManualLocation> {
+  if (!fs.existsSync(file)) return new Map();
+  const raw = JSON.parse(fs.readFileSync(file, 'utf-8'));
+  if (!Array.isArray(raw)) throw new Error(`${file}: erwartet ein Array`);
+  const map = new Map<number, ManualLocation>();
+  for (const m of raw as ManualLocation[]) {
+    if (typeof m?.clubId !== 'number') throw new Error(`${file}: Eintrag ohne clubId`);
+    const hasCoords = typeof m.lat === 'number' && typeof m.lng === 'number';
+    if (!hasCoords && !(m.zip && m.city)) throw new Error(`${file}: clubId ${m.clubId} braucht zip und city oder lat und lng`);
+    map.set(m.clubId, m);
+  }
+  return map;
+}
+
+export async function manualHit(
+  m: ManualLocation,
+  geocode: (q: string) => Promise<{ lat: number; lng: number } | null> = geocodeDetailed
+): Promise<ClubGeocode | null> {
+  if (typeof m.lat === 'number' && typeof m.lng === 'number') {
+    return { lat: m.lat, lng: m.lng, source: 'manual', confidence: 'high', geocodedFrom: m.city ?? null };
+  }
+  const hit = await geocode(`${m.zip} ${m.city}`);
+  return hit ? { lat: hit.lat, lng: hit.lng, source: 'manual', confidence: 'high', geocodedFrom: m.city ?? null } : null;
+}
+
 function arg(name: string, fallback: string): string {
   const hit = process.argv.find(a => a.startsWith(`--${name}=`));
   return hit ? hit.slice(name.length + 3) : fallback;
@@ -149,8 +194,14 @@ async function regeocode(): Promise<void> {
   const clubs = loadExistingClubs();
   const junkClusters = findJunkClusters(Array.from(clubs.values()));
   const inJunkCluster = (c: ClubEntry) => c.lat != null && c.lng != null && junkClusters.has(coordKey(c));
-  const suspectOf = (c: ClubEntry) => isSuspect(c) || inJunkCluster(c);
-  const targets = Array.from(clubs.values()).filter(c => scope === 'all' || suspectOf(c));
+  const labelSuspect = (c: ClubEntry) => isSuspect(c) || inJunkCluster(c);
+  // Schwerpunkte je Bezirk/Landesverband nur aus Vereinen mit verlässlicher Koordinate
+  const regions = new RegionIndex(Array.from(clubs.values()), c => !labelSuspect(c));
+  // Eine Koordinate weit außerhalb von Bezirk bzw. Landesverband ist ebenfalls verdächtig und unbrauchbar
+  const outsideRegion = (c: ClubEntry) => c.lat != null && c.lng != null && !regions.check(c, { lat: c.lat, lng: c.lng }).ok;
+  const suspectOf = (c: ClubEntry) => labelSuspect(c) || outsideRegion(c);
+  const manual = loadManualLocations();
+  const targets = Array.from(clubs.values()).filter(c => scope === 'all' || suspectOf(c) || manual.has(c.clubId));
 
   console.log(`${targets.length} von ${clubs.size} Vereinen (scope=${scope}${apply ? ', --apply' : ', nur Bericht'}; ${junkClusters.size} Müll-Gruppen).`);
 
@@ -158,9 +209,17 @@ async function regeocode(): Promise<void> {
   for (let i = 0; i < targets.length; i++) {
     const club = targets[i];
     const suspect = suspectOf(club);
-    const oldUnusable = club.lat == null || club.lng == null || inJunkCluster(club);
+    const oldUnusable = club.lat == null || club.lng == null || inJunkCluster(club) || outsideRegion(club);
     const before = { lat: club.lat, lng: club.lng, geocodedFrom: club.geocodedFrom };
-    const hit = await geocodeClub(club);
+    const regionRejected: string[] = [];
+    const m = manual.get(club.clubId);
+    const hit = m
+      ? await manualHit(m)
+      : await geocodeClub(club, undefined, (coords, source) => {
+          const r = regions.check(club, coords);
+          if (!r.ok) regionRejected.push(`${source} ${r.distanceKm} km`);
+          return r.ok;
+        });
 
     let after: RegeocodeResult['after'] = null;
     let dist: number | null = null;
@@ -172,8 +231,10 @@ async function regeocode(): Promise<void> {
       unchanged = dist !== null && dist < 0.05 && after.geocodedFrom === club.geocodedFrom;
     }
     const action = decide(hit, suspect, oldUnusable, unchanged);
+    const check = after ? regions.check(club, after) : null;
+    const region = check && check.region ? { name: check.region, level: check.level, distanceKm: check.distanceKm ?? 0, limitKm: check.limitKm ?? 0 } : null;
 
-    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, nameHitRejected: !!hit?.nameHitRejected, group: null, groupAction: null, before, after, distanceKm: dist, action });
+    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, nameHitRejected: !!hit?.nameHitRejected, group: null, groupAction: null, region, regionRejected, before, after, distanceKm: dist, action });
 
     if ((i + 1) % 100 === 0) {
       console.log(`  ${i + 1}/${targets.length} verarbeitet...`);
@@ -200,11 +261,12 @@ async function regeocode(): Promise<void> {
   const bySource = (s: GeocodeSource) => results.filter(r => r.action === 'changed' && r.source === s).length;
   const summary = [
     `Fertig: ${results.length} Vereine geprüft`,
-    `  geändert:    ${count('changed')} (Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
+    `  geändert:    ${count('changed')} (von Hand: ${bySource('manual')}, Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
     `  unverändert: ${count('unchanged')}`,
     `  Namenstreffer wegen Widerspruch zur Heimhalle verworfen: ${results.filter(r => r.nameHitRejected).length}`,
     `  Gruppen gleichnamiger Club-IDs: ${results.filter(r => r.groupAction === 'unified').length} IDs vereinheitlicht, ${results.filter(r => r.groupAction === 'conflict').length} IDs im Konflikt (> ${GROUP_MAX_KM} km)`,
     `  zu prüfen:   ${count('review')} (unsicheres Ergebnis, alte Koordinate brauchbar)`,
+    `  Treffer wegen Region verworfen: ${results.filter(r => r.regionRejected.length > 0).length} Vereine`,
     `  beibehalten: ${count('kept')} (unverdächtig, kein Namenstreffer)`,
     `  ohne Ergebnis: ${count('no-result')}`,
     apply ? 'clubs.json wurde aktualisiert.' : 'Nur Bericht — clubs.json unverändert (--apply setzen zum Übernehmen).',
