@@ -115,6 +115,16 @@ function initVenueMap(mapEl, venue) {
   L.marker([venue.lat, venue.lng], { icon, title: venue.bezeichnung, alt: venue.bezeichnung }).addTo(map);
 }
 
+/** Heim/Auswärts als farbiges Kürzel: "vs." (blau) bei Heimspielen, "@" (gelb) bei Auswärtsspielen; Farbe und Zeichen ergänzen sich. */
+function haBadge(isHome) {
+  const b = el('span', 'team-match-ha dss-chip dss-chip--mono ' + (isHome ? 'dss-chip--sky team-match-ha--home' : 'dss-chip--amber team-match-ha--away'));
+  const sym = el('span', null, isHome ? 'vs.' : '@');
+  sym.setAttribute('aria-hidden', 'true');
+  b.appendChild(sym);
+  b.appendChild(el('span', 'dss-sr-only', isHome ? 'Heimspiel gegen' : 'Auswärtsspiel bei'));
+  return b;
+}
+
 function renderNext(list, doc, ownClubId, hallIndex) {
   const next = TeamLogic.nextMatch(list, todayIso());
   const section = el('section', 'next-game dss-card dss-card--default');
@@ -145,7 +155,7 @@ function renderNext(list, doc, ownClubId, hallIndex) {
   const when = TeamLogic.formatKickoff(m.kickoffDate, m.kickoffTime).split(' · ');
   mid.appendChild(el('div', 'next-game-kickoff', when[0]));
   if (when[1]) mid.appendChild(el('div', 'next-game-kickoff-time', when[1] + ' Uhr'));
-  mid.appendChild(el('div', 'next-game-ha', next.isHome ? 'Heimspiel' : 'Auswärtsspiel'));
+  mid.appendChild(el('div', 'next-game-ha ' + (next.isHome ? 'next-game-ha--home' : 'next-game-ha--away'), next.isHome ? 'Heimspiel' : 'Auswärtsspiel'));
   matchup.appendChild(mid);
   matchup.appendChild(side(m.guestTeam, 'next-game-team--guest'));
   section.appendChild(matchup);
@@ -210,7 +220,7 @@ function matchRow(d, ligaId) {
   row.appendChild(el('div', 'team-match-when dss-row-when', TeamLogic.formatKickoff(d.match.kickoffDate, d.match.kickoffTime)));
 
   const teams = el('div', 'team-match-teams dss-row-main');
-  teams.appendChild(el('span', 'team-match-ha', d.isHome ? 'H' : 'A'));
+  teams.appendChild(haBadge(d.isHome));
   if (d.opponent) teams.appendChild(logoEl(d.opponent.teamPermanentId, d.opponent.teamname, 'xs'));
   teams.appendChild(d.opponent ? teamLink(d.opponent.teamPermanentId, ligaId, d.opponent.teamname) : document.createTextNode('?'));
   row.appendChild(teams);

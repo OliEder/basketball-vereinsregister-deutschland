@@ -188,3 +188,15 @@ test('Team-Karten sind als Link erkennbar', async ({ page }) => {
     await page.locator('.verein-team-card').first().waitFor();
   }
 });
+
+test('Spielplan: Heim "vs." und Auswärts "@" mit Textalternative', async ({ page }) => {
+  await open(page, '/team.html?id=151009', 'light', '.team-match');
+  const home = page.locator('.team-match-ha--home').first();
+  const away = page.locator('.team-match-ha--away').first();
+  await expect(home).toContainText('vs.');
+  await expect(home).toContainText('Heimspiel gegen');
+  await expect(away).toContainText('@');
+  await expect(away).toContainText('Auswärtsspiel bei');
+  // die sichtbaren Zeichen sind für Screenreader verborgen, der Text bleibt
+  await expect(home.locator('[aria-hidden="true"]')).toHaveText('vs.');
+});
