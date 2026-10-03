@@ -128,6 +128,25 @@
     return withMatches[0] || docs[0] || null;
   }
 
+  /**
+   * Voraussichtlicher Spielort eines Spiels: Heimhalle des gastgebenden Vereins aus dem Hallenindex.
+   * Bei Heimspielen ist das der eigene Verein, sonst der Verein des Heimteams.
+   */
+  function venueFor(d, ownClubId, hallIndex) {
+    if (!d || !hallIndex) return null;
+    var hostId = d.isHome ? ownClubId : (d.match.homeTeam && d.match.homeTeam.clubId);
+    if (hostId == null) return null;
+    return hallIndex[String(hostId)] || null;
+  }
+
+  /** Kürzel für den Logo-Platzhalter: Anfangsbuchstaben der ersten drei Namensteile ohne Rechtsform. */
+  function initials(name) {
+    var words = String(name || '').replace(/\be\.?\s?V\.?/gi, ' ').split(/[\s\/\-]+/)
+      .filter(function (w) { return /^[A-Za-zÄÖÜäöü]/.test(w); });
+    var letters = words.slice(0, 3).map(function (w) { return w[0].toUpperCase(); }).join('');
+    return letters || '·';
+  }
+
   /** "2026-09-26", "18:30" → "Sa, 26.09.2026 · 18:30" */
   function formatKickoff(date, time) {
     var m = typeof date === 'string' && date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -147,6 +166,8 @@
     teamName: teamName,
     clubIdOf: clubIdOf,
     pickPrimaryLiga: pickPrimaryLiga,
-    formatKickoff: formatKickoff
+    formatKickoff: formatKickoff,
+    venueFor: venueFor,
+    initials: initials
   };
 });

@@ -117,7 +117,7 @@ Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit 
 Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live über einen CORS-Proxy (corsproxy.io) aus der BBB-API geladen. Der Proxy war unzuverlässig („Liga nicht verfügbar“). Messung: 2124 Ligen, ca. 37 KB je Liga, keine Drosselung bei 4–5 parallelen Anfragen.
 
 *Entscheidung:*
-`crawler/live.ts` holt pro Liga mit einer Anfrage (`competition/spielplan/id/{ligaId}`) Spiele und Tabelle und schreibt `liga/<id>.json`, `team-index.json` und `index.json`. Der Pages-Workflow läuft alle 6 Stunden und veröffentlicht die Dateien unter `data/live/`, ohne sie ins Repository zu committen; zuletzt gecachte Daten werden bei Portaländerungen wiederverwendet. Die Team-Seite (`team.html`) und die Team-Karten lesen ausschließlich diese Dateien.
+`crawler/live.ts` holt pro Liga mit einer Anfrage (`competition/spielplan/id/{ligaId}`) Spiele und Tabelle und schreibt `liga/<id>.json`, `team-index.json` und `index.json`. Der Pages-Workflow läuft alle 6 Stunden und veröffentlicht die Dateien unter `data/live/`, ohne sie ins Repository zu committen; zuletzt gecachte Daten werden bei Portaländerungen wiederverwendet. Die Team-Seite (`team.html`) und die Team-Karten lesen ausschließlich diese Dateien. Ergänzend schreibt `crawler/hall-index.ts` beim Zusammenstellen des Artefakts `hall-index.json` (Club-ID → Heimhalle aus `chooseHomeHall`), damit die Team-Seite den voraussichtlichen Spielort des nächsten Spiels samt Karte zeigt, ohne die große `clubs.json` zu laden. Teamlogos lädt die Seite direkt von basketball-bund.net; fehlt eines, erscheint ein Kürzel.
 
 *Konsequenzen:*
 * (+) Kein Proxy, kein Browser-Zugriff auf die BBB-API, schnelle statische Auslieferung
