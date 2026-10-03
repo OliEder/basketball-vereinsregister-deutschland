@@ -621,6 +621,17 @@ Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live
 
 *Einbindung:* Beim Zusammenstellen des Pages-Artefakts holt der Deploy den Branch `data-store` und legt mit `crawler/apply-venues.ts` in jede `liga/<id>.json` zwei Felder: `venues` (Spiel-ID → Hallen-ID, nur bekannte Hallen) und `halls` (die dort vorkommenden Hallen mit Adresse; Koordinaten aus `clubs.json` über die Spielfeld-ID). Die Team-Seite zeigt für das nächste Spiel die gemeldete Halle; fehlt sie noch, bleibt es bei der „voraussichtlichen“ Heimhalle aus `hall-index.json`. Fehlt der Branch, entfallen nur die Hallen.
 
+== ADR-009: Statische Vereins- und Regionsseiten mit stabilen, mitwandernden URLs
+
+*Status:* angenommen
+
+*Kontext:* Das Portal lud bisher alle Inhalte per JavaScript auf `verein.html?id=…`. Suchmaschinen sehen so keine eigenständigen Seiten pro Verein oder Ort. Vereinsnamen sind nicht eindeutig („SV Eintracht“ gibt es vielfach), und Orte können sich nach einer Neuzuordnung (Regeocode) ändern. GitHub Pages bietet keine serverseitigen Weiterleitungen.
+
+*Entscheidung:* `crawler/seo.ts` erzeugt beim Pages-Build für jeden Verein eine Seite unter `/<bundesland>/<ort>/<verein>/`. Das Land stammt aus den ersten zwei Ziffern der Vereinsnummer (01–16), alles andere (Bundesligen, Rollstuhl, Kooperationen) liegt unter `bundesweit`; der Ort ist der Ort der Heimhalle (ohne Halle: `weitere`). Gleiche Pfade werden durch die Vereins-ID unterschieden; solche Seiten gelten als Dubletten (derselbe Verein steht in den Daten teils mehrfach) und zeigen per canonical auf die Hauptseite. Dazu kommen Seiten für Länder und Orte (Vereinslisten, Brotkrumen), `sitemap.xml`, `robots.txt`, JSON-LD (`SportsOrganization`, `BreadcrumbList`) und Links auf der Startseite. Die Seiten enthalten Name, Teams und Hallen als HTML; `verein.js` ersetzt den Inhalt im Browser durch die interaktive Fassung mit Live-Daten.
+Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom Pages-Workflow fortgeschrieben). Ändert sich Land oder Ort, wandert der Verein auf den neuen Pfad; der alte bleibt als Weiterleitungsseite (`meta refresh` und canonical) erhalten und steht nicht in der Sitemap. Alte Adressen `verein.html?id=…` leitet `verein.js` über `data/url-map.json` um. Die Basis-URL (Standard: GitHub Pages) ist über `--base` / `SITE_BASE` einstellbar.
+
+*Folgen:* (+) Jeder Verein und jeder Ort ist einzeln auffindbar. (+) Umzüge zerstören keine Links. (−) Meta-Refresh ist kein echtes 301; die Übernahme in den Index dauert etwas länger. (−) Der Build erzeugt rund 3 700 Dateien (etwa 40 MB). (−) Der Ort stammt aus den Hallendaten; Vereine ohne Halle landen vorerst unter `weitere`.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
