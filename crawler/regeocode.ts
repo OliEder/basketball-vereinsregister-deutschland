@@ -1,17 +1,21 @@
-// Berechnet die Koordinaten verdächtiger Vereine neu (Name → Halle → Ort) und
+// Berechnet die Koordinaten verdächtiger Vereine neu (Name → Heimhalle → Ort) und
 // schreibt einen Vorher-Nachher-Bericht. clubs.json wird nur mit --apply geändert.
 //
 //   npm run regeocode [-- --scope=suspect|all] [-- --apply] [-- --out=regeocode-report.json]
 //
 // scope=suspect (Standard): Vereine, deren geocodedFrom eine Rechtsform ("e.V.") oder leer ist
-//   (Folge eines früheren Fehlers in extractCityFromName).
+//   oder deren Koordinate in einer "Müll-Gruppe" liegt (von mindestens 4 Vereinen mit
+//   verschiedenen Ortsbezeichnungen geteilt, z. B. ein Standardpunkt).
 // scope=all: alle Vereine. Hier werden bestehende Koordinaten nur durch einen plausiblen
-//   Namenstreffer ersetzt; Hallen-/Ort-Treffer nur bei verdächtigen Vereinen.
+//   Namenstreffer ersetzt.
+//
+// Übernommen wird ein Ergebnis, wenn es sicher ist (Namenstreffer, eindeutige Heimhalle) oder die
+// alte Koordinate ohnehin unbrauchbar ist. Unsichere Ergebnisse bei brauchbarer alter Koordinate
+// erscheinen im Bericht als "review" und werden nicht übernommen.
 
 import fs from 'fs';
-import { geocodeClub, GeocodeSource } from './club-geocoder';
+import { geocodeClub, GeocodeSource, Confidence } from './club-geocoder';
 import { distanceKm } from './check-geocoding';
-import { extractCityFromName } from './extractor';
 import { loadExistingClubs, writeClubs } from './writer';
 import { ClubEntry } from './types';
 
@@ -20,17 +24,54 @@ export function isSuspect(club: Pick<ClubEntry, 'geocodedFrom'>): boolean {
   return g === '' || /^(e\.?\s?V\.?|V\.?|eV)$/i.test(g);
 }
 
-export type RegeocodeAction = 'changed' | 'unchanged' | 'no-result' | 'kept';
+const coordKey = (c: { lat: number | null; lng: number | null }) => `${c.lat},${c.lng}`;
+
+/**
+ * Koordinaten, die sich mindestens `minClubs` Vereine mit mindestens 3 verschiedenen
+ * Ortsbezeichnungen teilen. Ein Stadtzentrum, an dem viele Vereine derselben Stadt hängen,
+ * zählt nicht dazu.
+ */
+export function findJunkClusters(
+  clubs: Array<Pick<ClubEntry, 'lat' | 'lng' | 'geocodedFrom'>>,
+  minClubs = 4
+): Set<string> {
+  const groups = new Map<string, Array<string>>();
+  for (const c of clubs) {
+    if (c.lat == null || c.lng == null) continue;
+    const k = coordKey(c);
+    groups.set(k, [...(groups.get(k) ?? []), (c.geocodedFrom ?? '').toLowerCase()]);
+  }
+  const junk = new Set<string>();
+  for (const [k, labels] of groups) {
+    if (labels.length >= minClubs && new Set(labels).size >= 3) junk.add(k);
+  }
+  return junk;
+}
+
+export type RegeocodeAction = 'changed' | 'unchanged' | 'review' | 'kept' | 'no-result';
 
 export interface RegeocodeResult {
   clubId: number;
   name: string;
   suspect: boolean;
   source: GeocodeSource | null;
+  confidence: Confidence | null;
   before: { lat: number | null; lng: number | null; geocodedFrom: string | null };
   after: { lat: number; lng: number; geocodedFrom: string | null } | null;
   distanceKm: number | null;
   action: RegeocodeAction;
+}
+
+export function decide(
+  hit: { source: GeocodeSource; confidence: Confidence } | null,
+  suspect: boolean,
+  oldUnusable: boolean,
+  unchanged: boolean
+): RegeocodeAction {
+  if (!hit) return 'no-result';
+  if (!suspect && hit.source !== 'name') return 'kept';
+  if (hit.confidence === 'low' && !oldUnusable) return 'review';
+  return unchanged ? 'unchanged' : 'changed';
 }
 
 function arg(name: string, fallback: string): string {
@@ -43,31 +84,33 @@ async function regeocode(): Promise<void> {
   const apply = process.argv.includes('--apply');
   const out = arg('out', 'regeocode-report.json');
   const clubs = loadExistingClubs();
-  const targets = Array.from(clubs.values()).filter(c => scope === 'all' || isSuspect(c));
+  const junkClusters = findJunkClusters(Array.from(clubs.values()));
+  const inJunkCluster = (c: ClubEntry) => c.lat != null && c.lng != null && junkClusters.has(coordKey(c));
+  const suspectOf = (c: ClubEntry) => isSuspect(c) || inJunkCluster(c);
+  const targets = Array.from(clubs.values()).filter(c => scope === 'all' || suspectOf(c));
 
-  console.log(`${targets.length} von ${clubs.size} Vereinen (scope=${scope}${apply ? ', --apply' : ', nur Bericht'}).`);
+  console.log(`${targets.length} von ${clubs.size} Vereinen (scope=${scope}${apply ? ', --apply' : ', nur Bericht'}; ${junkClusters.size} Müll-Gruppen).`);
 
   const results: RegeocodeResult[] = [];
   for (let i = 0; i < targets.length; i++) {
     const club = targets[i];
-    const suspect = isSuspect(club);
+    const suspect = suspectOf(club);
+    const oldUnusable = club.lat == null || club.lng == null || inJunkCluster(club);
     const before = { lat: club.lat, lng: club.lng, geocodedFrom: club.geocodedFrom };
     const hit = await geocodeClub(club);
 
-    let action: RegeocodeAction = 'no-result';
     let after: RegeocodeResult['after'] = null;
     let dist: number | null = null;
+    let unchanged = false;
 
     if (hit) {
-      // Bei unverdächtigen Vereinen nur plausible Namenstreffer übernehmen.
-      const accept = suspect || hit.source === 'name';
-      const newFrom = hit.geocodedFrom ?? (suspect ? extractCityFromName(club.name) : club.geocodedFrom);
-      after = { lat: hit.lat, lng: hit.lng, geocodedFrom: newFrom };
+      after = { lat: hit.lat, lng: hit.lng, geocodedFrom: hit.geocodedFrom };
       dist = club.lat != null && club.lng != null ? Math.round(distanceKm({ lat: club.lat, lng: club.lng }, hit) * 10) / 10 : null;
-      action = !accept ? 'kept' : dist !== null && dist < 0.05 && newFrom === club.geocodedFrom ? 'unchanged' : 'changed';
+      unchanged = dist !== null && dist < 0.05 && after.geocodedFrom === club.geocodedFrom;
     }
+    const action = decide(hit, suspect, oldUnusable, unchanged);
 
-    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, before, after, distanceKm: dist, action });
+    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, before, after, distanceKm: dist, action });
 
     if (apply && action === 'changed' && after) {
       club.lat = after.lat;
@@ -86,9 +129,10 @@ async function regeocode(): Promise<void> {
   const bySource = (s: GeocodeSource) => results.filter(r => r.action === 'changed' && r.source === s).length;
   const summary = [
     `Fertig: ${results.length} Vereine geprüft`,
-    `  geändert:   ${count('changed')} (Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
+    `  geändert:    ${count('changed')} (Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
     `  unverändert: ${count('unchanged')}`,
-    `  beibehalten (unverdächtig, kein Namenstreffer): ${count('kept')}`,
+    `  zu prüfen:   ${count('review')} (unsicheres Ergebnis, alte Koordinate brauchbar)`,
+    `  beibehalten: ${count('kept')} (unverdächtig, kein Namenstreffer)`,
     `  ohne Ergebnis: ${count('no-result')}`,
     apply ? 'clubs.json wurde aktualisiert.' : 'Nur Bericht — clubs.json unverändert (--apply setzen zum Übernehmen).',
     `Bericht: ${out}`
