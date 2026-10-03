@@ -122,7 +122,7 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordin
 | [OpenStreetMap](https://www.openstreetmap.org/copyright) (Nominatim, Kartenkacheln) | Koordinaten, Kartendarstellung | © OpenStreetMap-Mitwirkende, ODbL |
 | Bundesamt für Kartographie und Geodäsie | Länderpolygone für die Ortsprüfung (`data/geo/laender.geojson`, nicht Teil der Seitenanzeige) | siehe unten |
 
-**BKG, Verwaltungsgebiete 1:250 000 (VG250):** © [BKG](https://www.bkg.bund.de) (2026) [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0), Datenquellen: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
+**BKG, Verwaltungsgebiete 1:250 000 (VG250):** © [BKG](https://www.bkg.bund.de) (2026) [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0) (Daten verändert), Datenquellen: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
 
 *Veränderungshinweis:* Die Daten wurden bearbeitet: nur die Landflächen der 16 Länder, Geometrie vereinfacht, nach WGS84 (EPSG:4326) umgerechnet und auf Name und Länderschlüssel reduziert. Die Datei erzeugt der Workflow „Länderpolygone (BKG)“ (`crawler/geo-laender.ts`), Quellenvermerk und Änderungshinweis stehen auch in der Datei selbst.
 
