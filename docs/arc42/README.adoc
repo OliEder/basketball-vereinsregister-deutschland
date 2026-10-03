@@ -648,6 +648,16 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Folgen:* (+) Ergebnisse und Tabellen bleiben dauerhaft erhalten, ab dem Start der Archivierung lückenlos bis auf den Stand des letzten Tageslaufs. (+) Dieselbe Struktur trägt später Historie auf Team- und Ligaseiten und Boxscore-Summen. (−) Frühere Saisons vor dem Start sind nicht rekonstruierbar. (−) Pro Saison etwa 2 000 Dateien, geschätzt 15–25 MB; der Branch wird einmal täglich neu hochgeladen. (−) Eine Korrektur der API nach unten (weniger gespielte Spiele) wird bewusst nicht übernommen.
 
+== ADR-011: Favoriten nur lokal, Fehlermeldung über ein GitHub-Formular
+
+*Status:* angenommen
+
+*Kontext:* Besucher sollen ihre Teams wiederfinden, und Datenfehler (falscher Ort, falsche Halle) sollen bei den Betreibern ankommen. Das Portal ist rein statisch (ADR-001, ADR-005), es gibt keine Konten und keinen Server; personenbezogene Daten sollen nicht entstehen.
+
+*Entscheidung:* Favoriten (Teams und Vereine, höchstens 50 je Art) liegen im `localStorage` des Browsers (`portal/favorites.js`, Schlüssel `vr:favorites`) und verlassen das Gerät nicht. Ohne `localStorage` entfällt die Schaltfläche. Auf der Startseite zeigt der Abschnitt „Meine Teams und Vereine“ das nächste Spiel jedes gemerkten Teams aus den Live-Daten. „Fehler melden“ (`portal/report.js`) öffnet das Formular `.github/ISSUE_TEMPLATE/datenfehler.yml` mit vorausgefüllter Seitenadresse und Objekt (Verein/Team/Liga mit ID); es werden keine Daten über die meldende Person übergeben.
+
+*Folgen:* (+) Keine Konten, kein Backend, keine Einwilligung nötig, da nichts übertragen wird. (+) Meldungen landen als Issues mit Label `daten` bei den Betreibern. (−) Favoriten sind pro Gerät und Browser, nicht geräteübergreifend. (−) Wer Fehler melden will, braucht ein GitHub-Konto.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
