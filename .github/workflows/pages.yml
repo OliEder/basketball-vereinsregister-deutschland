@@ -38,6 +38,9 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      # Abhängigkeiten immer installieren: auch ein reiner Portal-Deploy ohne Live-Crawl braucht ts-node
+      - run: npm ci
+
       # Live-Daten des letzten erfolgreichen Laufs (damit Deploys bei Portal-Änderungen
       # die Live-Daten behalten, ohne neu zu crawlen).
       - name: Live-Daten aus dem Cache holen
@@ -63,7 +66,6 @@ jobs:
         if: steps.need.outputs.crawl == 'true'
         continue-on-error: true
         run: |
-          npm ci
           npm run live -- --out=_live_new
           rm -rf _live
           mv _live_new _live
@@ -80,7 +82,7 @@ jobs:
           mkdir -p _site/data/schemas
           cp portal/index.html portal/style.css portal/app.js portal/verein.html portal/verein.css portal/verein.js portal/theme.js portal/team.html portal/team.css portal/team.js portal/team-logic.js _site/
           cp -r portal/dss _site/dss
-          npx ts-node crawler/hall-index.ts --out=_site/data/live/hall-index.json
+          npm run hall-index -- --out=_site/data/live/hall-index.json
           cp data/clubs.json _site/data/clubs.json
           cp data/schemas/*.json _site/data/schemas/
           if [ -d _live ]; then
