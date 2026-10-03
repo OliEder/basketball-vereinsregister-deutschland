@@ -139,6 +139,19 @@
     return hallIndex[String(hostId)] || null;
   }
 
+  /**
+   * Spielort für ein Spiel: die gemeldete Halle aus matchInfo (doc.venues/doc.halls), sonst die voraussichtliche
+   * Heimhalle des Gastgebers. `confirmed` sagt, welche von beiden vorliegt.
+   */
+  function venueForMatch(doc, d, ownClubId, hallIndex) {
+    if (!d) return null;
+    var hallId = doc && doc.venues && doc.venues[String(d.match.matchId)];
+    var real = hallId && doc.halls && doc.halls[String(hallId)];
+    if (real) return { venue: real, confirmed: true };
+    var guess = venueFor(d, ownClubId, hallIndex);
+    return guess ? { venue: guess, confirmed: false } : null;
+  }
+
   /** Kürzel für den Logo-Platzhalter: Anfangsbuchstaben der ersten drei Namensteile ohne Rechtsform. */
   function initials(name) {
     var words = String(name || '').replace(/\be\.?\s?V\.?/gi, ' ').split(/[\s\/\-]+/)
@@ -168,6 +181,7 @@
     pickPrimaryLiga: pickPrimaryLiga,
     formatKickoff: formatKickoff,
     venueFor: venueFor,
+    venueForMatch: venueForMatch,
     initials: initials
   };
 });

@@ -200,3 +200,11 @@ test('Spielplan: Heim "vs." und Auswärts "@" mit Textalternative', async ({ pag
   // die sichtbaren Zeichen sind für Screenreader verborgen, der Text bleibt
   await expect(home.locator('[aria-hidden="true"]')).toHaveText('vs.');
 });
+
+test('Nächstes Spiel zeigt die gemeldete Halle ohne "Voraussichtlich"', async ({ page }) => {
+  await open(page, '/team.html?id=151009', 'light', '.next-game-venue');
+  await expect(page.locator('.next-game-venue-name')).toHaveText('Sporthalle Schwabing (gemeldet)');
+  await expect(page.locator('.next-game-venue-label')).toHaveText('Spielort');
+  await expect(page.locator('.next-game-venue-note')).toHaveCount(0);
+  await expect(page.locator('.next-game-map')).toHaveCount(1);
+});

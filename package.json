@@ -11,6 +11,7 @@
     "hall-index": "npx ts-node crawler/hall-index.ts",
     "venues": "npx ts-node crawler/venues.ts",
     "geo-laender": "npx ts-node crawler/geo-laender.ts",
+    "apply-venues": "npx ts-node crawler/apply-venues.ts",
     "fix-names": "npx ts-node crawler/fix-names.ts",
     "api": "npx ts-node api/server.ts",
     "test": "npx jest --runInBand",

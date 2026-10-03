@@ -82,14 +82,14 @@ function mapsQuery(venue) {
   return encodeURIComponent([venue.bezeichnung, venue.strasse, [venue.plz, venue.ort].filter(Boolean).join(' ')].filter(Boolean).join(', '));
 }
 
-function renderVenue(venue, isHome) {
+function renderVenue(venue, isHome, confirmed) {
   const box = el('div', 'next-game-venue');
   const info = el('div', 'next-game-venue-info');
-  info.appendChild(el('div', 'next-game-venue-label', isHome ? 'Heimspiel in' : 'Spielort (Halle des Gastgebers)'));
+  info.appendChild(el('div', 'next-game-venue-label', confirmed ? 'Spielort' : (isHome ? 'Heimspiel in' : 'Spielort (Halle des Gastgebers)')));
   info.appendChild(el('div', 'next-game-venue-name', venue.bezeichnung));
   const addr = [venue.strasse, [venue.plz, venue.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   if (addr) info.appendChild(el('div', 'next-game-venue-addr', addr));
-  info.appendChild(el('div', 'next-game-venue-note', 'Voraussichtlich – die genaue Halle steht in der offiziellen Ansetzung.'));
+  if (!confirmed) info.appendChild(el('div', 'next-game-venue-note', 'Voraussichtlich – die genaue Halle steht in der offiziellen Ansetzung.'));
   const links = el('div', 'next-game-nav');
   [['Route in Google Maps', 'https://www.google.com/maps/dir/?api=1&destination='], ['Route in Apple Karten', 'https://maps.apple.com/?daddr=']].forEach(([label, base]) => {
     const a = el('a', 'dss-btn dss-btn--secondary dss-btn--sm', label);
@@ -162,9 +162,10 @@ function renderNext(list, doc, ownClubId, hallIndex) {
 
   if (doc.liganame) section.appendChild(el('div', 'next-game-competition', doc.liganame));
 
-  const venue = TeamLogic.venueFor(next, ownClubId, hallIndex);
+  const found = TeamLogic.venueForMatch(doc, next, ownClubId, hallIndex);
+  const venue = found && found.venue;
   if (venue) {
-    section.appendChild(renderVenue(venue, next.isHome));
+    section.appendChild(renderVenue(venue, next.isHome, found.confirmed));
     if (typeof venue.lat === 'number' && typeof venue.lng === 'number') {
       const mapEl = el('div', 'next-game-map');
       mapEl.setAttribute('role', 'region');
