@@ -1,19 +1,5 @@
 [
   {
-    "clubId": 839,
-    "name": "Homburger Turngemeinde 1846 e.V.",
-    "zip": "61348",
-    "city": "Bad Homburg v.d.H.",
-    "note": "Vereinsverzeichnis der Stadt Bad Homburg (Niederstedter Weg 2)"
-  },
-  {
-    "clubId": 4796,
-    "name": "TV Altenstadt 1873 e.V.",
-    "zip": "73312",
-    "city": "Geislingen an der Steige",
-    "note": "Vereinsanschrift Filsstr. 51 (Suchtreffer); Halle in Geislingen"
-  },
-  {
     "clubId": 463,
     "name": "TuS Ensdorf",
     "zip": "66806",
@@ -33,6 +19,13 @@
     "zip": "37115",
     "city": "Duderstadt",
     "note": "Hilkerode ist ein Ortsteil von Duderstadt; Halle in Duderstadt; kein Impressum gefunden"
+  },
+  {
+    "clubId": 839,
+    "name": "Homburger Turngemeinde 1846 e.V.",
+    "zip": "61348",
+    "city": "Bad Homburg v.d.H.",
+    "note": "Vereinsverzeichnis der Stadt Bad Homburg (Niederstedter Weg 2)"
   },
   {
     "clubId": 1849,
@@ -56,11 +49,39 @@
     "note": "sc-luechow.de (Schulweg 4); der Geocoder fand ein anderes Lüchow bei Berlin"
   },
   {
+    "clubId": 4144,
+    "name": "LINDEN DUDES e.V.",
+    "zip": "30453",
+    "city": "Hannover",
+    "note": "Stadtteil Linden/Limmer; PLZ der Heimhalle Gymnasium Limmer; Vereinsanschrift nicht gefunden"
+  },
+  {
+    "clubId": 4796,
+    "name": "TV Altenstadt 1873 e.V.",
+    "zip": "73312",
+    "city": "Geislingen an der Steige",
+    "note": "Vereinsanschrift Filsstr. 51 (Suchtreffer); Halle in Geislingen"
+  },
+  {
+    "clubId": 4867,
+    "name": "BSG Usinger Land",
+    "zip": "61250",
+    "city": "Usingen",
+    "note": "Haupthalle Neue Halle CWS; Alternative Neu-Anspach 61267; Sitz nicht belegt"
+  },
+  {
     "clubId": 5198,
     "name": "TSV Baskets Aufbau",
     "zip": "37308",
     "city": "Heilbad Heiligenstadt",
     "note": "Basketballabteilung des TSV Aufbau 1952 Heiligenstadt; Dreifelderhalle im Park"
+  },
+  {
+    "clubId": 5232,
+    "name": "SG Frisian Vikings",
+    "zip": "25899",
+    "city": "Niebüll",
+    "note": "Spielgemeinschaft; Heimhalle Gemeinschaftsschule Halle 2; Sitz nicht belegt"
   },
   {
     "clubId": 5338,
@@ -84,24 +105,10 @@
     "note": "Heimspielstätte Halle der Freundschaft (Humanas Rookie Academy); Vereinssitz nicht belegt"
   },
   {
-    "clubId": 4144,
-    "name": "LINDEN DUDES e.V.",
-    "zip": "30453",
-    "city": "Hannover",
-    "note": "Stadtteil Linden/Limmer; PLZ der Heimhalle Gymnasium Limmer; Vereinsanschrift nicht gefunden"
-  },
-  {
-    "clubId": 4867,
-    "name": "BSG Usinger Land",
-    "zip": "61250",
-    "city": "Usingen",
-    "note": "Haupthalle Neue Halle CWS; Alternative Neu-Anspach 61267; Sitz nicht belegt"
-  },
-  {
-    "clubId": 5232,
-    "name": "SG Frisian Vikings",
-    "zip": "25899",
-    "city": "Niebüll",
-    "note": "Spielgemeinschaft; Heimhalle Gemeinschaftsschule Halle 2; Sitz nicht belegt"
+    "clubId": 5414,
+    "name": "PockingS e.V.",
+    "zip": "94060",
+    "city": "Pocking",
+    "note": "PockingS Basketball (FC Indling-Basketball), Pocking in Niederbayern; Hinweis des Betreibers. Die Liga liegt im Bezirk Oberbayern, der Vereinsort nicht."
   }
 ]
