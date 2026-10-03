@@ -13,6 +13,8 @@ Für Vereine ohne Koordinaten (`npm run geocode` und Phase 3 des Crawls, umgeset
 3. **Ort aus dem Vereinsnamen** (letzter Fallback): `extractCityFromName` entfernt Rechtsform, Gründungsjahr und Teamnummern; Kürzel, Zahlen und Allerweltswörter („TV“, „Sportverein“) werden nicht geocodet.
 4. **Keine Koordinate** (letzter Ausweg): Verein erscheint nur in der Namensuche, nicht in der Umkreissuche; er wird in `data/geocoding-todo.json` vermerkt.
 
+Gleichnamige Club-IDs (z. B. ALBA Berlin mit mehreren IDs) werden im Regeocode vereinheitlicht: Maßgeblich ist das sichere Ergebnis der ID mit den meisten Teams, sofern alle Ergebnisse der Gruppe höchstens 15 km auseinander liegen; sonst bleibt jede ID bei ihrem Ergebnis und die Gruppe steht im Bericht als Konflikt. Eine von mehreren Club-IDs genutzte Halle ist nie ein Grund, eine Koordinate abzulehnen.
+
 Name und eindeutige Heimhalle gelten als sicher, Mehrheitsentscheidung und reiner Ortsname als unsicher. `npm run regeocode` übernimmt unsichere Ergebnisse nur, wenn die alte Koordinate unbrauchbar ist (fehlt oder liegt in einer „Müll-Gruppe“: von mindestens vier Vereinen mit verschiedenen Ortsbezeichnungen geteilt); sonst steht der Verein im Bericht als „review“.
 
 Bereits vorhandene Koordinaten werden dabei nicht überschrieben. Unabhängig davon übernimmt `npm run merge-halls` nach dem separaten Hallen-Crawl weiterhin die Hallen-Koordinaten (siehe ADR-004, ergänzt durch ADR-006). Das Log weist aus, wie viele Treffer aus Name, Halle und Ort stammen.

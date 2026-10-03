@@ -49,6 +49,7 @@ export function findJunkClusters(
 }
 
 export type RegeocodeAction = 'changed' | 'unchanged' | 'review' | 'kept' | 'no-result';
+export type GroupAction = 'unified' | 'conflict';
 
 export interface RegeocodeResult {
   clubId: number;
@@ -57,6 +58,9 @@ export interface RegeocodeResult {
   source: GeocodeSource | null;
   confidence: Confidence | null;
   nameHitRejected: boolean;
+  /** Gruppe gleichnamiger Club-IDs, falls vorhanden */
+  group: string | null;
+  groupAction: GroupAction | null;
   before: { lat: number | null; lng: number | null; geocodedFrom: string | null };
   after: { lat: number; lng: number; geocodedFrom: string | null } | null;
   distanceKm: number | null;
@@ -73,6 +77,64 @@ export function decide(
   if (!suspect && hit.source !== 'name') return 'kept';
   if (hit.confidence === 'low' && !oldUnusable) return 'review';
   return unchanged ? 'unchanged' : 'changed';
+}
+
+/** Vereinsname für die Gruppierung: ohne Rechtsform, Zahlen, Satzzeichen und die Allerweltswörter "Basketball(team)". */
+export function groupName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/\be\.?\s?v\.?(?=\s|$)/g, ' ')
+    .replace(/\d+/g, ' ')
+    .replace(/[^a-zäöüß ]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w && w !== 'basketball' && w !== 'basketballteam')
+    .join(' ');
+}
+
+/** Gleichnamige Club-IDs liegen höchstens so weit auseinander, damit sie als ein Verein gelten. */
+export const GROUP_MAX_KM = 15;
+
+/**
+ * Vereinheitlicht die Koordinate gleichnamiger Club-IDs (z. B. ALBA Berlin mit mehreren IDs).
+ * Maßgeblich ist das sichere Ergebnis der ID mit den meisten Teams. Liegen die Ergebnisse der Gruppe
+ * weiter als GROUP_MAX_KM auseinander, bleibt jede ID bei ihrem Ergebnis (groupAction = 'conflict'),
+ * denn gleichnamige Vereine gibt es auch an verschiedenen Orten.
+ *
+ * Eine von mehreren Club-IDs genutzte Halle ist ausdrücklich KEIN Grund, eine Koordinate abzulehnen.
+ */
+export function unifyGroups(
+  results: RegeocodeResult[],
+  teamCount: (clubId: number) => number
+): void {
+  const groups = new Map<string, RegeocodeResult[]>();
+  for (const r of results) {
+    const key = groupName(r.name);
+    if (!key) continue;
+    groups.set(key, [...(groups.get(key) ?? []), r]);
+  }
+
+  for (const [key, members] of groups) {
+    if (members.length < 2) continue;
+    const usable = members.filter(m => (m.action === 'changed' || m.action === 'unchanged') && m.after && m.confidence === 'high');
+    members.forEach(m => { m.group = key; });
+    if (usable.length < 2) continue;
+
+    const canonical = usable.slice().sort((a, b) => teamCount(b.clubId) - teamCount(a.clubId) || (a.source === 'name' ? -1 : 1))[0];
+    const consistent = usable.every(m => distanceKm(canonical.after!, m.after!) <= GROUP_MAX_KM);
+    if (!consistent) {
+      usable.forEach(m => { m.groupAction = 'conflict'; });
+      continue;
+    }
+    for (const m of usable) {
+      m.groupAction = 'unified';
+      m.after = { ...canonical.after! };
+      m.distanceKm = m.before.lat != null && m.before.lng != null
+        ? Math.round(distanceKm({ lat: m.before.lat, lng: m.before.lng }, m.after) * 10) / 10
+        : null;
+      const same = m.distanceKm !== null && m.distanceKm < 0.05 && m.after.geocodedFrom === m.before.geocodedFrom;
+      m.action = same ? 'unchanged' : 'changed';
+    }
+  }
 }
 
 function arg(name: string, fallback: string): string {
@@ -111,16 +173,24 @@ async function regeocode(): Promise<void> {
     }
     const action = decide(hit, suspect, oldUnusable, unchanged);
 
-    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, nameHitRejected: !!hit?.nameHitRejected, before, after, distanceKm: dist, action });
+    results.push({ clubId: club.clubId, name: club.name, suspect, source: hit?.source ?? null, confidence: hit?.confidence ?? null, nameHitRejected: !!hit?.nameHitRejected, group: null, groupAction: null, before, after, distanceKm: dist, action });
 
-    if (apply && action === 'changed' && after) {
-      club.lat = after.lat;
-      club.lng = after.lng;
-      club.geocodedFrom = after.geocodedFrom;
-    }
     if ((i + 1) % 100 === 0) {
       console.log(`  ${i + 1}/${targets.length} verarbeitet...`);
       fs.writeFileSync(out, JSON.stringify(results, null, 2), 'utf-8');
+    }
+  }
+
+  unifyGroups(results, id => clubs.get(id)?.teams?.length ?? 0);
+
+  if (apply) {
+    for (const r of results) {
+      const club = clubs.get(r.clubId);
+      if (club && r.action === 'changed' && r.after) {
+        club.lat = r.after.lat;
+        club.lng = r.after.lng;
+        club.geocodedFrom = r.after.geocodedFrom;
+      }
     }
   }
 
@@ -133,6 +203,7 @@ async function regeocode(): Promise<void> {
     `  geändert:    ${count('changed')} (Name: ${bySource('name')}, Halle: ${bySource('hall')}, Ort: ${bySource('city')})`,
     `  unverändert: ${count('unchanged')}`,
     `  Namenstreffer wegen Widerspruch zur Heimhalle verworfen: ${results.filter(r => r.nameHitRejected).length}`,
+    `  Gruppen gleichnamiger Club-IDs: ${results.filter(r => r.groupAction === 'unified').length} IDs vereinheitlicht, ${results.filter(r => r.groupAction === 'conflict').length} IDs im Konflikt (> ${GROUP_MAX_KM} km)`,
     `  zu prüfen:   ${count('review')} (unsicheres Ergebnis, alte Koordinate brauchbar)`,
     `  beibehalten: ${count('kept')} (unverdächtig, kein Namenstreffer)`,
     `  ohne Ergebnis: ${count('no-result')}`,
