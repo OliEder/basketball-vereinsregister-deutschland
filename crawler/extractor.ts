@@ -2,9 +2,21 @@
 import { BbbTableEntry, ClubEntry, TeamEntry } from './types';
 
 export function extractCityFromName(name: string): string {
-  // Teamnummern und Klammern am Ende entfernen: "Bonn 2", "Berlin (1)", "Bonn 2. Mannschaft"
-  const cleaned = name.trim().replace(/\s+[\d]+\.?\s*(Mannschaft)?$/i, '').replace(/\s*\([\d]+\)$/, '').trim();
-  const parts = cleaned.split(/\s+/);
+  // Rechtsform, Gründungsjahr und Teamnummern am Ende entfernen, bis nichts mehr passt:
+  // "TSV Calw von 1846 e. V." → "TSV Calw", "Bonn 2. Mannschaft" → "Bonn", "Berlin (1)" → "Berlin"
+  let cleaned = name.trim();
+  let previous: string;
+  do {
+    previous = cleaned;
+    cleaned = cleaned
+      .replace(/\s*\be\.?\s?V\.?(?:\s+\d{4})?$/i, '')
+      .replace(/\s+von\s*\d{4}$/i, '')
+      .replace(/\s+\d{4}$/, '')
+      .replace(/\s+[\d]+\.?\s*(Mannschaft)?$/i, '')
+      .replace(/\s*\([\d]+\)$/, '')
+      .trim();
+  } while (cleaned !== previous && cleaned.length > 0);
+  const parts = (cleaned || name.trim()).split(/\s+/);
   const last = parts[parts.length - 1];
   // Schrägstrich-Orte: "Marburg/Keltern" → "Marburg"
   return last.split('/')[0];

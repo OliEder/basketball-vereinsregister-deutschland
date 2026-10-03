@@ -12,6 +12,22 @@ describe('extractCityFromName', () => {
     expect(extractCityFromName('Fibalon Baskets Regensburg')).toBe('Regensburg');
   });
 
+  it('ignores legal form and founding year at the end', () => {
+    expect(extractCityFromName('SV Eidelstedt e.V.')).toBe('Eidelstedt');
+    expect(extractCityFromName('TSV Calw von 1846 e. V.')).toBe('Calw');
+    expect(extractCityFromName('TSV Nahe von 1924 e.V.')).toBe('Nahe');
+    expect(extractCityFromName('Bremen 1860')).toBe('Bremen');
+    expect(extractCityFromName('TB Sigmaringen e. V.')).toBe('Sigmaringen');
+    expect(extractCityFromName('Sportverein Weyhe eV')).toBe('Weyhe');
+    expect(extractCityFromName('SG Bramsche e. V. 1966')).toBe('Bramsche');
+  });
+
+  it('still strips team numbers and takes the first part of slash cities', () => {
+    expect(extractCityFromName('Bonn 2. Mannschaft')).toBe('Bonn');
+    expect(extractCityFromName('Berlin (1)')).toBe('Berlin');
+    expect(extractCityFromName('BG Marburg/Keltern')).toBe('Marburg');
+  });
+
   it('handles single word', () => {
     expect(extractCityFromName('München')).toBe('München');
   });
