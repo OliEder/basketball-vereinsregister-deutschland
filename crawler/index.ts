@@ -1,6 +1,6 @@
 import { BbbClient } from './bbb-client';
 import { extractClubs, extractCityFromName, extractTeams } from './extractor';
-import { geocodeCity } from './geocoder';
+import { geocodeClub } from './club-geocoder';
 import { mergeAndWrite, loadExistingClubs } from './writer';
 import { ClubEntry, TeamEntry } from './types';
 
@@ -128,7 +128,7 @@ async function crawl(): Promise<void> {
   let geocoded = 0;
   for (let i = 0; i < toGeocode.length; i++) {
     const club = toGeocode[i];
-    const coords = await geocodeCity(club.geocodedFrom ?? club.name);
+    const coords = await geocodeClub(club);
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;

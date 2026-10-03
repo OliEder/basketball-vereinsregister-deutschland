@@ -4,7 +4,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { geocodeCity } from './geocoder';
+import { geocodeClub, GeocodeSource } from './club-geocoder';
 import { loadExistingClubs, mergeAndWrite } from './writer';
 
 const TODO_PATH = path.join(__dirname, '..', 'data', 'geocoding-todo.json');
@@ -21,13 +21,15 @@ async function geocodeAll(): Promise<void> {
   console.log(`${toGeocode.length} Vereine ohne Koordinaten werden geocodiert...`);
 
   let done = 0;
+  const bySource: Record<GeocodeSource, number> = { name: 0, hall: 0, city: 0 };
   for (let i = 0; i < toGeocode.length; i++) {
     const club = toGeocode[i];
-    const coords = await geocodeCity(club.geocodedFrom ?? club.name);
+    const coords = await geocodeClub(club);
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;
       done++;
+      bySource[coords.source]++;
     }
     // Alle 50 verarbeiteten Einträge zwischenspeichern (nicht nur erfolgreich geocodierte)
     if ((i + 1) % 50 === 0) {
@@ -37,7 +39,7 @@ async function geocodeAll(): Promise<void> {
   }
 
   mergeAndWrite(toGeocode);
-  console.log(`Geocoding abgeschlossen: ${done}/${toGeocode.length} erfolgreich.`);
+  console.log(`Geocoding abgeschlossen: ${done}/${toGeocode.length} erfolgreich (Name: ${bySource.name}, Halle: ${bySource.hall}, Ort: ${bySource.city}).`);
 
   const failed = toGeocode.filter(c => c.lat === null);
   if (failed.length > 0) {
