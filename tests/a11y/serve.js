@@ -13,9 +13,17 @@ fs.cpSync(path.join(root, 'portal'), site, { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'fixtures', 'clubs.json'), path.join(site, 'data', 'clubs.json'));
 fs.cpSync(path.join(__dirname, 'fixtures', 'live'), path.join(site, 'data', 'live'), { recursive: true });
 
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' };
+// Statische Vereins- und Regionsseiten wie im Pages-Build (crawler/seo.ts)
+require('child_process').execFileSync(
+  path.join(root, 'node_modules', '.bin', 'ts-node'),
+  ['crawler/seo.ts', `--site=${site}`, `--clubs=${path.join(__dirname, 'fixtures', 'clubs.json')}`],
+  { cwd: root, stdio: 'inherit' }
+);
+
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.xml': 'application/xml', '.txt': 'text/plain' };
 http.createServer((req, res) => {
-  const file = path.join(site, decodeURIComponent(req.url.split('?')[0]));
+  let file = path.join(site, decodeURIComponent(req.url.split('?')[0]));
+  if (file.endsWith(path.sep) || (fs.existsSync(file) && fs.statSync(file).isDirectory())) file = path.join(file, 'index.html');
   if (!file.startsWith(site)) { res.writeHead(403); return res.end(); }
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); return res.end(); }

@@ -26,7 +26,26 @@ function loadLiga(ligaId) {
 }
 
 function getClubIdFromUrl() {
-  return new URLSearchParams(window.location.search).get('id');
+  const fromQuery = new URLSearchParams(window.location.search).get('id');
+  if (fromQuery) return fromQuery;
+  // Statische Vereinsseiten (/<bundesland>/<ort>/<verein>/) tragen die ID im Head
+  const meta = document.querySelector('meta[name="club-id"]');
+  return meta ? meta.getAttribute('content') : null;
+}
+
+// Alte Adresse verein.html?id=… → auf die statische Seite umleiten (falls bekannt)
+async function redirectToStaticPage(clubId) {
+  if (document.querySelector('meta[name="club-id"]')) return false;
+  try {
+    const res = await fetch('data/url-map.json');
+    if (!res.ok) return false;
+    const target = (await res.json())[String(clubId)];
+    if (!target) return false;
+    location.replace(target);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function getTeamLabel(team, allTeams) {
@@ -389,6 +408,8 @@ async function init() {
     showError('Keine Vereins-ID angegeben.');
     return;
   }
+
+  if (await redirectToStaticPage(clubId)) return;
 
   try {
     const club = await loadClub(clubId);

@@ -1,111 +1,114 @@
 [
- {
-  "clubId": 1235,
-  "name": "TSV 1861 Nördlingen",
-  "verbandId": 1,
-  "verbandName": "Bayern",
-  "lat": 48.85,
-  "lng": 10.49,
-  "geocodedFrom": "Nördlingen",
-  "logoUrl": null,
-  "lastCrawled": "2026-10-03T00:00:00Z",
-  "halls": [
-   {
-    "id": 1,
-    "dbbSpielfeldId": 100,
-    "bezeichnung": "Sporthalle am Ring",
-    "strasse": "Ringstr. 1",
-    "plz": "86720",
-    "ort": "Nördlingen",
+  {
+    "clubId": 1235,
+    "name": "TSV 1861 Nördlingen",
+    "verbandId": 1,
+    "verbandName": "Bayern",
     "lat": 48.85,
-    "lng": 10.49
-   }
-  ],
-  "teams": [
-   {
-    "teamPermanentId": 151009,
-    "altersklasse": "Senioren",
-    "geschlecht": "männlich",
-    "teamNumber": 1,
-    "training": [
-     {
-      "wochentag": "Dienstag",
-      "von": "19:00",
-      "bis": "21:00",
-      "hallId": 1
-     }
-    ]
-   },
-   {
-    "teamPermanentId": 999,
-    "altersklasse": "U16",
-    "geschlecht": "männlich",
-    "training": []
-   }
-  ]
- },
- {
-  "clubId": 924,
-  "name": "MTSV Schwabing",
-  "verbandId": 1,
-  "verbandName": "Bayern",
-  "lat": 48.17,
-  "lng": 11.58,
-  "geocodedFrom": "München",
-  "logoUrl": null,
-  "lastCrawled": "2026-10-03T00:00:00Z",
-  "halls": [
-   {
-    "id": 2,
-    "dbbSpielfeldId": 101,
-    "bezeichnung": "Halle Schwabing",
-    "strasse": "Weg 2",
-    "plz": "80801",
-    "ort": "München",
+    "lng": 10.49,
+    "geocodedFrom": "Nördlingen",
+    "logoUrl": null,
+    "lastCrawled": "2026-10-03T00:00:00Z",
+    "halls": [
+      {
+        "id": 1,
+        "dbbSpielfeldId": 100,
+        "bezeichnung": "Sporthalle am Ring",
+        "strasse": "Ringstr. 1",
+        "plz": "86720",
+        "ort": "Nördlingen",
+        "lat": 48.85,
+        "lng": 10.49
+      }
+    ],
+    "teams": [
+      {
+        "teamPermanentId": 151009,
+        "altersklasse": "Senioren",
+        "geschlecht": "männlich",
+        "teamNumber": 1,
+        "training": [
+          {
+            "wochentag": "Dienstag",
+            "von": "19:00",
+            "bis": "21:00",
+            "hallId": 1
+          }
+        ]
+      },
+      {
+        "teamPermanentId": 999,
+        "altersklasse": "U16",
+        "geschlecht": "männlich",
+        "training": []
+      }
+    ],
+    "vereinsnummer": "0200235"
+  },
+  {
+    "clubId": 924,
+    "name": "MTSV Schwabing",
+    "verbandId": 1,
+    "verbandName": "Bayern",
     "lat": 48.17,
-    "lng": 11.58
-   }
-  ],
-  "teams": [
-   {
-    "teamPermanentId": 149794,
-    "altersklasse": "Senioren",
-    "geschlecht": "männlich",
-    "teamNumber": 1,
-    "training": []
-   }
-  ]
- },
- {
-  "clubId": 718,
-  "name": "hapa Ansbach",
-  "verbandId": 1,
-  "verbandName": "Bayern",
-  "lat": 49.3,
-  "lng": 10.57,
-  "geocodedFrom": "Ansbach",
-  "logoUrl": null,
-  "lastCrawled": "2026-10-03T00:00:00Z",
-  "halls": [
-   {
-    "id": 3,
-    "dbbSpielfeldId": 102,
-    "bezeichnung": "Sporthalle Ansbach",
-    "strasse": "Weg 3",
-    "plz": "91522",
-    "ort": "Ansbach",
+    "lng": 11.58,
+    "geocodedFrom": "München",
+    "logoUrl": null,
+    "lastCrawled": "2026-10-03T00:00:00Z",
+    "halls": [
+      {
+        "id": 2,
+        "dbbSpielfeldId": 101,
+        "bezeichnung": "Halle Schwabing",
+        "strasse": "Weg 2",
+        "plz": "80801",
+        "ort": "München",
+        "lat": 48.17,
+        "lng": 11.58
+      }
+    ],
+    "teams": [
+      {
+        "teamPermanentId": 149794,
+        "altersklasse": "Senioren",
+        "geschlecht": "männlich",
+        "teamNumber": 1,
+        "training": []
+      }
+    ],
+    "vereinsnummer": "0200924"
+  },
+  {
+    "clubId": 718,
+    "name": "hapa Ansbach",
+    "verbandId": 1,
+    "verbandName": "Bayern",
     "lat": 49.3,
-    "lng": 10.57
-   }
-  ],
-  "teams": [
-   {
-    "teamPermanentId": 149792,
-    "altersklasse": "Senioren",
-    "geschlecht": "männlich",
-    "teamNumber": 1,
-    "training": []
-   }
-  ]
- }
+    "lng": 10.57,
+    "geocodedFrom": "Ansbach",
+    "logoUrl": null,
+    "lastCrawled": "2026-10-03T00:00:00Z",
+    "halls": [
+      {
+        "id": 3,
+        "dbbSpielfeldId": 102,
+        "bezeichnung": "Sporthalle Ansbach",
+        "strasse": "Weg 3",
+        "plz": "91522",
+        "ort": "Ansbach",
+        "lat": 49.3,
+        "lng": 10.57
+      }
+    ],
+    "teams": [
+      {
+        "teamPermanentId": 149792,
+        "altersklasse": "Senioren",
+        "geschlecht": "männlich",
+        "teamNumber": 1,
+        "training": []
+      }
+    ],
+    "vereinsnummer": "0200718"
+  }
 ]
