@@ -1,4 +1,4 @@
-import { chooseHomeHall, geocodeClub, isPlausibleNameHit, isSaneCityLabel, searchName } from '../crawler/club-geocoder';
+import { chooseHomeHall, geocodeClub, isPlausibleNameHit, isSaneCityLabel, sameOrt, searchName } from '../crawler/club-geocoder';
 import { ClubEntry } from '../crawler/types';
 
 const base = { clubId: 1, name: 'FC ANADOLU BAYERN e.V.', geocodedFrom: 'e.V.', lat: null, lng: null } as unknown as ClubEntry;
@@ -32,6 +32,19 @@ describe('searchName / isSaneCityLabel', () => {
   });
 });
 
+describe('sameOrt', () => {
+  it('ignores spelling, hyphens and districts', () => {
+    expect(sameOrt('Lang-Göns', 'Langgöns')).toBe(true);
+    expect(sameOrt('Viersen - Dülken', 'Dülken')).toBe(true);
+    expect(sameOrt('Köln - Rondorf', 'Köln')).toBe(true);
+  });
+  it('tells different places apart', () => {
+    expect(sameOrt('Hamburg', 'Reinbek')).toBe(false);
+    expect(sameOrt('', 'Köln')).toBe(false);
+    expect(sameOrt(undefined, 'Köln')).toBe(false);
+  });
+});
+
 describe('chooseHomeHall', () => {
   it('uses the only place when all halls are in the same place', () => {
     const r = chooseHomeHall({ name: 'X', halls: [hall(1, 'Ludwigsburg'), hall(2, 'Ludwigsburg')] } as any);
@@ -60,10 +73,39 @@ describe('chooseHomeHall', () => {
 describe('geocodeClub', () => {
   it('prefers a plausible name hit and labels it with the place from the address', async () => {
     const geocode = jest.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
-    const r = await geocodeClub({ ...base, halls: [hall(1, 'X')] }, geocode);
+    const r = await geocodeClub({ ...base, halls: [hall(1, 'München')] }, geocode);
     expect(r).toEqual({ lat: 1, lng: 2, source: 'name', confidence: 'high', geocodedFrom: 'München' });
     expect(geocode).toHaveBeenCalledWith('FC ANADOLU BAYERN');
     expect(geocode).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects a plausible name hit that contradicts the home hall', async () => {
+    // "Hamburger SV" wird in Reinbek gefunden, die Hallen liegen aber in Hamburg
+    const club = { ...base, name: 'Hamburger SV', halls: [hall(1, 'Hamburg'), hall(2, 'Hamburg')] } as any;
+    const geocode = jest.fn()
+      .mockResolvedValueOnce(hit(53.51, 10.24, 'Hamburger SV, Reinbek', 'Reinbek'))
+      .mockResolvedValueOnce(hit(53.55, 10.0));
+    const r = await geocodeClub(club, geocode);
+    expect(r).toMatchObject({ lat: 53.55, lng: 10.0, source: 'hall', confidence: 'high', geocodedFrom: 'Hamburg', nameHitRejected: true });
+  });
+
+  it('keeps a name hit that lies next to the home hall although the place label differs', async () => {
+    const club = { ...base, name: 'Postsportverein Remagen e.V.', halls: [hall(1, 'Sinzig')] } as any;
+    const geocode = jest.fn()
+      .mockResolvedValueOnce(hit(50.5762, 7.2440, 'Postsportverein Remagen, Remagen', 'Remagen'))
+      .mockResolvedValueOnce(hit(50.5770, 7.2450));
+    const r = await geocodeClub(club, geocode);
+    expect(r).toMatchObject({ source: 'name', lat: 50.5762 });
+    expect(r?.nameHitRejected).toBeUndefined();
+  });
+
+  it('does not check a name hit without home hall or place label', async () => {
+    const g1 = jest.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
+    expect(await geocodeClub({ ...base, halls: [] }, g1)).toMatchObject({ source: 'name' });
+    expect(g1).toHaveBeenCalledTimes(1);
+    const g2 = jest.fn().mockResolvedValueOnce(hit(1, 2));
+    expect(await geocodeClub({ ...base, halls: [hall(1, 'Ulm')] }, g2)).toMatchObject({ source: 'name' });
+    expect(g2).toHaveBeenCalledTimes(1);
   });
 
   it('falls back to the home hall when the name hit is implausible', async () => {
