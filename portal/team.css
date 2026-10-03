@@ -26,6 +26,7 @@
 }
 
 .team-liga-btn {
+  min-height: 44px;
   font: inherit;
   font-size: 0.8rem;
   background: var(--dark-2);
@@ -38,7 +39,7 @@
 
 .team-liga-btn[aria-pressed="true"] {
   color: var(--white);
-  border-color: var(--orange);
+  border-color: var(--orange-text);
 }
 
 .team-stats {
@@ -128,8 +129,14 @@
 .team-table td:nth-child(2) { text-align: left; white-space: normal; }
 .team-table td:first-child,
 .team-table th:first-child { text-align: center; }
-.team-table a { color: var(--light); text-decoration: none; }
-.team-table a:hover { text-decoration: underline; }
+.team-table a,
+.team-match-teams a { display: inline-flex; align-items: center; min-height: 44px; color: var(--light); text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; }
+.team-table a:hover,
+.team-match-teams a:hover { text-decoration-color: var(--orange-text); }
+.team-table a:focus-visible,
+.team-match-teams a:focus-visible,
+.team-next-teams a:focus-visible,
+.team-liga-btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
 .team-table tr.team-own td { background: color-mix(in srgb, var(--orange) 14%, transparent); font-weight: 600; }
 
 .team-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; }
@@ -149,8 +156,6 @@
 }
 
 .team-match-when { color: var(--muted); font-size: 0.78rem; }
-.team-match-teams a { color: var(--light); text-decoration: none; }
-.team-match-teams a:hover { text-decoration: underline; }
 .team-match-ha { color: var(--muted); font-size: 0.72rem; margin-right: 0.35rem; }
 .team-match-result { font-weight: 600; color: var(--white); white-space: nowrap; }
 .team-match-note { font-size: 0.7rem; color: var(--muted); font-weight: 400; margin-left: 0.3rem; }

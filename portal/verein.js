@@ -186,7 +186,7 @@ function renderMap(halls) {
 
     const bounds = [];
     hallsWithCoords.forEach(h => {
-      const marker = L.marker([h.lat, h.lng], { icon });
+      const marker = L.marker([h.lat, h.lng], { icon, title: h.bezeichnung, alt: h.bezeichnung });
       const addrParts = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean);
       const popup = document.createElement('div');
       const strong = document.createElement('strong');
@@ -251,8 +251,13 @@ function renderTeamCard(team, club, hallsById) {
   label.className = 'verein-team-label';
   const labelLink = document.createElement('a');
   labelLink.href = 'team.html?id=' + encodeURIComponent(team.teamPermanentId);
-  labelLink.textContent = getTeamLabel(team, club.teams);
   labelLink.className = 'verein-team-link';
+  labelLink.appendChild(document.createTextNode(getTeamLabel(team, club.teams)));
+  // Zusatz für Screenreader: wohin der Link führt (der sichtbare Text beginnt mit dem Teamnamen)
+  const hidden = document.createElement('span');
+  hidden.className = 'sr-only';
+  hidden.textContent = ' – Tabelle und Spielplan';
+  labelLink.appendChild(hidden);
   label.appendChild(labelLink);
   header.appendChild(label);
 
@@ -290,6 +295,13 @@ function renderTeamCard(team, club, hallsById) {
       card.appendChild(row);
     });
   }
+
+  // Sichtbarer Hinweis, dass die ganze Karte zur Team-Seite führt (der Link oben deckt die Karte ab)
+  const cta = document.createElement('div');
+  cta.className = 'verein-team-cta';
+  cta.setAttribute('aria-hidden', 'true');
+  cta.textContent = 'Tabelle & Spielplan ansehen →';
+  card.appendChild(cta);
 
   card._ligaEl = ligaEl;
   card._rangEl = rangEl;

@@ -1,0 +1,459 @@
+{
+ "ligaId": 52514,
+ "liganame": "1. Regionalliga Herren HR-Süd (1RLH-HRS)",
+ "verbandName": "Regionalliga Südost",
+ "fetchedAt": "2026-10-03T09:07:00.283Z",
+ "tabelle": [
+  {
+   "rang": 1,
+   "team": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "anzspiele": 2,
+   "anzGewinnpunkte": 4,
+   "anzVerlustpunkte": 0,
+   "s": 2,
+   "n": 0,
+   "koerbe": 164,
+   "gegenKoerbe": 142,
+   "korbdiff": 22
+  },
+  {
+   "rang": 2,
+   "team": {
+    "seasonTeamId": 149795,
+    "teamPermanentId": 149794,
+    "teamname": "MTSV Schwabing",
+    "teamnameSmall": "MTSV",
+    "clubId": 924,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 2,
+   "anzVerlustpunkte": 0,
+   "s": 1,
+   "n": 0,
+   "koerbe": 83,
+   "gegenKoerbe": 55,
+   "korbdiff": 28
+  },
+  {
+   "rang": 3,
+   "team": {
+    "seasonTeamId": 162386,
+    "teamPermanentId": 162385,
+    "teamname": "TS Jahn München",
+    "teamnameSmall": "TSJM",
+    "clubId": 961,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 2,
+   "anzVerlustpunkte": 0,
+   "s": 1,
+   "n": 0,
+   "koerbe": 89,
+   "gegenKoerbe": 74,
+   "korbdiff": 15
+  },
+  {
+   "rang": 4,
+   "team": {
+    "seasonTeamId": 149793,
+    "teamPermanentId": 149792,
+    "teamname": "hapa Ansbach",
+    "teamnameSmall": "AN",
+    "clubId": 718,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 2,
+   "anzVerlustpunkte": 0,
+   "s": 1,
+   "n": 0,
+   "koerbe": 106,
+   "gegenKoerbe": 93,
+   "korbdiff": 13
+  },
+  {
+   "rang": 5,
+   "team": {
+    "seasonTeamId": 314285,
+    "teamPermanentId": 314284,
+    "teamname": "BG Illertal",
+    "teamnameSmall": "BGI",
+    "clubId": 4872,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 0,
+   "anzVerlustpunkte": 0,
+   "s": 0,
+   "n": 1,
+   "koerbe": 79,
+   "gegenKoerbe": 84,
+   "korbdiff": -5
+  },
+  {
+   "rang": 6,
+   "team": {
+    "seasonTeamId": 149786,
+    "teamPermanentId": 149785,
+    "teamname": "TSV Vilsbiburg",
+    "teamnameSmall": "VIB",
+    "clubId": 1422,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 0,
+   "anzVerlustpunkte": 0,
+   "s": 0,
+   "n": 1,
+   "koerbe": 93,
+   "gegenKoerbe": 106,
+   "korbdiff": -13
+  },
+  {
+   "rang": 7,
+   "team": {
+    "seasonTeamId": 152266,
+    "teamPermanentId": 152265,
+    "teamname": "MÜNCHEN BASKET",
+    "teamnameSmall": "MB",
+    "clubId": 575,
+    "verzicht": false
+   },
+   "anzspiele": 1,
+   "anzGewinnpunkte": 0,
+   "anzVerlustpunkte": 0,
+   "s": 0,
+   "n": 1,
+   "koerbe": 55,
+   "gegenKoerbe": 83,
+   "korbdiff": -28
+  },
+  {
+   "rang": 8,
+   "team": {
+    "seasonTeamId": 154138,
+    "teamPermanentId": 154137,
+    "teamname": "Haching Baskets",
+    "teamnameSmall": "UHA",
+    "clubId": 1138,
+    "verzicht": false
+   },
+   "anzspiele": 2,
+   "anzGewinnpunkte": 0,
+   "anzVerlustpunkte": 0,
+   "s": 0,
+   "n": 2,
+   "koerbe": 137,
+   "gegenKoerbe": 169,
+   "korbdiff": -32
+  }
+ ],
+ "matches": [
+  {
+   "matchId": 1,
+   "matchDay": 1,
+   "kickoffDate": "2026-09-26",
+   "kickoffTime": "18:30",
+   "homeTeam": {
+    "seasonTeamId": 154138,
+    "teamPermanentId": 154137,
+    "teamname": "Haching Baskets",
+    "teamnameSmall": "UHA",
+    "clubId": 1138,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 162386,
+    "teamPermanentId": 162385,
+    "teamname": "TS Jahn München",
+    "teamnameSmall": "TSJM",
+    "clubId": 961,
+    "verzicht": false
+   },
+   "result": "74:89",
+   "ergebnisbestaetigt": true,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 2,
+   "matchDay": 1,
+   "kickoffDate": "2026-09-26",
+   "kickoffTime": "19:30",
+   "homeTeam": {
+    "seasonTeamId": 314285,
+    "teamPermanentId": 314284,
+    "teamname": "BG Illertal",
+    "teamnameSmall": "BGI",
+    "clubId": 4872,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "result": "79:84",
+   "ergebnisbestaetigt": true,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 3,
+   "matchDay": 1,
+   "kickoffDate": "2026-09-26",
+   "kickoffTime": "19:30",
+   "homeTeam": {
+    "seasonTeamId": 149793,
+    "teamPermanentId": 149792,
+    "teamname": "hapa Ansbach",
+    "teamnameSmall": "AN",
+    "clubId": 718,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 149786,
+    "teamPermanentId": 149785,
+    "teamname": "TSV Vilsbiburg",
+    "teamnameSmall": "VIB",
+    "clubId": 1422,
+    "verzicht": false
+   },
+   "result": "106:93",
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 4,
+   "matchDay": 1,
+   "kickoffDate": "2026-09-27",
+   "kickoffTime": "17:30",
+   "homeTeam": {
+    "seasonTeamId": 149795,
+    "teamPermanentId": 149794,
+    "teamname": "MTSV Schwabing",
+    "teamnameSmall": "MTSV",
+    "clubId": 924,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 152266,
+    "teamPermanentId": 152265,
+    "teamname": "MÜNCHEN BASKET",
+    "teamnameSmall": "MB",
+    "clubId": 575,
+    "verzicht": false
+   },
+   "result": "83:55",
+   "ergebnisbestaetigt": true,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 5,
+   "matchDay": 2,
+   "kickoffDate": "2026-10-02",
+   "kickoffTime": "19:30",
+   "homeTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 154138,
+    "teamPermanentId": 154137,
+    "teamname": "Haching Baskets",
+    "teamnameSmall": "UHA",
+    "clubId": 1138,
+    "verzicht": false
+   },
+   "result": "80:63",
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 6,
+   "matchDay": 2,
+   "kickoffDate": "2026-10-03",
+   "kickoffTime": "18:30",
+   "homeTeam": {
+    "seasonTeamId": 152266,
+    "teamPermanentId": 152265,
+    "teamname": "MÜNCHEN BASKET",
+    "teamnameSmall": "MB",
+    "clubId": 575,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 149793,
+    "teamPermanentId": 149792,
+    "teamname": "hapa Ansbach",
+    "teamnameSmall": "AN",
+    "clubId": 718,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 7,
+   "matchDay": 3,
+   "kickoffDate": "2099-10-10",
+   "kickoffTime": "17:30",
+   "homeTeam": {
+    "seasonTeamId": 149795,
+    "teamPermanentId": 149794,
+    "teamname": "MTSV Schwabing",
+    "teamnameSmall": "MTSV",
+    "clubId": 924,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 8,
+   "matchDay": 4,
+   "kickoffDate": "2099-10-16",
+   "kickoffTime": "19:30",
+   "homeTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 149793,
+    "teamPermanentId": 149792,
+    "teamname": "hapa Ansbach",
+    "teamnameSmall": "AN",
+    "clubId": 718,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 9,
+   "matchDay": 5,
+   "kickoffDate": "2099-10-25",
+   "kickoffTime": "16:00",
+   "homeTeam": {
+    "seasonTeamId": 149786,
+    "teamPermanentId": 149785,
+    "teamname": "TSV Vilsbiburg",
+    "teamnameSmall": "VIB",
+    "clubId": 1422,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 10,
+   "matchDay": 6,
+   "kickoffDate": "2099-10-31",
+   "kickoffTime": "19:30",
+   "homeTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 152266,
+    "teamPermanentId": 152265,
+    "teamname": "MÜNCHEN BASKET",
+    "teamnameSmall": "MB",
+    "clubId": 575,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": false,
+   "matchInfo": null
+  },
+  {
+   "matchId": 11,
+   "matchDay": 8,
+   "kickoffDate": "2099-11-08",
+   "kickoffTime": "10:00",
+   "homeTeam": {
+    "seasonTeamId": 162386,
+    "teamPermanentId": 162385,
+    "teamname": "TS Jahn München",
+    "teamnameSmall": "TSJM",
+    "clubId": 961,
+    "verzicht": false
+   },
+   "guestTeam": {
+    "seasonTeamId": 151010,
+    "teamPermanentId": 151009,
+    "teamname": "TSV 1861 Nördlingen",
+    "teamnameSmall": "NOR",
+    "clubId": 1235,
+    "verzicht": false
+   },
+   "result": null,
+   "ergebnisbestaetigt": false,
+   "verzicht": false,
+   "abgesagt": true,
+   "matchInfo": null
+  }
+ ]
+}

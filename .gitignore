@@ -10,3 +10,6 @@ probe-live.json
 _live/
 _live_new/
 regeocode-report.json
+_a11y-site/
+test-results/
+playwright-report/
