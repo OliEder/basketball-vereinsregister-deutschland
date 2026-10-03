@@ -36,6 +36,43 @@ function stripSuffixes(name: string): string {
   return cleaned;
 }
 
+/** Ortszusätze wie "a.Rh." oder "a.d.Donau" gehören zum Ortsnamen und werden ausgeschrieben. */
+const PLACE_QUALIFIERS: Array<[RegExp, string | ((m: RegExpMatchArray) => string)]> = [
+  [/^a\.\s?Rh\.?$/i, 'am Rhein'],
+  [/^a\.\s?M\.?$/i, 'am Main'],
+  [/^a\.\s?N\.?$/i, 'am Neckar'],
+  [/^i\.\s?d\.\s?Opf\.?$/i, 'in der Oberpfalz'],
+  [/^i\.\s?Br\.?$/i, 'im Breisgau'],
+  [/^o\.\s?d\.\s?T\.?$/i, 'ob der Tauber'],
+  [/^a\.\s?d\.\s?([A-ZÄÖÜ][\wäöüß]+)\.?$/i, m => `an der ${m[1]}`],
+  [/^b\.\s?([A-ZÄÖÜ][\wäöüß]+)\.?$/i, m => `bei ${m[1]}`]
+];
+
+/** "Wörth a.Rh." → "Wörth_am_Rhein" (ein Token), damit Ort und Zusatz zusammenbleiben. */
+function bindQualifiers(name: string): string {
+  const words = name.split(/\s+/);
+  const out: string[] = [];
+  for (let i = 0; i < words.length; i++) {
+    // Zusatz kann in einem oder zwei Wörtern stehen ("a.d. Donau", "i. Br.")
+    const tries = [words[i], words.slice(i, i + 2).join(' ')];
+    let bound = false;
+    for (let t = tries.length - 1; t >= 0 && !bound; t--) {
+      for (const [re, rep] of PLACE_QUALIFIERS) {
+        const m = tries[t].match(re);
+        if (m && out.length > 0) {
+          const full = typeof rep === 'string' ? rep : rep(m);
+          out[out.length - 1] = `${out[out.length - 1]}_${full.replace(/ /g, '_')}`;
+          i += t;
+          bound = true;
+          break;
+        }
+      }
+    }
+    if (!bound) out.push(words[i]);
+  }
+  return out.join(' ');
+}
+
 /**
  * Mögliche Ortsangaben aus dem Vereinsnamen, wahrscheinlichste zuerst.
  * Vereinskürzel (SV, TSV, DJK, MTV, TuS …), Rechtsformen und Allerweltswörter fallen weg; von hinten nach vorn
@@ -43,7 +80,7 @@ function stripSuffixes(name: string): string {
  * ("Eckernförde", "Barmstedt"), die Nominatim eher kennt.
  */
 export function cityCandidates(name: string): string[] {
-  const cleaned = stripSuffixes(name);
+  const cleaned = bindQualifiers(stripSuffixes(name));
   const words = cleaned.split(/\s+/).filter(Boolean);
   const kept: string[] = [];
   for (const w of words) {
@@ -57,6 +94,7 @@ export function cityCandidates(name: string): string[] {
   const out: string[] = [];
   const add = (w: string) => { const c = w.split('/')[0]; if (c.length >= 3 && !out.includes(c)) out.push(c); };
   for (const w of kept.slice().reverse()) {
+    if (w.includes('_')) { add(w.replace(/_/g, ' ')); add(w.split('_')[0]); continue; } // "Wörth am Rhein", dann "Wörth"
     add(w);
     if (/er$/i.test(w) && w.length >= 6) { add(w.slice(0, -2)); add(w.slice(0, -1)); }
   }

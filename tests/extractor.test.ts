@@ -58,9 +58,16 @@ describe('cityCandidates', () => {
 
   it('überspringt Jahreszahlen, "von" und Abkürzungen mit Punkt; Kürzel am Anfang eines Bindestrich-Worts fallen weg', () => {
     expect(cityCandidates('TV von 1912 Verl e. V.')).toEqual(['Verl']);
-    expect(cityCandidates('TV 03 Wörth a.Rh. e. V.')).toEqual(['Wörth']);
+    expect(cityCandidates('TV 03 Wörth a.Rh. e. V.')).toEqual(['Wörth am Rhein', 'Wörth']);
     expect(cityCandidates('DJK-Köln-Ost e.V.')).toEqual(['Köln-Ost']);
     expect(cityCandidates('Blau-Weiß Merzen e. V.')[0]).toBe('Merzen');
+  });
+
+  it('behält Ortszusätze wie a.Rh. und schreibt sie aus', () => {
+    expect(cityCandidates('Offenbach a.M. e.V.')).toEqual(['Offenbach am Main', 'Offenbach']);
+    expect(cityCandidates('SV Neustadt a.d. Donau')).toEqual(['Neustadt an der Donau', 'Neustadt']);
+    expect(cityCandidates('TSV Kirchheim b. München')[0]).toBe('Kirchheim bei München');
+    expect(cityCandidates('TV Waldkirch i. Br.')[0]).toBe('Waldkirch im Breisgau');
   });
 
   it('gibt nichts zurück, wenn nur Kürzel übrig bleiben', () => {
