@@ -30,7 +30,7 @@
 .team-table a:focus-visible, .team-match-teams a:focus-visible, .team-sub a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
 
 .team-tabs { margin-bottom: 0.75rem; }
-.team-match-ha { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--dss-mute); margin-right: 0.35rem; }
+.team-match-ha { text-transform: none; letter-spacing: 0; font-size: 0.78rem; font-weight: 700; min-width: 2.6rem; justify-content: center; }
 .team-match-result { display: inline-flex; align-items: center; gap: 0.35rem; }
 .team-match-note { font-size: 0.72rem; color: var(--dss-mute); font-weight: 500; margin-left: 0.3rem; font-family: var(--font-body); }
 .team-match-past .dss-row-main { color: var(--dss-fg-soft); }
@@ -65,7 +65,9 @@
 .next-game-vs-label { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--dss-mute); }
 .next-game-kickoff { font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; color: var(--dss-fg); }
 .next-game-kickoff-time { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--dss-fg-soft); }
-.next-game-ha { margin-top: 4px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--radius-full); background: var(--dss-selected-bg); color: var(--dss-fg); box-shadow: inset 0 0 0 1px var(--amber-400); }
+.next-game-ha { margin-top: 4px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--radius-full); }
+.next-game-ha--home { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); }
+.next-game-ha--away { background: var(--dss-chip-amber-bg); color: var(--dss-chip-amber-fg); }
 .next-game-competition { text-align: center; font-size: 0.85rem; color: var(--dss-mute); padding: 0 18px 14px; }
 
 .next-game-venue { border-top: 1px solid var(--dss-line); padding: 14px 18px; }
