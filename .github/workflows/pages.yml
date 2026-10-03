@@ -7,11 +7,20 @@ on:
       - 'portal/**'
       - 'data/clubs.json'
       - 'data/schemas/**'
+      - 'crawler/live.ts'
+      - '.github/workflows/pages.yml'
+  schedule:
+    - cron: '17 */6 * * *'   # alle 6 Stunden: Live-Daten (Tabellen, Spielpläne) neu crawlen
   workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
 
     permissions:
       pages: write
@@ -24,12 +33,58 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Live-Daten des letzten erfolgreichen Laufs (damit Deploys bei Portal-Änderungen
+      # die Live-Daten behalten, ohne neu zu crawlen).
+      - name: Live-Daten aus dem Cache holen
+        uses: actions/cache/restore@v4
+        with:
+          path: _live
+          key: live-${{ github.run_id }}
+          restore-keys: live-
+
+      - name: Live-Crawl nötig?
+        id: need
+        run: |
+          if [ "${{ github.event_name }}" != "push" ] || [ ! -f _live/index.json ]; then
+            echo "crawl=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "crawl=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Fehlschlag (Guard in crawler/live.ts: zu viele Fehler) verhindert den Deploy nicht;
+      # dann bleiben die zuletzt gecachten Live-Daten erhalten.
+      - name: Live-Crawl (Tabellen und Spielpläne pro Liga)
+        id: live
+        if: steps.need.outputs.crawl == 'true'
+        continue-on-error: true
+        run: |
+          npm ci
+          npm run live -- --out=_live_new
+          rm -rf _live
+          mv _live_new _live
+
+      - name: Live-Daten cachen
+        if: steps.live.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: _live
+          key: live-${{ github.run_id }}
+
       - name: Deploy-Artefakt zusammenstellen
         run: |
           mkdir -p _site/data/schemas
           cp portal/index.html portal/style.css portal/app.js portal/verein.html portal/verein.css portal/verein.js portal/theme.js _site/
           cp data/clubs.json _site/data/clubs.json
           cp data/schemas/*.json _site/data/schemas/
+          if [ -d _live ]; then
+            mkdir -p _site/data/live
+            cp -r _live/. _site/data/live/
+          fi
 
       - uses: actions/configure-pages@v4
 
@@ -39,3 +94,9 @@ jobs:
 
       - uses: actions/deploy-pages@v4
         id: deployment
+
+      - name: Live-Crawl-Fehler melden
+        if: steps.live.outcome == 'failure'
+        run: |
+          echo "::error::Live-Crawl fehlgeschlagen — es wurden die zuletzt gecachten Live-Daten (falls vorhanden) deployt."
+          exit 1

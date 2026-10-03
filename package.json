@@ -6,6 +6,7 @@
     "geocode": "npx ts-node crawler/geocode.ts",
     "check-geocoding": "npx ts-node crawler/check-geocoding.ts",
     "probe-live": "npx ts-node crawler/probe-live.ts",
+    "live": "npx ts-node crawler/live.ts",
     "fix-names": "npx ts-node crawler/fix-names.ts",
     "api": "npx ts-node api/server.ts",
     "test": "npx jest --runInBand",
