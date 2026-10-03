@@ -1,0 +1,571 @@
+{
+  "startedAt": "2026-10-03T15:15:59.214Z",
+  "ligen": [
+    {
+      "ligaId": 55802,
+      "liganame": "1. Bundesliga (easyCredit BBL)",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 0
+    },
+    {
+      "ligaId": 55811,
+      "liganame": "Herren ProA",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 0
+    },
+    {
+      "ligaId": 55815,
+      "liganame": "Herren ProB Nord",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 0
+    },
+    {
+      "ligaId": 55817,
+      "liganame": "Herren ProB Süd",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 0
+    },
+    {
+      "ligaId": 55738,
+      "liganame": "1. Bundesliga (Toyota DBBL)",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 0
+    },
+    {
+      "ligaId": 55746,
+      "liganame": "2. DBBL Nord",
+      "seasonName": "2026/2027",
+      "statisticType": 1,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 12,
+        "stand": "2026-09-27",
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0
+        }
+      },
+      "gespielteSpiele": 6,
+      "boxscore": {
+        "http": 200,
+        "matchId": 2959428,
+        "statisticType": 1,
+        "boxscoreVorhanden": true,
+        "boxscoreSchluessel": [
+          "homePlayerStats",
+          "homeTeamStats",
+          "homeTotalStats",
+          "guestPlayerStats",
+          "guestTeamStats",
+          "guestTotalStats"
+        ],
+        "heimRoh": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0,
+          "player": null,
+          "isf": null
+        },
+        "heim": {},
+        "gast": {}
+      }
+    },
+    {
+      "ligaId": 55749,
+      "liganame": "2. DBBL Süd",
+      "seasonName": "2026/2027",
+      "statisticType": 1,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 12,
+        "stand": "2026-09-27",
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0
+        }
+      },
+      "gespielteSpiele": 6,
+      "boxscore": {
+        "http": 200,
+        "matchId": 2959841,
+        "statisticType": 1,
+        "boxscoreVorhanden": true,
+        "boxscoreSchluessel": [
+          "homePlayerStats",
+          "homeTeamStats",
+          "homeTotalStats",
+          "guestPlayerStats",
+          "guestTeamStats",
+          "guestTotalStats"
+        ],
+        "heimRoh": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0,
+          "player": null,
+          "isf": null
+        },
+        "heim": {},
+        "gast": {}
+      }
+    },
+    {
+      "ligaId": 52514,
+      "liganame": "1. Regionalliga Herren HR-Süd (1RLH-HRS)",
+      "seasonName": "2026/2027",
+      "statisticType": 0,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 0,
+        "stand": null,
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": null
+      },
+      "gespielteSpiele": 3,
+      "boxscore": {
+        "http": 200,
+        "matchId": 2838831,
+        "statisticType": 1,
+        "boxscoreVorhanden": false,
+        "boxscoreSchluessel": [],
+        "heimRoh": null,
+        "heim": {},
+        "gast": {}
+      }
+    },
+    {
+      "ligaId": 54937,
+      "liganame": "1.Jugendregionalliga U18 männlich",
+      "seasonName": "2026/2027",
+      "statisticType": 1,
+      "teamstatistik": {
+        "http": 200,
+        "apiStatus": "0",
+        "eintraege": 10,
+        "stand": "2026-09-27",
+        "felderMitWert": {
+          "pts": 0,
+          "fouls": 0,
+          "eff": 0,
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "twoPoints.made": 0,
+          "twoPoints.attempted": 0,
+          "threePoints.made": 0,
+          "threePoints.attempted": 0,
+          "wt.made": 0,
+          "wt.attempted": 0,
+          "onePoints.made": 0,
+          "onePoints.attempted": 0
+        },
+        "ersterEintrag": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0
+        }
+      },
+      "gespielteSpiele": 10,
+      "boxscore": {
+        "http": 200,
+        "matchId": 2881886,
+        "statisticType": 1,
+        "boxscoreVorhanden": true,
+        "boxscoreSchluessel": [
+          "homePlayerStats",
+          "homeTeamStats",
+          "homeTotalStats",
+          "guestPlayerStats",
+          "guestTeamStats",
+          "guestTotalStats"
+        ],
+        "heimRoh": {
+          "esz": 0,
+          "pts": 0,
+          "twoPoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "threePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "wt": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "onePoints": {
+            "made": 0,
+            "attempted": 0,
+            "quota": null
+          },
+          "ro": 0,
+          "rd": 0,
+          "rt": 0,
+          "as": 0,
+          "st": 0,
+          "to": 0,
+          "bs": 0,
+          "fouls": 0,
+          "eff": 0,
+          "player": null,
+          "isf": null
+        },
+        "heim": {},
+        "gast": {}
+      }
+    }
+  ],
+  "finishedAt": "2026-10-03T15:16:32.798Z"
+}
