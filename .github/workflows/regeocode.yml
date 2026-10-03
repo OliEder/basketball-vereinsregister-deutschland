@@ -1,0 +1,68 @@
+name: Regeocode Clubs
+
+# Berechnet Koordinaten verdächtiger Vereine neu (Name → Halle → Ort).
+# Standard: nur Bericht, clubs.json bleibt unverändert. Mit "apply" werden die Änderungen
+# nach main committet. Bericht: Artifact "regeocode-report" und Branch "regeocode-report".
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'suspect = nur Vereine mit kaputtem Ort (e.V.), all = alle Vereine'
+        default: 'suspect'
+        type: choice
+        options: [suspect, all]
+      apply:
+        description: 'Änderungen in data/clubs.json übernehmen und committen'
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  regeocode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Regeocode
+        run: npm run regeocode -- --scope=${{ inputs.scope }} ${{ inputs.apply && '--apply' || '' }}
+
+      - name: clubs.json committen
+        if: ${{ inputs.apply }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/clubs.json
+          git diff --staged --quiet || git commit -m "chore: update clubs.json - regeocode (${{ inputs.scope }})"
+          git pull --rebase origin main
+          git push
+
+      # Bericht lesbar ablegen (ohne Artifact-Download).
+      - name: Bericht auf Branch regeocode-report veröffentlichen
+        if: ${{ always() && hashFiles('regeocode-report.json') != '' }}
+        run: |
+          cp regeocode-report.json "$RUNNER_TEMP/regeocode-report.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan regeocode-report
+          git rm -rfq --cached .
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp "$RUNNER_TEMP/regeocode-report.json" regeocode-report.json
+          git add regeocode-report.json
+          git commit -qm "report: regeocode"
+          git push -f origin regeocode-report
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: regeocode-report
+          path: regeocode-report.json

@@ -579,6 +579,9 @@ Im automatischen Geocoding (Vereine ohne Koordinaten) wird zuerst Nominatim mit 
 * (+) Mehr Vereine erhalten Koordinaten, oft genauer als nur der Ort
 * (-) Namenssuche kann bei generischen Namen falsche Treffer liefern; Qualität ist nach dem ersten Lauf zu prüfen
 * (-) Zusätzlicher Nominatim-Request pro Verein (Rate-Limit 1 Request/Sekunde)
+* (+) Fehlerhafte Orte (z. B. „e.V.“ aus dem Vereinsnamen) werden nicht mehr zum Geocoding verwendet: `extractCityFromName` entfernt Rechtsform, Gründungsjahr und Teamnummern
+* (+) Namenstreffer werden nur übernommen, wenn der Vereinsname im Treffer vorkommt (`isPlausibleNameHit`)
+* (+) `npm run regeocode` (Workflow „Regeocode Clubs“) berechnet verdächtige Vereine neu; ohne `--apply` entsteht nur ein Bericht
 
 = Kapitel 10: Qualitätsanforderungen
 

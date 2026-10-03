@@ -132,6 +132,7 @@ async function crawl(): Promise<void> {
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;
+      if (coords.geocodedFrom) club.geocodedFrom = coords.geocodedFrom;
       geocoded++;
     }
     if ((i + 1) % 10 === 0) {

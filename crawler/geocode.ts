@@ -28,6 +28,7 @@ async function geocodeAll(): Promise<void> {
     if (coords) {
       club.lat = coords.lat;
       club.lng = coords.lng;
+      if (coords.geocodedFrom) club.geocodedFrom = coords.geocodedFrom;
       done++;
       bySource[coords.source]++;
     }
