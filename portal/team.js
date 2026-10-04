@@ -263,8 +263,8 @@ function renderSchedule(list, ligaId, teamId) {
     tabs.appendChild(b);
   });
   section.appendChild(tabs);
-  section.appendChild(cal.el);
   section.appendChild(matches);
+  section.appendChild(cal.el);
   show(0);
   return section;
 }

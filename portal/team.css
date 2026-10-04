@@ -67,7 +67,7 @@
 }
 
 /* Kalender-Abo */
-.team-cal { margin: 0 0 1rem; }
+.team-cal { margin: 1rem 0 1.5rem; }
 .team-cal-summary { cursor: pointer; list-style: none; }
 .team-cal-summary::-webkit-details-marker { display: none; }
 .team-cal-body { margin-top: 0.75rem; padding: 0.75rem 1rem; border: 1px solid var(--dss-line); border-radius: var(--radius-lg); background: var(--dss-surface); }
