@@ -384,7 +384,7 @@ export function renderListPage(opts: {
       source.push(...a.groups);
     } else source.push(g);
   }
-  const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}"` : ''}>${esc(g.heading)}</h2>` : ''}
+  const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
       ${card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`)}`).join('\n');
   const body = `${topbar()}
   <main class="verein-main">
@@ -435,6 +435,7 @@ export function renderSitemap(base: string, paths: string[], lastmod: string): s
 export interface LigaDoc {
   ligaId: number; liganame: string; verbandName: string; akName?: string; geschlecht?: string;
   fetchedAt?: string; tabelle: any[]; matches: any[];
+  skEbeneName?: string | null; bezirkName?: string | null; kreisname?: string | null;     // Ebene und Bezirk/Kreis der Liga (Live-Crawl)
   venues?: Record<string, number | string>;                                  // matchId → Hallen-ID (apply-venues)
   halls?: Record<string, { bezeichnung?: string; strasse?: string | null; plz?: string | null; ort?: string | null; lat?: number | null; lng?: number | null }>;
 }
@@ -577,7 +578,38 @@ export interface LigaBuild {
   docs: Map<number, LigaDoc>;
 }
 
-export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}): LigaBuild {
+/** Die Tabellenspitze (erste drei, erst wenn gespielt wurde) mit Team und Punkten, für die Mini-Tabelle der Ligakarte. */
+export function top3Entries(d: LigaDoc): any[] {
+  const rows = (d.tabelle ?? []).filter(e => e?.team);
+  if (!rows.reduce((n, e) => n + (Number(e.anzspiele) || 0), 0)) return [];
+  return rows.slice().sort((a, b) => (a.rang ?? 99) - (b.rang ?? 99)).slice(0, 3);
+}
+
+/** Ebenen der Ligen in der Reihenfolge der Seiten; alles andere (Bundesligen, ohne Angabe) steht unter "Weitere Ligen". */
+export const EBENEN: { key: string; label: string }[] = [
+  { key: 'Verband', label: 'Verbandsebene' }, { key: 'Bezirk', label: 'Bezirksebene' }, { key: 'Kreis', label: 'Kreisebene' }, { key: 'Weitere', label: 'Weitere Ligen' }
+];
+
+export function ebeneKey(d: LigaDoc, ebeneOf?: (id: number) => string | undefined): string {
+  const e = d.skEbeneName ?? ebeneOf?.(d.ligaId);
+  return EBENEN.some(x => x.key === e) ? e! : 'Weitere';
+}
+
+/** Karte einer Liga: Name, Bezirk/Kreis und Teams, Tabellenspitze als Mini-Tabelle mit verlinkten Teams. `h` ist die Überschriftsebene des Namens. */
+export function ligaCard(d: LigaDoc, ligaPath: string, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4' = 'h4'): string {
+  const top = top3Entries(d);
+  const teams = (d.tabelle ?? []).filter(e => e?.team).length;
+  const meta = [d.kreisname || d.bezirkName, teams ? `${teams} ${teams === 1 ? 'Team' : 'Teams'}` : ''].filter(Boolean).join(' · ');
+  const table = top.length
+    ? `<div class="dss-table-scroll"><table class="dss-tbl dss-tbl--compact liga-mini"><caption class="dss-sr-only">Tabellenspitze ${esc(d.liganame)}</caption><thead><tr><th scope="col" class="center">#</th><th scope="col" class="wrap">Mannschaft</th><th scope="col" class="num">Sp</th><th scope="col" class="num">Pkt</th></tr></thead><tbody>${top.map(e => `<tr><td class="center num lead">${esc(String(e.rang ?? ''))}</td><td class="wrap">${teamCell(e.team, clubPaths, teamPaths)}</td><td class="num">${e.anzspiele ?? 0}</td><td class="num lead">${e.anzGewinnpunkte ?? 0}</td></tr>`).join('')}</tbody></table></div>`
+    : `<p class="seo-note liga-empty">${teams ? 'Noch keine Spiele gespielt.' : 'Noch keine Tabelle.'}</p>`;
+  return `<li class="liga-card dss-card dss-card--default"><div class="liga-card-head"><${h} class="liga-card-title"><a href="${ligaPath}">${esc(d.liganame)}</a></${h}>${meta ? `<p class="seo-note liga-card-meta">${esc(meta)}</p>` : ''}</div>${table}</li>`;
+}
+
+const ligaGrid = (docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4'): string =>
+  `<ul class="liga-cards">${docs.slice().sort((a, b) => a.liganame.localeCompare(b.liganame, 'de')).map(d => ligaCard(d, paths[d.ligaId], clubPaths, teamPaths, h)).join('')}</ul>`;
+
+export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}, ebeneOf?: (id: number) => string | undefined): LigaBuild {
   const map = assignKeyed(ligaWishes(docs), previous);
   const files = new Map<string, string>();
   const sitemap: string[] = [];
@@ -597,23 +629,27 @@ export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, 
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }
 
-  const ligaItem = (d: LigaDoc): ListItem => ({ name: d.liganame, href: paths[d.ligaId], note: top3Text(d) || undefined });
   const verbaende = [...byVerband.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name, 'de'));
   for (const [slug, v] of verbaende) {
-    const groups = new Map<string, LigaDoc[]>();
-    for (const d of v.docs) {
-      const key = [d.akName, d.geschlecht].filter(Boolean).join(' · ') || 'Weitere Ligen';
-      groups.set(key, [...(groups.get(key) ?? []), d]);
-    }
     const pagePath = `liga/${slug}/`;
+    // Struktur: Ebene (h2) → Altersklasse und Geschlecht (h3) → Ligakarten (h4)
+    const sections = EBENEN.map(e => ({ ...e, docs: v.docs.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(s => s.docs.length).map(s => {
+      const groups = new Map<string, LigaDoc[]>();
+      for (const d of s.docs) {
+        const key = [d.akName, d.geschlecht].filter(Boolean).join(' · ') || 'Weitere Ligen';
+        groups.set(key, [...(groups.get(key) ?? []), d]);
+      }
+      const inner = [...groups.entries()].sort((x, y) => x[0].localeCompare(y[0], 'de')).map(([heading, ds]) => `      <h3>${esc(heading)}</h3>\n      ${ligaGrid(ds, paths, clubPaths, teamPaths, 'h4')}`).join('\n');
+      return `      <h2 id="ebene-${s.key.toLowerCase()}">${s.label} <span class="seo-note">${s.docs.length} ${s.docs.length === 1 ? 'Liga' : 'Ligen'}</span></h2>\n${inner}`;
+    }).join('\n');
     files.set(`${pagePath}index.html`, renderListPage({
       base, pagePath,
       title: `Basketball-Ligen: ${v.name}`,
       heading: `Ligen: ${v.name}`,
       intro: `${v.docs.length} Basketball-Ligen im Bereich ${v.name} mit Tabelle, Spielplan und Ergebnissen.`,
       crumbs: [{ name: 'Vereinsregister', path: '' }, { name: 'Ligen', path: 'liga/' }, { name: v.name, path: pagePath }],
-      groups: [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0], 'de'))
-        .map(([heading, ds]) => ({ heading, items: ds.sort((a, b) => a.liganame.localeCompare(b.liganame, 'de')).map(ligaItem) }))
+      groups: [],
+      extraHtml: sections
     }));
     sitemap.push(pagePath);
   }
@@ -1033,7 +1069,15 @@ export function buildSite(
   const wishes = teamWishes(refs);
   const teamMap = assignKeyed(wishes, liga.previousTeams ?? {});
   const teamPaths: Record<string, string> = Object.fromEntries(wishes.map(w => [w.key, teamMap[w.key].path]));
-  const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths);
+  const ebeneByLiga = new Map<number, Map<string, number>>();
+  for (const c of clubs) for (const t of c.teams ?? []) {
+    if (t.ligaId == null || !t.ebene) continue;
+    const m = ebeneByLiga.get(t.ligaId) ?? new Map<string, number>();
+    m.set(t.ebene, (m.get(t.ebene) ?? 0) + 1);
+    ebeneByLiga.set(t.ligaId, m);
+  }
+  const ebeneOf = (id: number): string | undefined => [...(ebeneByLiga.get(id) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+  const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths, ebeneOf);
 
   // Hallen: Spielfeld-ID → Seite, aus clubs.json und den Spielorten der Live-Daten
   const clubById = new Map(clubs.map(c => [c.clubId, c]));
@@ -1090,14 +1134,6 @@ export function buildSite(
     }
   }
 
-  const ebeneByLiga = new Map<number, Map<string, number>>();
-  for (const c of clubs) for (const t of c.teams ?? []) {
-    if (t.ligaId == null || !t.ebene) continue;
-    const m = ebeneByLiga.get(t.ligaId) ?? new Map<string, number>();
-    m.set(t.ebene, (m.get(t.ebene) ?? 0) + 1);
-    ebeneByLiga.set(t.ligaId, m);
-  }
-  const ebeneOf = (id: number): string | undefined => [...(ebeneByLiga.get(id) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
   const slugById = new Map(clubs.map(c => [String(c.clubId), clubSlug(c.name)]));
   const derbies = localDerbies(lb.docs.values(), placeKeyOfClub, id => slugById.get(String(id)) ?? null, d => ligaLevel(d, ebeneOf(d.ligaId)));
 
@@ -1119,15 +1155,14 @@ export function buildSite(
     }));
     return [{ heading: `Hallen in ${placeName}`, items }];
   };
-  const stateLigaGroup = (stateSlug: string, stateName: string): ListGroup[] => {
+  // Ligen eines Landes: die Seniorenligen nach Ebene, je Liga eine Karte mit Tabellenspitze; die übrigen über den Link auf die Verbandsseite
+  const stateLigaSection = (stateSlug: string, stateName: string): string => {
     const v = lb.byVerband.get(stateSlug);
-    if (!v) return [];
-    const senior = v.docs.filter(d => /senioren/i.test(d.akName ?? '')).sort((a, b) => a.liganame.localeCompare(b.liganame, 'de'));
-    const items: ListItem[] = [
-      { name: `Alle ${v.docs.length} Ligen in ${stateName}`, href: `liga/${stateSlug}/` },
-      ...senior.map(d => ({ name: d.liganame, href: lb.paths[d.ligaId], note: top3Text(d) || undefined }))
-    ];
-    return [{ heading: `Ligen in ${stateName}`, items }];
+    if (!v) return '';
+    const senior = v.docs.filter(d => /senioren/i.test(d.akName ?? ''));
+    const parts = EBENEN.map(e => ({ ...e, docs: senior.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(x => x.docs.length)
+      .map(x => `      <h3>${x.label} <span class="seo-note">${x.docs.length} ${x.docs.length === 1 ? 'Liga' : 'Ligen'}</span></h3>\n      ${ligaGrid(x.docs, lb.paths, clubPaths, teamPaths, 'h4')}`).join('\n');
+    return `      <h2 id="ligen">Ligen in ${esc(stateName)}</h2>\n      <p><a class="dss-link" href="liga/${stateSlug}/">Alle ${v.docs.length} Ligen in ${esc(stateName)}</a>, auch Jugend und weitere Altersklassen</p>${parts ? `\n${parts}` : ''}\n`;
   };
 
   const hallenByState = new Map<string, number>();
@@ -1168,9 +1203,9 @@ export function buildSite(
       intro: `${total} Basketballvereine in ${sg.state.name}, nach Orten sortiert, mit Teams, Hallen, Spielplänen und Tabellen.`,
       crumbs: [{ name: 'Vereinsregister', path: '' }, { name: sg.state.name, path: pagePath }],
       groups: [
-        { alphabetic: true, items: places.map(([slug, p]) => ({ name: p.name, href: `${stateSlug}/${slug}/`, note: `${p.clubs.length} ${p.clubs.length === 1 ? 'Verein' : 'Vereine'}` })) },
-        ...stateLigaGroup(stateSlug, sg.state.name)
-      ]
+        { alphabetic: true, items: places.map(([slug, p]) => ({ name: p.name, href: `${stateSlug}/${slug}/`, note: `${p.clubs.length} ${p.clubs.length === 1 ? 'Verein' : 'Vereine'}` })) }
+      ],
+      extraHtml: stateLigaSection(stateSlug, sg.state.name)
     }));
     sitemapPaths.push(pagePath);
   }

@@ -74,7 +74,7 @@
     function refresh() {
       if (!wantsNav) return;
       var old = main.querySelector('.dss-pagenav');
-      var headings = Array.prototype.filter.call(main.querySelectorAll('h2, [data-pagenav]'), function (h) { return !h.closest('.dss-pagenav'); });
+      var headings = Array.prototype.filter.call(main.querySelectorAll('h2, [data-pagenav]'), function (h) { return !h.closest('.dss-pagenav') && !h.hasAttribute('data-pagenav-skip'); });
       var taken = {};
       Array.prototype.forEach.call(doc.querySelectorAll('[id]'), function (e) { taken[e.id] = true; });
       var list = headings.length >= MIN_HEADINGS ? entries(headings, taken) : [];

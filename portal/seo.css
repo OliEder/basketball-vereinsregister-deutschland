@@ -22,3 +22,17 @@
 .dss-card .seo-list { margin: 0; }
 .seo-list-page > p { margin: 0 0 1rem; }
 .dss-crumbs { margin: 0 0 1rem; }
+
+/* Ligakarten (Land- und Verbandsseiten): Name, Bezirk/Teams, Tabellenspitze als Mini-Tabelle */
+.liga-cards { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0.75rem; }
+.liga-card { padding: 0.65rem 0.9rem 0.85rem; gap: 0.4rem; }
+.liga-card-title { margin: 0; font-size: 1rem; line-height: 1.25; }
+.liga-card-title a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-fg); text-decoration: none; overflow-wrap: break-word; }
+.liga-card-title a:hover { text-decoration: underline; }
+.liga-card-title a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; border-radius: var(--radius-sm); }
+.liga-card-meta { margin: 0; }
+.liga-empty { margin: 0.25rem 0 0.5rem; }
+.liga-mini { font-size: 13px; }
+.liga-mini td, .liga-mini th { padding: 0 8px; }
+.liga-mini th.wrap, .liga-mini td.wrap { min-width: 0; white-space: normal; }
+.seo-list-page h2 .seo-note { font-size: 0.875rem; font-weight: 500; margin-left: 0.35rem; }
