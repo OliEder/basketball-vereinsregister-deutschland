@@ -68,7 +68,7 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--dss-fg); }
 
 .hero-sub { margin-top: 1.25rem; color: var(--dss-fg-soft); font-size: 1.1rem; }
 
-#stats-bar { margin: 1.75rem auto 0; max-width: 520px; display: flex; justify-content: center; gap: 0.75rem; }
+#stats-bar { margin: 1.75rem auto 0; max-width: 640px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
 .hero-stat {
   flex: 1 1 0;
   min-width: 0;
@@ -79,7 +79,12 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--dss-fg); }
   text-align: left;
 }
 .hero-stat-num { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--dss-fg); line-height: 1.15; font-variant-numeric: tabular-nums; }
-.hero-stat-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.hero-stat-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.hero-stat-sub { display: block; margin-top: 0.25rem; font-size: 0.78rem; color: var(--dss-fg-soft); line-height: 1.3; }
+.hero-stat--link { display: block; color: inherit; text-decoration: none; cursor: pointer; }
+.hero-stat--link:hover { border-color: var(--dss-line-strong); }
+.hero-stat--link:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 3px; }
+.hero-stat--link .hero-stat-label::after { content: ' \2192'; content: ' \2192' / ''; }
 
 /* ===== SUCHE ===== */
 main { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0.5rem 1.25rem 4rem; }
@@ -177,6 +182,9 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 
 /* ===== RESPONSIV ===== */
+@media (max-width: 640px) {
+  #stats-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 520px) {
   .hero { padding-top: 4rem; }
   .hero-stat { padding: 0.6rem 0.7rem; }
@@ -218,3 +226,19 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .fav-next-text { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--dss-fg); overflow-wrap: anywhere; }
 .fav-next .dss-eyebrow { margin-bottom: 0.15rem; }
 .fav-actions { position: relative; z-index: 1; margin-top: 0.4rem; }
+
+/* ===== REGIONEN (Kachelkarte der Bundesländer, erzeugt von crawler/seo.ts) ===== */
+.region-map { list-style: none; margin: 0 auto 1rem; padding: 0; max-width: 560px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.35rem; }
+.region-tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem; min-height: 56px; padding: 0.3rem 0.15rem;
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: var(--radius-md); color: var(--dss-fg); text-decoration: none; text-align: center;
+  transition: border-color 0.12s, background 0.12s;
+}
+.region-tile:hover { border-color: var(--dss-line-strong); background: var(--dss-hover-bg); }
+.region-tile:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
+.region-abbr { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.02em; line-height: 1.1; }
+.region-name { display: none; font-size: 0.68rem; line-height: 1.15; color: var(--dss-fg-soft); hyphens: auto; overflow-wrap: anywhere; }
+.region-count { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--dss-mute); font-variant-numeric: tabular-nums; }
+@media (min-width: 480px) { .region-name { display: block; } .region-tile { min-height: 76px; } }
+.region-more { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.region-more a { display: inline-flex; align-items: center; min-height: 44px; }

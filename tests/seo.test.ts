@@ -1,4 +1,4 @@
-import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, REGION_TILES, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -142,7 +142,23 @@ describe('buildSite', () => {
   it('Regionsliste für die Startseite', () => {
     expect(b.regions.map(r => r.slug)).toEqual(['bayern', 'bundesweit']);
     const out = injectRegionLinks('<nav><!--REGION-LINKS--></nav>', b.regions);
-    expect(out).toContain('<a href="bayern/">Bayern</a>');
+    expect(out).toContain('<a class="region-tile" href="bayern/">');
+    expect(out).toContain('<li style="grid-column:4;grid-row:5">');                       // Bayern unten rechts im Gitter
+    expect(out).toContain('<span class="dss-sr-only">Bayern, 2 Vereine</span>');            // Name und Zahl für Screenreader
+    expect(out).toContain('<a class="dss-link" href="bundesweit/">');                                       // kein Bundesland: als Liste darunter
+  });
+
+  it('Kachelkarte: jedes Bundesland hat eine eigene Zelle im Gitter', () => {
+    const cells = Object.values(REGION_TILES).map(t => `${t.col}/${t.row}`);
+    expect(Object.keys(REGION_TILES)).toHaveLength(16);
+    expect(new Set(cells).size).toBe(16);
+  });
+
+  it('Startseite: data-hubs nennt die vorhandenen Übersichten', () => {
+    const html = '<div id="stats-bar"></div><!--REGION-LINKS-->';
+    expect(injectRegionLinks(html, b.regions, true, true)).toContain('<div id="stats-bar" data-hubs="liga halle"></div>');
+    expect(injectRegionLinks(html, b.regions, false, false)).toContain('data-hubs=""');
+    expect(injectRegionLinks(html, b.regions, true, true)).toContain('href="halle/"');
   });
 });
 
@@ -486,6 +502,17 @@ describe('Hallenseiten', () => {
     expect(ort).toContain('Hallen in Ulm');
     expect(ort).toContain('Weg 1, 89073 Ulm · 1 Spiel gemeldet');
     expect(before.files.get('sitemap.xml')).toContain('/halle/baden-wuerttemberg/ulm/sporthalle-ost/<');
+
+    // Übersichten: /halle/ → Land → Ort, mit Brotkrumen und in der Sitemap
+    const hub = before.files.get('halle/index.html')!;
+    expect(hub).toContain('<h1>Basketballhallen in Deutschland</h1>');
+    expect(hub).toContain('href="halle/baden-wuerttemberg/"');
+    expect(before.files.get('halle/baden-wuerttemberg/index.html')).toContain('href="halle/baden-wuerttemberg/ulm/"');
+    const ortHallen = before.files.get('halle/baden-wuerttemberg/ulm/index.html')!;
+    expect(ortHallen).toContain('<a href="halle/baden-wuerttemberg/ulm/sporthalle-ost/">Sporthalle Ost</a>');
+    expect(ortHallen).toContain('<li><a href="halle/">Hallen</a></li>');
+    expect(before.files.get('sitemap.xml')).toContain('/halle/<');
+    expect(before.hasHalls).toBe(true);
 
     const renamed = { ...clubA, halls: [{ ...clubA.halls[0], bezeichnung: 'Neue Halle Ost' }] } as ClubEntry;
     const after = buildSite([renamed], before.urlMap, BASE, '2026-10-03', { docs: [{ ...d, halls: {} } as any], previousHalls: before.hallMap });
