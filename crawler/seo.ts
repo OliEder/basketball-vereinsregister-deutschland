@@ -1002,7 +1002,10 @@ ${crumbNav(crumbs)}
   });
 }
 
-export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; hallMap: UrlMap; regions: { state: string; slug: string; clubs: number }[]; hasLiga: boolean; hasHalls: boolean }
+/** Kennzahlen eines Landes für die Startseite: Vereine, Teams mit Liga, Orte, Ligen und Hallen. */
+export interface RegionInfo { state: string; slug: string; clubs: number; teams: number; orte: number; ligen: number; hallen: number }
+
+export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; hallMap: UrlMap; regions: RegionInfo[]; hasLiga: boolean; hasHalls: boolean }
 
 export function buildSite(
   clubs: ClubEntry[], previous: UrlMap, base: string, lastmod: string,
@@ -1125,12 +1128,15 @@ export function buildSite(
     return [{ heading: `Ligen in ${stateName}`, items }];
   };
 
+  const hallenByState = new Map<string, number>();
+  for (const [key, list] of hallsByPlace) hallenByState.set(key.split('/')[0], (hallenByState.get(key.split('/')[0]) ?? 0) + list.length);
   const regions: SiteBuild['regions'] = [];
   const sortedStates = [...states.entries()].sort((a, b) => a[1].state.name.localeCompare(b[1].state.name, 'de'));
   for (const [stateSlug, sg] of sortedStates) {
     const places = [...sg.places.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name, 'de'));
     const total = places.reduce((n, [, p]) => n + p.clubs.length, 0);
-    regions.push({ state: sg.state.name, slug: stateSlug, clubs: total });
+    const teams = places.reduce((n, [, p]) => n + p.clubs.reduce((m, { club }) => m + (club.teams ?? []).filter(t => t.ligaId != null).length, 0), 0);
+    regions.push({ state: sg.state.name, slug: stateSlug, clubs: total, teams, orte: places.length, ligen: lb.byVerband.get(stateSlug)?.docs.length ?? 0, hallen: hallenByState.get(stateSlug) ?? 0 });
 
     for (const [placeSlug, pg] of places) {
       const items = pg.clubs.sort((a, b) => a.club.name.localeCompare(b.club.name, 'de'))
@@ -1247,31 +1253,22 @@ export function buildSite(
   return { files, urlMap, ligaMap: lb.map, teamMap, hallMap, regions, hasLiga: lb.docs.size > 0, hasHalls: halls.size > 0 };
 }
 
-/** Lage der Bundesländer in der Kachelkarte (Spalte, Zeile), grob wie auf der Landkarte: Norden oben, Süden unten. */
-export const REGION_TILES: Record<string, { abbr: string; col: number; row: number }> = {
-  'schleswig-holstein': { abbr: 'SH', col: 3, row: 1 }, 'mecklenburg-vorpommern': { abbr: 'MV', col: 5, row: 1 },
-  'bremen': { abbr: 'HB', col: 2, row: 2 }, 'hamburg': { abbr: 'HH', col: 3, row: 2 }, 'berlin': { abbr: 'BE', col: 5, row: 2 },
-  'niedersachsen': { abbr: 'NI', col: 3, row: 3 }, 'sachsen-anhalt': { abbr: 'ST', col: 4, row: 3 }, 'brandenburg': { abbr: 'BB', col: 5, row: 3 },
-  'nordrhein-westfalen': { abbr: 'NW', col: 2, row: 4 }, 'hessen': { abbr: 'HE', col: 3, row: 4 }, 'thueringen': { abbr: 'TH', col: 4, row: 4 }, 'sachsen': { abbr: 'SN', col: 5, row: 4 },
-  'saarland': { abbr: 'SL', col: 1, row: 5 }, 'rheinland-pfalz': { abbr: 'RP', col: 2, row: 5 }, 'baden-wuerttemberg': { abbr: 'BW', col: 3, row: 5 }, 'bayern': { abbr: 'BY', col: 4, row: 5 }
-};
+const de = (n: number): string => n.toLocaleString('de-DE');
 
 /**
- * Ersetzt in der Startseite den Platzhalter durch die Regionen als Kachelkarte (Link-Liste in alphabetischer Reihenfolge,
- * die Lage ergibt sich nur aus dem Gitter) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
+ * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Vereine, Teams, Ligen, Hallen;
+ * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
  */
 export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
-  const vereine = (n: number): string => `${n} ${n === 1 ? 'Verein' : 'Vereine'}`;
-  const tiles = regions.filter(r => REGION_TILES[r.slug]).map(r => {
-    const t = REGION_TILES[r.slug];
-    return `<li style="grid-column:${t.col};grid-row:${t.row}"><a class="region-tile" href="${r.slug}/"><span class="dss-sr-only">${esc(r.state)}, ${vereine(r.clubs)}</span><span class="region-abbr" aria-hidden="true">${t.abbr}</span><span class="region-name" aria-hidden="true">${esc(r.state)}</span><span class="region-count" aria-hidden="true">${r.clubs}</span></a></li>`;
+  const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
+  const cards = regions.map(r => {
+    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.teams ? tile(r.teams, r.teams === 1 ? 'Team' : 'Teams') : '', r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : '', r.hallen ? tile(r.hallen, r.hallen === 1 ? 'Halle' : 'Hallen') : ''].join('');
+    return `<li class="region-card dss-card dss-card--hoverable${r.state.length > 24 ? ' region-card--wide' : ''}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
-  const more = regions.filter(r => !REGION_TILES[r.slug]).map(r => `<li><a class="dss-link" href="${r.slug}/">${esc(r.state)}</a> <span class="seo-note">${r.clubs}</span></li>`).join('')
-    + (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '')
-    + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
+  const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
   const hubs = [withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
   return indexHtml
-    .replace('<!--REGION-LINKS-->', `<ul class="region-map">${tiles}</ul>${more ? `\n      <ul class="region-more">${more}</ul>` : ''}`)
+    .replace('<!--REGION-LINKS-->', `<ul class="region-cards">${cards}</ul>${more ? `\n      <ul class="region-more">${more}</ul>` : ''}`)
     .replace('<div id="stats-bar"></div>', `<div id="stats-bar" data-hubs="${hubs}"></div>`);
 }
 

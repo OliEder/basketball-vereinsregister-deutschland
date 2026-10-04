@@ -428,12 +428,13 @@ test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden 
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Basketballhallen in Deutschland');
 });
 
-test('Startseite: Bundesländer als Kachelkarte mit Namen für Screenreader', async ({ page }) => {
-  await open(page, '/index.html', 'light', '.region-map');
-  const bayern = page.getByRole('link', { name: /Bayern, \d+ Vereine?/ });
-  await expect(bayern).toBeVisible();
-  await expect(bayern.locator('.region-abbr')).toHaveText('BY');
-  await bayern.click();
+test('Startseite: Bundesländer als zweispaltige Karten mit Kennzahlen', async ({ page }) => {
+  await open(page, '/index.html', 'light', '.region-card');
+  const bayern = page.locator('.region-card', { has: page.getByRole('link', { name: 'Bayern', exact: true }) });
+  await expect(bayern.locator('.dss-stat-label').first()).toHaveText(/Vereine?/);
+  const cols = await page.locator('.region-cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+  expect(cols).toBe(2);
+  await bayern.getByRole('link', { name: 'Bayern', exact: true }).click();
   await expect(page).toHaveURL(/\/bayern\/$/);
 });
 
