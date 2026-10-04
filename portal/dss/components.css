@@ -273,6 +273,19 @@
   box-shadow: 0 0 0 2px color-mix(in oklch, var(--ink-1000) 35%, transparent), var(--shadow-md);
 }
 
+/* ── Brotkrumen (Navigation-Spec, Variante plain; Liste für Screenreader) ── */
+.dss-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; list-style: none; margin: 0; padding: 0; font-family: var(--font-body); font-size: 13px; color: var(--dss-mute); }
+.dss-crumbs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
+.dss-crumbs li + li::before {
+  content: ''; flex-shrink: 0; width: 14px; height: 14px; background: var(--dss-mute); opacity: 0.7;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.dss-crumbs a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 0 2px; color: var(--dss-mute); text-decoration: none; }
+.dss-crumbs a:hover { color: var(--dss-fg); text-decoration: underline; text-underline-offset: 3px; }
+.dss-crumbs a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; border-radius: var(--radius-sm); }
+.dss-crumbs [aria-current="page"] { color: var(--dss-fg); font-weight: 600; }
+
 /* ── Top-Leiste ─────────────────────────────────────────────── */
 .dss-topbar { border-bottom: 1px solid var(--dss-line); background: color-mix(in oklch, var(--dss-surface) 92%, transparent); }
 .dss-topbar-inner { max-width: 880px; margin: 0 auto; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }

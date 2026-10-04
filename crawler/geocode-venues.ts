@@ -3,7 +3,9 @@
 //
 //   npx ts-node crawler/geocode-venues.ts --store=data-store [--clubs=data/clubs.json] [--budget-min=25] [--max=0]
 //
-// Vorgehen je Halle: erst "Straße, PLZ Ort" (Genauigkeit "adresse"), sonst "PLZ Ort" (Genauigkeit "ort", nur ungefähr).
+// Vorgehen je Halle (Suchtexte siehe queriesFor): "Straße, PLZ Ort" und "Straße, PLZ" (Genauigkeit "adresse"), dann
+// "PLZ Ort" und "PLZ" (Genauigkeit "ort", nur ungefähr). Die Suche nur mit PLZ ist nötig, wenn der Ort im Register ein Kürzel
+// oder einen Ortsteil trägt ("HD-Boxberg", "Essen - Kupferdreh", "Kirchheim/Teck").
 // Ein Treffer gilt nur, wenn er plausibel liegt: höchstens ANCHOR_KM von einem Verein entfernt, der die Halle meldet;
 // ohne solchen Verein muss der von Nominatim gefundene Ort zum Hallenort passen. Fehlschläge werden nach RETRY_DAYS erneut
 // versucht, geänderte Adressen sofort.
@@ -14,11 +16,13 @@ import { distanceKm } from './geo';
 
 export const ANCHOR_KM = 40;
 export const RETRY_DAYS = 30;
+/** Erhöhen, wenn die Suchtexte besser werden: Fehlschläge und ungefähre Treffer werden dann einmal neu versucht. */
+export const QUERY_VERSION = 2;
 
 export interface HallAddress { id: string; bezeichnung?: string; strasse?: string | null; plz?: string | null; ort?: string | null }
 export type Precision = 'adresse' | 'ort';
-export interface CoordEntry { lat: number; lng: number; precision: Precision; q: string; checked: string }
-export interface HallCoords { v: 1; coords: Record<string, CoordEntry>; failed: Record<string, { q: string; checked: string }> }
+export interface CoordEntry { lat: number; lng: number; precision: Precision; q: string; checked: string; v?: number }
+export interface HallCoords { v: 1; coords: Record<string, CoordEntry>; failed: Record<string, { q: string; checked: string; v?: number }> }
 
 export const emptyCoords = (): HallCoords => ({ v: 1, coords: {}, failed: {} });
 
@@ -32,16 +36,21 @@ export function normalizeStreet(s: string): string {
     .trim();
 }
 
-/** Die beiden Suchtexte einer Halle, genauester zuerst; leer, wenn die Adresse nicht reicht. */
+/** Die Suchtexte einer Halle, genauester zuerst; leer, wenn die Adresse nicht reicht. */
 export function queriesFor(h: HallAddress): Array<{ q: string; precision: Precision }> {
   const ort = (h.ort ?? '').replace(/\s+/g, ' ').trim();
   if (!ort) return [];
   const plz = (h.plz ?? '').trim();
   const place = [plz, ort].filter(Boolean).join(' ');
   const out: Array<{ q: string; precision: Precision }> = [];
+  const add = (q: string, precision: Precision): void => { if (!out.some(x => x.q === q)) out.push({ q, precision }); };
   const street = h.strasse ? normalizeStreet(h.strasse) : '';
-  if (street && /\p{L}/u.test(street)) out.push({ q: `${street}, ${place}`, precision: 'adresse' });
-  out.push({ q: place, precision: 'ort' });
+  if (street && /\p{L}/u.test(street)) {
+    add(`${street}, ${place}`, 'adresse');
+    if (plz) add(`${street}, ${plz}`, 'adresse');      // der Ort im Register trägt oft ein Kürzel oder einen Ortsteil
+  }
+  add(place, 'ort');
+  if (plz) add(plz, 'ort');
   return out;
 }
 
@@ -59,6 +68,8 @@ export function daysBetween(from: string, to: string): number {
   return Math.round((Date.parse(to) - Date.parse(from)) / 86400000);
 }
 
+const hasAddressQuery = (h: HallAddress): boolean => queriesFor(h).some(x => x.precision === 'adresse');
+
 /** Welche Hallen sind dran: ohne Koordinate, mit geänderter Adresse oder mit altem Fehlschlag; Hallen mit mehr Vereinen zuerst. */
 export function pending(halls: HallAddress[], store: HallCoords, today: string, weight: (id: string) => number = () => 0): HallAddress[] {
   return halls
@@ -66,9 +77,12 @@ export function pending(halls: HallAddress[], store: HallCoords, today: string, 
     .filter(h => {
       const qs = queriesFor(h).map(x => x.q);
       const done = store.coords[h.id];
-      if (done) return !qs.includes(done.q);                  // nur, wenn sich die Adresse geändert hat
+      if (done) {
+        if (!qs.includes(done.q)) return true;               // die Adresse hat sich geändert
+        return done.precision === 'ort' && done.v !== QUERY_VERSION && hasAddressQuery(h);   // ungefähren Treffer einmal verbessern
+      }
       const failed = store.failed[h.id];
-      return !failed || failed.q !== qs[0] || daysBetween(failed.checked, today) >= RETRY_DAYS;
+      return !failed || failed.q !== qs[0] || failed.v !== QUERY_VERSION || daysBetween(failed.checked, today) >= RETRY_DAYS;
     })
     .sort((a, b) => weight(b.id) - weight(a.id) || Number(a.id) - Number(b.id));
 }
@@ -84,16 +98,20 @@ export interface RunOptions {
   now?: () => number;
 }
 
-export interface RunReport { tried: number; found: number; failed: number; stoppedByBudget: boolean }
+export interface RunReport { tried: number; found: number; failed: number; improved: number; stoppedByBudget: boolean }
 
 export async function geocodeHalls(todo: HallAddress[], store: HallCoords, o: RunOptions): Promise<RunReport> {
   const now = o.now ?? Date.now;
-  const report: RunReport = { tried: 0, found: 0, failed: 0, stoppedByBudget: false };
+  const report: RunReport = { tried: 0, found: 0, failed: 0, improved: 0, stoppedByBudget: false };
   for (const h of todo) {
     if (o.max && report.tried >= o.max) break;
     if (o.deadline && now() >= o.deadline) { report.stoppedByBudget = true; break; }
     report.tried++;
-    const queries = queriesFor(h);
+    const all = queriesFor(h);
+    const existing = store.coords[h.id];
+    // ungefähre Koordinate vorhanden und Adresse unverändert: nur noch die Straßensuche versuchen, die Koordinate bleibt sonst
+    const upgradeOnly = !!existing && existing.precision === 'ort' && all.some(x => x.q === existing.q);
+    const queries = upgradeOnly ? all.filter(x => x.precision === 'adresse') : all;
     const anchors = o.anchorsOf(h.id);
     let hit: { lat: number; lng: number; precision: Precision; q: string } | null = null;
     for (const { q, precision } of queries) {
@@ -101,11 +119,13 @@ export async function geocodeHalls(todo: HallAddress[], store: HallCoords, o: Ru
       if (r && plausible(r, h.ort, anchors)) { hit = { lat: r.lat, lng: r.lng, precision, q }; break; }
     }
     if (hit) {
-      store.coords[h.id] = { lat: Math.round(hit.lat * 1e6) / 1e6, lng: Math.round(hit.lng * 1e6) / 1e6, precision: hit.precision, q: hit.q, checked: o.today };
+      store.coords[h.id] = { lat: Math.round(hit.lat * 1e6) / 1e6, lng: Math.round(hit.lng * 1e6) / 1e6, precision: hit.precision, q: hit.q, checked: o.today, v: QUERY_VERSION };
       delete store.failed[h.id];
-      report.found++;
+      if (upgradeOnly) report.improved++; else report.found++;
+    } else if (upgradeOnly) {
+      existing!.v = QUERY_VERSION;                            // bleibt ungefähr, wird nicht erneut versucht
     } else {
-      store.failed[h.id] = { q: queries[0].q, checked: o.today };
+      store.failed[h.id] = { q: all[0].q, checked: o.today, v: QUERY_VERSION };
       report.failed++;
     }
   }
@@ -161,7 +181,7 @@ async function main(): Promise<void> {
 
   fs.mkdirSync(storeDir, { recursive: true });
   fs.writeFileSync(file, JSON.stringify(store) + '\n', 'utf-8');
-  const msg = `Geokodiert: ${report.found} gefunden, ${report.failed} ohne Treffer von ${report.tried} versuchten Hallen${report.stoppedByBudget ? ' (Zeitbudget erreicht)' : ''}. Gesamt ${Object.keys(store.coords).length}/${halls.length}.`;
+  const msg = `Geokodiert: ${report.found} gefunden, ${report.improved} ungefähre verbessert, ${report.failed} ohne Treffer von ${report.tried} versuchten Hallen${report.stoppedByBudget ? ' (Zeitbudget erreicht)' : ''}. Gesamt ${Object.keys(store.coords).length}/${halls.length}.`;
   console.log(msg);
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `changed=${report.tried > 0}\n`);
 }

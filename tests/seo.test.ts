@@ -520,10 +520,25 @@ describe('Hallenkarte', () => {
     expect(html).not.toContain('"geo"');
   });
 
-  it('ohne Koordinate keine Karte und kein Leaflet', () => {
+  it('ohne Koordinate der Halle: ungefähre Lage aus der Ortsposition des meldenden Vereins, mit Hinweis', () => {
     const html = render({});
+    expect(html).toContain('id="hall-map"');
+    expect(html).toContain('data-lat="49" data-lng="12" data-zoom="13"');
+    expect(html).toContain('nur ungefähr');
+    expect(html).not.toContain('"geo"');
+  });
+
+  it('weder Koordinate noch Verein mit Position: keine Karte und kein Leaflet', () => {
+    const lonely = club(7, 'TV Test', 'Ulm', '0100007', { lat: undefined, lng: undefined, halls: [{ id: 1, dbbSpielfeldId: 9, bezeichnung: 'Halle', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any] } as any);
+    const hall = collectHalls([lonely], [], {}).get('9')!;
+    const html = renderHallPage({ base: BASE, hall, path: 'halle/baden-wuerttemberg/ulm/halle/', today: '2026-10-03', clubById: new Map([[7, lonely]]), clubPaths: {}, teamPaths: {}, ligaPaths: {}, state: { slug: 'baden-wuerttemberg', name: 'BW' } });
     expect(html).not.toContain('hall-map');
     expect(html).not.toContain('leaflet');
+  });
+
+  it('die geokodierte Koordinate hat Vorrang vor der Position des Vereins', () => {
+    const hall = collectHalls([c], [], { '9': { lat: 48.4, lng: 9.99, precision: 'adresse' } }).get('9')!;
+    expect([hall.lat, hall.lng, hall.precision]).toEqual([48.4, 9.99, 'adresse']);
   });
 });
 
