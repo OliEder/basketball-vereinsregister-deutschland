@@ -712,6 +712,8 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Ergänzung Vereins- und Teamseiten fest im HTML:* Die Vereinsseiten enthalten die Teamkarten wie `verein.js` (Name, Liga, Kennzahlen, Training), die Teamseiten Kennzahlen, die Tabelle mit hervorgehobenem eigenem Team sowie die nächsten und letzten fünf Spiele (`scheduleRows`). Die Zahlen berechnet `TeamLogic.summary`, die Kacheln `TeamStats.items`; beides ist dieselbe Datei wie im Browser (UMD), `statsHtml` in `crawler/seo.ts` setzt daraus das HTML. Der Browser ersetzt den Inhalt nach dem Laden der Live-Daten und markiert ihn mit `data-live` (Tests warten darauf). Größe: Teamseite rund 14 kB, Vereinsseite rund 6 bis 8 kB; die Live-Daten stammen aus demselben Deploy, die statische Fassung ist also genauso aktuell. Ohne JavaScript fehlen Filter (Heim/Auswärts), Kalender-Abo, Favoriten, Karte und der Spielort im Teaser.
 
+*Ergänzung Ligenhierarchie:* Die Verbandsseiten gliedern jetzt Altersklasse (h2) → Geschlecht (h3) → Ebene (h4) → Ligakarten (h5) als verschachtelte `details` (`ligaHierarchy`); die Länderseiten zeigen die Seniorenligen als Geschlecht (h3) → Ebene (h4) → Karten. Eine Seite statt Unterseiten je Kombination, damit kein weiterer Klick nötig wird; alles steht im HTML (zugeklappt, nur der jeweils erste Block je Stufe ist offen), Crawler und Nutzer ohne JavaScript sehen den ganzen Inhalt. `pagenav.js` klappt beim Sprung über die Seitennavigation oder einen Fragment-Link alle umgebenden `details` auf. Die Ligakarte nennt zusätzlich „x von y Spielen gespielt“ (ohne abgesagte und Verzichtsspiele). Altersklassen sortieren wie auf den Vereinsseiten (`akSortKey`), Geschlechter männlich, weiblich, mixed.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
