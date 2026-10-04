@@ -111,6 +111,8 @@
 .dss-btn--amber:hover:not(:disabled) { background: var(--dss-cta-bg-hover); }
 .dss-btn--secondary { background: var(--dss-surface-2); color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line); }
 .dss-btn--secondary:hover:not(:disabled) { background: var(--dss-line); }
+.dss-btn--danger { background: var(--err-button); color: #fff; border-radius: var(--radius-md); }
+.dss-btn--danger:hover:not(:disabled) { filter: brightness(1.08); }
 .dss-btn--ghost { background: transparent; color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
 .dss-btn--ghost:hover:not(:disabled) { background: var(--dss-hover-bg); }
 .dss-btn--sm { height: var(--touch-sm); padding: 0 14px; font-size: 13px; }
