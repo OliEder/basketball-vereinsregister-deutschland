@@ -291,16 +291,33 @@ test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async (
   await expect(link).toHaveAttribute('target', '_blank');
 });
 
-test('Kalender-Abo: webcal-Link, Datei und Inhalt mit Spielort', async ({ page, request }) => {
+test('Kalender-Abo: Auswahl Alle/Heim/Auswärts, iPhone- und Android-Link, Dateien mit Spielort', async ({ page, request }) => {
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
-  await expect(page.getByRole('link', { name: 'Kalender abonnieren' })).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009.ics');
+  const apple = page.getByRole('link', { name: 'iPhone / Mac' });
+  const android = page.getByRole('link', { name: /Android/ });
+  await expect(apple).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009.ics');
+  await expect(android).toHaveAttribute('href', 'https://www.google.com/calendar/render?cid=' + encodeURIComponent('webcal://localhost:4173/ics/151009.ics'));
   await expect(page.getByRole('link', { name: /Als Datei/ })).toHaveAttribute('href', 'http://localhost:4173/ics/151009.ics');
 
-  const res = await request.get('/ics/151009.ics');
-  expect(res.headers()['content-type']).toContain('text/calendar');
-  const ics = (await res.text()).replace(/\r\n /g, '');
-  expect(ics).toContain('BEGIN:VCALENDAR');
-  expect(ics).toContain('X-WR-CALNAME:TSV 1861 Nördlingen – Basketball');
-  expect(ics).toContain('BEGIN:VEVENT');
-  expect(ics).toContain('LOCATION:Sporthalle Schwabing (gemeldet)');     // Halle aus matchInfo (Fixture)
+  await page.getByRole('button', { name: 'Nur Heimspiele' }).click();
+  await expect(apple).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009-heim.ics');
+  await expect(page.getByRole('button', { name: 'Nur Heimspiele' })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Nur Auswärtsspiele' }).click();
+  await expect(android).toHaveAttribute('href', /151009-auswaerts\.ics$|151009-auswaerts\.ics/);
+  await expect(page.getByText('Wie funktioniert das Abo?')).toBeVisible();
+
+  const get = async (n: string) => (await (await request.get('/ics/' + n)).text()).replace(/\r\n /g, '');
+  const all = await get('151009.ics');
+  const home = await get('151009-heim.ics');
+  const away = await get('151009-auswaerts.ics');
+  const summaries = (c: string) => [...c.matchAll(/SUMMARY:(.+)\r?\n/g)].map(m => m[1]);
+  expect(all).toContain('X-WR-CALNAME:TSV 1861 Nördlingen – Basketball');
+  expect(all).toContain('LOCATION:Sporthalle Schwabing (gemeldet)');     // Halle aus matchInfo (Fixture)
+  expect(home).toContain('Heimspiele');
+  expect(away).toContain('Auswärtsspiele');
+  expect(summaries(home).length).toBeGreaterThan(0);
+  expect(summaries(away).length).toBeGreaterThan(0);
+  summaries(home).forEach(s => expect(s.startsWith('TSV 1861 Nördlingen –')).toBe(true));
+  summaries(away).forEach(s => expect(s.endsWith('– TSV 1861 Nördlingen')).toBe(true));
+  expect(summaries(home).length + summaries(away).length).toBe(summaries(all).length);
 });

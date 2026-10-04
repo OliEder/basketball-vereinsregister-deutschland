@@ -1,4 +1,5 @@
-// Kalender-Abo: eine .ics-Datei je Team (ics/<teamPermanentId>.ics) aus den Live-Daten samt Spielorten.
+// Kalender-Abo: je Team drei .ics-Dateien aus den Live-Daten samt Spielorten:
+//   ics/<teamPermanentId>.ics (alle Spiele), -heim.ics (nur Heimspiele), -auswaerts.ics (nur Auswärtsspiele)
 //
 //   npx ts-node crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…]
 //
@@ -94,8 +95,16 @@ export function locationOf(hall: IcsHall | undefined): string | null {
   return [hall.bezeichnung, hall.strasse, place].filter(Boolean).join(', ');
 }
 
+export type IcsScope = 'all' | 'home' | 'away';
+export const SCOPES: { scope: IcsScope; suffix: string; label: string }[] = [
+  { scope: 'all', suffix: '', label: '' },
+  { scope: 'home', suffix: '-heim', label: ' – Heimspiele' },
+  { scope: 'away', suffix: '-auswaerts', label: ' – Auswärtsspiele' }
+];
+
 export interface CalendarOptions {
   teamId: number;
+  scope?: IcsScope;               // alle Spiele (Standard), nur Heim- oder nur Auswärtsspiele
   name: string;
   ligen: IcsLiga[];
   today: string;                  // YYYY-MM-DD
@@ -105,14 +114,16 @@ export interface CalendarOptions {
 
 export function buildCalendar(o: CalendarOptions): string {
   const from = addDays(o.today, -7);
+  const scope = o.scope ?? 'all';
+  const title = `${o.name} – Basketball${SCOPES.find(s => s.scope === scope)!.label}`;
   const lines: string[] = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Basketball Vereinsregister//Spielplan//DE',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    `X-WR-CALNAME:${escapeText(`${o.name} – Basketball`)}`,
-    `NAME:${escapeText(`${o.name} – Basketball`)}`,
+    `X-WR-CALNAME:${escapeText(title)}`,
+    `NAME:${escapeText(title)}`,
     'X-WR-TIMEZONE:Europe/Berlin',
     'REFRESH-INTERVAL;VALUE=DURATION:PT6H',
     'X-PUBLISHED-TTL:PT6H'
@@ -128,6 +139,7 @@ export function buildCalendar(o: CalendarOptions): string {
       const home = m.homeTeam?.teamPermanentId === o.teamId;
       const guest = m.guestTeam?.teamPermanentId === o.teamId;
       if (!(home || guest) || !m.kickoffDate || m.kickoffDate < from || seen.has(m.matchId)) continue;
+      if ((scope === 'home' && !home) || (scope === 'away' && !guest)) continue;
       seen.add(m.matchId);
 
       const cancelled = !!m.abgesagt || !!m.verzicht;
@@ -203,9 +215,11 @@ function main(): void {
   for (const [teamId, t] of teams) {
     const stamp = t.ligen.map(l => l.fetchedAt ?? '').sort().pop() || new Date().toISOString();
     const page = teamUrls[String(teamId)] ? `${base}/${teamUrls[String(teamId)]}` : undefined;
-    fs.writeFileSync(path.join(out, `${teamId}.ics`), buildCalendar({ teamId, name: t.name, ligen: t.ligen, today, pageUrl: page, stamp }), 'utf-8');
+    for (const v of SCOPES) {
+      fs.writeFileSync(path.join(out, `${teamId}${v.suffix}.ics`), buildCalendar({ teamId, scope: v.scope, name: t.name, ligen: t.ligen, today, pageUrl: page, stamp }), 'utf-8');
+    }
   }
-  console.log(`Kalender: ${teams.size} Teams → ${out}`);
+  console.log(`Kalender: ${teams.size} Teams × ${SCOPES.length} Abos → ${out}`);
 }
 
 if (require.main === module) main();

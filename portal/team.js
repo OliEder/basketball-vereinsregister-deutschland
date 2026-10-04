@@ -299,34 +299,84 @@ function renderLiga(docs, doc, teamId, container, hallIndex) {
   }
 }
 
-/** Kalender-Abo: webcal-Link (Kalender-App öffnet sich), Link zum Kopieren und die Datei selbst. */
+const CAL_VARIANTS = [
+  { suffix: '', label: 'Alle Spiele', note: 'Alle Spiele des Teams, auch Pokal und Turniere.' },
+  { suffix: '-heim', label: 'Nur Heimspiele', note: 'Nur die Spiele, die das Team zuhause austrägt (vs.).' },
+  { suffix: '-auswaerts', label: 'Nur Auswärtsspiele', note: 'Nur die Spiele, die das Team auswärts austrägt (@).' }
+];
+
+/** Kalender-Abo: Auswahl Alle / Heim / Auswärts, Buttons für iPhone/Mac und Android, Link, Datei und eine kurze Erklärung. */
 function calendarBlock(teamId) {
-  const url = new URL('ics/' + encodeURIComponent(teamId) + '.ics', document.baseURI);
-  const box = el('div', 'team-cal');
-  box.setAttribute('role', 'group');
-  box.setAttribute('aria-label', 'Spielplan im Kalender');
+  const box = el('section', 'team-cal');
+  box.setAttribute('aria-labelledby', 'team-cal-title');
+  box.appendChild(el('h2', 'team-section-title', 'Spielplan im Kalender'));
+  box.firstChild.id = 'team-cal-title';
+  box.appendChild(el('p', 'team-cal-intro', 'Neue Spiele, Verlegungen und Absagen erscheinen automatisch in deiner Kalender-App, mit Halle, sobald sie gemeldet ist.'));
 
-  const sub = el('a', 'team-cal-link dss-btn dss-btn--secondary dss-btn--sm', 'Kalender abonnieren');
-  sub.href = 'webcal://' + url.host + url.pathname;
-  box.appendChild(sub);
+  const tabs = el('div', 'team-tabs dss-tabs dss-tabs--segmented dss-tabs--md');
+  tabs.setAttribute('role', 'group');
+  tabs.setAttribute('aria-label', 'Welche Spiele abonnieren?');
+  box.appendChild(tabs);
+  const note = el('p', 'team-cal-note');
+  note.setAttribute('aria-live', 'polite');
+  box.appendChild(note);
 
+  const actions = el('div', 'team-cal-actions');
+  const apple = el('a', 'team-cal-link dss-btn dss-btn--secondary dss-btn--sm', 'iPhone / Mac');
+  const android = el('a', 'team-cal-link dss-btn dss-btn--secondary dss-btn--sm', 'Android (Google Kalender)');
   const file = el('a', 'team-cal-link dss-btn dss-btn--ghost dss-btn--sm', 'Als Datei (.ics)');
-  file.href = url.href;
-  file.setAttribute('download', teamId + '.ics');
-  box.appendChild(file);
-
+  actions.appendChild(apple);
+  actions.appendChild(android);
+  let copy = null;
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    const copy = el('button', 'team-cal-link dss-btn dss-btn--ghost dss-btn--sm', 'Link kopieren');
+    copy = el('button', 'team-cal-link dss-btn dss-btn--ghost dss-btn--sm', 'Link kopieren');
     copy.type = 'button';
+    actions.appendChild(copy);
+  }
+  actions.appendChild(file);
+  box.appendChild(actions);
+
+  let current = CAL_VARIANTS[0];
+  function show(i) {
+    current = CAL_VARIANTS[i];
+    const url = new URL('ics/' + encodeURIComponent(teamId) + current.suffix + '.ics', document.baseURI);
+    const webcal = 'webcal://' + url.host + url.pathname;
+    apple.href = webcal;
+    android.href = 'https://www.google.com/calendar/render?cid=' + encodeURIComponent(webcal);
+    android.target = '_blank';
+    android.rel = 'noopener';
+    file.href = url.href;
+    file.setAttribute('download', teamId + current.suffix + '.ics');
+    note.textContent = current.note;
+    Array.from(tabs.children).forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
+  }
+  CAL_VARIANTS.forEach((v, i) => {
+    const b = el('button', 'team-liga-btn dss-tab', v.label);
+    b.type = 'button';
+    b.onclick = () => show(i);
+    tabs.appendChild(b);
+  });
+  if (copy) {
     copy.addEventListener('click', () => {
-      navigator.clipboard.writeText(url.href).then(() => {
+      navigator.clipboard.writeText(file.href).then(() => {
         copy.textContent = 'Link kopiert';
         setTimeout(() => { copy.textContent = 'Link kopieren'; }, 2000);
       }).catch(() => {});
     });
-    box.appendChild(copy);
   }
-  box.appendChild(el('p', 'team-cal-note', 'Alle Spiele mit Spielort, sobald die Halle gemeldet ist. Wird alle 6 Stunden aktualisiert.'));
+  show(0);
+
+  const help = el('details', 'team-cal-help');
+  help.appendChild(el('summary', null, 'Wie funktioniert das Abo?'));
+  const dl = el('dl');
+  [
+    ['iPhone, iPad und Mac', 'Tippe auf „iPhone / Mac“. Die Kalender-App öffnet sich und fragt, ob du den Kalender abonnieren möchtest. Danach aktualisiert sie sich selbst.'],
+    ['Android und Google Kalender', 'Tippe auf „Android“. Google Kalender öffnet sich im Browser, dort bestätigst du das Abo einmalig. Danach erscheint es in der Google-Kalender-App auf allen deinen Geräten. Google lädt Abos nur etwa alle 12 bis 24 Stunden neu, Änderungen kommen also mit etwas Verzögerung.'],
+    ['Outlook', 'Tippe auf „Link kopieren“ und füge die Adresse in Outlook ein: Kalender hinzufügen → Aus dem Internet abonnieren.'],
+    ['Andere Apps', 'Lade die Datei „.ics“ herunter und importiere sie. Das ist eine einmalige Kopie ohne automatische Aktualisierung.']
+  ].forEach(([t, d]) => { dl.appendChild(el('dt', null, t)); dl.appendChild(el('dd', null, d)); });
+  help.appendChild(dl);
+  box.appendChild(help);
   return box;
 }
 
