@@ -603,7 +603,7 @@ export function ligaCard(d: LigaDoc, ligaPath: string, clubPaths: Record<string,
   const table = top.length
     ? `<div class="dss-table-scroll"><table class="dss-tbl dss-tbl--compact liga-mini"><caption class="dss-sr-only">Tabellenspitze ${esc(d.liganame)}</caption><thead><tr><th scope="col" class="center">#</th><th scope="col" class="wrap">Mannschaft</th><th scope="col" class="num">Sp</th><th scope="col" class="num">Pkt</th></tr></thead><tbody>${top.map(e => `<tr><td class="center num lead">${esc(String(e.rang ?? ''))}</td><td class="wrap">${teamCell(e.team, clubPaths, teamPaths)}</td><td class="num">${e.anzspiele ?? 0}</td><td class="num lead">${e.anzGewinnpunkte ?? 0}</td></tr>`).join('')}</tbody></table></div>`
     : `<p class="seo-note liga-empty">${teams ? 'Noch keine Spiele gespielt.' : 'Noch keine Tabelle.'}</p>`;
-  return `<li class="liga-card dss-card dss-card--default"><div class="liga-card-head"><${h} class="liga-card-title"><a href="${ligaPath}">${esc(d.liganame)}</a></${h}>${meta ? `<p class="seo-note liga-card-meta">${esc(meta)}</p>` : ''}</div>${table}</li>`;
+  return `<li class="liga-card dss-card dss-card--default"><div class="liga-card-head"><${h} class="liga-card-title"><a href="${ligaPath}">${esc(d.liganame)}</a></${h}>${meta ? `<p class="seo-note liga-card-meta">${esc(meta)}</p>` : ''}</div>${table}<p class="liga-card-more"><a class="dss-link" href="${ligaPath}">Komplette Tabelle und Spielplan<span class="dss-sr-only"> ${esc(d.liganame)}</span></a></p></li>`;
 }
 
 const ligaGrid = (docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4'): string =>

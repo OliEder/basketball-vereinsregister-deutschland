@@ -308,10 +308,12 @@ describe('Ligaseiten', () => {
     expect(html).toContain('<a href="bayern/regensburg/tv-regensburg/herren/">TV Regensburg</a>');       // Team direkt verlinkt
     expect(html.match(/<tr><td/g)).toHaveLength(3);                                                        // nur die ersten drei
     expect(html).not.toContain('Vierter');
+    expect(html).toContain('<p class="liga-card-more"><a class="dss-link" href="liga/bayern/kreisliga-a/">Komplette Tabelle und Spielplan<span class="dss-sr-only"> Kreisliga A</span></a></p>');   // Hinweis auf die komplette Tabelle
     expect(html).toContain('DJK &lt;b&gt;');                                                               // maskiert
     const leer = ligaCard(liga(2, 'Neu', { tabelle: d.tabelle.map(e => ({ ...e, anzspiele: 0 })) }), 'liga/bayern/neu/', {}, {});
     expect(leer).toContain('Noch keine Spiele gespielt.');
     expect(leer).not.toContain('<table');
+    expect(leer).toContain('Komplette Tabelle und Spielplan');                                           // auch ohne Mini-Tabelle
   });
 
   it('Ebene einer Liga: aus der Liga selbst, sonst aus den Vereinen, sonst Weitere', () => {

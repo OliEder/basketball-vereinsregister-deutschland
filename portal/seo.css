@@ -32,6 +32,8 @@
 .liga-card-title a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; border-radius: var(--radius-sm); }
 .liga-card-meta { margin: 0; }
 .liga-empty { margin: 0.25rem 0 0.5rem; }
+.liga-card-more { margin: auto 0 0; font-size: 0.875rem; }
+.liga-card-more a { display: inline-flex; align-items: center; min-height: 44px; }
 .liga-mini { font-size: 13px; }
 .liga-mini td, .liga-mini th { padding: 0 8px; }
 .liga-mini th.wrap, .liga-mini td.wrap { min-width: 0; white-space: normal; }
