@@ -108,6 +108,15 @@ export function distanceToBorderKm(land: LandFeature, point: { lat: number; lng:
   return best;
 }
 
+/** Andere Länder, deren Grenze höchstens `km` vom Punkt entfernt liegt (für Klubs nahe der Landesgrenze). */
+export function nearbyStates(laender: Laender, point: { lat: number; lng: number }, home: string, km: number): string[] {
+  const pad = km / KM_PER_DEG + 0.05;
+  return laender.features
+    .filter(f => f.name !== home && point.lng >= f.bbox[0] - pad && point.lng <= f.bbox[2] + pad && point.lat >= f.bbox[1] - pad && point.lat <= f.bbox[3] + pad)
+    .filter(f => distanceToBorderKm(f, point) <= km)
+    .map(f => f.name);
+}
+
 const DEFAULT_FILE = path.resolve(__dirname, '..', 'data', 'geo', 'laender.geojson');
 let cached: Laender | null | undefined;
 

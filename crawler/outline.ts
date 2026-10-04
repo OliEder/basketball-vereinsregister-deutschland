@@ -65,3 +65,20 @@ export function outlinesFor(l: Laender, slug: (name: string) => string): Record<
   }
   return out;
 }
+
+/**
+ * Gemeinsamer Umriss mehrerer Länder (Regionalligen aus den Ländern ihrer Klubs, ganz Deutschland für die Bundesligen).
+ * Die Länder werden zusammen projiziert; die Vereinfachung wächst mit der Ausdehnung, damit der Pfad klein bleibt.
+ * Die Grenzen zwischen den Ländern bleiben als feine Linien sichtbar.
+ */
+export function unionOutline(l: Laender, names: string[]): Outline | null {
+  const wanted = new Set(names);
+  const features = l.features.filter(f => wanted.has(f.name));
+  if (!features.length) return null;
+  if (features.length === 1) return landOutline(features[0]);
+  const polygons = features.flatMap(f => f.polygons);
+  const bbox: [number, number, number, number] = [Math.min(...features.map(f => f.bbox[0])), Math.min(...features.map(f => f.bbox[1])), Math.max(...features.map(f => f.bbox[2])), Math.max(...features.map(f => f.bbox[3]))];
+  const span = Math.max(bbox[2] - bbox[0], bbox[3] - bbox[1]);
+  const merged: LandFeature = { name: names.join('+'), sn: null, polygons, bbox };
+  return landOutline(merged, Math.max(0.012, span * 0.003));
+}

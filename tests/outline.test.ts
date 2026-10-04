@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { landOutline, outlinesFor } from '../crawler/outline';
+import { landOutline, outlinesFor, unionOutline } from '../crawler/outline';
 import { parseLaender } from '../crawler/geo-laender';
 
 const square = (x: number, y: number, s: number): number[][] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s], [x, y]];
@@ -53,5 +53,25 @@ describe('outlinesFor mit den BKG-Grenzen', () => {
   it('Rügen bleibt bei Mecklenburg-Vorpommern, mehrere Flächen bei Bremen', () => {
     expect((out['mecklenburg-vorpommern'].path.match(/M/g) ?? []).length).toBeGreaterThan(1);
     expect((out['bremen'].path.match(/M/g) ?? []).length).toBe(2);
+  });
+});
+
+describe('unionOutline', () => {
+  const file = path.join(__dirname, '..', 'data', 'geo', 'laender.geojson');
+  const laender = parseLaender(JSON.parse(fs.readFileSync(file, 'utf-8')));
+
+  it('ein Land: wie landOutline; mehrere Länder: gemeinsames Feld, größer als jedes einzelne', () => {
+    const one = unionOutline(laender, ['Bayern'])!;
+    expect(one.path).toBe(landOutline(laender.features.find(f => f.name === 'Bayern')!)!.path);
+    const two = unionOutline(laender, ['Bayern', 'Sachsen'])!;
+    expect(Math.max(two.w, two.h)).toBe(100);
+    expect((two.path.match(/M/g) ?? []).length).toBeGreaterThanOrEqual(2);                      // beide Länder als eigene Flächen
+  });
+
+  it('ganz Deutschland bleibt klein genug für die Seite; unbekannte Namen ergeben nichts', () => {
+    const all = unionOutline(laender, laender.features.map(f => f.name))!;
+    expect(all.path.length).toBeLessThan(40000);
+    expect(unionOutline(laender, ['Atlantis'])).toBeNull();
+    expect(all.h).toBeGreaterThan(all.w * 0.8);                                                 // Deutschland ist etwa so hoch wie breit
   });
 });

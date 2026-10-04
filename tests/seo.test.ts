@@ -1,4 +1,4 @@
-import { LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -359,6 +359,58 @@ describe('Ligaseiten', () => {
     const d = liga(1, 'Kreisliga A', { matches: [{ matchId: 1, result: '80:70' }, { matchId: 2, result: null }, { matchId: 3, result: null }, { matchId: 4, abgesagt: true }] as any });
     expect(ligaCard(d, 'liga/bayern/kreisliga-a/', {}, {})).toContain('1 von 3 Spielen gespielt');
     expect(ligaCard(liga(2, 'X', { matches: [{ matchId: 1, result: null }] as any }), 'p/', {}, {})).toContain('0 von 1 Spiel gespielt');
+  });
+
+  it('Verbandsarten der Übersicht: bundesweit, Regionalliga, Landesverband, weitere', () => {
+    expect(verbandKind('Bundesligen')).toBe('bund');
+    expect(verbandKind('Deutsche Meisterschaften')).toBe('bund');
+    expect(verbandKind('Rollstuhlbasketball')).toBe('bund');
+    expect(verbandKind('Regionalliga Südost')).toBe('regional');
+    expect(verbandKind('Bayern')).toBe('land');
+    expect(verbandKind('Baden-Württemberg')).toBe('land');
+    expect(verbandKind('Irgendwas')).toBe('weitere');
+  });
+
+  it('Länder einer Liga ergeben sich aus den Klubs in Tabelle und Spielen, ohne Dubletten und ohne Unbekannte', () => {
+    const where: Record<string, { state: string; near?: string[] }> = { '1': { state: 'Bayern' }, '2': { state: 'Sachsen' }, '3': { state: 'Bayern' } };
+    const d = liga(1, 'RL', { tabelle: [{ team: { clubId: 1 } }, { team: { clubId: 2 } }, { team: { clubId: 99 } }] as any, matches: [{ homeTeam: { clubId: 3 }, guestTeam: { clubId: 2 } }] as any });
+    expect(statesOfLiga(d, id => where[id] ?? null).sort()).toEqual(['Bayern', 'Sachsen']);
+  });
+
+  it('Klub nahe der Grenze zu einem schon vertretenen Land nimmt sein Land nicht mit auf', () => {
+    const where: Record<string, { state: string; near?: string[] }> = {
+      '1': { state: 'Baden-Württemberg' }, '2': { state: 'Hessen' },
+      '3': { state: 'Bayern', near: ['Baden-Württemberg'] },                        // z. B. Neu-Ulm
+      '4': { state: 'Saarland', near: ['Frankreich-nicht-im-Datensatz'] }           // nahe einer Grenze, aber niemand sonst im Nachbarland: bleibt
+    };
+    const d = liga(1, 'RL Südwest', { tabelle: [1, 2, 3, 4].map(clubId => ({ team: { clubId } })) as any });
+    expect(statesOfLiga(d, id => where[id] ?? null).sort()).toEqual(['Baden-Württemberg', 'Hessen', 'Saarland']);
+    // gegenseitig nahe Klubs: keiner wird verworfen
+    const both: Record<string, { state: string; near?: string[] }> = { '1': { state: 'Bayern', near: ['Hessen'] }, '2': { state: 'Hessen', near: ['Bayern'] } };
+    expect(statesOfLiga(liga(2, 'X', { tabelle: [1, 2].map(clubId => ({ team: { clubId } })) as any }), id => both[id] ?? null).sort()).toEqual(['Bayern', 'Hessen']);
+  });
+
+  it('Ligenübersicht: Karten in der Reihenfolge bundesweit, Regionalligen, Landesverbände, mit Umriss und Kennzahlen', () => {
+    const geo = { attribution: 'BKG (2024)', outlines: { bayern: { path: 'M0,0L10,0L10,10Z', w: 10, h: 10 } }, laender: { attribution: 'BKG (2024)', features: [
+      { name: 'Bayern', sn: null, bbox: [0, 0, 1, 1] as [number, number, number, number], polygons: [[[[10, 48], [11, 48], [11, 49], [10, 49], [10, 48]]]] },
+      { name: 'Sachsen', sn: null, bbox: [0, 0, 1, 1] as [number, number, number, number], polygons: [[[[12, 50], [13, 50], [13, 51], [12, 51], [12, 50]]]] }
+    ] } };
+    const docs = [
+      liga(1, 'Kreisliga A', { verbandName: 'Bayern' }), liga(2, '1. Regionalliga', { verbandName: 'Regionalliga Südost', matches: [{ matchId: 1, result: '80:70' }] as any }),
+      liga(3, '1. Bundesliga', { verbandName: 'Bundesligen' })
+    ];
+    const b = buildLigaPages(docs, {}, BASE, {}, {}, undefined, { geo, statesOf: d => (d.ligaId === 2 ? ['Bayern', 'Sachsen'] : []) });
+    const html = b.files.get('liga/index.html')!;
+    const at = (x: string): number => html.indexOf(x);
+    expect(at('id="bundesweit"')).toBeGreaterThan(-1);
+    expect(at('id="bundesweit"')).toBeLessThan(at('id="regionalligen"'));
+    expect(at('id="regionalligen"')).toBeLessThan(at('id="landesverbaende"'));
+    expect(html).toContain('<a class="region-link" href="liga/regionalliga-suedost/">Regionalliga Südost</a>');
+    expect(html).toContain('<a class="region-link" href="liga/bayern/">Bayern</a>');
+    expect((html.match(/<svg class="region-shape"/g) ?? []).length).toBe(3);                      // jede Karte hat einen Umriss
+    expect(html).toContain('>Spiel gespielt<');
+    expect(html).toContain('Umrisse:');                                                           // Quellenvermerk
+    expect(buildLigaPages(docs, {}, BASE, {}).files.get('liga/index.html')).not.toContain('region-shape');   // ohne Grenzdaten keine Umrisse
   });
 
   it('Verbandsseite und Übersicht, Weiterleitung bei geändertem Pfad', () => {

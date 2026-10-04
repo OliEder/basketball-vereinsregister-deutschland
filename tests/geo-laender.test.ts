@@ -1,4 +1,4 @@
-import { parseLaender, stateAt, inPolygon, buildLaenderFile, LAND_NAMES } from '../crawler/geo-laender';
+import { parseLaender, stateAt, nearbyStates, inPolygon, buildLaenderFile, LAND_NAMES } from '../crawler/geo-laender';
 
 // Zwei Quadrate: "Nord" (0–10 / 10–20) mit Loch, "Sued" daneben
 const square = (x0: number, y0: number, x1: number, y1: number) => [[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0]];
@@ -53,5 +53,15 @@ describe('buildLaenderFile', () => {
   it('bricht ab, wenn Länder fehlen (falsche Ebene)', () => {
     expect(() => buildLaenderFile({ features: full.features.slice(0, 10) }, meta)).toThrow(/Länder fehlen/);
     expect(() => buildLaenderFile({ features: [] }, meta)).toThrow(/Länder fehlen/);
+  });
+});
+
+describe('nearbyStates', () => {
+  const l = parseLaender(raw);
+  it('nennt das Nachbarland, wenn der Punkt nahe an seiner Grenze liegt, sonst nichts', () => {
+    expect(nearbyStates(l, { lat: 9.9, lng: 5 }, 'Sued', 20)).toEqual(['Nord']);        // knapp unter der Grenze zu Nord
+    expect(nearbyStates(l, { lat: 1, lng: 5 }, 'Sued', 20)).toEqual([]);                  // weit weg
+    expect(nearbyStates(l, { lat: 9.9, lng: 5 }, 'Nord', 120)).toEqual(['Sued']);         // 100 km zur Grenze von Sued; das eigene Land zählt nie
+    expect(nearbyStates(l, { lat: 9.9, lng: 5 }, 'Nord', 20)).toEqual([]);
   });
 });
