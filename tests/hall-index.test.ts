@@ -32,3 +32,13 @@ describe('buildHallIndex', () => {
     expect(idx['4'].bezeichnung).toBe('Heimhalle'); // Ort steht im Vereinsnamen
   });
 });
+
+describe('buildHallIndex mit Geokodierung', () => {
+  it('füllt Koordinaten der Heimhalle nur bei genauem Treffer', () => {
+    const c = (id: number, sid: number) => club(id, 'TSV ' + id, [{ id: 1, dbbSpielfeldId: sid, bezeichnung: 'H', strasse: 'A 1', plz: '1', ort: 'Ulm' }]);
+    const idx = buildHallIndex([c(1, 10), c(2, 20), c(3, 30)], { '10': { lat: 1, lng: 2, precision: 'adresse' }, '20': { lat: 3, lng: 4, precision: 'ort' } });
+    expect(idx['1']).toMatchObject({ lat: 1, lng: 2 });
+    expect(idx['2']).toMatchObject({ lat: null, lng: null });
+    expect(idx['3']).toMatchObject({ lat: null, lng: null });
+  });
+});

@@ -491,3 +491,35 @@ describe('Hallenseiten', () => {
     expect(after.files.get('halle/baden-wuerttemberg/ulm/sporthalle-ost/index.html')).toContain('http-equiv="refresh"');
   });
 });
+
+describe('Hallenkarte', () => {
+  const c = club(7, 'TV Test', 'Ulm', '0100007', { halls: [{ id: 1, dbbSpielfeldId: 9, bezeichnung: 'Halle', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any] });
+  const render = (geo: any) => {
+    const hall = collectHalls([c], [], geo).get('9')!;
+    return renderHallPage({ base: BASE, hall, path: 'halle/baden-wuerttemberg/ulm/halle/', today: '2026-10-03', clubById: new Map([[7, c]]), clubPaths: {}, teamPaths: {}, ligaPaths: {}, state: { slug: 'baden-wuerttemberg', name: 'BW' } });
+  };
+
+  it('Koordinate auf die Adresse: Karte, genauer OSM-Link und geo', () => {
+    const html = render({ '9': { lat: 48.4, lng: 9.99, precision: 'adresse' } });
+    expect(html).toContain('id="hall-map"');
+    expect(html).toContain('data-lat="48.4" data-lng="9.99" data-zoom="16"');
+    expect(html).toContain('<script src="hall.js"></script>');
+    expect(html).toContain('mlat=48.4');
+    expect(html).toContain('"geo":{"@type":"GeoCoordinates","latitude":48.4,"longitude":9.99}');
+    expect(html).not.toContain('nur ungefähr');
+  });
+
+  it('Koordinate nur auf den Ort: Karte mit Hinweis, Suchlink statt Pin, kein geo', () => {
+    const html = render({ '9': { lat: 48.4, lng: 9.99, precision: 'ort' } });
+    expect(html).toContain('data-zoom="13"');
+    expect(html).toContain('nur ungefähr');
+    expect(html).toContain('openstreetmap.org/search?query=');
+    expect(html).not.toContain('"geo"');
+  });
+
+  it('ohne Koordinate keine Karte und kein Leaflet', () => {
+    const html = render({});
+    expect(html).not.toContain('hall-map');
+    expect(html).not.toContain('leaflet');
+  });
+});

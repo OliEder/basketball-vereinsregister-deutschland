@@ -39,3 +39,5 @@
 .seo-block-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
 .seo-list-page address { font-style: normal; margin: 0 0 0.5rem; }
 .seo-matches a, .seo-table a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+.hall-map { height: 260px; border-radius: 8px; margin: 0 0 0.75rem; border: 1px solid var(--dss-line); }
+.team-map-pin { width: 16px; height: 16px; border-radius: 50%; background: var(--dss-cta-bg, #f5a524); border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.35); }
