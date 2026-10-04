@@ -39,7 +39,7 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 
 ## Kalender-Abo
 
-Jede Team-Seite bietet das Abo für **alle Spiele**, **nur Heimspiele** oder **nur Auswärtsspiele**, mit den Wegen **iPhone / Mac** (`webcal://`), **Android (Google Kalender)**, **Link kopieren** und **Als Datei (.ics)** sowie einer kurzen Erklärung. Die Dateien liegen unter `ics/<teamPermanentId>.ics`, `-heim.ics` und `-auswaerts.ics` und werden bei jedem Deploy (alle 6 Stunden) aus den Live-Daten erzeugt (`crawler/ics.ts`). Spiele haben Halle und Koordinaten, sobald der Spielort aus matchInfo bekannt ist; abgesagte Spiele erscheinen als abgesagt.
+Jede Team-Seite bietet das Abo für **alle Spiele**, **nur Heimspiele** oder **nur Auswärtsspiele**, mit den Wegen **iPhone / Mac** (`webcal://`), **Android (Google Kalender)**, **Link kopieren** und **Als Datei (.ics)** sowie einer kurzen Erklärung. Die Dateien liegen unter `ics/<teamPermanentId>.ics`, `-heim.ics` und `-auswaerts.ics` und werden bei jedem Deploy (alle 6 Stunden) aus den Live-Daten erzeugt (`crawler/ics.ts`), inkrementell: nur Teams mit geänderten Eingaben werden neu gebaut, die übrigen Dateien kommen aus dem Cache des letzten Laufs. Spiele haben Halle und Koordinaten, sobald der Spielort aus matchInfo bekannt ist; abgesagte Spiele erscheinen als abgesagt.
 
 ## Hallenseiten
 
