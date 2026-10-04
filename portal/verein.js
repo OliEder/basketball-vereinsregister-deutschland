@@ -294,15 +294,17 @@ function renderTeamCard(team, club, hallsById) {
   label.appendChild(labelLink);
   header.appendChild(label);
 
-  const rangEl = document.createElement('div');
-  rangEl.className = 'verein-team-rang';
-  header.appendChild(rangEl);
   card.appendChild(header);
 
   const ligaEl = document.createElement('div');
   ligaEl.className = 'verein-team-liga verein-team-loading';
   ligaEl.textContent = 'Liga wird geladen…';
   card.appendChild(ligaEl);
+
+  // Platz, Bilanz, Differenz und Form (TeamStats); füllt loadTeamLiga, sobald die Liga geladen ist
+  const statsEl = document.createElement('div');
+  statsEl.className = 'verein-team-stats';
+  card.appendChild(statsEl);
 
   if (team.training && team.training.length > 0) {
     team.training.forEach(t => {
@@ -337,7 +339,7 @@ function renderTeamCard(team, club, hallsById) {
   card.appendChild(cta);
 
   card._ligaEl = ligaEl;
-  card._rangEl = rangEl;
+  card._statsEl = statsEl;
   card._labelLink = labelLink;
   return card;
 }
@@ -379,7 +381,8 @@ function showStaticLiga(team, card) {
   card._ligaEl.classList.remove('verein-team-loading');
   if (team.liganame) {
     card._ligaEl.textContent = team.liganame;
-    if (team.rang) card._rangEl.textContent = 'Platz ' + team.rang;
+    const stats = team.rang ? TeamStats.render({ rang: team.rang }, { compact: true }) : null;
+    if (stats) card._statsEl.appendChild(stats);
   } else {
     card._ligaEl.textContent = 'Liga nicht verfügbar';
   }
@@ -398,10 +401,9 @@ async function loadTeamLiga(team, clubId, card) {
     card._ligaEl.textContent = doc.liganame;
     card._labelLink.href = TeamLogic.teamHref(teamUrlMap, team.teamPermanentId, doc.ligaId);
 
-    const entry = TeamLogic.standingFor(doc.tabelle, team.teamPermanentId);
-    if (entry) {
-      card._rangEl.textContent = 'Platz ' + entry.rang;
-    } else if ((doc.tabelle || []).length === 0) {
+    const stats = TeamStats.render(TeamLogic.summary(doc, team.teamPermanentId), { compact: true });
+    if (stats) card._statsEl.appendChild(stats);
+    if (!TeamLogic.standingFor(doc.tabelle, team.teamPermanentId) && (doc.tabelle || []).length === 0) {
       card._ligaEl.textContent = '';
       const badge = document.createElement('span');
       badge.className = 'verein-badge-pokal dss-chip dss-chip--mono';

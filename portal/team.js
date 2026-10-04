@@ -58,34 +58,8 @@ function todayIso() {
   return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
 }
 
-function stat(value, label) {
-  const box = el('div', 'team-stat dss-stat');
-  const v = el('div', 'team-stat-value dss-stat-value');
-  if (value instanceof Node) v.appendChild(value); else v.textContent = value;
-  box.appendChild(v);
-  box.appendChild(el('div', 'team-stat-label dss-stat-label', label));
-  return box;
-}
-
-function formChips(outcomes) {
-  const wrap = el('span', 'team-form');
-  if (!outcomes.length) { wrap.textContent = '–'; return wrap; }
-  outcomes.forEach(o => wrap.appendChild(el('span', 'team-chip team-chip-' + o, o)));
-  return wrap;
-}
-
-function renderStats(doc, teamId, list) {
-  const standing = TeamLogic.standingFor(doc.tabelle, teamId);
-  const rec = TeamLogic.record(list);
-  const grid = el('div', 'team-stats');
-  grid.appendChild(stat(standing ? standing.rang + '.' : '–', 'Tabellenplatz'));
-  grid.appendChild(stat(rec.played ? rec.wins + ' – ' + rec.losses : '–', 'Bilanz (S – N)'));
-  if (rec.played) {
-    const diff = rec.pointsFor - rec.pointsAgainst;
-    grid.appendChild(stat((diff > 0 ? '+' : '') + diff, 'Korbdifferenz'));
-  }
-  grid.appendChild(stat(formChips(TeamLogic.form(list, 5)), 'Form (letzte 5)'));
-  return grid;
+function renderStats(doc, teamId) {
+  return TeamStats.render(TeamLogic.summary(doc, teamId));
 }
 
 function mapsQuery(venue) {
@@ -253,7 +227,7 @@ function matchRow(d, ligaId) {
   } else if (d.played) {
     const home = d.isHome ? d.own : d.opp;
     const guest = d.isHome ? d.opp : d.own;
-    res.appendChild(el('span', 'team-chip team-chip-' + d.outcome, d.outcome));
+    res.appendChild(el('span', 'dss-chip dss-chip--mono ' + (d.outcome === 'S' ? 'dss-chip--ok' : 'dss-chip--err'), d.outcome));
     res.appendChild(document.createTextNode(' ' + home + ':' + guest));
     if (d.status === 'provisional') res.appendChild(el('span', 'team-match-note', 'vorläufig'));
   } else {
@@ -263,7 +237,7 @@ function matchRow(d, ligaId) {
   return row;
 }
 
-function renderSchedule(list, ligaId) {
+function renderSchedule(list, ligaId, teamId) {
   const section = el('div');
   section.appendChild(el('h2', 'team-section-title', 'Spielplan'));
   if (!list.length) {
@@ -273,12 +247,14 @@ function renderSchedule(list, ligaId) {
   const tabs = el('div', 'team-tabs dss-tabs dss-tabs--segmented dss-tabs--md');
   tabs.setAttribute('role', 'group');
   tabs.setAttribute('aria-label', 'Spiele filtern');
+  const cal = calendarBlock(teamId);
   const matches = el('div', 'team-matches dss-rows');
   const filters = [['Alle', () => true], ['Heim', d => d.isHome], ['Auswärts', d => !d.isHome]];
   function show(i) {
     matches.textContent = '';
     list.filter(filters[i][1]).forEach(d => matches.appendChild(matchRow(d, ligaId)));
     Array.from(tabs.children).forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
+    cal.select(i);
   }
   filters.forEach((f, i) => {
     const b = el('button', 'team-liga-btn dss-tab', f[0]);
@@ -288,6 +264,7 @@ function renderSchedule(list, ligaId) {
   });
   section.appendChild(tabs);
   section.appendChild(matches);
+  section.appendChild(cal.el);
   show(0);
   return section;
 }
@@ -295,11 +272,11 @@ function renderSchedule(list, ligaId) {
 function renderLiga(docs, doc, teamId, container, hallIndex) {
   const list = TeamLogic.teamMatches(doc.matches, teamId);
   container.textContent = '';
-  container.appendChild(renderStats(doc, teamId, list));
+  container.appendChild(renderStats(doc, teamId));
   const next = renderNext(list, doc, TeamLogic.clubIdOf(doc, teamId), hallIndex);
   if (next) container.appendChild(next);
   container.appendChild(renderTable(doc, teamId));
-  container.appendChild(renderSchedule(list, doc.ligaId));
+  container.appendChild(renderSchedule(list, doc.ligaId, teamId));
   container.appendChild(el('div', 'team-updated', 'Stand: ' + new Date(doc.fetchedAt).toLocaleString('de-DE') + ' · wird alle 6 Stunden aktualisiert'));
   const report = window.Report ? Report.link({ kind: 'team', id: teamId, name: TeamLogic.teamName(doc, teamId) || 'Team ' + teamId }) : null;
   if (report) {
@@ -311,25 +288,25 @@ function renderLiga(docs, doc, teamId, container, hallIndex) {
 
 const CAL_VARIANTS = [
   { suffix: '', label: 'Alle Spiele', note: 'Alle Spiele des Teams, auch Pokal und Turniere.' },
-  { suffix: '-heim', label: 'Nur Heimspiele', note: 'Nur die Spiele, die das Team zuhause austrägt (vs.).' },
-  { suffix: '-auswaerts', label: 'Nur Auswärtsspiele', note: 'Nur die Spiele, die das Team auswärts austrägt (@).' }
+  { suffix: '-heim', label: 'Heimspiele', note: 'Nur die Spiele, die das Team zuhause austrägt (vs.).' },
+  { suffix: '-auswaerts', label: 'Auswärtsspiele', note: 'Nur die Spiele, die das Team auswärts austrägt (@).' }
 ];
 
-/** Kalender-Abo: Auswahl Alle / Heim / Auswärts, Buttons für iPhone/Mac und Android, Link, Datei und eine kurze Erklärung. */
+/**
+ * Kalender-Abo im Spielplan: einklappbar, gilt für die Auswahl Alle / Heim / Auswärts darüber (select(i)).
+ * Buttons für iPhone/Mac und Android, Link kopieren, Datei und eine kurze Erklärung.
+ */
 function calendarBlock(teamId) {
-  const box = el('section', 'team-cal');
-  box.setAttribute('aria-labelledby', 'team-cal-title');
-  box.appendChild(el('h2', 'team-section-title', 'Spielplan im Kalender'));
-  box.firstChild.id = 'team-cal-title';
-  box.appendChild(el('p', 'team-cal-intro', 'Neue Spiele, Verlegungen und Absagen erscheinen automatisch in deiner Kalender-App, mit Halle, sobald sie gemeldet ist.'));
-
-  const tabs = el('div', 'team-tabs dss-tabs dss-tabs--segmented dss-tabs--md');
-  tabs.setAttribute('role', 'group');
-  tabs.setAttribute('aria-label', 'Welche Spiele abonnieren?');
-  box.appendChild(tabs);
+  const box = el('details', 'team-cal');
+  box.setAttribute('data-pagenav', 'Kalender-Abo');
+  const summary = el('summary', 'team-cal-summary dss-btn dss-btn--secondary dss-btn--sm');
+  box.appendChild(summary);
+  const inner = el('div', 'team-cal-body');
+  box.appendChild(inner);
+  inner.appendChild(el('p', 'team-cal-intro', 'Neue Spiele, Verlegungen und Absagen erscheinen automatisch in deiner Kalender-App, mit Halle, sobald sie gemeldet ist.'));
   const note = el('p', 'team-cal-note');
   note.setAttribute('aria-live', 'polite');
-  box.appendChild(note);
+  inner.appendChild(note);
 
   const actions = el('div', 'team-cal-actions');
   const apple = el('a', 'team-cal-link dss-btn dss-btn--secondary dss-btn--sm', 'iPhone / Mac');
@@ -344,28 +321,7 @@ function calendarBlock(teamId) {
     actions.appendChild(copy);
   }
   actions.appendChild(file);
-  box.appendChild(actions);
-
-  let current = CAL_VARIANTS[0];
-  function show(i) {
-    current = CAL_VARIANTS[i];
-    const url = new URL('ics/' + encodeURIComponent(teamId) + current.suffix + '.ics', document.baseURI);
-    const webcal = 'webcal://' + url.host + url.pathname;
-    apple.href = webcal;
-    android.href = 'https://www.google.com/calendar/render?cid=' + encodeURIComponent(webcal);
-    android.target = '_blank';
-    android.rel = 'noopener';
-    file.href = url.href;
-    file.setAttribute('download', teamId + current.suffix + '.ics');
-    note.textContent = current.note;
-    Array.from(tabs.children).forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
-  }
-  CAL_VARIANTS.forEach((v, i) => {
-    const b = el('button', 'team-liga-btn dss-tab', v.label);
-    b.type = 'button';
-    b.onclick = () => show(i);
-    tabs.appendChild(b);
-  });
+  inner.appendChild(actions);
   if (copy) {
     copy.addEventListener('click', () => {
       navigator.clipboard.writeText(file.href).then(() => {
@@ -374,7 +330,6 @@ function calendarBlock(teamId) {
       }).catch(() => {});
     });
   }
-  show(0);
 
   const help = el('details', 'team-cal-help');
   help.appendChild(el('summary', null, 'Wie funktioniert das Abo?'));
@@ -386,8 +341,23 @@ function calendarBlock(teamId) {
     ['Andere Apps', 'Lade die Datei „.ics“ herunter und importiere sie. Das ist eine einmalige Kopie ohne automatische Aktualisierung.']
   ].forEach(([t, d]) => { dl.appendChild(el('dt', null, t)); dl.appendChild(el('dd', null, d)); });
   help.appendChild(dl);
-  box.appendChild(help);
-  return box;
+  inner.appendChild(help);
+
+  function select(i) {
+    const v = CAL_VARIANTS[i];
+    const url = new URL('ics/' + encodeURIComponent(teamId) + v.suffix + '.ics', document.baseURI);
+    const webcal = 'webcal://' + url.host + url.pathname;
+    apple.href = webcal;
+    android.href = 'https://www.google.com/calendar/render?cid=' + encodeURIComponent(webcal);
+    android.target = '_blank';
+    android.rel = 'noopener';
+    file.href = url.href;
+    file.setAttribute('download', teamId + v.suffix + '.ics');
+    note.textContent = v.note;
+    summary.textContent = 'Kalender abonnieren: ' + v.label;
+  }
+  select(0);
+  return { el: box, select };
 }
 
 async function init() {
@@ -449,7 +419,6 @@ async function init() {
   const ligaLabel = el('span', null);
   sub.appendChild(ligaLabel);
   content.appendChild(sub);
-  content.appendChild(calendarBlock(teamId));
 
   const body = el('div');
   if (docs.length > 1) {

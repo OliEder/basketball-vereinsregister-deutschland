@@ -298,18 +298,21 @@ test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async (
   await expect(link).toHaveAttribute('target', '_blank');
 });
 
-test('Kalender-Abo: Auswahl Alle/Heim/Auswärts, iPhone- und Android-Link, Dateien mit Spielort', async ({ page, request }) => {
+test('Kalender-Abo im Spielplan: folgt der Auswahl Alle/Heim/Auswärts, iPhone- und Android-Link, Dateien mit Spielort', async ({ page, request }) => {
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await expect(page.getByRole('heading', { name: 'Spielplan im Kalender' })).toHaveCount(0);      // kein eigener Abschnitt mehr
+  await page.getByText('Kalender abonnieren: Alle Spiele').click();
   const apple = page.getByRole('link', { name: 'iPhone / Mac' });
   const android = page.getByRole('link', { name: /Android/ });
   await expect(apple).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009.ics');
   await expect(android).toHaveAttribute('href', 'https://www.google.com/calendar/render?cid=' + encodeURIComponent('webcal://localhost:4173/ics/151009.ics'));
   await expect(page.getByRole('link', { name: /Als Datei/ })).toHaveAttribute('href', 'http://localhost:4173/ics/151009.ics');
 
-  await page.getByRole('button', { name: 'Nur Heimspiele' }).click();
+  await page.getByRole('button', { name: 'Heim', exact: true }).click();
   await expect(apple).toHaveAttribute('href', 'webcal://localhost:4173/ics/151009-heim.ics');
-  await expect(page.getByRole('button', { name: 'Nur Heimspiele' })).toHaveAttribute('aria-pressed', 'true');
-  await page.getByRole('button', { name: 'Nur Auswärtsspiele' }).click();
+  await expect(page.getByText('Kalender abonnieren: Heimspiele')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Heim', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Auswärts', exact: true }).click();
   await expect(android).toHaveAttribute('href', /151009-auswaerts\.ics$|151009-auswaerts\.ics/);
   await expect(page.getByText('Wie funktioniert das Abo?')).toBeVisible();
 
@@ -355,7 +358,10 @@ test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', asyn
 
 test('Seitennavigation: auf der Teamseite erst nach dem Laden der Abschnitte', async ({ page }) => {
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
-  await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan']);
+  await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan', 'Kalender-Abo']);
+  await page.locator('.dss-pagenav').getByRole('link', { name: 'Kalender-Abo' }).click();
+  await expect(page.locator('details.team-cal')).toHaveAttribute('open', '');
+  await expect(page.getByRole('link', { name: 'iPhone / Mac' })).toBeVisible();
   await expect(page.locator('.dss-pagenav')).toHaveCount(1);
 });
 
@@ -376,4 +382,12 @@ test('Startseite: Nach oben ja, Seitennavigation nein', async ({ page }) => {
   await open(page, '/index.html', 'light', '#stats-bar:not(:empty)');
   await expect(page.locator('.dss-pagenav')).toHaveCount(0);
   await expect(page.locator('.dss-backtop')).toHaveCount(1);
+});
+
+test('Vereinsseite: Teamkarte mit Platz, Bilanz, Differenz und letzten Spielen', async ({ page }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '.verein-team-stats .dss-stat');
+  const card = page.locator('.verein-team-card').first();
+  await expect(card.locator('.dss-stat-label')).toHaveText(['Platz', 'Bilanz', 'Diff.', 'Letzte 5']);
+  await expect(card.locator('.dss-stat-value').first()).toHaveText('1.');
+  await expect(card.locator('.dss-form .dss-chip').first()).toContainText(/Sieg|Niederlage/);
 });

@@ -88,6 +88,19 @@
     return r;
   }
 
+  /** Kennzahlen für Teamkarten: Platz, Bilanz, Korbdifferenz und letzte fünf Ergebnisse (aus Tabelle und Spielen der Liga). */
+  function summary(doc, teamId) {
+    var list = teamMatches((doc && doc.matches) || [], teamId);
+    var standing = standingFor(doc && doc.tabelle, teamId);
+    var rec = record(list);
+    return {
+      rang: standing && standing.rang != null ? standing.rang : null,
+      played: rec.played, wins: rec.wins, losses: rec.losses,
+      diff: rec.played ? rec.pointsFor - rec.pointsAgainst : null,
+      form: form(list, 5)
+    };
+  }
+
   /** Tabelleneintrag des Teams oder null. */
   function standingFor(tabelle, teamId) {
     var rows = tabelle || [];
@@ -188,6 +201,7 @@
     form: form,
     record: record,
     standingFor: standingFor,
+    summary: summary,
     teamName: teamName,
     clubIdOf: clubIdOf,
     pickPrimaryLiga: pickPrimaryLiga,

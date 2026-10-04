@@ -1,6 +1,6 @@
 // Seitennavigation für lange Seiten und "Nach oben"-Schaltfläche.
 //
-// Die Navigation entsteht aus den Überschriften (h2) im Hauptbereich, sobald es mindestens MIN_HEADINGS gibt.
+// Die Navigation entsteht aus den Überschriften (h2) und Blöcken mit data-pagenav="Name" im Hauptbereich, sobald es mindestens MIN_HEADINGS gibt.
 // Weil Team- und Vereinsseiten ihre Abschnitte erst im Browser aufbauen, beobachtet das Skript den Hauptbereich
 // und baut die Navigation bei Änderungen der Überschriften neu auf.
 (function (root, factory) {
@@ -17,10 +17,16 @@
       .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'abschnitt';
   }
 
+  /** Beschriftung: data-pagenav, falls gesetzt (für Blöcke ohne Überschrift, z. B. das Kalender-Abo), sonst der Text. */
+  function labelOf(h) {
+    var custom = typeof h.getAttribute === 'function' ? h.getAttribute('data-pagenav') : null;
+    return (custom || h.textContent).replace(/\s+/g, ' ').trim();
+  }
+
   /** Liste { id, text } aus Überschriften; vergibt fehlende Ids. `taken` ist die Menge bereits benutzter Ids. */
   function entries(headings, taken) {
     return headings.map(function (h) {
-      var text = h.textContent.replace(/\s+/g, ' ').trim();
+      var text = labelOf(h);
       if (!h.id) {
         var base = 'abschnitt-' + slug(text), id = base, n = 2;
         while (taken[id]) id = base + '-' + n++;
@@ -68,7 +74,7 @@
     function refresh() {
       if (!wantsNav) return;
       var old = main.querySelector('.dss-pagenav');
-      var headings = Array.prototype.filter.call(main.querySelectorAll('h2'), function (h) { return !h.closest('.dss-pagenav'); });
+      var headings = Array.prototype.filter.call(main.querySelectorAll('h2, [data-pagenav]'), function (h) { return !h.closest('.dss-pagenav'); });
       var taken = {};
       Array.prototype.forEach.call(doc.querySelectorAll('[id]'), function (e) { taken[e.id] = true; });
       var list = headings.length >= MIN_HEADINGS ? entries(headings, taken) : [];
@@ -105,6 +111,15 @@
       win.addEventListener('scroll', toggle, { passive: true });
       win.addEventListener('resize', toggle);
       toggle();
+    }
+
+    // Ein Sprung zu einem eingeklappten Block (details) klappt ihn auf
+    if (wantsNav) {
+      main.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('.dss-pagenav a');
+        var target = a && doc.getElementById(a.getAttribute('href').split('#')[1]);
+        if (target && target.tagName === 'DETAILS') target.open = true;
+      });
     }
 
     refresh();

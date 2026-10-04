@@ -339,6 +339,7 @@ ${crumbNav(crumbs)}
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
+  <script src="team-stats.js"></script>
   <script src="verein.js"></script>
 `
   });
@@ -817,6 +818,7 @@ ${crumbNav(crumbs)}
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
+  <script src="team-stats.js"></script>
   <script src="team.js"></script>
 `
   });
