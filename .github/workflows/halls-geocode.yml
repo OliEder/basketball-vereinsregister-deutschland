@@ -1,0 +1,71 @@
+name: Hallen geokodieren
+
+# Geokodiert die Hallenadressen (clubs.json und Spielorte aus data-store) schrittweise über Nominatim
+# und legt die Koordinaten in data-store/hall-coords.json ab. Bereits gefundene Hallen bleiben liegen,
+# nur neue, geänderte und alte Fehlschläge (nach 30 Tagen) kommen dran. Hallenseiten, Teaser und Kalender
+# übernehmen sie mit dem nächsten Pages-Deploy.
+on:
+  schedule:
+    - cron: '27 4 * * *'
+  workflow_dispatch:
+    inputs:
+      budget:
+        description: 'Zeitbudget in Minuten'
+        default: '25'
+      max:
+        description: 'Höchstzahl Hallen (0 = nur Zeitbudget)'
+        default: '0'
+
+permissions:
+  contents: write
+
+# Gleiche Gruppe wie der Spielorte-Lauf: beide ersetzen den Branch data-store und dürfen nicht gleichzeitig laufen.
+concurrency:
+  group: venues
+  cancel-in-progress: false
+
+jobs:
+  geocode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Branch data-store holen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin data-store >/dev/null 2>&1; then
+            git fetch --depth=1 origin data-store
+            git worktree add data-store FETCH_HEAD
+          else
+            mkdir data-store
+          fi
+
+      - name: Hallen geokodieren
+        id: geo
+        run: npm run geocode-venues -- --store=data-store --budget-min=${{ inputs.budget || '25' }} --max=${{ inputs.max || '0' }}
+
+      # Auch nach einem Abbruch wird gesichert, was bis dahin gefunden wurde.
+      - name: In data-store veröffentlichen
+        if: ${{ always() && hashFiles('data-store/hall-coords.json') != '' && steps.geo.outputs.changed == 'true' }}
+        run: |
+          OUT="$RUNNER_TEMP/data-store-out"
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          cp -r data-store/. "$OUT/"
+          rm -rf "$OUT/.git"
+          cd "$OUT"
+          git init -q -b data-store
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "data: Hallenkoordinaten $(date -u +%F\ %H:%M)"
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git push -f origin data-store

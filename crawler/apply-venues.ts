@@ -13,11 +13,18 @@ import { HallMap, VenueStore, readJson } from './venues';
 export interface HallWithCoords { id?: number; bezeichnung: string; strasse: string | null; plz: string | null; ort: string | null; lat: number | null; lng: number | null }
 
 /** Spielfeld-ID → Koordinaten aus den Hallen der Vereine. */
-export function coordsByHallId(clubs: Array<{ halls?: Array<{ dbbSpielfeldId?: number | null; lat?: number | null; lng?: number | null }> }>): Map<number, { lat: number; lng: number }> {
+export function coordsByHallId(
+  clubs: Array<{ halls?: Array<{ dbbSpielfeldId?: number | null; lat?: number | null; lng?: number | null }> }>,
+  geocoded: Record<string, { lat: number; lng: number; precision?: string }> = {}
+): Map<number, { lat: number; lng: number }> {
   const map = new Map<number, { lat: number; lng: number }>();
+  // Aus der Geokodierung (hall-coords.json) nur Treffer auf die Adresse: eine Ortsmitte wäre als Spielort irreführend
+  for (const [id, c] of Object.entries(geocoded)) {
+    if (c && c.precision === 'adresse' && typeof c.lat === 'number' && typeof c.lng === 'number') map.set(Number(id), { lat: c.lat, lng: c.lng });
+  }
   for (const c of clubs) {
     for (const h of c.halls ?? []) {
-      if (h.dbbSpielfeldId && typeof h.lat === 'number' && typeof h.lng === 'number') map.set(h.dbbSpielfeldId, { lat: h.lat, lng: h.lng });
+      if (h.dbbSpielfeldId && typeof h.lat === 'number' && typeof h.lng === 'number' && !map.has(h.dbbSpielfeldId)) map.set(h.dbbSpielfeldId, { lat: h.lat, lng: h.lng });
     }
   }
   return map;
@@ -61,7 +68,7 @@ function main(): void {
   const halls = readJson<HallMap>(path.join(storeDir, 'halls.json'), {});
   if (!store) { console.log(`Kein Speicher in ${storeDir} — Live-Daten bleiben ohne Spielorte.`); return; }
 
-  const coords = coordsByHallId(readJson<any[]>(clubsFile, []));
+  const coords = coordsByHallId(readJson<any[]>(clubsFile, []), readJson<any>(path.join(storeDir, 'hall-coords.json'), {}).coords ?? {});
   const ligaDir = path.join(dir, 'liga');
   let docs = 0, matches = 0;
   for (const f of fs.existsSync(ligaDir) ? fs.readdirSync(ligaDir) : []) {

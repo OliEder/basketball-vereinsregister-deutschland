@@ -43,7 +43,7 @@ Jede Team-Seite bietet das Abo für **alle Spiele**, **nur Heimspiele** oder **n
 
 ## Hallenseiten
 
-Jede Halle hat eine Seite (`/halle/<land>/<ort>/<halle>/`) mit Adresse, dem **Hallenzähler** (Spiele dieser Saison mit gemeldeter Halle), den nächsten Spielen und den Vereinen, die dort spielen. Die Halle wird über die Spielfeld-ID aus `clubs.json` und den Spielorten (matchInfo) zusammengeführt. Der Zähler ist so vollständig wie die Spielorte im Branch `data-store`.
+Jede Halle hat eine Seite (`/halle/<land>/<ort>/<halle>/`) mit Adresse, dem **Hallenzähler** (Spiele dieser Saison mit gemeldeter Halle), den nächsten Spielen und den Vereinen, die dort spielen. Die Halle wird über die Spielfeld-ID aus `clubs.json` und den Spielorten (matchInfo) zusammengeführt. Der Zähler ist so vollständig wie die Spielorte im Branch `data-store`. Die Koordinaten der Hallen (für die Karte) erzeugt der Workflow „Hallen geokodieren“ (`crawler/geocode-venues.ts`, Nominatim, schrittweise, Ergebnis in `data-store/hall-coords.json`).
 
 ## Favoriten und Fehlermeldung
 
