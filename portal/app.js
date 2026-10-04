@@ -540,8 +540,8 @@ function favToday() {
   return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
 }
 
-/** Nächstes Spiel eines Teams aus den Live-Daten, oder null (keine Daten, kein Spiel). */
-async function favNextGame(teamId) {
+/** Liga, Nächstes Spiel und Kennzahlen eines Teams aus den Live-Daten, oder null (keine Daten). */
+async function favTeamInfo(teamId) {
   try {
     if (!favLive.index) favLive.index = await favJson('data/live/team-index.json');
     const ids = favLive.index[String(teamId)];
@@ -552,36 +552,85 @@ async function favNextGame(teamId) {
     }));
     const doc = TeamLogic.pickPrimaryLiga(docs, teamId);
     if (!doc) return null;
-    return { doc, next: TeamLogic.nextMatch(TeamLogic.teamMatches(doc.matches, teamId), favToday()) };
+    return {
+      doc,
+      next: TeamLogic.nextMatch(TeamLogic.teamMatches(doc.matches, teamId), favToday()),
+      summary: TeamLogic.summary(doc, teamId)
+    };
   } catch (e) {
     return null;
   }
 }
 
-function favItem(kind, entry, href) {
-  const li = document.createElement('li');
-  li.className = 'fav-item';
-  const main = document.createElement('div');
-  main.className = 'fav-main';
-  const a = document.createElement('a');
-  a.className = 'fav-name';
-  a.href = href;
-  a.textContent = entry.name;
-  main.appendChild(a);
-  const sub = document.createElement('span');
-  sub.className = 'fav-sub';
-  sub.textContent = kind === 'club' ? 'Verein' : 'Team';
-  main.appendChild(sub);
-  li.appendChild(main);
+function favEl(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
 
-  const rm = document.createElement('button');
+/** Karte eines Favoriten: Name als Link über die ganze Karte, Art als Chip, "Entfernen" oberhalb des Links. */
+function favCard(kind, entry, href) {
+  const li = favEl('li', 'fav-item fav-card dss-card dss-card--hoverable');
+  const head = favEl('div', 'fav-head');
+  const a = favEl('a', 'fav-name', entry.name);
+  a.href = href;
+  head.appendChild(a);
+  head.appendChild(favEl('span', 'fav-kind dss-chip dss-chip--mono ' + (kind === 'club' ? 'dss-chip--amber' : 'dss-chip--sky'), kind === 'club' ? 'Verein' : 'Team'));
+  li.appendChild(head);
+
+  const actions = favEl('div', 'fav-actions');
+  const rm = favEl('button', 'fav-remove dss-btn dss-btn--danger dss-btn--sm', 'Entfernen');
   rm.type = 'button';
-  rm.className = 'fav-remove dss-btn dss-btn--danger dss-btn--sm';
-  rm.textContent = 'Entfernen';
   rm.setAttribute('aria-label', entry.name + ' aus Meine Teams und Vereine entfernen');
   rm.addEventListener('click', () => Favorites.toggleFavorite(kind, entry));
-  li.appendChild(rm);
-  return { li, sub };
+  actions.appendChild(rm);
+  li.appendChild(actions);
+  return li;
+}
+
+/** Teamkarte wie auf der Vereinsseite: Liga, Platz, Bilanz, Differenz, Form und das nächste Spiel. */
+function favTeamCard(t) {
+  const li = favCard('team', t, TeamLogic.teamHref(teamUrlMap, t.id));
+  const head = li.querySelector('.fav-head');
+  const liga = favEl('div', 'fav-liga fav-loading', 'Liga wird geladen…');
+  const stats = favEl('div', 'fav-stats');
+  const next = favEl('div', 'fav-next');
+  head.after(liga, stats, next);
+  favTeamInfo(t.id).then(r => {
+    liga.classList.remove('fav-loading');
+    if (!r) { liga.textContent = 'Keine Live-Daten'; return; }
+    liga.textContent = r.doc.liganame;
+    const grid = TeamStats.render(r.summary, { compact: true });
+    if (grid) stats.appendChild(grid);
+    const n = r.next;
+    next.appendChild(favEl('div', 'dss-eyebrow', 'Nächstes Spiel'));
+    next.appendChild(favEl('div', 'fav-next-text', n && n.match
+      ? TeamLogic.formatKickoff(n.match.kickoffDate, n.match.kickoffTime) + ' · ' + (n.isHome ? 'vs. ' : '@ ') + (n.opponent ? n.opponent.teamname : '?')
+      : 'Kein Spiel angesetzt'));
+  });
+  return li;
+}
+
+/** Vereinskarte: Logo, Verband, Zahl der Teams und Hallen sowie die Teams als Kürzel (alles aus clubs.json, ohne Live-Daten). */
+function favClubCard(c) {
+  const li = favCard('club', c, (urlMap && urlMap[String(c.id)]) || 'verein.html?id=' + encodeURIComponent(c.id));
+  const club = searchEngine && searchEngine.clubs.find(x => String(x.clubId) === String(c.id));
+  if (!club) return li;
+  const head = li.querySelector('.fav-head');
+  head.insertBefore(createLogoEl(club), head.firstChild);
+  const teams = (club.teams || []).slice().sort((a, b) => akSortKey(a.altersklasse) - akSortKey(b.altersklasse));
+  const halls = club.halls ? club.halls.length : 0;
+  const meta = [club.verbandName, teams.length + (teams.length === 1 ? ' Team' : ' Teams'), halls ? halls + (halls === 1 ? ' Halle' : ' Hallen') : ''].filter(Boolean);
+  const info = favEl('div', 'fav-liga', meta.join(' · '));
+  const badges = favEl('div', 'team-badges');
+  teams.slice(0, 8).forEach(t => {
+    const g = t.geschlecht;
+    badges.appendChild(favEl('span', 'team-badge dss-chip ' + (g === 'männlich' ? 'dss-chip--sky' : g === 'weiblich' ? 'dss-chip--amber' : ''), getBadgeLabel(t)));
+  });
+  if (teams.length > 8) badges.appendChild(favEl('span', 'team-badge dss-chip', '+' + (teams.length - 8)));
+  head.after(info, badges);
+  return li;
 }
 
 async function renderFavorites() {
@@ -592,22 +641,8 @@ async function renderFavorites() {
   list.textContent = '';
   if (!state.teams.length && !state.clubs.length) { section.hidden = true; return; }
   section.hidden = false;
-
-  state.teams.forEach(t => {
-    const { li, sub } = favItem('team', t, TeamLogic.teamHref(teamUrlMap, t.id));
-    list.appendChild(li);
-    favNextGame(t.id).then(r => {
-      if (!r) return;
-      const n = r.next;
-      sub.textContent = n && n.match
-        ? 'Nächstes Spiel: ' + TeamLogic.formatKickoff(n.match.kickoffDate, n.match.kickoffTime) + ' · ' + (n.isHome ? 'vs. ' : '@ ') + (n.opponent ? n.opponent.teamname : '?')
-        : 'Kein Spiel angesetzt · ' + r.doc.liganame;
-    });
-  });
-  state.clubs.forEach(c => {
-    const { li } = favItem('club', c, (urlMap && urlMap[String(c.id)]) || 'verein.html?id=' + encodeURIComponent(c.id));
-    list.appendChild(li);
-  });
+  state.teams.forEach(t => list.appendChild(favTeamCard(t)));
+  state.clubs.forEach(c => list.appendChild(favClubCard(c)));
 }
 
 window.addEventListener('favorites:changed', renderFavorites);

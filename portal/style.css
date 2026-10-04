@@ -203,8 +203,18 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .fav-panel[hidden] { display: none; }
 .fav-title { margin: 0; font-size: 1.15rem; }
 .fav-note { margin: 0.15rem 0 0.75rem; color: var(--dss-mute); font-size: 0.85rem; }
-.fav-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-.fav-item { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.5rem 0; border-top: 1px solid var(--dss-line); }
-.fav-main { display: flex; flex-direction: column; min-width: 0; }
-.fav-name { color: var(--dss-link); font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; }
-.fav-sub { color: var(--dss-mute); font-size: 0.875rem; }
+.fav-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+.fav-card { position: relative; padding: 1rem 1.25rem; gap: 0.4rem; }
+.fav-head { display: flex; align-items: center; gap: 0.6rem; }
+.fav-head .club-logo, .fav-head .club-logo-placeholder { flex-shrink: 0; }
+.fav-name { color: var(--dss-fg); font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; flex: 1; min-width: 0; }
+.fav-name::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); }
+.fav-name:hover { text-decoration: underline; }
+.fav-name:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 3px; }
+.fav-kind { flex-shrink: 0; }
+.fav-liga { font-size: 0.88rem; color: var(--dss-fg-soft); }
+.fav-loading { font-style: italic; color: var(--dss-mute); }
+.fav-stats:empty { display: none; }
+.fav-next-text { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--dss-fg); overflow-wrap: anywhere; }
+.fav-next .dss-eyebrow { margin-bottom: 0.15rem; }
+.fav-actions { position: relative; z-index: 1; margin-top: 0.4rem; }
