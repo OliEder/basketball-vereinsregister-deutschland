@@ -1,7 +1,11 @@
 // Kalender-Abo: je Team drei .ics-Dateien aus den Live-Daten samt Spielorten:
 //   ics/<teamPermanentId>.ics (alle Spiele), -heim.ics (nur Heimspiele), -auswaerts.ics (nur Auswärtsspiele)
 //
-//   npx ts-node crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…]
+//   npx ts-node crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…] [--manifest=<datei>]
+//
+// Inkrementell: Mit --manifest merkt sich der Lauf je Team einen Hash seiner Eingaben (Rohdaten seiner Ligen, Name, Seitenadresse,
+// Zahl der sichtbaren Spiele, Programmstand). Stimmt der Hash und liegen die drei Dateien schon in --out (aus dem Cache des letzten Laufs),
+// wird das Team übersprungen; Dateien von Teams, die es nicht mehr gibt, werden entfernt.
 //
 // Die Datei heißt nach der Team-ID und bleibt daher stabil, auch wenn ein Verein auf eine andere Seite umzieht.
 // Enthalten sind Spiele ab 7 Tage zurück (Ergebnis in der Beschreibung) und alle kommenden. Der Spielort steht nur,
@@ -9,6 +13,7 @@
 // Zeiten sind deutsche Ortszeit und werden als UTC ausgegeben; Kalender-Apps rechnen sie in die eigene Zeitzone um.
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { DEFAULT_BASE } from './seo';
 
 export interface IcsMatch {
@@ -193,6 +198,67 @@ export function collectTeams(docs: IcsLiga[]): Map<number, { name: string; ligen
   return out;
 }
 
+const sha1 = (data: string | Buffer): string => crypto.createHash('sha1').update(data).digest('hex');
+
+/** Hash des Programmstands: Änderungen an diesem Modul machen alle gespeicherten Kalender ungültig. */
+export function codeVersion(): string {
+  try { return sha1(fs.readFileSync(__filename)).slice(0, 12); } catch { return 'unbekannt'; }
+}
+
+export interface HashedLiga { doc: IcsLiga; hash: string }                    // hash: Hash der Rohdatei der Liga
+export interface Manifest { version: string; teams: Record<string, string> }
+
+export interface GenerateOptions {
+  ligen: HashedLiga[];
+  out: string;
+  manifestFile?: string;
+  teamUrls?: Record<string, string>;
+  base: string;
+  today: string;
+  version?: string;
+  now?: string;                    // Ersatz für den Zeitpunkt, wenn keine Liga einen Datenstand hat (Tests)
+}
+
+export interface GenerateResult { teams: number; built: number; skipped: number; pruned: number }
+
+const FILE_RE = /^(\d+)(-heim|-auswaerts)?\.ics$/;
+
+/** Erzeugt die Kalender; mit Manifest nur für Teams, deren Eingaben sich geändert haben (oder deren Dateien fehlen). */
+export function generateCalendars(o: GenerateOptions): GenerateResult {
+  const version = o.version ?? codeVersion();
+  const from = addDays(o.today, -7);
+  const info = new Map<IcsLiga, string>();                                  // Liga → Hash der Rohdatei und Zahl der noch sichtbaren Spiele
+  for (const l of o.ligen) info.set(l.doc, `${l.doc.ligaId}:${l.hash}:${(l.doc.matches ?? []).filter(m => (m.kickoffDate ?? '') >= from).length}`);
+
+  let previous: Record<string, string> = {};
+  if (o.manifestFile && fs.existsSync(o.manifestFile)) {
+    try { const m: Manifest = JSON.parse(fs.readFileSync(o.manifestFile, 'utf-8')); if (m.version === version) previous = m.teams ?? {}; } catch { /* kaputtes Manifest: alles neu */ }
+  }
+
+  fs.mkdirSync(o.out, { recursive: true });
+  const teams = collectTeams(o.ligen.map(l => l.doc));
+  const next: Record<string, string> = {};
+  let built = 0, skipped = 0;
+  for (const [teamId, t] of teams) {
+    const page = o.teamUrls?.[String(teamId)] ? `${o.base}/${o.teamUrls[String(teamId)]}` : undefined;
+    const hash = sha1([version, t.name, page ?? '', ...t.ligen.map(l => info.get(l)).sort()].join('\n'));
+    next[String(teamId)] = hash;
+    const files = SCOPES.map(v => path.join(o.out, `${teamId}${v.suffix}.ics`));
+    if (previous[String(teamId)] === hash && files.every(f => fs.existsSync(f))) { skipped++; continue; }
+    const stamp = t.ligen.map(l => l.fetchedAt ?? '').sort().pop() || o.now || new Date().toISOString();
+    SCOPES.forEach((v, i) => fs.writeFileSync(files[i], buildCalendar({ teamId, scope: v.scope, name: t.name, ligen: t.ligen, today: o.today, pageUrl: page, stamp }), 'utf-8'));
+    built++;
+  }
+
+  let pruned = 0;                                                           // Kalender von Teams, die es nicht mehr gibt
+  for (const f of fs.readdirSync(o.out)) {
+    const m = FILE_RE.exec(f);
+    if (m && !teams.has(Number(m[1]))) { fs.rmSync(path.join(o.out, f)); pruned++; }
+  }
+  if (o.manifestFile) fs.writeFileSync(o.manifestFile, JSON.stringify({ version, teams: next } satisfies Manifest), 'utf-8');
+  return { teams: teams.size, built, skipped, pruned };
+}
+
 function arg(name: string): string | undefined {
   return process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3);
 }
@@ -206,20 +272,12 @@ function main(): void {
 
   const dir = path.join(live, 'liga');
   if (!fs.existsSync(dir)) { console.log(`Keine Live-Daten in ${live}; keine Kalender.`); return; }
-  const docs: IcsLiga[] = fs.readdirSync(dir).filter(f => f.endsWith('.json'))
-    .map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8')));
-  const today = new Date().toISOString().slice(0, 10);
-
-  fs.mkdirSync(out, { recursive: true });
-  const teams = collectTeams(docs);
-  for (const [teamId, t] of teams) {
-    const stamp = t.ligen.map(l => l.fetchedAt ?? '').sort().pop() || new Date().toISOString();
-    const page = teamUrls[String(teamId)] ? `${base}/${teamUrls[String(teamId)]}` : undefined;
-    for (const v of SCOPES) {
-      fs.writeFileSync(path.join(out, `${teamId}${v.suffix}.ics`), buildCalendar({ teamId, scope: v.scope, name: t.name, ligen: t.ligen, today, pageUrl: page, stamp }), 'utf-8');
-    }
-  }
-  console.log(`Kalender: ${teams.size} Teams × ${SCOPES.length} Abos → ${out}`);
+  const ligen: HashedLiga[] = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => {
+    const raw = fs.readFileSync(path.join(dir, f));
+    return { doc: JSON.parse(raw.toString('utf-8')) as IcsLiga, hash: sha1(raw) };
+  });
+  const r = generateCalendars({ ligen, out, manifestFile: arg('manifest'), teamUrls, base, today: new Date().toISOString().slice(0, 10) });
+  console.log(`Kalender: ${r.teams} Teams × ${SCOPES.length} Abos → ${out} (neu ${r.built}, unverändert ${r.skipped}, entfernt ${r.pruned})`);
 }
 
 if (require.main === module) main();

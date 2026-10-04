@@ -1,7 +1,7 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { SCOPES, escapeText, foldLine, berlinToUtc, formatUtc, locationOf, buildCalendar, collectTeams, IcsLiga } from '../crawler/ics';
+import { SCOPES, escapeText, foldLine, berlinToUtc, formatUtc, locationOf, buildCalendar, collectTeams, generateCalendars, codeVersion, IcsLiga } from '../crawler/ics';
 
 const t = (id: number, name: string) => ({ teamPermanentId: id, teamname: name });
 const liga: IcsLiga = {
@@ -125,5 +125,67 @@ describe('CLI-Pfad', () => {
     const { execFileSync } = require('child_process');
     execFileSync('npx', ['ts-node', 'crawler/ics.ts', `--live=${path.join(dir, 'live')}`, `--out=${path.join(dir, 'ics')}`], { cwd: path.join(__dirname, '..'), stdio: 'pipe' });
     expect(fs.readdirSync(path.join(dir, 'ics')).sort()).toEqual(['1-auswaerts.ics', '1-heim.ics', '1.ics', '2-auswaerts.ics', '2-heim.ics', '2.ics', '3-auswaerts.ics', '3-heim.ics', '3.ics', '4-auswaerts.ics', '4-heim.ics', '4.ics']);
+  });
+});
+
+describe('generateCalendars (inkrementell)', () => {
+  const other: IcsLiga = { ligaId: 20, liganame: 'Bezirksliga', fetchedAt: '2026-10-03T09:00:00Z', matches: [{ matchId: 50, kickoffDate: '2026-11-01', kickoffTime: '18:00', homeTeam: t(7, 'Sieben'), guestTeam: t(8, 'Acht') }] };
+  const setup = () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ics-inc-'));
+    return { out: path.join(dir, 'ics'), manifestFile: path.join(dir, 'manifest.json') };
+  };
+  const run = (d: { out: string; manifestFile: string }, ligen: { doc: IcsLiga; hash: string }[], extra: object = {}) =>
+    generateCalendars({ ligen, ...d, base: 'https://x.test', today: '2026-10-03', teamUrls: {}, ...extra });
+  const L = (doc: IcsLiga, hash: string) => ({ doc, hash });
+
+  it('erster Lauf baut alles, zweiter mit gleichen Daten nichts', () => {
+    const d = setup();
+    expect(run(d, [L(liga, 'a'), L(other, 'b')])).toEqual({ teams: 6, built: 6, skipped: 0, pruned: 0 });
+    const before = fs.readFileSync(path.join(d.out, '1.ics'), 'utf-8');
+    expect(run(d, [L(liga, 'a'), L(other, 'b')])).toEqual({ teams: 6, built: 0, skipped: 6, pruned: 0 });
+    expect(fs.readFileSync(path.join(d.out, '1.ics'), 'utf-8')).toBe(before);
+  });
+
+  it('ändert sich eine Liga, werden nur deren Teams neu gebaut', () => {
+    const d = setup();
+    run(d, [L(liga, 'a'), L(other, 'b')]);
+    expect(run(d, [L(liga, 'a2'), L(other, 'b')])).toMatchObject({ built: 4, skipped: 2 });      // Teams 1 bis 4 der Kreisliga
+  });
+
+  it('neue Seitenadresse, fehlende Datei, anderer Programmstand und neuer Teamname bauen neu', () => {
+    const d = setup();
+    run(d, [L(other, 'b')]);
+    expect(run(d, [L(other, 'b')], { teamUrls: { '7': 'a/b/sieben/' } })).toMatchObject({ built: 1, skipped: 1 });
+    fs.rmSync(path.join(d.out, '8-heim.ics'));
+    expect(run(d, [L(other, 'b')], { teamUrls: { '7': 'a/b/sieben/' } })).toMatchObject({ built: 1, skipped: 1 });
+    expect(run(d, [L(other, 'b')], { teamUrls: { '7': 'a/b/sieben/' }, version: 'neu' })).toMatchObject({ built: 2, skipped: 0 });
+    const renamed: IcsLiga = { ...other, matches: [{ ...other.matches[0], homeTeam: t(7, 'Sieben II') }] };
+    expect(run(d, [L(renamed, 'b')], { teamUrls: { '7': 'a/b/sieben/' }, version: 'neu' })).toMatchObject({ built: 1, skipped: 1 });   // nur Team 7 hat einen neuen Namen
+  });
+
+  it('fallen alte Spiele aus dem Zeitfenster, wird neu gebaut, sonst nicht', () => {
+    const d = setup();
+    run(d, [L(liga, 'a')], { today: '2026-10-03' });
+    expect(run(d, [L(liga, 'a')], { today: '2026-10-04' })).toMatchObject({ built: 0 });             // keine Änderung der sichtbaren Spiele
+    expect(run(d, [L(liga, 'a')], { today: '2026-10-09' })).toMatchObject({ built: 4 });             // Spiel vom 1.10. fällt heraus
+  });
+
+  it('entfernt Kalender von Teams, die es nicht mehr gibt, und lässt fremde Dateien stehen', () => {
+    const d = setup();
+    run(d, [L(liga, 'a'), L(other, 'b')]);
+    fs.writeFileSync(path.join(d.out, 'readme.txt'), 'bleibt');
+    expect(run(d, [L(other, 'b')])).toMatchObject({ teams: 2, pruned: 12 });                       // 4 Teams × 3 Dateien
+    expect(fs.existsSync(path.join(d.out, '1.ics'))).toBe(false);
+    expect(fs.existsSync(path.join(d.out, '7.ics'))).toBe(true);
+    expect(fs.existsSync(path.join(d.out, 'readme.txt'))).toBe(true);
+  });
+
+  it('ein kaputtes Manifest führt zum vollständigen Neubau, ohne Manifest-Pfad wird immer gebaut', () => {
+    const d = setup();
+    run(d, [L(other, 'b')]);
+    fs.writeFileSync(d.manifestFile, '{kaputt');
+    expect(run(d, [L(other, 'b')])).toMatchObject({ built: 2 });
+    expect(generateCalendars({ ligen: [L(other, 'b')], out: d.out, base: 'x', today: '2026-10-03' })).toMatchObject({ built: 2 });
+    expect(codeVersion()).toMatch(/^[0-9a-f]{12}$/);
   });
 });
