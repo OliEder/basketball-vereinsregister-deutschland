@@ -670,6 +670,16 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Ergänzung Heim/Auswärts und Android:* Je Team gibt es drei Abos: `ics/<id>.ics` (alle Spiele), `ics/<id>-heim.ics` (nur Heimspiele) und `ics/<id>-auswaerts.ics` (nur Auswärtsspiele) mit jeweils eigenem Kalendernamen und gleichen UIDs. Die Team-Seite lässt die Variante wählen und bietet je Auswahl „iPhone / Mac“ (`webcal://`), „Android (Google Kalender)“ (`https://www.google.com/calendar/render?cid=<webcal-Adresse>`, wie im ics-generator), „Link kopieren“ und die Datei. Android hat kein systemweites Kalender-Abo; Google Kalender richtet es einmalig im Browser ein und synchronisiert es dann auf alle Geräte. Eine kurze Erklärung („Wie funktioniert das Abo?“) nennt die Wege für iPhone/Mac, Android, Outlook und andere Apps.
 
+== ADR-013: Hallenseiten und Hallenzähler
+
+*Status:* angenommen
+
+*Kontext:* Hallen sind der Treffpunkt des Sports: Eltern, Gastmannschaften und Schiedsrichter suchen „Sporthalle X“. Die Daten liegen verteilt vor: `clubs.json` kennt die Hallen, die Vereine melden (2 341 verschiedene Spielfeld-IDs), `data-store` kennt die Hallen je Spiel aus matchInfo (derzeit 2 544, davon 2 027 auch in `clubs.json`). Beide benutzen dieselbe Spielfeld-ID. Koordinaten der Hallen sind noch nicht erfasst.
+
+*Entscheidung:* `crawler/seo.ts` erzeugt je Halle eine Seite `/halle/<land>/<ort>/<halle>/`. Die Halle ist über ihre Spielfeld-ID eindeutig (`collectHalls` führt `clubs.json` und die Spielorte der Live-Daten zusammen); Hallen ohne Namen oder Ort entfallen. Das Land ist das häufigste Land der Vereine, die die Halle melden, sonst der gastgebenden Vereine; der Ort ist der Hallenort, Stadtteile werden wie bei den Vereinen zur Stadt zusammengefasst. Gleiche Namen im selben Ort unterscheidet die Spielfeld-ID. Die Zuordnung (`hall-map.json` im Branch `url-store`) wandert mit, alte Pfade bleiben als Weiterleitung. Die Seite zeigt Adresse (Link zu OpenStreetMap, mit Karte erst, wenn Koordinaten vorliegen), den **Hallenzähler** (Spiele dieser Saison mit gemeldeter Halle, davon gespielt und anstehend; abgesagte Spiele zählen nicht), die nächsten zehn Spiele, die Vereine der Halle mit der Zahl ihrer Heimspiele, den Fehler-melden-Link und JSON-LD (`SportsActivityLocation`). Verlinkt wird von den Ortsseiten („Hallen in …“), den Vereinsseiten und im Browser von Vereins- und Team-Seite über `data/hall-url-map.json` (die Hallen in `liga/*.json` und `hall-index.json` tragen dafür die Spielfeld-ID). Es werden keine Personendaten gespeichert.
+
+*Folgen:* (+) Jede Halle ist einzeln auffindbar; der Zähler wächst mit dem Spielort-Crawler (ADR-008). (+) Hallen, die kein Verein meldet, erscheinen allein durch ihre Spiele. (−) Der Zähler zählt nur Spiele mit gemeldeter Halle und ist solange zu niedrig, bis alle Spielorte geholt sind; die Seite sagt das offen. (−) Ohne Koordinaten gibt es keine eingebettete Karte; eine Geokodierung der Hallenadressen ist ein eigener Schritt. (−) Rund 2 400 weitere Seiten.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
