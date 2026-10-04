@@ -208,7 +208,8 @@ ${o.head ?? ''}  <script src="theme.js"></script>
 </head>
 <body>
 ${o.body}
-${o.scripts ?? ''}</body>
+${o.scripts ?? ''}  <script src="pagenav.js"></script>
+</body>
 </html>
 `;
 }

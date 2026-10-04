@@ -199,7 +199,7 @@ function renderNext(list, doc, ownClubId, hallIndex) {
 function renderTable(doc, teamId) {
   const rows = doc.tabelle || [];
   const section = el('div');
-  section.appendChild(el('div', 'team-section-title', 'Tabelle'));
+  section.appendChild(el('h2', 'team-section-title', 'Tabelle'));
   if (!rows.length) {
     section.appendChild(el('div', 'team-empty dss-empty', 'Für diesen Wettbewerb gibt es (noch) keine Tabelle.'));
     return section;
@@ -265,7 +265,7 @@ function matchRow(d, ligaId) {
 
 function renderSchedule(list, ligaId) {
   const section = el('div');
-  section.appendChild(el('div', 'team-section-title', 'Spielplan'));
+  section.appendChild(el('h2', 'team-section-title', 'Spielplan'));
   if (!list.length) {
     section.appendChild(el('div', 'team-empty dss-empty', 'Keine Spiele gefunden.'));
     return section;

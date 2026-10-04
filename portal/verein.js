@@ -183,7 +183,7 @@ function renderMap(halls) {
 
   const section = document.createElement('div');
 
-  const title = document.createElement('div');
+  const title = document.createElement('h2');
   title.className = 'verein-section-title';
   title.textContent = 'Spielorte';
   section.appendChild(title);
@@ -349,7 +349,7 @@ function renderTeams(club) {
   if (club.halls) club.halls.forEach(h => { hallsById[h.id] = h; });
 
   const section = document.createElement('div');
-  const title = document.createElement('div');
+  const title = document.createElement('h2');
   title.className = 'verein-section-title';
   title.textContent = 'Teams (' + club.teams.length + ')';
   section.appendChild(title);

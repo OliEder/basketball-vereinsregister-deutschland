@@ -22,6 +22,11 @@ const search: Step = async page => {
   await page.click('#name-btn');
 };
 
+const scrollDown: Step = async page => {
+  await page.setViewportSize({ width: 390, height: 500 });
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+};
+
 const withFavorites: Step = async page => {
   await page.evaluate(() => {
     localStorage.setItem('vr:favorites', JSON.stringify({ v: 1, teams: [{ id: '151009', name: 'TSV 1861 Nördlingen', clubId: '1235' }], clubs: [{ id: '1235', name: 'TSV 1861 Nördlingen' }] }));
@@ -38,6 +43,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
   { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.dss-tbl' },
   { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.seo-list a' },
+  { name: 'Ligaseite mit Nach-oben-Schaltfläche', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: '.dss-backtop:not([hidden])', action: scrollDown },
   { name: 'Hallenseite', url: '/halle/bayern/muenchen/halle-schwabing/', ready: 'address' },
   { name: 'Team-Seite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', ready: '.team-table' },
   { name: 'Team ohne Live-Daten', url: '/team.html?id=424242', ready: '.verein-error' }
@@ -336,4 +342,38 @@ test('Hallenseite: Zähler, Spiele und Vereine; Links von Verein und Team', asyn
 
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.next-game-venue');
   await expect(page.locator('.next-game-venue-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
+});
+
+test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', async ({ page }) => {
+  await open(page, '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', 'light', '.dss-pagenav');
+  const links = page.locator('.dss-pagenav a');
+  await expect(links).toHaveText(['Tabelle', 'Nächste Spiele', 'Letzte Ergebnisse']);
+  await links.nth(2).click();
+  await expect(page).toHaveURL(/#abschnitt-letzte-ergebnisse$/);
+  await expect(page.getByRole('heading', { name: 'Letzte Ergebnisse' })).toBeInViewport();
+});
+
+test('Seitennavigation: auf der Teamseite erst nach dem Laden der Abschnitte', async ({ page }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan']);
+  await expect(page.locator('.dss-pagenav')).toHaveCount(1);
+});
+
+test('Nach oben: erscheint erst nach dem Scrollen, springt nach oben und setzt den Fokus auf die Überschrift', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 500 });
+  await open(page, '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', 'light', '.dss-pagenav');
+  const btn = page.getByRole('button', { name: 'Nach oben' });
+  await expect(btn).toBeHidden();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await expect(btn).toBeVisible();
+  await btn.click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.locator('h1')).toBeFocused();
+  await expect(btn).toBeHidden();
+});
+
+test('Startseite: Nach oben ja, Seitennavigation nein', async ({ page }) => {
+  await open(page, '/index.html', 'light', '#stats-bar:not(:empty)');
+  await expect(page.locator('.dss-pagenav')).toHaveCount(0);
+  await expect(page.locator('.dss-backtop')).toHaveCount(1);
 });
