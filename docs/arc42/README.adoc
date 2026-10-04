@@ -668,6 +668,8 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Folgen:* (+) Funktioniert in Apple Kalender, Google Kalender, Outlook und Thunderbird ohne Konto und ohne Server. (+) Die Spielorte erscheinen automatisch, sobald der Venue-Crawler sie geholt hat. (−) Ein Abo ist nur so aktuell wie der letzte Deploy; manche Dienste (z. B. Google Kalender) laden abonnierte Kalender nur etwa alle ein bis zwei Tage nach. (−) Rund 10 000 Dateien, geschätzt 80 MB im Artefakt. (−) Solange erst ein Teil der Spiele eine gemeldete Halle hat, fehlt bei vielen Terminen der Ort.
 
+*Ergänzung Heim/Auswärts und Android:* Je Team gibt es drei Abos: `ics/<id>.ics` (alle Spiele), `ics/<id>-heim.ics` (nur Heimspiele) und `ics/<id>-auswaerts.ics` (nur Auswärtsspiele) mit jeweils eigenem Kalendernamen und gleichen UIDs. Die Team-Seite lässt die Variante wählen und bietet je Auswahl „iPhone / Mac“ (`webcal://`), „Android (Google Kalender)“ (`https://www.google.com/calendar/render?cid=<webcal-Adresse>`, wie im ics-generator), „Link kopieren“ und die Datei. Android hat kein systemweites Kalender-Abo; Google Kalender richtet es einmalig im Browser ein und synchronisiert es dann auf alle Geräte. Eine kurze Erklärung („Wie funktioniert das Abo?“) nennt die Wege für iPhone/Mac, Android, Outlook und andere Apps.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
