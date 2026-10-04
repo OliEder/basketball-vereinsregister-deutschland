@@ -358,7 +358,10 @@ test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', asyn
 
 test('Seitennavigation: auf der Teamseite erst nach dem Laden der Abschnitte', async ({ page }) => {
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
-  await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan']);
+  await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan', 'Kalender-Abo']);
+  await page.locator('.dss-pagenav').getByRole('link', { name: 'Kalender-Abo' }).click();
+  await expect(page.locator('details.team-cal')).toHaveAttribute('open', '');
+  await expect(page.getByRole('link', { name: 'iPhone / Mac' })).toBeVisible();
   await expect(page.locator('.dss-pagenav')).toHaveCount(1);
 });
 

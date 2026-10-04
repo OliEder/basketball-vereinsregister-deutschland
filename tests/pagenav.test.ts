@@ -21,6 +21,12 @@ describe('PageNav', () => {
     expect(list[0].id).toBe('abschnitt-tabelle-2');
   });
 
+  it('nimmt data-pagenav als Beschriftung für Blöcke ohne Überschrift', () => {
+    const block = { id: '', textContent: 'Kalender abonnieren: Alle Spiele', getAttribute: (n: string) => (n === 'data-pagenav' ? 'Kalender-Abo' : null) };
+    const list = PageNav.entries([block], {});
+    expect(list).toEqual([{ id: 'abschnitt-kalender-abo', text: 'Kalender-Abo' }]);
+  });
+
   it('lässt leere Überschriften weg und normalisiert Leerraum', () => {
     const list = PageNav.entries([heading('  Nächste \n Spiele '), heading('   ')], {});
     expect(list.map((e: any) => e.text)).toEqual(['Nächste Spiele']);

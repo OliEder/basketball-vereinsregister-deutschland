@@ -298,6 +298,7 @@ const CAL_VARIANTS = [
  */
 function calendarBlock(teamId) {
   const box = el('details', 'team-cal');
+  box.setAttribute('data-pagenav', 'Kalender-Abo');
   const summary = el('summary', 'team-cal-summary dss-btn dss-btn--secondary dss-btn--sm');
   box.appendChild(summary);
   const inner = el('div', 'team-cal-body');
