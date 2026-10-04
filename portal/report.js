@@ -22,7 +22,7 @@
   function link(o) {
     if (!win || !win.document) return null;
     var a = win.document.createElement('a');
-    a.className = 'report-link';
+    a.className = 'report-link dss-link';
     a.href = url({ kind: o.kind, id: o.id, name: o.name, page: o.page || win.location.href.split('#')[0] });
     a.target = '_blank';
     a.rel = 'noopener';

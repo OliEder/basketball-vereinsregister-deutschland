@@ -230,6 +230,7 @@
 .dss-tbl th.num, .dss-tbl td.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; }
 .dss-tbl td.num.lead { color: var(--dss-fg); font-weight: 700; }
 .dss-tbl th.center, .dss-tbl td.center { text-align: center; }
+.dss-tbl th.wrap, .dss-tbl td.wrap { white-space: normal; min-width: 11rem; }
 .dss-tbl tr.is-own td { background: var(--dss-selected-bg); color: var(--dss-fg); font-weight: 600; }
 .dss-tbl--compact td { height: 40px; font-size: 13.5px; padding: 0 12px; }
 .dss-tbl--compact th { padding: 0 12px; }
@@ -240,8 +241,27 @@
 .dss-row:last-child { border-bottom: 0; }
 .dss-row--match { grid-template-columns: 9rem 1fr auto; }
 .dss-row-when { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--dss-fg-soft); }
-.dss-row-main { min-width: 0; display: flex; align-items: center; gap: 8px; }
+.dss-row-main { min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+.dss-row-meta { flex-basis: 100%; font-size: 12.5px; color: var(--dss-mute); }
+.dss-row-main a, .dss-tbl a {
+  display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-fg);
+  text-decoration: underline; text-decoration-color: var(--dss-line-strong); text-underline-offset: 3px;
+}
+.dss-row-main a:hover, .dss-tbl a:hover { text-decoration-color: var(--amber-500); }
+.dss-row-main a:focus-visible, .dss-tbl a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
+.dss-row-meta a { color: var(--dss-link); }
+.dss-row-teams a { display: inline; min-height: 0; }
+@media (max-width: 560px) {
+  .dss-row--match { grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .dss-row--match .dss-row-when { grid-column: 1 / -1; }
+}
 .dss-row-score { font-family: var(--font-mono); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; color: var(--dss-fg); white-space: nowrap; }
+
+/* ── Kartenmarker (Leaflet divIcon) ─────────────────────────── */
+.dss-map-pin {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--dss-cta-bg); border: 3px solid var(--n-0);
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--ink-1000) 35%, transparent), var(--shadow-md);
+}
 
 /* ── Top-Leiste ─────────────────────────────────────────────── */
 .dss-topbar { border-bottom: 1px solid var(--dss-line); background: color-mix(in oklch, var(--dss-surface) 92%, transparent); }
