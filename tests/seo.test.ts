@@ -324,7 +324,7 @@ describe('Ligaseiten', () => {
     expect(EBENEN.map(e => e.key)).toEqual(['Verband', 'Bezirk', 'Kreis', 'Weitere']);
   });
 
-  it('Verbandsseite: Altersklasse, Geschlecht, Ebene, Bezirk als offene Überschriften, keine Klappboxen', () => {
+  it('Verbandsseite: Altersklasse, Geschlecht, Ebene als Akkordeons, Bezirk als einfache Überschrift', () => {
     const b = buildLigaPages([
       liga(1, 'Kreisliga A', { skEbeneName: 'Kreis', bezirkName: 'Oberpfalz', kreisname: 'Regensburg' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }),
       liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14', bezirkName: 'Schwaben' }), liga(4, 'U14 Damen', { akName: 'U14', geschlecht: 'weiblich', skEbeneName: 'Bezirk', bezirkName: 'Schwaben' }),
@@ -332,7 +332,9 @@ describe('Ligaseiten', () => {
     ], {}, BASE, {});
     const html = b.files.get('liga/bayern/index.html')!;
     const at = (x: string): number => html.indexOf(x);
-    expect(html).not.toContain('<details');
+    expect(html.match(/<details/g)!.length).toBeGreaterThanOrEqual(6);                             // Altersklasse, Geschlecht und Ebene aufklappbar
+    expect(html.match(/<details class="liga-fold liga-fold--2" open>/g)).toHaveLength(1);         // nur die erste Altersklasse offen
+    expect(html).not.toMatch(/<details[^>]*><summary><h5/);                                       // Bezirk ist kein Akkordeon
     expect(at('id="ak-senioren"')).toBeLessThan(at('id="ak-u14"'));                                // Altersklassen in Reihenfolge
     expect(at('id="ak-senioren-maennlich-verband"')).toBeLessThan(at('id="ak-senioren-maennlich-kreis"'));
     expect(at('id="ak-u14-maennlich"')).toBeLessThan(at('id="ak-u14-weiblich"'));

@@ -654,16 +654,18 @@ const geschlechtSort = (g: string): number => { const i = GESCHLECHT_ORDER.index
 const capitalize = (t: string): string => t.charAt(0).toUpperCase() + t.slice(1);
 
 /**
- * Ligen als Gliederung Altersklasse → Geschlecht → Ebene → (Bezirk) → Ligakarten, alles offen auf der Seite.
- * Innerhalb einer Ebene steht je Bezirk nur eine Überschrift, wenn es mehr als einen Bezirk gibt.
+ * Ligen als aufklappbare Gliederung Altersklasse → Geschlecht → Ebene (details, vollständig im HTML, je Stufe nur der erste Block offen)
+ * → Ligakarten. Innerhalb einer Ebene steht je Bezirk nur eine einfache Überschrift (kein weiteres Akkordeon), wenn es mehr als einen Bezirk gibt.
  * `level` ist die Überschriftsebene der obersten Stufe; mit `fromGender` entfällt die Altersklasse (Länderseiten zeigen nur Senioren).
  */
 export function ligaHierarchy(
   docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>,
   ebeneOf: ((id: number) => string | undefined) | undefined, opts: { level: 2 | 3; fromGender?: boolean; idBase?: string }
 ): string {
-  const head = (level: number, id: string | null, label: string, n: number): string =>
-    `<h${level}${id ? ` id="${id}"` : ''}>${esc(label)} <span class="seo-note">${n} ${n === 1 ? 'Liga' : 'Ligen'}</span></h${level}>`;
+  const count = (n: number): string => `<span class="seo-note">${n} ${n === 1 ? 'Liga' : 'Ligen'}</span>`;
+  const head = (level: number, label: string, n: number): string => `<h${level}>${esc(label)} ${count(n)}</h${level}>`;
+  const fold = (level: number, id: string, label: string, n: number, open: boolean, inner: string): string =>
+    `<details class="liga-fold liga-fold--${level}"${open ? ' open' : ''}><summary><h${level} id="${id}">${esc(label)} ${count(n)}</h${level}></summary>\n${inner}</details>`;
   const group = (list: LigaDoc[], key: (d: LigaDoc) => string): Map<string, LigaDoc[]> => {
     const m = new Map<string, LigaDoc[]>();
     for (const d of list) m.set(key(d), [...(m.get(key(d)) ?? []), d]);
@@ -675,19 +677,19 @@ export function ligaHierarchy(
     const named = [...g.keys()].filter(k => k);
     if (!named.length || (named.length === 1 && !g.has(''))) return `      ${ligaGrid(list, paths, clubPaths, teamPaths, `h${level}` as 'h5' | 'h6')}\n`;
     const keys = [...named.sort((a, b) => a.localeCompare(b, 'de')), ...(g.has('') ? [''] : [])];
-    return keys.map(k => `      ${head(level, null, k || 'Ohne Bezirk', g.get(k)!.length)}\n      ${ligaGrid(g.get(k)!, paths, clubPaths, teamPaths, `h${level + 1}` as 'h6', false)}\n`).join('');
+    return keys.map(k => `      ${head(level, k || 'Ohne Bezirk', g.get(k)!.length)}\n      ${ligaGrid(g.get(k)!, paths, clubPaths, teamPaths, `h${level + 1}` as 'h6', false)}\n`).join('');
   };
   const ebenen = (list: LigaDoc[], idBase: string, level: number): string =>
     EBENEN.map(e => ({ ...e, docs: list.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(x => x.docs.length)
-      .map(x => `    ${head(level, `${idBase}-${x.key.toLowerCase()}`, x.label, x.docs.length)}\n${bezirke(x.docs, level + 1)}`).join('');
+      .map((x, i) => fold(level, `${idBase}-${x.key.toLowerCase()}`, x.label, x.docs.length, i === 0, bezirke(x.docs, level + 1))).join('\n');
   const genders = (list: LigaDoc[], idBase: string, level: number): string =>
     [...group(list, d => d.geschlecht || 'Weitere').entries()]
       .sort((a, b) => geschlechtSort(a[0]) - geschlechtSort(b[0]) || a[0].localeCompare(b[0], 'de'))
-      .map(([g, ds]) => `  ${head(level, `${idBase}-${slugify(g)}`, capitalize(g), ds.length)}\n${ebenen(ds, `${idBase}-${slugify(g)}`, level + 1)}`).join('');
+      .map(([g, ds], i) => fold(level, `${idBase}-${slugify(g)}`, capitalize(g), ds.length, i === 0, `${ebenen(ds, `${idBase}-${slugify(g)}`, level + 1)}\n`)).join('\n');
   if (opts.fromGender) return genders(docs, opts.idBase ?? 'ligen', opts.level);
   return [...group(docs, d => d.akName || 'Weitere Ligen').entries()]
     .sort((a, b) => akSortKey(a[0]) - akSortKey(b[0]) || a[0].localeCompare(b[0], 'de'))
-    .map(([ak, ds]) => `${head(opts.level, `ak-${slugify(ak)}`, ak, ds.length)}\n${genders(ds, `ak-${slugify(ak)}`, opts.level + 1)}`).join('');
+    .map(([ak, ds], i) => fold(opts.level, `ak-${slugify(ak)}`, ak, ds.length, i === 0, `${genders(ds, `ak-${slugify(ak)}`, opts.level + 1)}\n`)).join('\n');
 }
 
 export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}, ebeneOf?: (id: number) => string | undefined): LigaBuild {
@@ -713,7 +715,7 @@ export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, 
   const verbaende = [...byVerband.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name, 'de'));
   for (const [slug, v] of verbaende) {
     const pagePath = `liga/${slug}/`;
-    // Struktur: Altersklasse (h2) → Geschlecht (h3) → Ebene (h4) → Bezirk (h5) → Ligakarten
+    // Struktur: Altersklasse (h2) → Geschlecht (h3) → Ebene (h4, jeweils aufklappbar) → Bezirk (h5, einfache Überschrift) → Ligakarten
     const sections = ligaHierarchy(v.docs, paths, clubPaths, teamPaths, ebeneOf, { level: 2 });
     files.set(`${pagePath}index.html`, renderListPage({
       base, pagePath,
