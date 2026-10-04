@@ -13,7 +13,7 @@ import { loadExistingClubs } from './writer';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
-import { Laender, loadLaender, stateAt } from './geo-laender';
+import { Laender, loadLaender, nearbyStates, stateAt } from './geo-laender';
 import { stateName, stateOf } from './region';
 // Kennzahlen und Tabellenlogik teilen sich Browser und Seitenbau (UMD-Dateien des Portals)
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -708,12 +708,22 @@ const HUB_SECTIONS: { kind: VerbandKind; id: string; title: string }[] = [
   { kind: 'weitere', id: 'weitere-verbaende', title: 'Weitere Verbände' }
 ];
 
-/** Länder der Klubs einer Liga (Tabelle und Spiele); `locate` liefert zur Klub-ID den Landesnamen. */
-export function statesOfLiga(d: LigaDoc, locate: (clubId: string) => string | null): string[] {
+/** Land eines Klubs; `near` sind andere Länder, an deren Grenze der Klub liegt (dort zählt sein Land nur, wenn sonst niemand dort ist). */
+export interface ClubState { state: string; near?: string[] }
+
+/**
+ * Länder der Klubs einer Liga (Tabelle und Spiele). Ein Klub nahe der Grenze zu einem anderen Land, das schon durch andere Klubs
+ * der Liga vertreten ist, nimmt sein eigenes Land nicht mit auf (der BBU'01 aus Neu-Ulm macht Bayern nicht zu einem Land der Regionalliga Südwest).
+ */
+export function statesOfLiga(d: LigaDoc, locate: (clubId: string) => ClubState | null): string[] {
   const ids = new Set<string>();
   for (const e of d.tabelle ?? []) if (e?.team?.clubId != null) ids.add(String(e.team.clubId));
   for (const m of d.matches ?? []) for (const t of [m?.homeTeam, m?.guestTeam]) if (t?.clubId != null) ids.add(String(t.clubId));
-  return [...new Set([...ids].map(locate).filter((x): x is string => !!x))];
+  const located = [...ids].map(locate).filter((x): x is ClubState => !!x);
+  const firm = new Set(located.filter(c => !c.near?.length).map(c => c.state));
+  const result = new Set(firm);
+  for (const c of located) if (c.near?.length && !c.near.some(n => firm.has(n))) result.add(c.state);
+  return [...result];
 }
 
 export interface LigaHub { geo?: GeoInfo; statesOf?: (d: LigaDoc) => string[] }
@@ -1215,12 +1225,17 @@ export function buildSite(
   }
   const ebeneOf = (id: number): string | undefined => [...(ebeneByLiga.get(id) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
   const clubByKey = new Map(clubs.map(c => [String(c.clubId), c]));
-  const locateClub = (id: string): string | null => {
+  const BORDER_KM = 2;                                    // "nahe der Grenze" für Klubs (bei 3 km und mehr fielen Bremen, Hamburg und Brandenburg aus der Regionalliga Nord)
+  const locateClub = (id: string): ClubState | null => {
     const c = clubByKey.get(id);
     if (!c) return null;
-    if (c.lat != null && c.lng != null && liga.geo?.laender) { const n = stateAt(liga.geo.laender, { lat: c.lat, lng: c.lng }); if (n) return n; }
+    if (c.lat != null && c.lng != null && liga.geo?.laender) {
+      const point = { lat: c.lat, lng: c.lng };
+      const state = stateAt(liga.geo.laender, point);
+      if (state) return { state, near: nearbyStates(liga.geo.laender, point, state, BORDER_KM) };
+    }
     const code = stateOf(c.vereinsnummer);
-    return code ? stateName(code) : null;
+    return code ? { state: stateName(code) } : null;
   };
   const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths, ebeneOf, { geo: liga.geo, statesOf: d => statesOfLiga(d, locateClub) });
 

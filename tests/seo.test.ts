@@ -372,9 +372,22 @@ describe('Ligaseiten', () => {
   });
 
   it('Länder einer Liga ergeben sich aus den Klubs in Tabelle und Spielen, ohne Dubletten und ohne Unbekannte', () => {
-    const where: Record<string, string> = { '1': 'Bayern', '2': 'Sachsen', '3': 'Bayern' };
+    const where: Record<string, { state: string; near?: string[] }> = { '1': { state: 'Bayern' }, '2': { state: 'Sachsen' }, '3': { state: 'Bayern' } };
     const d = liga(1, 'RL', { tabelle: [{ team: { clubId: 1 } }, { team: { clubId: 2 } }, { team: { clubId: 99 } }] as any, matches: [{ homeTeam: { clubId: 3 }, guestTeam: { clubId: 2 } }] as any });
     expect(statesOfLiga(d, id => where[id] ?? null).sort()).toEqual(['Bayern', 'Sachsen']);
+  });
+
+  it('Klub nahe der Grenze zu einem schon vertretenen Land nimmt sein Land nicht mit auf', () => {
+    const where: Record<string, { state: string; near?: string[] }> = {
+      '1': { state: 'Baden-Württemberg' }, '2': { state: 'Hessen' },
+      '3': { state: 'Bayern', near: ['Baden-Württemberg'] },                        // z. B. Neu-Ulm
+      '4': { state: 'Saarland', near: ['Frankreich-nicht-im-Datensatz'] }           // nahe einer Grenze, aber niemand sonst im Nachbarland: bleibt
+    };
+    const d = liga(1, 'RL Südwest', { tabelle: [1, 2, 3, 4].map(clubId => ({ team: { clubId } })) as any });
+    expect(statesOfLiga(d, id => where[id] ?? null).sort()).toEqual(['Baden-Württemberg', 'Hessen', 'Saarland']);
+    // gegenseitig nahe Klubs: keiner wird verworfen
+    const both: Record<string, { state: string; near?: string[] }> = { '1': { state: 'Bayern', near: ['Hessen'] }, '2': { state: 'Hessen', near: ['Bayern'] } };
+    expect(statesOfLiga(liga(2, 'X', { tabelle: [1, 2].map(clubId => ({ team: { clubId } })) as any }), id => both[id] ?? null).sort()).toEqual(['Bayern', 'Hessen']);
   });
 
   it('Ligenübersicht: Karten in der Reihenfolge bundesweit, Regionalligen, Landesverbände, mit Umriss und Kennzahlen', () => {
