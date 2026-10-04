@@ -696,6 +696,8 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Ergänzung Teamkarten und Kalender-Abo:* `portal/team-stats.js` (mit `TeamLogic.summary`) liefert Platz, Bilanz, Korbdifferenz und die letzten fünf Spiele als `dss-stat`-Kacheln; die Teamseite zeigt sie groß, die Teamkarten der Vereinsseite kompakt. Die Form besteht aus `dss-chip--ok`/`--err` (für Screenreader „Sieg“/„Niederlage“). Das Kalender-Abo (ADR-012) ist ein einklappbarer Block am Ende des Spielplans und folgt der Auswahl Alle/Heim/Auswärts; die eigene Auswahl und der Abschnitt „Spielplan im Kalender“ entfallen.
 
+*Ergänzung Favoritenkarten (ADR-011):* Die Favoriten auf der Startseite sind Karten wie die Teamkarten der Vereinsseite. Ein Team zeigt Liga, Platz, Bilanz, Differenz, Form und das nächste Spiel (Live-Daten, `TeamStats`); ein Verein zeigt Logo, Verband, Hallen und Kennzahlen (Teams, Spiele gespielt/gesamt, Ligen; `TeamLogic.clubSummary` aus den Ligen seiner Teams, Live-Daten zwischengespeichert). Der ganze Karten-Bereich ist der Link, „Entfernen“ (`dss-btn--danger`) liegt darüber.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
