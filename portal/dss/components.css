@@ -250,3 +250,13 @@
 /* ── Leerer / Fehler-Zustand ────────────────────────────────── */
 .dss-empty { text-align: center; padding: 40px 20px; color: var(--dss-mute); font-size: 14px; }
 .dss-empty a { color: var(--dss-link); }
+
+/* ── Seitennavigation und "Nach oben" (pagenav.js) ──────────── */
+html { scroll-padding-bottom: 4.5rem; }   /* fokussierte Elemente nicht unter der festen Schaltfläche */
+h2[id] { scroll-margin-top: 1rem; }
+.dss-pagenav { margin: 1rem 0 1.5rem; }
+.dss-pagenav .dss-eyebrow { margin: 0 0 0.5rem; }
+.dss-pagenav ul { list-style: none; margin: 0; padding: 0; }
+.dss-pagenav .dss-tab { text-decoration: none; color: var(--dss-link); }
+.dss-backtop { position: fixed; right: 16px; bottom: 16px; z-index: 20; box-shadow: var(--shadow-md), inset 0 0 0 1px var(--dss-line-strong); }
+.dss-backtop[hidden] { display: none; }

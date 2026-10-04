@@ -26,7 +26,7 @@
 .verein-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
 .verein-links .dss-chip--link { color: var(--dss-link); }
 
-.verein-section-title { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute); margin-bottom: 0.75rem; }
+.verein-section-title { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute); margin: 0 0 0.75rem; }
 
 /* Karte und Hallen */
 .verein-map-wrap { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--dss-line); margin-bottom: 0.75rem; }
