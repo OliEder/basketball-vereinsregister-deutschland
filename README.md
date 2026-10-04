@@ -137,6 +137,8 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordin
 
 **BKG, Verwaltungsgebiete 1:250 000 (VG250):** © [BKG](https://www.bkg.bund.de) (2026) [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0) (Daten verändert), Datenquellen: https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
 
+*Verwendung:* Prüfung der Vereinskoordinaten und die Länderumrisse auf den Karten der Startseite (weiter vereinfacht, Quellenvermerk im Fuß der Seite).
+
 *Veränderungshinweis:* Die Daten wurden bearbeitet: nur die Landflächen der 16 Länder, Geometrie vereinfacht, nach WGS84 (EPSG:4326) umgerechnet und auf Name und Länderschlüssel reduziert. Die Datei erzeugt der Workflow „Länderpolygone (BKG)“ (`crawler/geo-laender.ts`), Quellenvermerk und Änderungshinweis stehen auch in der Datei selbst.
 
 ## Projektstruktur

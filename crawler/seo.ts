@@ -13,6 +13,8 @@ import { loadExistingClubs } from './writer';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
+import { loadLaender } from './geo-laender';
+import { Outline, outlinesFor } from './outline';
 
 export const DEFAULT_BASE = 'https://olieder.github.io/basketball-vereinsregister-deutschland';
 
@@ -1262,18 +1264,30 @@ export const LAENDER = new Set(['baden-wuerttemberg', 'bayern', 'berlin', 'brand
  * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Zahl der Vereine und Ligen;
  * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
  */
-export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
-  const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
+export interface GeoInfo { outlines: Record<string, Outline>; attribution: string }
+
+/** Quellenvermerk der Umrisse für den Fuß der Startseite (BKG, dl-de/by-2-0; die Umrisse sind vereinfacht). */
+export function geoAttribution(raw: string): string {
+  const year = /\((\d{4})\)/.exec(raw)?.[1];
+  return `Umrisse: <a href="https://www.bkg.bund.de" target="_blank" rel="noopener">© BKG${year ? ` (${year})` : ''}</a>, <a href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener">dl-de/by-2-0</a> (vereinfacht)`;
+}
+
+export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false, geo?: GeoInfo): string {
+  const tile = (value: number, label: string, extra = false): string => `<div class="dss-stat dss-stat--compact${extra ? ' region-extra' : ''}"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
   const ordered = [...regions.filter(r => LAENDER.has(r.slug)), ...regions.filter(r => !LAENDER.has(r.slug))];
   const cards = ordered.map(r => {
-    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : ''].join('');
-    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
+    // Mobil nur Vereine und Ligen; Teams und Hallen (region-extra) erst ab Desktopbreite
+    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.teams ? tile(r.teams, r.teams === 1 ? 'Team' : 'Teams', true) : '', r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : '', r.hallen ? tile(r.hallen, r.hallen === 1 ? 'Halle' : 'Hallen', true) : ''].join('');
+    const o = geo?.outlines[r.slug];
+    const shape = o ? `<svg class="region-shape" viewBox="0 0 ${o.w} ${o.h}" width="${Math.round(o.w * 0.8)}" height="${Math.round(o.h * 0.8)}" aria-hidden="true" focusable="false"><path d="${o.path}"/></svg>` : '';
+    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a>${shape}<div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
   const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
   const hubs = [withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
   return indexHtml
     .replace('<!--REGION-LINKS-->', `<ul class="region-cards">${cards}</ul>${more ? `\n      <ul class="region-more">${more}</ul>` : ''}`)
-    .replace('<div id="stats-bar"></div>', `<div id="stats-bar" data-hubs="${hubs}"></div>`);
+    .replace('<div id="stats-bar"></div>', `<div id="stats-bar" data-hubs="${hubs}"></div>`)
+    .replace('<!--GEO-ATTRIBUTION-->', geo ? geoAttribution(geo.attribution) : '');
 }
 
 function arg(name: string): string | undefined {
@@ -1325,8 +1339,10 @@ function main(): void {
   const publicMap = Object.fromEntries(Object.entries(build.urlMap).map(([id, e]) => [id, e.path]));
   fs.writeFileSync(path.join(site, 'data', 'url-map.json'), JSON.stringify(publicMap), 'utf-8');
 
+  const laender = loadLaender(arg('geo') ?? path.join('data', 'geo', 'laender.geojson'));
+  const geo: GeoInfo | undefined = laender ? { outlines: outlinesFor(laender, slugify), attribution: laender.attribution } : undefined;
   const indexFile = path.join(site, 'index.html');
-  if (fs.existsSync(indexFile)) fs.writeFileSync(indexFile, injectRegionLinks(fs.readFileSync(indexFile, 'utf-8'), build.regions, build.hasLiga, build.hasHalls), 'utf-8');
+  if (fs.existsSync(indexFile)) fs.writeFileSync(indexFile, injectRegionLinks(fs.readFileSync(indexFile, 'utf-8'), build.regions, build.hasLiga, build.hasHalls, geo), 'utf-8');
 
   fs.writeFileSync(path.join(site, 'data', 'team-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.teamMap).map(([id, e]) => [id, e.path]))), 'utf-8');
