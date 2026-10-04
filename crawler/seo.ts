@@ -13,13 +13,14 @@ import { loadExistingClubs } from './writer';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
-import { loadLaender } from './geo-laender';
+import { Laender, loadLaender, stateAt } from './geo-laender';
+import { stateName, stateOf } from './region';
 // Kennzahlen und Tabellenlogik teilen sich Browser und Seitenbau (UMD-Dateien des Portals)
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamLogic: any = require('../portal/team-logic.js');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamStats: any = require('../portal/team-stats.js');
-import { Outline, outlinesFor } from './outline';
+import { Outline, outlinesFor, unionOutline } from './outline';
 
 export const DEFAULT_BASE = 'https://olieder.github.io/basketball-vereinsregister-deutschland';
 
@@ -692,7 +693,55 @@ export function ligaHierarchy(
     .map(([ak, ds], i) => fold(opts.level, `ak-${slugify(ak)}`, ak, ds.length, i === 0, `${genders(ds, `ak-${slugify(ak)}`, opts.level + 1)}\n`)).join('\n');
 }
 
-export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}, ebeneOf?: (id: number) => string | undefined): LigaBuild {
+/** Ligenbereiche der Übersicht: bundesweite Ligen, Regionalligen, Landesverbände, alles andere zuletzt. */
+export type VerbandKind = 'bund' | 'regional' | 'land' | 'weitere';
+export function verbandKind(name: string): VerbandKind {
+  if (/^regionalliga/i.test(name)) return 'regional';
+  if (/bundesliga|bundesligen|meisterschaft|dbbl|rollstuhl/i.test(name)) return 'bund';
+  return LAENDER.has(verbandSlug(name)) ? 'land' : 'weitere';
+}
+
+const HUB_SECTIONS: { kind: VerbandKind; id: string; title: string }[] = [
+  { kind: 'bund', id: 'bundesweit', title: 'Bundesweite Ligen' },
+  { kind: 'regional', id: 'regionalligen', title: 'Regionalligen' },
+  { kind: 'land', id: 'landesverbaende', title: 'Landesverbände' },
+  { kind: 'weitere', id: 'weitere-verbaende', title: 'Weitere Verbände' }
+];
+
+/** Länder der Klubs einer Liga (Tabelle und Spiele); `locate` liefert zur Klub-ID den Landesnamen. */
+export function statesOfLiga(d: LigaDoc, locate: (clubId: string) => string | null): string[] {
+  const ids = new Set<string>();
+  for (const e of d.tabelle ?? []) if (e?.team?.clubId != null) ids.add(String(e.team.clubId));
+  for (const m of d.matches ?? []) for (const t of [m?.homeTeam, m?.guestTeam]) if (t?.clubId != null) ids.add(String(t.clubId));
+  return [...new Set([...ids].map(locate).filter((x): x is string => !!x))];
+}
+
+export interface LigaHub { geo?: GeoInfo; statesOf?: (d: LigaDoc) => string[] }
+
+/** Karten der Ligenübersicht: je Verband Name, Umriss (bundesweit ganz Deutschland, Regionalliga aus den Ländern der Klubs) und Kennzahlen. */
+export function verbandCards(list: { slug: string; name: string; docs: LigaDoc[] }[], hub: LigaHub): string {
+  const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
+  return `<ul class="region-cards">${list.map(v => {
+    const teams = new Set<string>();
+    let played = 0;
+    for (const d of v.docs) {
+      for (const e of d.tabelle ?? []) if (e?.team) teams.add(String(e.team.teamPermanentId ?? `${d.ligaId}:${e.team.teamname}`));
+      played += (d.matches ?? []).filter(m => m.result && !m.abgesagt && !m.verzicht).length;
+    }
+    const kind = verbandKind(v.name);
+    const laender = hub.geo?.laender;
+    let outline: Outline | null | undefined;
+    if (kind === 'land') outline = hub.geo?.outlines[verbandSlug(v.name)];
+    else if (laender) {
+      const names = kind === 'bund' ? laender.features.map(f => f.name) : [...new Set(v.docs.flatMap(d => hub.statesOf?.(d) ?? []))];
+      outline = names.length ? unionOutline(laender, names) : null;
+    }
+    const tiles = tile(v.docs.length, v.docs.length === 1 ? 'Liga' : 'Ligen') + (teams.size ? tile(teams.size, teams.size === 1 ? 'Team' : 'Teams') : '') + (played ? tile(played, played === 1 ? 'Spiel gespielt' : 'Spiele gespielt') : '');
+    return `<li class="region-card dss-card dss-card--hoverable"><a class="region-link" href="liga/${v.slug}/">${esc(v.name)}</a>${outlineSvg(outline)}<div class="dss-stats dss-stats--compact liga-hub-stats">${tiles}</div></li>`;
+  }).join('')}</ul>`;
+}
+
+export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}, ebeneOf?: (id: number) => string | undefined, hub: LigaHub = {}): LigaBuild {
   const map = assignKeyed(ligaWishes(docs), previous);
   const files = new Map<string, string>();
   const sitemap: string[] = [];
@@ -728,13 +777,17 @@ export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, 
     }));
     sitemap.push(pagePath);
   }
+  const sections = HUB_SECTIONS.map(sec => ({ ...sec, list: verbaende.filter(([, v]) => verbandKind(v.name) === sec.kind).map(([slug, v]) => ({ slug, name: v.name, docs: v.docs })) })).filter(sec => sec.list.length);
+  const hubHtml = sections.map(sec => `      <h2 id="${sec.id}">${sec.title} <span class="seo-note">${sec.list.reduce((n, v) => n + v.docs.length, 0)} Ligen</span></h2>\n      ${verbandCards(sec.list, hub)}`).join('\n')
+    + (hub.geo?.laender && Object.keys(hub.geo.outlines).length ? `\n      <p class="seo-note region-source">${geoAttribution(hub.geo.attribution)}</p>` : '');
   files.set('liga/index.html', renderListPage({
     base, pagePath: 'liga/',
     title: 'Basketball-Ligen in Deutschland',
     heading: 'Basketball-Ligen in Deutschland',
     intro: `${byId.size} Ligen aus dem Spielbetrieb des DBB und seiner Landesverbände, mit Tabellen, Spielplänen und Ergebnissen.`,
     crumbs: [{ name: 'Vereinsregister', path: '' }, { name: 'Ligen', path: 'liga/' }],
-    groups: [{ items: verbaende.map(([slug, v]) => ({ name: v.name, href: `liga/${slug}/`, note: `${v.docs.length} Ligen` })) }]
+    groups: [],
+    extraHtml: hubHtml
   }));
   sitemap.push('liga/');
   return { files, map, sitemap, paths, byVerband, docs: byId };
@@ -1161,7 +1214,15 @@ export function buildSite(
     ebeneByLiga.set(t.ligaId, m);
   }
   const ebeneOf = (id: number): string | undefined => [...(ebeneByLiga.get(id) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
-  const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths, ebeneOf);
+  const clubByKey = new Map(clubs.map(c => [String(c.clubId), c]));
+  const locateClub = (id: string): string | null => {
+    const c = clubByKey.get(id);
+    if (!c) return null;
+    if (c.lat != null && c.lng != null && liga.geo?.laender) { const n = stateAt(liga.geo.laender, { lat: c.lat, lng: c.lng }); if (n) return n; }
+    const code = stateOf(c.vereinsnummer);
+    return code ? stateName(code) : null;
+  };
+  const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths, ebeneOf, { geo: liga.geo, statesOf: d => statesOfLiga(d, locateClub) });
 
   // Hallen: Spielfeld-ID → Seite, aus clubs.json und den Spielorten der Live-Daten
   const clubById = new Map(clubs.map(c => [c.clubId, c]));
@@ -1388,12 +1449,17 @@ const de = (n: number): string => n.toLocaleString('de-DE');
 /** Die 16 Bundesländer; alles andere (Bundesweit, Sonstige) ist kein Land und steht als breite Karte am Ende. */
 export const LAENDER = new Set(['baden-wuerttemberg', 'bayern', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'hessen', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thueringen']);
 
-export interface GeoInfo { outlines: Record<string, Outline>; attribution: string }
+export interface GeoInfo { outlines: Record<string, Outline>; attribution: string; laender?: Laender }
 
 /** Quellenvermerk der Umrisse (BKG, dl-de/by-2-0; die Umrisse sind vereinfacht). */
 export function geoAttribution(raw: string): string {
   const year = /\((\d{4})\)/.exec(raw)?.[1];
   return `Umrisse: <a class="dss-link" href="https://www.bkg.bund.de" target="_blank" rel="noopener">© BKG${year ? ` (${year})` : ''}</a>, <a class="dss-link" href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener">dl-de/by-2-0</a> (vereinfacht)`;
+}
+
+/** Umriss als dekoratives SVG der Karten (leer, wenn es keinen gibt). */
+function outlineSvg(o?: Outline | null): string {
+  return o ? `<svg class="region-shape" viewBox="0 0 ${o.w} ${o.h}" width="${Math.round(o.w * 0.8)}" height="${Math.round(o.h * 0.8)}" aria-hidden="true" focusable="false"><path d="${o.path}"/></svg>` : '';
 }
 
 /** Die Regionen als zweispaltige Karten: Überschrift, Umriss, Kennzahlen; die ganze Karte ist der Link. */
@@ -1403,8 +1469,7 @@ export function regionCards(regions: SiteBuild['regions'], geo?: GeoInfo): strin
   const cards = ordered.map(r => {
     // Mobil nur Vereine und Ligen; Teams und Hallen (region-extra) erst ab Desktopbreite
     const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.teams ? tile(r.teams, r.teams === 1 ? 'Team' : 'Teams', true) : '', r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : '', r.hallen ? tile(r.hallen, r.hallen === 1 ? 'Halle' : 'Hallen', true) : ''].join('');
-    const o = geo?.outlines[r.slug];
-    const shape = o ? `<svg class="region-shape" viewBox="0 0 ${o.w} ${o.h}" width="${Math.round(o.w * 0.8)}" height="${Math.round(o.h * 0.8)}" aria-hidden="true" focusable="false"><path d="${o.path}"/></svg>` : '';
+    const shape = outlineSvg(geo?.outlines[r.slug]);
     return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a>${shape}<div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
   return `<ul class="region-cards">${cards}</ul>`;
@@ -1479,7 +1544,7 @@ function main(): void {
   const hallMapFile = store ? path.join(store, 'hall-map.json') : null;
   const previousHalls: UrlMap = hallMapFile && fs.existsSync(hallMapFile) ? JSON.parse(fs.readFileSync(hallMapFile, 'utf-8')) : {};
   const laender = loadLaender(arg('geo') ?? path.join('data', 'geo', 'laender.geojson'));
-  const geo: GeoInfo | undefined = laender ? { outlines: outlinesFor(laender, slugify), attribution: laender.attribution } : undefined;
+  const geo: GeoInfo | undefined = laender ? { outlines: outlinesFor(laender, slugify), attribution: laender.attribution, laender } : undefined;
   const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls, hallCoords, geo });
   writeAll(site, build.files);
 
