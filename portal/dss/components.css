@@ -290,3 +290,9 @@ h2[id] { scroll-margin-top: 1rem; }
 .dss-pagenav .dss-tab { text-decoration: none; color: var(--dss-link); }
 .dss-backtop { position: fixed; right: 16px; bottom: 16px; z-index: 20; box-shadow: var(--shadow-md), inset 0 0 0 1px var(--dss-line-strong); }
 .dss-backtop[hidden] { display: none; }
+
+/* OSM kennt keinen Dunkelmodus: Kacheln abdunkeln und umfärben, Marker (eigene Ebene) bleiben unberührt */
+:root[data-theme="dark"] .dss-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dss-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+}

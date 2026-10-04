@@ -503,6 +503,7 @@ describe('Hallenkarte', () => {
 
   it('Koordinate auf die Adresse: Karte, genauer OSM-Link und geo', () => {
     const html = render({ '9': { lat: 48.4, lng: 9.99, precision: 'adresse' } });
+    expect(html).toContain('<script src="map-tiles.js"></script>\n  <script src="hall.js"></script>');
     expect(html).toContain('id="hall-map"');
     expect(html).toContain('data-lat="48.4" data-lng="9.99" data-zoom="16"');
     expect(html).toContain('<script src="hall.js"></script>');

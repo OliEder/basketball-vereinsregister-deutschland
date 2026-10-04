@@ -197,10 +197,7 @@ function renderMap(halls) {
 
   section._initMap = function () {
     const map = L.map('verein-map', { zoomControl: true });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap, © CARTO',
-      maxZoom: 19
-    }).addTo(map);
+    MapTiles.add(L, map);
 
     const icon = L.divIcon({
       className: '',
