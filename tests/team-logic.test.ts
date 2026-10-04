@@ -133,3 +133,30 @@ describe('teamHref', () => {
     expect(L.teamHref({}, 5)).toBe('team.html?id=5');
   });
 });
+
+describe('summary', () => {
+  const doc = {
+    tabelle: [{ rang: 2, team: t(1) }, { rang: 1, team: t(2) }],
+    matches: [
+      m({ matchId: 1, kickoffDate: '2026-09-20', homeTeam: t(1), guestTeam: t(2), result: '80:70' }),
+      m({ matchId: 2, kickoffDate: '2026-09-27', homeTeam: t(2), guestTeam: t(1), result: '75:60' }),
+      m({ matchId: 3, kickoffDate: '2026-10-04', homeTeam: t(1), guestTeam: t(2), result: '95:85' }),
+      m({ matchId: 4, kickoffDate: '2026-10-11', homeTeam: t(2), guestTeam: t(1) })
+    ]
+  };
+
+  it('Platz, Bilanz, Korbdifferenz und Form aus Tabelle und Spielen', () => {
+    expect(L.summary(doc, 1)).toEqual({ rang: 2, played: 3, wins: 2, losses: 1, diff: 5, form: ['S', 'N', 'S'] });
+    expect(L.summary(doc, 2)).toEqual({ rang: 1, played: 3, wins: 1, losses: 2, diff: -5, form: ['N', 'S', 'N'] });
+  });
+
+  it('Form zeigt höchstens die letzten fünf Spiele', () => {
+    const many = { tabelle: [], matches: Array.from({ length: 7 }, (_, i) => m({ matchId: i, kickoffDate: `2026-09-${String(10 + i)}`, result: i % 2 ? '60:70' : '70:60' })) };
+    expect(L.summary(many, 1).form).toEqual(['S', 'N', 'S', 'N', 'S']);
+  });
+
+  it('ohne Spiele und Tabelle: leere Kennzahlen statt Fehler', () => {
+    expect(L.summary({ tabelle: [], matches: [] }, 1)).toEqual({ rang: null, played: 0, wins: 0, losses: 0, diff: null, form: [] });
+    expect(L.summary(null, 1).rang).toBeNull();
+  });
+});

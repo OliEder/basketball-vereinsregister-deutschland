@@ -41,7 +41,8 @@
 .verein-team-card { position: relative; padding: 1rem 1.25rem; }
 .verein-team-header { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.4rem; }
 .verein-team-label { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; color: var(--dss-fg); }
-.verein-team-rang { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--dss-accent-text); white-space: nowrap; }
+.verein-team-stats { margin: 0.25rem 0 0.6rem; }
+.verein-team-stats:empty { display: none; }
 .verein-team-liga { font-size: 0.88rem; color: var(--dss-fg-soft); margin-bottom: 0.5rem; }
 .verein-team-loading { font-style: italic; color: var(--dss-mute); }
 .verein-badge-pokal { margin-right: 0.35rem; }

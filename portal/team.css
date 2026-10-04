@@ -7,22 +7,14 @@
 .team-sub a { color: var(--dss-link); }
 
 .team-ligas { margin-bottom: 1.25rem; }
-.team-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
 
-.team-form { display: inline-flex; gap: 0.25rem; vertical-align: middle; }
-.team-chip {
-  display: inline-block; min-width: 1.5rem; text-align: center; font-family: var(--font-mono);
-  font-size: 0.75rem; font-weight: 700; border-radius: var(--radius-sm); padding: 0.1rem 0.35rem;
-  background: var(--dss-surface-2); color: var(--dss-fg-soft);
-}
-.team-chip-S { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); }
-.team-chip-N { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); }
 
 .team-section-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute); margin: 2rem 0 0.7rem; }
 
 
 
 .team-tabs { margin-bottom: 0.75rem; }
+.dss-stats:not(.dss-stats--compact) { margin-bottom: 1.5rem; }
 .team-match-ha { text-transform: none; letter-spacing: 0; font-size: 0.78rem; font-weight: 700; min-width: 2.6rem; justify-content: center; }
 .team-match-result { display: inline-flex; align-items: center; gap: 0.35rem; }
 .team-match-note { font-size: 0.72rem; color: var(--dss-mute); font-weight: 500; margin-left: 0.3rem; font-family: var(--font-body); }
@@ -75,7 +67,10 @@
 }
 
 /* Kalender-Abo */
-.team-cal { margin: 1rem 0 1.5rem; }
+.team-cal { margin: 0 0 1rem; }
+.team-cal-summary { cursor: pointer; list-style: none; }
+.team-cal-summary::-webkit-details-marker { display: none; }
+.team-cal-body { margin-top: 0.75rem; padding: 0.75rem 1rem; border: 1px solid var(--dss-line); border-radius: var(--radius-lg); background: var(--dss-surface); }
 .team-cal-intro { margin: 0 0 0.75rem; color: var(--dss-fg-soft); }
 .team-cal-note { margin: 0.5rem 0; color: var(--dss-mute); font-size: 0.9rem; }
 .team-cal-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
@@ -85,7 +80,5 @@
 .team-cal-help dl { margin: 0.25rem 0 0; }
 .team-cal-help dt { font-weight: 600; margin-top: 0.75rem; }
 .team-cal-help dd { margin: 0.15rem 0 0; color: var(--dss-fg-soft); }
-.team-cal .dss-tabs--segmented { flex-wrap: wrap; max-width: 100%; }
-.team-cal .dss-tab { flex: 1 1 auto; justify-content: center; }
 
 .next-game-venue-name a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
