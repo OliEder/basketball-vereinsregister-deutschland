@@ -1002,7 +1002,10 @@ ${crumbNav(crumbs)}
   });
 }
 
-export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; hallMap: UrlMap; regions: { state: string; slug: string; clubs: number }[]; hasLiga: boolean }
+/** Kennzahlen eines Landes für die Startseite: Vereine, Teams mit Liga, Orte, Ligen und Hallen. */
+export interface RegionInfo { state: string; slug: string; clubs: number; teams: number; orte: number; ligen: number; hallen: number }
+
+export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; hallMap: UrlMap; regions: RegionInfo[]; hasLiga: boolean; hasHalls: boolean }
 
 export function buildSite(
   clubs: ClubEntry[], previous: UrlMap, base: string, lastmod: string,
@@ -1125,12 +1128,15 @@ export function buildSite(
     return [{ heading: `Ligen in ${stateName}`, items }];
   };
 
+  const hallenByState = new Map<string, number>();
+  for (const [key, list] of hallsByPlace) hallenByState.set(key.split('/')[0], (hallenByState.get(key.split('/')[0]) ?? 0) + list.length);
   const regions: SiteBuild['regions'] = [];
   const sortedStates = [...states.entries()].sort((a, b) => a[1].state.name.localeCompare(b[1].state.name, 'de'));
   for (const [stateSlug, sg] of sortedStates) {
     const places = [...sg.places.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name, 'de'));
     const total = places.reduce((n, [, p]) => n + p.clubs.length, 0);
-    regions.push({ state: sg.state.name, slug: stateSlug, clubs: total });
+    const teams = places.reduce((n, [, p]) => n + p.clubs.reduce((m, { club }) => m + (club.teams ?? []).filter(t => t.ligaId != null).length, 0), 0);
+    regions.push({ state: sg.state.name, slug: stateSlug, clubs: total, teams, orte: places.length, ligen: lb.byVerband.get(stateSlug)?.docs.length ?? 0, hallen: hallenByState.get(stateSlug) ?? 0 });
 
     for (const [placeSlug, pg] of places) {
       const items = pg.clubs.sort((a, b) => a.club.name.localeCompare(b.club.name, 'de'))
@@ -1192,18 +1198,82 @@ export function buildSite(
     sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }
+  // Übersichten der Hallen: /halle/ → Land → Ort (die Hallenseiten selbst liegen darunter)
+  if (halls.size) {
+    const hubBase = [{ name: 'Vereinsregister', path: '' }, { name: 'Hallen', path: 'halle/' }];
+    const byState = new Map<string, Map<string, HallRec[]>>();
+    for (const [key, list] of hallsByPlace) {
+      const [stateSlug, placeSlug] = key.split('/');
+      const places = byState.get(stateSlug) ?? new Map<string, HallRec[]>();
+      places.set(placeSlug, list);
+      byState.set(stateSlug, places);
+    }
+    const nHallen = (n: number): string => `${n} ${n === 1 ? 'Halle' : 'Hallen'}`;
+    const stateName = (slug: string): string => states.get(slug)?.state.name ?? (slug === NO_PLACE.slug ? NO_PLACE.name : hallState(byState.get(slug)!.values().next().value![0], clubById).name);
+    const placeName = (stateSlug: string, placeSlug: string, list: HallRec[]): string => states.get(stateSlug)?.places.get(placeSlug)?.name || mainPlace(list[0].ort ?? '') || placeSlug;
+    const stateItems: ListItem[] = [];
+    for (const [stateSlug, places] of [...byState].sort((a, b) => stateName(a[0]).localeCompare(stateName(b[0]), 'de'))) {
+      const total = [...places.values()].reduce((n, l) => n + l.length, 0);
+      const sName = stateName(stateSlug);
+      stateItems.push({ name: sName, href: `halle/${stateSlug}/`, note: nHallen(total) });
+      const placeItems: ListItem[] = [];
+      for (const [placeSlug, list] of [...places].sort((a, b) => placeName(stateSlug, a[0], a[1]).localeCompare(placeName(stateSlug, b[0], b[1]), 'de'))) {
+        const pName = placeName(stateSlug, placeSlug, list);
+        placeItems.push({ name: pName, href: `halle/${stateSlug}/${placeSlug}/`, note: nHallen(list.length) });
+        const pagePath = `halle/${stateSlug}/${placeSlug}/`;
+        files.set(`${pagePath}index.html`, renderListPage({
+          base, pagePath, title: `Basketballhallen in ${pName} (${sName})`, heading: `Basketballhallen in ${pName}`,
+          intro: `${nHallen(list.length)} in ${pName}, ${sName}, mit Adresse, Spielen und den Vereinen, die dort spielen.`,
+          crumbs: [...hubBase, { name: sName, path: `halle/${stateSlug}/` }, { name: pName, path: pagePath }],
+          groups: [{ items: list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({ name: h.name, href: hallPaths[h.id], note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ') })) }]
+        }));
+        sitemapPaths.push(pagePath);
+      }
+      const statePath = `halle/${stateSlug}/`;
+      files.set(`${statePath}index.html`, renderListPage({
+        base, pagePath: statePath, title: `Basketballhallen in ${sName}`, heading: `Basketballhallen in ${sName}`,
+        intro: `${nHallen(total)} in ${sName}, nach Orten sortiert.`,
+        crumbs: [...hubBase, { name: sName, path: statePath }],
+        groups: [{ alphabetic: true, items: placeItems }]
+      }));
+      sitemapPaths.push(statePath);
+    }
+    const total = [...hallsByPlace.values()].reduce((n, l) => n + l.length, 0);
+    files.set('halle/index.html', renderListPage({
+      base, pagePath: 'halle/', title: 'Basketballhallen in Deutschland', heading: 'Basketballhallen in Deutschland',
+      intro: `${nHallen(total)} in ${stateItems.length} ${stateItems.length === 1 ? 'Bundesland' : 'Bundesländern'}, mit Adresse, Karte und den Spielen, die dort stattfinden.`,
+      crumbs: hubBase, groups: [{ items: stateItems }]
+    }));
+    sitemapPaths.push('halle/');
+  }
   for (const [rel, content] of lb.files) files.set(rel, content);
   sitemapPaths.push(...lb.sitemap);
   files.set('sitemap.xml', renderSitemap(base, sitemapPaths, lastmod));
   files.set('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);
-  return { files, urlMap, ligaMap: lb.map, teamMap, hallMap, regions, hasLiga: lb.docs.size > 0 };
+  return { files, urlMap, ligaMap: lb.map, teamMap, hallMap, regions, hasLiga: lb.docs.size > 0, hasHalls: halls.size > 0 };
 }
 
-/** Ersetzt in der Startseite den Platzhalter durch Links auf die Regionsseiten (Crawler erreichen so alle Seiten). */
-export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false): string {
-  const links = regions.map(r => `<li><a href="${r.slug}/">${esc(r.state)}</a> <span class="seo-note">${r.clubs}</span></li>`).join('')
-    + (withLiga ? '<li><a href="liga/">Alle Ligen mit Tabellen</a></li>' : '');
-  return indexHtml.replace('<!--REGION-LINKS-->', `<ul class="seo-list seo-regions">${links}</ul>`);
+const de = (n: number): string => n.toLocaleString('de-DE');
+
+/** Die 16 Bundesländer; alles andere (Bundesweit, Sonstige) ist kein Land und steht als breite Karte am Ende. */
+export const LAENDER = new Set(['baden-wuerttemberg', 'bayern', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'hessen', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thueringen']);
+
+/**
+ * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Zahl der Vereine und Ligen;
+ * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
+ */
+export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
+  const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
+  const ordered = [...regions.filter(r => LAENDER.has(r.slug)), ...regions.filter(r => !LAENDER.has(r.slug))];
+  const cards = ordered.map(r => {
+    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : ''].join('');
+    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
+  }).join('');
+  const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
+  const hubs = [withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
+  return indexHtml
+    .replace('<!--REGION-LINKS-->', `<ul class="region-cards">${cards}</ul>${more ? `\n      <ul class="region-more">${more}</ul>` : ''}`)
+    .replace('<div id="stats-bar"></div>', `<div id="stats-bar" data-hubs="${hubs}"></div>`);
 }
 
 function arg(name: string): string | undefined {
@@ -1256,7 +1326,7 @@ function main(): void {
   fs.writeFileSync(path.join(site, 'data', 'url-map.json'), JSON.stringify(publicMap), 'utf-8');
 
   const indexFile = path.join(site, 'index.html');
-  if (fs.existsSync(indexFile)) fs.writeFileSync(indexFile, injectRegionLinks(fs.readFileSync(indexFile, 'utf-8'), build.regions, build.hasLiga), 'utf-8');
+  if (fs.existsSync(indexFile)) fs.writeFileSync(indexFile, injectRegionLinks(fs.readFileSync(indexFile, 'utf-8'), build.regions, build.hasLiga, build.hasHalls), 'utf-8');
 
   fs.writeFileSync(path.join(site, 'data', 'team-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.teamMap).map(([id, e]) => [id, e.path]))), 'utf-8');

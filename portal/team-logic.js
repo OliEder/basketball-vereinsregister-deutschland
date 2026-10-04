@@ -126,6 +126,28 @@
     return { total: total, played: played, ligen: ligen };
   }
 
+  /**
+   * Kennzahlen des Registers für die Startseite: Vereine, Teams mit Liga (aktiv) und ohne Liga (inaktiv),
+   * Ligen und Verbände, in denen Vereine des Registers spielen.
+   */
+  function registerStats(clubs) {
+    var ligen = {}, verbaende = {};
+    var r = { clubs: 0, teamsActive: 0, teamsInactive: 0, ligen: 0, verbaende: 0 };
+    (clubs || []).forEach(function (c) {
+      r.clubs++;
+      (c.teams || []).forEach(function (t) {
+        if (t.ligaId != null) {
+          r.teamsActive++;
+          if (!ligen[t.ligaId]) { ligen[t.ligaId] = true; r.ligen++; }
+        } else {
+          r.teamsInactive++;
+        }
+      });
+      if (c.verbandId != null && !verbaende[c.verbandId]) { verbaende[c.verbandId] = true; r.verbaende++; }
+    });
+    return r;
+  }
+
   /** Tabelleneintrag des Teams oder null. */
   function standingFor(tabelle, teamId) {
     var rows = tabelle || [];
@@ -227,6 +249,7 @@
     record: record,
     standingFor: standingFor,
     summary: summary,
+    registerStats: registerStats,
     clubSummary: clubSummary,
     teamName: teamName,
     clubIdOf: clubIdOf,

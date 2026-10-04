@@ -190,3 +190,17 @@ describe('clubSummary', () => {
     expect(L.clubSummary(null, 10)).toEqual({ total: 0, played: 0, ligen: 0 });
   });
 });
+
+describe('registerStats', () => {
+  const club = (id: number, verband: number, ligen: Array<number | null>) => ({ clubId: id, verbandId: verband, teams: ligen.map((l, i) => ({ teamPermanentId: id * 100 + i, ligaId: l })) });
+
+  it('zählt Vereine, Teams mit und ohne Liga, Ligen und Verbände', () => {
+    const r = L.registerStats([club(1, 1, [10, 11, null]), club(2, 1, [10]), club(3, 2, [12, null, null])]);
+    expect(r).toEqual({ clubs: 3, teamsActive: 4, teamsInactive: 3, ligen: 3, verbaende: 2 });
+  });
+
+  it('leeres oder fehlendes Register: Nullen', () => {
+    expect(L.registerStats([])).toEqual({ clubs: 0, teamsActive: 0, teamsInactive: 0, ligen: 0, verbaende: 0 });
+    expect(L.registerStats(null).clubs).toBe(0);
+  });
+});

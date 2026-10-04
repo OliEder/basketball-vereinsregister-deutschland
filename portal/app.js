@@ -490,35 +490,61 @@ document.getElementById('geschlecht-filter').addEventListener('change', () => re
   }
 })();
 
+/** Spielstätten: Zahl der Hallenseiten (data/hall-url-map.json), sonst die verschiedenen Hallen im Register. */
+async function countHalls(clubs) {
+  try {
+    const res = await fetch('data/hall-url-map.json');
+    if (res.ok) return Object.keys(await res.json()).length;
+  } catch (e) { /* weiter mit dem Register */ }
+  const ids = new Set();
+  clubs.forEach(c => (c.halls || []).forEach(h => ids.add(h.dbbSpielfeldId != null ? h.dbbSpielfeldId : c.clubId + ':' + h.id)));
+  return ids.size;
+}
+
+/** Die Top-Karten: Vereine (mit Teams), Ligen (in x Verbänden), Spielstätten und inaktive Teams; mit Link, wenn es die Übersicht gibt. */
+async function renderHeroStats(clubs) {
+  const statsBar = document.getElementById('stats-bar');
+  if (!statsBar) return;
+  const hubs = (statsBar.dataset.hubs || '').split(' ');
+  const st = TeamLogic.registerStats(clubs);
+  const nf = new Intl.NumberFormat('de-DE');
+  const halls = await countHalls(clubs);
+  const items = [
+    { num: st.clubs, label: 'Vereine', sub: nf.format(st.teamsActive) + ' aktive Teams', href: '#regions' },
+    { num: st.ligen, label: 'Ligen', sub: 'in ' + st.verbaende + ' Verbänden', href: hubs.includes('liga') ? 'liga/' : null },
+    { num: halls, label: 'Spielstätten', sub: 'mit Karte und Spielplan', href: hubs.includes('halle') ? 'halle/' : null },
+    { num: st.teamsInactive, label: 'inaktive Teams', sub: 'ohne Liga in dieser Saison', href: null }
+  ];
+  statsBar.textContent = '';
+  items.forEach(it => {
+    const item = document.createElement(it.href ? 'a' : 'div');
+    item.className = 'hero-stat' + (it.href ? ' hero-stat--link dss-card--hoverable' : '');
+    if (it.href) item.href = it.href;
+    const s = document.createElement('span');
+    s.className = 'hero-stat-num';
+    s.textContent = nf.format(it.num);
+    const l = document.createElement('span');
+    l.className = 'hero-stat-label';
+    l.textContent = it.label;
+    item.appendChild(s);
+    item.appendChild(l);
+    if (it.sub) {
+      const sub = document.createElement('span');
+      sub.className = 'hero-stat-sub';
+      sub.textContent = it.sub;
+      item.appendChild(sub);
+    }
+    statsBar.appendChild(item);
+  });
+}
+
 loadClubs()
   .then(clubs => {
     searchEngine = new SearchEngine(clubs);
     if (typeof renderFavorites === 'function') renderFavorites();   // Vereinsadressen (urlMap) sind jetzt geladen
     setStatus(clubs.length + ' Vereine geladen. Bereit zur Suche.');
 
-    const teamCount = clubs.reduce((sum, c) => sum + (c.teams ? c.teams.length : 0), 0);
-    const hallCount = clubs.reduce((sum, c) => sum + (c.halls ? c.halls.length : 0), 0);
-    const statsBar = document.getElementById('stats-bar');
-    if (statsBar) {
-      const parts = [
-        [clubs.length, 'Vereine'],
-        [teamCount, 'Teams'],
-        [hallCount, 'Spielstätten']
-      ];
-      parts.forEach(([num, label], i) => {
-        const item = document.createElement('div');
-        item.className = 'hero-stat';
-        const s = document.createElement('span');
-        s.className = 'hero-stat-num';
-        s.textContent = num;
-        const l = document.createElement('span');
-        l.className = 'hero-stat-label';
-        l.textContent = label;
-        item.appendChild(s);
-        item.appendChild(l);
-        statsBar.appendChild(item);
-      });
-    }
+    renderHeroStats(clubs);
   })
   .catch(() => {
     setStatus('Fehler: Vereinsdaten konnten nicht geladen werden.');
