@@ -197,7 +197,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .fav-btn.is-on { color: var(--dss-accent-text); }
 .fav-star { flex-shrink: 0; }
 .report-row { margin: 1.5rem 0 0; color: var(--dss-mute); font-size: 0.9rem; }
-.report-link { color: var(--dss-link); display: inline-flex; align-items: center; min-height: 44px; }
+.report-link { display: inline-flex; align-items: center; min-height: 44px; }
 
 .fav-panel { max-width: 960px; margin: 0 auto 1.5rem; padding: 1.25rem 1.5rem; }
 .fav-panel[hidden] { display: none; }

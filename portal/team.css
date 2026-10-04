@@ -21,13 +21,6 @@
 .team-section-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute); margin: 2rem 0 0.7rem; }
 
 
-.team-table th:nth-child(2), .team-table td:nth-child(2) { text-align: left; white-space: normal; }
-.team-table a, .team-match-teams a {
-  display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-fg);
-  text-decoration: underline; text-decoration-color: var(--dss-line-strong); text-underline-offset: 3px;
-}
-.team-table a:hover, .team-match-teams a:hover { text-decoration-color: var(--amber-500); }
-.team-table a:focus-visible, .team-match-teams a:focus-visible, .team-sub a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
 
 .team-tabs { margin-bottom: 0.75rem; }
 .team-match-ha { text-transform: none; letter-spacing: 0; font-size: 0.78rem; font-weight: 700; min-width: 2.6rem; justify-content: center; }
@@ -35,16 +28,12 @@
 .team-match-note { font-size: 0.72rem; color: var(--dss-mute); font-weight: 500; margin-left: 0.3rem; font-family: var(--font-body); }
 .team-match-past .dss-row-main { color: var(--dss-fg-soft); }
 
-.team-empty { color: var(--dss-mute); font-size: 0.9rem; padding: 0.5rem 0; }
+.team-empty.dss-empty { padding: 16px 20px; font-size: 0.9rem; }
 .team-updated { font-family: var(--font-mono); font-size: 0.72rem; color: var(--dss-mute); margin-top: 1.75rem; text-align: center; }
 
-@media (max-width: 560px) {
-  .dss-row--match { grid-template-columns: 1fr auto; gap: 4px 12px; }
-  .team-match-when { grid-column: 1 / -1; }
-}
 
 /* Teamlogos (von basketball-bund.net; ohne Logo erscheint ein Kürzel) */
-.team-logo { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; background: #fff; border: 1px solid var(--dss-line); }
+.team-logo { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; background: var(--n-0); border: 1px solid var(--dss-line); }
 .team-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .team-logo--xs { width: 28px; height: 28px; border-radius: 6px; padding: 2px; }
 .team-logo--lg { width: 72px; height: 72px; border-radius: var(--radius-lg); padding: 5px; }
@@ -77,7 +66,6 @@
 .next-game-venue-note { font-size: 0.75rem; color: var(--dss-mute); margin-top: 4px; }
 .next-game-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
 .next-game-map { height: 220px; border-top: 1px solid var(--dss-line); position: relative; z-index: 0; background: var(--dss-surface-2); }
-.team-map-pin { width: 16px; height: 16px; border-radius: 50%; background: var(--amber-400); border: 3px solid #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5); }
 
 @media (max-width: 560px) {
   .next-game-matchup { grid-template-columns: 1fr 1fr; }

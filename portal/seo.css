@@ -5,7 +5,6 @@
 .seo-crumbs a { color: var(--dss-link, inherit); }
 
 .seo-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.5rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr)); }
-.seo-list a { color: var(--dss-link, inherit); }
 .seo-note { color: var(--dss-mute); font-size: 0.875rem; }
 .seo-list-page h1 { margin-top: 0; }
 #regions { margin: 2rem 0; }
@@ -13,31 +12,18 @@
 .seo-crumbs ol { align-items: center; }
 .seo-list-page h1, #verein-content > h1 { font-size: clamp(1.5rem, 7vw, 2.25rem); overflow-wrap: anywhere; hyphens: auto; }
 
-.seo-alphabet ul { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.seo-alphabet a {
-  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px;
-  border: 1px solid var(--dss-line-strong); border-radius: 8px; font-weight: 600; text-decoration: none;
-  color: var(--dss-link); background: var(--dss-surface);
-}
-.seo-alphabet a:hover { background: var(--dss-hover-bg); }
+.seo-alphabet ul { list-style: none; margin: 0 0 1.5rem; padding: 0; }
+.seo-alphabet .dss-tab { min-width: 44px; text-decoration: none; color: var(--dss-link); }
 .seo-list-page h2[id] { scroll-margin-top: 1rem; }
 
 /* Ligaseiten */
-.seo-table-wrap { overflow-x: auto; margin: 0 0 1.5rem; border: 1px solid var(--dss-line); border-radius: 8px; }
-.seo-table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
-.seo-table th, .seo-table td { padding: 0.5rem 0.75rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--dss-line); }
-.seo-table th:nth-child(2), .seo-table td:nth-child(2) { text-align: left; white-space: normal; min-width: 11rem; }
-.seo-table th { color: var(--dss-fg); font-weight: 600; background: var(--dss-surface-2); }
-.seo-table a { color: var(--dss-link); display: inline-block; padding: 0.7rem 0; }
-.seo-table tbody tr:last-child td { border-bottom: 0; }
-.seo-matches { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.25rem; }
-.seo-matches li { padding: 0.35rem 0; border-bottom: 1px solid var(--dss-line); }
-.seo-matches a { color: var(--dss-link); display: inline-block; padding: 0.7rem 0; }
-.seo-table-wrap:focus-visible { outline: 3px solid var(--dss-link); outline-offset: 2px; }
-.seo-list a { display: inline-flex; align-items: center; min-height: 44px; }
-
-.seo-block-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
-.seo-list-page address { font-style: normal; margin: 0 0 0.5rem; }
-.seo-matches a, .seo-table a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
-.hall-map { height: 260px; border-radius: 8px; margin: 0 0 0.75rem; border: 1px solid var(--dss-line); }
-.team-map-pin { width: 16px; height: 16px; border-radius: 50%; background: var(--dss-cta-bg, #f5a524); border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.35); }
+.seo-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 0.75rem; margin: 0 0 1.5rem; }
+.seo-list-page h2, .seo-list-page h3 { margin-top: 2rem; }
+.seo-list-page .dss-rows, .seo-list-page .dss-frame, .seo-list-page .dss-card { margin-bottom: 1.5rem; }
+.seo-list a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
+.seo-block-link { display: inline-flex; align-items: center; min-height: 44px; }
+.seo-list-page address { font-style: normal; margin: 0 0 0.75rem; }
+.hall-map { height: 260px; border-radius: var(--radius-lg); margin: 0 0 0.75rem; border: 1px solid var(--dss-line); }
+.dss-frame:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
+.dss-card .seo-list { margin: 0; }
+.seo-list-page > p { margin: 0 0 1rem; }
