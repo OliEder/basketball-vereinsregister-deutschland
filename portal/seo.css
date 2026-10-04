@@ -23,10 +23,20 @@
 .seo-list-page > p { margin: 0 0 1rem; }
 .dss-crumbs { margin: 0 0 1rem; }
 
-/* Gliederung der Ligen: Altersklasse (h2), Geschlecht (h3), Ebene (h4), Bezirk (h5) */
-.seo-list-page > h3 { margin-top: 1.5rem; }
-.seo-list-page > h4 { margin: 1.25rem 0 0.5rem; font-size: 1.05rem; }
-.seo-list-page > h5 { margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+/* Aufklappbare Ligenhierarchie: Altersklasse → Geschlecht → Ebene (details, ohne JavaScript bedienbar); darunter Bezirk als einfache Überschrift */
+.liga-fold { margin: 0 0 0.5rem; }
+.liga-fold .liga-fold { margin-left: 0.25rem; padding-left: 0.75rem; border-left: 2px solid var(--dss-line); }
+.liga-fold > summary { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; cursor: pointer; list-style: none; border-radius: var(--radius-sm); }
+.liga-fold > summary::-webkit-details-marker { display: none; }
+.liga-fold > summary::before { content: ""; flex: none; width: 0.55rem; height: 0.55rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; }
+.liga-fold[open] > summary::before { transform: rotate(45deg); }
+.liga-fold > summary:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
+.liga-fold > summary > :is(h2, h3, h4) { margin: 0; }
+.liga-fold--2 > summary > h2 { font-size: 1.35rem; }
+.liga-fold--3 > summary > h3 { font-size: 1.15rem; }
+.liga-fold--4 > summary > h4 { font-size: 1rem; }
+.liga-fold > h5 { margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+@media (prefers-reduced-motion: reduce) { .liga-fold > summary::before { transition: none; } }
 
 /* Ligakarten (Land- und Verbandsseiten): Name, Bezirk/Teams, Tabellenspitze als Mini-Tabelle */
 .liga-cards { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0.75rem; }
