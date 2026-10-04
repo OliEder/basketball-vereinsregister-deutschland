@@ -421,7 +421,7 @@ test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden,
   await expect(cards.nth(0)).toContainText('aktive Teams');
   await expect(cards.nth(0)).toHaveAttribute('href', 'vereine/');
   await expect(cards.nth(1)).toContainText('Ligen');
-  await expect(cards.nth(1)).toContainText(/in \d+ Verbänd?e?n?/);
+  await expect(cards.nth(1)).toContainText(/in \d+ (Verband|Verbänden)$/);
   await expect(cards.nth(1)).toHaveAttribute('href', 'liga/');
   await expect(cards.nth(2)).toContainText('Spielstätten');
   await expect(cards.nth(2)).toHaveAttribute('href', 'halle/');
