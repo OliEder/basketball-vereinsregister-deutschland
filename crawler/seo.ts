@@ -1256,13 +1256,13 @@ export function buildSite(
 const de = (n: number): string => n.toLocaleString('de-DE');
 
 /**
- * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Vereine, Teams, Ligen, Hallen;
+ * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Zahl der Vereine und Ligen;
  * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
  */
 export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
   const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
   const cards = regions.map(r => {
-    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.teams ? tile(r.teams, r.teams === 1 ? 'Team' : 'Teams') : '', r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : '', r.hallen ? tile(r.hallen, r.hallen === 1 ? 'Halle' : 'Hallen') : ''].join('');
+    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : ''].join('');
     return `<li class="region-card dss-card dss-card--hoverable${r.state.length > 24 ? ' region-card--wide' : ''}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
   const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');

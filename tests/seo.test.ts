@@ -148,16 +148,18 @@ describe('buildSite', () => {
     expect(out).toContain('<div class="dss-stat-label">Vereine</div>');
   });
 
-  it('Regionskarte nennt Vereine, Teams mit Liga, Orte, Ligen und Hallen', () => {
+  it('Regionskarte nennt Vereine und Ligen; Teams, Orte und Hallen stehen im Datensatz', () => {
     const r = b.regions.find(x => x.slug === 'bayern')!;
     expect(r).toMatchObject({ state: 'Bayern', clubs: 2 });
     expect(r.teams).toBe(0);                    // die Fixture-Teams haben keine Liga
     expect(r.orte).toBeGreaterThan(0);
     expect(r.hallen).toBeGreaterThan(0);
-    const html = injectRegionLinks('<!--REGION-LINKS-->', [{ state: 'Hessen', slug: 'hessen', clubs: 1234, teams: 5678, orte: 9, ligen: 1, hallen: 0 }]);
+    const html = injectRegionLinks('<!--REGION-LINKS-->', [{ state: 'Hessen', slug: 'hessen', clubs: 1234, teams: 5678, orte: 9, ligen: 1, hallen: 3 }]);
     expect(html).toContain('<div class="dss-stat-value">1.234</div><div class="dss-stat-label">Vereine</div>');   // deutsche Tausenderpunkte
     expect(html).toContain('<div class="dss-stat-label">Liga</div>');                                           // Einzahl
-    expect(html).not.toContain('Hallen</div>');                                                                 // keine Kachel ohne Wert
+    expect(html).not.toContain('Teams</div>');
+    expect(html).not.toContain('Hallen</div>');
+    expect(injectRegionLinks('<!--REGION-LINKS-->', [{ state: 'X', slug: 'x', clubs: 2, teams: 0, orte: 1, ligen: 0, hallen: 0 }])).not.toContain('Liga');   // keine Kachel ohne Wert
   });
 
   it('Startseite: data-hubs nennt die vorhandenen Übersichten', () => {
