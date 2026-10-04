@@ -635,6 +635,10 @@
   "path": "halle/baden-wuerttemberg/ettlingen/neue-sporthalle-eichendorff-gymnasium/",
   "history": []
  },
+ "1085": {
+  "path": "halle/baden-wuerttemberg/ettlingen/sporthalle-am-dickhaeuter-platz/",
+  "history": []
+ },
  "1090": {
   "path": "halle/baden-wuerttemberg/freiburg/sportzentrum-der-universitaet-halle-1/",
   "history": []
@@ -2043,6 +2047,10 @@
  },
  "100168": {
   "path": "halle/hessen/hofheim/bruehlwiesenhalle-alt/",
+  "history": []
+ },
+ "100169": {
+  "path": "halle/hessen/hofheim/gesamtschule-am-rosenberg/",
   "history": []
  },
  "100170": {
@@ -4537,6 +4545,10 @@
   "path": "halle/nordrhein-westfalen/xanten/turnhalle-luettingen/",
   "history": []
  },
+ "102856": {
+  "path": "halle/nordrhein-westfalen/kamp-lintfort/glueckaufhalle-i-feld-3/",
+  "history": []
+ },
  "102858": {
   "path": "halle/nordrhein-westfalen/herne/sh-mont-cenis-gesamtschule-querfeld/",
   "history": []
@@ -4873,6 +4885,10 @@
   "path": "halle/nordrhein-westfalen/bad-muenstereifel/st-angela-gymnasium-drittelfeld/",
   "history": []
  },
+ "103137": {
+  "path": "halle/nordrhein-westfalen/oberhausen/hans-jansen-halle-querfeld/",
+  "history": []
+ },
  "103139": {
   "path": "halle/nordrhein-westfalen/bornheim/sporthalle-der-europaschule-bornheim-drittelfeld/",
   "history": []
@@ -4931,6 +4947,10 @@
  },
  "103233": {
   "path": "halle/nordrhein-westfalen/muenster/2-fach-halle-des-schulzentrums-kinderhaus/",
+  "history": []
+ },
+ "103235": {
+  "path": "halle/nordrhein-westfalen/meerbusch/2-fach-halle-realschule-osterath-querfeld/",
   "history": []
  },
  "103239": {
@@ -5969,6 +5989,10 @@
   "path": "halle/niedersachsen/bad-essen/europaschule/",
   "history": []
  },
+ "105934": {
+  "path": "halle/niedersachsen/osnabrueck/moeser-realschule/",
+  "history": []
+ },
  "105939": {
   "path": "halle/bayern/bayreuth/realschule-1-halle-1/",
   "history": []
@@ -6043,6 +6067,10 @@
  },
  "105978": {
   "path": "halle/nordrhein-westfalen/koeln/sporthalle-der-kgs-gruenguertelschule/",
+  "history": []
+ },
+ "105989": {
+  "path": "halle/bundesweit/bremerhaven/eisbaeren-trainingscentrum/",
   "history": []
  },
  "105997": {
@@ -6450,8 +6478,10 @@
   "history": []
  },
  "106357": {
-  "path": "halle/bundesweit/cottbus/lausitzarena/",
-  "history": []
+  "path": "halle/brandenburg/cottbus/lausitzarena/",
+  "history": [
+   "halle/bundesweit/cottbus/lausitzarena/"
+  ]
  },
  "106358": {
   "path": "halle/bremen/bremen/curiestr/",
@@ -7253,6 +7283,10 @@
   "path": "halle/nordrhein-westfalen/duesseldorf/international-school-duesseldorf-querfeld-2/",
   "history": []
  },
+ "107010": {
+  "path": "halle/rheinland-pfalz/mainz/bbs-3/",
+  "history": []
+ },
  "107014": {
   "path": "halle/baden-wuerttemberg/sindelfingen/gemeindeschule-eichholz/",
   "history": []
@@ -7335,6 +7369,10 @@
  },
  "107057": {
   "path": "halle/bayern/hemau/schulturnhalle-hemau/",
+  "history": []
+ },
+ "107058": {
+  "path": "halle/bayern/ainring/mittelschule-mitterfelden/",
   "history": []
  },
  "107059": {
@@ -7643,6 +7681,10 @@
  },
  "107319": {
   "path": "halle/brandenburg/rathenow/gymnasium-fr-l-jahn/",
+  "history": []
+ },
+ "107326": {
+  "path": "halle/niedersachsen/osnabrueck/bbs-schoelerberg/",
   "history": []
  },
  "107327": {
@@ -8269,6 +8311,10 @@
   "path": "halle/berlin/berlin/ahrensfelder-chaussee/",
   "history": []
  },
+ "107760": {
+  "path": "halle/berlin/berlin/altonaer-strasse/",
+  "history": []
+ },
  "107764": {
   "path": "halle/berlin/berlin/arnouxstrasse/",
   "history": []
@@ -8423,6 +8469,10 @@
  },
  "107933": {
   "path": "halle/berlin/berlin/pallasstrasse-oben/",
+  "history": []
+ },
+ "107935": {
+  "path": "halle/berlin/berlin/parchimer-allee/",
   "history": []
  },
  "107936": {
@@ -8865,6 +8915,10 @@
   "path": "halle/bundesweit/koblenz/cgm-arena/",
   "history": []
  },
+ "108242": {
+  "path": "halle/mecklenburg-vorpommern/schwerin/ecolea-internationale-schule-schwerin/",
+  "history": []
+ },
  "108243": {
   "path": "halle/nordrhein-westfalen/euskirchen/willi-maurer-halle-hauptfeld/",
   "history": []
@@ -8985,6 +9039,10 @@
   "path": "halle/bayern/aschheim/st-emmeram-realschule/",
   "history": []
  },
+ "108298": {
+  "path": "halle/bundesweit/herne/sporthalle-im-sportpark/",
+  "history": []
+ },
  "108299": {
   "path": "halle/bundesweit/nuernberg/kia-metropol-arena/",
   "history": []
@@ -9047,6 +9105,10 @@
  },
  "108324": {
   "path": "halle/hessen/weiterstadt/grosssporthalle-graefenhausen/",
+  "history": []
+ },
+ "108325": {
+  "path": "halle/sachsen/chemnitz/feel-good-club/",
   "history": []
  },
  "108326": {
@@ -9219,6 +9281,10 @@
  },
  "108429": {
   "path": "halle/nordrhein-westfalen/koeln/sporthalle-feld-3-hildegard-von-bingen-gymnasium/",
+  "history": []
+ },
+ "108435": {
+  "path": "halle/schleswig-holstein/luebeck/johanneum/",
   "history": []
  },
  "108437": {
@@ -10049,6 +10115,10 @@
   "path": "halle/bayern/traunreut/landkreishalle/",
   "history": []
  },
+ "108876": {
+  "path": "halle/bremen/bremen/sporthalle-alwin-lonke-str/",
+  "history": []
+ },
  "108877": {
   "path": "halle/bayern/augsburg/erhard-wunderlich-sporthalle/",
   "history": []
@@ -10135,6 +10205,10 @@
  },
  "108910": {
   "path": "halle/nordrhein-westfalen/soest/schulzentrum-soest-einfach-sh/",
+  "history": []
+ },
+ "108912": {
+  "path": "halle/nordrhein-westfalen/hagen/sporthalle-altenhagen-querfeld-1/",
   "history": []
  },
  "108914": {
@@ -10657,6 +10731,10 @@
   "path": "halle/nordrhein-westfalen/duesseldorf/sh-wim-wenders-gymnasium-querfeld-2/",
   "history": []
  },
+ "109161": {
+  "path": "halle/nordrhein-westfalen/duesseldorf/sh-wim-wenders-gymnasium-querfeld-3/",
+  "history": []
+ },
  "109163": {
   "path": "halle/niedersachsen/isernhagen-kirchhorst/turnhalle-kirchhorst/",
   "history": []
@@ -11017,6 +11095,10 @@
   "path": "halle/nordrhein-westfalen/niederkassel/sporthalle-des-kopernikus-gymnasiums-feld-2/",
   "history": []
  },
+ "109281": {
+  "path": "halle/nordrhein-westfalen/niederkassel/sporthalle-des-kopernikus-gymnasiums-feld-3/",
+  "history": []
+ },
  "109284": {
   "path": "halle/bayern/muenchen/grundschule-gustl-bayrhammer/",
   "history": []
@@ -11221,6 +11303,10 @@
   "path": "halle/baden-wuerttemberg/donaueschingen/erich-kaestner-schule/",
   "history": []
  },
+ "109381": {
+  "path": "halle/niedersachsen/hannover/lueerstrasse-halle-2/",
+  "history": []
+ },
  "109384": {
   "path": "halle/nordrhein-westfalen/hueckelhoven/3-fach-sporthalle-ratheim/",
   "history": []
@@ -11326,8 +11412,10 @@
   "history": []
  },
  "109432": {
-  "path": "halle/bundesweit/hamburg/margit-zinke-halle/",
-  "history": []
+  "path": "halle/hamburg/hamburg/margit-zinke-halle/",
+  "history": [
+   "halle/bundesweit/hamburg/margit-zinke-halle/"
+  ]
  },
  "109434": {
   "path": "halle/berlin/berlin/amalienstrasse-oben/",
@@ -11555,6 +11643,10 @@
  },
  "109510": {
   "path": "halle/niedersachsen/braunschweig/sporthalle-grundschule-heidberg/",
+  "history": []
+ },
+ "109512": {
+  "path": "halle/niedersachsen/goslar/helmut-sander-sporthalle/",
   "history": []
  },
  "109516": {
