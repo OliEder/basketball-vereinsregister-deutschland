@@ -245,4 +245,4 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 @media (max-width: 360px) { .region-link { font-size: 0.9rem; } .region-card { padding: 0.6rem 0.7rem 0.75rem; } }
 .region-more { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; justify-content: center; }
 .region-more a { display: inline-flex; align-items: center; min-height: 44px; }
-.footer-geo:not(:empty)::before { content: '· '; }
+.region-source { margin: 1rem 0 0; text-align: center; }

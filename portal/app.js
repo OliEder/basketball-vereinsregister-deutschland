@@ -510,7 +510,7 @@ async function renderHeroStats(clubs) {
   const nf = new Intl.NumberFormat('de-DE');
   const halls = await countHalls(clubs);
   const items = [
-    { num: st.clubs, label: 'Vereine', sub: nf.format(st.teamsActive) + ' aktive Teams', href: '#regions' },
+    { num: st.clubs, label: 'Vereine', sub: nf.format(st.teamsActive) + ' aktive Teams', href: hubs.includes('vereine') ? 'vereine/' : '#regions' },
     { num: st.ligen, label: 'Ligen', sub: 'in ' + st.verbaende + ' Verbänden', href: hubs.includes('liga') ? 'liga/' : null },
     { num: halls, label: 'Spielstätten', sub: 'mit Karte und Spielplan', href: hubs.includes('halle') ? 'halle/' : null },
     { num: st.teamsInactive, label: 'inaktive Teams', sub: 'ohne Liga in dieser Saison', href: null }
