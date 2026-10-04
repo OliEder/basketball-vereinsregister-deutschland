@@ -375,15 +375,11 @@ test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', asyn
   await expect(page.getByRole('heading', { name: 'Letzte Ergebnisse' })).toBeInViewport();
 });
 
-test('Ligen eines Verbands: aufklappbare Hierarchie, Sprung zu einem zugeklappten Ziel klappt die Blöcke auf', async ({ page }) => {
+test('Ligen eines Verbands: offene Gliederung ohne Klappboxen', async ({ page }) => {
   await open(page, '/liga/regionalliga-suedost/', 'light', '.liga-card a');
-  const folds = page.locator('details.liga-fold');
-  expect(await folds.count()).toBeGreaterThanOrEqual(3);                           // Altersklasse, Geschlecht, Ebene
-  await expect(page.locator('summary > h2').first()).toBeVisible();
-  await page.evaluate(() => document.querySelectorAll('details.liga-fold').forEach(d => d.removeAttribute('open')));
-  await expect(page.locator('.liga-card').first()).toBeHidden();                   // zugeklappt, aber im HTML
-  const id = await page.locator('summary > h4').first().getAttribute('id');
-  await page.evaluate(h => { location.hash = h; }, id);
+  await expect(page.locator('details')).toHaveCount(0);
+  await expect(page.locator('h2[id^="ak-"]').first()).toBeVisible();
+  await expect(page.locator('h3').first()).toBeVisible();
   await expect(page.locator('.liga-card').first()).toBeVisible();
 });
 

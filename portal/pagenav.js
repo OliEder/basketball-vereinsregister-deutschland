@@ -113,7 +113,7 @@
       toggle();
     }
 
-    // Ein Sprung zu einem Ziel in eingeklappten Blöcken (details) klappt alle umgebenden Blöcke auf
+    // Ein Sprung zu einem Ziel in eingeklappten Blöcken (details, z. B. das Kalender-Abo) klappt alle umgebenden Blöcke auf
     function openAround(target) {
       var d = target && target.closest ? target.closest('details') : null;
       while (d) { d.open = true; d = d.parentElement && d.parentElement.closest ? d.parentElement.closest('details') : null; }
