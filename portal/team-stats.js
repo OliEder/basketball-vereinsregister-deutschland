@@ -57,5 +57,19 @@
     return grid;
   }
 
-  return { render: render, formChips: formChips };
+  /** Vereinskacheln: Teams, Spiele (gespielt / gesamt), Ligen. Ohne Live-Daten (played == null) nur die Zahl der Teams. */
+  function renderClub(summary, opts) {
+    var compact = !!(opts && opts.compact);
+    var s = summary || {};
+    var items = [];
+    if (s.teams != null) items.push([String(s.teams), s.teams === 1 ? 'Team' : 'Teams']);
+    if (s.total != null && s.total > 0) items.push([s.played + ' / ' + s.total, 'Spiele gespielt']);
+    if (s.ligen != null && s.ligen > 0) items.push([String(s.ligen), s.ligen === 1 ? 'Liga' : 'Ligen']);
+    if (!items.length) return null;
+    var grid = el('div', 'dss-stats' + (compact ? ' dss-stats--compact' : ''));
+    items.forEach(function (it) { grid.appendChild(tile(it[0], it[1], compact)); });
+    return grid;
+  }
+
+  return { render: render, renderClub: renderClub, formChips: formChips };
 });

@@ -403,7 +403,8 @@ test('Favoriten: Vereinskarte mit Logo, Verband, Zahl der Teams und Teamkürzeln
   });
   const card = page.locator('.fav-item');
   await expect(card.locator('.fav-kind')).toHaveText('Verein');
-  await expect(card.locator('.fav-liga')).toContainText('Teams');
+  await expect(card.locator('.fav-liga')).toContainText('Bayern');
+  await expect(card.locator('.dss-stat-label')).toContainText(['Teams', 'Spiele gespielt', /Lig(a|en)/]);
   await expect(card.locator('.team-badge').first()).toBeVisible();
   await expect(card.getByRole('link', { name: 'TSV 1861 Nördlingen' })).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/$/);
 });

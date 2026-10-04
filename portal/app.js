@@ -562,6 +562,21 @@ async function favTeamInfo(teamId) {
   }
 }
 
+/** Ligen, in denen die Teams eines Vereins spielen (aus den Live-Daten, zwischengespeichert), oder null ohne Daten. */
+async function favClubInfo(teamIds) {
+  try {
+    if (!favLive.index) favLive.index = await favJson('data/live/team-index.json');
+    const ligaIds = [...new Set(teamIds.flatMap(id => favLive.index[String(id)] || []))];
+    if (!ligaIds.length) return null;
+    return await Promise.all(ligaIds.map(id => {
+      if (!favLive.docs.has(id)) favLive.docs.set(id, favJson('data/live/liga/' + id + '.json'));
+      return favLive.docs.get(id);
+    }));
+  } catch (e) {
+    return null;
+  }
+}
+
 function favEl(tag, cls, text) {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
@@ -621,15 +636,25 @@ function favClubCard(c) {
   head.insertBefore(createLogoEl(club), head.firstChild);
   const teams = (club.teams || []).slice().sort((a, b) => akSortKey(a.altersklasse) - akSortKey(b.altersklasse));
   const halls = club.halls ? club.halls.length : 0;
-  const meta = [club.verbandName, teams.length + (teams.length === 1 ? ' Team' : ' Teams'), halls ? halls + (halls === 1 ? ' Halle' : ' Hallen') : ''].filter(Boolean);
+  const meta = [club.verbandName, halls ? halls + (halls === 1 ? ' Halle' : ' Hallen') : ''].filter(Boolean);
   const info = favEl('div', 'fav-liga', meta.join(' · '));
+  const stats = favEl('div', 'fav-stats');
+  const showStats = summary => {
+    stats.textContent = '';
+    const grid = TeamStats.renderClub(Object.assign({ teams: teams.length }, summary), { compact: true });
+    if (grid) stats.appendChild(grid);
+  };
+  showStats(null);
+  favClubInfo(teams.map(t => t.teamPermanentId)).then(docs => {
+    if (docs) showStats(TeamLogic.clubSummary(docs, c.id));
+  });
   const badges = favEl('div', 'team-badges');
   teams.slice(0, 8).forEach(t => {
     const g = t.geschlecht;
     badges.appendChild(favEl('span', 'team-badge dss-chip ' + (g === 'männlich' ? 'dss-chip--sky' : g === 'weiblich' ? 'dss-chip--amber' : ''), getBadgeLabel(t)));
   });
   if (teams.length > 8) badges.appendChild(favEl('span', 'team-badge dss-chip', '+' + (teams.length - 8)));
-  head.after(info, badges);
+  head.after(info, stats, badges);
   return li;
 }
 
