@@ -226,7 +226,7 @@ function crumbNav(items: { name: string; path: string }[]): string {
   const parts = items.map((it, i) => i === items.length - 1
     ? `<li aria-current="page">${esc(it.name)}</li>`
     : `<li><a href="${it.path || 'index.html'}">${esc(it.name)}</a></li>`);
-  return `    <nav class="seo-crumbs" aria-label="Brotkrumen"><ol>${parts.join('')}</ol></nav>`;
+  return `    <nav class="dss-crumbs" aria-label="Brotkrumen"><ol>${parts.join('')}</ol></nav>`;
 }
 
 function topbar(): string {
@@ -842,6 +842,8 @@ const clean = (v: unknown): string | undefined => (typeof v === 'string' && v.tr
 /** Hallen aus clubs.json und matchInfo, über die Spielfeld-ID zusammengeführt; Spiele pro Halle gezählt. */
 export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[], geocoded: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }> = {}): Map<string, HallRec> {
   const out = new Map<string, HallRec>();
+  const clubXY = new Map<number, { lat: number; lng: number }>();
+  for (const c of clubs) if (typeof c.lat === 'number' && typeof c.lng === 'number') clubXY.set(c.clubId, { lat: c.lat, lng: c.lng });
   const get = (id: string): HallRec => {
     let h = out.get(id);
     if (!h) { h = { id, name: '', clubIds: new Set(), games: [] }; out.set(id, h); }
@@ -877,6 +879,11 @@ export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[], geocoded: Reco
     const g = geocoded[id];
     if (h.lat !== undefined) h.precision = 'adresse';
     else if (g && typeof g.lat === 'number' && typeof g.lng === 'number') { h.lat = g.lat; h.lng = g.lng; h.precision = g.precision ?? 'adresse'; }
+    else {
+      // Ohne eigene Koordinate: die (geprüfte) Ortsposition eines Vereins, der die Halle meldet, nur als ungefähre Lage
+      const anchor = [...h.clubIds].map(cid => clubXY.get(cid)).find(Boolean);
+      if (anchor) { h.lat = anchor.lat; h.lng = anchor.lng; h.precision = 'ort'; }
+    }
   }
   return out;
 }
@@ -967,7 +974,7 @@ ${crumbNav(crumbs)}
       <h1>${esc(hall.name)}</h1>
       ${card(`<address>${esc(addr)}</address>
       ${hall.lat !== undefined ? `<div id="hall-map" class="hall-map" role="region" aria-label="Karte: ${esc(hall.name)}" data-lat="${hall.lat}" data-lng="${hall.lng}" data-zoom="${exact ? 16 : 13}" data-name="${esc(hall.name)}"></div>
-      ${exact ? '' : '<p class="seo-note">Die Position ist nur ungefähr (Ortsmitte), die genaue Lage ist noch nicht erfasst.</p>'}` : ''}
+      ${exact ? '' : '<p class="seo-note">Die Position ist nur ungefähr, die genaue Lage ist noch nicht erfasst.</p>'}` : ''}
       <p><a class="seo-block-link dss-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ${exact ? 'ansehen' : 'suchen'}<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>`)}
       <h2>Spiele in dieser Halle</h2>
       <p>${esc(counter)}</p>

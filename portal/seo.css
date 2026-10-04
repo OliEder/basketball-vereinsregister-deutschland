@@ -1,15 +1,9 @@
 /* Statische Vereins- und Regionsseiten (erzeugt von crawler/seo.ts) */
-.seo-crumbs { margin: 0 0 1rem; font-size: 0.875rem; }
-.seo-crumbs ol { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; list-style: none; margin: 0; padding: 0; }
-.seo-crumbs li + li::before { content: "›"; margin-right: 0.5rem; color: var(--dss-mute); }
-.seo-crumbs a { color: var(--dss-link, inherit); }
 
 .seo-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.5rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr)); }
 .seo-note { color: var(--dss-mute); font-size: 0.875rem; }
 .seo-list-page h1 { margin-top: 0; }
 #regions { margin: 2rem 0; }
-.seo-crumbs a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
-.seo-crumbs ol { align-items: center; }
 .seo-list-page h1, #verein-content > h1 { font-size: clamp(1.5rem, 7vw, 2.25rem); overflow-wrap: anywhere; hyphens: auto; }
 
 .seo-alphabet ul { list-style: none; margin: 0 0 1.5rem; padding: 0; }
@@ -27,3 +21,4 @@
 .dss-frame:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
 .dss-card .seo-list { margin: 0; }
 .seo-list-page > p { margin: 0 0 1rem; }
+.dss-crumbs { margin: 0 0 1rem; }

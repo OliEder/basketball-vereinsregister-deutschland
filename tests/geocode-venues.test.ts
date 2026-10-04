@@ -1,4 +1,4 @@
-import { normalizeStreet, queriesFor, plausible, pending, geocodeHalls, collectAddresses, emptyCoords, HallCoords, HallAddress, GeocodeFn } from '../crawler/geocode-venues';
+import { QUERY_VERSION, normalizeStreet, queriesFor, plausible, pending, geocodeHalls, collectAddresses, emptyCoords, HallCoords, HallAddress, GeocodeFn } from '../crawler/geocode-venues';
 
 const hall = (id: string, over: Partial<HallAddress> = {}): HallAddress => ({ id, bezeichnung: 'Halle', strasse: 'Kurfürstenstr. 25', plz: '71636', ort: 'Ludwigsburg', ...over });
 const near = { lat: 48.9, lng: 9.19 };
@@ -11,14 +11,22 @@ describe('Suchtexte', () => {
     expect(normalizeStreet('An der Kotsche 39/41')).toBe('An der Kotsche 39/41');
   });
 
-  it('queriesFor: erst Straße, dann PLZ und Ort; ohne Ort keine Suche; ohne Straße nur der Ort', () => {
+  it('queriesFor: Straße mit Ort, Straße nur mit PLZ, dann Ort, dann nur PLZ; ohne Ort keine Suche', () => {
     expect(queriesFor(hall('1'))).toEqual([
       { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', precision: 'adresse' },
-      { q: '71636 Ludwigsburg', precision: 'ort' }
+      { q: 'Kurfürstenstraße 25, 71636', precision: 'adresse' },
+      { q: '71636 Ludwigsburg', precision: 'ort' },
+      { q: '71636', precision: 'ort' }
     ]);
     expect(queriesFor(hall('1', { ort: null }))).toEqual([]);
-    expect(queriesFor(hall('1', { strasse: null }))).toEqual([{ q: '71636 Ludwigsburg', precision: 'ort' }]);
+    expect(queriesFor(hall('1', { strasse: null }))).toEqual([{ q: '71636 Ludwigsburg', precision: 'ort' }, { q: '71636', precision: 'ort' }]);
     expect(queriesFor(hall('1', { strasse: '  ', plz: null }))).toEqual([{ q: 'Ludwigsburg', precision: 'ort' }]);
+  });
+
+  it('Ortsteil oder Kürzel im Ort: die Suche nur mit PLZ steht dabei', () => {
+    const qs = queriesFor(hall('1', { strasse: 'Am Waldrand 21', plz: '69126', ort: 'HD-Boxberg' })).map(x => x.q);
+    expect(qs).toContain('Am Waldrand 21, 69126');
+    expect(qs).toContain('69126');
   });
 });
 
@@ -42,8 +50,8 @@ describe('pending', () => {
   it('nimmt Hallen ohne Koordinate, überspringt fertige und frische Fehlschläge, wiederholt alte und geänderte', () => {
     const store: HallCoords = {
       v: 1,
-      coords: { '1': { lat: 1, lng: 1, precision: 'adresse', q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-09-01' }, '5': { lat: 1, lng: 1, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-09-01' } },
-      failed: { '2': { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-09-30' }, '3': { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-08-01' }, '4': { q: 'alte Adresse', checked: '2026-10-01' } }
+      coords: { '1': { lat: 1, lng: 1, precision: 'adresse', q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-09-01' }, '5': { lat: 1, lng: 1, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-09-01', v: QUERY_VERSION } },
+      failed: { '2': { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-09-30', v: QUERY_VERSION }, '3': { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-08-01', v: QUERY_VERSION }, '4': { q: 'alte Adresse', checked: '2026-10-01', v: QUERY_VERSION } }
     };
     const todo = pending([hall('1'), hall('2'), hall('3'), hall('4'), hall('5'), hall('6'), hall('7', { ort: null })], store, today);
     expect(todo.map(h => h.id)).toEqual(['3', '4', '6']);
@@ -71,7 +79,7 @@ describe('geocodeHalls', () => {
     expect(r).toMatchObject({ tried: 3, found: 2, failed: 1 });
     expect(store.coords['1']).toMatchObject({ precision: 'adresse', lat: 48.9001, lng: 9.1901 });
     expect(store.coords['2']).toMatchObject({ precision: 'ort', q: '71636 Ludwigsburg' });
-    expect(store.failed['3']).toEqual({ q: 'Geisterweg 9, 00000 Unbekannt', checked: '2026-10-04' });
+    expect(store.failed['3']).toEqual({ q: 'Geisterweg 9, 00000 Unbekannt', checked: '2026-10-04', v: QUERY_VERSION });
     expect(calls[0]).toBe('Kurfürstenstraße 25, 71636 Ludwigsburg');
   });
 
@@ -94,6 +102,51 @@ describe('geocodeHalls', () => {
     const r2 = await geocodeHalls([hall('1'), hall('2'), hall('3')], emptyCoords(), { ...base, geocode: async () => near, deadline: 2, now: () => t++ });
     expect(r2.stoppedByBudget).toBe(true);
     expect(r2.tried).toBe(2);
+  });
+});
+
+describe('Verbesserte Suchtexte (QUERY_VERSION)', () => {
+  const today = '2026-10-04';
+
+  it('alte Fehlschläge und ungefähre Treffer ohne Version werden einmal neu versucht, danach nicht mehr', () => {
+    const store: HallCoords = {
+      v: 1,
+      coords: { '1': { lat: 1, lng: 1, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-10-01' }, '2': { lat: 1, lng: 1, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-10-01', v: QUERY_VERSION } },
+      failed: { '3': { q: 'Kurfürstenstraße 25, 71636 Ludwigsburg', checked: '2026-10-03' } }
+    };
+    expect(pending([hall('1'), hall('2'), hall('3')], store, today).map(h => h.id)).toEqual(['1', '3']);
+  });
+
+  it('ungefähre Halle ohne Straße wird nicht neu versucht (es gäbe nichts Besseres)', () => {
+    const store: HallCoords = { v: 1, coords: { '1': { lat: 1, lng: 1, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-10-01' } }, failed: {} };
+    expect(pending([hall('1', { strasse: null })], store, today)).toEqual([]);
+  });
+
+  it('Verbesserung: Straßentreffer ersetzt die ungefähre Koordinate; ohne Treffer bleibt sie und wird markiert', async () => {
+    const store: HallCoords = {
+      v: 1,
+      coords: {
+        '1': { lat: 48.89, lng: 9.19, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-10-01' },
+        '2': { lat: 48.89, lng: 9.19, precision: 'ort', q: '71636 Ludwigsburg', checked: '2026-10-01' }
+      },
+      failed: {}
+    };
+    const calls: string[] = [];
+    const geocode: GeocodeFn = async q => { calls.push(q); return q.startsWith('Kurfürstenstraße') && calls.length === 1 ? { lat: 48.9001, lng: 9.1901 } : null; };
+    const r = await geocodeHalls([hall('1'), hall('2')], store, { today, anchorsOf: () => [near], geocode });
+    expect(r).toMatchObject({ improved: 1, found: 0, failed: 0 });
+    expect(store.coords['1']).toMatchObject({ precision: 'adresse', lat: 48.9001, v: QUERY_VERSION });
+    expect(store.coords['2']).toMatchObject({ precision: 'ort', lat: 48.89, v: QUERY_VERSION });
+    expect(calls.every(q => q.startsWith('Kurfürstenstraße'))).toBe(true);        // nur Straßensuchen, keine Ortssuche
+  });
+
+  it('PLZ-Suche rettet Hallen, deren Ort ein Kürzel oder einen Ortsteil trägt', async () => {
+    const store = emptyCoords();
+    const h = hall('1044', { strasse: 'Am Waldrand 21', plz: '69126', ort: 'HD-Boxberg' });
+    const geocode: GeocodeFn = async q => (q === '69126' ? { lat: 49.38, lng: 8.67 } : null);
+    const r = await geocodeHalls([h], store, { today, anchorsOf: () => [{ lat: 49.4, lng: 8.69 }], geocode });
+    expect(r.found).toBe(1);
+    expect(store.coords['1044']).toMatchObject({ precision: 'ort', q: '69126' });
   });
 });
 
