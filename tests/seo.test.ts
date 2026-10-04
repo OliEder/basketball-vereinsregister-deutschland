@@ -490,12 +490,35 @@ describe('Teamseiten', () => {
     expect(html).toContain('60:70');
   });
 
+  it('Teamseite: Kennzahlen und Tabelle fest im HTML, eigenes Team hervorgehoben', () => {
+    const html = renderTeamPage({
+      base: BASE, ref: { club: c, team: c.teams[0] as any, clubPath: 'bayern/regensburg/tv-regensburg/' }, path: 'bayern/regensburg/tv-regensburg/herren/',
+      docs: [doc], clubPaths: { '7': 'bayern/regensburg/tv-regensburg/' }, ligaPaths: { 1: 'liga/bayern/kreisliga-a/' },
+      teamPaths: { '70': 'bayern/regensburg/tv-regensburg/herren/' }, today: '2026-10-03', cp: placeOf(c), clubUrl: 'bayern/regensburg/tv-regensburg/'
+    });
+    expect(html).toContain('<div class="dss-stats"><div class="dss-stat">');                              // große Kacheln wie auf der Teamseite im Browser
+    expect(html).toContain('<div class="dss-stat-label">Tabellenplatz</div>');
+    expect(html).toContain('<div class="dss-stat-label">Form (letzte 5)</div>');
+    expect(html).toContain('<h2>Tabelle</h2>');
+    expect(html).toContain('<tr class="team-own is-own"><td class="center num lead">2</td>');
+    expect(html.indexOf('<h2>Tabelle</h2>')).toBeLessThan(html.indexOf('<h2>Nächste Spiele</h2>'));
+  });
+
   it('buildSite: Team-, Vereins- und Ligaseite verlinken sich, Umzug erzeugt Weiterleitung', () => {
     const before = buildSite([club(7, 'TV Regensburg', 'Passau', '0200007', { teams: c.teams })], {}, BASE, '2026-10-03', { docs: [doc] });
     const moved = buildSite([c], before.urlMap, BASE, '2026-10-03', { docs: [doc], previousTeams: before.teamMap });
     expect(moved.files.get('bayern/regensburg/tv-regensburg/herren/index.html')).toContain('SportsTeam');
     expect(moved.files.get('bayern/passau/tv-regensburg/herren/index.html')).toContain('http-equiv="refresh"');
-    expect(moved.files.get('bayern/regensburg/tv-regensburg/index.html')).toContain('<a href="bayern/regensburg/tv-regensburg/herren/">Herren</a>');
+    const verein = moved.files.get('bayern/regensburg/tv-regensburg/index.html')!;
+    expect(verein).toContain('<a class="verein-team-link" href="bayern/regensburg/tv-regensburg/herren/">Herren<span class="dss-sr-only"> – Tabelle und Spielplan</span></a>');
+    expect(verein).toContain('<div class="verein-team-liga"><a href="liga/bayern/kreisliga-a/">Kreisliga A</a></div>');
+    // Kennzahlen fest im HTML: Platz 2, Bilanz 1 – 1 (aus der Tabelle bzw. den Spielen der Liga), Form
+    expect(verein).toContain('<div class="verein-team-stats"><div class="dss-stats dss-stats--compact">');
+    expect(verein).toContain('<div class="dss-stat-value">2.</div><div class="dss-stat-label">Platz</div>');
+    expect(verein).toContain('<div class="dss-stat-label">Bilanz</div>');
+    expect(verein).toContain('<div class="dss-stat-label">Letzte 5</div>');
+    expect(verein).toContain('<h2 class="verein-section-title">Teams (3)</h2><div class="verein-teams">');
+    expect(verein.indexOf('>Herren<')).toBeLessThan(verein.indexOf('U16'));                              // Reihenfolge wie im Browser (Senioren vor Jugend)
     expect(moved.files.get('liga/bayern/kreisliga-a/index.html')).toContain('href="bayern/regensburg/tv-regensburg/herren/"');
     expect(moved.files.get('sitemap.xml')).toContain('/bayern/regensburg/tv-regensburg/herren/<');
     expect(moved.files.get('sitemap.xml')).not.toContain('passau/tv-regensburg/herren');

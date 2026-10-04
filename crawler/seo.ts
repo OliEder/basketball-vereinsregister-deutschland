@@ -14,6 +14,11 @@ import { loadExistingClubs } from './writer';
 const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
 import { loadLaender } from './geo-laender';
+// Kennzahlen und Tabellenlogik teilen sich Browser und Seitenbau (UMD-Dateien des Portals)
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TeamLogic: any = require('../portal/team-logic.js');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TeamStats: any = require('../portal/team-stats.js');
 import { Outline, outlinesFor } from './outline';
 
 export const DEFAULT_BASE = 'https://olieder.github.io/basketball-vereinsregister-deutschland';
@@ -251,7 +256,29 @@ function teamLabel(t: ClubEntry['teams'][number]): string {
   return ak + (g ? ` (${g})` : '') + num;
 }
 
-export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string> }
+/** Form als Chips, wie TeamStats.formChips im Browser. */
+function formChipsHtml(outcomes: string[]): string {
+  if (!outcomes.length) return '<span class="dss-form">–</span>';
+  return `<span class="dss-form">${outcomes.map(o => `<span class="dss-chip dss-chip--mono ${o === 'S' ? 'dss-chip--ok' : 'dss-chip--err'}"><span aria-hidden="true">${o}</span><span class="dss-sr-only">${o === 'S' ? 'Sieg' : 'Niederlage'}</span></span>`).join('')}</span>`;
+}
+
+/** Das Kachelgitter eines Teams als HTML; gleiche Liste wie TeamStats.render im Browser. Leer, wenn nichts zu zeigen ist. */
+export function statsHtml(summary: unknown, compact: boolean): string {
+  const items: Array<{ value?: string; form?: string[]; label: string }> = TeamStats.items(summary, compact);
+  if (!items.length) return '';
+  const tile = (it: { value?: string; form?: string[]; label: string }): string =>
+    `<div class="dss-stat${compact ? ' dss-stat--compact' : ''}"><div class="dss-stat-value">${it.form ? formChipsHtml(it.form) : esc(it.value ?? '')}</div><div class="dss-stat-label">${esc(it.label)}</div></div>`;
+  return `<div class="dss-stats${compact ? ' dss-stats--compact' : ''}">${items.map(tile).join('')}</div>`;
+}
+
+/** Reihenfolge der Teams auf der Vereinsseite wie verein.js (akSortKey). */
+const AK_ORDER = ['Senioren', 'U22', 'U20', 'U19', 'U18', 'U17', 'U16', 'U15', 'U14', 'U13', 'U12', 'U11', 'U10', 'Mini'];
+const akSortKey = (ak?: string): number => { const i = AK_ORDER.indexOf(ak ?? ''); return i === -1 ? 99 : i; };
+
+/** Liga und Kennzahlen eines Teams für die Teamkarte der Vereinsseite. */
+export interface ClubTeamInfo { liga: LigaDoc | null; summary: unknown }
+
+export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string>; teamInfo?: Record<string, ClubTeamInfo> }
 
 export function renderClubPage(ctx: ClubPageContext): string {
   const { base, club, urlPath, cp } = ctx;
@@ -259,7 +286,7 @@ export function renderClubPage(ctx: ClubPageContext): string {
   const home = chooseHomeHall(club)?.hall ?? club.halls?.[0];
   const ortText = cp.place === NO_PLACE ? '' : cp.place.name;
   const land = cp.state === NATIONAL ? '' : cp.state.name;
-  const teams = (club.teams ?? []).slice().sort((a, b) => (a.altersklasse ?? '').localeCompare(b.altersklasse ?? '', 'de'));
+  const teams = (club.teams ?? []).slice().sort((a, b) => akSortKey(a.altersklasse) - akSortKey(b.altersklasse));
   const where = [ortText, land].filter(Boolean).join(', ');
 
   const description = [
@@ -300,15 +327,26 @@ export function renderClubPage(ctx: ClubPageContext): string {
     };
   }
 
-  const ligaLink = (t: ClubEntry['teams'][number]): string => {
-    if (!t.liganame) return '';
-    const lp = t.ligaId != null ? ctx.ligaPaths?.[t.ligaId] : undefined;
-    return ` – ${lp ? `<a href="${lp}">${esc(t.liganame)}</a>` : esc(t.liganame)}`;
-  };
-  const teamItems = teams.map(t => {
+  // Teamkarten wie in verein.js: Name, Liga, Kennzahlen, Training; verein.js ersetzt sie nach dem Laden der Live-Daten
+  const hallById = new Map((club.halls ?? []).map(h => [h.id, h]));
+  const teamCard = (t: ClubEntry['teams'][number]): string => {
     const tp = ctx.teamPaths?.[String(t.teamPermanentId)];
-    return `<li>${tp ? `<a href="${tp}">${esc(teamLabel(t))}</a>` : esc(teamLabel(t))}${ligaLink(t)}</li>`;
-  }).join('');
+    const info = ctx.teamInfo?.[String(t.teamPermanentId)];
+    const liga = info?.liga ?? null;
+    const ligaName = liga?.liganame ?? t.liganame;
+    const lp = liga ? ctx.ligaPaths?.[liga.ligaId] : t.ligaId != null ? ctx.ligaPaths?.[t.ligaId] : undefined;
+    const ligaHtml = !ligaName ? 'Liga nicht verfügbar'
+      : liga && !(liga.tabelle ?? []).length ? `<span class="verein-badge-pokal dss-chip dss-chip--mono">Pokal / KO-Turnier</span> ${lp ? `<a href="${lp}">${esc(ligaName)}</a>` : esc(ligaName)}`
+      : lp ? `<a href="${lp}">${esc(ligaName)}</a>` : esc(ligaName);
+    const stats = info ? statsHtml(info.summary, true) : (t.rang ? statsHtml({ rang: t.rang }, true) : '');
+    const training = (t.training ?? []).map(tr => {
+      const hall = hallById.get(tr.hallId);
+      return `<div class="verein-training-row">${esc(`${tr.wochentag} ${tr.von}–${tr.bis}`)}${hall ? ` · ${esc(hall.bezeichnung)}` : ''}</div>`;
+    }).join('');
+    const label = esc(teamLabel(t));
+    return `<div class="verein-team-card dss-card dss-card--hoverable"><div class="verein-team-header"><div class="verein-team-label">${tp ? `<a class="verein-team-link" href="${tp}">${label}<span class="dss-sr-only"> – Tabelle und Spielplan</span></a>` : label}</div></div><div class="verein-team-liga">${ligaHtml}</div>${stats ? `<div class="verein-team-stats">${stats}</div>` : ''}${training}${tp ? '<div class="verein-team-cta" aria-hidden="true">Tabelle &amp; Spielplan ansehen →</div>' : ''}</div>`;
+  };
+  const teamCards = teams.map(teamCard).join('');
   const hallItems = (club.halls ?? []).map(h => {
     const addr = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
     const hp = h.dbbSpielfeldId ? ctx.hallPaths?.[String(h.dbbSpielfeldId)] : undefined;
@@ -322,9 +360,9 @@ ${crumbNav(crumbs)}
     <div id="verein-content">
       <h1>${esc(club.name)}</h1>
       ${where ? `<p>${esc(where)}</p>` : ''}
-      ${teamItems ? `<h2>Teams (${teams.length})</h2>${card(`<ul class="seo-list">${teamItems}</ul>`)}` : ''}
+      ${teamCards ? `<h2 class="verein-section-title">Teams (${teams.length})</h2><div class="verein-teams">${teamCards}</div>` : ''}
       ${hallItems ? `<h2>Hallen</h2>${card(`<ul class="seo-list">${hallItems}</ul>`)}` : ''}
-      <noscript><p>Spielpläne und Tabellen werden mit JavaScript geladen.</p></noscript>
+      <noscript><p class="seo-note">Karte, Favoriten und aktuelle Live-Daten brauchen JavaScript.</p></noscript>
     </div>
   </main>`;
 
@@ -799,6 +837,13 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
     return { match: m, mark: home ? 'vs.' : '@', teams: teamCell(home ? m.guestTeam : m.homeTeam, clubPaths, teamPaths), meta: hall ? [esc([hall.bezeichnung, hall.ort].filter(Boolean).join(', '))] : [] };
   }));
 
+  // Kennzahlen und Tabelle fest im HTML (team.js ersetzt sie nach dem Laden der Live-Daten)
+  const statsBlock = doc ? statsHtml(TeamLogic.summary(doc, id), false) : '';
+  const tableRows = doc ? (doc.tabelle ?? []).filter(e => e?.team).slice().sort((a, b) => (a.rang ?? 99) - (b.rang ?? 99)) : [];
+  const tableBlock = tableRows.length
+    ? `<h2>Tabelle</h2>\n      <div class="team-table-wrap dss-frame dss-table-scroll" role="region" aria-label="Tabelle ${esc(doc!.liganame)}" tabindex="0"><table class="team-table dss-tbl"><thead><tr><th scope="col" class="center">#</th><th scope="col" class="wrap">Team</th><th scope="col" class="num">Sp</th><th scope="col" class="num">S</th><th scope="col" class="num">N</th><th scope="col" class="num">Körbe</th><th scope="col" class="num">Diff</th><th scope="col" class="num">Pkt</th></tr></thead><tbody>${tableRows.map(e => `<tr${sameTeam(e.team, id) ? ' class="team-own is-own"' : ''}><td class="center num lead">${esc(String(e.rang ?? ''))}</td><td class="wrap">${teamCell(e.team, clubPaths, teamPaths)}</td><td class="num">${e.anzspiele ?? 0}</td><td class="num">${e.s ?? 0}</td><td class="num">${e.n ?? 0}</td><td class="num">${e.koerbe ?? 0}:${e.gegenKoerbe ?? 0}</td><td class="num">${(e.korbdiff ?? 0) > 0 ? '+' : ''}${e.korbdiff ?? 0}</td><td class="num lead">${e.anzGewinnpunkte ?? 0}</td></tr>`).join('')}</tbody></table></div>`
+    : '';
+
   const crumbs = [
     { name: 'Vereinsregister', path: '' },
     { name: cp.state.name, path: `${cp.state.slug}/` },
@@ -838,10 +883,12 @@ ${crumbNav(crumbs)}
     <div id="team-content" class="seo-list-page">
       <h1>${esc(name)}</h1>
       <p>${esc(label)}${ligaLine ? ` · ${ligaLine}` : ''} · <a href="${ref.clubPath}">${esc(ref.club.name)}</a>${standing ? ` · ${esc(standing)}` : ''}</p>
+      ${statsBlock}
+      ${tableBlock}
       ${upcoming.length ? `<h2>Nächste Spiele</h2>${schedule(upcoming, true)}` : ''}
       ${recent.length ? `<h2>Letzte Ergebnisse</h2>${schedule(recent, false)}` : ''}
       ${others.length ? `<h2>Weitere Wettbewerbe</h2>${card(`<ul class="seo-list">${others.map(d => `<li><a href="${ligaPaths[d.ligaId]}">${esc(d.liganame)}</a></li>`).join('')}</ul>`)}` : ''}
-      <noscript><p>Tabelle und Spielplan werden mit JavaScript geladen.</p></noscript>
+      <noscript><p class="seo-note">Filter, Kalender-Abo, Favoriten und aktuelle Live-Daten brauchen JavaScript.</p></noscript>
     </div>
   </main>`;
 
@@ -1113,7 +1160,13 @@ export function buildSite(
     // angehängter ID sind Dubletten: erreichbar, aber canonical auf die Hauptseite und nicht in der Sitemap.
     const dupOf = entry.path.replace(new RegExp(`-${club.clubId}/$`), '/');
     const canonicalPath = dupOf !== entry.path && currentPaths.has(dupOf) ? dupOf : undefined;
-    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths }));
+    const teamInfo: Record<string, ClubTeamInfo> = {};
+    for (const t of club.teams ?? []) {
+      const docs = ligenOfTeam.get(t.teamPermanentId);
+      const doc = docs?.length ? (TeamLogic.pickPrimaryLiga(docs, t.teamPermanentId) as LigaDoc | null) : null;
+      if (doc) teamInfo[String(t.teamPermanentId)] = { liga: doc, summary: TeamLogic.summary(doc, t.teamPermanentId) };
+    }
+    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths, teamInfo }));
     if (!canonicalPath) sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }

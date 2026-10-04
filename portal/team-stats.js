@@ -37,23 +37,29 @@
   }
 
   /**
-   * summary: { rang, played, wins, losses, diff, form }. Ohne `compact` erscheinen immer alle vier Kacheln
-   * (fehlende Werte als "–"); kompakt entfallen Kacheln ohne Wert. Gibt null zurück, wenn nichts zu zeigen ist.
+   * Die Kacheln als Daten: [{ value, label }] oder [{ form: ['S','N',…], label }] für die Form.
+   * Ohne `compact` erscheinen immer alle vier Kacheln (fehlende Werte als "–"); kompakt entfallen Kacheln ohne Wert.
+   * Browser (render) und Seitenbau (crawler/seo.ts) benutzen dieselbe Liste, damit die Zahlen gleich bleiben.
    */
-  function render(summary, opts) {
-    var compact = !!(opts && opts.compact);
+  function items(summary, compact) {
     var s = summary || {};
     var played = s.played > 0;
     var form = s.form || [];
-    var items = [
-      s.rang != null ? [s.rang + '.', compact ? 'Platz' : 'Tabellenplatz'] : (compact ? null : ['–', 'Tabellenplatz']),
-      played ? [s.wins + ' – ' + s.losses, compact ? 'Bilanz' : 'Bilanz (S – N)'] : (compact ? null : ['–', 'Bilanz (S – N)']),
-      played ? [(s.diff > 0 ? '+' : '') + s.diff, compact ? 'Diff.' : 'Korbdifferenz'] : null,
-      form.length || !compact ? [formChips(form), compact ? 'Letzte 5' : 'Form (letzte 5)'] : null
+    return [
+      s.rang != null ? { value: s.rang + '.', label: compact ? 'Platz' : 'Tabellenplatz' } : (compact ? null : { value: '–', label: 'Tabellenplatz' }),
+      played ? { value: s.wins + ' – ' + s.losses, label: compact ? 'Bilanz' : 'Bilanz (S – N)' } : (compact ? null : { value: '–', label: 'Bilanz (S – N)' }),
+      played ? { value: (s.diff > 0 ? '+' : '') + s.diff, label: compact ? 'Diff.' : 'Korbdifferenz' } : null,
+      form.length || !compact ? { form: form, label: compact ? 'Letzte 5' : 'Form (letzte 5)' } : null
     ].filter(Boolean);
-    if (!items.length) return null;
+  }
+
+  /** Erzeugt das Kachelgitter im Browser; gibt null zurück, wenn nichts zu zeigen ist. */
+  function render(summary, opts) {
+    var compact = !!(opts && opts.compact);
+    var list = items(summary, compact);
+    if (!list.length) return null;
     var grid = el('div', 'dss-stats' + (compact ? ' dss-stats--compact' : ''));
-    items.forEach(function (it) { grid.appendChild(tile(it[0], it[1], compact)); });
+    list.forEach(function (it) { grid.appendChild(tile(it.form ? formChips(it.form) : it.value, it.label, compact)); });
     return grid;
   }
 
@@ -71,5 +77,5 @@
     return grid;
   }
 
-  return { render: render, renderClub: renderClub, formChips: formChips };
+  return { render: render, items: items, renderClub: renderClub, formChips: formChips };
 });
