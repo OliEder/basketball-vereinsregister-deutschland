@@ -336,6 +336,7 @@ ${crumbNav(crumbs)}
     head: `  <meta name="club-id" content="${club.clubId}">\n  <script type="application/ld+json">${jsonLd(org)}</script>\n${breadcrumbLd(base, crumbs)}`,
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="map-tiles.js"></script>
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
@@ -815,6 +816,7 @@ ${crumbNav(crumbs)}
     head: `  <meta name="team-id" content="${id}">\n  <script type="application/ld+json">${jsonLd(team)}</script>\n${events.map(e => `  <script type="application/ld+json">${jsonLd(e)}</script>\n`).join('')}${breadcrumbLd(base, crumbs)}`,
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="map-tiles.js"></script>
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
@@ -989,7 +991,7 @@ ${crumbNav(crumbs)}
     styles: hall.lat !== undefined ? ['style.css', 'verein.css', 'seo.css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'] : ['style.css', 'verein.css', 'seo.css'],
     head: `  <script type="application/ld+json">${jsonLd(place)}</script>\n${breadcrumbLd(base, crumbs)}`,
     body,
-    scripts: hall.lat !== undefined ? `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>\n  <script src="hall.js"></script>\n` : undefined
+    scripts: hall.lat !== undefined ? `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>\n  <script src="map-tiles.js"></script>\n  <script src="hall.js"></script>\n` : undefined
   });
 }
 

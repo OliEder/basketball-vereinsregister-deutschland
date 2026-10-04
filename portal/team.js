@@ -99,11 +99,7 @@ function renderVenue(venue, isHome, confirmed) {
 function initVenueMap(mapEl, venue) {
   if (typeof L === 'undefined') { mapEl.remove(); return; }
   const map = L.map(mapEl, { zoomControl: true, scrollWheelZoom: false }).setView([venue.lat, venue.lng], 15);
-  const dark = document.documentElement.getAttribute('data-theme') !== 'light';
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') + '/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap, © CARTO',
-    maxZoom: 19
-  }).addTo(map);
+  MapTiles.add(L, map);
   const icon = L.divIcon({ className: '', html: '<div class="dss-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
   L.marker([venue.lat, venue.lng], { icon, title: venue.bezeichnung, alt: venue.bezeichnung }).addTo(map);
 }

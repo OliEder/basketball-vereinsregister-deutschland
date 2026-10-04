@@ -138,7 +138,7 @@ jobs:
       - name: Deploy-Artefakt zusammenstellen
         run: |
           mkdir -p _site/data/schemas
-          cp portal/index.html portal/style.css portal/app.js portal/verein.html portal/verein.css portal/verein.js portal/theme.js portal/team.html portal/team.css portal/team.js portal/team-logic.js portal/seo.css portal/favorites.js portal/report.js portal/hall.js portal/pagenav.js portal/team-stats.js _site/
+          cp portal/index.html portal/style.css portal/app.js portal/verein.html portal/verein.css portal/verein.js portal/theme.js portal/team.html portal/team.css portal/team.js portal/team-logic.js portal/seo.css portal/favorites.js portal/report.js portal/hall.js portal/pagenav.js portal/team-stats.js portal/map-tiles.js _site/
           cp -r portal/dss _site/dss
           npm run hall-index -- --out=_site/data/live/hall-index.json --coords=data-store/hall-coords.json
           cp data/clubs.json _site/data/clubs.json
