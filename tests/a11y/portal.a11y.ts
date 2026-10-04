@@ -413,19 +413,19 @@ test('Favoriten: Vereinskarte mit Logo, Verband und Kennzahlen', async ({ page }
   await expect(card.getByRole('link', { name: 'TSV 1861 Nördlingen' })).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/$/);
 });
 
-test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden und inaktive Teams', async ({ page }) => {
+test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden, inaktive Teams nur in der Vereine-Karte', async ({ page }) => {
   await open(page, '/index.html', 'light', '#stats-bar .hero-stat');
   const cards = page.locator('#stats-bar .hero-stat');
-  await expect(cards).toHaveCount(4);
+  await expect(cards).toHaveCount(3);
   await expect(cards.nth(0)).toContainText('Vereine');
   await expect(cards.nth(0)).toContainText('aktive Teams');
   await expect(cards.nth(0)).toHaveAttribute('href', 'vereine/');
   await expect(cards.nth(1)).toContainText('Ligen');
-  await expect(cards.nth(1)).toContainText(/in \d+ Verbänden/);
+  await expect(cards.nth(1)).toContainText(/in \d+ Verbänd?e?n?/);
   await expect(cards.nth(1)).toHaveAttribute('href', 'liga/');
   await expect(cards.nth(2)).toContainText('Spielstätten');
   await expect(cards.nth(2)).toHaveAttribute('href', 'halle/');
-  await expect(cards.nth(3)).toContainText('inaktive Teams');
+  await expect(page.locator('#stats-bar')).not.toContainText('inaktive Teams');     // keine eigene Karte, höchstens "inaktiv" in der Unterzeile
   await cards.nth(2).click();
   await expect(page).toHaveURL(/\/halle\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Basketballhallen in Deutschland');

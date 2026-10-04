@@ -501,7 +501,7 @@ async function countHalls(clubs) {
   return ids.size;
 }
 
-/** Die Top-Karten: Vereine (mit Teams), Ligen (in x Verbänden), Spielstätten und inaktive Teams; mit Link, wenn es die Übersicht gibt. */
+/** Die Top-Karten: Vereine (mit aktiven und inaktiven Teams), Ligen (in x Verbänden) und Spielstätten; mit Link, wenn es die Übersicht gibt. */
 async function renderHeroStats(clubs) {
   const statsBar = document.getElementById('stats-bar');
   if (!statsBar) return;
@@ -510,10 +510,9 @@ async function renderHeroStats(clubs) {
   const nf = new Intl.NumberFormat('de-DE');
   const halls = await countHalls(clubs);
   const items = [
-    { num: st.clubs, label: 'Vereine', sub: nf.format(st.teamsActive) + ' aktive Teams', href: hubs.includes('vereine') ? 'vereine/' : '#regions' },
-    { num: st.ligen, label: 'Ligen', sub: 'in ' + st.verbaende + ' Verbänden', href: hubs.includes('liga') ? 'liga/' : null },
-    { num: halls, label: 'Spielstätten', sub: 'mit Karte und Spielplan', href: hubs.includes('halle') ? 'halle/' : null },
-    { num: st.teamsInactive, label: 'inaktive Teams', sub: 'ohne Liga in dieser Saison', href: null }
+    { num: st.clubs, label: 'Vereine', sub: nf.format(st.teamsActive) + ' aktive Teams' + (st.teamsInactive ? ' · ' + nf.format(st.teamsInactive) + ' inaktiv' : ''), href: hubs.includes('vereine') ? 'vereine/' : '#regions' },
+    { num: st.ligen, label: 'Ligen', sub: 'in ' + st.verbaende + (st.verbaende === 1 ? ' Verband' : ' Verbänden'), href: hubs.includes('liga') ? 'liga/' : null },
+    { num: halls, label: 'Spielstätten', sub: 'mit Karte und Spielplan', href: hubs.includes('halle') ? 'halle/' : null }
   ];
   statsBar.textContent = '';
   items.forEach(it => {
