@@ -423,6 +423,12 @@ test('Vereinsseite: Teamkarte mit Platz, Bilanz, Differenz und letzten Spielen',
   await expect(card.locator('.dss-form .dss-chip').first()).toContainText(/Sieg|Niederlage/);
 });
 
+test('Vereinsseite: kein Link auf ein BBB-Profil (das Linkziel gibt es nicht)', async ({ page }) => {
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '#verein-content[data-live] .verein-team-card');
+  await expect(page.getByRole('link', { name: 'BBB-Profil' })).toHaveCount(0);
+  await expect(page.locator('a[href*="basketball-bund.net/club"]')).toHaveCount(0);
+});
+
 test('Favoriten: Vereinskarte mit Logo, Verband und Kennzahlen', async ({ page }) => {
   await open(page, '/index.html', 'light', '.fav-item', async p => {
     await p.evaluate(() => {

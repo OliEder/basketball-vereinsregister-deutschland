@@ -151,27 +151,19 @@ function renderClubHeader(club) {
   return wrap;
 }
 
+/** Links des Vereins; es gibt nur die eigene Website (ein Profil auf basketball-bund.net lässt sich nicht verlinken: das Linkziel existiert nicht). */
 function renderLinks(club) {
+  if (!club.website) return null;
   const wrap = document.createElement('div');
   wrap.className = 'verein-links';
 
-  if (club.website) {
-    const a = document.createElement('a');
-    a.className = 'dss-chip dss-chip--link';
-    a.href = club.website;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.textContent = 'Website';
-    wrap.appendChild(a);
-  }
-
-  const bbb = document.createElement('a');
-  bbb.className = 'dss-chip dss-chip--link';
-  bbb.href = 'https://www.basketball-bund.net/club/id/' + club.clubId;
-  bbb.target = '_blank';
-  bbb.rel = 'noopener';
-  bbb.textContent = 'BBB-Profil';
-  wrap.appendChild(bbb);
+  const a = document.createElement('a');
+  a.className = 'dss-chip dss-chip--link';
+  a.href = club.website;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.textContent = 'Website';
+  wrap.appendChild(a);
 
   return wrap;
 }
@@ -433,7 +425,8 @@ async function init() {
     content.setAttribute('data-live', '');       // ab hier die Fassung aus den Live-Daten (davor die vorberechnete Seite)
 
     content.appendChild(renderClubHeader(club));
-    content.appendChild(renderLinks(club));
+    const links = renderLinks(club);
+    if (links) content.appendChild(links);
 
     const mapSection = renderMap(club.halls);
     if (mapSection) {
