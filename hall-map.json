@@ -35,6 +35,10 @@
   "path": "halle/sachsen/chemnitz/richard-hartmann-halle/",
   "history": []
  },
+ "30": {
+  "path": "halle/sachsen/riesa/berufsschulzentrum-technik-und-wirtschaft/",
+  "history": []
+ },
  "31": {
   "path": "halle/sachsen/zwickau/bsz-technik-zwickau/",
   "history": []
@@ -461,6 +465,10 @@
  },
  "560": {
   "path": "halle/thueringen/meiningen/drachenberghalle/",
+  "history": []
+ },
+ "561": {
+  "path": "halle/thueringen/meiningen/multihalle/",
   "history": []
  },
  "566": {
@@ -923,6 +931,10 @@
   "path": "halle/bayern/augsburg/reischlesche-wirtschaftsschule-gross/",
   "history": []
  },
+ "2051": {
+  "path": "halle/bayern/guenzburg/sporthalle/",
+  "history": []
+ },
  "2053": {
   "path": "halle/bayern/wertingen/stadthalle/",
   "history": []
@@ -965,6 +977,10 @@
  },
  "2076": {
   "path": "halle/bayern/bayreuth/sportzentrum/",
+  "history": []
+ },
+ "2079": {
+  "path": "halle/bayern/coburg/pestalozzi-sporthalle/",
   "history": []
  },
  "2086": {
@@ -1044,8 +1060,10 @@
   "history": []
  },
  "2141": {
-  "path": "halle/bayern/regensburg/clermont-ferrand-schule/",
-  "history": []
+  "path": "halle/bundesweit/regensburg/clermont-ferrand-schule/",
+  "history": [
+   "halle/bayern/regensburg/clermont-ferrand-schule/"
+  ]
  },
  "2147": {
   "path": "halle/bayern/schwandorf/oberpfalzhalle/",
@@ -1909,6 +1927,10 @@
  },
  "100066": {
   "path": "halle/hessen/fritzlar/grosssporthalle-der-ursulinenschule/",
+  "history": []
+ },
+ "100067": {
+  "path": "halle/hessen/fritzlar/grosssporthalle-der-koenig-heinrich-schule/",
   "history": []
  },
  "100068": {
@@ -2947,6 +2969,10 @@
   "path": "halle/baden-wuerttemberg/metzingen/neue-oeschhalle/",
   "history": []
  },
+ "101098": {
+  "path": "halle/hamburg/lueneburg/sportpark-kreideberg/",
+  "history": []
+ },
  "101101": {
   "path": "halle/bundesweit/zwickau/sporthalle-mosel/",
   "history": []
@@ -2961,6 +2987,10 @@
  },
  "101107": {
   "path": "halle/baden-wuerttemberg/ellwangen/buchenberghalle/",
+  "history": []
+ },
+ "101109": {
+  "path": "halle/niedersachsen/braunschweig/sporthalle-gueldenstrasse/",
   "history": []
  },
  "101110": {
@@ -4167,6 +4197,10 @@
   "path": "halle/nordrhein-westfalen/duisburg/sh-des-landfermann-gymnasiums/",
   "history": []
  },
+ "102626": {
+  "path": "halle/nordrhein-westfalen/essen/sporthalle-der-gesamtschule-nord/",
+  "history": []
+ },
  "102627": {
   "path": "halle/nordrhein-westfalen/oberhausen/sh-koenigshardt/",
   "history": []
@@ -4349,6 +4383,10 @@
  },
  "102754": {
   "path": "halle/nordrhein-westfalen/hennef/sporthalle-am-kuckuck-drittelfeld/",
+  "history": []
+ },
+ "102756": {
+  "path": "halle/nordrhein-westfalen/koeln/sporthalle-gymnasium-rodenkirchen/",
   "history": []
  },
  "102757": {
@@ -5015,6 +5053,10 @@
   "path": "halle/hamburg/pinneberg/theodor-heuss-schule/",
   "history": []
  },
+ "105008": {
+  "path": "halle/hamburg/hamburg/schule-thadenstr-125/",
+  "history": []
+ },
  "105010": {
   "path": "halle/nordrhein-westfalen/recklinghausen/5-fach-sporthalle-querfeld-1/",
   "history": []
@@ -5179,6 +5221,10 @@
   "path": "halle/bayern/bad-reichenhall/karlsgymnasium/",
   "history": []
  },
+ "105285": {
+  "path": "halle/bayern/ottobeuren/rupert-ness-gymnasium/",
+  "history": []
+ },
  "105286": {
   "path": "halle/sachsen-anhalt/schoenebeck/sporthalle-dr-carl-hermann-gymnasium/",
   "history": []
@@ -5285,6 +5331,10 @@
  },
  "105366": {
   "path": "halle/nordrhein-westfalen/rahden/sporthalle-gymnasium/",
+  "history": []
+ },
+ "105368": {
+  "path": "halle/baden-wuerttemberg/waiblingen/salier-gymnasium-sporthalle/",
   "history": []
  },
  "105369": {
@@ -5457,6 +5507,10 @@
  },
  "105517": {
   "path": "halle/bremen/bremen/baumschulenweg-sportzentrum-1860/",
+  "history": []
+ },
+ "105518": {
+  "path": "halle/nordrhein-westfalen/moenchengladbach/krahnendonk-halle/",
   "history": []
  },
  "105527": {
@@ -5999,6 +6053,10 @@
   "path": "halle/baden-wuerttemberg/heidelberg/neckarhalle-wieblingen/",
   "history": []
  },
+ "106003": {
+  "path": "halle/bundesweit/stralsund/adolph-diesterweg-realschule/",
+  "history": []
+ },
  "106013": {
   "path": "halle/niedersachsen/osnabrueck/sporthalle-voxtrup/",
   "history": []
@@ -6109,6 +6167,10 @@
  },
  "106119": {
   "path": "halle/bundesweit/wedel/am-steinberg-106119/",
+  "history": []
+ },
+ "106122": {
+  "path": "halle/bundesweit/leipzig/arena-leipzig/",
   "history": []
  },
  "106127": {
@@ -7135,6 +7197,10 @@
   "path": "halle/baden-wuerttemberg/tuebingen/ballspielhalle/",
   "history": []
  },
+ "106962": {
+  "path": "halle/hessen/frankfurt-sm-main/philipp-holzmann-schule/",
+  "history": []
+ },
  "106968": {
   "path": "halle/sachsen/leipzig/sh-kurt-masur-schule/",
   "history": []
@@ -7149,6 +7215,10 @@
  },
  "106993": {
   "path": "halle/rheinland-pfalz/kaiserslautern/schillerschule/",
+  "history": []
+ },
+ "106995": {
+  "path": "halle/niedersachsen/oldenburg/sporthalle-igs-floetenteich/",
   "history": []
  },
  "107000": {
@@ -7295,6 +7365,10 @@
   "path": "halle/nordrhein-westfalen/duesseldorf/sh-der-justus-von-liebig-realschule/",
   "history": []
  },
+ "107086": {
+  "path": "halle/nordrhein-westfalen/detmold/neue-grabbe-halle/",
+  "history": []
+ },
  "107091": {
   "path": "halle/sachsen/dresden/marie-curie-gymnasium/",
   "history": []
@@ -7423,6 +7497,10 @@
   "path": "halle/brandenburg/bernau/gesamtschule/",
   "history": []
  },
+ "107229": {
+  "path": "halle/brandenburg/bernau/gesamtschule-107229/",
+  "history": []
+ },
  "107230": {
   "path": "halle/brandenburg/bernau/erich-wuensch-halle/",
   "history": []
@@ -7449,6 +7527,10 @@
  },
  "107240": {
   "path": "halle/brandenburg/cottbus/sandower-grundschulzentrum/",
+  "history": []
+ },
+ "107241": {
+  "path": "halle/brandenburg/cottbus/sportbetonte-gs/",
   "history": []
  },
  "107242": {
@@ -7759,6 +7841,10 @@
   "path": "halle/nordrhein-westfalen/koeln/dreikoenigs-gymnasium-querfeld/",
   "history": []
  },
+ "107466": {
+  "path": "halle/niedersachsen/celle/carstenstrasse/",
+  "history": []
+ },
  "107473": {
   "path": "halle/bremen/heidelberg/osp-rhein-neckar-107473/",
   "history": []
@@ -7793,6 +7879,10 @@
  },
  "107511": {
   "path": "halle/hessen/frankfurt-am-main/viktoria-luise-schule-grundschule-rebstock/",
+  "history": []
+ },
+ "107526": {
+  "path": "halle/schleswig-holstein/neumuenster/holstenschule/",
   "history": []
  },
  "107531": {
@@ -8147,6 +8237,10 @@
   "path": "halle/rheinland-pfalz/kaisersesch/realschule-plus-kaisersesch/",
   "history": []
  },
+ "107733": {
+  "path": "halle/niedersachsen/osnabrueck/sporthalle-des-otb-107733/",
+  "history": []
+ },
  "107735": {
   "path": "halle/bundesweit/wiesbaden/sporthalle-platz-der-deutschen-einheit/",
   "history": []
@@ -8293,6 +8387,10 @@
  },
  "107897": {
   "path": "halle/berlin/berlin/lutherstrasse-30-unten/",
+  "history": []
+ },
+ "107903": {
+  "path": "halle/brandenburg/blankenfelde-mahlow/mahlow-weidenhof/",
   "history": []
  },
  "107904": {
@@ -9607,6 +9705,10 @@
   "path": "halle/niedersachsen/gehrden/halle-am-bad/",
   "history": []
  },
+ "108698": {
+  "path": "halle/niedersachsen/calberlah/drei-feld-halle-calberlah/",
+  "history": []
+ },
  "108700": {
   "path": "halle/berlin/berlin/hussitenstrasse-links/",
   "history": []
@@ -9815,6 +9917,10 @@
   "path": "halle/sachsen/dresden/46-oberschule/",
   "history": []
  },
+ "108816": {
+  "path": "halle/hessen/wetzlar/eichendorffschule/",
+  "history": []
+ },
  "108817": {
   "path": "halle/bayern/ingolstadt/grundschule-an-der-muenchenerstrasse/",
   "history": []
@@ -9953,6 +10059,14 @@
  },
  "108884": {
   "path": "halle/bayern/uffenheim/christian-von-bomhard-schule/",
+  "history": []
+ },
+ "108886": {
+  "path": "halle/hamburg/norerstedt/gemeinschaftsschule-harksheide/",
+  "history": []
+ },
+ "108887": {
+  "path": "halle/hamburg/norderstedt/gemeinschaftsschule-harksheide/",
   "history": []
  },
  "108888": {
@@ -10137,6 +10251,10 @@
  },
  "108967": {
   "path": "halle/sachsen/chemnitz/marianne-brandt-oberschule/",
+  "history": []
+ },
+ "108969": {
+  "path": "halle/hamburg/hamburg/cu-arena/",
   "history": []
  },
  "108970": {
@@ -10451,6 +10569,10 @@
   "path": "halle/sachsen/leipzig/paralympische-sporthalle-oben/",
   "history": []
  },
+ "109127": {
+  "path": "halle/sachsen/leipzig/paralympische-sporthalle-unten/",
+  "history": []
+ },
  "109128": {
   "path": "halle/bundesweit/hamburg/sporthalle-julius-leber-schule/",
   "history": []
@@ -10581,6 +10703,10 @@
  },
  "109177": {
   "path": "halle/nordrhein-westfalen/beckum/sh-des-kopernikus-gymnasiums/",
+  "history": []
+ },
+ "109178": {
+  "path": "halle/brandenburg/potsdam/potsdam-fritz-von-der-lancken-strasse/",
   "history": []
  },
  "109179": {
@@ -10875,6 +11001,10 @@
   "path": "halle/bayern/muenchen/gs-an-der-oberfoehringer-str/",
   "history": []
  },
+ "109276": {
+  "path": "halle/bayern/muenchen/sporthalle-elektrastrasse/",
+  "history": []
+ },
  "109278": {
   "path": "halle/sachsen/riesa/4-grundschule/",
   "history": []
@@ -11007,6 +11137,10 @@
   "path": "halle/bayern/landsberg-am-lech/sportzentrum-h2/",
   "history": []
  },
+ "109336": {
+  "path": "halle/rheinland-pfalz/trier/friedrich-wilhelm-gymnasium/",
+  "history": []
+ },
  "109339": {
   "path": "halle/nordrhein-westfalen/minden/halle-minden-sued/",
   "history": []
@@ -11107,6 +11241,10 @@
   "path": "halle/baden-wuerttemberg/bretten/wettkampfhalle-im-gruener/",
   "history": []
  },
+ "109400": {
+  "path": "halle/bayern/muenchen/mittelschule-an-der-rockefellerstrasse/",
+  "history": []
+ },
  "109403": {
   "path": "halle/nordrhein-westfalen/waldbroehl/sporthalle-heidberghalle/",
   "history": []
@@ -11169,6 +11307,10 @@
  },
  "109426": {
   "path": "halle/hessen/dreieich/sporthalle-weibelfeldschule-109426/",
+  "history": []
+ },
+ "109428": {
+  "path": "halle/hessen/dreieich/sporthalle-heinrich-heine-schule-109428/",
   "history": []
  },
  "109429": {
