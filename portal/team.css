@@ -87,6 +87,15 @@
 }
 
 /* Kalender-Abo */
-.team-cal { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.75rem 0 1.25rem; }
+.team-cal { margin: 1rem 0 1.5rem; }
+.team-cal-intro { margin: 0 0 0.75rem; color: var(--dss-fg-soft); }
+.team-cal-note { margin: 0.5rem 0; color: var(--dss-mute); font-size: 0.9rem; }
+.team-cal-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 .team-cal-link { display: inline-flex; align-items: center; text-decoration: none; }
-.team-cal-note { flex-basis: 100%; margin: 0; color: var(--dss-mute); font-size: 0.85rem; }
+.team-cal-help { margin-top: 0.75rem; }
+.team-cal-help summary { cursor: pointer; color: var(--dss-link); min-height: 44px; display: flex; align-items: center; }
+.team-cal-help dl { margin: 0.25rem 0 0; }
+.team-cal-help dt { font-weight: 600; margin-top: 0.75rem; }
+.team-cal-help dd { margin: 0.15rem 0 0; color: var(--dss-fg-soft); }
+.team-cal .dss-tabs--segmented { flex-wrap: wrap; max-width: 100%; }
+.team-cal .dss-tab { flex: 1 1 auto; justify-content: center; }

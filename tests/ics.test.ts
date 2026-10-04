@@ -1,7 +1,7 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { escapeText, foldLine, berlinToUtc, formatUtc, locationOf, buildCalendar, collectTeams, IcsLiga } from '../crawler/ics';
+import { SCOPES, escapeText, foldLine, berlinToUtc, formatUtc, locationOf, buildCalendar, collectTeams, IcsLiga } from '../crawler/ics';
 
 const t = (id: number, name: string) => ({ teamPermanentId: id, teamname: name });
 const liga: IcsLiga = {
@@ -83,6 +83,19 @@ describe('buildCalendar', () => {
     expect(again).toBe(ics);
   });
 
+  it('nur Heim- oder nur Auswärtsspiele mit eigenem Kalendernamen, gleiche UIDs', () => {
+    const base = { teamId: 1, name: 'TV Test', ligen: [liga], today: '2026-10-03', stamp: '2026-10-03T09:00:00Z' };
+    const home = buildCalendar({ ...base, scope: 'home' });
+    const away = buildCalendar({ ...base, scope: 'away' });
+    const uids = (c: string) => [...c.matchAll(/UID:(.+)\r/g)].map(m => m[1]);
+    expect(uids(home)).toEqual(['m4-t1@vereinsregister', 'm1-t1@vereinsregister', 'm6-t1@vereinsregister']);
+    expect(uids(away)).toEqual(['m2-t1@vereinsregister']);
+    expect(home).toContain('X-WR-CALNAME:TV Test – Basketball – Heimspiele');
+    expect(away).toContain('X-WR-CALNAME:TV Test – Basketball – Auswärtsspiele');
+    expect(uids(ics)).toEqual(expect.arrayContaining([...uids(home), ...uids(away)]));
+    expect(SCOPES.map(s => s.suffix)).toEqual(['', '-heim', '-auswaerts']);
+  });
+
   it('ein Team ohne Spiele ergibt einen gültigen, leeren Kalender', () => {
     const empty = buildCalendar({ teamId: 77, name: 'Leer', ligen: [liga], today: '2026-10-03', stamp: '2026-10-03T09:00:00Z' });
     expect(empty).not.toContain('BEGIN:VEVENT');
@@ -111,6 +124,6 @@ describe('CLI-Pfad', () => {
     fs.writeFileSync(path.join(dir, 'live', 'liga', '9.json'), JSON.stringify(liga));
     const { execFileSync } = require('child_process');
     execFileSync('npx', ['ts-node', 'crawler/ics.ts', `--live=${path.join(dir, 'live')}`, `--out=${path.join(dir, 'ics')}`], { cwd: path.join(__dirname, '..'), stdio: 'pipe' });
-    expect(fs.readdirSync(path.join(dir, 'ics')).sort()).toEqual(['1.ics', '2.ics', '3.ics', '4.ics']);
+    expect(fs.readdirSync(path.join(dir, 'ics')).sort()).toEqual(['1-auswaerts.ics', '1-heim.ics', '1.ics', '2-auswaerts.ics', '2-heim.ics', '2.ics', '3-auswaerts.ics', '3-heim.ics', '3.ics', '4-auswaerts.ics', '4-heim.ics', '4.ics']);
   });
 });
