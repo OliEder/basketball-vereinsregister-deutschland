@@ -101,6 +101,31 @@
     };
   }
 
+  /**
+   * Kennzahlen eines Vereins aus den Ligen, in denen seine Teams spielen: Spiele gespielt und insgesamt
+   * (abgesagte und Verzichtsspiele zählen nicht; ein Spiel zweier Teams desselben Vereins zählt einmal)
+   * und die Zahl der Ligen, in denen der Verein in Tabelle oder Spielplan vorkommt.
+   */
+  function clubSummary(docs, clubId) {
+    var id = String(clubId);
+    var mine = function (t) { return !!t && t.clubId != null && String(t.clubId) === id; };
+    var seen = {};
+    var total = 0, played = 0, ligen = 0;
+    (docs || []).forEach(function (doc) {
+      var inLiga = (doc.tabelle || []).some(function (e) { return e && mine(e.team); });
+      (doc.matches || []).forEach(function (m) {
+        if (!(mine(m.homeTeam) || mine(m.guestTeam))) return;
+        inLiga = true;
+        if (m.abgesagt || m.verzicht || seen[m.matchId]) return;
+        seen[m.matchId] = true;
+        total++;
+        if (parseResult(m.result)) played++;
+      });
+      if (inLiga) ligen++;
+    });
+    return { total: total, played: played, ligen: ligen };
+  }
+
   /** Tabelleneintrag des Teams oder null. */
   function standingFor(tabelle, teamId) {
     var rows = tabelle || [];
@@ -202,6 +227,7 @@
     record: record,
     standingFor: standingFor,
     summary: summary,
+    clubSummary: clubSummary,
     teamName: teamName,
     clubIdOf: clubIdOf,
     pickPrimaryLiga: pickPrimaryLiga,

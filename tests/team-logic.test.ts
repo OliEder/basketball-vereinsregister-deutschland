@@ -160,3 +160,33 @@ describe('summary', () => {
     expect(L.summary(null, 1).rang).toBeNull();
   });
 });
+
+describe('clubSummary', () => {
+  const a1 = { teamPermanentId: 1, teamname: 'A1', clubId: 10 };
+  const a2 = { teamPermanentId: 2, teamname: 'A2', clubId: 10 };
+  const b = { teamPermanentId: 3, teamname: 'B', clubId: 20 };
+  const c = { teamPermanentId: 4, teamname: 'C', clubId: 30 };
+  const ligaA = { tabelle: [{ team: a1 }, { team: b }], matches: [
+    m({ matchId: 1, homeTeam: a1, guestTeam: b, result: '80:70' }),
+    m({ matchId: 2, homeTeam: b, guestTeam: a1 }),
+    m({ matchId: 3, homeTeam: b, guestTeam: a1, abgesagt: true }),
+    m({ matchId: 4, homeTeam: b, guestTeam: c, result: '60:50' })
+  ] };
+  const ligaB = { tabelle: [{ team: a2 }, { team: c }], matches: [
+    m({ matchId: 5, homeTeam: a2, guestTeam: c, result: '55:50' }),
+    m({ matchId: 6, homeTeam: a2, guestTeam: a1, result: '70:65' })     // Derby zweier Teams des Vereins
+  ] };
+
+  it('zählt gespielte und alle Spiele des Vereins, ohne Abgesagte und ohne fremde Spiele', () => {
+    expect(L.clubSummary([ligaA, ligaB], 10)).toEqual({ total: 4, played: 3, ligen: 2 });
+  });
+
+  it('Derby und doppelt gelieferte Spiele zählen einmal', () => {
+    expect(L.clubSummary([ligaB, ligaB], 10)).toEqual({ total: 2, played: 2, ligen: 2 });
+  });
+
+  it('Verein ohne Spiele und Ligen: Nullen statt Fehler', () => {
+    expect(L.clubSummary([ligaA], 99)).toEqual({ total: 0, played: 0, ligen: 0 });
+    expect(L.clubSummary(null, 10)).toEqual({ total: 0, played: 0, ligen: 0 });
+  });
+});

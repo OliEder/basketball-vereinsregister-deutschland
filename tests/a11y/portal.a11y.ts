@@ -283,7 +283,9 @@ test('Favoriten: Team merken, auf der Startseite wiederfinden und entfernen', as
   await expect(item).toHaveCount(1);
   await expect(item.locator('.fav-name')).toHaveText('TSV 1861 Nördlingen');
   await expect(item.locator('.fav-name')).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/herren\/$/);
-  await expect(item.locator('.fav-sub')).toContainText('Nächstes Spiel');     // aus den Live-Daten
+  await expect(item.locator('.fav-next')).toContainText('Nächstes Spiel');     // aus den Live-Daten
+  await expect(item.locator('.fav-liga')).toContainText('Regionalliga');
+  await expect(item.locator('.dss-stat-label')).toHaveText(['Platz', 'Bilanz', 'Diff.', 'Letzte 5']);
   await item.getByRole('button', { name: /entfernen/i }).click();
   await expect(page.locator('#favorites')).toBeHidden();
 });
@@ -390,4 +392,19 @@ test('Vereinsseite: Teamkarte mit Platz, Bilanz, Differenz und letzten Spielen',
   await expect(card.locator('.dss-stat-label')).toHaveText(['Platz', 'Bilanz', 'Diff.', 'Letzte 5']);
   await expect(card.locator('.dss-stat-value').first()).toHaveText('1.');
   await expect(card.locator('.dss-form .dss-chip').first()).toContainText(/Sieg|Niederlage/);
+});
+
+test('Favoriten: Vereinskarte mit Logo, Verband und Kennzahlen', async ({ page }) => {
+  await open(page, '/index.html', 'light', '.fav-item', async p => {
+    await p.evaluate(() => {
+      localStorage.setItem('vr:favorites', JSON.stringify({ v: 1, teams: [], clubs: [{ id: '1235', name: 'TSV 1861 Nördlingen' }] }));
+      window.dispatchEvent(new CustomEvent('favorites:changed'));
+    });
+  });
+  const card = page.locator('.fav-item');
+  await expect(card.locator('.fav-kind')).toHaveText('Verein');
+  await expect(card.locator('.fav-liga')).toContainText('Bayern');
+  await expect(card.locator('.dss-stat-label')).toContainText(['Teams', 'Spiele gespielt', /Lig(a|en)/]);
+  await expect(card.locator('.team-badge')).toHaveCount(0);       // nur Kennzahlen, keine Teamliste (wäre bei vielen Teams zu lang)
+  await expect(card.getByRole('link', { name: 'TSV 1861 Nördlingen' })).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/$/);
 });
