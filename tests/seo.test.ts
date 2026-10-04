@@ -1,4 +1,4 @@
-import { LAENDER, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -240,7 +240,7 @@ describe('Stadtteile und Alphabet', () => {
     const long = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN), alphabetic: true }] });
     expect(long).toContain('aria-label="Alphabet"');
     expect(long).toContain('href="bayern/#buchstabe-a"');
-    expect(long).toContain('<h2 id="buchstabe-a">A</h2>');
+    expect(long).toContain('<h2 id="buchstabe-a" data-pagenav-skip>A</h2>');      // Buchstaben nicht noch einmal in der Seitennavigation
     const short = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: mk(ALPHABET_MIN - 1), alphabetic: true }] });
     expect(short).not.toContain('Alphabet');
   });
@@ -297,6 +297,46 @@ describe('Ligaseiten', () => {
     expect(html).toContain('Aktuell: 1. TV Regensburg');
   });
 
+  it('Ligakarte: Name, Bezirk und Teams, Mini-Tabelle der Spitze mit verlinkten Teams', () => {
+    const d = liga(1, 'Kreisliga A', { bezirkName: 'Oberpfalz' });
+    expect(top3Entries(d).map(e => e.rang)).toEqual([1, 2, 3]);
+    expect(top3Entries(liga(1, 'X', { tabelle: d.tabelle.map(e => ({ ...e, anzspiele: 0 })) }))).toEqual([]);
+    const html = ligaCard(d, 'liga/bayern/kreisliga-a/', { '7': 'bayern/regensburg/tv-regensburg/' }, { '1': 'bayern/regensburg/tv-regensburg/herren/' });
+    expect(html).toContain('<h4 class="liga-card-title"><a href="liga/bayern/kreisliga-a/">Kreisliga A</a></h4>');
+    expect(html).toContain('Oberpfalz · 4 Teams');
+    expect(html).toContain('<caption class="dss-sr-only">Tabellenspitze Kreisliga A</caption>');
+    expect(html).toContain('<a href="bayern/regensburg/tv-regensburg/herren/">TV Regensburg</a>');       // Team direkt verlinkt
+    expect(html.match(/<tr><td/g)).toHaveLength(3);                                                        // nur die ersten drei
+    expect(html).not.toContain('Vierter');
+    expect(html).toContain('<p class="liga-card-more"><a class="dss-link" href="liga/bayern/kreisliga-a/">Komplette Tabelle und Spielplan<span class="dss-sr-only"> Kreisliga A</span></a></p>');   // Hinweis auf die komplette Tabelle
+    expect(html).toContain('DJK &lt;b&gt;');                                                               // maskiert
+    const leer = ligaCard(liga(2, 'Neu', { tabelle: d.tabelle.map(e => ({ ...e, anzspiele: 0 })) }), 'liga/bayern/neu/', {}, {});
+    expect(leer).toContain('Noch keine Spiele gespielt.');
+    expect(leer).not.toContain('<table');
+    expect(leer).toContain('Komplette Tabelle und Spielplan');                                           // auch ohne Mini-Tabelle
+  });
+
+  it('Ebene einer Liga: aus der Liga selbst, sonst aus den Vereinen, sonst Weitere', () => {
+    expect(ebeneKey(liga(1, 'A', { skEbeneName: 'Bezirk' }))).toBe('Bezirk');
+    expect(ebeneKey(liga(1, 'A'), () => 'Kreis')).toBe('Kreis');
+    expect(ebeneKey(liga(1, 'A', { skEbeneName: 'Bundesebene' }), () => 'Kreis')).toBe('Weitere');
+    expect(ebeneKey(liga(1, 'A'))).toBe('Weitere');
+    expect(EBENEN.map(e => e.key)).toEqual(['Verband', 'Bezirk', 'Kreis', 'Weitere']);
+  });
+
+  it('Verbandsseite: Ebene, dann Altersklasse und Geschlecht, darin die Ligakarten', () => {
+    const b = buildLigaPages([liga(1, 'Kreisliga A', { skEbeneName: 'Kreis' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }), liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14' })], {}, BASE, {});
+    const html = b.files.get('liga/bayern/index.html')!;
+    const at = (x: string): number => html.indexOf(x);
+    expect(at('id="ebene-verband"')).toBeGreaterThan(-1);
+    expect(at('id="ebene-verband"')).toBeLessThan(at('id="ebene-bezirk"'));
+    expect(at('id="ebene-bezirk"')).toBeLessThan(at('id="ebene-kreis"'));
+    expect(html).toContain('<h2 id="ebene-bezirk">Bezirksebene <span class="seo-note">1 Liga</span></h2>');
+    expect(html).toContain('<h3>U14 · männlich</h3>');
+    expect(html).toContain('<h3>Senioren · männlich</h3>');
+    expect(html).toContain('<li class="liga-card dss-card dss-card--default">');
+  });
+
   it('Verbandsseite und Übersicht, Weiterleitung bei geändertem Pfad', () => {
     const prev = { '1': { path: 'liga/bayern/alt/', history: [] } };
     const b = buildLigaPages([liga(1, 'Kreisliga A')], prev, BASE, {});
@@ -311,7 +351,11 @@ describe('Ligaseiten', () => {
     const c = club(7, 'TV Regensburg', 'Regensburg', '0200007', { teams: [{ teamPermanentId: 1, altersklasse: 'Senioren', geschlecht: 'männlich', ligaId: 1, liganame: 'Kreisliga A', training: [] } as any] });
     const b = buildSite([c], {}, BASE, '2026-10-03', { docs: [liga(1, 'Kreisliga A')] });
     expect(b.files.get('bayern/index.html')).toContain('href="liga/bayern/kreisliga-a/"');
-    expect(b.files.get('bayern/index.html')).toContain('Alle 1 Ligen in Bayern');
+    const land = b.files.get('bayern/index.html')!;
+    expect(land).toContain('Alle 1 Ligen in Bayern');
+    expect(land).toContain('<h2 id="ligen">Ligen in Bayern</h2>');
+    expect(land).toContain('<li class="liga-card dss-card dss-card--default">');                       // Ligakarte mit Mini-Tabelle
+    expect(land).toContain('Weitere Ligen');                                                           // Ebene unbekannt
     const ort = b.files.get('bayern/regensburg/index.html')!;
     expect(ort).toContain('Ligen in Regensburg');
     expect(ort).toContain('TV Regensburg: Platz 1');

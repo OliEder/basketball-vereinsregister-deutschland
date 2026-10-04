@@ -44,7 +44,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
   { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.dss-tbl' },
-  { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.seo-list a' },
+  { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.liga-card a' },
   { name: 'Ligaseite mit Nach-oben-Schaltfläche', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: '.dss-backtop:not([hidden])', action: scrollDown },
   { name: 'Hallenseite', url: '/halle/bayern/muenchen/halle-schwabing/', ready: 'address' },
   { name: 'Team-Seite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', ready: '.team-table' },
