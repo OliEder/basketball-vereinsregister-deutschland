@@ -634,18 +634,53 @@ export function ebeneKey(d: LigaDoc, ebeneOf?: (id: number) => string | undefine
 }
 
 /** Karte einer Liga: Name, Bezirk/Kreis und Teams, Tabellenspitze als Mini-Tabelle mit verlinkten Teams. `h` ist die Überschriftsebene des Namens. */
-export function ligaCard(d: LigaDoc, ligaPath: string, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4' = 'h4'): string {
+export function ligaCard(d: LigaDoc, ligaPath: string, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4' | 'h5' = 'h4'): string {
   const top = top3Entries(d);
   const teams = (d.tabelle ?? []).filter(e => e?.team).length;
-  const meta = [d.kreisname || d.bezirkName, teams ? `${teams} ${teams === 1 ? 'Team' : 'Teams'}` : ''].filter(Boolean).join(' · ');
+  const games = (d.matches ?? []).filter(m => !m.abgesagt && !m.verzicht);
+  const played = games.filter(m => m.result).length;
+  const meta = [d.kreisname || d.bezirkName, teams ? `${teams} ${teams === 1 ? 'Team' : 'Teams'}` : '', games.length ? `${played} von ${games.length} ${games.length === 1 ? 'Spiel' : 'Spielen'} gespielt` : ''].filter(Boolean).join(' · ');
   const table = top.length
     ? `<div class="dss-table-scroll"><table class="dss-tbl dss-tbl--compact liga-mini"><caption class="dss-sr-only">Tabellenspitze ${esc(d.liganame)}</caption><thead><tr><th scope="col" class="center">#</th><th scope="col" class="wrap">Mannschaft</th><th scope="col" class="num">Sp</th><th scope="col" class="num">Pkt</th></tr></thead><tbody>${top.map(e => `<tr><td class="center num lead">${esc(String(e.rang ?? ''))}</td><td class="wrap">${teamCell(e.team, clubPaths, teamPaths)}</td><td class="num">${e.anzspiele ?? 0}</td><td class="num lead">${e.anzGewinnpunkte ?? 0}</td></tr>`).join('')}</tbody></table></div>`
     : `<p class="seo-note liga-empty">${teams ? 'Noch keine Spiele gespielt.' : 'Noch keine Tabelle.'}</p>`;
   return `<li class="liga-card dss-card dss-card--default"><div class="liga-card-head"><${h} class="liga-card-title"><a href="${ligaPath}">${esc(d.liganame)}</a></${h}>${meta ? `<p class="seo-note liga-card-meta">${esc(meta)}</p>` : ''}</div>${table}<p class="liga-card-more"><a class="dss-link" href="${ligaPath}">Komplette Tabelle und Spielplan<span class="dss-sr-only"> ${esc(d.liganame)}</span></a></p></li>`;
 }
 
-const ligaGrid = (docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4'): string =>
+const ligaGrid = (docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>, h: 'h3' | 'h4' | 'h5'): string =>
   `<ul class="liga-cards">${docs.slice().sort((a, b) => a.liganame.localeCompare(b.liganame, 'de')).map(d => ligaCard(d, paths[d.ligaId], clubPaths, teamPaths, h)).join('')}</ul>`;
+
+const GESCHLECHT_ORDER = ['männlich', 'weiblich', 'mixed'];
+const geschlechtSort = (g: string): number => { const i = GESCHLECHT_ORDER.indexOf(g); return i === -1 ? 99 : i; };
+const capitalize = (t: string): string => t.charAt(0).toUpperCase() + t.slice(1);
+
+/**
+ * Ligen als aufklappbare Hierarchie Altersklasse → Geschlecht → Ebene → Ligakarten. Alles steht im HTML
+ * (details, ohne JavaScript bedienbar, für Crawler vollständig); je Stufe ist nur der erste Block offen.
+ * `level` ist die Überschriftsebene der obersten Stufe; mit `fromGender` entfällt die Altersklasse (Länderseiten zeigen nur Senioren).
+ */
+export function ligaHierarchy(
+  docs: LigaDoc[], paths: Record<number, string>, clubPaths: Record<string, string>, teamPaths: Record<string, string>,
+  ebeneOf: ((id: number) => string | undefined) | undefined, opts: { level: 2 | 3; fromGender?: boolean; idBase?: string }
+): string {
+  const fold = (level: number, id: string, label: string, n: number, open: boolean, inner: string): string =>
+    `<details class="liga-fold liga-fold--${level}"${open ? ' open' : ''}><summary><h${level} id="${id}">${esc(label)} <span class="seo-note">${n} ${n === 1 ? 'Liga' : 'Ligen'}</span></h${level}></summary>\n${inner}</details>`;
+  const group = (list: LigaDoc[], key: (d: LigaDoc) => string): Map<string, LigaDoc[]> => {
+    const m = new Map<string, LigaDoc[]>();
+    for (const d of list) m.set(key(d), [...(m.get(key(d)) ?? []), d]);
+    return m;
+  };
+  const ebenen = (list: LigaDoc[], idBase: string, level: number): string =>
+    EBENEN.map(e => ({ ...e, docs: list.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(x => x.docs.length)
+      .map((x, i) => fold(level, `${idBase}-${x.key.toLowerCase()}`, x.label, x.docs.length, i === 0, `      ${ligaGrid(x.docs, paths, clubPaths, teamPaths, `h${level + 1}` as 'h4' | 'h5')}\n`)).join('\n');
+  const genders = (list: LigaDoc[], idBase: string, level: number): string =>
+    [...group(list, d => d.geschlecht || 'Weitere').entries()]
+      .sort((a, b) => geschlechtSort(a[0]) - geschlechtSort(b[0]) || a[0].localeCompare(b[0], 'de'))
+      .map(([g, ds], i) => fold(level, `${idBase}-${slugify(g)}`, capitalize(g), ds.length, i === 0, `${ebenen(ds, `${idBase}-${slugify(g)}`, level + 1)}\n`)).join('\n');
+  if (opts.fromGender) return genders(docs, opts.idBase ?? 'ligen', opts.level);
+  return [...group(docs, d => d.akName || 'Weitere Ligen').entries()]
+    .sort((a, b) => akSortKey(a[0]) - akSortKey(b[0]) || a[0].localeCompare(b[0], 'de'))
+    .map(([ak, ds], i) => fold(opts.level, `ak-${slugify(ak)}`, ak, ds.length, i === 0, `${genders(ds, `ak-${slugify(ak)}`, opts.level + 1)}\n`)).join('\n');
+}
 
 export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}, ebeneOf?: (id: number) => string | undefined): LigaBuild {
   const map = assignKeyed(ligaWishes(docs), previous);
@@ -670,16 +705,8 @@ export function buildLigaPages(docs: LigaDoc[], previous: UrlMap, base: string, 
   const verbaende = [...byVerband.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name, 'de'));
   for (const [slug, v] of verbaende) {
     const pagePath = `liga/${slug}/`;
-    // Struktur: Ebene (h2) → Altersklasse und Geschlecht (h3) → Ligakarten (h4)
-    const sections = EBENEN.map(e => ({ ...e, docs: v.docs.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(s => s.docs.length).map(s => {
-      const groups = new Map<string, LigaDoc[]>();
-      for (const d of s.docs) {
-        const key = [d.akName, d.geschlecht].filter(Boolean).join(' · ') || 'Weitere Ligen';
-        groups.set(key, [...(groups.get(key) ?? []), d]);
-      }
-      const inner = [...groups.entries()].sort((x, y) => x[0].localeCompare(y[0], 'de')).map(([heading, ds]) => `      <h3>${esc(heading)}</h3>\n      ${ligaGrid(ds, paths, clubPaths, teamPaths, 'h4')}`).join('\n');
-      return `      <h2 id="ebene-${s.key.toLowerCase()}">${s.label} <span class="seo-note">${s.docs.length} ${s.docs.length === 1 ? 'Liga' : 'Ligen'}</span></h2>\n${inner}`;
-    }).join('\n');
+    // Struktur: Altersklasse (h2) → Geschlecht (h3) → Ebene (h4) → Ligakarten (h5), aufklappbar und vollständig im HTML
+    const sections = ligaHierarchy(v.docs, paths, clubPaths, teamPaths, ebeneOf, { level: 2 });
     files.set(`${pagePath}index.html`, renderListPage({
       base, pagePath,
       title: `Basketball-Ligen: ${v.name}`,
@@ -1213,8 +1240,7 @@ export function buildSite(
     const v = lb.byVerband.get(stateSlug);
     if (!v) return '';
     const senior = v.docs.filter(d => /senioren/i.test(d.akName ?? ''));
-    const parts = EBENEN.map(e => ({ ...e, docs: senior.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(x => x.docs.length)
-      .map(x => `      <h3>${x.label} <span class="seo-note">${x.docs.length} ${x.docs.length === 1 ? 'Liga' : 'Ligen'}</span></h3>\n      ${ligaGrid(x.docs, lb.paths, clubPaths, teamPaths, 'h4')}`).join('\n');
+    const parts = ligaHierarchy(senior, lb.paths, clubPaths, teamPaths, ebeneOf, { level: 3, fromGender: true, idBase: 'ligen' });
     return `      <h2 id="ligen">Ligen in ${esc(stateName)}</h2>\n      <p><a class="dss-link" href="liga/${stateSlug}/">Alle ${v.docs.length} Ligen in ${esc(stateName)}</a>, auch Jugend und weitere Altersklassen</p>${parts ? `\n${parts}` : ''}\n`;
   };
 
