@@ -68,7 +68,7 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--dss-fg); }
 
 .hero-sub { margin-top: 1.25rem; color: var(--dss-fg-soft); font-size: 1.1rem; }
 
-#stats-bar { margin: 1.75rem auto 0; max-width: 640px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+#stats-bar { margin: 1.75rem auto 0; max-width: 640px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
 .hero-stat {
   flex: 1 1 0;
   min-width: 0;
@@ -184,6 +184,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 /* ===== RESPONSIV ===== */
 @media (max-width: 640px) {
   #stats-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #stats-bar > :first-child { grid-column: 1 / -1; }      /* Vereine mit der längsten Unterzeile über die volle Breite */
 }
 @media (max-width: 520px) {
   .hero { padding-top: 4rem; }
@@ -227,7 +228,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .fav-next .dss-eyebrow { margin-bottom: 0.15rem; }
 .fav-actions { position: relative; z-index: 1; margin-top: 0.4rem; }
 
-/* ===== REGIONEN (zweispaltige Karten, erzeugt von crawler/seo.ts) ===== */
+/* ===== REGIONEN (zweispaltige Karten mit Umriss, erzeugt von crawler/seo.ts) ===== */
 .region-cards { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
 .region-card { position: relative; padding: 0.75rem 0.9rem 0.9rem; gap: 0.35rem; }
 .region-card--wide { grid-column: 1 / -1; }
@@ -235,10 +236,14 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .region-link::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); }
 .region-link:hover { text-decoration: underline; }
 .region-link:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 3px; }
+.region-shape { align-self: center; height: 84px; width: auto; max-width: 100%; margin: 0.15rem 0 0.35rem; color: var(--dss-link); overflow: visible; }
+.region-shape path { fill: currentColor; fill-opacity: 0.14; stroke: currentColor; stroke-width: 1.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .region-card .dss-stats--compact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem 0.75rem; margin-top: auto; }
 .region-card .dss-stat-value { font-size: 16px; }
 .region-card .dss-stat-label { font-size: 10px; letter-spacing: 0.06em; }
-@media (min-width: 560px) { .region-card .dss-stats--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.region-extra { display: none; }
+@media (min-width: 640px) { .region-extra { display: block; } .region-card .dss-stats--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } .region-shape { height: 104px; } }
 @media (max-width: 360px) { .region-link { font-size: 0.9rem; } .region-card { padding: 0.6rem 0.7rem 0.75rem; } }
 .region-more { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; justify-content: center; }
 .region-more a { display: inline-flex; align-items: center; min-height: 44px; }
+.region-source { margin: 1rem 0 0; text-align: center; }

@@ -13,6 +13,8 @@ import { loadExistingClubs } from './writer';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
+import { loadLaender } from './geo-laender';
+import { Outline, outlinesFor } from './outline';
 
 export const DEFAULT_BASE = 'https://olieder.github.io/basketball-vereinsregister-deutschland';
 
@@ -1009,7 +1011,7 @@ export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap
 
 export function buildSite(
   clubs: ClubEntry[], previous: UrlMap, base: string, lastmod: string,
-  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap; previousHalls?: UrlMap; hallCoords?: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }> } = { docs: [] }
+  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap; previousHalls?: UrlMap; hallCoords?: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }>; geo?: GeoInfo } = { docs: [] }
 ): SiteBuild {
   const urlMap = assignPaths(clubs, previous);
   const clubPaths: Record<string, string> = Object.fromEntries(Object.entries(urlMap).map(([id, e]) => [id, e.path]));
@@ -1246,6 +1248,10 @@ export function buildSite(
     }));
     sitemapPaths.push('halle/');
   }
+  if (regions.length) {
+    files.set('vereine/index.html', renderRegionHub(base, regions, lb.docs.size > 0, halls.size > 0, liga.geo));
+    sitemapPaths.push('vereine/');
+  }
   for (const [rel, content] of lb.files) files.set(rel, content);
   sitemapPaths.push(...lb.sitemap);
   files.set('sitemap.xml', renderSitemap(base, sitemapPaths, lastmod));
@@ -1258,21 +1264,51 @@ const de = (n: number): string => n.toLocaleString('de-DE');
 /** Die 16 Bundesländer; alles andere (Bundesweit, Sonstige) ist kein Land und steht als breite Karte am Ende. */
 export const LAENDER = new Set(['baden-wuerttemberg', 'bayern', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'hessen', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thueringen']);
 
-/**
- * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Zahl der Vereine und Ligen;
- * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
- */
-export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
-  const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
+export interface GeoInfo { outlines: Record<string, Outline>; attribution: string }
+
+/** Quellenvermerk der Umrisse (BKG, dl-de/by-2-0; die Umrisse sind vereinfacht). */
+export function geoAttribution(raw: string): string {
+  const year = /\((\d{4})\)/.exec(raw)?.[1];
+  return `Umrisse: <a class="dss-link" href="https://www.bkg.bund.de" target="_blank" rel="noopener">© BKG${year ? ` (${year})` : ''}</a>, <a class="dss-link" href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener">dl-de/by-2-0</a> (vereinfacht)`;
+}
+
+/** Die Regionen als zweispaltige Karten: Überschrift, Umriss, Kennzahlen; die ganze Karte ist der Link. */
+export function regionCards(regions: SiteBuild['regions'], geo?: GeoInfo): string {
+  const tile = (value: number, label: string, extra = false): string => `<div class="dss-stat dss-stat--compact${extra ? ' region-extra' : ''}"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
   const ordered = [...regions.filter(r => LAENDER.has(r.slug)), ...regions.filter(r => !LAENDER.has(r.slug))];
   const cards = ordered.map(r => {
-    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : ''].join('');
-    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
+    // Mobil nur Vereine und Ligen; Teams und Hallen (region-extra) erst ab Desktopbreite
+    const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.teams ? tile(r.teams, r.teams === 1 ? 'Team' : 'Teams', true) : '', r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : '', r.hallen ? tile(r.hallen, r.hallen === 1 ? 'Halle' : 'Hallen', true) : ''].join('');
+    const o = geo?.outlines[r.slug];
+    const shape = o ? `<svg class="region-shape" viewBox="0 0 ${o.w} ${o.h}" width="${Math.round(o.w * 0.8)}" height="${Math.round(o.h * 0.8)}" aria-hidden="true" focusable="false"><path d="${o.path}"/></svg>` : '';
+    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a>${shape}<div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
+  return `<ul class="region-cards">${cards}</ul>`;
+}
+
+/** Hubseite /vereine/: alle Bundesländer als Karten mit Umriss, darunter die Übersichten der Ligen und Hallen. */
+export function renderRegionHub(base: string, regions: SiteBuild['regions'], withLiga: boolean, withHalls: boolean, geo?: GeoInfo): string {
+  const total = regions.reduce((n, r) => n + r.clubs, 0);
+  const laender = regions.filter(r => LAENDER.has(r.slug)).length;
   const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
-  const hubs = [withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
+  return renderListPage({
+    base, pagePath: 'vereine/',
+    title: 'Basketballvereine nach Bundesland',
+    heading: 'Basketballvereine in Deutschland',
+    intro: `${de(total)} Basketballvereine in ${laender} ${laender === 1 ? 'Bundesland' : 'Bundesländern'}, mit Teams, Hallen, Spielplänen und Tabellen.`,
+    crumbs: [{ name: 'Vereinsregister', path: '' }, { name: 'Vereine', path: 'vereine/' }],
+    groups: [],
+    extraHtml: `      ${regionCards(regions, geo)}${more ? `\n      <ul class="region-more">${more}</ul>` : ''}${geo && Object.keys(geo.outlines).length ? `\n      <p class="seo-note region-source">${geoAttribution(geo.attribution)}</p>` : ''}`
+  });
+}
+
+/** Ersetzt in der Startseite den Platzhalter durch Links auf die Hubseiten und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten). */
+export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
+  const links = (regions.length ? '<li><a class="dss-link" href="vereine/">Vereine nach Bundesland</a></li>' : '')
+    + (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
+  const hubs = [regions.length ? 'vereine' : '', withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
   return indexHtml
-    .replace('<!--REGION-LINKS-->', `<ul class="region-cards">${cards}</ul>${more ? `\n      <ul class="region-more">${more}</ul>` : ''}`)
+    .replace('<!--REGION-LINKS-->', `<ul class="region-more">${links}</ul>`)
     .replace('<div id="stats-bar"></div>', `<div id="stats-bar" data-hubs="${hubs}"></div>`);
 }
 
@@ -1318,7 +1354,9 @@ function main(): void {
   try { if (coordsFile) hallCoords = JSON.parse(fs.readFileSync(coordsFile, 'utf-8')).coords ?? {}; } catch { /* ohne Koordinaten */ }
   const hallMapFile = store ? path.join(store, 'hall-map.json') : null;
   const previousHalls: UrlMap = hallMapFile && fs.existsSync(hallMapFile) ? JSON.parse(fs.readFileSync(hallMapFile, 'utf-8')) : {};
-  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls, hallCoords });
+  const laender = loadLaender(arg('geo') ?? path.join('data', 'geo', 'laender.geojson'));
+  const geo: GeoInfo | undefined = laender ? { outlines: outlinesFor(laender, slugify), attribution: laender.attribution } : undefined;
+  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls, hallCoords, geo });
   writeAll(site, build.files);
 
   fs.mkdirSync(path.join(site, 'data'), { recursive: true });

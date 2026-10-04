@@ -40,6 +40,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Startseite mit Ergebnissen', url: '/index.html', ready: '.club-card', action: search },
   { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
   { name: 'Hallen-Übersicht', url: '/halle/', ready: '.seo-list a' },
+  { name: 'Vereine nach Bundesland', url: '/vereine/', ready: '.region-card' },
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
   { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.dss-tbl' },
@@ -246,9 +247,11 @@ test('Statische Vereinsseite: Canonical, Inhalt ohne JavaScript, Sitemap', async
   expect((await (await request.get('/robots.txt')).text())).toContain('Sitemap:');
 });
 
-test('Startseite verlinkt die Regionen', async ({ page }) => {
+test('Startseite verlinkt die Hubseite Vereine, diese die Bundesländer', async ({ page }) => {
   await open(page, '/index.html', 'light', '#regions a');
-  await expect(page.locator('#regions a[href="bayern/"]')).toBeVisible();
+  await expect(page.locator('#regions a[href="vereine/"]')).toBeVisible();
+  await page.goto('/vereine/');
+  await expect(page.locator('a.region-link[href="bayern/"]')).toBeVisible();
 });
 
 test('Ligaseite: Tabelle mit Kopfzellen, Vereinslinks und Eintrag in der Sitemap', async ({ request }) => {
@@ -410,32 +413,46 @@ test('Favoriten: Vereinskarte mit Logo, Verband und Kennzahlen', async ({ page }
   await expect(card.getByRole('link', { name: 'TSV 1861 Nördlingen' })).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/$/);
 });
 
-test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden und inaktive Teams', async ({ page }) => {
+test('Startseite: Top-Karten mit Link auf die Übersichten, Ligen in Verbänden, inaktive Teams nur in der Vereine-Karte', async ({ page }) => {
   await open(page, '/index.html', 'light', '#stats-bar .hero-stat');
   const cards = page.locator('#stats-bar .hero-stat');
-  await expect(cards).toHaveCount(4);
+  await expect(cards).toHaveCount(3);
   await expect(cards.nth(0)).toContainText('Vereine');
   await expect(cards.nth(0)).toContainText('aktive Teams');
-  await expect(cards.nth(0)).toHaveAttribute('href', '#regions');
+  await expect(cards.nth(0)).toHaveAttribute('href', 'vereine/');
   await expect(cards.nth(1)).toContainText('Ligen');
-  await expect(cards.nth(1)).toContainText(/in \d+ Verbänden/);
+  await expect(cards.nth(1)).toContainText(/in \d+ (Verband|Verbänden)$/);
   await expect(cards.nth(1)).toHaveAttribute('href', 'liga/');
   await expect(cards.nth(2)).toContainText('Spielstätten');
   await expect(cards.nth(2)).toHaveAttribute('href', 'halle/');
-  await expect(cards.nth(3)).toContainText('inaktive Teams');
+  await expect(page.locator('#stats-bar')).not.toContainText('inaktive Teams');     // keine eigene Karte, höchstens "inaktiv" in der Unterzeile
   await cards.nth(2).click();
   await expect(page).toHaveURL(/\/halle\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Basketballhallen in Deutschland');
 });
 
-test('Startseite: Bundesländer als zweispaltige Karten mit Kennzahlen', async ({ page }) => {
-  await open(page, '/index.html', 'light', '.region-card');
+test('Hubseite Vereine: Länderkarten mit Umriss; mobil Vereine und Ligen, auf dem Desktop alle vier Kennzahlen', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await open(page, '/vereine/', 'light', '.region-card');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Basketballvereine in Deutschland');
   const bayern = page.locator('.region-card', { has: page.getByRole('link', { name: 'Bayern', exact: true }) });
-  await expect(bayern.locator('.dss-stat-label').first()).toHaveText(/Vereine?/);
+  await expect(bayern.locator('svg.region-shape')).toBeVisible();
+  await expect(bayern.locator('.dss-stat:visible .dss-stat-label')).toHaveText([/^Vereine?$/, /^Lig(a|en)$/]);
   const cols = await page.locator('.region-cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
   expect(cols).toBe(2);
+  await expect(page.getByText(/Umrisse: © BKG/)).toBeVisible();
+  await page.setViewportSize({ width: 1000, height: 900 });
+  await expect(bayern.locator('.dss-stat:visible')).toHaveCount(await bayern.locator('.dss-stat').count());
   await bayern.getByRole('link', { name: 'Bayern', exact: true }).click();
   await expect(page).toHaveURL(/\/bayern\/$/);
+});
+
+test('Startseite: Top-Karte Vereine führt zur Hubseite, kein Länderraster mehr auf der Startseite', async ({ page }) => {
+  await open(page, '/index.html', 'light', '#stats-bar .hero-stat');
+  await expect(page.locator('.region-card')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Vereine nach Bundesland' })).toHaveAttribute('href', 'vereine/');
+  await page.locator('#stats-bar .hero-stat').first().click();
+  await expect(page).toHaveURL(/\/vereine\/$/);
 });
 
 test('Hallen-Übersicht: Land und Ort führen zu den Hallenseiten', async ({ page }) => {

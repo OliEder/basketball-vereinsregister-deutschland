@@ -1,4 +1,4 @@
-import { LAENDER, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { LAENDER, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -139,13 +139,18 @@ describe('buildSite', () => {
     expect(d.files.get('sitemap.xml')).toContain('/alba-berlin/<');
   });
 
-  it('Regionsliste für die Startseite', () => {
+  it('Hubseite /vereine/ mit den Länderkarten, Startseite verweist darauf', () => {
     expect(b.regions.map(r => r.slug)).toEqual(['bayern', 'bundesweit']);
+    const hub = b.files.get('vereine/index.html')!;
+    expect(hub).toContain('<h1>Basketballvereine in Deutschland</h1>');
+    expect(hub).toContain('<ul class="region-cards">');
+    expect(hub).toContain('<a class="region-link" href="bayern/">Bayern</a>');
+    expect(hub).toContain('<a class="region-link" href="bundesweit/">Bundesweit (Bundesligen, Rollstuhl, Kooperationen)</a>');
+    expect(hub).toContain('<li><a href="index.html">Vereinsregister</a></li>');
+    expect(b.files.get('sitemap.xml')).toContain('/vereine/<');
     const out = injectRegionLinks('<nav><!--REGION-LINKS--></nav>', b.regions);
-    expect(out).toContain('<ul class="region-cards">');
-    expect(out).toContain('<a class="region-link" href="bayern/">Bayern</a>');
-    expect(out).toContain('<a class="region-link" href="bundesweit/">Bundesweit (Bundesligen, Rollstuhl, Kooperationen)</a>');
-    expect(out).toContain('<div class="dss-stat-label">Vereine</div>');
+    expect(out).toContain('<a class="dss-link" href="vereine/">Vereine nach Bundesland</a>');
+    expect(out).not.toContain('region-card');                                              // die Karten stehen nur auf der Hubseite
   });
 
   it('Bundesweit und andere Nicht-Länder: breite Karte über beide Spalten, nach den Ländern', () => {
@@ -155,30 +160,48 @@ describe('buildSite', () => {
       { state: 'Bayern', slug: 'bayern', clubs: 9, teams: 0, orte: 1, ligen: 3, hallen: 0 },
       { state: 'Hessen', slug: 'hessen', clubs: 7, teams: 0, orte: 1, ligen: 1, hallen: 0 }
     ];
-    const html = injectRegionLinks('<!--REGION-LINKS-->', regions);
+    const html = regionCards(regions);
     expect(html.indexOf('href="bundesweit/"')).toBeGreaterThan(html.indexOf('href="hessen/"'));   // am Ende, sonst stünde sie mitten in den Paaren
     expect(html).toMatch(/region-card dss-card dss-card--hoverable region-card--wide"><a class="region-link" href="bundesweit\/">/);
     expect(html).not.toMatch(/region-card--wide"><a class="region-link" href="(bayern|hessen)\//);
   });
 
-  it('Regionskarte nennt Vereine und Ligen; Teams, Orte und Hallen stehen im Datensatz', () => {
+  it('Regionskarte: Vereine und Ligen immer, Teams und Hallen nur auf dem Desktop', () => {
     const r = b.regions.find(x => x.slug === 'bayern')!;
     expect(r).toMatchObject({ state: 'Bayern', clubs: 2 });
     expect(r.teams).toBe(0);                    // die Fixture-Teams haben keine Liga
     expect(r.orte).toBeGreaterThan(0);
     expect(r.hallen).toBeGreaterThan(0);
-    const html = injectRegionLinks('<!--REGION-LINKS-->', [{ state: 'Hessen', slug: 'hessen', clubs: 1234, teams: 5678, orte: 9, ligen: 1, hallen: 3 }]);
+    const html = regionCards([{ state: 'Hessen', slug: 'hessen', clubs: 1234, teams: 5678, orte: 9, ligen: 1, hallen: 3 }]);
     expect(html).toContain('<div class="dss-stat-value">1.234</div><div class="dss-stat-label">Vereine</div>');   // deutsche Tausenderpunkte
-    expect(html).toContain('<div class="dss-stat-label">Liga</div>');                                           // Einzahl
-    expect(html).not.toContain('Teams</div>');
-    expect(html).not.toContain('Hallen</div>');
-    expect(injectRegionLinks('<!--REGION-LINKS-->', [{ state: 'X', slug: 'x', clubs: 2, teams: 0, orte: 1, ligen: 0, hallen: 0 }])).not.toContain('Liga');   // keine Kachel ohne Wert
+    expect(html).toContain('<div class="dss-stat dss-stat--compact region-extra"><div class="dss-stat-value">5.678</div><div class="dss-stat-label">Teams</div></div>');   // nur ab Desktopbreite sichtbar
+    expect(html).toContain('<div class="dss-stat dss-stat--compact region-extra"><div class="dss-stat-value">3</div><div class="dss-stat-label">Hallen</div></div>');
+    expect(html).toContain('<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">1</div><div class="dss-stat-label">Liga</div></div>');          // Vereine und Ligen immer
+    expect(regionCards([{ state: 'X', slug: 'x', clubs: 2, teams: 0, orte: 1, ligen: 0, hallen: 0 }])).not.toContain('Liga');   // keine Kachel ohne Wert
+  });
+
+  it('Umriss: Überschrift, Umriss, Kennzahlen; ohne Umriss (Bundesweit) kein SVG; Quellenvermerk auf der Hubseite', () => {
+    const regions = [{ state: 'Bayern', slug: 'bayern', clubs: 9, teams: 5, orte: 1, ligen: 3, hallen: 2 }, { state: 'Bundesweit', slug: 'bundesweit', clubs: 2, teams: 0, orte: 1, ligen: 1, hallen: 0 }];
+    const geo = { outlines: { bayern: { path: 'M0,0L10,0L10,10Z', w: 10, h: 10 } }, attribution: '© BKG (2026) dl-de/by-2-0 (Daten verändert)' };
+    const html = renderRegionHub(BASE, regions, true, true, geo);
+    const cards = html.split('<li class="region-card').slice(1);
+    const bayern = cards[0];
+    expect(bayern.indexOf('region-link')).toBeLessThan(bayern.indexOf('<svg class="region-shape"'));       // Überschrift, Umriss, Kennzahlen
+    expect(bayern.indexOf('<svg class="region-shape"')).toBeLessThan(bayern.indexOf('dss-stats'));
+    expect(bayern).toContain('aria-hidden="true" focusable="false"><path d="M0,0L10,0L10,10Z"/>');
+    expect(cards[1]).not.toContain('<svg');
+    expect(html).toContain('© BKG (2026)</a>');
+    expect(html).toContain('dl-de/by-2-0</a> (vereinfacht)');
+    expect(html).toContain('href="liga/"');
+    expect(html).toContain('href="halle/"');
+    expect(renderRegionHub(BASE, regions, false, false)).not.toContain('Umrisse:');            // ohne Umrisse kein Quellenvermerk
   });
 
   it('Startseite: data-hubs nennt die vorhandenen Übersichten', () => {
     const html = '<div id="stats-bar"></div><!--REGION-LINKS-->';
-    expect(injectRegionLinks(html, b.regions, true, true)).toContain('<div id="stats-bar" data-hubs="liga halle"></div>');
-    expect(injectRegionLinks(html, b.regions, false, false)).toContain('data-hubs=""');
+    expect(injectRegionLinks(html, b.regions, true, true)).toContain('<div id="stats-bar" data-hubs="vereine liga halle"></div>');
+    expect(injectRegionLinks(html, b.regions, false, false)).toContain('data-hubs="vereine"');
+    expect(injectRegionLinks(html, [], false, false)).toContain('data-hubs=""');
     expect(injectRegionLinks(html, b.regions, true, true)).toContain('href="halle/"');
   });
 });
