@@ -627,7 +627,7 @@ function favTeamCard(t) {
   return li;
 }
 
-/** Vereinskarte: Logo, Verband, Zahl der Teams und Hallen sowie die Teams als Kürzel (alles aus clubs.json, ohne Live-Daten). */
+/** Vereinskarte: Logo, Verband, Hallen und Kennzahlen (Teams, Spiele gespielt/gesamt, Ligen). */
 function favClubCard(c) {
   const li = favCard('club', c, (urlMap && urlMap[String(c.id)]) || 'verein.html?id=' + encodeURIComponent(c.id));
   const club = searchEngine && searchEngine.clubs.find(x => String(x.clubId) === String(c.id));
@@ -648,13 +648,7 @@ function favClubCard(c) {
   favClubInfo(teams.map(t => t.teamPermanentId)).then(docs => {
     if (docs) showStats(TeamLogic.clubSummary(docs, c.id));
   });
-  const badges = favEl('div', 'team-badges');
-  teams.slice(0, 8).forEach(t => {
-    const g = t.geschlecht;
-    badges.appendChild(favEl('span', 'team-badge dss-chip ' + (g === 'männlich' ? 'dss-chip--sky' : g === 'weiblich' ? 'dss-chip--amber' : ''), getBadgeLabel(t)));
-  });
-  if (teams.length > 8) badges.appendChild(favEl('span', 'team-badge dss-chip', '+' + (teams.length - 8)));
-  head.after(info, stats, badges);
+  head.after(info, stats);
   return li;
 }
 

@@ -394,7 +394,7 @@ test('Vereinsseite: Teamkarte mit Platz, Bilanz, Differenz und letzten Spielen',
   await expect(card.locator('.dss-form .dss-chip').first()).toContainText(/Sieg|Niederlage/);
 });
 
-test('Favoriten: Vereinskarte mit Logo, Verband, Zahl der Teams und Teamkürzeln', async ({ page }) => {
+test('Favoriten: Vereinskarte mit Logo, Verband und Kennzahlen', async ({ page }) => {
   await open(page, '/index.html', 'light', '.fav-item', async p => {
     await p.evaluate(() => {
       localStorage.setItem('vr:favorites', JSON.stringify({ v: 1, teams: [], clubs: [{ id: '1235', name: 'TSV 1861 Nördlingen' }] }));
@@ -405,6 +405,6 @@ test('Favoriten: Vereinskarte mit Logo, Verband, Zahl der Teams und Teamkürzeln
   await expect(card.locator('.fav-kind')).toHaveText('Verein');
   await expect(card.locator('.fav-liga')).toContainText('Bayern');
   await expect(card.locator('.dss-stat-label')).toContainText(['Teams', 'Spiele gespielt', /Lig(a|en)/]);
-  await expect(card.locator('.team-badge').first()).toBeVisible();
+  await expect(card.locator('.team-badge')).toHaveCount(0);       // nur Kennzahlen, keine Teamliste (wäre bei vielen Teams zu lang)
   await expect(card.getByRole('link', { name: 'TSV 1861 Nördlingen' })).toHaveAttribute('href', /noerdlingen\/tsv-1861-noerdlingen\/$/);
 });
