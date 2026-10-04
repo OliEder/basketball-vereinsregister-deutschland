@@ -1,4 +1,4 @@
-import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { LAENDER, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -146,6 +146,19 @@ describe('buildSite', () => {
     expect(out).toContain('<a class="region-link" href="bayern/">Bayern</a>');
     expect(out).toContain('<a class="region-link" href="bundesweit/">Bundesweit (Bundesligen, Rollstuhl, Kooperationen)</a>');
     expect(out).toContain('<div class="dss-stat-label">Vereine</div>');
+  });
+
+  it('Bundesweit und andere Nicht-Länder: breite Karte über beide Spalten, nach den Ländern', () => {
+    expect(LAENDER.size).toBe(16);
+    const regions = [
+      { state: 'Bundesweit (Bundesligen)', slug: 'bundesweit', clubs: 5, teams: 0, orte: 1, ligen: 2, hallen: 0 },
+      { state: 'Bayern', slug: 'bayern', clubs: 9, teams: 0, orte: 1, ligen: 3, hallen: 0 },
+      { state: 'Hessen', slug: 'hessen', clubs: 7, teams: 0, orte: 1, ligen: 1, hallen: 0 }
+    ];
+    const html = injectRegionLinks('<!--REGION-LINKS-->', regions);
+    expect(html.indexOf('href="bundesweit/"')).toBeGreaterThan(html.indexOf('href="hessen/"'));   // am Ende, sonst stünde sie mitten in den Paaren
+    expect(html).toMatch(/region-card dss-card dss-card--hoverable region-card--wide"><a class="region-link" href="bundesweit\/">/);
+    expect(html).not.toMatch(/region-card--wide"><a class="region-link" href="(bayern|hessen)\//);
   });
 
   it('Regionskarte nennt Vereine und Ligen; Teams, Orte und Hallen stehen im Datensatz', () => {

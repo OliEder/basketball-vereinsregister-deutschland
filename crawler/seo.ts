@@ -1255,15 +1255,19 @@ export function buildSite(
 
 const de = (n: number): string => n.toLocaleString('de-DE');
 
+/** Die 16 Bundesländer; alles andere (Bundesweit, Sonstige) ist kein Land und steht als breite Karte am Ende. */
+export const LAENDER = new Set(['baden-wuerttemberg', 'bayern', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'hessen', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thueringen']);
+
 /**
  * Ersetzt in der Startseite den Platzhalter durch die Regionen als zweispaltige Karten (Zahl der Vereine und Ligen;
  * die ganze Karte ist der Link) und trägt ein, welche Übersichten es gibt (data-hubs, für die Top-Karten).
  */
 export function injectRegionLinks(indexHtml: string, regions: SiteBuild['regions'], withLiga = false, withHalls = false): string {
   const tile = (value: number, label: string): string => `<div class="dss-stat dss-stat--compact"><div class="dss-stat-value">${de(value)}</div><div class="dss-stat-label">${label}</div></div>`;
-  const cards = regions.map(r => {
+  const ordered = [...regions.filter(r => LAENDER.has(r.slug)), ...regions.filter(r => !LAENDER.has(r.slug))];
+  const cards = ordered.map(r => {
     const tiles = [tile(r.clubs, r.clubs === 1 ? 'Verein' : 'Vereine'), r.ligen ? tile(r.ligen, r.ligen === 1 ? 'Liga' : 'Ligen') : ''].join('');
-    return `<li class="region-card dss-card dss-card--hoverable${r.state.length > 24 ? ' region-card--wide' : ''}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
+    return `<li class="region-card dss-card dss-card--hoverable${LAENDER.has(r.slug) ? '' : ' region-card--wide'}"><a class="region-link" href="${r.slug}/">${esc(r.state)}</a><div class="dss-stats dss-stats--compact">${tiles}</div></li>`;
   }).join('');
   const more = (withLiga ? '<li><a class="dss-link" href="liga/">Alle Ligen mit Tabellen</a></li>' : '') + (withHalls ? '<li><a class="dss-link" href="halle/">Alle Hallen</a></li>' : '');
   const hubs = [withLiga ? 'liga' : '', withHalls ? 'halle' : ''].filter(Boolean).join(' ');
