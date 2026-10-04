@@ -324,21 +324,32 @@ describe('Ligaseiten', () => {
     expect(EBENEN.map(e => e.key)).toEqual(['Verband', 'Bezirk', 'Kreis', 'Weitere']);
   });
 
-  it('Verbandsseite: aufklappbar nach Altersklasse, Geschlecht und Ebene, alles im HTML', () => {
-    const b = buildLigaPages([liga(1, 'Kreisliga A', { skEbeneName: 'Kreis' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }), liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14' }), liga(4, 'U14 Damen', { akName: 'U14', geschlecht: 'weiblich', skEbeneName: 'Bezirk' })], {}, BASE, {});
+  it('Verbandsseite: Altersklasse, Geschlecht, Ebene, Bezirk als offene Überschriften, keine Klappboxen', () => {
+    const b = buildLigaPages([
+      liga(1, 'Kreisliga A', { skEbeneName: 'Kreis', bezirkName: 'Oberpfalz', kreisname: 'Regensburg' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }),
+      liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14', bezirkName: 'Schwaben' }), liga(4, 'U14 Damen', { akName: 'U14', geschlecht: 'weiblich', skEbeneName: 'Bezirk', bezirkName: 'Schwaben' }),
+      liga(5, 'Kreisliga B', { skEbeneName: 'Kreis', bezirkName: 'Franken' }), liga(6, 'Kreisliga C', { skEbeneName: 'Kreis' })
+    ], {}, BASE, {});
     const html = b.files.get('liga/bayern/index.html')!;
     const at = (x: string): number => html.indexOf(x);
-    expect(at('id="ak-senioren"')).toBeGreaterThan(-1);
+    expect(html).not.toContain('<details');
     expect(at('id="ak-senioren"')).toBeLessThan(at('id="ak-u14"'));                                // Altersklassen in Reihenfolge
     expect(at('id="ak-senioren-maennlich-verband"')).toBeLessThan(at('id="ak-senioren-maennlich-kreis"'));
     expect(at('id="ak-u14-maennlich"')).toBeLessThan(at('id="ak-u14-weiblich"'));
     expect(html).toContain('<h2 id="ak-u14">U14 <span class="seo-note">2 Ligen</span></h2>');
     expect(html).toContain('<h3 id="ak-u14-weiblich">Weiblich <span class="seo-note">1 Liga</span></h3>');
     expect(html).toContain('<h4 id="ak-senioren-maennlich-verband">Verbandsebene');
-    expect(html).toContain('<h5 class="liga-card-title">');
-    expect(html.match(/<details class="liga-fold liga-fold--2" open>/g)).toHaveLength(1);             // nur die erste Altersklasse offen
-    expect(html.match(/<details class="liga-fold liga-fold--2">/g)).toHaveLength(1);
-    expect(html).toContain('Kreisliga A');                                                            // auch zugeklappt im HTML
+    // Kreisebene hat drei Gruppen: Franken, Oberpfalz, Ohne Bezirk (zuletzt), mit Bezirksüberschrift und Kartenüberschrift eine Stufe tiefer
+    const kreis = html.slice(at('id="ak-senioren-maennlich-kreis"'));
+    expect(kreis.indexOf('<h5>Franken')).toBeLessThan(kreis.indexOf('<h5>Oberpfalz'));
+    expect(kreis.indexOf('<h5>Oberpfalz')).toBeLessThan(kreis.indexOf('<h5>Ohne Bezirk'));
+    expect(kreis).toContain('<h6 class="liga-card-title">');
+    expect(kreis).toContain('<p class="seo-note liga-card-meta">Regensburg');                       // Kreis bleibt, der Bezirk steht in der Überschrift
+    expect(kreis).not.toContain('Oberpfalz ·');
+    // nur ein Bezirk: keine zusätzliche Überschrift, Karten direkt unter der Ebene
+    const u14 = html.slice(at('id="ak-u14-weiblich"'));
+    expect(u14).not.toContain('<h6');
+    expect(u14).toContain('<h5 class="liga-card-title">');
     expect(html).toContain('<li class="liga-card dss-card dss-card--default">');
   });
 
