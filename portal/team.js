@@ -400,6 +400,7 @@ async function init() {
 
   const content = document.getElementById('team-content');
   content.textContent = '';
+  content.setAttribute('data-live', '');         // ab hier die Fassung aus den Live-Daten (davor die vorberechnete Seite)
   const head = el('div', 'team-head');
   head.appendChild(logoEl(teamId, name, 'xl'));
   head.appendChild(el('h1', 'team-title', name));

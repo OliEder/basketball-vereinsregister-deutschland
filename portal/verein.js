@@ -430,6 +430,7 @@ async function init() {
 
     const content = document.getElementById('verein-content');
     content.textContent = '';
+    content.setAttribute('data-live', '');       // ab hier die Fassung aus den Live-Daten (davor die vorberechnete Seite)
 
     content.appendChild(renderClubHeader(club));
     content.appendChild(renderLinks(club));

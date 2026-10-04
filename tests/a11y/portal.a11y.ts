@@ -38,7 +38,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Startseite', url: '/index.html', ready: '#stats-bar:not(:empty)' },
   { name: 'Startseite mit Favoriten', url: '/index.html', ready: '.fav-item', action: withFavorites },
   { name: 'Startseite mit Ergebnissen', url: '/index.html', ready: '.club-card', action: search },
-  { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '.verein-team-card .verein-team-liga:not(.verein-team-loading)' },
+  { name: 'Vereinsseite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '#verein-content[data-live] .verein-team-card .verein-team-liga:not(.verein-team-loading)' },
   { name: 'Hallen-Übersicht', url: '/halle/', ready: '.seo-list a' },
   { name: 'Vereine nach Bundesland', url: '/vereine/', ready: '.region-card' },
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
@@ -47,7 +47,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.liga-card a' },
   { name: 'Ligaseite mit Nach-oben-Schaltfläche', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: '.dss-backtop:not([hidden])', action: scrollDown },
   { name: 'Hallenseite', url: '/halle/bayern/muenchen/halle-schwabing/', ready: 'address' },
-  { name: 'Team-Seite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', ready: '.team-table' },
+  { name: 'Team-Seite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', ready: '#team-content[data-live] .team-table' },
   { name: 'Team ohne Live-Daten', url: '/team.html?id=424242', ready: '.verein-error' }
 ];
 const THEMES = ['light', 'dark'] as const;
@@ -195,7 +195,7 @@ const TEAM_URL = /(tsv-1861-noerdlingen\/[a-z0-9-]+\/(\?liga=\d+)?|team\.html\?i
 
 // ---- Team-Teaser: erkennbar und per Tastatur erreichbar ------------------------------------------
 test('Team-Karten sind als Link erkennbar', async ({ page }) => {
-  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '.verein-team-card .verein-team-liga:not(.verein-team-loading)');
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '#verein-content[data-live] .verein-team-card .verein-team-liga:not(.verein-team-loading)');
   const cards = page.locator('.verein-team-card');
   await expect(cards).toHaveCount(2);
   for (let i = 0; i < 2; i++) {
@@ -233,7 +233,7 @@ test('Nächstes Spiel zeigt die gemeldete Halle ohne "Voraussichtlich"', async (
 });
 
 test('Alte Vereinsadresse leitet auf die statische Seite um', async ({ page }) => {
-  await open(page, '/verein.html?id=1235', 'light', '.verein-team-card');
+  await open(page, '/verein.html?id=1235', 'light', '#verein-content[data-live] .verein-team-card');
   await expect(page).toHaveURL(/\/bayern\/noerdlingen\/tsv-1861-noerdlingen\/$/);
 });
 
@@ -262,7 +262,7 @@ test('Ligaseite: Tabelle mit Kopfzellen, Vereinslinks und Eintrag in der Sitemap
 });
 
 test('Alte Team-Adresse leitet auf die statische Teamseite um', async ({ page }) => {
-  await open(page, '/team.html?id=151009', 'light', '.team-table');
+  await open(page, '/team.html?id=151009', 'light', '#team-content[data-live] .team-table');
   await expect(page).toHaveURL(/\/bayern\/noerdlingen\/tsv-1861-noerdlingen\/herren\/$/);
 });
 
@@ -271,11 +271,24 @@ test('Statische Teamseite: Inhalt ohne JavaScript, Verlinkung und strukturierte 
   expect(html).toContain('<h1>TSV 1861 Nördlingen</h1>');
   expect(html).toContain('"@type":"SportsTeam"');
   expect(html).toContain('href="liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/"');
+  // fest im HTML, ohne JavaScript: Kennzahlen, Tabelle mit eigenem Team, Spiele
+  expect(html).toContain('<div class="dss-stat-label">Tabellenplatz</div>');
+  expect(html).toContain('<h2>Tabelle</h2>');
+  expect(html).toContain('class="team-own is-own"');
+  expect(html).toContain('dss-row dss-row--match');
   expect(await (await request.get('/sitemap.xml')).text()).toContain('/bayern/noerdlingen/tsv-1861-noerdlingen/herren/');
 });
 
+test('Statische Vereinsseite: Teamkarten mit Kennzahlen ohne JavaScript', async ({ request }) => {
+  const html = await (await request.get('/bayern/noerdlingen/tsv-1861-noerdlingen/')).text();
+  expect(html).toContain('<div class="verein-team-card dss-card dss-card--hoverable">');
+  expect(html).toContain('<div class="dss-stat-value">1.</div><div class="dss-stat-label">Platz</div>');
+  expect(html).toContain('<div class="dss-stat-label">Letzte 5</div>');
+  expect(html).toContain('class="verein-team-link"');
+});
+
 test('Favoriten: Team merken, auf der Startseite wiederfinden und entfernen', async ({ page }) => {
-  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '#team-content[data-live] .team-table');
   const star = page.locator('.team-head .fav-btn');
   await expect(star).toHaveAttribute('aria-pressed', 'false');
   await star.click();
@@ -295,7 +308,7 @@ test('Favoriten: Team merken, auf der Startseite wiederfinden und entfernen', as
 });
 
 test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async ({ page }) => {
-  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '.verein-team-card');
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/', 'light', '#verein-content[data-live] .verein-team-card');
   const link = page.getByRole('link', { name: /Fehler melden/ });
   const href = await link.getAttribute('href');
   expect(href).toContain('github.com/OliEder/basketball-vereinsregister-deutschland/issues/new?template=datenfehler.yml');
@@ -305,7 +318,7 @@ test('Fehler melden: Link auf das GitHub-Formular mit Seite und Objekt', async (
 });
 
 test('Kalender-Abo im Spielplan: folgt der Auswahl Alle/Heim/Auswärts, iPhone- und Android-Link, Dateien mit Spielort', async ({ page, request }) => {
-  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '#team-content[data-live] .team-table');
   await expect(page.getByRole('heading', { name: 'Spielplan im Kalender' })).toHaveCount(0);      // kein eigener Abschnitt mehr
   await page.getByText('Kalender abonnieren: Alle Spiele').click();
   const apple = page.getByRole('link', { name: 'iPhone / Mac' });
@@ -346,7 +359,7 @@ test('Hallenseite: Zähler, Spiele und Vereine; Links von Verein und Team', asyn
   expect(await (await request.get('/sitemap.xml')).text()).toContain('/halle/bayern/muenchen/halle-schwabing/');
   expect(await (await request.get('/data/hall-url-map.json')).json()).toMatchObject({ '500': 'halle/bayern/muenchen/halle-schwabing/' });
 
-  await open(page, '/bayern/muenchen/mtsv-schwabing/', 'light', '.verein-team-card');
+  await open(page, '/bayern/muenchen/mtsv-schwabing/', 'light', '#verein-content[data-live] .verein-team-card');
   await expect(page.locator('.verein-hall-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
 
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.next-game-venue');
@@ -363,7 +376,7 @@ test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', asyn
 });
 
 test('Seitennavigation: auf der Teamseite erst nach dem Laden der Abschnitte', async ({ page }) => {
-  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.team-table');
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '#team-content[data-live] .team-table');
   await expect(page.locator('.dss-pagenav a')).toContainText(['Tabelle', 'Spielplan', 'Kalender-Abo']);
   await page.locator('.dss-pagenav').getByRole('link', { name: 'Kalender-Abo' }).click();
   await expect(page.locator('details.team-cal')).toHaveAttribute('open', '');
