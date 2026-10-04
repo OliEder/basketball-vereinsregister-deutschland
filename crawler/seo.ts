@@ -320,8 +320,8 @@ ${crumbNav(crumbs)}
     <div id="verein-content">
       <h1>${esc(club.name)}</h1>
       ${where ? `<p>${esc(where)}</p>` : ''}
-      ${teamItems ? `<h2>Teams (${teams.length})</h2><ul>${teamItems}</ul>` : ''}
-      ${hallItems ? `<h2>Hallen</h2><ul>${hallItems}</ul>` : ''}
+      ${teamItems ? `<h2>Teams (${teams.length})</h2>${card(`<ul class="seo-list">${teamItems}</ul>`)}` : ''}
+      ${hallItems ? `<h2>Hallen</h2>${card(`<ul class="seo-list">${hallItems}</ul>`)}` : ''}
       <noscript><p>Spielpläne und Tabellen werden mit JavaScript geladen.</p></noscript>
     </div>
   </main>`;
@@ -363,7 +363,7 @@ function alphabetGroups(pagePath: string, items: ListItem[]): { nav: string; gro
     byLetter.set(l, [...(byLetter.get(l) ?? []), it]);
   }
   const letters = [...byLetter.keys()].sort((a, b) => (a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b)));
-  const nav = `      <nav class="seo-alphabet" aria-label="Alphabet"><ul>${letters.map(l => `<li><a href="${pagePath}#buchstabe-${l === '#' ? 'sonst' : l.toLowerCase()}">${l}</a></li>`).join('')}</ul></nav>`;
+  const nav = `      <nav class="seo-alphabet" aria-label="Alphabet"><ul class="dss-tabs dss-tabs--pills">${letters.map(l => `<li><a class="dss-tab" href="${pagePath}#buchstabe-${l === '#' ? 'sonst' : l.toLowerCase()}">${l}</a></li>`).join('')}</ul></nav>`;
   return { nav, groups: letters.map(l => ({ heading: l, id: `buchstabe-${l === '#' ? 'sonst' : l.toLowerCase()}`, items: byLetter.get(l)! })) };
 }
 
@@ -381,7 +381,7 @@ export function renderListPage(opts: {
     } else source.push(g);
   }
   const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}"` : ''}>${esc(g.heading)}</h2>` : ''}
-      <ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`).join('\n');
+      ${card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`)}`).join('\n');
   const body = `${topbar()}
   <main class="verein-main">
 ${crumbNav(opts.crumbs)}
@@ -466,14 +466,48 @@ function teamCell(t: any, clubPaths: Record<string, string>, teamPaths: Record<s
   return p ? `<a href="${p}">${name}</a>` : name;
 }
 
-function matchList(matches: any[], clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}): string {
-  const items = matches.map(m => {
-    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
-    const score = m.result ? ` <strong>${esc(String(m.result))}</strong>` : '';
-    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)}${score}</li>`;
-  });
-  return `<ul class="seo-matches">${items.join('')}</ul>`;
+const WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+
+/** Wie TeamLogic.formatKickoff im Browser: "Sa, 12.10.2026 · 18:00". */
+export function kickoffText(date?: string, time?: string): string {
+  const m = typeof date === 'string' ? /^(\d{4})-(\d{2})-(\d{2})$/.exec(date) : null;
+  if (!m) return time ?? '';
+  const wd = WEEKDAYS[new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getDay()];
+  return `${wd}, ${m[3]}.${m[2]}.${m[1]}${time ? ` · ${time}` : ''}`;
 }
+
+function scoreText(m: any): string {
+  if (m.verzicht) return 'Verzicht';
+  if (m.abgesagt) return 'abgesagt';
+  return m.result ? esc(String(m.result)) : '–';
+}
+
+/** Heim/Auswärts-Kürzel wie auf der Teamseite (team.js haBadge). */
+function haChip(mark: 'vs.' | '@'): string {
+  const home = mark === 'vs.';
+  return `<span class="team-match-ha dss-chip dss-chip--mono ${home ? 'dss-chip--sky' : 'dss-chip--amber'}"><span aria-hidden="true">${mark}</span><span class="dss-sr-only">${home ? 'Heimspiel gegen' : 'Auswärtsspiel bei'}</span></span>`;
+}
+
+interface SchedRow { match: any; mark?: 'vs.' | '@'; teams: string; meta?: string[] }
+
+/** Der eine Spielplan: gleiche Zeile (Zeit | Paarung | Ergebnis) auf Liga-, Orts-, Team- und Hallenseiten, wie auf der Teamseite. */
+export function scheduleRows(rows: SchedRow[]): string {
+  const items = rows.map(r => {
+    const meta = (r.meta ?? []).filter(Boolean);
+    return `<div class="dss-row dss-row--match"><div class="dss-row-when">${esc(kickoffText(r.match.kickoffDate, r.match.kickoffTime))}</div><div class="dss-row-main">${r.mark ? haChip(r.mark) : ''}<span class="dss-row-teams">${r.teams}</span>${meta.length ? `<span class="dss-row-meta">${meta.join(' · ')}</span>` : ''}</div><div class="dss-row-score">${scoreText(r.match)}</div></div>`;
+  });
+  return `<div class="dss-rows">${items.join('')}</div>`;
+}
+
+const pairing = (m: any, clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}): string =>
+  `${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)}`;
+
+function matchList(matches: any[], clubPaths: Record<string, string>, teamPaths: Record<string, string> = {}): string {
+  return scheduleRows(matches.map(m => ({ match: m, teams: pairing(m, clubPaths, teamPaths) })));
+}
+
+/** Kartenfläche für Listen und Kopfbereiche (DSS Card). */
+const card = (inner: string, cls = ''): string => `<div class="dss-card dss-card--default dss-card--pad-md${cls ? ` ${cls}` : ''}"><div class="dss-card-body">${inner}</div></div>`;
 
 export function renderLigaPage(ctx: LigaPageCtx): string {
   const { base, doc, path: urlPath, clubPaths } = ctx;
@@ -488,10 +522,10 @@ export function renderLigaPage(ctx: LigaPageCtx): string {
   const rows = (doc.tabelle ?? []).filter(e => e?.team).slice().sort((a, b) => (a.rang ?? 99) - (b.rang ?? 99));
   const table = rows.length ? `
       <h2>Tabelle</h2>
-      <div class="seo-table-wrap" role="region" aria-label="Tabelle ${esc(doc.liganame)}" tabindex="0">
-        <table class="seo-table">
-          <thead><tr><th scope="col">Platz</th><th scope="col">Mannschaft</th><th scope="col">Spiele</th><th scope="col">S</th><th scope="col">N</th><th scope="col">Körbe</th><th scope="col">Diff.</th><th scope="col">Punkte</th></tr></thead>
-          <tbody>${rows.map(e => `<tr><td>${esc(String(e.rang ?? ''))}</td><td>${teamCell(e.team, clubPaths, teamPaths)}</td><td>${e.anzspiele ?? 0}</td><td>${e.s ?? 0}</td><td>${e.n ?? 0}</td><td>${e.koerbe ?? 0}:${e.gegenKoerbe ?? 0}</td><td>${e.korbdiff ?? 0}</td><td>${e.anzGewinnpunkte ?? 0}:${e.anzVerlustpunkte ?? 0}</td></tr>`).join('')}</tbody>
+      <div class="dss-frame dss-table-scroll" role="region" aria-label="Tabelle ${esc(doc.liganame)}" tabindex="0">
+        <table class="dss-tbl">
+          <thead><tr><th scope="col" class="center">Platz</th><th scope="col" class="wrap">Mannschaft</th><th scope="col" class="num">Spiele</th><th scope="col" class="num">S</th><th scope="col" class="num">N</th><th scope="col" class="num">Körbe</th><th scope="col" class="num">Diff.</th><th scope="col" class="num">Punkte</th></tr></thead>
+          <tbody>${rows.map(e => `<tr><td class="center num lead">${esc(String(e.rang ?? ''))}</td><td class="wrap">${teamCell(e.team, clubPaths, teamPaths)}</td><td class="num">${e.anzspiele ?? 0}</td><td class="num">${e.s ?? 0}</td><td class="num">${e.n ?? 0}</td><td class="num">${e.koerbe ?? 0}:${e.gegenKoerbe ?? 0}</td><td class="num">${e.korbdiff ?? 0}</td><td class="num lead">${e.anzGewinnpunkte ?? 0}:${e.anzVerlustpunkte ?? 0}</td></tr>`).join('')}</tbody>
         </table>
       </div>` : '';
 
@@ -500,15 +534,21 @@ export function renderLigaPage(ctx: LigaPageCtx): string {
     .sort((a, b) => `${a.kickoffDate} ${a.kickoffTime ?? ''}`.localeCompare(`${b.kickoffDate} ${b.kickoffTime ?? ''}`)).slice(0, 10);
   const recent = played.sort((a, b) => `${b.kickoffDate} ${b.kickoffTime ?? ''}`.localeCompare(`${a.kickoffDate} ${a.kickoffTime ?? ''}`)).slice(0, 10);
 
+  const tile = (value: number, label: string): string => `<div class="dss-stat"><div class="dss-stat-value">${value}</div><div class="dss-stat-label">${label}</div></div>`;
+  const all = (doc.matches ?? []).filter(m => !m.abgesagt && !m.verzicht);
+  const stats = rows.length || all.length
+    ? `\n      <div class="seo-stats">${tile(rows.length, 'Teams')}${tile(all.filter(m => m.result).length, 'Spiele gespielt')}${tile(all.filter(m => !m.result).length, 'Spiele offen')}</div>`
+    : '';
+
   const body = `${topbar()}
   <main class="verein-main">
 ${crumbNav(crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(doc.liganame)}</h1>
-      <p>${esc(doc.verbandName)}${doc.fetchedAt ? ` · Stand: ${esc(deDate(doc.fetchedAt))}` : ''}</p>${table}
+      <p>${esc(doc.verbandName)}${doc.fetchedAt ? ` · Stand: ${esc(deDate(doc.fetchedAt))}` : ''}</p>${stats}${table}
       ${upcoming.length ? `<h2>Nächste Spiele</h2>${matchList(upcoming, clubPaths, teamPaths)}` : ''}
       ${recent.length ? `<h2>Letzte Ergebnisse</h2>${matchList(recent, clubPaths, teamPaths)}` : ''}
-      ${!rows.length && !upcoming.length && !recent.length ? '<p>Für diese Liga liegen noch keine Daten vor.</p>' : ''}
+      ${!rows.length && !upcoming.length && !recent.length ? '<p class="dss-empty">Für diese Liga liegen noch keine Daten vor.</p>' : ''}
     </div>
   </main>`;
 
@@ -632,17 +672,13 @@ export function renderDerbies(derbies: Derby[], today: string, clubPaths: Record
   const done = derbies.filter(d => d.match.result && !d.match.abgesagt)
     .sort((a, b) => key(b.match).localeCompare(key(a.match)) || a.level - b.level).slice(0, 5);
   if (!open.length && !done.length) return '';
-  const row = (d: Derby): string => {
-    const m = d.match;
-    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
+  const list = (ds: Derby[]): string => scheduleRows(ds.map(d => {
     const lp = ligaPaths[d.doc.ligaId];
-    const score = m.result ? ` <strong>${esc(String(m.result))}</strong>` : '';
-    const liga = lp ? `<a href="${lp}">${esc(d.doc.liganame)}</a>` : esc(d.doc.liganame);
-    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths)} – ${teamCell(m.guestTeam, clubPaths)}${score} <span class="seo-note">${liga}</span></li>`;
-  };
+    return { match: d.match, teams: pairing(d.match, clubPaths), meta: [lp ? `<a href="${lp}">${esc(d.doc.liganame)}</a>` : esc(d.doc.liganame)] };
+  }));
   return `      <h2>Lokalderbys in ${esc(placeName)}</h2>
       <p>Spiele zweier Vereine aus ${esc(placeName)} in den höchsten Ligen des Ortes.</p>
-${open.length ? `      <h3>Nächste Derbys</h3><ul class="seo-matches">${open.map(row).join('')}</ul>\n` : ''}${done.length ? `      <h3>Letzte Derbys</h3><ul class="seo-matches">${done.map(row).join('')}</ul>\n` : ''}`;
+${open.length ? `      <h3>Nächste Derbys</h3>${list(open)}\n` : ''}${done.length ? `      <h3>Letzte Derbys</h3>${list(done)}\n` : ''}`;
 }
 
 // ---- Teamseiten --------------------------------------------------------------------------------
@@ -717,14 +753,11 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
   const upcoming = mine.filter(m => !m.result && !m.abgesagt && !m.verzicht && m.kickoffDate && m.kickoffDate >= today).sort((a, b) => key(a).localeCompare(key(b))).slice(0, 5);
   const recent = mine.filter(m => m.result && !m.abgesagt).sort((a, b) => key(b).localeCompare(key(a))).slice(0, 5);
 
-  const row = (m: any, withHall: boolean): string => {
-    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
+  const schedule = (list: any[], withHall: boolean): string => scheduleRows(list.map(m => {
+    const home = sameTeam(m.homeTeam, id);
     const hall = withHall && doc ? hallOf(doc, m) : null;
-    const where = hall ? ` <span class="seo-note">${esc([hall.bezeichnung, hall.ort].filter(Boolean).join(', '))}</span>` : '';
-    const score = m.result ? ` <strong>${esc(String(m.result))}</strong>` : '';
-    const mark = sameTeam(m.homeTeam, id) ? 'vs.' : '@';
-    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}<span class="seo-note">${mark}</span> ${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)}${score}${where}</li>`;
-  };
+    return { match: m, mark: home ? 'vs.' : '@', teams: teamCell(home ? m.guestTeam : m.homeTeam, clubPaths, teamPaths), meta: hall ? [esc([hall.bezeichnung, hall.ort].filter(Boolean).join(', '))] : [] };
+  }));
 
   const crumbs = [
     { name: 'Vereinsregister', path: '' },
@@ -765,9 +798,9 @@ ${crumbNav(crumbs)}
     <div id="team-content" class="seo-list-page">
       <h1>${esc(name)}</h1>
       <p>${esc(label)}${ligaLine ? ` · ${ligaLine}` : ''} · <a href="${ref.clubPath}">${esc(ref.club.name)}</a>${standing ? ` · ${esc(standing)}` : ''}</p>
-      ${upcoming.length ? `<h2>Nächste Spiele</h2><ul class="seo-matches">${upcoming.map(m => row(m, true)).join('')}</ul>` : ''}
-      ${recent.length ? `<h2>Letzte Ergebnisse</h2><ul class="seo-matches">${recent.map(m => row(m, false)).join('')}</ul>` : ''}
-      ${others.length ? `<h2>Weitere Wettbewerbe</h2><ul class="seo-list">${others.map(d => `<li><a href="${ligaPaths[d.ligaId]}">${esc(d.liganame)}</a></li>`).join('')}</ul>` : ''}
+      ${upcoming.length ? `<h2>Nächste Spiele</h2>${schedule(upcoming, true)}` : ''}
+      ${recent.length ? `<h2>Letzte Ergebnisse</h2>${schedule(recent, false)}` : ''}
+      ${others.length ? `<h2>Weitere Wettbewerbe</h2>${card(`<ul class="seo-list">${others.map(d => `<li><a href="${ligaPaths[d.ligaId]}">${esc(d.liganame)}</a></li>`).join('')}</ul>`)}` : ''}
       <noscript><p>Tabelle und Spielplan werden mit JavaScript geladen.</p></noscript>
     </div>
   </main>`;
@@ -908,11 +941,10 @@ export function renderHallPage(ctx: HallPageCtx): string {
     return `<li>${name}${r.n ? ` <span class="seo-note">${r.n} ${r.n === 1 ? 'Heimspiel' : 'Heimspiele'} hier</span>` : ''}</li>`;
   }).join('');
 
-  const matchItems = upcoming.slice(0, 10).map(({ doc, match: m }) => {
-    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
+  const matchRows = scheduleRows(upcoming.slice(0, 10).map(({ doc, match: m }) => {
     const lp = ligaPaths[doc.ligaId];
-    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)} <span class="seo-note">${lp ? `<a href="${lp}">${esc(doc.liganame)}</a>` : esc(doc.liganame)}</span></li>`;
-  }).join('');
+    return { match: m, teams: pairing(m, clubPaths, teamPaths), meta: [lp ? `<a href="${lp}">${esc(doc.liganame)}</a>` : esc(doc.liganame)] };
+  }));
 
   const exact = hall.lat !== undefined && hall.precision !== 'ort';
   const osm = exact
@@ -929,15 +961,15 @@ export function renderHallPage(ctx: HallPageCtx): string {
 ${crumbNav(crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(hall.name)}</h1>
-      <address>${esc(addr)}</address>
+      ${card(`<address>${esc(addr)}</address>
       ${hall.lat !== undefined ? `<div id="hall-map" class="hall-map" role="region" aria-label="Karte: ${esc(hall.name)}" data-lat="${hall.lat}" data-lng="${hall.lng}" data-zoom="${exact ? 16 : 13}" data-name="${esc(hall.name)}"></div>
       ${exact ? '' : '<p class="seo-note">Die Position ist nur ungefähr (Ortsmitte), die genaue Lage ist noch nicht erfasst.</p>'}` : ''}
-      <p><a class="seo-block-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ${exact ? 'ansehen' : 'suchen'}<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>
+      <p><a class="seo-block-link dss-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ${exact ? 'ansehen' : 'suchen'}<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>`)}
       <h2>Spiele in dieser Halle</h2>
       <p>${esc(counter)}</p>
-      ${matchItems ? `<h3>Nächste Spiele</h3><ul class="seo-matches">${matchItems}</ul>` : ''}
-      ${clubItems ? `<h2>Vereine in dieser Halle</h2><ul class="seo-list">${clubItems}</ul>` : ''}
-      <p class="report-row">Stimmt etwas nicht? <a class="report-link" href="${esc(report)}" target="_blank" rel="noopener">Fehler melden<span class="dss-sr-only"> (öffnet GitHub in einem neuen Tab)</span></a></p>
+      ${upcoming.length ? `<h3>Nächste Spiele</h3>${matchRows}` : ''}
+      ${clubItems ? `<h2>Vereine in dieser Halle</h2>${card(`<ul class="seo-list">${clubItems}</ul>`)}` : ''}
+      <p class="report-row">Stimmt etwas nicht? <a class="report-link dss-link" href="${esc(report)}" target="_blank" rel="noopener">Fehler melden<span class="dss-sr-only"> (öffnet GitHub in einem neuen Tab)</span></a></p>
     </div>
   </main>`;
 

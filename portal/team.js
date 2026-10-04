@@ -130,7 +130,7 @@ function initVenueMap(mapEl, venue) {
     attribution: '© OpenStreetMap, © CARTO',
     maxZoom: 19
   }).addTo(map);
-  const icon = L.divIcon({ className: '', html: '<div class="team-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  const icon = L.divIcon({ className: '', html: '<div class="dss-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
   L.marker([venue.lat, venue.lng], { icon, title: venue.bezeichnung, alt: venue.bezeichnung }).addTo(map);
 }
 
@@ -150,7 +150,7 @@ function renderNext(list, doc, ownClubId, hallIndex) {
   section.appendChild(el('h2', 'next-game-title team-section-title', 'Nächstes Spiel'));
   if (!next) {
     if (!list.length) return null;
-    section.appendChild(el('div', 'team-empty', 'Aktuell sind keine weiteren Spiele geplant.'));
+    section.appendChild(el('div', 'team-empty dss-empty', 'Aktuell sind keine weiteren Spiele geplant.'));
     return section;
   }
 
@@ -201,7 +201,7 @@ function renderTable(doc, teamId) {
   const section = el('div');
   section.appendChild(el('h2', 'team-section-title', 'Tabelle'));
   if (!rows.length) {
-    section.appendChild(el('div', 'team-empty', 'Für diesen Wettbewerb gibt es (noch) keine Tabelle.'));
+    section.appendChild(el('div', 'team-empty dss-empty', 'Für diesen Wettbewerb gibt es (noch) keine Tabelle.'));
     return section;
   }
   const wrap = el('div', 'team-table-wrap dss-frame dss-table-scroll');
@@ -267,7 +267,7 @@ function renderSchedule(list, ligaId) {
   const section = el('div');
   section.appendChild(el('h2', 'team-section-title', 'Spielplan'));
   if (!list.length) {
-    section.appendChild(el('div', 'team-empty', 'Keine Spiele gefunden.'));
+    section.appendChild(el('div', 'team-empty dss-empty', 'Keine Spiele gefunden.'));
     return section;
   }
   const tabs = el('div', 'team-tabs dss-tabs dss-tabs--segmented dss-tabs--md');

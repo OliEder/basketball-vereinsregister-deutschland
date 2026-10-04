@@ -1,4 +1,4 @@
-import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -229,11 +229,11 @@ describe('Ligaseiten', () => {
     expect(html).toContain('<a href="bayern/regensburg/tv-regensburg/">TV Regensburg</a>');
     expect(html).toContain('DJK &lt;b&gt;');
     expect(html).not.toContain('DJK <b>');
-    expect(html).toContain('26.09.2026 18:30');
-    expect(html).toContain('<strong>74:89</strong>');
+    expect(html).toContain('Sa, 26.09.2026 · 18:30');
+    expect(html).toContain('<div class="dss-row-score">74:89</div>');
     expect(html).toContain('Nächste Spiele');
     expect(html).not.toContain('11.10.2026');     // abgesagt
-    expect(html).toContain('<th scope="col">Platz</th>');
+    expect(html).toContain('<th scope="col" class="center">Platz</th>');
     expect(html).toContain('Aktuell: 1. TV Regensburg');
   });
 
@@ -314,7 +314,7 @@ describe('Lokalderbys', () => {
     expect(html).toContain('Nächste Derbys');
     expect(html).toContain('Letzte Derbys');
     expect(html).toContain('<a href="bayern/ulm/a/">TV &lt;A&gt;</a>');
-    expect(html).toContain('<strong>80:70</strong>');
+    expect(html).toContain('<div class="dss-row-score">80:70</div>');
     expect(html).toContain('<a href="liga/bayern/liga-1/">Liga 1</a>');
     expect(html).not.toContain('17.10.2026');
     expect(renderDerbies([], '2026-10-03', {}, {}, 'Ulm')).toBe('');
@@ -376,8 +376,10 @@ describe('Teamseiten', () => {
     expect(html).toContain('id="team-content"');
     expect(html).toContain('Platz 2 (2 Spiele, 1 Siege, 1 Niederlagen)');
     expect(html).toContain('Halle &lt;1&gt;, Regensburg');
-    expect(html).toContain('<span class="seo-note">vs.</span>');
-    expect(html).toContain('<span class="seo-note">@</span>');
+    expect(html).toContain('<span aria-hidden="true">vs.</span><span class="dss-sr-only">Heimspiel gegen</span>');
+    expect(html).toContain('<span aria-hidden="true">@</span><span class="dss-sr-only">Auswärtsspiel bei</span>');
+    expect(html).toContain('<div class="dss-rows">');
+    expect(html).toContain('dss-row dss-row--match');
     expect(html).toContain('<a href="liga/bayern/kreisliga-a/">Kreisliga A</a>');
     expect(html).toContain('"@type":"SportsTeam"');
     expect((html.match(/"@type":"SportsEvent"/g) ?? []).length).toBe(1);       // nur das Spiel mit bestätigter Halle
@@ -521,5 +523,22 @@ describe('Hallenkarte', () => {
     const html = render({});
     expect(html).not.toContain('hall-map');
     expect(html).not.toContain('leaflet');
+  });
+});
+
+describe('Spielplan-Zeile', () => {
+  const m = { kickoffDate: '2026-10-10', kickoffTime: '18:00', result: null };
+  it('Datum wie auf der Teamseite: Wochentag, Datum, Uhrzeit', () => {
+    expect(kickoffText('2026-10-10', '18:00')).toBe('Sa, 10.10.2026 · 18:00');
+    expect(kickoffText('2026-10-10')).toBe('Sa, 10.10.2026');
+    expect(kickoffText(undefined, '18:00')).toBe('18:00');
+  });
+  it('immer Zeit | Paarung | Ergebnis in einem dss-rows-Rahmen', () => {
+    const html = scheduleRows([{ match: m, teams: 'A – B', meta: ['Liga 1'] }]);
+    expect(html).toBe('<div class="dss-rows"><div class="dss-row dss-row--match"><div class="dss-row-when">Sa, 10.10.2026 · 18:00</div><div class="dss-row-main"><span class="dss-row-teams">A – B</span><span class="dss-row-meta">Liga 1</span></div><div class="dss-row-score">–</div></div></div>');
+  });
+  it('abgesagt und Verzicht stehen im Ergebnisfeld', () => {
+    expect(scheduleRows([{ match: { ...m, abgesagt: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">abgesagt</div>');
+    expect(scheduleRows([{ match: { ...m, verzicht: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">Verzicht</div>');
   });
 });

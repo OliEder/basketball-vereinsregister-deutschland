@@ -12,6 +12,6 @@
     attribution: '© OpenStreetMap, © CARTO',
     maxZoom: 19
   }).addTo(map);
-  var icon = L.divIcon({ className: '', html: '<div class="team-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  var icon = L.divIcon({ className: '', html: '<div class="dss-map-pin"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
   L.marker([lat, lng], { icon: icon, title: name, alt: name }).addTo(map);
 })();

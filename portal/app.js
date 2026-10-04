@@ -576,7 +576,7 @@ function favItem(kind, entry, href) {
 
   const rm = document.createElement('button');
   rm.type = 'button';
-  rm.className = 'fav-remove dss-btn dss-btn--ghost dss-btn--sm';
+  rm.className = 'fav-remove dss-btn dss-btn--danger dss-btn--sm';
   rm.textContent = 'Entfernen';
   rm.setAttribute('aria-label', entry.name + ' aus Meine Teams und Vereine entfernen');
   rm.addEventListener('click', () => Favorites.toggleFavorite(kind, entry));
