@@ -9,6 +9,7 @@ import { loadExistingClubs } from './writer';
 import { ClubEntry } from './types';
 
 export interface HallIndexEntry {
+  id: number | null;           // Spielfeld-ID, für den Link auf die Hallenseite
   bezeichnung: string;
   strasse: string | null;
   plz: string | null;
@@ -24,6 +25,7 @@ export function buildHallIndex(clubs: ClubEntry[]): Record<string, HallIndexEntr
     if (!home) continue;
     const h = home.hall;
     index[String(club.clubId)] = {
+      id: h.dbbSpielfeldId ?? null,
       bezeichnung: h.bezeichnung,
       strasse: h.strasse ?? null,
       plz: h.plz ?? null,

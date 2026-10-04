@@ -27,10 +27,11 @@ function logoEl(teamId, name, size) {
 // Adresslisten der statischen Seiten (data/team-url-map.json, data/url-map.json); beide sind optional
 let teamUrlMap = null;
 let clubUrlMap = null;
+let hallUrlMap = null;
 
 async function loadUrlMaps() {
   const get = url => fetch(url).then(r => (r.ok ? r.json() : null)).catch(() => null);
-  [teamUrlMap, clubUrlMap] = await Promise.all([get('data/team-url-map.json'), get('data/url-map.json')]);
+  [teamUrlMap, clubUrlMap, hallUrlMap] = await Promise.all([get('data/team-url-map.json'), get('data/url-map.json'), get('data/hall-url-map.json')]);
 }
 
 function teamLink(teamId, ligaId, text) {
@@ -95,7 +96,16 @@ function renderVenue(venue, isHome, confirmed) {
   const box = el('div', 'next-game-venue');
   const info = el('div', 'next-game-venue-info');
   info.appendChild(el('div', 'next-game-venue-label', confirmed ? 'Spielort' : (isHome ? 'Heimspiel in' : 'Spielort (Halle des Gastgebers)')));
-  info.appendChild(el('div', 'next-game-venue-name', venue.bezeichnung));
+  const nameEl = el('div', 'next-game-venue-name');
+  const hallPath = hallUrlMap && venue.id ? hallUrlMap[String(venue.id)] : null;
+  if (hallPath) {
+    const a = el('a', null, venue.bezeichnung);
+    a.href = hallPath;
+    nameEl.appendChild(a);
+  } else {
+    nameEl.textContent = venue.bezeichnung;
+  }
+  info.appendChild(nameEl);
   const addr = [venue.strasse, [venue.plz, venue.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   if (addr) info.appendChild(el('div', 'next-game-venue-addr', addr));
   if (!confirmed) info.appendChild(el('div', 'next-game-venue-note', 'Voraussichtlich – die genaue Halle steht in der offiziellen Ansetzung.'));

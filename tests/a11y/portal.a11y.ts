@@ -38,6 +38,7 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
   { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.seo-table' },
   { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.seo-list a' },
+  { name: 'Hallenseite', url: '/halle/bayern/muenchen/halle-schwabing/', ready: 'address' },
   { name: 'Team-Seite', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', ready: '.team-table' },
   { name: 'Team ohne Live-Daten', url: '/team.html?id=424242', ready: '.verein-error' }
 ];
@@ -320,4 +321,19 @@ test('Kalender-Abo: Auswahl Alle/Heim/Auswärts, iPhone- und Android-Link, Datei
   summaries(home).forEach(s => expect(s.startsWith('TSV 1861 Nördlingen –')).toBe(true));
   summaries(away).forEach(s => expect(s.endsWith('– TSV 1861 Nördlingen')).toBe(true));
   expect(summaries(home).length + summaries(away).length).toBe(summaries(all).length);
+});
+
+test('Hallenseite: Zähler, Spiele und Vereine; Links von Verein und Team', async ({ page, request }) => {
+  const html = await (await request.get('/halle/bayern/muenchen/halle-schwabing/')).text();
+  expect(html).toContain('<h1>Halle Schwabing</h1>');
+  expect(html).toMatch(/\d+ Spiele? mit dieser Halle gemeldet/);
+  expect(html).toContain('href="bayern/muenchen/mtsv-schwabing/"');
+  expect(await (await request.get('/sitemap.xml')).text()).toContain('/halle/bayern/muenchen/halle-schwabing/');
+  expect(await (await request.get('/data/hall-url-map.json')).json()).toMatchObject({ '500': 'halle/bayern/muenchen/halle-schwabing/' });
+
+  await open(page, '/bayern/muenchen/mtsv-schwabing/', 'light', '.verein-team-card');
+  await expect(page.locator('.verein-hall-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
+
+  await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.next-game-venue');
+  await expect(page.locator('.next-game-venue-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
 });

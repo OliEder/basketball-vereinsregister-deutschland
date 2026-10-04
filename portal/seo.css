@@ -35,3 +35,7 @@
 .seo-matches a { color: var(--dss-link); display: inline-block; padding: 0.7rem 0; }
 .seo-table-wrap:focus-visible { outline: 3px solid var(--dss-link); outline-offset: 2px; }
 .seo-list a { display: inline-flex; align-items: center; min-height: 44px; }
+
+.seo-block-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
+.seo-list-page address { font-style: normal; margin: 0 0 0.5rem; }
+.seo-matches a, .seo-table a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }

@@ -10,7 +10,7 @@ describe('buildHallIndex', () => {
     const idx = buildHallIndex([
       club(1, 'TSV Test', [{ id: 1, dbbSpielfeldId: 1, bezeichnung: 'Sporthalle', strasse: 'A 1', plz: '86720', ort: 'Nördlingen', lat: 48.85, lng: 10.49 }])
     ]);
-    expect(idx['1']).toEqual({ bezeichnung: 'Sporthalle', strasse: 'A 1', plz: '86720', ort: 'Nördlingen', lat: 48.85, lng: 10.49 });
+    expect(idx['1']).toEqual({ id: 1, bezeichnung: 'Sporthalle', strasse: 'A 1', plz: '86720', ort: 'Nördlingen', lat: 48.85, lng: 10.49 });
   });
 
   it('lässt Vereine ohne Halle aus und kennt fehlende Koordinaten als null', () => {
