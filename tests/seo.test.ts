@@ -324,24 +324,35 @@ describe('Ligaseiten', () => {
     expect(EBENEN.map(e => e.key)).toEqual(['Verband', 'Bezirk', 'Kreis', 'Weitere']);
   });
 
-  it('Verbandsseite: Ebene, dann Altersklasse und Geschlecht, darin die Ligakarten', () => {
-    const b = buildLigaPages([liga(1, 'Kreisliga A', { skEbeneName: 'Kreis' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }), liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14' })], {}, BASE, {});
+  it('Verbandsseite: aufklappbar nach Altersklasse, Geschlecht und Ebene, alles im HTML', () => {
+    const b = buildLigaPages([liga(1, 'Kreisliga A', { skEbeneName: 'Kreis' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }), liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14' }), liga(4, 'U14 Damen', { akName: 'U14', geschlecht: 'weiblich', skEbeneName: 'Bezirk' })], {}, BASE, {});
     const html = b.files.get('liga/bayern/index.html')!;
     const at = (x: string): number => html.indexOf(x);
-    expect(at('id="ebene-verband"')).toBeGreaterThan(-1);
-    expect(at('id="ebene-verband"')).toBeLessThan(at('id="ebene-bezirk"'));
-    expect(at('id="ebene-bezirk"')).toBeLessThan(at('id="ebene-kreis"'));
-    expect(html).toContain('<h2 id="ebene-bezirk">Bezirksebene <span class="seo-note">1 Liga</span></h2>');
-    expect(html).toContain('<h3>U14 · männlich</h3>');
-    expect(html).toContain('<h3>Senioren · männlich</h3>');
+    expect(at('id="ak-senioren"')).toBeGreaterThan(-1);
+    expect(at('id="ak-senioren"')).toBeLessThan(at('id="ak-u14"'));                                // Altersklassen in Reihenfolge
+    expect(at('id="ak-senioren-maennlich-verband"')).toBeLessThan(at('id="ak-senioren-maennlich-kreis"'));
+    expect(at('id="ak-u14-maennlich"')).toBeLessThan(at('id="ak-u14-weiblich"'));
+    expect(html).toContain('<h2 id="ak-u14">U14 <span class="seo-note">2 Ligen</span></h2>');
+    expect(html).toContain('<h3 id="ak-u14-weiblich">Weiblich <span class="seo-note">1 Liga</span></h3>');
+    expect(html).toContain('<h4 id="ak-senioren-maennlich-verband">Verbandsebene');
+    expect(html).toContain('<h5 class="liga-card-title">');
+    expect(html.match(/<details class="liga-fold liga-fold--2" open>/g)).toHaveLength(1);             // nur die erste Altersklasse offen
+    expect(html.match(/<details class="liga-fold liga-fold--2">/g)).toHaveLength(1);
+    expect(html).toContain('Kreisliga A');                                                            // auch zugeklappt im HTML
     expect(html).toContain('<li class="liga-card dss-card dss-card--default">');
+  });
+
+  it('Ligakarte zeigt gespielte von allen Spielen, ohne abgesagte', () => {
+    const d = liga(1, 'Kreisliga A', { matches: [{ matchId: 1, result: '80:70' }, { matchId: 2, result: null }, { matchId: 3, result: null }, { matchId: 4, abgesagt: true }] as any });
+    expect(ligaCard(d, 'liga/bayern/kreisliga-a/', {}, {})).toContain('1 von 3 Spielen gespielt');
+    expect(ligaCard(liga(2, 'X', { matches: [{ matchId: 1, result: null }] as any }), 'p/', {}, {})).toContain('0 von 1 Spiel gespielt');
   });
 
   it('Verbandsseite und Übersicht, Weiterleitung bei geändertem Pfad', () => {
     const prev = { '1': { path: 'liga/bayern/alt/', history: [] } };
     const b = buildLigaPages([liga(1, 'Kreisliga A')], prev, BASE, {});
     expect(b.files.get('liga/bayern/alt/index.html')).toContain('http-equiv="refresh"');
-    expect(b.files.get('liga/bayern/index.html')).toContain('Senioren · männlich');
+    expect(b.files.get('liga/bayern/index.html')).toContain('id="ak-senioren"');
     expect(b.files.get('liga/index.html')).toContain('href="liga/bayern/"');
     expect(b.sitemap).toEqual(expect.arrayContaining(['liga/bayern/kreisliga-a/', 'liga/bayern/', 'liga/']));
     expect(b.sitemap).not.toContain('liga/bayern/alt/');
@@ -356,6 +367,7 @@ describe('Ligaseiten', () => {
     expect(land).toContain('<h2 id="ligen">Ligen in Bayern</h2>');
     expect(land).toContain('<li class="liga-card dss-card dss-card--default">');                       // Ligakarte mit Mini-Tabelle
     expect(land).toContain('Weitere Ligen');                                                           // Ebene unbekannt
+    expect(land).toContain('<h3 id="ligen-maennlich">Männlich');                                       // Geschlecht, darunter Ebene
     const ort = b.files.get('bayern/regensburg/index.html')!;
     expect(ort).toContain('Ligen in Regensburg');
     expect(ort).toContain('TV Regensburg: Platz 1');

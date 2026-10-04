@@ -113,13 +113,19 @@
       toggle();
     }
 
-    // Ein Sprung zu einem eingeklappten Block (details) klappt ihn auf
+    // Ein Sprung zu einem Ziel in eingeklappten Blöcken (details) klappt alle umgebenden Blöcke auf
+    function openAround(target) {
+      var d = target && target.closest ? target.closest('details') : null;
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest ? d.parentElement.closest('details') : null; }
+    }
     if (wantsNav) {
       main.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('.dss-pagenav a');
-        var target = a && doc.getElementById(a.getAttribute('href').split('#')[1]);
-        if (target && target.tagName === 'DETAILS') target.open = true;
+        if (a) openAround(doc.getElementById(a.getAttribute('href').split('#')[1]));
       });
+      var fromHash = function () { var id = win.location.hash.slice(1); if (id) openAround(doc.getElementById(decodeURIComponent(id))); };
+      win.addEventListener('hashchange', fromHash);
+      fromHash();
     }
 
     refresh();
