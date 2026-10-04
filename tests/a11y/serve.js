@@ -20,7 +20,13 @@ require('child_process').execFileSync(
   { cwd: root, stdio: 'inherit' }
 );
 
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.xml': 'application/xml', '.txt': 'text/plain' };
+require('child_process').execFileSync(
+  path.join(root, 'node_modules', '.bin', 'ts-node'),
+  ['crawler/ics.ts', `--live=${path.join(site, 'data', 'live')}`, `--out=${path.join(site, 'ics')}`, `--team-urls=${path.join(site, 'data', 'team-url-map.json')}`],
+  { cwd: root, stdio: 'inherit' }
+);
+
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.xml': 'application/xml', '.ics': 'text/calendar; charset=utf-8', '.txt': 'text/plain' };
 http.createServer((req, res) => {
   let file = path.join(site, decodeURIComponent(req.url.split('?')[0]));
   if (file.endsWith(path.sep) || (fs.existsSync(file) && fs.statSync(file).isDirectory())) file = path.join(file, 'index.html');

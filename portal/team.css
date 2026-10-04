@@ -85,3 +85,8 @@
   .next-game-team--home { grid-column: 1; grid-row: 1; }
   .next-game-team--guest { grid-column: 2; grid-row: 1; }
 }
+
+/* Kalender-Abo */
+.team-cal { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.75rem 0 1.25rem; }
+.team-cal-link { display: inline-flex; align-items: center; text-decoration: none; }
+.team-cal-note { flex-basis: 100%; margin: 0; color: var(--dss-mute); font-size: 0.85rem; }

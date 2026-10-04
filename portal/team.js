@@ -299,6 +299,37 @@ function renderLiga(docs, doc, teamId, container, hallIndex) {
   }
 }
 
+/** Kalender-Abo: webcal-Link (Kalender-App öffnet sich), Link zum Kopieren und die Datei selbst. */
+function calendarBlock(teamId) {
+  const url = new URL('ics/' + encodeURIComponent(teamId) + '.ics', document.baseURI);
+  const box = el('div', 'team-cal');
+  box.setAttribute('role', 'group');
+  box.setAttribute('aria-label', 'Spielplan im Kalender');
+
+  const sub = el('a', 'team-cal-link dss-btn dss-btn--secondary dss-btn--sm', 'Kalender abonnieren');
+  sub.href = 'webcal://' + url.host + url.pathname;
+  box.appendChild(sub);
+
+  const file = el('a', 'team-cal-link dss-btn dss-btn--ghost dss-btn--sm', 'Als Datei (.ics)');
+  file.href = url.href;
+  file.setAttribute('download', teamId + '.ics');
+  box.appendChild(file);
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    const copy = el('button', 'team-cal-link dss-btn dss-btn--ghost dss-btn--sm', 'Link kopieren');
+    copy.type = 'button';
+    copy.addEventListener('click', () => {
+      navigator.clipboard.writeText(url.href).then(() => {
+        copy.textContent = 'Link kopiert';
+        setTimeout(() => { copy.textContent = 'Link kopieren'; }, 2000);
+      }).catch(() => {});
+    });
+    box.appendChild(copy);
+  }
+  box.appendChild(el('p', 'team-cal-note', 'Alle Spiele mit Spielort, sobald die Halle gemeldet ist. Wird alle 6 Stunden aktualisiert.'));
+  return box;
+}
+
 async function init() {
   const params = new URLSearchParams(window.location.search);
   // Statische Teamseiten (/<land>/<ort>/<verein>/<team>/) tragen die ID im Head, alte Adressen in der Query
@@ -358,6 +389,7 @@ async function init() {
   const ligaLabel = el('span', null);
   sub.appendChild(ligaLabel);
   content.appendChild(sub);
+  content.appendChild(calendarBlock(teamId));
 
   const body = el('div');
   if (docs.length > 1) {

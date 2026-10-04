@@ -37,6 +37,10 @@ flowchart LR
 
 Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId}`), die Spiele und Tabelle liefert, und schreibt `liga/<id>.json`, `team-index.json` (Team → Ligen) und `index.json`. Zwischen zwei Läufen bleiben die zuletzt gecachten Live-Daten erhalten, auch bei Portaländerungen. Beim Zusammenstellen des Artefakts entsteht außerdem `hall-index.json` (Club-ID → Heimhalle, `crawler/hall-index.ts`); die Team-Seite zeigt damit Spielort und Karte des nächsten Spiels. Der Ort gilt als voraussichtlich: bei Heimspielen die Heimhalle des eigenen Vereins, sonst die des gastgebenden Gegners.
 
+## Kalender-Abo
+
+Jede Team-Seite bietet **Kalender abonnieren** (`webcal://`, öffnet die Kalender-App), **Als Datei (.ics)** und **Link kopieren**. Die Dateien liegen unter `ics/<teamPermanentId>.ics` und werden bei jedem Deploy (alle 6 Stunden) aus den Live-Daten erzeugt (`crawler/ics.ts`). Spiele haben Halle und Koordinaten, sobald der Spielort aus matchInfo bekannt ist; abgesagte Spiele erscheinen als abgesagt.
+
 ## Favoriten und Fehlermeldung
 
 Auf Vereins- und Teamseiten gibt es die Schaltfläche **Merken**; gemerkte Teams und Vereine erscheinen auf der Startseite unter „Meine Teams und Vereine“ (mit dem nächsten Spiel). Sie liegen nur im Browser des Besuchers (`localStorage`), nichts wird übertragen. **Fehler melden** öffnet das GitHub-Formular „Datenfehler melden“ mit vorausgefüllter Seite; es legt ein Issue mit dem Label `daten` an (das Label bitte einmal im Repository anlegen).
