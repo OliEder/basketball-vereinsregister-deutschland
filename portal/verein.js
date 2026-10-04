@@ -4,7 +4,8 @@ const LIVE_BASE = 'data/live/';
 // Live-Daten (Tabellen/Spielpläne) werden vom Deploy-Workflow alle 6 Stunden erzeugt.
 let teamIndexPromise = null;
 const ligaCache = new Map();
-let teamUrlMap = null;   // data/team-url-map.json: Adressen der statischen Teamseiten (optional)
+let teamUrlMap = null;
+let hallUrlMap = null;   // data/hall-url-map.json: Spielfeld-ID → Hallenseite (optional)   // data/team-url-map.json: Adressen der statischen Teamseiten (optional)
 
 function loadTeamIndex() {
   if (!teamIndexPromise) {
@@ -247,7 +248,15 @@ function renderHalls(halls) {
 
     const nameEl = document.createElement('div');
     nameEl.className = 'verein-hall-name';
-    nameEl.textContent = h.bezeichnung;
+    const hallPath = hallUrlMap && h.dbbSpielfeldId ? hallUrlMap[String(h.dbbSpielfeldId)] : null;
+    if (hallPath) {
+      const a = document.createElement('a');
+      a.href = hallPath;
+      a.textContent = h.bezeichnung;
+      nameEl.appendChild(a);
+    } else {
+      nameEl.textContent = h.bezeichnung;
+    }
     item.appendChild(nameEl);
 
     const addrParts = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean);
@@ -414,6 +423,7 @@ async function init() {
 
   if (await redirectToStaticPage(clubId)) return;
   teamUrlMap = await fetch('data/team-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
+  hallUrlMap = await fetch('data/hall-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
 
   try {
     const club = await loadClub(clubId);

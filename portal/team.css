@@ -99,3 +99,5 @@
 .team-cal-help dd { margin: 0.15rem 0 0; color: var(--dss-fg-soft); }
 .team-cal .dss-tabs--segmented { flex-wrap: wrap; max-width: 100%; }
 .team-cal .dss-tab { flex: 1 1 auto; justify-content: center; }
+
+.next-game-venue-name a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }

@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import { HallMap, VenueStore, readJson } from './venues';
 
-export interface HallWithCoords { bezeichnung: string; strasse: string | null; plz: string | null; ort: string | null; lat: number | null; lng: number | null }
+export interface HallWithCoords { id?: number; bezeichnung: string; strasse: string | null; plz: string | null; ort: string | null; lat: number | null; lng: number | null }
 
 /** Spielfeld-ID → Koordinaten aus den Hallen der Vereine. */
 export function coordsByHallId(clubs: Array<{ halls?: Array<{ dbbSpielfeldId?: number | null; lat?: number | null; lng?: number | null }> }>): Map<number, { lat: number; lng: number }> {
@@ -35,7 +35,7 @@ export function applyVenuesToDoc(doc: any, store: VenueStore, halls: HallMap, co
     venues[String(m.matchId)] = entry[0];
     if (!used[String(entry[0])]) {
       const c = coords.get(entry[0]);
-      used[String(entry[0])] = { ...hall, lat: c?.lat ?? null, lng: c?.lng ?? null };
+      used[String(entry[0])] = { id: entry[0], ...hall, lat: c?.lat ?? null, lng: c?.lng ?? null };
     }
   }
   if (Object.keys(venues).length > 0) {

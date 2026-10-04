@@ -10,6 +10,8 @@ import fs from 'fs';
 import path from 'path';
 import { chooseHomeHall } from './club-geocoder';
 import { loadExistingClubs } from './writer';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Report: { url(o: { kind: string; id: string | number; name: string; page: string }): string } = require('../portal/report.js');
 import { ClubEntry } from './types';
 
 export const DEFAULT_BASE = 'https://olieder.github.io/basketball-vereinsregister-deutschland';
@@ -246,7 +248,7 @@ function teamLabel(t: ClubEntry['teams'][number]): string {
   return ak + (g ? ` (${g})` : '') + num;
 }
 
-export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string> }
+export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string> }
 
 export function renderClubPage(ctx: ClubPageContext): string {
   const { base, club, urlPath, cp } = ctx;
@@ -306,7 +308,8 @@ export function renderClubPage(ctx: ClubPageContext): string {
   }).join('');
   const hallItems = (club.halls ?? []).map(h => {
     const addr = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
-    return `<li>${esc(h.bezeichnung)}${addr ? ` – ${esc(addr)}` : ''}</li>`;
+    const hp = h.dbbSpielfeldId ? ctx.hallPaths?.[String(h.dbbSpielfeldId)] : undefined;
+    return `<li>${hp ? `<a href="${hp}">${esc(h.bezeichnung)}</a>` : esc(h.bezeichnung)}${addr ? ` – ${esc(addr)}` : ''}</li>`;
   }).join('');
 
   // Der Inhalt von #verein-content ist die statische Fassung für Suchmaschinen; verein.js ersetzt ihn.
@@ -427,6 +430,8 @@ export function renderSitemap(base: string, paths: string[], lastmod: string): s
 export interface LigaDoc {
   ligaId: number; liganame: string; verbandName: string; akName?: string; geschlecht?: string;
   fetchedAt?: string; tabelle: any[]; matches: any[];
+  venues?: Record<string, number | string>;                                  // matchId → Hallen-ID (apply-venues)
+  halls?: Record<string, { bezeichnung?: string; strasse?: string | null; plz?: string | null; ort?: string | null; lat?: number | null; lng?: number | null }>;
 }
 
 const hasContent = (d: LigaDoc): boolean => (d.tabelle?.length ?? 0) > 0 || (d.matches?.length ?? 0) > 0;
@@ -783,11 +788,171 @@ ${crumbNav(crumbs)}
   });
 }
 
-export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; regions: { state: string; slug: string; clubs: number }[]; hasLiga: boolean }
+// ---- Hallenseiten ------------------------------------------------------------------------------
+
+export interface HallGame { doc: LigaDoc; match: any }
+export interface HallRec {
+  id: string;                       // Spielfeld-ID (dbbSpielfeldId bzw. matchInfo spielfeld)
+  name: string; strasse?: string; plz?: string; ort?: string; lat?: number; lng?: number;
+  clubIds: Set<number>;             // Vereine, bei denen die Halle gemeldet ist (clubs.json)
+  games: HallGame[];                // Spiele mit gemeldeter Halle aus matchInfo
+}
+
+const clean = (v: unknown): string | undefined => (typeof v === 'string' && v.trim() ? v.replace(/\s+/g, ' ').trim() : undefined);
+
+/** Hallen aus clubs.json und matchInfo, über die Spielfeld-ID zusammengeführt; Spiele pro Halle gezählt. */
+export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[]): Map<string, HallRec> {
+  const out = new Map<string, HallRec>();
+  const get = (id: string): HallRec => {
+    let h = out.get(id);
+    if (!h) { h = { id, name: '', clubIds: new Set(), games: [] }; out.set(id, h); }
+    return h;
+  };
+  const fill = (h: HallRec, src: { bezeichnung?: unknown; strasse?: unknown; plz?: unknown; ort?: unknown; lat?: unknown; lng?: unknown }): void => {
+    h.name = h.name || clean(src.bezeichnung) || '';
+    h.strasse = h.strasse ?? clean(src.strasse);
+    h.plz = h.plz ?? clean(src.plz);
+    h.ort = h.ort ?? clean(src.ort);
+    if (h.lat === undefined && typeof src.lat === 'number' && typeof src.lng === 'number') { h.lat = src.lat; h.lng = src.lng; }
+  };
+  for (const c of clubs) {
+    for (const hall of c.halls ?? []) {
+      if (!hall.dbbSpielfeldId) continue;
+      const h = get(String(hall.dbbSpielfeldId));
+      fill(h, hall);
+      h.clubIds.add(c.clubId);
+    }
+  }
+  for (const doc of docs) {
+    for (const m of doc.matches ?? []) {
+      const hallId = doc.venues?.[String(m.matchId)];
+      if (hallId == null) continue;
+      const rec = doc.halls?.[String(hallId)];
+      const h = get(String(hallId));
+      if (rec) fill(h, rec);
+      h.games.push({ doc, match: m });
+    }
+  }
+  for (const [id, h] of out) if (!h.name || !h.ort || (!h.clubIds.size && !h.games.length)) out.delete(id);
+  return out;
+}
+
+/** Land der Halle: häufigstes Land der Vereine, die sie melden, sonst der gastgebenden Vereine ("weitere", wenn unbekannt). */
+export function hallState(h: HallRec, clubById: Map<number, ClubEntry>): { slug: string; name: string } {
+  const votes = new Map<string, { slug: string; name: string; n: number }>();
+  const vote = (c: ClubEntry | undefined): void => {
+    if (!c) return;
+    const st = placeOf(c).state;
+    const v = votes.get(st.slug) ?? { ...st, n: 0 };
+    v.n++;
+    votes.set(st.slug, v);
+  };
+  h.clubIds.forEach(id => vote(clubById.get(id)));
+  if (!votes.size) h.games.forEach(g => vote(clubById.get(Number(g.match.homeTeam?.clubId))));
+  const best = [...votes.values()].sort((a, b) => b.n - a.n || a.slug.localeCompare(b.slug))[0];
+  return best ? { slug: best.slug, name: best.name } : { slug: NO_PLACE.slug, name: NO_PLACE.name };
+}
+
+export function hallWishes(halls: Map<string, HallRec>, clubById: Map<number, ClubEntry>, known: Set<string>): PathWish[] {
+  return [...halls.values()].sort((a, b) => Number(a.id) - Number(b.id)).map(h => {
+    const st = hallState(h, clubById);
+    const place = slugify(mainPlace(h.ort!, known)) || NO_PLACE.slug;
+    return { key: h.id, desired: `halle/${st.slug}/${place}/${slugify(h.name) || `halle-${h.id}`}/` };
+  });
+}
+
+const hallAddress = (h: HallRec): string => [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+
+interface HallPageCtx {
+  base: string; hall: HallRec; path: string; today: string;
+  clubById: Map<number, ClubEntry>; clubPaths: Record<string, string>; teamPaths: Record<string, string>; ligaPaths: Record<number, string>;
+  state: { slug: string; name: string }; placePage?: { name: string; path: string };
+}
+
+export function renderHallPage(ctx: HallPageCtx): string {
+  const { base, hall, path: urlPath, today, clubById, clubPaths, teamPaths, ligaPaths } = ctx;
+  const addr = hallAddress(hall);
+  const crumbs = [
+    { name: 'Vereinsregister', path: '' },
+    ...(ctx.state.slug !== NO_PLACE.slug ? [{ name: ctx.state.name, path: `${ctx.state.slug}/` }] : []),
+    ...(ctx.placePage ? [{ name: ctx.placePage.name, path: ctx.placePage.path }] : []),
+    { name: hall.name, path: urlPath }
+  ];
+
+  const key = (m: any): string => `${m.kickoffDate ?? ''} ${m.kickoffTime ?? ''}`;
+  const games = hall.games.filter(g => !g.match.abgesagt && !g.match.verzicht);
+  const played = games.filter(g => g.match.result).length;
+  const upcoming = games.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= today)
+    .sort((a, b) => key(a.match).localeCompare(key(b.match)));
+
+  // Vereine: gemeldet in clubs.json und/oder Gastgeber von Spielen hier, mit Zahl der Heimspiele
+  const hosts = new Map<number, number>();
+  for (const g of games) {
+    const id = Number(g.match.homeTeam?.clubId);
+    if (id) hosts.set(id, (hosts.get(id) ?? 0) + 1);
+  }
+  const clubIds = new Set<number>([...hall.clubIds, ...hosts.keys()]);
+  const clubRows = [...clubIds].map(id => ({ id, club: clubById.get(id), n: hosts.get(id) ?? 0 }))
+    .filter(r => r.club)
+    .sort((a, b) => b.n - a.n || a.club!.name.localeCompare(b.club!.name, 'de'));
+  const clubItems = clubRows.map(r => {
+    const p = clubPaths[String(r.id)];
+    const name = p ? `<a href="${p}">${esc(r.club!.name)}</a>` : esc(r.club!.name);
+    return `<li>${name}${r.n ? ` <span class="seo-note">${r.n} ${r.n === 1 ? 'Heimspiel' : 'Heimspiele'} hier</span>` : ''}</li>`;
+  }).join('');
+
+  const matchItems = upcoming.slice(0, 10).map(({ doc, match: m }) => {
+    const when = [deDate(m.kickoffDate), m.kickoffTime].filter(Boolean).join(' ');
+    const lp = ligaPaths[doc.ligaId];
+    return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)} <span class="seo-note">${lp ? `<a href="${lp}">${esc(doc.liganame)}</a>` : esc(doc.liganame)}</span></li>`;
+  }).join('');
+
+  const osm = hall.lat !== undefined
+    ? `https://www.openstreetmap.org/?mlat=${hall.lat}&mlon=${hall.lng}#map=17/${hall.lat}/${hall.lng}`
+    : `https://www.openstreetmap.org/search?query=${encodeURIComponent(addr)}`;
+  const report = Report.url({ kind: 'hall', id: hall.id, name: hall.name, page: `${base}/${urlPath}` });
+
+  const counter = games.length
+    ? `In dieser Saison sind bisher ${games.length} ${games.length === 1 ? 'Spiel' : 'Spiele'} mit dieser Halle gemeldet: ${played} gespielt, ${upcoming.length} anstehend.`
+    : 'Für diese Halle ist noch kein Spiel gemeldet. Die Spielorte werden nach und nach aus den Spielinformationen übernommen.';
+
+  const body = `${topbar()}
+  <main class="verein-main">
+${crumbNav(crumbs)}
+    <div id="verein-content" class="seo-list-page">
+      <h1>${esc(hall.name)}</h1>
+      <address>${esc(addr)}</address>
+      <p><a class="seo-block-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ansehen<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>
+      <h2>Spiele in dieser Halle</h2>
+      <p>${esc(counter)}</p>
+      ${matchItems ? `<h3>Nächste Spiele</h3><ul class="seo-matches">${matchItems}</ul>` : ''}
+      ${clubItems ? `<h2>Vereine in dieser Halle</h2><ul class="seo-list">${clubItems}</ul>` : ''}
+      <p class="report-row">Stimmt etwas nicht? <a class="report-link" href="${esc(report)}" target="_blank" rel="noopener">Fehler melden<span class="dss-sr-only"> (öffnet GitHub in einem neuen Tab)</span></a></p>
+    </div>
+  </main>`;
+
+  const place: Record<string, unknown> = {
+    '@context': 'https://schema.org', '@type': 'SportsActivityLocation', name: hall.name, url: `${base}/${urlPath}`,
+    address: { '@type': 'PostalAddress', ...(hall.strasse ? { streetAddress: hall.strasse } : {}), ...(hall.plz ? { postalCode: hall.plz } : {}), addressLocality: hall.ort, addressCountry: 'DE' }
+  };
+  if (hall.lat !== undefined) place.geo = { '@type': 'GeoCoordinates', latitude: hall.lat, longitude: hall.lng };
+
+  return shell({
+    title: `${hall.name}, ${hall.ort} – Basketball | Basketball Vereinsregister`,
+    description: `${hall.name}, ${addr}: Basketball-Spielstätte. ${games.length ? `${games.length} Spiele gemeldet, ` : ''}${clubRows.length ? `${clubRows.length} ${clubRows.length === 1 ? 'Verein' : 'Vereine'}.` : 'Vereine und Spiele.'}`.replace(/, \./, '.'),
+    pagePath: urlPath,
+    base,
+    styles: ['style.css', 'verein.css', 'seo.css'],
+    head: `  <script type="application/ld+json">${jsonLd(place)}</script>\n${breadcrumbLd(base, crumbs)}`,
+    body
+  });
+}
+
+export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap: UrlMap; teamMap: UrlMap; hallMap: UrlMap; regions: { state: string; slug: string; clubs: number }[]; hasLiga: boolean }
 
 export function buildSite(
   clubs: ClubEntry[], previous: UrlMap, base: string, lastmod: string,
-  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap } = { docs: [] }
+  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap; previousHalls?: UrlMap } = { docs: [] }
 ): SiteBuild {
   const urlMap = assignPaths(clubs, previous);
   const clubPaths: Record<string, string> = Object.fromEntries(Object.entries(urlMap).map(([id, e]) => [id, e.path]));
@@ -810,6 +975,18 @@ export function buildSite(
   const teamMap = assignKeyed(wishes, liga.previousTeams ?? {});
   const teamPaths: Record<string, string> = Object.fromEntries(wishes.map(w => [w.key, teamMap[w.key].path]));
   const lb = buildLigaPages(liga.docs, liga.previous ?? {}, base, clubPaths, teamPaths);
+
+  // Hallen: Spielfeld-ID → Seite, aus clubs.json und den Spielorten der Live-Daten
+  const clubById = new Map(clubs.map(c => [c.clubId, c]));
+  const knownPlaces = knownOrte(clubs);
+  const halls = collectHalls(clubs, liga.docs.filter(hasContent));
+  const hallMap = assignKeyed(hallWishes(halls, clubById, knownPlaces), liga.previousHalls ?? {});
+  const hallPaths: Record<string, string> = Object.fromEntries([...halls.keys()].map(id => [id, hallMap[id].path]));
+  const hallsByPlace = new Map<string, HallRec[]>();
+  for (const h of halls.values()) {
+    const key = hallMap[h.id].path.split('/').slice(1, 3).join('/') + '/';      // <land>/<ort>/
+    hallsByPlace.set(key, [...(hallsByPlace.get(key) ?? []), h]);
+  }
   const files = new Map<string, string>();
   const sitemapPaths: string[] = [];
   const known = knownOrte(clubs);
@@ -833,7 +1010,7 @@ export function buildSite(
     // angehängter ID sind Dubletten: erreichbar, aber canonical auf die Hauptseite und nicht in der Sitemap.
     const dupOf = entry.path.replace(new RegExp(`-${club.clubId}/$`), '/');
     const canonicalPath = dupOf !== entry.path && currentPaths.has(dupOf) ? dupOf : undefined;
-    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths }));
+    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths }));
     if (!canonicalPath) sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }
@@ -874,6 +1051,15 @@ export function buildSite(
       .map(({ doc, notes }) => ({ name: doc.liganame, href: lb.paths[doc.ligaId], note: notes.join(' · ') }));
     return [{ heading: `Ligen in ${placeName}`, items }];
   };
+  const placeHallGroup = (placeKey: string, placeName: string): ListGroup[] => {
+    const list = hallsByPlace.get(placeKey);
+    if (!list || !list.length) return [];
+    const items = list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({
+      name: h.name, href: hallPaths[h.id],
+      note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ')
+    }));
+    return [{ heading: `Hallen in ${placeName}`, items }];
+  };
   const stateLigaGroup = (stateSlug: string, stateName: string): ListGroup[] => {
     const v = lb.byVerband.get(stateSlug);
     if (!v) return [];
@@ -904,7 +1090,8 @@ export function buildSite(
         crumbs: [{ name: 'Vereinsregister', path: '' }, { name: sg.state.name, path: `${stateSlug}/` }, { name: pg.name, path: pagePath }],
         groups: [
           { items, alphabetic: true },
-          ...placeLigaGroup(`${stateSlug}/${placeSlug}/`, pg.name)
+          ...placeLigaGroup(`${stateSlug}/${placeSlug}/`, pg.name),
+          ...placeHallGroup(`${stateSlug}/${placeSlug}/`, pg.name)
         ],
         extraHtml: renderDerbies(derbies.get(`${stateSlug}/${placeSlug}/`) ?? [], lastmod, clubPaths, lb.paths, pg.name)
       }));
@@ -939,11 +1126,23 @@ export function buildSite(
     sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }
+  for (const h of halls.values()) {
+    const entry = hallMap[h.id];
+    const [, stateSlug, placeSlug] = entry.path.split('/');
+    const sg = states.get(stateSlug);
+    const pg = sg?.places.get(placeSlug);
+    files.set(`${entry.path}index.html`, renderHallPage({
+      base, hall: h, path: entry.path, today: lastmod, clubById, clubPaths, teamPaths, ligaPaths: lb.paths,
+      state: hallState(h, clubById), placePage: pg ? { name: pg.name, path: `${stateSlug}/${placeSlug}/` } : undefined
+    }));
+    sitemapPaths.push(entry.path);
+    for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
+  }
   for (const [rel, content] of lb.files) files.set(rel, content);
   sitemapPaths.push(...lb.sitemap);
   files.set('sitemap.xml', renderSitemap(base, sitemapPaths, lastmod));
   files.set('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);
-  return { files, urlMap, ligaMap: lb.map, teamMap, regions, hasLiga: lb.docs.size > 0 };
+  return { files, urlMap, ligaMap: lb.map, teamMap, hallMap, regions, hasLiga: lb.docs.size > 0 };
 }
 
 /** Ersetzt in der Startseite den Platzhalter durch Links auf die Regionsseiten (Crawler erreichen so alle Seiten). */
@@ -990,7 +1189,9 @@ function main(): void {
   const previousLiga: UrlMap = ligaMapFile && fs.existsSync(ligaMapFile) ? JSON.parse(fs.readFileSync(ligaMapFile, 'utf-8')) : {};
   const teamMapFile = store ? path.join(store, 'team-map.json') : null;
   const previousTeams: UrlMap = teamMapFile && fs.existsSync(teamMapFile) ? JSON.parse(fs.readFileSync(teamMapFile, 'utf-8')) : {};
-  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams });
+  const hallMapFile = store ? path.join(store, 'hall-map.json') : null;
+  const previousHalls: UrlMap = hallMapFile && fs.existsSync(hallMapFile) ? JSON.parse(fs.readFileSync(hallMapFile, 'utf-8')) : {};
+  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls });
   writeAll(site, build.files);
 
   fs.mkdirSync(path.join(site, 'data'), { recursive: true });
@@ -1002,6 +1203,12 @@ function main(): void {
 
   fs.writeFileSync(path.join(site, 'data', 'team-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.teamMap).map(([id, e]) => [id, e.path]))), 'utf-8');
+  fs.writeFileSync(path.join(site, 'data', 'hall-url-map.json'),
+    JSON.stringify(Object.fromEntries(Object.entries(build.hallMap).map(([id, e]) => [id, e.path]))), 'utf-8');
+  if (hallMapFile) {
+    fs.mkdirSync(store!, { recursive: true });
+    fs.writeFileSync(hallMapFile, JSON.stringify(build.hallMap, null, 1) + '\n', 'utf-8');
+  }
   if (teamMapFile && build.hasLiga) {
     fs.mkdirSync(store!, { recursive: true });
     fs.writeFileSync(teamMapFile, JSON.stringify(build.teamMap, null, 1) + '\n', 'utf-8');

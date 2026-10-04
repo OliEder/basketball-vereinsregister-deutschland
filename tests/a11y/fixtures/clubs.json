@@ -58,7 +58,7 @@
     "halls": [
       {
         "id": 2,
-        "dbbSpielfeldId": 101,
+        "dbbSpielfeldId": 500,
         "bezeichnung": "Halle Schwabing",
         "strasse": "Weg 2",
         "plz": "80801",

@@ -8,7 +8,7 @@
 
   /** @param o {kind: 'club'|'team'|'liga', id, name, page} */
   function url(o) {
-    var noun = o.kind === 'club' ? 'Verein' : o.kind === 'liga' ? 'Liga' : 'Team';
+    var noun = o.kind === 'club' ? 'Verein' : o.kind === 'liga' ? 'Liga' : o.kind === 'hall' ? 'Halle' : 'Team';
     var q = [
       ['template', 'datenfehler.yml'],
       ['title', 'Datenfehler: ' + noun + ' ' + String(o.name || '').slice(0, 80)],

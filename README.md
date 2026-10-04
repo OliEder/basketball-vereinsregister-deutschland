@@ -41,6 +41,10 @@ Der Live-Crawl holt pro Liga **eine** Anfrage (`competition/spielplan/id/{ligaId
 
 Jede Team-Seite bietet das Abo für **alle Spiele**, **nur Heimspiele** oder **nur Auswärtsspiele**, mit den Wegen **iPhone / Mac** (`webcal://`), **Android (Google Kalender)**, **Link kopieren** und **Als Datei (.ics)** sowie einer kurzen Erklärung. Die Dateien liegen unter `ics/<teamPermanentId>.ics`, `-heim.ics` und `-auswaerts.ics` und werden bei jedem Deploy (alle 6 Stunden) aus den Live-Daten erzeugt (`crawler/ics.ts`). Spiele haben Halle und Koordinaten, sobald der Spielort aus matchInfo bekannt ist; abgesagte Spiele erscheinen als abgesagt.
 
+## Hallenseiten
+
+Jede Halle hat eine Seite (`/halle/<land>/<ort>/<halle>/`) mit Adresse, dem **Hallenzähler** (Spiele dieser Saison mit gemeldeter Halle), den nächsten Spielen und den Vereinen, die dort spielen. Die Halle wird über die Spielfeld-ID aus `clubs.json` und den Spielorten (matchInfo) zusammengeführt. Der Zähler ist so vollständig wie die Spielorte im Branch `data-store`.
+
 ## Favoriten und Fehlermeldung
 
 Auf Vereins- und Teamseiten gibt es die Schaltfläche **Merken**; gemerkte Teams und Vereine erscheinen auf der Startseite unter „Meine Teams und Vereine“ (mit dem nächsten Spiel). Sie liegen nur im Browser des Besuchers (`localStorage`), nichts wird übertragen. **Fehler melden** öffnet das GitHub-Formular „Datenfehler melden“ mit vorausgefüllter Seite; es legt ein Issue mit dem Label `daten` an (das Label bitte einmal im Repository anlegen).

@@ -1,4 +1,4 @@
-import { teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -399,5 +399,95 @@ describe('Teamseiten', () => {
   it('ohne Live-Daten entstehen keine Teamseiten', () => {
     const out = buildSite([c], {}, BASE, '2026-10-03');
     expect([...out.files.keys()].some(k => k.endsWith('/herren/index.html'))).toBe(false);
+  });
+});
+
+describe('Hallenseiten', () => {
+  const clubA = club(1, 'TV Ulm', 'Ulm', '0100001', { halls: [{ id: 1, dbbSpielfeldId: 500, bezeichnung: 'Sporthalle Ost', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any] });
+  const clubB = club(2, 'SV Neu-Ulm', 'Neu-Ulm', '0200002', { halls: [{ id: 1, dbbSpielfeldId: 500, bezeichnung: 'Sporthalle Ost', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any, { id: 2, dbbSpielfeldId: 600, bezeichnung: 'Halle Leer', ort: null } as any] });
+  const tm = (id: number, clubId: number, name: string) => ({ teamPermanentId: id, clubId, teamname: name });
+  const mk = (id: number, home: any, guest: any, date: string, result: string | null = null, extra: any = {}) => ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: home, guestTeam: guest, result, ...extra });
+  const doc = (matches: any[], venues: Record<string, number>, halls: any = {}): LigaDoc => ({
+    ligaId: 5, liganame: 'Liga <5>', verbandName: 'Bayern', tabelle: [], matches, venues, halls, fetchedAt: '2026-10-03T00:00:00Z'
+  } as any);
+
+  it('führt Hallen aus clubs.json und matchInfo über die Spielfeld-ID zusammen und lässt unvollständige weg', () => {
+    const d = doc([mk(1, tm(1, 1, 'TV Ulm'), tm(9, 9, 'Gast'), '2026-10-10'), mk(2, tm(9, 9, 'Gast'), tm(1, 1, 'TV Ulm'), '2026-10-11')], { '1': 500, '2': 777 },
+      { '777': { bezeichnung: 'Nur matchInfo', strasse: 'X 2', plz: '80331', ort: 'München' } });
+    const h = collectHalls([clubA, clubB], [d]);
+    expect([...h.keys()].sort()).toEqual(['500', '777']);              // 600 hat keinen Ort
+    expect([...h.get('500')!.clubIds].sort()).toEqual([1, 2]);
+    expect(h.get('500')!.games).toHaveLength(1);
+    expect(h.get('777')!.games).toHaveLength(1);
+    expect(h.get('777')!.clubIds.size).toBe(0);
+  });
+
+  it('Land nach den meldenden Vereinen, sonst nach den Gastgebern, sonst "weitere"', () => {
+    const byId = new Map([[1, clubA], [2, clubB]]);
+    const h = collectHalls([clubA, clubB], []);
+    expect(hallState(h.get('500')!, byId).slug).toBe('baden-wuerttemberg');     // zwei Stimmen: BW (Ulm) und Bayern (Neu-Ulm) → alphabetisch BW
+    const only = collectHalls([], [doc([mk(1, tm(1, 1, 'TV Ulm'), tm(9, 9, 'G'), '2026-10-10')], { '1': 777 }, { '777': { bezeichnung: 'H', ort: 'Ulm' } })]);
+    expect(hallState(only.get('777')!, byId).slug).toBe('baden-wuerttemberg');
+    expect(hallState(only.get('777')!, new Map()).slug).toBe('weitere');
+  });
+
+  it('Pfad halle/<land>/<ort>/<halle>/, gleiche Namen im selben Ort mit ID', () => {
+    const c = club(3, 'Dritter', 'Ulm', '0100003', { halls: [{ id: 1, dbbSpielfeldId: 501, bezeichnung: 'Sporthalle Ost', ort: 'Ulm - Wiblingen' } as any] });
+    const h = collectHalls([clubA, c], []);
+    const w = hallWishes(h, new Map([[1, clubA], [3, c]]), knownOrte([clubA, c]));
+    expect(w.map(x => x.desired)).toEqual(['halle/baden-wuerttemberg/ulm/sporthalle-ost/', 'halle/baden-wuerttemberg/ulm/sporthalle-ost/']);
+    const m = assignKeyed(w);
+    expect(m['500'].path).toBe('halle/baden-wuerttemberg/ulm/sporthalle-ost/');
+    expect(m['501'].path).toBe('halle/baden-wuerttemberg/ulm/sporthalle-ost-501/');
+  });
+
+  it('Seite: Zähler, nächste Spiele, Vereine mit Heimspielen, Fehler-melden-Link, strukturierte Daten', () => {
+    const d = doc([
+      mk(1, tm(1, 1, 'TV Ulm'), tm(9, 9, 'Gast <b>'), '2026-10-10'),
+      mk(2, tm(1, 1, 'TV Ulm'), tm(9, 9, 'Gast <b>'), '2026-09-20', '80:70'),
+      mk(3, tm(1, 1, 'TV Ulm'), tm(9, 9, 'Gast <b>'), '2026-11-01', null, { abgesagt: true })
+    ], { '1': 500, '2': 500, '3': 500 });
+    const hall = collectHalls([clubA, clubB], [d]).get('500')!;
+    const html = renderHallPage({
+      base: BASE, hall, path: 'halle/baden-wuerttemberg/ulm/sporthalle-ost/', today: '2026-10-03', clubById: new Map([[1, clubA], [2, clubB]]),
+      clubPaths: { '1': 'baden-wuerttemberg/ulm/tv-ulm/' }, teamPaths: {}, ligaPaths: { 5: 'liga/bayern/liga-5/' },
+      state: { slug: 'baden-wuerttemberg', name: 'Baden-Württemberg' }, placePage: { name: 'Ulm', path: 'baden-wuerttemberg/ulm/' }
+    });
+    expect(html).toContain('<base href="../../../../">');
+    expect(html).toContain('<h1>Sporthalle Ost</h1>');
+    expect(html).toContain('<address>Weg 1, 89073 Ulm</address>');
+    expect(html).toContain('2 Spiele mit dieser Halle gemeldet: 1 gespielt, 1 anstehend');   // abgesagtes Spiel zählt nicht
+    expect(html).toContain('Gast &lt;b&gt;');
+    expect(html).toContain('<a href="baden-wuerttemberg/ulm/tv-ulm/">TV Ulm</a> <span class="seo-note">2 Heimspiele hier</span>');
+    expect(html).toContain('SV Neu-Ulm');                                           // meldet die Halle, ohne Heimspiel hier
+    expect(html).toContain('openstreetmap.org/search?query=');                       // ohne Koordinaten
+    expect(html).toContain('issues/new?template=datenfehler.yml');
+    expect(html).toContain('"@type":"SportsActivityLocation"');
+    expect(html).toContain('baden-wuerttemberg/ulm/">Ulm</a>');                      // Brotkrumen
+  });
+
+  it('Halle ohne Spiele: ehrlicher Hinweis; mit Koordinaten Karte und geo', () => {
+    const c = club(7, 'TV Test', 'Ulm', '0100007', { halls: [{ id: 1, dbbSpielfeldId: 9, bezeichnung: 'Halle', plz: '89073', ort: 'Ulm', lat: 48.4, lng: 9.99 } as any] });
+    const hall = collectHalls([c], []).get('9')!;
+    const html = renderHallPage({ base: BASE, hall, path: 'halle/baden-wuerttemberg/ulm/halle/', today: '2026-10-03', clubById: new Map([[7, c]]), clubPaths: {}, teamPaths: {}, ligaPaths: {}, state: { slug: 'baden-wuerttemberg', name: 'BW' } });
+    expect(html).toContain('noch kein Spiel gemeldet');
+    expect(html).toContain('mlat=48.4&amp;mlon=9.99');
+    expect(html).toContain('"geo":{"@type":"GeoCoordinates","latitude":48.4,"longitude":9.99}');
+  });
+
+  it('buildSite: Hallenseite, Link von Vereins- und Ortsseite, Weiterleitung bei Umzug, Sitemap', () => {
+    const d = doc([mk(1, tm(1, 1, 'TV Ulm'), tm(9, 9, 'G'), '2026-10-10')], { '1': 500 });
+    const before = buildSite([clubA], {}, BASE, '2026-10-03', { docs: [d] });
+    expect(before.hallMap['500'].path).toBe('halle/baden-wuerttemberg/ulm/sporthalle-ost/');
+    expect(before.files.get('baden-wuerttemberg/ulm/tv-ulm/index.html')).toContain('<a href="halle/baden-wuerttemberg/ulm/sporthalle-ost/">Sporthalle Ost</a>');
+    const ort = before.files.get('baden-wuerttemberg/ulm/index.html')!;
+    expect(ort).toContain('Hallen in Ulm');
+    expect(ort).toContain('Weg 1, 89073 Ulm · 1 Spiel gemeldet');
+    expect(before.files.get('sitemap.xml')).toContain('/halle/baden-wuerttemberg/ulm/sporthalle-ost/<');
+
+    const renamed = { ...clubA, halls: [{ ...clubA.halls[0], bezeichnung: 'Neue Halle Ost' }] } as ClubEntry;
+    const after = buildSite([renamed], before.urlMap, BASE, '2026-10-03', { docs: [{ ...d, halls: {} } as any], previousHalls: before.hallMap });
+    expect(after.hallMap['500'].path).toBe('halle/baden-wuerttemberg/ulm/neue-halle-ost/');
+    expect(after.files.get('halle/baden-wuerttemberg/ulm/sporthalle-ost/index.html')).toContain('http-equiv="refresh"');
   });
 });
