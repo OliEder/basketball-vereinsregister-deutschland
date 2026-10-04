@@ -698,6 +698,10 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Ergänzung Favoritenkarten (ADR-011):* Die Favoriten auf der Startseite sind Karten wie die Teamkarten der Vereinsseite. Ein Team zeigt Liga, Platz, Bilanz, Differenz, Form und das nächste Spiel (Live-Daten, `TeamStats`); ein Verein zeigt Logo, Verband, Hallen und Kennzahlen (Teams, Spiele gespielt/gesamt, Ligen; `TeamLogic.clubSummary` aus den Ligen seiner Teams, Live-Daten zwischengespeichert). Der ganze Karten-Bereich ist der Link, „Entfernen“ (`dss-btn--danger`) liegt darüber.
 
+*Ergänzung Hallenkoordinaten, zweiter Durchgang:* Auswertung nach dem ersten Lauf: von 2 915 Hallen hatten 2 796 eine Koordinate (2 569 auf die Adresse, 227 nur auf den Ort), 97 scheiterten, 22 waren noch offen. Die Fehlschläge hatten meist ein Kürzel oder einen Ortsteil im Ort („HD-Boxberg“, „Essen - Kupferdreh“, „Kirchheim/Teck“). `queriesFor` sucht deshalb zusätzlich „Straße, PLZ“ und zuletzt nur „PLZ“. Mit `QUERY_VERSION` werden Fehlschläge und ungefähre Treffer einmal neu versucht (ungefähre nur mit der Straßensuche, die bestehende Koordinate bleibt sonst). Hat eine Halle weiterhin keine Koordinate, zeigt die Hallenseite die Ortsposition eines Vereins, der sie meldet, als ungefähre Lage (Genauigkeit `ort`, mit Hinweis; nicht für Teaser und Kalender).
+
+*Ergänzung Brotkrumen:* `dss-crumbs` (Variante plain der Navigation-Spec, als Liste) ersetzt die eigenen Brotkrumen der statischen Seiten.
+
 = Kapitel 10: Qualitätsanforderungen
 
 == Quality Tree
