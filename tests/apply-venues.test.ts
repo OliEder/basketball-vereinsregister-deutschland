@@ -37,3 +37,18 @@ describe('applyVenuesToDoc', () => {
     expect(doc.venues).toBeUndefined();
   });
 });
+
+describe('coordsByHallId mit Geokodierung', () => {
+  it('nimmt Treffer auf die Adresse, ignoriert Ortsmitten; clubs.json ändert eine vorhandene Geokodierung nicht', () => {
+    const clubs = [{ halls: [{ dbbSpielfeldId: 1, lat: 1, lng: 1 }, { dbbSpielfeldId: 2 }] }];
+    const m = coordsByHallId(clubs, {
+      '1': { lat: 9, lng: 9, precision: 'adresse' },
+      '3': { lat: 3, lng: 3, precision: 'adresse' },
+      '4': { lat: 4, lng: 4, precision: 'ort' }
+    });
+    expect(m.get(1)).toEqual({ lat: 9, lng: 9 });
+    expect(m.get(3)).toEqual({ lat: 3, lng: 3 });
+    expect(m.has(4)).toBe(false);
+    expect(m.has(2)).toBe(false);
+  });
+});

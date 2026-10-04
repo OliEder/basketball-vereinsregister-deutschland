@@ -1,7 +1,7 @@
 // Statische Seiten für Suchmaschinen: Vereinsseiten unter /<bundesland>/<ort>/<verein>/, Regionsseiten,
 // sitemap.xml, robots.txt und Weiterleitungsseiten für Pfade, die sich geändert haben.
 //
-//   npx ts-node crawler/seo.ts --site=_site [--store=url-store] [--clubs=data/clubs.json] [--base=https://…]
+//   npx ts-node crawler/seo.ts --site=_site [--store=url-store] [--clubs=data/clubs.json] [--coords=data-store/hall-coords.json] [--base=https://…]
 //
 // Die URL-Zuordnung (clubId → Pfad + frühere Pfade) liegt in url-map.json und wird vom Pages-Workflow im
 // Branch "url-store" dauerhaft aufbewahrt. Wandert ein Verein (z. B. weil sich der Ort ändert), bleibt der
@@ -794,6 +794,7 @@ export interface HallGame { doc: LigaDoc; match: any }
 export interface HallRec {
   id: string;                       // Spielfeld-ID (dbbSpielfeldId bzw. matchInfo spielfeld)
   name: string; strasse?: string; plz?: string; ort?: string; lat?: number; lng?: number;
+  precision?: 'adresse' | 'ort';    // Genauigkeit der Koordinate (hall-coords.json); Koordinaten aus clubs.json gelten als genau
   clubIds: Set<number>;             // Vereine, bei denen die Halle gemeldet ist (clubs.json)
   games: HallGame[];                // Spiele mit gemeldeter Halle aus matchInfo
 }
@@ -801,7 +802,7 @@ export interface HallRec {
 const clean = (v: unknown): string | undefined => (typeof v === 'string' && v.trim() ? v.replace(/\s+/g, ' ').trim() : undefined);
 
 /** Hallen aus clubs.json und matchInfo, über die Spielfeld-ID zusammengeführt; Spiele pro Halle gezählt. */
-export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[]): Map<string, HallRec> {
+export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[], geocoded: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }> = {}): Map<string, HallRec> {
   const out = new Map<string, HallRec>();
   const get = (id: string): HallRec => {
     let h = out.get(id);
@@ -833,7 +834,12 @@ export function collectHalls(clubs: ClubEntry[], docs: LigaDoc[]): Map<string, H
       h.games.push({ doc, match: m });
     }
   }
-  for (const [id, h] of out) if (!h.name || !h.ort || (!h.clubIds.size && !h.games.length)) out.delete(id);
+  for (const [id, h] of out) {
+    if (!h.name || !h.ort || (!h.clubIds.size && !h.games.length)) { out.delete(id); continue; }
+    const g = geocoded[id];
+    if (h.lat !== undefined) h.precision = 'adresse';
+    else if (g && typeof g.lat === 'number' && typeof g.lng === 'number') { h.lat = g.lat; h.lng = g.lng; h.precision = g.precision ?? 'adresse'; }
+  }
   return out;
 }
 
@@ -907,7 +913,8 @@ export function renderHallPage(ctx: HallPageCtx): string {
     return `<li>${when ? `<span class="seo-note">${esc(when)}</span> ` : ''}${teamCell(m.homeTeam, clubPaths, teamPaths)} – ${teamCell(m.guestTeam, clubPaths, teamPaths)} <span class="seo-note">${lp ? `<a href="${lp}">${esc(doc.liganame)}</a>` : esc(doc.liganame)}</span></li>`;
   }).join('');
 
-  const osm = hall.lat !== undefined
+  const exact = hall.lat !== undefined && hall.precision !== 'ort';
+  const osm = exact
     ? `https://www.openstreetmap.org/?mlat=${hall.lat}&mlon=${hall.lng}#map=17/${hall.lat}/${hall.lng}`
     : `https://www.openstreetmap.org/search?query=${encodeURIComponent(addr)}`;
   const report = Report.url({ kind: 'hall', id: hall.id, name: hall.name, page: `${base}/${urlPath}` });
@@ -922,7 +929,9 @@ ${crumbNav(crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(hall.name)}</h1>
       <address>${esc(addr)}</address>
-      <p><a class="seo-block-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ansehen<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>
+      ${hall.lat !== undefined ? `<div id="hall-map" class="hall-map" role="region" aria-label="Karte: ${esc(hall.name)}" data-lat="${hall.lat}" data-lng="${hall.lng}" data-zoom="${exact ? 16 : 13}" data-name="${esc(hall.name)}"></div>
+      ${exact ? '' : '<p class="seo-note">Die Position ist nur ungefähr (Ortsmitte), die genaue Lage ist noch nicht erfasst.</p>'}` : ''}
+      <p><a class="seo-block-link" href="${esc(osm)}" target="_blank" rel="noopener">Auf OpenStreetMap ${exact ? 'ansehen' : 'suchen'}<span class="dss-sr-only"> (öffnet in einem neuen Tab)</span></a></p>
       <h2>Spiele in dieser Halle</h2>
       <p>${esc(counter)}</p>
       ${matchItems ? `<h3>Nächste Spiele</h3><ul class="seo-matches">${matchItems}</ul>` : ''}
@@ -935,16 +944,17 @@ ${crumbNav(crumbs)}
     '@context': 'https://schema.org', '@type': 'SportsActivityLocation', name: hall.name, url: `${base}/${urlPath}`,
     address: { '@type': 'PostalAddress', ...(hall.strasse ? { streetAddress: hall.strasse } : {}), ...(hall.plz ? { postalCode: hall.plz } : {}), addressLocality: hall.ort, addressCountry: 'DE' }
   };
-  if (hall.lat !== undefined) place.geo = { '@type': 'GeoCoordinates', latitude: hall.lat, longitude: hall.lng };
+  if (exact) place.geo = { '@type': 'GeoCoordinates', latitude: hall.lat, longitude: hall.lng };
 
   return shell({
     title: `${hall.name}, ${hall.ort} – Basketball | Basketball Vereinsregister`,
     description: `${hall.name}, ${addr}: Basketball-Spielstätte. ${games.length ? `${games.length} Spiele gemeldet, ` : ''}${clubRows.length ? `${clubRows.length} ${clubRows.length === 1 ? 'Verein' : 'Vereine'}.` : 'Vereine und Spiele.'}`.replace(/, \./, '.'),
     pagePath: urlPath,
     base,
-    styles: ['style.css', 'verein.css', 'seo.css'],
+    styles: hall.lat !== undefined ? ['style.css', 'verein.css', 'seo.css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'] : ['style.css', 'verein.css', 'seo.css'],
     head: `  <script type="application/ld+json">${jsonLd(place)}</script>\n${breadcrumbLd(base, crumbs)}`,
-    body
+    body,
+    scripts: hall.lat !== undefined ? `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>\n  <script src="hall.js"></script>\n` : undefined
   });
 }
 
@@ -952,7 +962,7 @@ export interface SiteBuild { files: Map<string, string>; urlMap: UrlMap; ligaMap
 
 export function buildSite(
   clubs: ClubEntry[], previous: UrlMap, base: string, lastmod: string,
-  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap; previousHalls?: UrlMap } = { docs: [] }
+  liga: { docs: LigaDoc[]; previous?: UrlMap; previousTeams?: UrlMap; previousHalls?: UrlMap; hallCoords?: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }> } = { docs: [] }
 ): SiteBuild {
   const urlMap = assignPaths(clubs, previous);
   const clubPaths: Record<string, string> = Object.fromEntries(Object.entries(urlMap).map(([id, e]) => [id, e.path]));
@@ -979,7 +989,7 @@ export function buildSite(
   // Hallen: Spielfeld-ID → Seite, aus clubs.json und den Spielorten der Live-Daten
   const clubById = new Map(clubs.map(c => [c.clubId, c]));
   const knownPlaces = knownOrte(clubs);
-  const halls = collectHalls(clubs, liga.docs.filter(hasContent));
+  const halls = collectHalls(clubs, liga.docs.filter(hasContent), liga.hallCoords ?? {});
   const hallMap = assignKeyed(hallWishes(halls, clubById, knownPlaces), liga.previousHalls ?? {});
   const hallPaths: Record<string, string> = Object.fromEntries([...halls.keys()].map(id => [id, hallMap[id].path]));
   const hallsByPlace = new Map<string, HallRec[]>();
@@ -1189,9 +1199,12 @@ function main(): void {
   const previousLiga: UrlMap = ligaMapFile && fs.existsSync(ligaMapFile) ? JSON.parse(fs.readFileSync(ligaMapFile, 'utf-8')) : {};
   const teamMapFile = store ? path.join(store, 'team-map.json') : null;
   const previousTeams: UrlMap = teamMapFile && fs.existsSync(teamMapFile) ? JSON.parse(fs.readFileSync(teamMapFile, 'utf-8')) : {};
+  const coordsFile = arg('coords');
+  let hallCoords: Record<string, any> = {};
+  try { if (coordsFile) hallCoords = JSON.parse(fs.readFileSync(coordsFile, 'utf-8')).coords ?? {}; } catch { /* ohne Koordinaten */ }
   const hallMapFile = store ? path.join(store, 'hall-map.json') : null;
   const previousHalls: UrlMap = hallMapFile && fs.existsSync(hallMapFile) ? JSON.parse(fs.readFileSync(hallMapFile, 'utf-8')) : {};
-  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls });
+  const build = buildSite(clubs, previous, base, new Date().toISOString().slice(0, 10), { docs: loadLigen(liveDir), previous: previousLiga, previousTeams, previousHalls, hallCoords });
   writeAll(site, build.files);
 
   fs.mkdirSync(path.join(site, 'data'), { recursive: true });
