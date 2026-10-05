@@ -295,6 +295,14 @@
   "path": "liga/hessen/u10-bezirksliga-weiblich/",
   "history": []
  },
+ "52930": {
+  "path": "liga/hessen/bezirksmeisterschaft-maenner-ue40/",
+  "history": []
+ },
+ "52931": {
+  "path": "liga/hessen/bezirksmeisterschaft-maenner-ue35/",
+  "history": []
+ },
  "52933": {
   "path": "liga/hessen/damen-kreisliga/",
   "history": []
@@ -5177,6 +5185,10 @@
  },
  "55572": {
   "path": "liga/bayern/ufr-bezirksoberliga-damen/",
+  "history": []
+ },
+ "55573": {
+  "path": "liga/bayern/ufr-bezirkspokal-herren/",
   "history": []
  },
  "55575": {
