@@ -425,15 +425,26 @@ export function renderListPage(opts: {
       source.push(...a.groups);
     } else source.push(g);
   }
+  const itemsHtml = (g: { items: ListItem[] }): string => g.items.every(i => i.hall)
+    ? `<ul class="hall-cards">${g.items.map(i => hallCardHtml({ name: i.name, href: i.href, card: i.hall! })).join('')}</ul>`
+    : card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`);
   const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
-      ${card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`)}`).join('\n');
+      ${itemsHtml(g)}`).join('\n');
+
+  // Karte oben: Pins aller Hallen mit genauer Koordinate
+  const pins = opts.groups.flatMap(g => g.items)
+    .filter(i => i.hall?.pin)
+    .map(i => ({ kind: 'hall', lat: i.hall!.pin!.lat, lng: i.hall!.pin!.lng, name: i.name, address: i.hall!.address, href: i.href, note: i.hall!.facts.join(' · ') }));
+  const mapHtml = pins.length
+    ? `      <div id="hall-overview-map" class="hall-overview-map" role="region" aria-label="Karte der Hallen"></div>\n      <script type="application/json" id="hall-pins">${jsonLd(pins)}</script>\n`
+    : '';
   const body = `${topbar()}
   <main class="verein-main">
 ${crumbNav(opts.crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(opts.heading)}</h1>
       <p>${esc(opts.intro)}</p>
-${alphabet}
+${mapHtml}${alphabet}
 ${groups}
 ${opts.extraHtml ?? ''}
     </div>
@@ -443,9 +454,10 @@ ${opts.extraHtml ?? ''}
     description: opts.intro,
     pagePath: opts.pagePath,
     base: opts.base,
-    styles: ['style.css', 'verein.css', 'seo.css'],
+    styles: pins.length ? ['style.css', 'verein.css', 'seo.css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'] : ['style.css', 'verein.css', 'seo.css'],
     head: breadcrumbLd(opts.base, opts.crumbs),
-    body
+    body,
+    scripts: pins.length ? `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>\n  <script src="map-tiles.js"></script>\n  <script src="hall-map.js"></script>\n  <script src="hall-list-map.js"></script>\n` : undefined
   });
 }
 
@@ -1288,6 +1300,7 @@ export function buildSite(
     const key = hallMap[h.id].path.split('/').slice(1, 3).join('/') + '/';      // <land>/<ort>/
     hallsByPlace.set(key, [...(hallsByPlace.get(key) ?? []), h]);
   }
+  const hallItem = (h: HallRec): ListItem => ({ name: h.name, href: hallPaths[h.id], hall: hallCardData(h, lastmod) });
   const files = new Map<string, string>();
   const sitemapPaths: string[] = [];
   const known = knownOrte(clubs);
@@ -1353,10 +1366,7 @@ export function buildSite(
   const placeHallGroup = (placeKey: string, placeName: string): ListGroup[] => {
     const list = hallsByPlace.get(placeKey);
     if (!list || !list.length) return [];
-    const items = list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({
-      name: h.name, href: hallPaths[h.id],
-      note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ')
-    }));
+    const items = list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(hallItem);
     return [{ heading: `Hallen in ${placeName}`, items }];
   };
   // Ligen eines Landes: die Seniorenligen nach Ebene, je Liga eine Karte mit Tabellenspitze; die übrigen über den Link auf die Verbandsseite
@@ -1465,7 +1475,7 @@ export function buildSite(
           base, pagePath, title: `Basketballhallen in ${pName} (${sName})`, heading: `Basketballhallen in ${pName}`,
           intro: `${nHallen(list.length)} in ${pName}, ${sName}, mit Adresse, Spielen und den Vereinen, die dort spielen.`,
           crumbs: [...hubBase, { name: sName, path: `halle/${stateSlug}/` }, { name: pName, path: pagePath }],
-          groups: [{ items: list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({ name: h.name, href: hallPaths[h.id], note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ') })) }]
+          groups: [{ items: list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(hallItem) }]
         }));
         sitemapPaths.push(pagePath);
       }

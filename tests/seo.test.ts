@@ -688,7 +688,9 @@ describe('Hallenseiten', () => {
     expect(before.files.get('baden-wuerttemberg/ulm/tv-ulm/index.html')).toContain('<a href="halle/baden-wuerttemberg/ulm/sporthalle-ost/">Sporthalle Ost</a>');
     const ort = before.files.get('baden-wuerttemberg/ulm/index.html')!;
     expect(ort).toContain('Hallen in Ulm');
-    expect(ort).toContain('Weg 1, 89073 Ulm · 1 Spiel gemeldet');
+    expect(ort).toContain('hall-card');
+    expect(ort).toContain('Weg 1, 89073 Ulm');
+    expect(ort).toContain('1 Spiel gemeldet');
     expect(before.files.get('sitemap.xml')).toContain('/halle/baden-wuerttemberg/ulm/sporthalle-ost/<');
 
     // Übersichten: /halle/ → Land → Ort, mit Brotkrumen und in der Sitemap
@@ -816,5 +818,56 @@ describe('Hallen-Cards', () => {
     expect(exact).not.toContain('Keine genaue Adresse');
     expect(exact).not.toContain('<a ');
     expect(exact).not.toContain('hall-card-facts');
+  });
+});
+
+describe('Hallen-Listenseiten', () => {
+  const item = (name: string, hall: any) => ({ name, href: `halle/x/${name}/`, hall });
+  const render = (items: any[]) => renderListPage({ base: BASE, pagePath: 'halle/bayern/ulm/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items }] });
+
+  it('zeigt Hallen als Cards und mit genauen Koordinaten eine Karte samt Pin-Daten', () => {
+    const html = render([
+      item('Halle A', { address: 'Weg 1, 89073 Ulm', exact: true, facts: ['2 Spiele gemeldet'], pin: { lat: 48.4, lng: 9.9 } }),
+      item('Halle B', { address: 'Ulm', exact: false, facts: [] })
+    ]);
+    expect(html).toContain('class="hall-cards"');
+    expect(html.match(/class="hall-card /g)).toHaveLength(2);
+    expect(html).toContain('id="hall-overview-map"');
+    expect(html).toContain('<script type="application/json" id="hall-pins">');
+    const pins = JSON.parse(html.match(/id="hall-pins">(.*?)<\/script>/)![1]);
+    expect(pins).toEqual([{ kind: 'hall', lat: 48.4, lng: 9.9, name: 'Halle A', address: 'Weg 1, 89073 Ulm', href: 'halle/x/Halle A/', note: '2 Spiele gemeldet' }]);
+    expect(html).toContain('hall-map.js');
+    expect(html).toContain('hall-list-map.js');
+    expect(html).toContain('leaflet.css');
+    expect(html).not.toContain('class="seo-list"');
+  });
+
+  it('ohne genaue Koordinate gibt es keine Karte und keine Karten-Skripte', () => {
+    const html = render([item('Halle B', { address: 'Ulm', exact: false, facts: [] })]);
+    expect(html).toContain('hall-card');
+    expect(html).not.toContain('hall-overview-map');
+    expect(html).not.toContain('hall-pins');
+    expect(html).not.toContain('leaflet');
+  });
+
+  it('Namen können nicht aus dem Script-Block ausbrechen', () => {
+    const html = render([item('</script><b>x', { address: '', exact: true, facts: [], pin: { lat: 1, lng: 2 } })]);
+    expect(html).not.toContain('</script><b>');
+    expect(html).toContain('\\u003c/script>');
+  });
+
+  it('andere Listen bleiben unverändert', () => {
+    const html = render([{ name: 'Verein', href: 'x/' }]);
+    expect(html).toContain('class="seo-list"');
+    expect(html).not.toContain('hall-cards');
+  });
+
+  it('buildSite: Ortsliste der Hallen mit Cards und Karte', () => {
+    const c = club(1, 'TV Regensburg', 'Regensburg', '0200001', { halls: [{ id: 1, dbbSpielfeldId: 900, bezeichnung: 'Halle Mitte', strasse: 'Weg 3', plz: '93047', ort: 'Regensburg', lat: 49.01, lng: 12.1 } as any] });
+    const b = buildSite([c], {}, BASE, '2026-10-03');
+    const page = b.files.get('halle/bayern/regensburg/index.html')!;
+    expect(page).toContain('hall-card');
+    expect(page).toContain('Weg 3, 93047 Regensburg');
+    expect(page).toContain('id="hall-overview-map"');
   });
 });
