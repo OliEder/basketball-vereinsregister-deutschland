@@ -1,7 +1,7 @@
 // Koordinaten der Hallen: geokodiert die Hallenadressen aus clubs.json und aus den Spielorten (matchInfo) schrittweise
 // und legt sie im Branch "data-store" ab (hall-coords.json). Hallenseiten, Teaser und Kalender nutzen sie.
 //
-//   npx ts-node crawler/geocode-venues.ts --store=data-store [--clubs=data/clubs.json] [--budget-min=25] [--max=0]
+//   npx tsx crawler/geocode-venues.ts --store=data-store [--clubs=data/clubs.json] [--budget-min=25] [--max=0]
 //
 // Vorgehen je Halle (Suchtexte siehe queriesFor): "Straße, PLZ Ort" und "Straße, PLZ" (Genauigkeit "adresse"), dann
 // "PLZ Ort" und "PLZ" (Genauigkeit "ort", nur ungefähr). Die Suche nur mit PLZ ist nötig, wenn der Ort im Register ein Kürzel

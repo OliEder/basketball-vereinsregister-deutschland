@@ -17,13 +17,13 @@ fs.cpSync(path.join(__dirname, 'fixtures', 'live'), path.join(site, 'data', 'liv
 
 // Statische Vereins- und Regionsseiten wie im Pages-Build (crawler/seo.ts)
 require('child_process').execFileSync(
-  path.join(root, 'node_modules', '.bin', 'ts-node'),
+  path.join(root, 'node_modules', '.bin', 'tsx'),
   ['crawler/seo.ts', `--site=${site}`, `--clubs=${path.join(__dirname, 'fixtures', 'clubs.json')}`],
   { cwd: root, stdio: 'inherit' }
 );
 
 require('child_process').execFileSync(
-  path.join(root, 'node_modules', '.bin', 'ts-node'),
+  path.join(root, 'node_modules', '.bin', 'tsx'),
   ['crawler/ics.ts', `--live=${path.join(site, 'data', 'live')}`, `--out=${path.join(site, 'ics')}`, `--team-urls=${path.join(site, 'data', 'team-url-map.json')}`],
   { cwd: root, stdio: 'inherit' }
 );

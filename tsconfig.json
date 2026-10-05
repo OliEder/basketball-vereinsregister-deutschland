@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "node16",
+    "moduleResolution": "node16",
     "esModuleInterop": true,
     "strict": true,
     "outDir": "./dist",
     "rootDir": "./",
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["node", "vitest/globals"]
   },
   "include": ["crawler/**/*", "api/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist", "portal", "tests/a11y"]

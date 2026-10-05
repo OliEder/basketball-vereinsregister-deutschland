@@ -1,7 +1,7 @@
 // Statische Seiten für Suchmaschinen: Vereinsseiten unter /<bundesland>/<ort>/<verein>/, Regionsseiten,
 // sitemap.xml, robots.txt und Weiterleitungsseiten für Pfade, die sich geändert haben.
 //
-//   npx ts-node crawler/seo.ts --site=_site [--store=url-store] [--clubs=data/clubs.json] [--coords=data-store/hall-coords.json] [--base=https://…]
+//   npx tsx crawler/seo.ts --site=_site [--store=url-store] [--clubs=data/clubs.json] [--coords=data-store/hall-coords.json] [--base=https://…]
 //
 // Die URL-Zuordnung (clubId → Pfad + frühere Pfade) liegt in url-map.json und wird vom Pages-Workflow im
 // Branch "url-store" dauerhaft aufbewahrt. Wandert ein Verein (z. B. weil sich der Ort ändert), bleibt der

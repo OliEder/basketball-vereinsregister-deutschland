@@ -1,4 +1,4 @@
-import { buildTeamIndex, tabelleEntries, toLigaDoc, LigaMeta } from '../crawler/live';
+import { buildTeamIndex, tabelleEntries, toLigaDoc, definedOnly, LigaMeta } from '../crawler/live';
 
 const meta: LigaMeta = { ligaId: 7, liganame: 'Bezirksliga', verbandName: 'Bayern' };
 const team = (id: number) => ({ teamPermanentId: id, teamname: `T${id}`, clubId: id * 10 });
@@ -48,7 +48,6 @@ describe('buildTeamIndex', () => {
 
 describe('definedOnly', () => {
   it('entfernt nur undefined-Felder', () => {
-    const { definedOnly } = require('../crawler/live');
     expect(definedOnly({ a: 1, b: undefined, c: null, d: '' })).toEqual({ a: 1, c: null, d: '' });
   });
 });

@@ -123,7 +123,7 @@ describe('CLI-Pfad', () => {
     fs.mkdirSync(path.join(dir, 'live', 'liga'), { recursive: true });
     fs.writeFileSync(path.join(dir, 'live', 'liga', '9.json'), JSON.stringify(liga));
     const { execFileSync } = require('child_process');
-    execFileSync('npx', ['ts-node', 'crawler/ics.ts', `--live=${path.join(dir, 'live')}`, `--out=${path.join(dir, 'ics')}`], { cwd: path.join(__dirname, '..'), stdio: 'pipe' });
+    execFileSync('npx', ['tsx', 'crawler/ics.ts', `--live=${path.join(dir, 'live')}`, `--out=${path.join(dir, 'ics')}`], { cwd: path.join(__dirname, '..'), stdio: 'pipe' });
     expect(fs.readdirSync(path.join(dir, 'ics')).sort()).toEqual(['1-auswaerts.ics', '1-heim.ics', '1.ics', '2-auswaerts.ics', '2-heim.ics', '2.ics', '3-auswaerts.ics', '3-heim.ics', '3.ics', '4-auswaerts.ics', '4-heim.ics', '4.ics']);
   });
 });

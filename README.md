@@ -67,7 +67,8 @@ Node.js 24 (LTS), wie in allen Workflows; getestet wurde auch mit Node 22.
 
 ```bash
 npm install
-npm test                     # Jest (TypeScript-Crawler) inkl. Portal-Logik
+npm test                     # Vitest (TypeScript-Crawler) inkl. Portal-Logik
+npm run typecheck            # Typprüfung mit TypeScript 7 (nativer Compiler)
 npx tsc --noEmit             # Typprüfung
 ```
 
@@ -143,6 +144,10 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordin
 
 *Veränderungshinweis:* Die Daten wurden bearbeitet: nur die Landflächen der 16 Länder, Geometrie vereinfacht, nach WGS84 (EPSG:4326) umgerechnet und auf Name und Länderschlüssel reduziert. Die Datei erzeugt der Workflow „Länderpolygone (BKG)“ (`crawler/geo-laender.ts`), Quellenvermerk und Änderungshinweis stehen auch in der Datei selbst.
 
+### TypeScript
+
+Typprüfung und Ausführung sind getrennt: `npm run typecheck` prüft die Typen mit dem nativen Compiler von TypeScript 7 (`tsc`). Die Crawler-Skripte laufen über `tsx` und die Tests über Vitest; beide übersetzen die Dateien einzeln (esbuild) und prüfen dabei keine Typen. Die Typprüfung ist deshalb ein eigener Schritt. Zu den Einstellungen in der `tsconfig.json`: `module`/`moduleResolution` stehen auf `node16` (`node10` gibt es in TypeScript 7 nicht mehr), `types` ist ab TypeScript 6 leer und deshalb ausdrücklich `["node", "vitest/globals"]`, und `isolatedModules` passt zur Einzeldatei-Übersetzung.
+
 ## Projektstruktur
 
 ```
@@ -151,7 +156,7 @@ portal/     statisches Frontend (HTML/CSS/JS, kein Build-Schritt)
 api/        optionale lokale Express-API
 data/       clubs.json (versioniert), Schemas, clubs-enriched.json (nur für die API)
 docs/arc42/ Architekturdokumentation (arc42, AsciiDoc)
-tests/      Jest-Tests
+tests/      Vitest-Tests
 .github/    Workflows
 ```
 

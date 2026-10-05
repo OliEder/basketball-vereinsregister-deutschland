@@ -72,7 +72,7 @@ describe('chooseHomeHall', () => {
 
 describe('geocodeClub', () => {
   it('prefers a plausible name hit and labels it with the place from the address', async () => {
-    const geocode = jest.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
+    const geocode = vi.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
     const r = await geocodeClub({ ...base, halls: [hall(1, 'München')] }, geocode);
     expect(r).toEqual({ lat: 1, lng: 2, source: 'name', confidence: 'high', geocodedFrom: 'München' });
     expect(geocode).toHaveBeenCalledWith('FC ANADOLU BAYERN');
@@ -82,7 +82,7 @@ describe('geocodeClub', () => {
   it('rejects a plausible name hit that contradicts the home hall', async () => {
     // "Hamburger SV" wird in Reinbek gefunden, die Hallen liegen aber in Hamburg
     const club = { ...base, name: 'Hamburger SV', halls: [hall(1, 'Hamburg'), hall(2, 'Hamburg')] } as any;
-    const geocode = jest.fn()
+    const geocode = vi.fn()
       .mockResolvedValueOnce(hit(53.51, 10.24, 'Hamburger SV, Reinbek', 'Reinbek'))
       .mockResolvedValueOnce(hit(53.55, 10.0));
     const r = await geocodeClub(club, geocode);
@@ -91,7 +91,7 @@ describe('geocodeClub', () => {
 
   it('keeps a name hit that lies next to the home hall although the place label differs', async () => {
     const club = { ...base, name: 'Postsportverein Remagen e.V.', halls: [hall(1, 'Sinzig')] } as any;
-    const geocode = jest.fn()
+    const geocode = vi.fn()
       .mockResolvedValueOnce(hit(50.5762, 7.2440, 'Postsportverein Remagen, Remagen', 'Remagen'))
       .mockResolvedValueOnce(hit(50.5770, 7.2450));
     const r = await geocodeClub(club, geocode);
@@ -100,16 +100,16 @@ describe('geocodeClub', () => {
   });
 
   it('does not check a name hit without home hall or place label', async () => {
-    const g1 = jest.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
+    const g1 = vi.fn().mockResolvedValueOnce(hit(1, 2, undefined, 'München'));
     expect(await geocodeClub({ ...base, halls: [] }, g1)).toMatchObject({ source: 'name' });
     expect(g1).toHaveBeenCalledTimes(1);
-    const g2 = jest.fn().mockResolvedValueOnce(hit(1, 2));
+    const g2 = vi.fn().mockResolvedValueOnce(hit(1, 2));
     expect(await geocodeClub({ ...base, halls: [hall(1, 'Ulm')] }, g2)).toMatchObject({ source: 'name' });
     expect(g2).toHaveBeenCalledTimes(1);
   });
 
   it('falls back to the home hall when the name hit is implausible', async () => {
-    const geocode = jest.fn()
+    const geocode = vi.fn()
       .mockResolvedValueOnce(hit(9, 9, 'Burg, Irgendwo'))
       .mockResolvedValueOnce(hit(3, 4, 'München'));
     const r = await geocodeClub({ ...base, halls: [hall(1, 'München')] }, geocode);
@@ -118,32 +118,32 @@ describe('geocodeClub', () => {
   });
 
   it('marks a majority decision as low confidence', async () => {
-    const geocode = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce(hit(3, 4));
+    const geocode = vi.fn().mockResolvedValueOnce(null).mockResolvedValueOnce(hit(3, 4));
     const r = await geocodeClub({ ...base, name: 'Foo', halls: [hall(1, 'Aachen', { games: 9 }), hall(2, 'Bonn', { games: 1 })] } as any, geocode);
     expect(r).toMatchObject({ source: 'hall', confidence: 'low', geocodedFrom: 'Aachen' });
   });
 
   it('uses existing hall coordinates without another request', async () => {
-    const geocode = jest.fn().mockResolvedValueOnce(null);
+    const geocode = vi.fn().mockResolvedValueOnce(null);
     const r = await geocodeClub({ ...base, halls: [hall(1, 'Ulm', { lat: 7, lng: 8 })] }, geocode);
     expect(r).toMatchObject({ lat: 7, lng: 8, source: 'hall' });
     expect(geocode).toHaveBeenCalledTimes(1);
   });
 
   it('falls back to the repaired city from the name, but not to abbreviations', async () => {
-    const g1 = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce(hit(5, 6, 'Calw'));
+    const g1 = vi.fn().mockResolvedValueOnce(null).mockResolvedValueOnce(hit(5, 6, 'Calw'));
     expect(await geocodeClub({ ...base, name: 'TSV Calw von 1846 e. V.', halls: [] } as any, g1))
       .toEqual({ lat: 5, lng: 6, source: 'city', confidence: 'low', geocodedFrom: 'Calw' });
     expect(g1).toHaveBeenLastCalledWith('Calw');
 
-    const g2 = jest.fn().mockResolvedValue(null);
+    const g2 = vi.fn().mockResolvedValue(null);
     expect(await geocodeClub({ ...base, name: 'Altrahlstedter MTV 1893 e. V', halls: [] } as any, g2)).toBeNull();
     // Namenssuche, dann die Ortsformen ohne Kürzel; "MTV" selbst wird nie geocodet
     expect(g2.mock.calls.map(c => c[0])).toEqual(['Altrahlstedter MTV 1893', 'Altrahlstedter', 'Altrahlstedt', 'Altrahlstedte']);
   });
 
   it('searches OpenStreetMap with the whole club name, abbreviations included (only e.V. is dropped)', async () => {
-    const g = jest.fn().mockResolvedValue(null);
+    const g = vi.fn().mockResolvedValue(null);
     await geocodeClub({ ...base, name: 'TSV Calw von 1846 e. V.', halls: [] } as any, g);
     expect(g.mock.calls[0][0]).toBe('TSV Calw von 1846');
     g.mockClear();
@@ -152,6 +152,6 @@ describe('geocodeClub', () => {
   });
 
   it('returns null when nothing matches', async () => {
-    expect(await geocodeClub({ ...base, halls: [] }, jest.fn().mockResolvedValue(null))).toBeNull();
+    expect(await geocodeClub({ ...base, halls: [] }, vi.fn().mockResolvedValue(null))).toBeNull();
   });
 });

@@ -2,7 +2,7 @@
 import { BbbClient } from '../crawler/bbb-client';
 
 function makeFetch(responseBody: object, status = 200) {
-  return jest.fn().mockResolvedValue({
+  return vi.fn().mockResolvedValue({
     ok: status >= 200 && status < 300,
     status,
     json: async () => responseBody
@@ -11,7 +11,7 @@ function makeFetch(responseBody: object, status = 200) {
 
 describe('BbbClient', () => {
   it('extracts verbaende from wam data', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({
+    const mockFetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         status: '0',
@@ -29,7 +29,7 @@ describe('BbbClient', () => {
   });
 
   it('returns ligen for a verband', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({
+    const mockFetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         status: '0',
@@ -50,7 +50,7 @@ describe('BbbClient', () => {
   });
 
   it('returns table entries for a liga', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({
+    const mockFetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         status: '0',

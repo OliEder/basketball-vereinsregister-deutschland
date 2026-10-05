@@ -8,10 +8,6 @@ updates:
     groups:
       npm-dependencies:
         patterns: ["*"]
-    ignore:
-      # ts-jest unterstützt TypeScript nur bis Version 6 (peer ">=4.3 <7"); TypeScript 7 lässt `npm ci` an ERESOLVE scheitern.
-      - dependency-name: typescript
-        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
