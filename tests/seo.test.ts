@@ -1,4 +1,4 @@
-import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, hallStats, hallIsExact, hallCardData, hallCardHtml, UrlMap } from '../crawler/seo';
+import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, hallStats, hallIsExact, hallCardData, hallCardHtml, publicHallCoords, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -911,5 +911,16 @@ describe('Vereinsseite: Hallen', () => {
     const b = buildSite([c], {}, BASE, '2026-10-03', { docs: [d] });
     const page = b.files.get(`${b.urlMap['7'].path}index.html`)!;
     expect(page).toContain('1 Spiel des Vereins hier, 1 anstehend');
+  });
+});
+
+describe('publicHallCoords', () => {
+  it('veröffentlicht nur genaue Koordinaten als [lat, lng]', () => {
+    expect(publicHallCoords({
+      '1': { lat: 48.1, lng: 11.5, precision: 'adresse' },
+      '2': { lat: 49, lng: 10, precision: 'ort' },
+      '3': { lat: 50, lng: 8 },
+      '4': { lat: 'x', lng: 1 } as any
+    })).toEqual({ '1': [48.1, 11.5], '3': [50, 8] });
   });
 });

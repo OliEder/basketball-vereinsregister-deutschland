@@ -1154,6 +1154,15 @@ export function hallCardHtml(o: { name: string; href?: string; card: HallCardDat
     + `</div></li>`;
 }
 
+/** data/hall-coords.json für die Live-Ansicht: nur genaue Koordinaten (wie in collectHalls: ohne Angabe gilt "adresse"). */
+export function publicHallCoords(coords: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }>): Record<string, [number, number]> {
+  const out: Record<string, [number, number]> = {};
+  for (const [id, g] of Object.entries(coords)) {
+    if (g && (g.precision ?? 'adresse') === 'adresse' && typeof g.lat === 'number' && typeof g.lng === 'number') out[id] = [g.lat, g.lng];
+  }
+  return out;
+}
+
 interface HallPageCtx {
   base: string; hall: HallRec; path: string; today: string;
   clubById: Map<number, ClubEntry>; clubPaths: Record<string, string>; teamPaths: Record<string, string>; ligaPaths: Record<number, string>;
@@ -1644,6 +1653,7 @@ function main(): void {
 
   fs.writeFileSync(path.join(site, 'data', 'team-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.teamMap).map(([id, e]) => [id, e.path]))), 'utf-8');
+  fs.writeFileSync(path.join(site, 'data', 'hall-coords.json'), JSON.stringify(publicHallCoords(hallCoords)), 'utf-8');
   fs.writeFileSync(path.join(site, 'data', 'hall-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.hallMap).map(([id, e]) => [id, e.path]))), 'utf-8');
   if (hallMapFile) {
