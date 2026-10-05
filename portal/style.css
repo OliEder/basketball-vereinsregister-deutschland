@@ -20,10 +20,15 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--dss-fg); }
 .court-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .court-lines {
   position: absolute; inset: 0;
-  /* hell genug, dass Text über einer Linie den AAA-Kontrast (7:1) hält */
+  /* hell genug, dass auch der gedämpfte 13-px-Text (Brotkrumen) über einer Linie den AAA-Kontrast (7:1) hält */
   background: var(--dss-line);
+  opacity: 0.6;
   -webkit-mask: url("dss/court.svg") center 8% / min(1500px, 170vw) auto no-repeat;
   mask: url("dss/court.svg") center 8% / min(1500px, 170vw) auto no-repeat;
+}
+:root[data-theme="dark"] .court-lines { opacity: 0.4; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .court-lines { opacity: 0.4; }
 }
 /* Handy: das ganze Feld im Hochformat statt eines Ausschnitts */
 @media (max-width: 700px) {
