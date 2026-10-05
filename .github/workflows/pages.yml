@@ -33,9 +33,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -46,7 +46,7 @@ jobs:
       # Live-Daten des letzten erfolgreichen Laufs (damit Deploys bei Portal-Änderungen
       # die Live-Daten behalten, ohne neu zu crawlen).
       - name: Live-Daten aus dem Cache holen
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: _live
           key: live-${{ github.run_id }}
@@ -74,7 +74,7 @@ jobs:
 
       - name: Live-Daten cachen
         if: steps.live.outcome == 'success'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: _live
           key: live-${{ github.run_id }}
@@ -82,7 +82,7 @@ jobs:
       # Spielorte (Branch data-store, vom Workflow "Spielorte" gepflegt); fehlt der Branch, entfallen nur die Hallen
       - name: Spielorte holen
         continue-on-error: true
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: data-store
           path: data-store
@@ -180,7 +180,7 @@ jobs:
 
       - name: Kalender aus dem Cache holen
         continue-on-error: true
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: |
             _site/ics
@@ -196,20 +196,20 @@ jobs:
       - name: Kalender cachen
         if: steps.ics.outcome == 'success' && github.ref == 'refs/heads/main'
         continue-on-error: true
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: |
             _site/ics
             _ics-manifest.json
           key: ics-${{ steps.day.outputs.day }}
 
-      - uses: actions/configure-pages@v4
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: '_site'
 
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v5
         id: deployment
 
       - name: Live-Crawl-Fehler melden
