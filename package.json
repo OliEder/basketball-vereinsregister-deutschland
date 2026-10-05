@@ -43,7 +43,7 @@
     "leaflet": "^1.9.4",
     "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
-    "typescript": "^7.0.2"
+    "typescript": "^5.9.3"
   },
   "jest": {
     "preset": "ts-jest",

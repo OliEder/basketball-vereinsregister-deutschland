@@ -45,7 +45,7 @@ export function createSearchRouter(clubs: MergedClub[]): Router {
   });
 
   router.get('/clubs/:clubId', (req: Request, res: Response) => {
-    const clubId = parseInt(req.params.clubId, 10);
+    const clubId = parseInt(String(req.params.clubId), 10);   // Express 5: Parameter sind string | string[]
     const club = clubs.find(c => c.clubId === clubId);
     if (!club) {
       res.status(404).json({ error: `Verein ${clubId} nicht gefunden.` });
