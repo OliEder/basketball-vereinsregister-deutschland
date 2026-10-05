@@ -27,23 +27,23 @@
     "test:a11y": "npx playwright test"
   },
   "dependencies": {
-    "ajv": "^8.18.0",
+    "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "express": "^4.18.2",
-    "fuse.js": "^7.0.0",
+    "express": "^5.2.1",
+    "fuse.js": "^7.5.0",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.56.1",
-    "@types/express": "^4.17.21",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^22.0.0",
-    "jest": "^29.7.0",
+    "@playwright/test": "^1.63.0",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.6.4",
+    "jest": "^30.5.2",
     "leaflet": "^1.9.4",
-    "ts-jest": "^29.2.3",
+    "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.0"
+    "typescript": "^7.0.2"
   },
   "jest": {
     "preset": "ts-jest",
