@@ -65,3 +65,19 @@
 }
 
 .verein-hall-name a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
+
+/* ── Hallen-Cards (Vereinsseite und Hallen-Listenseiten) ───── */
+.hall-cards { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.hall-card .dss-card-body { display: grid; gap: 0.25rem; }
+.hall-card-name { font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--dss-fg); }
+.hall-card-name a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-link); }
+.hall-card-addr, .hall-card-facts { margin: 0; font-size: 0.85rem; color: var(--dss-mute); }
+.hall-card-facts[hidden] { display: none; }
+.hall-card-note { margin: 0; font-size: 0.85rem; color: var(--dss-mute); font-style: italic; }
+
+/* ── Karte oben auf Hallen-Listenseiten, Legende, Popup ────── */
+.hall-overview-map { height: 340px; border-radius: var(--radius-lg); border: 1px solid var(--dss-line); margin: 0 0 1rem; background: var(--dss-surface-2); }
+.hall-map-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0 0 0.75rem; padding: 0; font-size: 0.85rem; color: var(--dss-mute); }
+.hall-map-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.hall-map-legend .dss-map-pin { flex-shrink: 0; }
+.hall-popup-note { margin: 0.25rem 0 0; font-size: 0.85rem; }
