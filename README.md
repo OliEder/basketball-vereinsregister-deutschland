@@ -63,6 +63,8 @@ Auf Vereins- und Teamseiten gibt es die Schaltfläche **Merken**; gemerkte Teams
 
 ## Lokal entwickeln
 
+Node.js 24 (LTS), wie in allen Workflows; getestet wurde auch mit Node 22.
+
 ```bash
 npm install
 npm test                     # Jest (TypeScript-Crawler) inkl. Portal-Logik
