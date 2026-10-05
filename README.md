@@ -66,6 +66,7 @@ Auf Vereins- und Teamseiten gibt es die Schaltfläche **Merken**; gemerkte Teams
 ```bash
 npm install
 npm test                     # Jest (TypeScript-Crawler) inkl. Portal-Logik
+npm run typecheck            # Typprüfung mit TypeScript 7 (nativer Compiler)
 npx tsc --noEmit             # Typprüfung
 ```
 
@@ -140,6 +141,10 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordin
 *Verwendung:* Prüfung der Vereinskoordinaten und die Länderumrisse auf der Hubseite Vereine (weiter vereinfacht, Quellenvermerk auf der Seite).
 
 *Veränderungshinweis:* Die Daten wurden bearbeitet: nur die Landflächen der 16 Länder, Geometrie vereinfacht, nach WGS84 (EPSG:4326) umgerechnet und auf Name und Länderschlüssel reduziert. Die Datei erzeugt der Workflow „Länderpolygone (BKG)“ (`crawler/geo-laender.ts`), Quellenvermerk und Änderungshinweis stehen auch in der Datei selbst.
+
+### TypeScript
+
+Typprüfung (`npm run typecheck`) und Laufzeit sind getrennt: Der native Compiler von TypeScript 7 (`typescript-native`) prüft die Typen, `ts-node` (Crawler-Skripte) und `ts-jest` (Tests) brauchen aber die JavaScript-Schnittstelle des Compilers, die TypeScript 7 nicht mehr hat. Deshalb ist `typescript` auf `@typescript/typescript6` umgebogen. Sobald `ts-node` und `ts-jest` TypeScript 7 unterstützen, genügt es, `typescript` wieder auf 7 zu setzen und `typescript-native` zu entfernen. In der `tsconfig.json` sind `module`/`moduleResolution` auf `node16` gesetzt (`node10` gibt es in TypeScript 7 nicht mehr), `types` ist ab TypeScript 6 leer und deshalb ausdrücklich `["node", "jest"]`, `isolatedModules` verlangt ts-jest für `node16`.
 
 ## Projektstruktur
 
