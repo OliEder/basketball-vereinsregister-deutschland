@@ -43,6 +43,8 @@ const PAGES: Array<{ name: string; url: string; ready: string; action?: Step }> 
   { name: 'Vereine nach Bundesland', url: '/vereine/', ready: '.region-card' },
   { name: 'Regionsseite Land', url: '/bayern/', ready: '.seo-list a' },
   { name: 'Regionsseite Ort', url: '/bayern/muenchen/', ready: '.seo-list a' },
+  { name: 'Vereinsseite mit Hallenkarte', url: '/bayern/noerdlingen/tsv-1861-noerdlingen/', ready: '#verein-content[data-live] #verein-map .leaflet-marker-icon' },
+  { name: 'Hallen-Liste mit Karte', url: '/halle/bayern/muenchen/', ready: '#hall-overview-map .leaflet-marker-icon' },
   { name: 'Ligaseite', url: '/liga/regionalliga-suedost/1-regionalliga-herren-hr-sued/', ready: 'table.dss-tbl' },
   { name: 'Ligen-Übersicht', url: '/liga/', ready: '.region-card' },
   { name: 'Ligen eines Verbands', url: '/liga/regionalliga-suedost/', ready: '.liga-card a' },
@@ -361,7 +363,7 @@ test('Hallenseite: Zähler, Spiele und Vereine; Links von Verein und Team', asyn
   expect(await (await request.get('/data/hall-url-map.json')).json()).toMatchObject({ '500': 'halle/bayern/muenchen/halle-schwabing/' });
 
   await open(page, '/bayern/muenchen/mtsv-schwabing/', 'light', '#verein-content[data-live] .verein-team-card');
-  await expect(page.locator('.verein-hall-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
+  await expect(page.locator('.hall-card-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
 
   await open(page, '/bayern/noerdlingen/tsv-1861-noerdlingen/herren/', 'light', '.next-game-venue');
   await expect(page.locator('.next-game-venue-name a')).toHaveAttribute('href', /halle\/bayern\/muenchen\/halle-schwabing\/$/);
@@ -492,6 +494,6 @@ test('Hallen-Übersicht: Land und Ort führen zu den Hallenseiten', async ({ pag
   await expect(page).toHaveURL(/\/halle\/[a-z-]+\/$/);
   await page.locator('.seo-list a').first().click();
   await expect(page).toHaveURL(/\/halle\/[a-z-]+\/[a-z-]+\/$/);
-  await page.locator('.seo-list a').first().click();
+  await page.locator('.hall-card-name a').first().click();
   await expect(page.locator('address')).toBeVisible();
 });

@@ -272,6 +272,11 @@
   width: 16px; height: 16px; border-radius: 50%; background: var(--dss-cta-bg); border: 3px solid var(--n-0);
   box-shadow: 0 0 0 2px color-mix(in oklch, var(--ink-1000) 35%, transparent), var(--shadow-md);
 }
+.dss-map-pin--seat {
+  width: 28px; height: 28px; border-radius: 8px; background: var(--ink-1000); color: var(--n-0);
+  display: grid; place-items: center; box-sizing: border-box;
+}
+.dss-map-pin--seat svg { width: 16px; height: 16px; fill: currentColor; }
 
 /* ── Brotkrumen (Navigation-Spec, Variante plain; Liste für Screenreader) ── */
 .dss-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; list-style: none; margin: 0; padding: 0; font-family: var(--font-body); font-size: 13px; color: var(--dss-mute); }

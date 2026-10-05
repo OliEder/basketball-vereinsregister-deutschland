@@ -6,6 +6,7 @@ let teamIndexPromise = null;
 const ligaCache = new Map();
 let teamUrlMap = null;
 let hallUrlMap = null;   // data/hall-url-map.json: Spielfeld-ID → Hallenseite (optional)   // data/team-url-map.json: Adressen der statischen Teamseiten (optional)
+let hallCoords = null;   // data/hall-coords.json: Spielfeld-ID → [lat, lng], nur genaue Adressen (optional)
 
 function loadTeamIndex() {
   if (!teamIndexPromise) {
@@ -168,13 +169,21 @@ function renderLinks(club) {
   return wrap;
 }
 
-function renderMap(halls) {
-  if (!halls || halls.length === 0) return null;
-  const hallsWithCoords = halls.filter(h => h.lat && h.lng);
-  if (hallsWithCoords.length === 0) return null;
+function hallHref(hall) {
+  return hallUrlMap && hall.dbbSpielfeldId ? hallUrlMap[String(hall.dbbSpielfeldId)] || null : null;
+}
+
+// Karte "Spielorte": Hallen mit genauer Koordinate und, wenn belegt, der Vereinssitz mit eigenem Pin.
+function renderMap(club) {
+  const pins = HallLogic.splitHalls(club.halls, hallCoords).onMap.map(e => ({
+    kind: 'hall', lat: e.lat, lng: e.lng, name: e.hall.bezeichnung, address: HallLogic.addressOf(e.hall),
+    href: hallHref(e.hall), note: '', hallId: e.hall.dbbSpielfeldId
+  }));
+  const seat = HallLogic.seatOf(club);
+  if (seat) pins.push({ kind: 'seat', lat: seat.lat, lng: seat.lng, name: seat.name, address: seat.address, href: null, note: '' });
+  if (pins.length === 0) return null;
 
   const section = document.createElement('div');
-
   const title = document.createElement('h2');
   title.className = 'verein-section-title';
   title.textContent = 'Spielorte';
@@ -184,82 +193,105 @@ function renderMap(halls) {
   mapWrap.className = 'verein-map-wrap';
   const mapEl = document.createElement('div');
   mapEl.id = 'verein-map';
+  mapEl.setAttribute('role', 'region');
+  mapEl.setAttribute('aria-label', 'Karte der Spielorte');
   mapWrap.appendChild(mapEl);
   section.appendChild(mapWrap);
 
-  section._initMap = function () {
-    const map = L.map('verein-map', { zoomControl: true });
-    MapTiles.add(L, map);
-
-    const icon = L.divIcon({
-      className: '',
-      html: '<div style="width:12px;height:12px;background:#F76C1B;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5)"></div>',
-      iconSize: [12, 12],
-      iconAnchor: [6, 6]
-    });
-
-    const bounds = [];
-    hallsWithCoords.forEach(h => {
-      const marker = L.marker([h.lat, h.lng], { icon, title: h.bezeichnung, alt: h.bezeichnung });
-      const addrParts = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean);
-      const popup = document.createElement('div');
-      const strong = document.createElement('strong');
-      strong.textContent = h.bezeichnung;
-      popup.appendChild(strong);
-      if (addrParts.length > 0) {
-        popup.appendChild(document.createElement('br'));
-        popup.appendChild(document.createTextNode(addrParts.join(', ')));
-      }
-      marker.bindPopup(popup);
-      marker.addTo(map);
-      bounds.push([h.lat, h.lng]);
-    });
-
-    if (bounds.length === 1) {
-      map.setView(bounds[0], 14);
-    } else {
-      map.fitBounds(bounds, { padding: [30, 30] });
-    }
-  };
-
+  section._pins = pins;
+  section._initMap = function () { if (typeof HallMap === 'undefined' || !HallMap.render(mapEl, pins)) section.remove(); };
   return section;
 }
 
-function renderHalls(halls) {
-  if (!halls || halls.length === 0) return null;
+// Hallen-Cards am Seitenende: Name (Link), Adresse, Spiele des Vereins (kommen nach den Liga-Daten), Vermerk ohne genaue Adresse.
+function renderHalls(club) {
+  if (!club.halls || club.halls.length === 0) return null;
 
   const section = document.createElement('div');
-  section.className = 'verein-halls';
+  const title = document.createElement('h2');
+  title.className = 'verein-section-title';
+  title.textContent = 'Hallen';
+  section.appendChild(title);
 
-  halls.forEach(h => {
-    const item = document.createElement('div');
-    item.className = 'verein-hall-item';
+  const list = document.createElement('ul');
+  list.className = 'hall-cards';
+  section.appendChild(list);
+  section._facts = {};
+
+  club.halls.forEach(h => {
+    const li = document.createElement('li');
+    li.className = 'hall-card dss-card dss-card--default dss-card--pad-md';
+    const body = document.createElement('div');
+    body.className = 'dss-card-body';
+    li.appendChild(body);
 
     const nameEl = document.createElement('div');
-    nameEl.className = 'verein-hall-name';
-    const hallPath = hallUrlMap && h.dbbSpielfeldId ? hallUrlMap[String(h.dbbSpielfeldId)] : null;
-    if (hallPath) {
+    nameEl.className = 'hall-card-name';
+    const href = hallHref(h);
+    if (href) {
       const a = document.createElement('a');
-      a.href = hallPath;
+      a.href = href;
       a.textContent = h.bezeichnung;
       nameEl.appendChild(a);
     } else {
       nameEl.textContent = h.bezeichnung;
     }
-    item.appendChild(nameEl);
+    body.appendChild(nameEl);
 
-    const addrParts = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean);
-    if (addrParts.length > 0) {
-      const addrEl = document.createElement('div');
-      addrEl.className = 'verein-hall-addr';
-      addrEl.textContent = addrParts.join(', ');
-      item.appendChild(addrEl);
+    const address = HallLogic.addressOf(h);
+    if (address) {
+      const addrEl = document.createElement('p');
+      addrEl.className = 'hall-card-addr';
+      addrEl.textContent = address;
+      body.appendChild(addrEl);
     }
 
-    section.appendChild(item);
+    const facts = document.createElement('p');
+    facts.className = 'hall-card-facts';
+    facts.hidden = true;
+    body.appendChild(facts);
+    if (h.dbbSpielfeldId) section._facts[String(h.dbbSpielfeldId)] = facts;
+
+    if (!HallLogic.coordsOf(h, hallCoords)) {
+      const note = document.createElement('p');
+      note.className = 'hall-card-note';
+      note.textContent = 'Keine genaue Adresse, nicht auf der Karte';
+      body.appendChild(note);
+    }
+    list.appendChild(li);
   });
 
   return section;
+}
+
+// Liga-Dokumente aller Teams des Vereins (die Teamkarten laden dieselben, über ligaCache nur einmal).
+async function loadClubDocs(club) {
+  try {
+    const index = await loadTeamIndex();
+    const ids = new Set();
+    (club.teams || []).forEach(t => (index[String(t.teamPermanentId)] || []).forEach(id => ids.add(id)));
+    const settled = await Promise.allSettled([...ids].map(loadLiga));
+    return settled.filter(r => r.status === 'fulfilled').map(r => r.value);
+  } catch (e) {
+    return [];
+  }
+}
+
+// Spiele des Vereins je Halle in Cards und Karten-Popups nachtragen.
+async function fillHallStats(club, mapSection, hallsSection) {
+  const docs = await loadClubDocs(club);
+  if (docs.length === 0) return;
+  const stats = HallLogic.clubHallStats(docs, club.clubId, new Date().toISOString().slice(0, 10));
+  if (hallsSection) {
+    Object.keys(hallsSection._facts).forEach(id => {
+      const text = HallLogic.gamesText(stats[id]);
+      if (text) {
+        hallsSection._facts[id].textContent = text;
+        hallsSection._facts[id].hidden = false;
+      }
+    });
+  }
+  if (mapSection) mapSection._pins.forEach(p => { if (p.kind === 'hall') p.note = HallLogic.gamesText(stats[String(p.hallId)]); });
 }
 
 function renderTeamCard(team, club, hallsById) {
@@ -415,6 +447,7 @@ async function init() {
   if (await redirectToStaticPage(clubId)) return;
   teamUrlMap = await fetch('data/team-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
   hallUrlMap = await fetch('data/hall-url-map.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
+  hallCoords = await fetch('data/hall-coords.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
 
   try {
     const club = await loadClub(clubId);
@@ -428,17 +461,18 @@ async function init() {
     const links = renderLinks(club);
     if (links) content.appendChild(links);
 
-    const mapSection = renderMap(club.halls);
+    const mapSection = renderMap(club);
     if (mapSection) {
       content.appendChild(mapSection);
       mapSection._initMap();
     }
 
-    const hallsSection = renderHalls(club.halls);
-    if (hallsSection) content.appendChild(hallsSection);
-
     const teamsSection = renderTeams(club);
     if (teamsSection) content.appendChild(teamsSection);
+
+    const hallsSection = renderHalls(club);
+    if (hallsSection) content.appendChild(hallsSection);
+    fillHallStats(club, mapSection, hallsSection).catch(() => {});
 
     const report = window.Report ? Report.link({ kind: 'club', id: club.clubId, name: club.name }) : null;
     if (report) {

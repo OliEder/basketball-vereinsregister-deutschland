@@ -13,3 +13,10 @@ regeocode-report.json
 _a11y-site/
 test-results/
 playwright-report/
+
+# Lokale Tool-/Session-Daten
+.playwright-mcp/
+.serena/
+.superpowers/
+docs/superpowers/
+portal/data

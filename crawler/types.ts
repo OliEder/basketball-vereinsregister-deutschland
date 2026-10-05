@@ -61,6 +61,9 @@ export interface ClubEnriched {
     street?: string;
     zip?: string;
     city?: string;
+    /** Koordinate der belegten Adresse; nur damit erscheint der Vereinssitz auf der Karte */
+    lat?: number;
+    lng?: number;
   };
   info?: string;
   halls?: Hall[];
@@ -79,6 +82,9 @@ export interface MergedClub extends ClubEntry {
     street?: string;
     zip?: string;
     city?: string;
+    /** Koordinate der belegten Adresse; nur damit erscheint der Vereinssitz auf der Karte */
+    lat?: number;
+    lng?: number;
   };
   info?: string;
 }

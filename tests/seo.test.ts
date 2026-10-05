@@ -1,4 +1,4 @@
-import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, hallStats, hallIsExact, hallCardData, hallCardHtml, publicHallCoords, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -688,7 +688,9 @@ describe('Hallenseiten', () => {
     expect(before.files.get('baden-wuerttemberg/ulm/tv-ulm/index.html')).toContain('<a href="halle/baden-wuerttemberg/ulm/sporthalle-ost/">Sporthalle Ost</a>');
     const ort = before.files.get('baden-wuerttemberg/ulm/index.html')!;
     expect(ort).toContain('Hallen in Ulm');
-    expect(ort).toContain('Weg 1, 89073 Ulm · 1 Spiel gemeldet');
+    expect(ort).toContain('hall-card');
+    expect(ort).toContain('Weg 1, 89073 Ulm');
+    expect(ort).toContain('1 Spiel gemeldet');
     expect(before.files.get('sitemap.xml')).toContain('/halle/baden-wuerttemberg/ulm/sporthalle-ost/<');
 
     // Übersichten: /halle/ → Land → Ort, mit Brotkrumen und in der Sitemap
@@ -771,5 +773,170 @@ describe('Spielplan-Zeile', () => {
   it('abgesagt und Verzicht stehen im Ergebnisfeld', () => {
     expect(scheduleRows([{ match: { ...m, abgesagt: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">abgesagt</div>');
     expect(scheduleRows([{ match: { ...m, verzicht: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">Verzicht</div>');
+  });
+});
+
+describe('Hallen-Cards', () => {
+  const clubA = club(1, 'TV Ulm', 'Ulm', '0100001', { halls: [{ id: 1, dbbSpielfeldId: 500, bezeichnung: 'Sporthalle <Ost>', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any] });
+  const tm = (id: number, clubId: number) => ({ teamPermanentId: id, clubId, teamname: `T${id}` });
+  const mk = (id: number, home: any, guest: any, date: string, result: string | null = null, extra: any = {}) => ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: home, guestTeam: guest, result, ...extra });
+  const doc = (matches: any[], venues: Record<string, number>): LigaDoc => ({ ligaId: 5, liganame: 'L', verbandName: 'Bayern', tabelle: [], matches, venues, halls: {}, fetchedAt: '2026-10-03T00:00:00Z' } as any);
+  const hallOf = (matches: any[], venues: Record<string, number>, c = clubA) => collectHalls([c], [doc(matches, venues)]).get('500')!;
+
+  it('hallStats zählt gemeldete und anstehende Spiele und die Heim-Teams, ohne Abgesagte und Verzichte', () => {
+    const h = hallOf([
+      mk(1, tm(1, 1), tm(9, 9), '2026-10-10'),
+      mk(2, tm(1, 1), tm(9, 9), '2026-09-20', '80:70'),
+      mk(3, tm(2, 1), tm(9, 9), '2026-11-01', null, { abgesagt: true }),
+      mk(4, tm(3, 1), tm(9, 9), '2026-10-12'),
+      mk(5, tm(4, 1), tm(9, 9), '2026-10-13', null, { verzicht: true })
+    ], { '1': 500, '2': 500, '3': 500, '4': 500, '5': 500 });
+    expect(hallStats(h, '2026-10-03')).toEqual({ games: 3, upcoming: 2, homeTeams: 2 });
+  });
+
+  it('hallIsExact: Koordinate aus Adresse ja, Ortsposition und fehlende nein', () => {
+    expect(hallIsExact({ lat: 48, precision: 'adresse' })).toBe(true);
+    expect(hallIsExact({ lat: 48, precision: 'ort' })).toBe(false);
+    expect(hallIsExact({})).toBe(false);
+  });
+
+  it('hallCardData: Fakten, Adresse und Pin nur bei genauer Koordinate', () => {
+    const h = hallOf([mk(1, tm(1, 1), tm(9, 9), '2026-10-10')], { '1': 500 });
+    expect(hallCardData(h, '2026-10-03')).toEqual({ address: 'Weg 1, 89073 Ulm', exact: false, facts: ['1 Spiel gemeldet', '1 anstehend', '1 Heim-Team'] });
+    h.lat = 48.4; h.lng = 9.9; h.precision = 'adresse';
+    expect(hallCardData(h, '2026-10-03')).toMatchObject({ exact: true, pin: { lat: 48.4, lng: 9.9 } });
+  });
+
+  it('hallCardHtml: Link, Adresse, Fakten, Vermerk ohne genaue Adresse, maskiert', () => {
+    const html = hallCardHtml({ name: 'Sporthalle <Ost>', href: 'halle/x/', card: { address: 'Weg 1, 89073 Ulm', exact: false, facts: ['3 Spiele gemeldet', '1 anstehend'] } });
+    expect(html).toContain('class="hall-card dss-card');
+    expect(html).toContain('<a href="halle/x/">Sporthalle &lt;Ost&gt;</a>');
+    expect(html).toContain('Weg 1, 89073 Ulm');
+    expect(html).toContain('3 Spiele gemeldet · 1 anstehend');
+    expect(html).toContain('Keine genaue Adresse, nicht auf der Karte');
+    const exact = hallCardHtml({ name: 'H', card: { address: '', exact: true, facts: [] } });
+    expect(exact).not.toContain('Keine genaue Adresse');
+    expect(exact).not.toContain('<a ');
+    expect(exact).not.toContain('hall-card-facts');
+  });
+});
+
+describe('Hallen-Listenseiten', () => {
+  const item = (name: string, hall: any) => ({ name, href: `halle/x/${name}/`, hall });
+  const render = (items: any[]) => renderListPage({ base: BASE, pagePath: 'halle/bayern/ulm/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items }] });
+
+  it('zeigt Hallen als Cards und mit genauen Koordinaten eine Karte samt Pin-Daten', () => {
+    const html = render([
+      item('Halle A', { address: 'Weg 1, 89073 Ulm', exact: true, facts: ['2 Spiele gemeldet'], pin: { lat: 48.4, lng: 9.9 } }),
+      item('Halle B', { address: 'Ulm', exact: false, facts: [] })
+    ]);
+    expect(html).toContain('class="hall-cards"');
+    expect(html.match(/class="hall-card /g)).toHaveLength(2);
+    expect(html).toContain('id="hall-overview-map"');
+    expect(html).toContain('<script type="application/json" id="hall-pins">');
+    const pins = JSON.parse(html.match(/id="hall-pins">(.*?)<\/script>/)![1]);
+    expect(pins).toEqual([{ kind: 'hall', lat: 48.4, lng: 9.9, name: 'Halle A', address: 'Weg 1, 89073 Ulm', href: 'halle/x/Halle A/', note: '2 Spiele gemeldet' }]);
+    expect(html).toContain('hall-map.js');
+    expect(html).toContain('hall-list-map.js');
+    expect(html).toContain('leaflet.css');
+    expect(html).not.toContain('class="seo-list"');
+  });
+
+  it('auf Ortsseiten steht die Karte direkt über den Hallen-Cards, nicht über der Vereinsliste', () => {
+    const html = renderListPage({
+      base: BASE, pagePath: 'bayern/ulm/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }],
+      groups: [
+        { heading: 'Vereine in Ulm', items: [{ name: 'Verein', href: 'x/' }] },
+        { heading: 'Hallen in Ulm', items: [item('Halle A', { address: 'Weg 1', exact: true, facts: [], pin: { lat: 48.4, lng: 9.9 } })] }
+      ]
+    });
+    const list = html.indexOf('class="seo-list"');
+    const map = html.indexOf('id="hall-overview-map"');
+    const cards = html.indexOf('class="hall-cards"');
+    expect(list).toBeGreaterThan(-1);
+    expect(list).toBeLessThan(map);
+    expect(map).toBeLessThan(cards);
+  });
+
+  it('ohne genaue Koordinate gibt es keine Karte und keine Karten-Skripte', () => {
+    const html = render([item('Halle B', { address: 'Ulm', exact: false, facts: [] })]);
+    expect(html).toContain('hall-card');
+    expect(html).not.toContain('hall-overview-map');
+    expect(html).not.toContain('hall-pins');
+    expect(html).not.toContain('leaflet');
+  });
+
+  it('Namen können nicht aus dem Script-Block ausbrechen', () => {
+    const html = render([item('</script><b>x', { address: '', exact: true, facts: [], pin: { lat: 1, lng: 2 } })]);
+    expect(html).not.toContain('</script><b>');
+    expect(html).toContain('\\u003c/script>');
+  });
+
+  it('andere Listen bleiben unverändert', () => {
+    const html = render([{ name: 'Verein', href: 'x/' }]);
+    expect(html).toContain('class="seo-list"');
+    expect(html).not.toContain('hall-cards');
+  });
+
+  it('buildSite: Ortsliste der Hallen mit Cards und Karte', () => {
+    const c = club(1, 'TV Regensburg', 'Regensburg', '0200001', { halls: [{ id: 1, dbbSpielfeldId: 900, bezeichnung: 'Halle Mitte', strasse: 'Weg 3', plz: '93047', ort: 'Regensburg', lat: 49.01, lng: 12.1 } as any] });
+    const b = buildSite([c], {}, BASE, '2026-10-03');
+    const page = b.files.get('halle/bayern/regensburg/index.html')!;
+    expect(page).toContain('hall-card');
+    expect(page).toContain('Weg 3, 93047 Regensburg');
+    expect(page).toContain('id="hall-overview-map"');
+  });
+});
+
+describe('Vereinsseite: Hallen', () => {
+  const c = club(7, 'TV Regensburg', 'Regensburg', '0200001', { halls: [
+    { id: 1, dbbSpielfeldId: 100, bezeichnung: 'Halle Mitte', strasse: 'Weg 3', plz: '93047', ort: 'Regensburg', lat: 49.01, lng: 12.1 } as any,
+    { id: 2, dbbSpielfeldId: 200, bezeichnung: 'Halle Rand', ort: 'Regensburg' } as any
+  ] });
+  const path = 'bayern/regensburg/tv-regensburg/';
+
+  it('Hallen-Cards stehen nach den Teams, mit Link, Spielzahlen des Vereins und Vermerk ohne genaue Adresse', () => {
+    const html = renderClubPage({
+      base: BASE, club: c, urlPath: path, cp: placeOf(c), hallPaths: { '100': 'halle/bayern/regensburg/halle-mitte/' },
+      hallInfo: { '100': { exact: true, games: 3, upcoming: 1 }, '200': { exact: false, games: 0, upcoming: 0 } }
+    });
+    expect(html.indexOf('class="verein-teams"')).toBeGreaterThan(-1);
+    expect(html.indexOf('class="hall-cards"')).toBeGreaterThan(html.indexOf('class="verein-teams"'));
+    expect(html).toContain('<a href="halle/bayern/regensburg/halle-mitte/">Halle Mitte</a>');
+    expect(html).toContain('3 Spiele des Vereins hier, 1 anstehend');
+    expect(html.match(/Keine genaue Adresse, nicht auf der Karte/g)).toHaveLength(1);     // nur Halle Rand
+    expect(html).not.toContain('class="seo-list"');
+  });
+
+  it('ohne Zusatzdaten bestimmt die Koordinate in clubs.json, ob die Adresse genau ist', () => {
+    const html = renderClubPage({ base: BASE, club: c, urlPath: path, cp: placeOf(c) });
+    expect(html.match(/Keine genaue Adresse, nicht auf der Karte/g)).toHaveLength(1);
+  });
+
+  it('lädt die Karten-Skripte der Live-Ansicht', () => {
+    const html = renderClubPage({ base: BASE, club: c, urlPath: path, cp: placeOf(c) });
+    expect(html.indexOf('hall-logic.js')).toBeGreaterThan(-1);
+    expect(html.indexOf('hall-map.js')).toBeGreaterThan(html.indexOf('map-tiles.js'));
+    expect(html.indexOf('verein.js')).toBeGreaterThan(html.indexOf('hall-map.js'));
+  });
+
+  it('buildSite zählt die Spiele des Vereins je Halle', () => {
+    const t = (id: number, clubId: number) => ({ teamPermanentId: id, clubId, teamname: `T${id}` });
+    const m = (id: number, h: number, g: number, date: string) => ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: t(h * 10, h), guestTeam: t(g * 10, g), result: null });
+    const d = { ligaId: 5, liganame: 'L', verbandName: 'Bayern', tabelle: [], matches: [m(1, 7, 9, '2026-10-10'), m(2, 8, 9, '2026-10-11')], venues: { '1': 100, '2': 100 }, halls: {}, fetchedAt: '2026-10-03T00:00:00Z' } as any;
+    const b = buildSite([c], {}, BASE, '2026-10-03', { docs: [d] });
+    const page = b.files.get(`${b.urlMap['7'].path}index.html`)!;
+    expect(page).toContain('1 Spiel des Vereins hier, 1 anstehend');
+  });
+});
+
+describe('publicHallCoords', () => {
+  it('veröffentlicht nur genaue Koordinaten als [lat, lng]', () => {
+    expect(publicHallCoords({
+      '1': { lat: 48.1, lng: 11.5, precision: 'adresse' },
+      '2': { lat: 49, lng: 10, precision: 'ort' },
+      '3': { lat: 50, lng: 8 },
+      '4': { lat: 'x', lng: 1 } as any
+    })).toEqual({ '1': [48.1, 11.5], '3': [50, 8] });
   });
 });

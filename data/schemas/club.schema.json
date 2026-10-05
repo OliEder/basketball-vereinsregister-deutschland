@@ -25,7 +25,9 @@
       "properties": {
         "street": { "type": "string" },
         "zip": { "type": "string" },
-        "city": { "type": "string" }
+        "city": { "type": "string" },
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lng": { "type": "number", "minimum": -180, "maximum": 180 }
       }
     },
     "info": { "type": "string" },

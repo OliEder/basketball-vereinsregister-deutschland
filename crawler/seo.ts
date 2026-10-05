@@ -19,6 +19,8 @@ import { stateName, stateOf } from './region';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamLogic: any = require('../portal/team-logic.js');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const HallLogic: any = require('../portal/hall-logic.js');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamStats: any = require('../portal/team-stats.js');
 import { Outline, outlinesFor, unionOutline } from './outline';
 
@@ -279,7 +281,8 @@ const akSortKey = (ak?: string): number => { const i = AK_ORDER.indexOf(ak ?? ''
 /** Liga und Kennzahlen eines Teams für die Teamkarte der Vereinsseite. */
 export interface ClubTeamInfo { liga: LigaDoc | null; summary: unknown }
 
-export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string>; teamInfo?: Record<string, ClubTeamInfo> }
+export interface ClubHallInfo { exact: boolean; games: number; upcoming: number }
+export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string>; hallInfo?: Record<string, ClubHallInfo>; teamInfo?: Record<string, ClubTeamInfo> }
 
 export function renderClubPage(ctx: ClubPageContext): string {
   const { base, club, urlPath, cp } = ctx;
@@ -348,10 +351,12 @@ export function renderClubPage(ctx: ClubPageContext): string {
     return `<div class="verein-team-card dss-card dss-card--hoverable"><div class="verein-team-header"><div class="verein-team-label">${tp ? `<a class="verein-team-link" href="${tp}">${label}<span class="dss-sr-only"> – Tabelle und Spielplan</span></a>` : label}</div></div><div class="verein-team-liga">${ligaHtml}</div>${stats ? `<div class="verein-team-stats">${stats}</div>` : ''}${training}${tp ? '<div class="verein-team-cta" aria-hidden="true">Tabelle &amp; Spielplan ansehen →</div>' : ''}</div>`;
   };
   const teamCards = teams.map(teamCard).join('');
-  const hallItems = (club.halls ?? []).map(h => {
-    const addr = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
-    const hp = h.dbbSpielfeldId ? ctx.hallPaths?.[String(h.dbbSpielfeldId)] : undefined;
-    return `<li>${hp ? `<a href="${hp}">${esc(h.bezeichnung)}</a>` : esc(h.bezeichnung)}${addr ? ` – ${esc(addr)}` : ''}</li>`;
+  const hallCards = (club.halls ?? []).map(h => {
+    const id = h.dbbSpielfeldId ? String(h.dbbSpielfeldId) : '';
+    const info = id ? ctx.hallInfo?.[id] : undefined;
+    const exact = info?.exact ?? (typeof h.lat === 'number' && typeof h.lng === 'number');
+    const facts = info && info.games ? [HallLogic.gamesText({ games: info.games, upcoming: info.upcoming })] : [];
+    return hallCardHtml({ name: h.bezeichnung, href: id ? ctx.hallPaths?.[id] : undefined, card: { address: HallLogic.addressOf(h), exact, facts } });
   }).join('');
 
   // Der Inhalt von #verein-content ist die statische Fassung für Suchmaschinen; verein.js ersetzt ihn.
@@ -362,7 +367,7 @@ ${crumbNav(crumbs)}
       <h1>${esc(club.name)}</h1>
       ${where ? `<p>${esc(where)}</p>` : ''}
       ${teamCards ? `<h2 class="verein-section-title">Teams (${teams.length})</h2><div class="verein-teams">${teamCards}</div>` : ''}
-      ${hallItems ? `<h2>Hallen</h2>${card(`<ul class="seo-list">${hallItems}</ul>`)}` : ''}
+      ${hallCards ? `<h2 class="verein-section-title">Hallen</h2><ul class="hall-cards">${hallCards}</ul>` : ''}
       <noscript><p class="seo-note">Karte, Favoriten und aktuelle Live-Daten brauchen JavaScript.</p></noscript>
     </div>
   </main>`;
@@ -378,6 +383,8 @@ ${crumbNav(crumbs)}
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="map-tiles.js"></script>
+  <script src="hall-logic.js"></script>
+  <script src="hall-map.js"></script>
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
@@ -389,7 +396,7 @@ ${crumbNav(crumbs)}
 
 export interface ListGroup { heading?: string; items: ListItem[]; alphabetic?: boolean }
 
-export interface ListItem { name: string; href: string; note?: string }
+export interface ListItem { name: string; href: string; note?: string; hall?: HallCardData }
 
 export const ALPHABET_MIN = 30;
 
@@ -423,8 +430,26 @@ export function renderListPage(opts: {
       source.push(...a.groups);
     } else source.push(g);
   }
-  const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
-      ${card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`)}`).join('\n');
+  const itemsHtml = (g: { items: ListItem[] }): string => g.items.every(i => i.hall)
+    ? `<ul class="hall-cards">${g.items.map(i => hallCardHtml({ name: i.name, href: i.href, card: i.hall! })).join('')}</ul>`
+    : card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`);
+  // Karte: Pins aller Hallen mit genauer Koordinate
+  const pins = opts.groups.flatMap(g => g.items)
+    .filter(i => i.hall?.pin)
+    .map(i => ({ kind: 'hall', lat: i.hall!.pin!.lat, lng: i.hall!.pin!.lng, name: i.name, address: i.hall!.address, href: i.href, note: i.hall!.facts.join(' · ') }));
+  const mapHtml = pins.length
+    ? `      <div id="hall-overview-map" class="hall-overview-map" role="region" aria-label="Karte der Hallen"></div>\n      <script type="application/json" id="hall-pins">${jsonLd(pins)}</script>\n`
+    : '';
+  // Hallenkarte direkt über den Cards der ersten reinen Hallen-Gruppe, nur einmal
+  let mapPlaced = false;
+  const groups = source.map(g => {
+    const isHall = g.items.length > 0 && g.items.every(i => i.hall);
+    const mapHere = isHall && !mapPlaced;
+    if (mapHere) mapPlaced = true;
+    return `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
+${mapHere ? mapHtml : ''}      ${itemsHtml(g)}`;
+  }).join('\n');
+
   const body = `${topbar()}
   <main class="verein-main">
 ${crumbNav(opts.crumbs)}
@@ -441,9 +466,10 @@ ${opts.extraHtml ?? ''}
     description: opts.intro,
     pagePath: opts.pagePath,
     base: opts.base,
-    styles: ['style.css', 'verein.css', 'seo.css'],
+    styles: pins.length ? ['style.css', 'verein.css', 'seo.css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'] : ['style.css', 'verein.css', 'seo.css'],
     head: breadcrumbLd(opts.base, opts.crumbs),
-    body
+    body,
+    scripts: pins.length ? `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>\n  <script src="map-tiles.js"></script>\n  <script src="hall-map.js"></script>\n  <script src="hall-list-map.js"></script>\n` : undefined
   });
 }
 
@@ -1099,6 +1125,51 @@ export function hallWishes(halls: Map<string, HallRec>, clubById: Map<number, Cl
 
 const hallAddress = (h: HallRec): string => [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
 
+/** Genaue Position (aus Adresse oder clubs.json); eine Ortsposition gilt als ungefähr. */
+export const hallIsExact = (h: { lat?: number; precision?: 'adresse' | 'ort' }): boolean => h.lat !== undefined && h.precision !== 'ort';
+
+/** Kennzahlen einer Halle: gemeldete Spiele, anstehende (ab `today`) und Heim-Teams; ohne Abgesagte und Verzichte. */
+export function hallStats(h: HallRec, today: string): { games: number; upcoming: number; homeTeams: number } {
+  const games = h.games.filter(g => !g.match.abgesagt && !g.match.verzicht);
+  const upcoming = games.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= today).length;
+  const homeTeams = new Set(games.map(g => g.match.homeTeam?.teamPermanentId).filter(id => id != null)).size;
+  return { games: games.length, upcoming, homeTeams };
+}
+
+/** Angaben für eine Hallen-Card (Listenseiten) und für den Pin auf der Karte. */
+export interface HallCardData { address: string; exact: boolean; facts: string[]; pin?: { lat: number; lng: number } }
+
+export function hallCardData(h: HallRec, today: string): HallCardData {
+  const s = hallStats(h, today);
+  const exact = hallIsExact(h);
+  const facts = [
+    s.games ? `${s.games} ${s.games === 1 ? 'Spiel' : 'Spiele'} gemeldet` : '',
+    s.upcoming ? `${s.upcoming} anstehend` : '',
+    s.homeTeams ? `${s.homeTeams} ${s.homeTeams === 1 ? 'Heim-Team' : 'Heim-Teams'}` : ''
+  ].filter(Boolean);
+  return { address: hallAddress(h), exact, facts, ...(exact ? { pin: { lat: h.lat!, lng: h.lng! } } : {}) };
+}
+
+/** Eine Hallen-Card: Name (Link auf die Hallenseite, wenn es sie gibt), Adresse, Fakten, Vermerk ohne genaue Adresse. */
+export function hallCardHtml(o: { name: string; href?: string; card: HallCardData }): string {
+  const name = o.href ? `<a href="${esc(o.href)}">${esc(o.name)}</a>` : esc(o.name);
+  return `<li class="hall-card dss-card dss-card--default dss-card--pad-md"><div class="dss-card-body">`
+    + `<div class="hall-card-name">${name}</div>`
+    + (o.card.address ? `<p class="hall-card-addr">${esc(o.card.address)}</p>` : '')
+    + (o.card.facts.length ? `<p class="hall-card-facts">${esc(o.card.facts.join(' · '))}</p>` : '')
+    + (o.card.exact ? '' : '<p class="hall-card-note">Keine genaue Adresse, nicht auf der Karte</p>')
+    + `</div></li>`;
+}
+
+/** data/hall-coords.json für die Live-Ansicht: nur genaue Koordinaten (wie in collectHalls: ohne Angabe gilt "adresse"). */
+export function publicHallCoords(coords: Record<string, { lat: number; lng: number; precision?: 'adresse' | 'ort' }>): Record<string, [number, number]> {
+  const out: Record<string, [number, number]> = {};
+  for (const [id, g] of Object.entries(coords)) {
+    if (g && (g.precision ?? 'adresse') === 'adresse' && typeof g.lat === 'number' && typeof g.lng === 'number') out[id] = [g.lat, g.lng];
+  }
+  return out;
+}
+
 interface HallPageCtx {
   base: string; hall: HallRec; path: string; today: string;
   clubById: Map<number, ClubEntry>; clubPaths: Record<string, string>; teamPaths: Record<string, string>; ligaPaths: Record<number, string>;
@@ -1250,6 +1321,7 @@ export function buildSite(
     const key = hallMap[h.id].path.split('/').slice(1, 3).join('/') + '/';      // <land>/<ort>/
     hallsByPlace.set(key, [...(hallsByPlace.get(key) ?? []), h]);
   }
+  const hallItem = (h: HallRec): ListItem => ({ name: h.name, href: hallPaths[h.id], hall: hallCardData(h, lastmod) });
   const files = new Map<string, string>();
   const sitemapPaths: string[] = [];
   const known = knownOrte(clubs);
@@ -1279,7 +1351,26 @@ export function buildSite(
       const doc = docs?.length ? (TeamLogic.pickPrimaryLiga(docs, t.teamPermanentId) as LigaDoc | null) : null;
       if (doc) teamInfo[String(t.teamPermanentId)] = { liga: doc, summary: TeamLogic.summary(doc, t.teamPermanentId) };
     }
-    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths, teamInfo }));
+    const hallInfo: Record<string, ClubHallInfo> = {};
+    for (const h of club.halls ?? []) {
+      if (!h.dbbSpielfeldId) continue;
+      const rec = halls.get(String(h.dbbSpielfeldId));
+      if (!rec) continue;
+      const seen = new Set<number>();
+      const mine = rec.games.filter(g => {
+        const m = g.match;
+        if (m.abgesagt || m.verzicht || seen.has(m.matchId)) return false;
+        if (Number(m.homeTeam?.clubId) !== club.clubId && Number(m.guestTeam?.clubId) !== club.clubId) return false;
+        seen.add(m.matchId);
+        return true;
+      });
+      hallInfo[String(h.dbbSpielfeldId)] = {
+        exact: hallIsExact(rec),
+        games: mine.length,
+        upcoming: mine.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= lastmod).length
+      };
+    }
+    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths, hallInfo, teamInfo }));
     if (!canonicalPath) sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }
@@ -1315,10 +1406,7 @@ export function buildSite(
   const placeHallGroup = (placeKey: string, placeName: string): ListGroup[] => {
     const list = hallsByPlace.get(placeKey);
     if (!list || !list.length) return [];
-    const items = list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({
-      name: h.name, href: hallPaths[h.id],
-      note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ')
-    }));
+    const items = list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(hallItem);
     return [{ heading: `Hallen in ${placeName}`, items }];
   };
   // Ligen eines Landes: die Seniorenligen nach Ebene, je Liga eine Karte mit Tabellenspitze; die übrigen über den Link auf die Verbandsseite
@@ -1427,7 +1515,7 @@ export function buildSite(
           base, pagePath, title: `Basketballhallen in ${pName} (${sName})`, heading: `Basketballhallen in ${pName}`,
           intro: `${nHallen(list.length)} in ${pName}, ${sName}, mit Adresse, Spielen und den Vereinen, die dort spielen.`,
           crumbs: [...hubBase, { name: sName, path: `halle/${stateSlug}/` }, { name: pName, path: pagePath }],
-          groups: [{ items: list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(h => ({ name: h.name, href: hallPaths[h.id], note: [hallAddress(h), h.games.length ? `${h.games.length} ${h.games.length === 1 ? 'Spiel' : 'Spiele'} gemeldet` : ''].filter(Boolean).join(' · ') })) }]
+          groups: [{ items: list.slice().sort((a, b) => a.name.localeCompare(b.name, 'de')).map(hallItem) }]
         }));
         sitemapPaths.push(pagePath);
       }
@@ -1572,6 +1660,7 @@ function main(): void {
 
   fs.writeFileSync(path.join(site, 'data', 'team-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.teamMap).map(([id, e]) => [id, e.path]))), 'utf-8');
+  fs.writeFileSync(path.join(site, 'data', 'hall-coords.json'), JSON.stringify(publicHallCoords(hallCoords)), 'utf-8');
   fs.writeFileSync(path.join(site, 'data', 'hall-url-map.json'),
     JSON.stringify(Object.fromEntries(Object.entries(build.hallMap).map(([id, e]) => [id, e.path]))), 'utf-8');
   if (hallMapFile) {
