@@ -1,4 +1,4 @@
-import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, UrlMap } from '../crawler/seo';
+import { verbandKind, statesOfLiga, verbandCards, LAENDER, top3Entries, ligaCard, ebeneKey, EBENEN, collectHalls, hallState, hallWishes, renderHallPage, teamWishes, teamLigen, primaryLiga, renderTeamPage, teamSlug, localDerbies, ligaLevel, renderDerbies, assignKeyed, ligaWishes, top3, top3Text, renderLigaPage, buildLigaPages, LigaDoc, slugify, clubSlug, mainPlace, letterOf, knownOrte, renderListPage, ALPHABET_MIN, placeOf, assignPaths, buildSite, renderClubPage, renderRedirect, regionCards, renderRegionHub, scheduleRows, kickoffText, injectRegionLinks, depthPrefix, hallStats, hallIsExact, hallCardData, hallCardHtml, UrlMap } from '../crawler/seo';
 import { ClubEntry } from '../crawler/types';
 
 const BASE = 'https://example.org/reg';
@@ -771,5 +771,50 @@ describe('Spielplan-Zeile', () => {
   it('abgesagt und Verzicht stehen im Ergebnisfeld', () => {
     expect(scheduleRows([{ match: { ...m, abgesagt: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">abgesagt</div>');
     expect(scheduleRows([{ match: { ...m, verzicht: true }, teams: 'A – B' }])).toContain('<div class="dss-row-score">Verzicht</div>');
+  });
+});
+
+describe('Hallen-Cards', () => {
+  const clubA = club(1, 'TV Ulm', 'Ulm', '0100001', { halls: [{ id: 1, dbbSpielfeldId: 500, bezeichnung: 'Sporthalle <Ost>', strasse: 'Weg 1', plz: '89073', ort: 'Ulm' } as any] });
+  const tm = (id: number, clubId: number) => ({ teamPermanentId: id, clubId, teamname: `T${id}` });
+  const mk = (id: number, home: any, guest: any, date: string, result: string | null = null, extra: any = {}) => ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: home, guestTeam: guest, result, ...extra });
+  const doc = (matches: any[], venues: Record<string, number>): LigaDoc => ({ ligaId: 5, liganame: 'L', verbandName: 'Bayern', tabelle: [], matches, venues, halls: {}, fetchedAt: '2026-10-03T00:00:00Z' } as any);
+  const hallOf = (matches: any[], venues: Record<string, number>, c = clubA) => collectHalls([c], [doc(matches, venues)]).get('500')!;
+
+  it('hallStats zählt gemeldete und anstehende Spiele und die Heim-Teams, ohne Abgesagte und Verzichte', () => {
+    const h = hallOf([
+      mk(1, tm(1, 1), tm(9, 9), '2026-10-10'),
+      mk(2, tm(1, 1), tm(9, 9), '2026-09-20', '80:70'),
+      mk(3, tm(2, 1), tm(9, 9), '2026-11-01', null, { abgesagt: true }),
+      mk(4, tm(3, 1), tm(9, 9), '2026-10-12'),
+      mk(5, tm(4, 1), tm(9, 9), '2026-10-13', null, { verzicht: true })
+    ], { '1': 500, '2': 500, '3': 500, '4': 500, '5': 500 });
+    expect(hallStats(h, '2026-10-03')).toEqual({ games: 3, upcoming: 2, homeTeams: 2 });
+  });
+
+  it('hallIsExact: Koordinate aus Adresse ja, Ortsposition und fehlende nein', () => {
+    expect(hallIsExact({ lat: 48, precision: 'adresse' })).toBe(true);
+    expect(hallIsExact({ lat: 48, precision: 'ort' })).toBe(false);
+    expect(hallIsExact({})).toBe(false);
+  });
+
+  it('hallCardData: Fakten, Adresse und Pin nur bei genauer Koordinate', () => {
+    const h = hallOf([mk(1, tm(1, 1), tm(9, 9), '2026-10-10')], { '1': 500 });
+    expect(hallCardData(h, '2026-10-03')).toEqual({ address: 'Weg 1, 89073 Ulm', exact: false, facts: ['1 Spiel gemeldet', '1 anstehend', '1 Heim-Team'] });
+    h.lat = 48.4; h.lng = 9.9; h.precision = 'adresse';
+    expect(hallCardData(h, '2026-10-03')).toMatchObject({ exact: true, pin: { lat: 48.4, lng: 9.9 } });
+  });
+
+  it('hallCardHtml: Link, Adresse, Fakten, Vermerk ohne genaue Adresse, maskiert', () => {
+    const html = hallCardHtml({ name: 'Sporthalle <Ost>', href: 'halle/x/', card: { address: 'Weg 1, 89073 Ulm', exact: false, facts: ['3 Spiele gemeldet', '1 anstehend'] } });
+    expect(html).toContain('class="hall-card dss-card');
+    expect(html).toContain('<a href="halle/x/">Sporthalle &lt;Ost&gt;</a>');
+    expect(html).toContain('Weg 1, 89073 Ulm');
+    expect(html).toContain('3 Spiele gemeldet · 1 anstehend');
+    expect(html).toContain('Keine genaue Adresse, nicht auf der Karte');
+    const exact = hallCardHtml({ name: 'H', card: { address: '', exact: true, facts: [] } });
+    expect(exact).not.toContain('Keine genaue Adresse');
+    expect(exact).not.toContain('<a ');
+    expect(exact).not.toContain('hall-card-facts');
   });
 });

@@ -19,6 +19,8 @@ import { stateName, stateOf } from './region';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamLogic: any = require('../portal/team-logic.js');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const HallLogic: any = require('../portal/hall-logic.js');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const TeamStats: any = require('../portal/team-stats.js');
 import { Outline, outlinesFor, unionOutline } from './outline';
 
@@ -389,7 +391,7 @@ ${crumbNav(crumbs)}
 
 export interface ListGroup { heading?: string; items: ListItem[]; alphabetic?: boolean }
 
-export interface ListItem { name: string; href: string; note?: string }
+export interface ListItem { name: string; href: string; note?: string; hall?: HallCardData }
 
 export const ALPHABET_MIN = 30;
 
@@ -1098,6 +1100,42 @@ export function hallWishes(halls: Map<string, HallRec>, clubById: Map<number, Cl
 }
 
 const hallAddress = (h: HallRec): string => [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+
+/** Genaue Position (aus Adresse oder clubs.json); eine Ortsposition gilt als ungefähr. */
+export const hallIsExact = (h: { lat?: number; precision?: 'adresse' | 'ort' }): boolean => h.lat !== undefined && h.precision !== 'ort';
+
+/** Kennzahlen einer Halle: gemeldete Spiele, anstehende (ab `today`) und Heim-Teams; ohne Abgesagte und Verzichte. */
+export function hallStats(h: HallRec, today: string): { games: number; upcoming: number; homeTeams: number } {
+  const games = h.games.filter(g => !g.match.abgesagt && !g.match.verzicht);
+  const upcoming = games.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= today).length;
+  const homeTeams = new Set(games.map(g => g.match.homeTeam?.teamPermanentId).filter(id => id != null)).size;
+  return { games: games.length, upcoming, homeTeams };
+}
+
+/** Angaben für eine Hallen-Card (Listenseiten) und für den Pin auf der Karte. */
+export interface HallCardData { address: string; exact: boolean; facts: string[]; pin?: { lat: number; lng: number } }
+
+export function hallCardData(h: HallRec, today: string): HallCardData {
+  const s = hallStats(h, today);
+  const exact = hallIsExact(h);
+  const facts = [
+    s.games ? `${s.games} ${s.games === 1 ? 'Spiel' : 'Spiele'} gemeldet` : '',
+    s.upcoming ? `${s.upcoming} anstehend` : '',
+    s.homeTeams ? `${s.homeTeams} ${s.homeTeams === 1 ? 'Heim-Team' : 'Heim-Teams'}` : ''
+  ].filter(Boolean);
+  return { address: hallAddress(h), exact, facts, ...(exact ? { pin: { lat: h.lat!, lng: h.lng! } } : {}) };
+}
+
+/** Eine Hallen-Card: Name (Link auf die Hallenseite, wenn es sie gibt), Adresse, Fakten, Vermerk ohne genaue Adresse. */
+export function hallCardHtml(o: { name: string; href?: string; card: HallCardData }): string {
+  const name = o.href ? `<a href="${esc(o.href)}">${esc(o.name)}</a>` : esc(o.name);
+  return `<li class="hall-card dss-card dss-card--default dss-card--pad-md"><div class="dss-card-body">`
+    + `<div class="hall-card-name">${name}</div>`
+    + (o.card.address ? `<p class="hall-card-addr">${esc(o.card.address)}</p>` : '')
+    + (o.card.facts.length ? `<p class="hall-card-facts">${esc(o.card.facts.join(' · '))}</p>` : '')
+    + (o.card.exact ? '' : '<p class="hall-card-note">Keine genaue Adresse, nicht auf der Karte</p>')
+    + `</div></li>`;
+}
 
 interface HallPageCtx {
   base: string; hall: HallRec; path: string; today: string;
