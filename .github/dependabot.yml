@@ -9,7 +9,7 @@ updates:
       npm-dependencies:
         patterns: ["*"]
     ignore:
-      # ts-jest unterstützt TypeScript nur bis Version 6 (peer ">=4.3 <7"); TypeScript 7 lässt `npm ci` an ERESOLVE scheitern.
+      # TypeScript-Hauptversionen nur bewusst heben: ts-node und ts-jest laufen über @typescript/typescript6, die Typprüfung über TypeScript 7 (siehe README, Abschnitt TypeScript).
       - dependency-name: typescript
         update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
