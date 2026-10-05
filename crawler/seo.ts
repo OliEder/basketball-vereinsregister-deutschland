@@ -281,7 +281,8 @@ const akSortKey = (ak?: string): number => { const i = AK_ORDER.indexOf(ak ?? ''
 /** Liga und Kennzahlen eines Teams für die Teamkarte der Vereinsseite. */
 export interface ClubTeamInfo { liga: LigaDoc | null; summary: unknown }
 
-export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string>; teamInfo?: Record<string, ClubTeamInfo> }
+export interface ClubHallInfo { exact: boolean; games: number; upcoming: number }
+export interface ClubPageContext { base: string; club: ClubEntry; urlPath: string; cp: ClubPlace; canonicalPath?: string; ligaPaths?: Record<number, string>; teamPaths?: Record<string, string>; hallPaths?: Record<string, string>; hallInfo?: Record<string, ClubHallInfo>; teamInfo?: Record<string, ClubTeamInfo> }
 
 export function renderClubPage(ctx: ClubPageContext): string {
   const { base, club, urlPath, cp } = ctx;
@@ -350,10 +351,12 @@ export function renderClubPage(ctx: ClubPageContext): string {
     return `<div class="verein-team-card dss-card dss-card--hoverable"><div class="verein-team-header"><div class="verein-team-label">${tp ? `<a class="verein-team-link" href="${tp}">${label}<span class="dss-sr-only"> – Tabelle und Spielplan</span></a>` : label}</div></div><div class="verein-team-liga">${ligaHtml}</div>${stats ? `<div class="verein-team-stats">${stats}</div>` : ''}${training}${tp ? '<div class="verein-team-cta" aria-hidden="true">Tabelle &amp; Spielplan ansehen →</div>' : ''}</div>`;
   };
   const teamCards = teams.map(teamCard).join('');
-  const hallItems = (club.halls ?? []).map(h => {
-    const addr = [h.strasse, [h.plz, h.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
-    const hp = h.dbbSpielfeldId ? ctx.hallPaths?.[String(h.dbbSpielfeldId)] : undefined;
-    return `<li>${hp ? `<a href="${hp}">${esc(h.bezeichnung)}</a>` : esc(h.bezeichnung)}${addr ? ` – ${esc(addr)}` : ''}</li>`;
+  const hallCards = (club.halls ?? []).map(h => {
+    const id = h.dbbSpielfeldId ? String(h.dbbSpielfeldId) : '';
+    const info = id ? ctx.hallInfo?.[id] : undefined;
+    const exact = info?.exact ?? (typeof h.lat === 'number' && typeof h.lng === 'number');
+    const facts = info && info.games ? [HallLogic.gamesText({ games: info.games, upcoming: info.upcoming })] : [];
+    return hallCardHtml({ name: h.bezeichnung, href: id ? ctx.hallPaths?.[id] : undefined, card: { address: HallLogic.addressOf(h), exact, facts } });
   }).join('');
 
   // Der Inhalt von #verein-content ist die statische Fassung für Suchmaschinen; verein.js ersetzt ihn.
@@ -364,7 +367,7 @@ ${crumbNav(crumbs)}
       <h1>${esc(club.name)}</h1>
       ${where ? `<p>${esc(where)}</p>` : ''}
       ${teamCards ? `<h2 class="verein-section-title">Teams (${teams.length})</h2><div class="verein-teams">${teamCards}</div>` : ''}
-      ${hallItems ? `<h2>Hallen</h2>${card(`<ul class="seo-list">${hallItems}</ul>`)}` : ''}
+      ${hallCards ? `<h2 class="verein-section-title">Hallen</h2><ul class="hall-cards">${hallCards}</ul>` : ''}
       <noscript><p class="seo-note">Karte, Favoriten und aktuelle Live-Daten brauchen JavaScript.</p></noscript>
     </div>
   </main>`;
@@ -380,6 +383,8 @@ ${crumbNav(crumbs)}
     body,
     scripts: `  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="map-tiles.js"></script>
+  <script src="hall-logic.js"></script>
+  <script src="hall-map.js"></script>
   <script src="favorites.js"></script>
   <script src="report.js"></script>
   <script src="team-logic.js"></script>
@@ -1330,7 +1335,26 @@ export function buildSite(
       const doc = docs?.length ? (TeamLogic.pickPrimaryLiga(docs, t.teamPermanentId) as LigaDoc | null) : null;
       if (doc) teamInfo[String(t.teamPermanentId)] = { liga: doc, summary: TeamLogic.summary(doc, t.teamPermanentId) };
     }
-    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths, teamInfo }));
+    const hallInfo: Record<string, ClubHallInfo> = {};
+    for (const h of club.halls ?? []) {
+      if (!h.dbbSpielfeldId) continue;
+      const rec = halls.get(String(h.dbbSpielfeldId));
+      if (!rec) continue;
+      const seen = new Set<number>();
+      const mine = rec.games.filter(g => {
+        const m = g.match;
+        if (m.abgesagt || m.verzicht || seen.has(m.matchId)) return false;
+        if (Number(m.homeTeam?.clubId) !== club.clubId && Number(m.guestTeam?.clubId) !== club.clubId) return false;
+        seen.add(m.matchId);
+        return true;
+      });
+      hallInfo[String(h.dbbSpielfeldId)] = {
+        exact: hallIsExact(rec),
+        games: mine.length,
+        upcoming: mine.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= lastmod).length
+      };
+    }
+    files.set(`${entry.path}index.html`, renderClubPage({ base, club, urlPath: entry.path, cp, canonicalPath, ligaPaths: lb.paths, teamPaths, hallPaths, hallInfo, teamInfo }));
     if (!canonicalPath) sitemapPaths.push(entry.path);
     for (const old of entry.history) files.set(`${old}index.html`, renderRedirect(base, old, entry.path));
   }

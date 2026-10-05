@@ -871,3 +871,45 @@ describe('Hallen-Listenseiten', () => {
     expect(page).toContain('id="hall-overview-map"');
   });
 });
+
+describe('Vereinsseite: Hallen', () => {
+  const c = club(7, 'TV Regensburg', 'Regensburg', '0200001', { halls: [
+    { id: 1, dbbSpielfeldId: 100, bezeichnung: 'Halle Mitte', strasse: 'Weg 3', plz: '93047', ort: 'Regensburg', lat: 49.01, lng: 12.1 } as any,
+    { id: 2, dbbSpielfeldId: 200, bezeichnung: 'Halle Rand', ort: 'Regensburg' } as any
+  ] });
+  const path = 'bayern/regensburg/tv-regensburg/';
+
+  it('Hallen-Cards stehen nach den Teams, mit Link, Spielzahlen des Vereins und Vermerk ohne genaue Adresse', () => {
+    const html = renderClubPage({
+      base: BASE, club: c, urlPath: path, cp: placeOf(c), hallPaths: { '100': 'halle/bayern/regensburg/halle-mitte/' },
+      hallInfo: { '100': { exact: true, games: 3, upcoming: 1 }, '200': { exact: false, games: 0, upcoming: 0 } }
+    });
+    expect(html.indexOf('class="verein-teams"')).toBeGreaterThan(-1);
+    expect(html.indexOf('class="hall-cards"')).toBeGreaterThan(html.indexOf('class="verein-teams"'));
+    expect(html).toContain('<a href="halle/bayern/regensburg/halle-mitte/">Halle Mitte</a>');
+    expect(html).toContain('3 Spiele des Vereins hier, 1 anstehend');
+    expect(html.match(/Keine genaue Adresse, nicht auf der Karte/g)).toHaveLength(1);     // nur Halle Rand
+    expect(html).not.toContain('class="seo-list"');
+  });
+
+  it('ohne Zusatzdaten bestimmt die Koordinate in clubs.json, ob die Adresse genau ist', () => {
+    const html = renderClubPage({ base: BASE, club: c, urlPath: path, cp: placeOf(c) });
+    expect(html.match(/Keine genaue Adresse, nicht auf der Karte/g)).toHaveLength(1);
+  });
+
+  it('lädt die Karten-Skripte der Live-Ansicht', () => {
+    const html = renderClubPage({ base: BASE, club: c, urlPath: path, cp: placeOf(c) });
+    expect(html.indexOf('hall-logic.js')).toBeGreaterThan(-1);
+    expect(html.indexOf('hall-map.js')).toBeGreaterThan(html.indexOf('map-tiles.js'));
+    expect(html.indexOf('verein.js')).toBeGreaterThan(html.indexOf('hall-map.js'));
+  });
+
+  it('buildSite zählt die Spiele des Vereins je Halle', () => {
+    const t = (id: number, clubId: number) => ({ teamPermanentId: id, clubId, teamname: `T${id}` });
+    const m = (id: number, h: number, g: number, date: string) => ({ matchId: id, kickoffDate: date, kickoffTime: '18:00', homeTeam: t(h * 10, h), guestTeam: t(g * 10, g), result: null });
+    const d = { ligaId: 5, liganame: 'L', verbandName: 'Bayern', tabelle: [], matches: [m(1, 7, 9, '2026-10-10'), m(2, 8, 9, '2026-10-11')], venues: { '1': 100, '2': 100 }, halls: {}, fetchedAt: '2026-10-03T00:00:00Z' } as any;
+    const b = buildSite([c], {}, BASE, '2026-10-03', { docs: [d] });
+    const page = b.files.get(`${b.urlMap['7'].path}index.html`)!;
+    expect(page).toContain('1 Spiel des Vereins hier, 1 anstehend');
+  });
+});
