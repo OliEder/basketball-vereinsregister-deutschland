@@ -940,3 +940,30 @@ describe('publicHallCoords', () => {
     })).toEqual({ '1': [48.1, 11.5], '3': [50, 8] });
   });
 });
+
+describe('Spielfeldlinien im Hintergrund', () => {
+  const COURT = '<div class="court-bg" aria-hidden="true"><div class="court-lines"></div></div>';
+  const count = (html: string) => html.split(COURT).length - 1;
+
+  it('stehen genau einmal vor dem Seiteninhalt, auf Vereins- und Listenseiten', () => {
+    const c = club(7, 'TV Regensburg', 'Regensburg');
+    const clubPage = renderClubPage({ base: BASE, club: c, urlPath: 'bayern/regensburg/tv-regensburg/', cp: placeOf(c) });
+    const listPage = renderListPage({ base: BASE, pagePath: 'bayern/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }], groups: [{ items: [{ name: 'Verein', href: 'x/' }] }] });
+    for (const html of [clubPage, listPage]) {
+      expect(count(html)).toBe(1);
+      expect(html.indexOf(COURT)).toBeGreaterThan(html.indexOf('<body>'));
+      expect(html.indexOf(COURT)).toBeLessThan(html.indexOf('verein-header'));
+    }
+  });
+
+  it('die Weiterleitungsseite bleibt ohne', () => {
+    expect(renderRedirect(BASE, 'alt/', 'neu/')).not.toContain('court-bg');
+  });
+
+  it('die dynamischen Seiten verein.html und team.html haben sie ebenfalls', () => {
+    const fs = require('fs');
+    for (const f of ['portal/verein.html', 'portal/team.html', 'portal/index.html']) {
+      expect(fs.readFileSync(f, 'utf-8')).toContain('class="court-bg"');
+    }
+  });
+});

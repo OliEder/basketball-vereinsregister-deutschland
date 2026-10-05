@@ -217,6 +217,7 @@ ${o.head ?? ''}  <script src="theme.js"></script>
   <script>initTheme();</script>
 </head>
 <body>
+${COURT_BG}
 ${o.body}
 ${o.scripts ?? ''}  <script src="pagenav.js"></script>
 </body>
@@ -238,6 +239,9 @@ function crumbNav(items: { name: string; path: string }[]): string {
     : `<li><a href="${it.path || 'index.html'}">${esc(it.name)}</a></li>`);
   return `    <nav class="dss-crumbs" aria-label="Brotkrumen"><ol>${parts.join('')}</ol></nav>`;
 }
+
+/** Spielfeldlinien im Hintergrund (Styles in style.css, wie auf der Startseite). */
+const COURT_BG = '  <div class="court-bg" aria-hidden="true"><div class="court-lines"></div></div>';
 
 function topbar(): string {
   return `  <header class="verein-header dss-topbar">
