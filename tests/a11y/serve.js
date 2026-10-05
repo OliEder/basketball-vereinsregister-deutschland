@@ -9,7 +9,9 @@ const PORT = Number(process.env.A11Y_PORT || 4173);
 
 fs.rmSync(site, { recursive: true, force: true });
 fs.mkdirSync(path.join(site, 'data'), { recursive: true });
-fs.cpSync(path.join(root, 'portal'), site, { recursive: true });
+// portal/data ist lokal ein Symlink auf ../data (Dev-Server); der Testserver legt site/data selbst an
+const portalData = path.join(root, 'portal', 'data');
+fs.cpSync(path.join(root, 'portal'), site, { recursive: true, filter: src => src !== portalData });
 fs.copyFileSync(path.join(__dirname, 'fixtures', 'clubs.json'), path.join(site, 'data', 'clubs.json'));
 fs.cpSync(path.join(__dirname, 'fixtures', 'live'), path.join(site, 'data', 'live'), { recursive: true });
 
