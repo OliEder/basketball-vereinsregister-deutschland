@@ -19,7 +19,7 @@
     "fix-names": "npx tsx crawler/fix-names.ts",
     "api": "npx tsx api/server.ts",
     "test": "vitest run",
-    "test:watch": "npx jest --watch",
+    "test:watch": "vitest",
     "crawl-halls": "npx tsx crawler/crawl-halls.ts",
     "merge-halls": "npx tsx crawler/merge-halls.ts",
     "backfill-team-details": "npx tsx crawler/backfill-team-details.ts",
