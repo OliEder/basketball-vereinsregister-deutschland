@@ -199,7 +199,7 @@ function renderMap(club) {
   section.appendChild(mapWrap);
 
   section._pins = pins;
-  section._initMap = function () { HallMap.render(mapEl, pins); };
+  section._initMap = function () { if (typeof HallMap === 'undefined' || !HallMap.render(mapEl, pins)) section.remove(); };
   return section;
 }
 
@@ -472,7 +472,7 @@ async function init() {
 
     const hallsSection = renderHalls(club);
     if (hallsSection) content.appendChild(hallsSection);
-    fillHallStats(club, mapSection, hallsSection);
+    fillHallStats(club, mapSection, hallsSection).catch(() => {});
 
     const report = window.Report ? Report.link({ kind: 'club', id: club.clubId, name: club.name }) : null;
     if (report) {

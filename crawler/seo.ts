@@ -433,23 +433,30 @@ export function renderListPage(opts: {
   const itemsHtml = (g: { items: ListItem[] }): string => g.items.every(i => i.hall)
     ? `<ul class="hall-cards">${g.items.map(i => hallCardHtml({ name: i.name, href: i.href, card: i.hall! })).join('')}</ul>`
     : card(`<ul class="seo-list">${g.items.map(i => `<li><a href="${i.href}">${esc(i.name)}</a>${i.note ? ` <span class="seo-note">${esc(i.note)}</span>` : ''}</li>`).join('')}</ul>`);
-  const groups = source.map(g => `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
-      ${itemsHtml(g)}`).join('\n');
-
-  // Karte oben: Pins aller Hallen mit genauer Koordinate
+  // Karte: Pins aller Hallen mit genauer Koordinate
   const pins = opts.groups.flatMap(g => g.items)
     .filter(i => i.hall?.pin)
     .map(i => ({ kind: 'hall', lat: i.hall!.pin!.lat, lng: i.hall!.pin!.lng, name: i.name, address: i.hall!.address, href: i.href, note: i.hall!.facts.join(' · ') }));
   const mapHtml = pins.length
     ? `      <div id="hall-overview-map" class="hall-overview-map" role="region" aria-label="Karte der Hallen"></div>\n      <script type="application/json" id="hall-pins">${jsonLd(pins)}</script>\n`
     : '';
+  // Hallenkarte direkt über den Cards der ersten reinen Hallen-Gruppe, nur einmal
+  let mapPlaced = false;
+  const groups = source.map(g => {
+    const isHall = g.items.length > 0 && g.items.every(i => i.hall);
+    const mapHere = isHall && !mapPlaced;
+    if (mapHere) mapPlaced = true;
+    return `      ${g.heading ? `<h2${g.id ? ` id="${g.id}" data-pagenav-skip` : ''}>${esc(g.heading)}</h2>` : ''}
+${mapHere ? mapHtml : ''}      ${itemsHtml(g)}`;
+  }).join('\n');
+
   const body = `${topbar()}
   <main class="verein-main">
 ${crumbNav(opts.crumbs)}
     <div id="verein-content" class="seo-list-page">
       <h1>${esc(opts.heading)}</h1>
       <p>${esc(opts.intro)}</p>
-${mapHtml}${alphabet}
+${alphabet}
 ${groups}
 ${opts.extraHtml ?? ''}
     </div>

@@ -842,6 +842,22 @@ describe('Hallen-Listenseiten', () => {
     expect(html).not.toContain('class="seo-list"');
   });
 
+  it('auf Ortsseiten steht die Karte direkt über den Hallen-Cards, nicht über der Vereinsliste', () => {
+    const html = renderListPage({
+      base: BASE, pagePath: 'bayern/ulm/', title: 't', heading: 'h', intro: 'i', crumbs: [{ name: 'a', path: '' }],
+      groups: [
+        { heading: 'Vereine in Ulm', items: [{ name: 'Verein', href: 'x/' }] },
+        { heading: 'Hallen in Ulm', items: [item('Halle A', { address: 'Weg 1', exact: true, facts: [], pin: { lat: 48.4, lng: 9.9 } })] }
+      ]
+    });
+    const list = html.indexOf('class="seo-list"');
+    const map = html.indexOf('id="hall-overview-map"');
+    const cards = html.indexOf('class="hall-cards"');
+    expect(list).toBeGreaterThan(-1);
+    expect(list).toBeLessThan(map);
+    expect(map).toBeLessThan(cards);
+  });
+
   it('ohne genaue Koordinate gibt es keine Karte und keine Karten-Skripte', () => {
     const html = render([item('Halle B', { address: 'Ulm', exact: false, facts: [] })]);
     expect(html).toContain('hall-card');

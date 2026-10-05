@@ -67,7 +67,8 @@
     ul.className = 'hall-map-legend';
     ul.appendChild(legendItem('Halle', false));
     ul.appendChild(legendItem('Vereinssitz', true));
-    el.insertAdjacentElement('afterend', ul);
+    var anchor = el.parentNode && el.parentNode.classList && el.parentNode.classList.contains('verein-map-wrap') ? el.parentNode : el;
+    anchor.insertAdjacentElement('afterend', ul);
   }
 
   function render(el, pins) {
@@ -76,7 +77,7 @@
     MapTiles.add(L, map);
     var bounds = [];
     pins.forEach(function (pin) {
-      var marker = L.marker([pin.lat, pin.lng], { icon: iconFor(pin.kind), title: pin.name, alt: pin.name });
+      var marker = L.marker([pin.lat, pin.lng], { icon: iconFor(pin.kind), title: pin.name, alt: pin.name, zIndexOffset: pin.kind === 'seat' ? 1000 : 0 });
       marker.bindPopup(function () { return popupFor(pin); });
       marker.addTo(map);
       bounds.push([pin.lat, pin.lng]);
