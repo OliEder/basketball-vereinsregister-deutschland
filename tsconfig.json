@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": ["node", "jest"]
+    "types": ["node", "vitest/globals"]
   },
   "include": ["crawler/**/*", "api/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist", "portal", "tests/a11y"]

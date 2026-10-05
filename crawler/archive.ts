@@ -1,6 +1,6 @@
 // Saison-Archiv: sichert Tabellen und Ergebnisse jeder Liga dauerhaft, weil die BBB-API nur die laufende Saison liefert.
 //
-//   npx ts-node crawler/archive.ts --live=_live --store=season-archive
+//   npx tsx crawler/archive.ts --live=_live --store=season-archive
 //
 // Aufbau des Speichers (Branch "season-archive", siehe README.md darin und ADR-010):
 //   <saison>/liga/<ligaId>.json.gz   Liga mit Tabelle und allen Spielen

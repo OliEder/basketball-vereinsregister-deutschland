@@ -1,7 +1,7 @@
 // Schlanker Hallenindex für die Team-Seiten: je Club-ID die Heimhalle (siehe chooseHomeHall).
 // Die Team-Seite zeigt damit Ort und Karte des nächsten Spiels, ohne die große clubs.json zu laden.
 //
-//   npx ts-node crawler/hall-index.ts [--out=_site/data/live/hall-index.json] [--coords=data-store/hall-coords.json]
+//   npx tsx crawler/hall-index.ts [--out=_site/data/live/hall-index.json] [--coords=data-store/hall-coords.json]
 import fs from 'fs';
 import path from 'path';
 import { chooseHomeHall } from './club-geocoder';

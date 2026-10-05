@@ -3,7 +3,7 @@ import { geocodeCity } from '../crawler/geocoder';
 
 describe('geocodeCity', () => {
   it('returns coordinates for known city', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({
+    const mockFetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ([{ lat: '49.0134', lon: '12.1016' }])
     });
@@ -15,7 +15,7 @@ describe('geocodeCity', () => {
   });
 
   it('returns null for unknown city', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({
+    const mockFetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ([])
     });
@@ -25,7 +25,7 @@ describe('geocodeCity', () => {
   });
 
   it('returns null on fetch error', async () => {
-    const mockFetch = jest.fn().mockRejectedValue(new Error('Network error'));
+    const mockFetch = vi.fn().mockRejectedValue(new Error('Network error'));
     const result = await geocodeCity('Regensburg', mockFetch as any);
     expect(result).toBeNull();
   });

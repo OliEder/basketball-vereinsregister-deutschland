@@ -8,10 +8,6 @@ updates:
     groups:
       npm-dependencies:
         patterns: ["*"]
-    ignore:
-      # TypeScript-Hauptversionen nur bewusst heben: ts-node und ts-jest laufen über @typescript/typescript6, die Typprüfung über TypeScript 7 (siehe README, Abschnitt TypeScript).
-      - dependency-name: typescript
-        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:

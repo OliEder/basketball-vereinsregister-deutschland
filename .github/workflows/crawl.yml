@@ -24,7 +24,7 @@ jobs:
       - run: npm ci
 
       - name: BBB-API crawlen (ohne Geocoding)
-        run: npx ts-node crawler/index.ts --skip-geocoding
+        run: npx tsx crawler/index.ts --skip-geocoding
 
       - name: clubs.json committen
         if: ${{ always() && hashFiles('data/clubs.json') != '' }}

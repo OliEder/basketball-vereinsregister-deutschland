@@ -40,7 +40,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
 
-      # Abhängigkeiten immer installieren: auch ein reiner Portal-Deploy ohne Live-Crawl braucht ts-node
+      # Abhängigkeiten immer installieren: auch ein reiner Portal-Deploy ohne Live-Crawl braucht tsx
       - run: npm ci
 
       # Live-Daten des letzten erfolgreichen Laufs (damit Deploys bei Portal-Änderungen

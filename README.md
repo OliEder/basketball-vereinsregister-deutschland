@@ -67,7 +67,7 @@ Node.js 24 (LTS), wie in allen Workflows; getestet wurde auch mit Node 22.
 
 ```bash
 npm install
-npm test                     # Jest (TypeScript-Crawler) inkl. Portal-Logik
+npm test                     # Vitest (TypeScript-Crawler) inkl. Portal-Logik
 npm run typecheck            # Typprüfung mit TypeScript 7 (nativer Compiler)
 npx tsc --noEmit             # Typprüfung
 ```
@@ -146,7 +146,7 @@ Gleichnamige Club-IDs (z. B. ALBA Berlin) bekommen im Regeocode dieselbe Koordin
 
 ### TypeScript
 
-Typprüfung (`npm run typecheck`) und Laufzeit sind getrennt: Der native Compiler von TypeScript 7 (`typescript-native`) prüft die Typen, `ts-node` (Crawler-Skripte) und `ts-jest` (Tests) brauchen aber die JavaScript-Schnittstelle des Compilers, die TypeScript 7 nicht mehr hat. Deshalb ist `typescript` auf `@typescript/typescript6` umgebogen. Sobald `ts-node` und `ts-jest` TypeScript 7 unterstützen, genügt es, `typescript` wieder auf 7 zu setzen und `typescript-native` zu entfernen. In der `tsconfig.json` sind `module`/`moduleResolution` auf `node16` gesetzt (`node10` gibt es in TypeScript 7 nicht mehr), `types` ist ab TypeScript 6 leer und deshalb ausdrücklich `["node", "jest"]`, `isolatedModules` verlangt ts-jest für `node16`.
+Typprüfung und Ausführung sind getrennt: `npm run typecheck` prüft die Typen mit dem nativen Compiler von TypeScript 7 (`tsc`). Die Crawler-Skripte laufen über `tsx` und die Tests über Vitest; beide übersetzen die Dateien einzeln (esbuild) und prüfen dabei keine Typen. Die Typprüfung ist deshalb ein eigener Schritt. Zu den Einstellungen in der `tsconfig.json`: `module`/`moduleResolution` stehen auf `node16` (`node10` gibt es in TypeScript 7 nicht mehr), `types` ist ab TypeScript 6 leer und deshalb ausdrücklich `["node", "vitest/globals"]`, und `isolatedModules` passt zur Einzeldatei-Übersetzung.
 
 ## Projektstruktur
 
@@ -156,7 +156,7 @@ portal/     statisches Frontend (HTML/CSS/JS, kein Build-Schritt)
 api/        optionale lokale Express-API
 data/       clubs.json (versioniert), Schemas, clubs-enriched.json (nur für die API)
 docs/arc42/ Architekturdokumentation (arc42, AsciiDoc)
-tests/      Jest-Tests
+tests/      Vitest-Tests
 .github/    Workflows
 ```
 

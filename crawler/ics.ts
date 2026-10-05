@@ -1,7 +1,7 @@
 // Kalender-Abo: je Team drei .ics-Dateien aus den Live-Daten samt Spielorten:
 //   ics/<teamPermanentId>.ics (alle Spiele), -heim.ics (nur Heimspiele), -auswaerts.ics (nur Auswärtsspiele)
 //
-//   npx ts-node crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…] [--manifest=<datei>]
+//   npx tsx crawler/ics.ts --live=_site/data/live --out=_site/ics [--team-urls=_site/data/team-url-map.json] [--base=https://…] [--manifest=<datei>]
 //
 // Inkrementell: Mit --manifest merkt sich der Lauf je Team einen Hash seiner Eingaben (Rohdaten seiner Ligen, Name, Seitenadresse,
 // Zahl der sichtbaren Spiele, Programmstand). Stimmt der Hash und liegen die drei Dateien schon in --out (aus dem Cache des letzten Laufs),
