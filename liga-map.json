@@ -6908,8 +6908,10 @@
   "history": []
  },
  "56605": {
-  "path": "liga/baden-wuerttemberg/bbw2-u16-maennlich-bezirksliga-nord-update-21-09-2026/",
-  "history": []
+  "path": "liga/baden-wuerttemberg/bbw2-u16-maennlich-bezirksliga-nord/",
+  "history": [
+   "liga/baden-wuerttemberg/bbw2-u16-maennlich-bezirksliga-nord-update-21-09-2026/"
+  ]
  },
  "56607": {
   "path": "liga/rheinland-pfalz/bvrp-meisterschaft-ue-35-herren/",
