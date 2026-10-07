@@ -8265,6 +8265,10 @@
   "path": "halle/bayern/passau/staedt-mehrfachhalle/",
   "history": []
  },
+ "107678": {
+  "path": "halle/thueringen/erfurt/christophorus-schule-erfurt/",
+  "history": []
+ },
  "107683": {
   "path": "halle/nordrhein-westfalen/bonn/sh-der-gs-bonns-fuenfte/",
   "history": []
@@ -10755,6 +10759,10 @@
  },
  "109115": {
   "path": "halle/schleswig-holstein/niebuell/gemeinschaftsschule-halle-2/",
+  "history": []
+ },
+ "109122": {
+  "path": "halle/niedersachsen/leer/hoheellernschule-leer/",
   "history": []
  },
  "109124": {
