@@ -11799,6 +11799,10 @@
   "path": "halle/niedersachsen/braunschweig/sporthalle-grundschule-heidberg/",
   "history": []
  },
+ "109511": {
+  "path": "halle/bayern/muenchen/ludwig-jall-halle/",
+  "history": []
+ },
  "109512": {
   "path": "halle/niedersachsen/goslar/helmut-sander-sporthalle/",
   "history": []
@@ -11821,6 +11825,10 @@
  },
  "109521": {
   "path": "halle/berlin/berlin/am-freibad/",
+  "history": []
+ },
+ "109524": {
+  "path": "halle/baden-wuerttemberg/ludwigsburg/oststadthalle/",
   "history": []
  }
 }
