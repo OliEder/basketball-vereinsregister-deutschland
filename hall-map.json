@@ -8517,6 +8517,10 @@
   "path": "halle/berlin/berlin/liebensteiner-strasse/",
   "history": []
  },
+ "107894": {
+  "path": "halle/berlin/berlin/lippstaedter-strasse-9/",
+  "history": []
+ },
  "107896": {
   "path": "halle/berlin/berlin/lutherstrasse-30-oben/",
   "history": []
@@ -11827,8 +11831,16 @@
   "path": "halle/berlin/berlin/am-freibad/",
   "history": []
  },
+ "109522": {
+  "path": "halle/berlin/berlin/baumeisterstrasse/",
+  "history": []
+ },
  "109524": {
   "path": "halle/baden-wuerttemberg/ludwigsburg/oststadthalle/",
+  "history": []
+ },
+ "109525": {
+  "path": "halle/brandenburg/strausberg/theodor-fontane-gymnasium/",
   "history": []
  }
 }
