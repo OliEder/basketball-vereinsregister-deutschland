@@ -1617,6 +1617,10 @@
   "path": "halle/rheinland-pfalz/linz/miesgesweghalle-der-realschule-plus/",
   "history": []
  },
+ "8051": {
+  "path": "halle/rheinland-pfalz/linz/realschulhalle/",
+  "history": []
+ },
  "8052": {
   "path": "halle/rheinland-pfalz/koblenz/hans-zulliger-schule/",
   "history": []
@@ -3303,6 +3307,10 @@
  },
  "102092": {
   "path": "halle/nordrhein-westfalen/ochtrup/stadt-halle/",
+  "history": []
+ },
+ "102096": {
+  "path": "halle/nordrhein-westfalen/kamen/doppelturnhalle-gymnasium/",
   "history": []
  },
  "102101": {
@@ -11821,6 +11829,10 @@
  },
  "109517": {
   "path": "halle/bayern/untermeitingen/dreifachsporthalle-mittelschule-untermeitingen/",
+  "history": []
+ },
+ "109518": {
+  "path": "halle/bayern/neusaess/justus-von-liebig-gymnasium/",
   "history": []
  },
  "109519": {
