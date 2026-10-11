@@ -4265,6 +4265,10 @@
   "path": "halle/nordrhein-westfalen/erkrath/sh-des-gymnasiums/",
   "history": []
  },
+ "102640": {
+  "path": "halle/nordrhein-westfalen/dormagen/sporthalle-leibniz-gymnasium/",
+  "history": []
+ },
  "102641": {
   "path": "halle/nordrhein-westfalen/herzogenrath/schulzentrum-herzogenrath-stadthalle-querfeld/",
   "history": []
@@ -11407,6 +11411,10 @@
  },
  "109354": {
   "path": "halle/sachsen/dresden/33-grundschule/",
+  "history": []
+ },
+ "109355": {
+  "path": "halle/baden-wuerttemberg/karlsruhe/sporthalle-der-ernst-reuter-schule/",
   "history": []
  },
  "109358": {
