@@ -4,7 +4,7 @@
    ──────────────────────────────────────────────────────────────
    Identity: Standalone (Ink · Amber · Sky)
    Accessibility: WCAG 2.1 AAA validated
-   DBB-Compat: hue-vars swap to S/W/Gold/Hellblau if needed.
+   Brands: Standalone (Ink · Amber · Sky) · DBB (Blau · Orange) via data-brand="dbb" auf <html>.
 
    Usage:
        @import "tokens.css";
@@ -12,16 +12,14 @@
    ─────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Hue tokens (swap these for DBB-Compat) ─────────────────── */
+  /* ── Hue tokens  ─────────────────── */
   --h-ink:   60;     /* warm near-black */
   --h-amber: 83;     /* signal amber */
   --h-sky:   244;    /* court sky */
 
-  /* DBB-Compat preset (commented — uncomment to switch):
-     --h-ink:   0;
-     --h-amber: 90;
-     --h-sky:   225;
-  */
+  /* Marken-Hue für Chips/Fokus-Ring; DBB-Brand überschreibt sie (siehe unten) */
+  --h-cool:   var(--h-sky);
+  --h-signal: var(--h-amber);
 
   /* ── Ink scale · Primary (low chroma anthracite) ────────────── */
   --ink-0:    oklch(1.000 0     0);
@@ -94,8 +92,87 @@
   --info-text:  oklch(0.380 0.130 245);
   --info-soft:  oklch(0.955 0.035 245);
 
+  /* ── DBB-Marke · Gold & Orange (nach basketball-bund.de) ───────
+     Gold   #c9ae64 · Hover/Active von Buttons, Markenakzent  → gold-400
+     Orange #ff9900 · aktive Tabs, Nav-Unterstrich, Hover     → orange-500
+     Neutrale: Schwarz, Weiß, Anthrazit #191919, Grau #f4f4f4 (siehe --n-* im DBB-Block) */
+  --h-gold:   90;
+  --h-orange: 65;
+
+  --gold-50:  oklch(0.975 0.020 var(--h-gold));
+  --gold-100: oklch(0.945 0.040 var(--h-gold));
+  --gold-200: oklch(0.900 0.065 var(--h-gold));
+  --gold-300: oklch(0.830 0.085 var(--h-gold));
+  --gold-400: oklch(0.759 0.099 var(--h-gold));    /* ≈ #c9ae64 */
+  --gold-500: oklch(0.690 0.100 var(--h-gold));
+  --gold-600: oklch(0.610 0.095 var(--h-gold));
+  --gold-700: oklch(0.510 0.085 var(--h-gold));
+  --gold-800: oklch(0.420 0.072 var(--h-gold));    /* text AAA */
+  --gold-900: oklch(0.290 0.050 var(--h-gold));
+
+  --orange-50:  oklch(0.975 0.020 var(--h-orange));
+  --orange-100: oklch(0.945 0.045 var(--h-orange));
+  --orange-200: oklch(0.895 0.085 var(--h-orange));
+  --orange-300: oklch(0.840 0.130 var(--h-orange));
+  --orange-400: oklch(0.800 0.160 var(--h-orange));
+  --orange-500: oklch(0.772 0.174 var(--h-orange)); /* ≈ #ff9900 */
+  --orange-600: oklch(0.670 0.182 calc(var(--h-orange) - 15));  /* ≈ #eb6909 */
+  --orange-700: oklch(0.550 0.150 calc(var(--h-orange) - 15));
+  --orange-800: oklch(0.420 0.110 calc(var(--h-orange) - 15));
+  --orange-900: oklch(0.290 0.070 calc(var(--h-orange) - 15));
+
+  /* ── Marken-Rollen · Komponenten nutzen NUR diese Ebene ──────────
+     base   = Text/Basis      (BBV: ink    · DBB: n, neutrales Grau)
+     signal = Highlight/CTA   (BBV: amber  · DBB: gold)
+     cool   = Links/Heim/Info (BBV: sky    · DBB: n, kein Blau)
+     action = Primäre Buttons (BBV: ink    · DBB: Anthrazit)
+     indicator = aktive Zustände: Tab-/Nav-Unterstrich (BBV: amber · DBB: orange-600, im Dark Mode orange-500)
+     ────────────────────────────────────────────────────────────── */
+  --base-0:    var(--ink-0);
+  --base-50:   var(--ink-50);
+  --base-100:  var(--ink-100);
+  --base-200:  var(--ink-200);
+  --base-300:  var(--ink-300);
+  --base-400:  var(--ink-400);
+  --base-500:  var(--ink-500);
+  --base-600:  var(--ink-600);
+  --base-700:  var(--ink-700);
+  --base-800:  var(--ink-800);
+  --base-900:  var(--ink-900);
+  --base-1000: var(--ink-1000);
+
+  --signal-50:  var(--amber-50);
+  --signal-100: var(--amber-100);
+  --signal-200: var(--amber-200);
+  --signal-300: var(--amber-300);
+  --signal-400: var(--amber-400);
+  --signal-500: var(--amber-500);
+  --signal-600: var(--amber-600);
+  --signal-700: var(--amber-700);
+  --signal-800: var(--amber-800);
+  --signal-900: var(--amber-900);
+
+  --cool-50:  var(--sky-50);
+  --cool-100: var(--sky-100);
+  --cool-200: var(--sky-200);
+  --cool-300: var(--sky-300);
+  --cool-400: var(--sky-400);
+  --cool-500: var(--sky-500);
+  --cool-600: var(--sky-600);
+  --cool-700: var(--sky-700);
+  --cool-800: var(--sky-800);
+  --cool-900: var(--sky-900);
+
+  --action-bg:       var(--ink-900);   /* primärer Button */
+  --action-bg-2:     var(--ink-800);   /* Button in components.css */
+  --action-bg-hover: var(--ink-700);
+  --action-fg:       var(--ink-0);
+  --indicator:       var(--amber-400);
+
+  --c-cool:          0.07;             /* Chroma der cool-Chips im Dark Mode */
+
   /* ── Team colors (configurable per match) ───────────────────── */
-  --team-heim:  var(--sky-700);
+  --team-heim:  var(--cool-700);
   --team-gast:  oklch(0.520 0.180 25);
 
   /* ── Surface aliases ────────────────────────────────────────── */
@@ -103,7 +180,7 @@
   --surface-1:  var(--n-50);
   --surface-2:  var(--n-100);
   --page-bg:    var(--n-50);
-  --page-fg:    var(--ink-900);
+  --page-fg:    var(--base-900);
   --page-mute:  var(--n-600);
   --page-line:  var(--n-200);
 
@@ -112,6 +189,26 @@
   --font-heading: 'Sora', system-ui, sans-serif;
   --font-body:    'Manrope', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Type scale · size / line-height / tracking / weight ──────
+     display & clock sind Zahlen-Stile (tabular-nums), label & caption
+     werden in Großbuchstaben gesetzt. Schriftfamilie siehe --font-*. */
+  --fs-display: 88px;  --lh-display: 0.9;   --ls-display: -0.04em;  --fw-display: 800;
+  --fs-clock:   64px;  --lh-clock:   1;     --ls-clock:   -0.02em;  --fw-clock:   700;
+  --fs-h1:      44px;  --lh-h1:      1.05;  --ls-h1:      -0.025em; --fw-h1:      700;
+  --fs-hero:    32px;  --lh-hero:    1.05;  --ls-hero:    -0.025em; --fw-hero:    700;  /* Name in Hero-Karten */
+  --fs-h2:      28px;  --lh-h2:      1.15;  --ls-h2:      -0.015em; --fw-h2:      600;
+  --fs-stat:    22px;  --lh-stat:    1.1;   --ls-stat:    -0.02em;  --fw-stat:    800;  /* Kennzahlen in Karten */
+  --fs-h3:      20px;  --lh-h3:      1.25;  --ls-h3:      -0.01em;  --fw-h3:      600;
+  --fs-body-lg: 18px;  --lh-body-lg: 1.55;  --ls-body-lg: 0;        --fw-body-lg: 400;
+  --fs-body:    15px;  --lh-body:    1.55;  --ls-body:    0;        --fw-body:    400;
+  --fs-body-md: 14px;  --lh-body-md: 1.5;   --ls-body-md: 0;        --fw-body-md: 400;  /* kompakte UI: Tabellen, Listen */
+  --fs-body-sm: 13px;  --lh-body-sm: 1.5;   --ls-body-sm: 0;        --fw-body-sm: 400;
+  --fs-label:   12px;  --lh-label:   1.5;   --ls-label:   0.04em;   --fw-label:   600;
+  --fs-caption: 11px;  --lh-caption: 1.4;   --ls-caption: 0.06em;   --fw-caption: 600;  /* Mono-Beschriftung, Chips */
+
+  --tt-display: none;  /* DBB-Schrift setzt Display/H1/H2 in Versalien */
+  --measure:    65ch;  /* maximale Zeilenlänge für Fließtext */
 
   /* ── Spacing scale · 4 px base ──────────────────────────────── */
   --space-0:  0;
@@ -144,7 +241,9 @@
 
   /* ── Focus ring ─────────────────────────────────────────────── */
   --ring-w:     3px;
-  --ring-color: oklch(0.82 0.10 var(--h-sky));
+  --ring-style: dashed;                          /* gestrichelt: erkennbar auch ohne Farbwahrnehmung, gleich auf allen Flächen */
+  --ring-color: oklch(0.60 0.14 calc(var(--h-amber) - 7.5));  /* Gold/Amber · ≈ #af7100, 4.0:1 auf Weiß, 3.7:1 auf #f4f4f4 (WCAG 1.4.11) */
+  --ring-color-on-dark: var(--amber-700);        /* dezenter für dunklen Grund · ≈ #9b6000, ≥ 3.4:1 auf Schwarz/Anthrazit */
 
   /* ── Touch targets ──────────────────────────────────────────── */
   --touch-sm: 44px;   /* WCAG minimum */
@@ -173,6 +272,125 @@
 }
 
 /* ────────────────────────────────────────────────────────────────
+   Brand · DBB (Schwarz · Weiß · Anthrazit · Gold · Orange)
+   Quelle: basketball-bund.de (Theme dbb21). Gold #c9ae64 ist die
+   Markenfarbe, Orange #ff9900 markiert aktive Zustände.
+   Aktivieren: <html data-brand="dbb"> — muss auf <html> stehen
+   (abgeleitete Tokens wie --team-heim lösen am Root auf).
+   Gold und Orange haben pro Stufe ähnliche Helligkeit wie amber,
+   die AAA-Slots (fill / text / deep) bleiben gleich.
+   ──────────────────────────────────────────────────────────────── */
+:root[data-brand="dbb"] {
+  --h-cool:   var(--h-gold);
+  --h-signal: var(--h-gold);
+  --c-cool:   0;
+
+  /* Neutrale ohne Farbstich (die Seite nutzt reine Grautöne) */
+  --n-0:    oklch(1.000 0 0);
+  --n-50:   oklch(0.985 0 0);
+  --n-100:  oklch(0.967 0 0);    /* #f4f4f4 */
+  --n-200:  oklch(0.925 0 0);
+  --n-300:  oklch(0.870 0 0);    /* #d4d4d4 */
+  --n-400:  oklch(0.700 0 0);
+  --n-500:  oklch(0.520 0 0);
+  --n-600:  oklch(0.420 0 0);
+  --n-700:  oklch(0.320 0 0);
+  --n-800:  oklch(0.250 0 0);
+  --n-900:  oklch(0.145 0 0);
+  --n-950:  oklch(0.085 0 0);
+  --n-1000: oklch(0.025 0 0);
+
+  --base-0:    var(--n-0);
+  --base-50:   var(--n-50);
+  --base-100:  var(--n-100);
+  --base-200:  var(--n-200);
+  --base-300:  var(--n-300);
+  --base-400:  var(--n-400);
+  --base-500:  var(--n-500);
+  --base-600:  var(--n-600);
+  --base-700:  var(--n-700);
+  --base-800:  var(--n-800);
+  --base-900:  oklch(0 0 0);      /* #000 · Text wie auf der Seite */
+  --base-1000: oklch(0.213 0 0);  /* #191919 · Anthrazit für Footer/dunkle Flächen */
+
+  --signal-50:  var(--gold-50);
+  --signal-100: var(--gold-100);
+  --signal-200: var(--gold-200);
+  --signal-300: var(--gold-300);
+  --signal-400: var(--gold-400);
+  --signal-500: var(--gold-500);
+  --signal-600: var(--gold-600);
+  --signal-700: var(--gold-700);
+  --signal-800: var(--gold-800);
+  --signal-900: var(--gold-900);
+
+  /* cool: kein Blau in der DBB-Marke, Links erben die Textfarbe */
+  --cool-50:  var(--n-50);
+  --cool-100: var(--n-100);
+  --cool-200: var(--n-200);
+  --cool-300: var(--n-300);
+  --cool-400: var(--n-400);
+  --cool-500: var(--n-500);
+  --cool-600: var(--n-600);
+  --cool-700: var(--n-700);
+  --cool-800: var(--n-800);
+  --cool-900: var(--n-900);
+
+  --action-bg:       var(--base-1000);
+  --action-bg-2:     var(--base-1000);
+  --action-bg-hover: var(--n-700);
+  --indicator:       var(--orange-600);   /* ≈ #eb6909 · 3.2:1 auf Weiß */
+  --ring-color:      var(--gold-600);   /* ≈ #998039 · 3.8:1 auf Weiß, 3.5:1 auf #f4f4f4 */
+  --ring-color-on-dark: var(--gold-700);  /* ≈ #796425 · ≥ 3.06:1 auf Anthrazit #191919, 3.6:1 auf Schwarz */
+}
+
+/* Auf dunklem Grund trägt die Marken-Orange #ff9900 (≈ 8:1 auf Anthrazit) */
+@media (prefers-color-scheme: dark) {
+  :root[data-brand="dbb"]:not([data-theme="light"]) { --indicator: var(--orange-500); }
+}
+:root[data-brand="dbb"][data-theme="dark"] { --indicator: var(--orange-500); }
+
+/* Type scale · Handy (≤ 640px): Die Klassen .dss-t-display/-clock/-h1/-h2 nutzen diese Größen.
+   Komponenten mit fester Kachelgröße (Trikotnummer, Kennzahl) bleiben bei --fs-*. */
+:root {
+  --fs-display-sm: 56px;
+  --fs-clock-sm:   48px;
+  --fs-h1-sm:      32px;
+  --fs-h2-sm:      24px;
+}
+
+/* Größe der Komponentenüberschriften (Table, ScheduleTable, ScheduleGrid, PlayByPlay, PlayerCard, TeamCard, EmptyState, Modal).
+   Sie hängt an Klassen, nie am Elementnamen (h2 bis h6 sehen gleich aus). Die Tokens sind absichtlich NICHT vorbelegt:
+   Ohne Wert gilt je Komponente der bisherige Wert (Rahmen --fs-body, Karten --fs-body-lg, Modal --fs-h3). Wer sie
+   in einem Bereich setzt, ändert alle Titel darin; die Reihenfolge ist komponentenspezifisch vor global:
+     --dss-frame-title-size   Table, ScheduleTable, ScheduleGrid, PlayByPlay   (sonst --dss-title-size)
+     --dss-card-title-size    PlayerCard, TeamCard, EmptyState                 (sonst --dss-title-size)
+     --dss-title-size         alle Komponentenüberschriften inkl. Modal
+     --dss-title-weight       Schriftgewicht aller Komponentenüberschriften
+     --dss-title-leading      Zeilenhöhe aller Komponentenüberschriften */
+
+/* ────────────────────────────────────────────────────────────────
+   Typografie · unabhängig von der Marke (data-type auf <html>)
+   Standard:  Sora (Display/Heading) · Manrope (Body) · JetBrains Mono
+   dbb:       Schriften von basketball-bund.de
+              Body    Rubik (SIL OFL, frei)
+              Display Sucrose (Yellow Design Studio, lizenzpflichtig, NICHT
+                      im Paket). Wer eine Lizenz hat, bindet sie selbst per
+                      @font-face unter dem Namen "Sucrose" ein; sonst greift
+                      der freie Fallback Barlow Condensed.
+   Die Schriftdateien liefert die Anwendung aus (siehe README).
+   ──────────────────────────────────────────────────────────────── */
+:root[data-type="dbb"] {
+  --font-display: 'Sucrose', 'Barlow Condensed', 'Rubik', system-ui, sans-serif;
+  --font-heading: 'Sucrose', 'Barlow Condensed', 'Rubik', system-ui, sans-serif;
+  --font-body:    'Rubik', system-ui, sans-serif;
+
+  /* Kondensierte Versalien-Headlines: kein negatives Tracking */
+  --ls-display: 0;  --ls-h1: 0;  --ls-h2: 0;  --ls-h3: 0;  --ls-hero: 0;
+  --tt-display: uppercase;
+}
+
+/* ────────────────────────────────────────────────────────────────
    Dark theme · auto via media query OR explicit data-theme="dark"
    ──────────────────────────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
@@ -184,6 +402,7 @@
     --surface-0: var(--n-1000);
     --surface-1: var(--n-950);
     --surface-2: var(--n-900);
+    --ring-color: var(--ring-color-on-dark);   /* dezenterer Ring auf dunklem Grund */
   }
 }
 :root[data-theme="dark"] {
@@ -194,6 +413,7 @@
   --surface-0: var(--n-1000);
   --surface-1: var(--n-950);
   --surface-2: var(--n-900);
+  --ring-color: var(--ring-color-on-dark);
 }
 
 /* ────────────────────────────────────────────────────────────────

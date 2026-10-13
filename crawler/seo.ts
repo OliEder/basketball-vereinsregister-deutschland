@@ -212,6 +212,7 @@ ${o.noindex ? '  <meta name="robots" content="noindex">\n' : ''}  <meta property
   <link href="${FONTS}" rel="stylesheet">
   <link rel="stylesheet" href="dss/tokens.css">
   <link rel="stylesheet" href="dss/components.css">
+  <link rel="stylesheet" href="dss-local.css">
 ${styles}
 ${o.head ?? ''}  <script src="theme.js"></script>
   <script>initTheme();</script>
