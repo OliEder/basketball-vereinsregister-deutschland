@@ -187,6 +187,14 @@ interface PageOpts {
   styles?: string[];
 }
 
+/** Hinweis auf allen statischen Seiten: die DBB-Optik ist kein Zeichen einer Trägerschaft. */
+const FOOTER = `  <footer>
+    <div class="footer-inner">
+      <span>Daten: <a href="https://www.basketball-bund.net" target="_blank" rel="noopener">basketball-bund.net</a></span>
+      <p class="site-note">Unabhängiges Projekt – kein Angebot des Deutschen Basketball Bundes (DBB). Die Darstellung orientiert sich am DBB-Erscheinungsbild; die Daten stammen aus öffentlich zugänglichen Quellen.</p>
+    </div>
+  </footer>`;
+
 function shell(o: PageOpts): string {
   const root = depthPrefix(o.pagePath);
   const url = `${o.base}/${o.canonicalPath ?? o.pagePath}`;
@@ -216,6 +224,7 @@ ${o.head ?? ''}  <script src="theme.js"></script>
 <body>
 ${COURT_BG}
 ${o.body}
+${FOOTER}
 ${o.scripts ?? ''}  <script src="pagenav.js"></script>
 </body>
 </html>
