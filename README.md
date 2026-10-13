@@ -110,7 +110,7 @@ python3 -m http.server -d _site 8080     # → http://localhost:8080
 
 ## Design und Barrierefreiheit
 
-Das Portal nutzt das [DSS Design System](https://github.com/OliEder/dss-design-system): `portal/dss/tokens.css` (Kopie der Design-Tokens) und `portal/dss/components.css` (framework-freie Komponenten mit den Klassennamen `dss-*`). Eigene Seitenlayouts stehen in `style.css`, `verein.css` und `team.css`. Neue Bausteine entstehen zuerst in `components.css` und werden ins Design System zurückgegeben.
+Das Portal nutzt das [DSS Design System](https://github.com/OliEder/dss-design-system): `portal/dss/tokens.css` (Kopie der Design-Tokens) und `portal/dss/components.css` (framework-freie Komponenten mit den Klassennamen `dss-*`), beide unverändert aus dem DSS kopiert (Stand: Commit `73cd19c`, nach Version 0.9.0). Was das DSS (noch) nicht kennt, steht in `portal/dss-local.css`: Brotkrumen als Liste mit 44 px Zielgröße, Links in Tabellen und Spielzeilen, Seitennavigation als Pillen, der Vereinssitz-Pin der Karte. Beim nächsten Update diese Datei mit dem DSS abgleichen und, was dort inzwischen existiert, streichen. Eigene Seitenlayouts stehen in `style.css`, `verein.css` und `team.css`. Neue Bausteine entstehen zuerst in `components.css` und werden ins Design System zurückgegeben.
 
 `npm run test:a11y` prüft Startseite, Vereins- und Team-Seiten (Light/Dark) mit axe-core:
 

@@ -246,8 +246,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--dss-line); 
 .region-card .dss-stats--compact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem 0.75rem; margin-top: auto; }
 .region-card .dss-stat-value { font-size: 16px; }
 .region-card .dss-stat-label { font-size: 10px; letter-spacing: 0.06em; }
-.region-extra { display: none; }
-@media (min-width: 640px) { .region-extra { display: block; } .region-card .dss-stats--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } .region-shape { height: 104px; } }
+.region-card .dss-stats > .region-extra { display: none; }   /* spezifischer als .dss-stats > .dss-stat { display: flex } */
+@media (min-width: 640px) { .region-card .dss-stats > .region-extra { display: flex; } .region-card .dss-stats--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } .region-shape { height: 104px; } }
 @media (max-width: 360px) { .region-link { font-size: 0.9rem; } .region-card { padding: 0.6rem 0.7rem 0.75rem; } }
 .region-more { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; justify-content: center; }
 .region-more a { display: inline-flex; align-items: center; min-height: 44px; }

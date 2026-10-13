@@ -15,28 +15,37 @@
 
 /* ── Semantische Aliase · Light ─────────────────────────────── */
 :root {
-  --dss-fg:          var(--ink-900);   /* starker Text */
-  --dss-fg-soft:     var(--ink-700);   /* Fließtext */
+  --dss-fg:          var(--base-900);   /* starker Text */
+  --dss-fg-soft:     var(--base-700);   /* Fließtext */
   --dss-mute:        var(--n-600);     /* Sekundärtext, AAA auf Surface */
   --dss-line:        var(--n-200);
   --dss-line-strong: var(--n-300);
   --dss-surface:     var(--n-0);       /* Karten */
   --dss-surface-2:   var(--n-100);     /* Eingabefelder, flache Flächen */
-  --dss-link:        var(--sky-800);
-  --dss-accent-text: var(--amber-800);
-  --dss-btn-bg:      var(--ink-800);
-  --dss-btn-bg-hover: var(--ink-700);
-  --dss-btn-fg:      var(--ink-0);
-  --dss-cta-bg:      var(--amber-400);
-  --dss-cta-bg-hover: var(--amber-500);
-  --dss-cta-fg:      var(--ink-1000);
-  --dss-hover-bg:    var(--ink-50);
-  --dss-selected-bg: var(--amber-50);
-  --dss-chip-sky-bg: var(--sky-100);   --dss-chip-sky-fg: var(--sky-800);
-  --dss-chip-amber-bg: var(--amber-100); --dss-chip-amber-fg: var(--amber-900);
+  --dss-link:        var(--cool-800);
+  --dss-accent-text: var(--signal-800);
+  --dss-btn-bg:      var(--action-bg-2);
+  --dss-btn-bg-hover: var(--action-bg-hover);
+  --dss-btn-fg:      var(--action-fg);
+  --dss-cta-bg:      var(--signal-400);
+  --dss-cta-bg-hover: var(--signal-500);
+  --dss-cta-fg:      var(--base-1000);
+  --dss-cta-fg-hover: var(--dss-cta-fg);   /* DBB: Schwarz, damit der dunklere Gold-Hover ≥ 7:1 hält */
+  --dss-mute-on-selected: var(--dss-mute);
+  --dss-hover-bg:    var(--base-50);
+  --dss-selected-bg: var(--signal-50);
+  --dss-chip-sky-bg: var(--cool-100);   --dss-chip-sky-fg: var(--cool-800);
+  --dss-chip-amber-bg: var(--signal-100); --dss-chip-amber-fg: var(--signal-900);
   --dss-chip-ok-bg:  var(--ok-soft);   --dss-chip-ok-fg:  var(--ok-text);
   --dss-chip-err-bg: var(--err-soft);  --dss-chip-err-fg: var(--err-text);
   --dss-chip-warn-bg: var(--warn-soft); --dss-chip-warn-fg: var(--warn-text);
+  --dss-chip-info-bg: var(--info-soft); --dss-chip-info-fg: var(--info-text);
+  --dss-chip-neutral-bg: var(--n-100);  --dss-chip-neutral-fg: var(--n-700);
+  /* Live: eine grüne Sprache. Fläche/Punkt aus --ok-fill (etwas dunkler, damit ≥ 3:1 auch auf --dss-surface-2); Text ≥ 7:1;
+     …-on-dark für immer dunkle Flächen (TopBar dunkel, dss-frame--dark), wie --ring-color-on-dark */
+  --live-fill: oklch(0.600 0.150 150);
+  --dss-live-fg: var(--ok-text);
+  --dss-live-fg-on-dark: oklch(0.85 0.12 150);
 }
 
 /* ── Semantische Aliase · Dark ──────────────────────────────── */
@@ -49,32 +58,38 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --dss-fg: var(--n-50);        --dss-fg-soft: var(--n-200);
-    --dss-mute: var(--n-400);
+    --dss-mute: var(--n-400);  --dss-mute-on-selected: var(--n-300);
     --dss-line: var(--n-800);     --dss-line-strong: var(--n-700);
     --dss-surface: var(--n-950);  --dss-surface-2: var(--n-900);
-    --dss-link: var(--sky-300);   --dss-accent-text: var(--amber-300);
-    --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--ink-1000);
-    --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-amber));
-    --dss-chip-sky-bg: oklch(0.30 0.07 var(--h-sky));   --dss-chip-sky-fg: var(--sky-200);
-    --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-amber)); --dss-chip-amber-fg: var(--amber-200);
+    --dss-link: var(--cool-300);   --dss-accent-text: var(--signal-300);
+    --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--base-1000);
+    --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-signal));
+    --dss-chip-sky-bg: oklch(0.30 var(--c-cool) var(--h-cool));   --dss-chip-sky-fg: var(--cool-200);
+    --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-signal)); --dss-chip-amber-fg: var(--signal-200);
     --dss-chip-ok-bg: oklch(0.30 0.06 150);  --dss-chip-ok-fg: oklch(0.85 0.12 150);
     --dss-chip-err-bg: oklch(0.30 0.08 27);  --dss-chip-err-fg: oklch(0.88 0.09 27);
     --dss-chip-warn-bg: oklch(0.32 0.06 75); --dss-chip-warn-fg: oklch(0.90 0.10 80);
+    --dss-chip-info-bg: oklch(0.30 0.06 245); --dss-chip-info-fg: oklch(0.88 0.08 245);
+    --dss-chip-neutral-bg: var(--n-800); --dss-chip-neutral-fg: var(--n-200);
+    --live-fill: oklch(0.72 0.17 150);  --dss-live-fg: oklch(0.85 0.12 150);  --dss-live-fg-on-dark: oklch(0.85 0.12 150);
   }
 }
 :root[data-theme="dark"] {
   --dss-fg: var(--n-50);        --dss-fg-soft: var(--n-200);
-  --dss-mute: var(--n-400);
+  --dss-mute: var(--n-400);  --dss-mute-on-selected: var(--n-300);
   --dss-line: var(--n-800);     --dss-line-strong: var(--n-700);
   --dss-surface: var(--n-950);  --dss-surface-2: var(--n-900);
-  --dss-link: var(--sky-300);   --dss-accent-text: var(--amber-300);
-  --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--ink-1000);
-  --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-amber));
-  --dss-chip-sky-bg: oklch(0.30 0.07 var(--h-sky));   --dss-chip-sky-fg: var(--sky-200);
-  --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-amber)); --dss-chip-amber-fg: var(--amber-200);
+  --dss-link: var(--cool-300);   --dss-accent-text: var(--signal-300);
+  --dss-btn-bg: var(--n-100);   --dss-btn-bg-hover: var(--n-300);  --dss-btn-fg: var(--base-1000);
+  --dss-hover-bg: var(--n-900); --dss-selected-bg: oklch(0.28 0.05 var(--h-signal));
+  --dss-chip-sky-bg: oklch(0.30 var(--c-cool) var(--h-cool));   --dss-chip-sky-fg: var(--cool-200);
+  --dss-chip-amber-bg: oklch(0.30 0.06 var(--h-signal)); --dss-chip-amber-fg: var(--signal-200);
   --dss-chip-ok-bg: oklch(0.30 0.06 150);  --dss-chip-ok-fg: oklch(0.85 0.12 150);
   --dss-chip-err-bg: oklch(0.30 0.08 27);  --dss-chip-err-fg: oklch(0.88 0.09 27);
   --dss-chip-warn-bg: oklch(0.32 0.06 75); --dss-chip-warn-fg: oklch(0.90 0.10 80);
+  --dss-chip-info-bg: oklch(0.30 0.06 245); --dss-chip-info-fg: oklch(0.88 0.08 245);
+  --dss-chip-neutral-bg: var(--n-800); --dss-chip-neutral-fg: var(--n-200);
+  --live-fill: oklch(0.72 0.17 150);  --dss-live-fg: oklch(0.85 0.12 150);  --dss-live-fg-on-dark: oklch(0.85 0.12 150);
 }
 
 /* ── Basis ──────────────────────────────────────────────────── */
@@ -83,7 +98,7 @@
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 .dss-eyebrow {
-  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--dss-mute);
 }
 .dss-link {
@@ -93,7 +108,7 @@
 .dss-link:hover { text-decoration-thickness: 2px; }
 .dss-link:focus-visible, .dss-btn:focus-visible, .dss-tab:focus-visible,
 .dss-select:focus-visible, .dss-chip--link:focus-visible {
-  outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px;
+  outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px;
 }
 
 /* ── Button ─────────────────────────────────────────────────── */
@@ -108,30 +123,28 @@
 .dss-btn--primary { background: var(--dss-btn-bg); color: var(--dss-btn-fg); border-radius: var(--radius-md); }
 .dss-btn--primary:hover:not(:disabled) { background: var(--dss-btn-bg-hover); }
 .dss-btn--amber { background: var(--dss-cta-bg); color: var(--dss-cta-fg); border-radius: var(--radius-md); }
-.dss-btn--amber:hover:not(:disabled) { background: var(--dss-cta-bg-hover); }
+.dss-btn--amber:hover:not(:disabled) { background: var(--dss-cta-bg-hover); color: var(--dss-cta-fg-hover); }
 .dss-btn--secondary { background: var(--dss-surface-2); color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line); }
 .dss-btn--secondary:hover:not(:disabled) { background: var(--dss-line); }
-.dss-btn--danger { background: var(--err-button); color: #fff; border-radius: var(--radius-md); }
-.dss-btn--danger:hover:not(:disabled) { filter: brightness(1.08); }
 .dss-btn--ghost { background: transparent; color: var(--dss-fg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
 .dss-btn--ghost:hover:not(:disabled) { background: var(--dss-hover-bg); }
-.dss-btn--sm { height: var(--touch-sm); padding: 0 14px; font-size: 13px; }
-.dss-btn--md { height: var(--touch-sm); padding: 0 18px; font-size: 14px; }
-.dss-btn--lg { height: var(--touch-md); padding: 0 22px; font-size: 15px; border-radius: var(--radius-lg); }
+.dss-btn--sm { height: var(--touch-sm); padding: 0 14px; font-size: var(--fs-body-sm); }
+.dss-btn--md { height: var(--touch-sm); padding: 0 18px; font-size: var(--fs-body-md); }
+.dss-btn--lg { height: var(--touch-md); padding: 0 22px; font-size: var(--fs-body); border-radius: var(--radius-lg); }
 .dss-btn--icon { width: var(--touch-sm); height: var(--touch-sm); padding: 0; }
 
 /* ── Eingabefelder ──────────────────────────────────────────── */
 .dss-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
-.dss-field-label { font-weight: 600; font-size: 12.5px; color: var(--dss-fg); }
+.dss-field-label { font-weight: 600; font-size: var(--fs-body-sm); color: var(--dss-fg); }
 .dss-input-group {
   display: flex; align-items: stretch; border: 1px solid var(--dss-line-strong);
   border-radius: var(--radius-md); background: var(--dss-surface); overflow: hidden;
   transition: border-color 0.14s, box-shadow 0.14s;
 }
-.dss-input-group:focus-within { border-color: var(--dss-fg); box-shadow: 0 0 0 var(--ring-w) var(--ring-color); }
+.dss-input-group:focus-within { border-color: var(--dss-fg); outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
 .dss-input {
   flex: 1; min-width: 0; appearance: none; border: 0; outline: 0; background: transparent;
-  height: var(--fld-h-touch); padding: 0 14px; font-family: var(--font-body); font-size: 15px; color: var(--dss-fg);
+  height: var(--fld-h-touch); padding: 0 14px; font-family: var(--font-body); font-size: var(--fs-body); color: var(--dss-fg);
 }
 .dss-input::placeholder { color: var(--dss-mute); }
 .dss-addon { display: inline-flex; align-items: center; padding: 0 0 0 14px; color: var(--dss-mute); }
@@ -139,7 +152,7 @@
   appearance: none; height: var(--fld-h-default); padding: 0 36px 0 12px;
   border: 1px solid var(--dss-line-strong); border-radius: var(--radius-md);
   background: var(--dss-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23888' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;
-  color: var(--dss-fg); font-family: var(--font-body); font-size: 14px; cursor: pointer;
+  color: var(--dss-fg); font-family: var(--font-body); font-size: var(--fs-body-md); cursor: pointer;
 }
 
 /* ── Karte ──────────────────────────────────────────────────── */
@@ -155,12 +168,13 @@
 .dss-card--hoverable:hover, .dss-card--hoverable:focus-within {
   border-color: var(--dss-line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px);
 }
+.dss-card:is(a, button, [role="button"]):focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
 .dss-card-head { padding: 14px 18px 0; font-family: var(--font-display); font-weight: 600; }
 .dss-card-body { flex: 1; min-width: 0; }
 .dss-card-foot {
   display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px;
   background: var(--dss-surface-2); border-top: 1px solid var(--dss-line);
-  font-family: var(--font-mono); font-size: 11px; color: var(--dss-mute);
+  font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute);
   text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
 }
 .dss-card--pad-sm .dss-card-body { padding: 12px 14px; }
@@ -175,13 +189,13 @@
   font-family: inherit; font-weight: 600; white-space: nowrap; text-decoration: none;
   transition: background 0.12s, color 0.12s, box-shadow 0.12s;
 }
-.dss-tabs--md .dss-tab { min-height: 44px; padding: 0 14px; font-size: 14px; }
+.dss-tabs--md .dss-tab { min-height: 44px; padding: 0 14px; font-size: var(--fs-body-md); }
 .dss-tabs--underline { border-bottom: 1px solid var(--dss-line); gap: var(--space-1); }
 .dss-tabs--underline .dss-tab { border-bottom: 2px solid transparent; margin-bottom: -1px; }
 .dss-tabs--underline .dss-tab:hover { color: var(--dss-fg); }
 .dss-tabs--underline .dss-tab.is-active,
 .dss-tabs--underline .dss-tab[aria-pressed="true"],
-.dss-tabs--underline .dss-tab[aria-selected="true"] { color: var(--dss-fg); border-bottom-color: var(--amber-400); }
+.dss-tabs--underline .dss-tab[aria-selected="true"] { color: var(--dss-fg); border-bottom-color: var(--indicator); }
 .dss-tabs--segmented { display: inline-flex; padding: 3px; background: var(--dss-surface-2); border-radius: var(--radius-md); gap: 2px; }
 .dss-tabs--segmented .dss-tab { border-radius: calc(var(--radius-md) - 2px); }
 .dss-tabs--segmented .dss-tab:hover:not(.is-active):not([aria-pressed="true"]) { background: var(--dss-line); }
@@ -190,7 +204,7 @@
 .dss-tabs--pills { flex-wrap: wrap; gap: var(--space-2); }
 .dss-tabs--pills .dss-tab {
   border-radius: var(--radius-full); border: 1px solid var(--dss-line); background: var(--dss-surface);
-  min-height: 44px; padding: 6px 14px; font-size: 13px;
+  min-height: 44px; padding: 6px 14px; font-size: var(--fs-body-sm);
   max-width: 100%; white-space: normal; text-align: left;
 }
 .dss-tabs--pills .dss-tab:hover:not(.is-active):not([aria-pressed="true"]) { border-color: var(--dss-line-strong); color: var(--dss-fg); }
@@ -200,7 +214,7 @@
 /* ── Chip / Status ──────────────────────────────────────────── */
 .dss-chip {
   display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; min-height: 24px;
-  border-radius: var(--radius-full); font-size: 12px; font-weight: 600; line-height: 1.2;
+  border-radius: var(--radius-full); font-size: var(--fs-label); font-weight: 600; line-height: 1.2;
   background: var(--dss-surface-2); color: var(--dss-fg-soft); box-shadow: inset 0 0 0 1px var(--dss-line);
 }
 .dss-chip--sky { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); box-shadow: none; }
@@ -208,30 +222,116 @@
 .dss-chip--ok { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); box-shadow: none; }
 .dss-chip--err { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); box-shadow: none; }
 .dss-chip--warn { background: var(--dss-chip-warn-bg); color: var(--dss-chip-warn-fg); box-shadow: none; }
-.dss-chip--mono { font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; }
-.dss-chip--link { text-decoration: none; min-height: 44px; padding: 0 14px; font-size: 13px; }
+/* Mono-Großbuchstaben und Ziffern sitzen in der Zeilenbox (JetBrains Mono) etwa 1 px zu hoch: 1 px Innenabstand von unten nach oben
+   verschoben, die Chip-Höhe (24 px Inhalt + 4 px) bleibt gleich. Gemessen: Textrand oben/unten gleich (Abweichung höchstens 0,25 px). */
+.dss-chip--mono { font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; font-size: var(--fs-caption); padding-block: 3px 1px; }
+.dss-chip--link { text-decoration: none; min-height: 43px; padding: 1px 14px 0; font-size: var(--fs-body-sm); } /* 43 + 1 px = 44 px Zielgröße; 1 px oben mittigt die Schrift optisch */
 .dss-chip--link:hover { box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
+
+/* ── Live: eine Sprache für alles, was gerade läuft ──────────────
+   Grün statt Rot (Rot bleibt Fehler, Foul und Abgesagt). Punkt/Fläche --live-fill, Text --dss-live-fg
+   (auf immer dunklen Flächen --dss-live-fg-on-dark). Nie nur Farbe: das Wort „Live“ bzw. der Screenreader-Text „läuft“ bleibt.
+   Zwei Animationen (Punkt, Text), beide nur Deckkraft, 1,6 s (unter 1 Hz), keine Bewegung; bei „Bewegung reduzieren“ oder data-motion="reduce" aus. */
+.dss-live { display: inline-flex; align-items: center; gap: 6px; color: var(--dss-live-fg); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.dss-live-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--live-fill); }
+.dss-sch-row.is-live .dss-sch-score, .dss-sg-game.is-live .dss-sch-score, .dss-match--live .dss-match-score { color: var(--dss-live-fg); }
+/* Zwei Keyframes mit je eigener Untergrenze: Punkte und Flächen pulsieren bis 0,35, Text nur bis 0,8
+   (Kontrast im Tal mindestens 4,5:1 auf allen Seitenflächen, Hell und Dunkel, BBV und DBB; bei 0,75 wären es hell nur 4,3:1). */
+@keyframes dss-live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes dss-live-pulse-text { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+.dss-live-pulse, .dss-live-dot, .dss-match-pulse, .dss-pbp-dot, .dss-crumb-dot, .dss-topbar-live::before {
+  animation: dss-live-pulse 1.6s ease-in-out infinite;
+}
+.dss-sch-row.is-live .dss-sch-score, .dss-sg-game.is-live .dss-sch-score, .dss-match--live .dss-match-score {
+  animation: dss-live-pulse-text 1.6s ease-in-out infinite;
+}
+/* Aus: Systemeinstellung „Bewegung reduzieren“ oder das Attribut data-motion="reduce" auf <html> (Pause-Schalter der App, WCAG 2.2.2).
+   Beide Regeln decken dieselben Selektoren ab (Test in tests/live.test.ts). */
+@media (prefers-reduced-motion: reduce) {
+  .dss-live-pulse,
+  .dss-live-dot,
+  .dss-match-pulse,
+  .dss-pbp-dot,
+  .dss-crumb-dot,
+  .dss-topbar-live::before,
+  .dss-sch-row.is-live .dss-sch-score,
+  .dss-sg-game.is-live .dss-sch-score,
+  .dss-match--live .dss-match-score {
+    animation: none;
+  }
+}
+:root[data-motion="reduce"] .dss-live-pulse,
+:root[data-motion="reduce"] .dss-live-dot,
+:root[data-motion="reduce"] .dss-match-pulse,
+:root[data-motion="reduce"] .dss-pbp-dot,
+:root[data-motion="reduce"] .dss-crumb-dot,
+:root[data-motion="reduce"] .dss-topbar-live::before,
+:root[data-motion="reduce"] .dss-sch-row.is-live .dss-sch-score,
+:root[data-motion="reduce"] .dss-sg-game.is-live .dss-sch-score,
+:root[data-motion="reduce"] .dss-match--live .dss-match-score {
+  animation: none;
+}
 
 /* ── Stat-Kachel ────────────────────────────────────────────── */
 .dss-stat { background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: var(--radius-lg); padding: 14px 16px; }
-.dss-stat-value { font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--dss-fg); line-height: 1.1; }
-.dss-stat-label { margin-top: 4px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.dss-stat-value { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); letter-spacing: -0.02em; color: var(--dss-fg); line-height: 1.1; }
+.dss-stat-label { margin-top: 4px; font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
 
-/* Kennzahlen-Gitter und Form (letzte Spiele als Chips) */
-.dss-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; }
+/* ── Kennzahlen-Gitter und Form ─────────────────────────────────
+   Kennzahlen: <dl class="dss-stats"> mit <div class="dss-stat"><dt class="dss-stat-label"><dd class="dss-stat-value">; der Wert steht optisch
+   über der Beschriftung (order), im Lesefluss steht die Beschriftung zuerst („Siege, 12“). Schriftgrößen nur aus Tokens (--fs-*).
+   --compact: ohne Kachel, in einer Zeile (Seitenleiste, Kopf einer Karte).
+   Form (letzte Spiele): <span class="dss-form"><span class="dss-form-list" aria-hidden="true"><span class="dss-form-item dss-form-item--s">…</span>
+   <span class="dss-sr-only">Form: Sieg, …</span></span>. Eine Darstellung für LeagueCard und eigene Seiten: Standard Punkte (S gefüllt, N Quadrat,
+   U Ring: Form statt nur Farbe), --letters mit Buchstaben S, N, U. Die Elemente sind nicht bedienbar (kein Ziel nach WCAG 2.5.5/2.5.8). */
+.dss-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(8rem, 100%), 1fr)); gap: 0.75rem; margin: 0; padding: 0; }
+.dss-stats > .dss-stat { display: flex; flex-direction: column; min-width: 0; }
+.dss-stats .dss-stat-value { order: -1; margin: 0; overflow-wrap: anywhere; }
+.dss-stats .dss-stat-label { overflow-wrap: anywhere; }
 .dss-stats--compact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
-.dss-stat--compact { padding: 0; border: 0; border-radius: 0; background: none; }
-.dss-stat--compact .dss-stat-value { font-size: 18px; }
-.dss-form { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
-.dss-form .dss-chip { min-height: 24px; padding: 2px 8px; }
+.dss-stat--compact, .dss-stats--compact > .dss-stat { padding: 0; border: 0; border-radius: 0; background: none; }
+.dss-stat--compact .dss-stat-value, .dss-stats--compact .dss-stat-value { font-size: var(--fs-h3); }
+
+.dss-form { position: relative; display: inline-flex; align-items: center; vertical-align: middle; }
+.dss-form-list { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 5px; } /* Punkte brechen nie um: sonst schrumpft die Spalte „Form“ einer Tabelle */
+.dss-form-item { box-sizing: border-box; flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.dss-form-item--s { background: var(--dss-chip-ok-fg); }
+.dss-form-item--n { background: var(--dss-chip-err-fg); border-radius: 2px; }
+.dss-form-item--u { border: 2px solid var(--dss-mute); }
+.dss-tbl tr.is-own .dss-form-item--u { border-color: var(--dss-mute-on-selected); }
+/* Buchstaben: farbige Marken (Chip-Töne, Kontrast wie die Chips) mit S, N, U; der Buchstabe kommt aus dem CSS und ist nicht Teil des Textes */
+.dss-form--letters .dss-form-list { flex-wrap: wrap; gap: 4px; }
+.dss-form--letters .dss-form-item {
+  display: inline-grid; place-items: center; width: auto; min-width: 24px; height: 24px; border: 0; border-radius: var(--radius-full);
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 700; line-height: 1;
+}
+.dss-form--letters .dss-form-item--s { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); }
+.dss-form--letters .dss-form-item--n { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); border-radius: var(--radius-sm); }
+.dss-form--letters .dss-form-item--u { background: var(--dss-chip-neutral-bg); color: var(--dss-chip-neutral-fg); box-shadow: inset 0 0 0 1px var(--dss-line-strong); }
+.dss-form--letters .dss-form-item--s::before { content: "S"; }
+.dss-form--letters .dss-form-item--n::before { content: "N"; }
+.dss-form--letters .dss-form-item--u::before { content: "U"; }
+/* Windows-Kontrastmodus: Füllungen entfallen dort; Formen bleiben (Punkt, Quadrat, Ring) */
+@media (forced-colors: active) {
+  .dss-form-item--s, .dss-form-item--n { background: CanvasText; forced-color-adjust: none; }
+  .dss-form-item--u { border-color: CanvasText; }
+}
 
 /* ── Tabelle ────────────────────────────────────────────────── */
 .dss-frame { border: 1px solid var(--dss-line); border-radius: 14px; background: var(--dss-surface); overflow: hidden; color: var(--dss-fg); }
 .dss-table-scroll { overflow-x: auto; }
-.dss-tbl { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 14px; color: inherit; }
+.dss-table-scroll:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+:where(.dss-tbl td, .dss-tbl th) :is(a, button, input, select, textarea, [tabindex="0"]):focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+:where(.dss-tbl tbody) tr:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+/* Dunkelmodus: der Ring (2,5 bis 2,8:1) liegt auf der Auswahlfläche der eigenen Zeile zu schwach, daher der hellere Ton */
+:root[data-theme="dark"] .dss-tbl tr.is-own :focus-visible { outline-color: var(--dss-chip-amber-fg); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dss-tbl tr.is-own :focus-visible { outline-color: var(--dss-chip-amber-fg); }
+}
+.dss-tbl { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: var(--fs-body-md); color: inherit; }
 .dss-tbl th, .dss-tbl td { text-align: left; padding: 0 14px; vertical-align: middle; white-space: nowrap; }
 .dss-tbl th {
-  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--dss-mute); background: var(--dss-surface-2); height: 38px; border-bottom: 1px solid var(--dss-line);
 }
 .dss-tbl td { height: 48px; border-bottom: 1px solid var(--dss-line); color: var(--dss-fg-soft); }
@@ -240,9 +340,8 @@
 .dss-tbl th.num, .dss-tbl td.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; }
 .dss-tbl td.num.lead { color: var(--dss-fg); font-weight: 700; }
 .dss-tbl th.center, .dss-tbl td.center { text-align: center; }
-.dss-tbl th.wrap, .dss-tbl td.wrap { white-space: normal; min-width: 11rem; }
 .dss-tbl tr.is-own td { background: var(--dss-selected-bg); color: var(--dss-fg); font-weight: 600; }
-.dss-tbl--compact td { height: 40px; font-size: 13.5px; padding: 0 12px; }
+.dss-tbl--compact td { height: 40px; font-size: var(--fs-body-md); padding: 0 12px; }
 .dss-tbl--compact th { padding: 0 12px; }
 
 /* ── Listenzeile (Spielplan) ────────────────────────────────── */
@@ -250,67 +349,1644 @@
 .dss-row { display: grid; align-items: center; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--dss-line); }
 .dss-row:last-child { border-bottom: 0; }
 .dss-row--match { grid-template-columns: 9rem 1fr auto; }
-.dss-row-when { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--dss-fg-soft); }
-.dss-row-main { min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
-.dss-row-meta { flex-basis: 100%; font-size: 12.5px; color: var(--dss-mute); }
-.dss-row-main a, .dss-tbl a {
-  display: inline-flex; align-items: center; min-height: 44px; color: var(--dss-fg);
-  text-decoration: underline; text-decoration-color: var(--dss-line-strong); text-underline-offset: 3px;
-}
-.dss-row-main a:hover, .dss-tbl a:hover { text-decoration-color: var(--amber-500); }
-.dss-row-main a:focus-visible, .dss-tbl a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
-.dss-row-meta a { color: var(--dss-link); }
-.dss-row-teams a { display: inline; min-height: 0; }
-@media (max-width: 560px) {
-  .dss-row--match { grid-template-columns: 1fr auto; gap: 4px 12px; }
-  .dss-row--match .dss-row-when { grid-column: 1 / -1; }
-}
-.dss-row-score { font-family: var(--font-mono); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; color: var(--dss-fg); white-space: nowrap; }
-
-/* ── Kartenmarker (Leaflet divIcon) ─────────────────────────── */
-.dss-map-pin {
-  width: 16px; height: 16px; border-radius: 50%; background: var(--dss-cta-bg); border: 3px solid var(--n-0);
-  box-shadow: 0 0 0 2px color-mix(in oklch, var(--ink-1000) 35%, transparent), var(--shadow-md);
-}
-.dss-map-pin--seat {
-  width: 28px; height: 28px; border-radius: 8px; background: var(--ink-1000); color: var(--n-0);
-  display: grid; place-items: center; box-sizing: border-box;
-}
-.dss-map-pin--seat svg { width: 16px; height: 16px; fill: currentColor; }
-
-/* ── Brotkrumen (Navigation-Spec, Variante plain; Liste für Screenreader) ── */
-.dss-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; list-style: none; margin: 0; padding: 0; font-family: var(--font-body); font-size: 13px; color: var(--dss-mute); }
-.dss-crumbs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
-.dss-crumbs li + li::before {
-  content: ''; flex-shrink: 0; width: 14px; height: 14px; background: var(--dss-mute); opacity: 0.7;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-.dss-crumbs a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 0 2px; color: var(--dss-mute); text-decoration: none; }
-.dss-crumbs a:hover { color: var(--dss-fg); text-decoration: underline; text-underline-offset: 3px; }
-.dss-crumbs a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; border-radius: var(--radius-sm); }
-.dss-crumbs [aria-current="page"] { color: var(--dss-fg); font-weight: 600; }
+.dss-row-when { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 600; color: var(--dss-fg-soft); }
+.dss-row-main { min-width: 0; display: flex; align-items: center; gap: 8px; }
+.dss-row-score { font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body-lg); font-variant-numeric: tabular-nums; color: var(--dss-fg); white-space: nowrap; }
 
 /* ── Top-Leiste ─────────────────────────────────────────────── */
 .dss-topbar { border-bottom: 1px solid var(--dss-line); background: color-mix(in oklch, var(--dss-surface) 92%, transparent); }
 .dss-topbar-inner { max-width: 880px; margin: 0 auto; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 /* ── Leerer / Fehler-Zustand ────────────────────────────────── */
-.dss-empty { text-align: center; padding: 40px 20px; color: var(--dss-mute); font-size: 14px; }
+.dss-empty { text-align: center; padding: 40px 20px; color: var(--dss-mute); font-size: var(--fs-body-md); }
 .dss-empty a { color: var(--dss-link); }
 
-/* ── Seitennavigation und "Nach oben" (pagenav.js) ──────────── */
-html { scroll-padding-bottom: 4.5rem; }   /* fokussierte Elemente nicht unter der festen Schaltfläche */
-h2[id] { scroll-margin-top: 1rem; }
+/* ══════════════════════════════════════════════════════════════
+   v0.7 · Ergänzungen: Button danger/touch, Felder, Banner, Modal,
+   Tabs (sm/lg/vertical/Count), Icon
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Button · danger + Hallen-Touch ─────────────────────────── */
+.dss-btn--danger { background: var(--err-button); color: var(--base-0); border-radius: var(--radius-md); }
+.dss-btn--danger:hover:not(:disabled) { filter: brightness(1.08); }
+.dss-btn.is-touch { height: var(--touch-lg); padding: 0 24px; font-size: var(--fs-body); border-radius: var(--radius-lg); }
+
+/* ── Felder · Label, Hilfetext, Zustände, Dichte ────────────── */
+.dss-field-label { display: flex; align-items: baseline; gap: 6px; }
+.dss-field-label .req { color: var(--dss-chip-err-fg); font-weight: 700; }
+.dss-field-label .opt {
+  margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-caption);
+  color: var(--dss-mute); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.dss-field-help { font-size: var(--fs-label); line-height: 1.4; color: var(--dss-mute); }
+.dss-field-help--err { color: var(--dss-chip-err-fg); font-weight: 500; }
+.dss-field-help--ok { color: var(--dss-chip-ok-fg); font-weight: 500; }
+.dss-field-help--warn { color: var(--dss-chip-warn-fg); font-weight: 500; }
+.dss-field.is-error .dss-input-group, .dss-field.is-error .dss-select { border-color: var(--err-fill); }
+.dss-field.is-ok .dss-input-group, .dss-field.is-ok .dss-select { border-color: var(--ok-fill); }
+.dss-field.is-warn .dss-input-group, .dss-field.is-warn .dss-select { border-color: var(--warn-fill); }
+.dss-input--default { height: var(--fld-h-default); }
+.dss-input--compact { height: var(--fld-h-compact); font-size: var(--fs-body-md); }
+.dss-input:disabled, .dss-select:disabled { color: var(--dss-mute); cursor: not-allowed; }
+.dss-addon--right { padding: 0 14px 0 0; }
+.dss-select--compact { height: var(--fld-h-compact); }
+
+/* ── Banner (dark-sicher über die Chip-Aliase) ──────────────── */
+.dss-banner {
+  display: flex; align-items: flex-start; gap: var(--space-3); padding: 12px 16px;
+  border-radius: var(--radius-lg); font-size: var(--fs-body-md); line-height: 1.5;
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, currentColor 22%, transparent);
+}
+.dss-banner--info { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); }
+.dss-banner--ok { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); }
+.dss-banner--warn { background: var(--dss-chip-warn-bg); color: var(--dss-chip-warn-fg); }
+.dss-banner--danger { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); }
+.dss-banner-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; }
+.dss-banner-body { flex: 1; min-width: 0; }
+.dss-banner-title { margin: 0 0 2px; font-weight: 700; }
+.dss-banner a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.dss-banner a:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+/* Der dezente Dunkel-Ring hat auf dem getönten Banner nur 2,2 bis 2,7:1 (WCAG 1.4.11 verlangt 3:1): dort Textfarbe, 8,8:1 und mehr */
+:root[data-theme="dark"] .dss-banner a:focus-visible { outline-color: currentColor; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dss-banner a:focus-visible { outline-color: currentColor; }
+}
+
+/* ── Modal (aus svelte/Modal.svelte extrahiert, über --dss-* Aliase) ── */
+.dss-backdrop {
+  position: fixed; inset: 0; z-index: 100; background: var(--backdrop);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.dss-modal-wrap {
+  position: fixed; inset: 0; z-index: 101; display: flex; align-items: center;
+  justify-content: center; padding: 24px; pointer-events: none;
+}
+.dss-modal {
+  pointer-events: auto; background: var(--dss-surface); color: var(--dss-fg);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-xl);
+  display: flex; flex-direction: column; max-height: calc(100vh - 48px);
+  overflow: hidden; width: 480px; max-width: 100%;
+}
+.dss-modal:focus { outline: none; }
+.dss-modal--sm { width: 380px; }
+.dss-modal--wide { width: 560px; }
+.dss-modal--xwide { width: 720px; }
+.dss-m-head { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px 12px; }
+.dss-m-head-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.dss-m-head-icon svg { width: 16px; height: 16px; }
+.dss-m-head-icon--danger { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); }
+.dss-m-head-icon--warn { background: var(--dss-chip-warn-bg); color: var(--dss-chip-warn-fg); }
+.dss-m-head-icon--ok { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); }
+.dss-m-head-icon--info { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); }
+.dss-m-head-text { flex: 1; min-width: 0; }
+.dss-m-title { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 700); font-size: var(--dss-title-size, var(--fs-h3)); line-height: var(--dss-title-leading, inherit); color: var(--dss-fg); }
+.dss-m-subtitle {
+  margin: 4px 0 0; font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute);
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+}
+.dss-m-close {
+  appearance: none; border: 0; background: var(--dss-surface-2); color: var(--dss-fg-soft);
+  width: 32px; height: 32px; border-radius: var(--radius-md); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.dss-m-close:hover { background: var(--dss-line); }
+.dss-m-close:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-m-body {
+  padding: 4px 24px 20px; overflow-y: auto; flex: 1; min-height: 0;
+  color: var(--dss-fg-soft); font-size: var(--fs-body); line-height: 1.55;
+}
+.dss-m-footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px;
+  padding: 16px 24px 20px; border-top: 1px solid var(--dss-line); background: var(--dss-surface-2);
+}
+
+/* ── Modal · natives <dialog> (initModal) ──────────────────────
+   Das <dialog> füllt wie .dss-modal-wrap das Fenster und zentriert .dss-modal; ::backdrop ersetzt .dss-backdrop (der Browser stellt das Dialog in die
+   oberste Ebene und schaltet die Seite dahinter ab). Ein Klick auf die Fläche außerhalb von .dss-modal trifft das Dialog selbst (dismissOnBackdrop).
+   Ohne showModal (alter Browser) bleibt das Dialog ein offenes, fest positioniertes Element mit eigener Abdunklung. */
+dialog.dss-modal-dialog {
+  position: fixed; inset: 0; z-index: 101; box-sizing: border-box; width: 100%; height: 100%; max-width: 100%; max-height: 100%;
+  margin: 0; padding: 24px; border: 0; background: transparent; color: inherit; overflow: hidden;
+  align-items: center; justify-content: center;
+}
+dialog.dss-modal-dialog[open] { display: flex; }
+dialog.dss-modal-dialog::backdrop {
+  background: var(--backdrop, rgb(0 0 0 / 0.5)); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+dialog.dss-modal-dialog:not(:modal) { background: var(--backdrop, rgb(0 0 0 / 0.5)); }
+
+/* ── Tabs · Größen, vertical, Icon, Count, disabled ─────────── */
+.dss-tabs--sm .dss-tab { min-height: 36px; padding: 0 10px; font-size: var(--fs-body-sm); }
+.dss-tabs--lg .dss-tab { min-height: 56px; padding: 0 18px; font-size: var(--fs-body); }
+.dss-tab-ic { flex-shrink: 0; }
+.dss-tab-count {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 18px;
+  padding: 0 6px; font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 700;
+  color: var(--dss-mute); background: var(--dss-surface-2); border-radius: var(--radius-full);
+}
+.dss-tab.is-active .dss-tab-count, .dss-tab[aria-selected="true"] .dss-tab-count,
+.dss-tab[aria-pressed="true"] .dss-tab-count { background: var(--dss-btn-bg); color: var(--dss-btn-fg); }
+.dss-tab:disabled, .dss-tab.is-disabled { opacity: 0.45; cursor: not-allowed; }
+.dss-tabs--vertical { flex-direction: column; gap: 2px; align-items: stretch; min-width: 220px; }
+.dss-tabs--vertical .dss-tab { justify-content: flex-start; padding: 10px 14px; border-radius: var(--radius-md); }
+.dss-tabs--vertical .dss-tab:hover:not(.is-active):not(.is-disabled) { background: var(--dss-surface-2); }
+.dss-tabs--vertical .dss-tab.is-active, .dss-tabs--vertical .dss-tab[aria-selected="true"] {
+  background: var(--dss-surface-2); color: var(--dss-fg); box-shadow: inset 3px 0 0 var(--indicator);
+}
+
+/* ── Icon ───────────────────────────────────────────────────── */
+.dss-icon { display: inline-block; vertical-align: -0.15em; color: currentColor; flex-shrink: 0; }
+
+/* ══════════════════════════════════════════════════════════════
+   v0.8 · Checkbox, Tabelle (aus Svelte extrahiert), TopBar dark,
+   EmptyState-Tonalitäten, Stepper, AppNav
+   Bereits genutzte Klassen (.dss-tbl, .dss-frame, .dss-topbar,
+   .dss-empty) werden nur ergänzt, nie verändert.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Checkbox ───────────────────────────────────────────────── */
+.dss-check {
+  display: inline-flex; align-items: center; gap: 10px; min-height: var(--fld-h-default);
+  cursor: pointer; font-family: var(--font-body); font-size: var(--fs-body-md); color: var(--dss-fg);
+}
+.dss-check--compact { min-height: var(--fld-h-compact); }
+.dss-check.is-disabled { cursor: not-allowed; opacity: 0.5; }
+.dss-check-input {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0; margin: 0; width: 22px; height: 22px;
+  display: grid; place-content: center; cursor: inherit;
+  border: 2px solid var(--dss-mute); border-radius: 6px; background: var(--dss-surface);
+  transition: background 0.12s, border-color 0.12s;
+}
+.dss-check-input::after {
+  content: ''; width: 6px; height: 11px; border: solid var(--dss-btn-fg); border-width: 0 2.5px 2.5px 0;
+  transform: translateY(-1px) rotate(45deg) scale(0); transition: transform 0.1s;
+}
+.dss-check-input:checked { background: var(--dss-btn-bg); border-color: var(--dss-btn-bg); }
+.dss-check-input:checked::after { transform: translateY(-1px) rotate(45deg) scale(1); }
+.dss-check-input:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-check-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dss-check-label { font-weight: 500; line-height: 1.3; }
+.dss-check-hint { font-size: var(--fs-label); line-height: 1.4; color: var(--dss-mute); }
+
+/* ── Tabelle · Rahmenkopf, Dichten, Sortierung, Footer, Dark ── */
+.dss-frame--dark { background: var(--n-1000); border-color: var(--n-800); color: var(--n-100); }
+.dss-frame-head {
+  display: flex; justify-content: space-between; align-items: center; padding: 16px 22px;
+  border-bottom: 1px solid var(--dss-line); background: var(--dss-hover-bg);
+}
+.dss-frame--dark .dss-frame-head { background: var(--n-950); border-color: var(--n-800); }
+.dss-frame-title { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 600); font-size: var(--dss-frame-title-size, var(--dss-title-size, var(--fs-body))); line-height: var(--dss-title-leading, inherit); color: inherit; letter-spacing: -0.005em; }
+.dss-frame-meta {
+  display: flex; gap: 14px; align-items: center; font-family: var(--font-mono); font-size: var(--fs-caption);
+  color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.dss-frame--dark .dss-frame-meta { color: var(--n-400); }
+.dss-crumb { display: inline-flex; align-items: center; gap: 6px; }
+.dss-crumb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live-fill); } /* Puls: siehe Abschnitt Live */
+
+.dss-tbl th { position: sticky; top: 0; z-index: 1; }
+.dss-tbl th.right, .dss-tbl td.right { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; }
+.dss-tbl td.num.dim { color: var(--dss-mute); }
+.dss-tbl td.num.plus { color: var(--dss-chip-ok-fg); }
+.dss-tbl td.num.minus { color: var(--dss-chip-err-fg); }
+.dss-tbl th.sortable { cursor: pointer; user-select: none; }
+.dss-tbl th.sortable::after {
+  content: ''; display: inline-block; width: 0; height: 0; border: 4px solid transparent;
+  border-top-color: var(--dss-mute); margin-left: 6px; vertical-align: -2px; opacity: 0.5;
+}
+.dss-tbl th.sort-asc::after { border-top: 0; border-bottom-color: var(--dss-fg-soft); opacity: 1; vertical-align: 1px; }
+.dss-tbl th.sort-desc::after { border-top-color: var(--dss-fg-soft); opacity: 1; }
+.dss-tbl--touch td { height: 60px; font-size: var(--fs-body); }
+.dss-tbl--dense td { height: 32px; font-size: var(--fs-body-sm); padding: 0 10px; }
+.dss-tbl--dense th { padding: 0 10px; height: 32px; }
+.dss-tbl--striped tbody tr:nth-child(even) td { background: var(--dss-hover-bg); }
+/* Die eigene Zeile bleibt auch auf geraden Streifen markiert (der Streifen überdeckte sie sonst) */
+.dss-tbl--striped tbody tr.is-own td { background: var(--dss-selected-bg); }
+.dss-tbl tfoot td {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; color: var(--dss-fg);
+  background: var(--dss-surface-2); border-top: 1px solid var(--dss-line-strong); border-bottom: 0; height: 42px;
+}
+.dss-frame--dark .dss-tbl th { color: var(--n-400); background: var(--n-950); border-bottom-color: var(--n-800); }
+.dss-frame--dark .dss-tbl td { border-bottom-color: var(--n-800); color: var(--n-200); }
+.dss-frame--dark .dss-tbl tbody tr:hover td { background: var(--n-900); }
+.dss-frame--dark .dss-tbl td.num.lead { color: var(--n-50); }
+.dss-frame--dark .dss-tbl td.num.plus { color: oklch(0.85 0.12 150); }
+.dss-frame--dark .dss-tbl td.num.minus { color: oklch(0.88 0.09 27); }
+.dss-frame--dark .dss-tbl th.sortable::after { border-top-color: var(--n-400); }
+.dss-frame--dark .dss-tbl th.sort-asc::after { border-bottom-color: var(--n-50); }
+.dss-frame--dark .dss-tbl th.sort-desc::after { border-top-color: var(--n-50); }
+.dss-frame--dark .dss-tbl--striped tbody tr:nth-child(even) td { background: var(--n-900); }
+.dss-frame--dark .dss-tbl--striped tbody tr.is-own td { background: var(--dss-selected-bg); }
+.dss-frame--dark .dss-tbl tfoot td { background: var(--n-900); color: var(--n-50); border-top-color: var(--n-700); }
+
+/* Dekorations-Klassen für Boxscore/Roster (Trikotnummer, Position, Pille) */
+.dss-tn {
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px;
+  font-family: var(--font-display); font-weight: 800; font-size: var(--fs-body-lg); letter-spacing: -0.02em;
+  background: var(--n-100); color: var(--base-900); font-variant-numeric: tabular-nums; flex-shrink: 0;
+}
+.dss-frame--dark .dss-tn { background: var(--n-800); color: var(--n-50); }
+.dss-tn.heim { background: var(--team-heim, oklch(0.55 0.20 27)); color: white; }
+/* 10 % Schwarz beigemischt: weißer Text hält auf dem Standard-Rot ≥ 7:1 (ohne Beimischung 6,0:1); die Marke bleibt Rot */
+.dss-tn.gast { background: color-mix(in oklab, var(--team-gast, oklch(0.55 0.18 245)) 90%, black); color: white; }
+.dss-tn.captain { box-shadow: 0 0 0 2px var(--signal-500); }
+.dss-tn.small { width: 32px; height: 32px; font-size: var(--fs-body-md); border-radius: 7px; }
+.dss-tn.large { width: 64px; height: 64px; font-size: var(--fs-h2); border-radius: 14px; }
+.dss-tn.hero { width: 110px; height: 110px; font-size: var(--fs-h1); border-radius: 22px; }
+.dss-player { display: flex; align-items: center; gap: 12px; }
+.dss-player-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dss-player-name { font-family: var(--font-body); font-weight: 600; font-size: var(--fs-body-md); color: var(--dss-fg); letter-spacing: -0.005em; line-height: 1.2; }
+.dss-player-meta { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.2; }
+.dss-frame--dark .dss-player-name { color: var(--n-50); }
+.dss-frame--dark .dss-player-meta { color: var(--n-400); }
+.dss-player.bench .dss-player-name { color: var(--dss-fg-soft); font-weight: 500; }
+.dss-frame--dark .dss-player.bench .dss-player-name { color: var(--n-300); }
+.dss-player.dnp .dss-player-name { color: var(--dss-mute); text-decoration: line-through; font-weight: 400; }
+.dss-pos {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-width: 22px; padding: 0 4px; height: 22px; border-radius: 5px;
+  font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-caption); background: var(--base-100); color: var(--base-700);
+}
+.dss-pos.pg { background: var(--dss-chip-sky-bg); color: var(--dss-chip-sky-fg); }
+.dss-pos.sg { background: var(--dss-chip-info-bg); color: var(--dss-chip-info-fg); }
+.dss-pos.sf { background: var(--dss-chip-amber-bg); color: var(--dss-accent-text); }
+.dss-pos.pf { background: var(--dss-chip-warn-bg); color: var(--dss-chip-warn-fg); }
+.dss-pos.c { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); }
+.dss-pill-s {
+  display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600;
+  padding: 3px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; background: var(--dss-chip-neutral-bg); color: var(--dss-chip-neutral-fg);
+}
+.dss-pill-s.on { background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); }
+.dss-pill-s.cap { background: var(--dss-chip-amber-bg); color: var(--dss-accent-text); }
+.dss-pill-s.dnp { background: var(--dss-chip-err-bg); color: var(--dss-chip-err-fg); }
+
+/* ── TopBar · dunkle App-Leiste (Modifier, die helle Vereinsregister-Leiste bleibt) ── */
+.dss-topbar.dss-topbar--dark {
+  display: flex; align-items: center; height: 56px; padding: 0 20px; gap: 20px;
+  background: var(--base-1000); color: var(--n-100); border-bottom: 1px solid var(--n-900);
+  font-family: var(--font-body);
+}
+.dss-topbar-brand {
+  display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fs-body); letter-spacing: -0.01em; color: white;
+}
+.dss-topbar-mark {
+  width: 26px; height: 26px; border-radius: 6px; background: var(--signal-400); color: var(--base-1000);
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: var(--fs-body-sm);
+}
+.dss-topbar-ctx {
+  display: flex; align-items: center; gap: 14px; margin-left: 28px; font-family: var(--font-mono);
+  font-size: var(--fs-caption); color: var(--n-300); letter-spacing: 0.04em;
+}
+/* Live auf der immer dunklen Leiste: Text --dss-live-fg-on-dark (≥ 7:1 auf Schwarz und Anthrazit #191919), Punkt --live-fill; Puls: siehe Abschnitt Live */
+.dss-topbar-live {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--dss-live-fg-on-dark); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.dss-topbar-live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--live-fill); }
+.dss-topbar-score { font-weight: 700; font-size: var(--fs-body-md); color: white; letter-spacing: -0.01em; }
+.dss-topbar-clock { color: var(--signal-300); font-weight: 700; }
+.dss-topbar-center { flex: 1; display: flex; justify-content: center; }
+.dss-topbar-spacer { flex: 1; }
+.dss-topbar-user {
+  display: flex; align-items: center; gap: 10px; padding: 5px 12px 5px 5px; border-radius: 999px;
+  background: var(--n-900); color: var(--n-100); font-size: var(--fs-body-sm); font-weight: 500;
+}
+.dss-topbar-av {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--cool-700); color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-label);
+}
+
+/* ── EmptyState · Tonalitäten (Basis .dss-empty bleibt der schlichte Text-Zustand) ── */
+.dss-empty--neutral, .dss-empty--action, .dss-empty--error {
+  display: flex; flex-direction: column; align-items: center; max-width: 460px; margin: 0 auto;
+  padding: 40px 32px; border: 1px dashed var(--dss-line-strong); border-radius: 14px;
+  background: var(--dss-surface); color: var(--dss-fg-soft); font-family: var(--font-body);
+}
+.dss-empty--action { border-color: var(--signal-400); background: var(--dss-chip-amber-bg); }
+.dss-empty--error { border-color: var(--err-fill); background: var(--dss-chip-err-bg); }
+.dss-empty-icon {
+  width: 60px; height: 60px; border-radius: 50%; margin-bottom: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.dss-empty--neutral .dss-empty-icon { background: var(--dss-surface-2); color: var(--dss-mute); }
+.dss-empty--action .dss-empty-icon { background: var(--dss-surface); color: var(--dss-chip-amber-fg); }
+.dss-empty--error .dss-empty-icon { background: var(--dss-surface); color: var(--dss-chip-err-fg); }
+.dss-empty-title { margin: 0 0 6px; font-family: var(--font-display); font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))); line-height: var(--dss-title-leading, inherit); color: var(--dss-fg); letter-spacing: -0.01em; }
+.dss-empty-body { margin: 0 0 16px; max-width: 360px; font-size: var(--fs-body-md); line-height: 1.55; color: var(--dss-fg-soft); text-wrap: pretty; }
+.dss-empty-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.dss-empty-extra { margin-top: 12px; font-size: var(--fs-body-sm); color: var(--dss-mute); }
+/* Der dezente Dunkel-Ring hat auf den getönten Flächen action/error nur 2,4 bis 2,7:1 (WCAG 1.4.11 verlangt 3:1): dort die Chip-Textfarbe */
+:root[data-theme="dark"] .dss-empty--action .dss-btn:focus-visible { outline-color: var(--dss-chip-amber-fg); }
+:root[data-theme="dark"] .dss-empty--error .dss-btn:focus-visible { outline-color: var(--dss-chip-err-fg); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dss-empty--action .dss-btn:focus-visible { outline-color: var(--dss-chip-amber-fg); }
+  :root:not([data-theme="light"]) .dss-empty--error .dss-btn:focus-visible { outline-color: var(--dss-chip-err-fg); }
+}
+
+/* ── Stepper (horizontal · kompakt · vertikal) ──────────────── */
+.dss-step { font-family: var(--font-body); }
+.dss-step--h, .dss-step--v { list-style: none; margin: 0; padding: 0; }
+.dss-step-dot {
+  appearance: none; box-sizing: border-box; flex-shrink: 0; margin: 0; padding: 0; border: 2px solid var(--dss-line-strong);
+  border-radius: 50%; background: var(--dss-surface); color: var(--dss-mute);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700; transition: background 0.12s, border-color 0.12s;
+}
+button.dss-step-dot { cursor: pointer; }
+button.dss-step-dot:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-step-item.is-done .dss-step-dot { background: var(--ok-fill); border-color: var(--ok-fill); color: white; }
+.dss-step-item.is-current .dss-step-dot {
+  border-color: var(--signal-500); background: var(--signal-500); color: var(--base-1000);
+  box-shadow: 0 0 0 4px var(--dss-chip-amber-bg);
+}
+.dss-step-label { font-weight: 600; color: var(--dss-fg-soft); }
+.dss-step-item.is-done .dss-step-label { color: var(--dss-fg); }
+.dss-step-item.is-current .dss-step-label { color: var(--dss-fg); font-weight: 700; }
+.dss-step-item.is-pending .dss-step-label, .dss-step-item.is-pending .dss-step-desc { color: var(--dss-mute); }
+
+/* horizontal */
+.dss-step--h { display: flex; align-items: flex-start; }
+.dss-step--h .dss-step-item { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; min-width: 0; }
+.dss-step--h .dss-step-dot { width: 32px; height: 32px; font-size: var(--fs-body-sm); z-index: 1; }
+.dss-step--h .dss-step-label { font-size: var(--fs-body-sm); margin-top: 8px; text-align: center; max-width: 140px; }
+.dss-step--h .dss-step-line { position: absolute; top: 16px; left: calc(50% + 18px); right: calc(-50% + 18px); height: 2px; background: var(--dss-line); z-index: 0; }
+.dss-step--h .dss-step-item.is-done .dss-step-line { background: var(--ok-fill); }
+
+/* kompakt */
+.dss-step--c { display: flex; flex-direction: column; gap: 8px; }
+.dss-step-track { height: 4px; border-radius: 999px; background: var(--dss-line); overflow: hidden; }
+.dss-step-fill { height: 100%; background: var(--ok-fill); transition: width 0.3s; }
+.dss-step-info { display: flex; gap: 12px; align-items: baseline; font-size: var(--fs-body-sm); }
+.dss-step-num { font-family: var(--font-mono); font-weight: 700; color: var(--dss-mute); text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--fs-caption); }
+.dss-step-cur { color: var(--dss-fg); font-weight: 600; }
+
+/* vertikal */
+.dss-step--v .dss-step-item { display: flex; gap: 14px; padding-bottom: 18px; }
+.dss-step--v .dss-step-item:last-child { padding-bottom: 0; }
+.dss-step-rail { display: flex; flex-direction: column; align-items: center; width: 32px; flex-shrink: 0; }
+.dss-step--v .dss-step-dot { width: 30px; height: 30px; font-size: var(--fs-label); }
+.dss-step-vline { flex: 1; width: 2px; background: var(--dss-line); margin: 4px 0; min-height: 16px; }
+.dss-step--v .dss-step-item.is-done .dss-step-vline { background: var(--ok-fill); }
+.dss-step-body { padding-top: 4px; flex: 1; }
+.dss-step--v .dss-step-label { font-size: var(--fs-body-md); }
+.dss-step-desc { font-size: var(--fs-body-sm); color: var(--dss-mute); margin-top: 2px; }
+
+/* ── AppNav · Hauptnavigation mit Gruppen-Dropdowns und mobilem Menü ── */
+.dss-appnav { position: relative; background: var(--dss-surface); border-bottom: 1px solid var(--dss-line); font-family: var(--font-body); }
+.dss-appnav-bar { display: flex; align-items: center; gap: 4px; padding: 0 12px; }
+.dss-appnav-list { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.dss-appnav-item { position: relative; }
+.dss-appnav-context { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 0 8px; }
+.dss-appnav-link, .dss-appnav-group-btn, .dss-appnav-toggle {
+  appearance: none; display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 12px;
+  border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none;
+  font: inherit; font-size: var(--fs-body-md); font-weight: 600; color: var(--dss-fg-soft); text-decoration: none; cursor: pointer;
+}
+.dss-appnav-link:hover, .dss-appnav-group-btn:hover, .dss-appnav-toggle:hover { color: var(--dss-fg); background: var(--dss-hover-bg); }
+.dss-appnav-link.is-active, .dss-appnav-group-btn.is-active { color: var(--dss-fg); border-bottom-color: var(--indicator); }
+/* Gesperrt (noch nicht verfügbar): abgedunkelt, Schloss, kein Hover. Gilt für Links und ganze Gruppen. */
+.dss-appnav-link.is-disabled, .dss-appnav-group-btn.is-disabled { color: var(--dss-mute); opacity: 0.55; cursor: not-allowed; background: none; }
+.dss-appnav-link.is-disabled:hover, .dss-appnav-group-btn.is-disabled:hover { color: var(--dss-mute); background: none; }
+.dss-appnav-link.is-disabled::after, .dss-appnav-group-btn.is-disabled::after {
+  content: ""; flex-shrink: 0; width: 14px; height: 14px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='9' rx='1.5'/%3E%3Cpath d='M8 11V8a4 4 0 1 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='9' rx='1.5'/%3E%3Cpath d='M8 11V8a4 4 0 1 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.dss-appnav-group-btn.is-disabled .dss-appnav-chev { display: none; }
+.dss-appnav-link:focus-visible, .dss-appnav-group-btn:focus-visible, .dss-appnav-toggle:focus-visible {
+  outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px;
+}
+.dss-appnav-chev { transition: transform 0.12s; }
+.dss-appnav-group-btn.is-open .dss-appnav-chev { transform: rotate(180deg); }
+.dss-appnav-panel {
+  position: absolute; top: 100%; left: 0; z-index: 50; min-width: 230px; margin: 4px 0 0; padding: 6px;
+  list-style: none; background: var(--dss-surface); border: 1px solid var(--dss-line);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-md);
+}
+.dss-appnav-panel[hidden] { display: none; }
+.dss-appnav-panel .dss-appnav-link {
+  display: flex; box-sizing: border-box; width: 100%; min-height: 44px; margin: 0; border-bottom: 0; border-radius: var(--radius-md);
+}
+.dss-appnav-panel .dss-appnav-link.is-active { background: var(--dss-selected-bg); box-shadow: inset 3px 0 0 var(--indicator); }
+.dss-appnav-toggle { display: none; }
+
+.dss-appnav--dark { background: var(--base-1000); border-bottom-color: var(--n-900); color: var(--n-100); }
+.dss-appnav--dark .dss-appnav-link, .dss-appnav--dark .dss-appnav-group-btn, .dss-appnav--dark .dss-appnav-toggle { color: var(--n-300); }
+.dss-appnav--dark .dss-appnav-link:hover, .dss-appnav--dark .dss-appnav-group-btn:hover, .dss-appnav--dark .dss-appnav-toggle:hover { color: white; background: var(--n-900); }
+.dss-appnav--dark .dss-appnav-link.is-active, .dss-appnav--dark .dss-appnav-group-btn.is-active { color: white; }
+.dss-appnav--dark .dss-appnav-link.is-disabled, .dss-appnav--dark .dss-appnav-group-btn.is-disabled,
+.dss-appnav--dark .dss-appnav-link.is-disabled:hover, .dss-appnav--dark .dss-appnav-group-btn.is-disabled:hover { color: var(--n-400); background: none; }
+.dss-appnav--dark .dss-appnav-link:focus-visible, .dss-appnav--dark .dss-appnav-group-btn:focus-visible, .dss-appnav--dark .dss-appnav-toggle:focus-visible { outline-color: var(--ring-color-on-dark); }
+.dss-appnav--dark .dss-appnav-panel { background: var(--n-950); border-color: var(--n-800); }
+.dss-appnav--dark .dss-appnav-panel .dss-appnav-link.is-active { background: var(--n-900); }
+
+@media (max-width: 720px) {
+  .dss-appnav-bar { flex-wrap: wrap; padding: 0 8px; }
+  .dss-appnav-toggle { display: inline-flex; margin-bottom: 0; border-bottom: 0; }
+  .dss-appnav-list { display: none; flex-direction: column; align-items: stretch; width: 100%; gap: 0; padding-bottom: 8px; }
+  .dss-appnav.is-open .dss-appnav-list { display: flex; }
+  .dss-appnav-link, .dss-appnav-group-btn { box-sizing: border-box; width: 100%; justify-content: space-between; border-bottom: 0; margin-bottom: 0; border-radius: var(--radius-md); }
+  .dss-appnav-link.is-active, .dss-appnav-group-btn.is-active { background: var(--dss-selected-bg); box-shadow: inset 3px 0 0 var(--indicator); }
+  .dss-appnav--dark .dss-appnav-link.is-active, .dss-appnav--dark .dss-appnav-group-btn.is-active { background: var(--n-900); }
+  .dss-appnav-panel { position: static; min-width: 0; margin: 0; padding: 0 0 0 14px; border: 0; box-shadow: none; background: none; }
+  .dss-appnav-context { margin-left: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   v0.9 · BottomNav, Breadcrumbs, Skeleton, MatchCard, PlayerCard,
+   PlayByPlay (aus Svelte extrahiert), contained-Leisten
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── BottomNav ──────────────────────────────────────────────── */
+.dss-bnav {
+  display: flex; align-items: stretch; justify-content: space-around; height: 64px;
+  background: var(--dss-surface); border-top: 1px solid var(--dss-line); font-family: var(--font-body);
+}
+.dss-bnav-item {
+  appearance: none; border: 0; background: transparent; cursor: pointer; flex: 1; min-width: 44px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 6px 4px; color: var(--dss-mute); position: relative; text-decoration: none; transition: color 0.12s;
+}
+.dss-bnav-ic { color: currentColor; }
+.dss-bnav-lbl { font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.02em; }
+.dss-bnav-item:hover { color: var(--dss-fg-soft); }
+.dss-bnav-item.is-active { color: var(--dss-fg); }
+.dss-bnav-item.is-active::before {
+  content: ''; position: absolute; top: 0; left: 50%; width: 36px; height: 3px;
+  background: var(--signal-500); transform: translateX(-50%); border-radius: 0 0 3px 3px;
+}
+.dss-bnav-badge {
+  position: absolute; top: 6px; right: calc(50% - 22px); min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; background: var(--err-button); color: white;
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 700; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.dss-bnav-fab {
+  appearance: none; border: 0; cursor: pointer; align-self: center; width: 56px; height: 56px; margin: 0 4px;
+  border-radius: 50%; background: var(--signal-500); color: var(--base-1000); text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md);
+  transform: translateY(-12px); transition: background 0.12s, transform 0.12s;
+}
+.dss-bnav-fab:hover { background: var(--signal-400); transform: translateY(-14px); }
+.dss-bnav-item:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+.dss-bnav-fab:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .dss-bnav-fab, .dss-bnav-fab:hover { transition: none; } }
+
+/* ── Breadcrumbs ────────────────────────────────────────────── */
+.dss-crumbs {
+  display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-family: var(--font-body); font-size: var(--fs-body-sm); color: var(--dss-mute);
+}
+.dss-crumbs-item { display: inline-flex; align-items: center; gap: 6px; padding: 2px 0; color: var(--dss-mute); text-decoration: none; }
+a.dss-crumbs-item:hover { color: var(--dss-fg); }
+.dss-crumbs-item.is-current { color: var(--dss-fg); font-weight: 600; }
+.dss-crumbs-sep { flex-shrink: 0; color: var(--dss-mute); opacity: 0.7; }
+.dss-crumbs-tag {
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 2px 6px; border-radius: 4px; background: var(--dss-surface-2); color: var(--dss-fg-soft);
+}
+.dss-crumbs--tagged .is-current .dss-crumbs-tag { background: var(--dss-btn-bg); color: var(--dss-btn-fg); }
+.dss-crumbs--chip { gap: 4px; }
+.dss-crumbs-chip {
+  display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px;
+  background: var(--dss-surface-2); color: var(--dss-fg-soft); text-decoration: none; font-size: var(--fs-label); font-weight: 500;
+}
+a.dss-crumbs-chip:hover { background: var(--dss-line); color: var(--dss-fg); }
+.dss-crumbs-chip.is-current { background: var(--dss-btn-bg); color: var(--dss-btn-fg); font-weight: 600; }
+a.dss-crumbs-item:focus-visible, a.dss-crumbs-chip:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+.dss-skel {
+  display: inline-block; background-size: 200% 100%; animation: dss-skel-shimmer 1.4s ease-in-out infinite;
+  background-image: linear-gradient(90deg, var(--dss-surface-2) 0%, var(--dss-line) 50%, var(--dss-surface-2) 100%);
+}
+.dss-skel--line { display: block; width: 100%; height: 14px; border-radius: 4px; }
+.dss-skel--block { display: block; width: 100%; height: 120px; border-radius: 8px; }
+.dss-skel--circle { border-radius: 50%; }
+@keyframes dss-skel-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .dss-skel { animation: none; } }
+.dss-skel-row {
+  display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 12px 16px;
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 12px; margin-bottom: 8px;
+}
+.dss-skel-who { display: flex; flex-direction: column; min-width: 0; }
+.dss-skel-match {
+  box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; min-width: min(320px, 100%);
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 14px;
+}
+.dss-skel-match-head { display: flex; justify-content: space-between; }
+.dss-skel-match-row { display: flex; gap: 14px; align-items: center; }
+
+/* ── MatchCard ──────────────────────────────────────────────── */
+.dss-match {
+  appearance: none; box-sizing: border-box; display: block; width: 100%; padding: 0; overflow: hidden; text-align: left;
+  background: var(--dss-surface); color: inherit; text-decoration: none; font: inherit; font-family: var(--font-body);
+  border: 1px solid var(--dss-line); border-radius: 14px; transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+button.dss-match, a.dss-match { cursor: pointer; }
+button.dss-match:hover, a.dss-match:hover { border-color: var(--dss-line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+button.dss-match:focus-visible, a.dss-match:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-match--live { border-color: var(--live-fill); }
+.dss-match--live::before { content: ''; display: block; height: 3px; background: var(--live-fill); }
+.dss-match-head {
+  display: flex; justify-content: space-between; align-items: center; padding: 14px 18px 8px;
+  font-family: var(--font-mono); font-size: var(--fs-caption); text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--dss-mute); font-weight: 600;
+}
+.dss-match-league { color: var(--dss-fg-soft); }
+.dss-match-muted { color: var(--dss-mute); margin-left: 4px; }
+.dss-match-when { color: var(--dss-fg-soft); }
+.dss-match-final { color: var(--dss-fg); }
+.dss-match-live { display: inline-flex; align-items: center; gap: 6px; color: var(--dss-live-fg); }
+/* Langer Abschnitt („4. Viertel“, „2. Verlängerung“) plus Spieltag passt nicht immer in eine Zeile: nur der Kopf der Live-Karte darf umbrechen (Angabe rechtsbündig in der zweiten Zeile); angesetzte und beendete Karten bleiben einzeilig. */
+.dss-match--live .dss-match-head { flex-wrap: wrap; gap: 2px 12px; }
+.dss-match--live .dss-match-head > :last-child { margin-left: auto; }
+.dss-match-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--live-fill); } /* Puls: siehe Abschnitt Live */
+@media (prefers-reduced-motion: reduce) { button.dss-match, a.dss-match { transition: none; } }
+.dss-match-body { display: flex; flex-direction: column; gap: 8px; padding: 6px 18px 16px; }
+.dss-match-team { display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; }
+/* Mit Logos (names/logos-Prop): zusätzliche Spalte zwischen Trikotpunkt und Name */
+.dss-match--logos .dss-match-team { grid-template-columns: 16px 28px 1fr auto; gap: 10px; }
+.dss-match-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--team-heim, oklch(0.55 0.20 27)); }
+.dss-match-team--gast .dss-match-dot { background: var(--team-gast, oklch(0.55 0.18 245)); }
+.dss-match-name {
+  font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body-lg); letter-spacing: -0.01em; color: var(--dss-fg);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.dss-match-score {
+  font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-stat); color: var(--dss-fg);
+  font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+}
+.dss-match-team.is-loser .dss-match-name { color: var(--dss-mute); font-weight: 500; }
+.dss-match-team.is-loser .dss-match-score { color: var(--dss-mute); }
+.dss-match-foot {
+  display: flex; justify-content: space-between; padding: 10px 18px; background: var(--dss-hover-bg);
+  border-top: 1px solid var(--dss-line); font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.04em;
+}
+
+/* ── PlayerCard ─────────────────────────────────────────────── */
+.dss-pc-row {
+  appearance: none; box-sizing: border-box; display: grid; grid-template-columns: 32px 1fr auto auto; gap: 14px; align-items: center;
+  width: 100%; padding: 12px 16px; text-align: left; font: inherit; font-family: var(--font-body); color: inherit;
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 12px; transition: border-color 0.12s, background 0.12s;
+}
+button.dss-pc-row { cursor: pointer; }
+button.dss-pc-row:hover { border-color: var(--dss-line-strong); background: var(--dss-hover-bg); }
+button.dss-pc-row:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-pc-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dss-pc-name { font-weight: 600; font-size: var(--fs-body); color: var(--dss-fg); letter-spacing: -0.005em; line-height: 1.2; }
+.dss-pc-meta { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase; }
+.dss-pc-stat { text-align: right; font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body-md); color: var(--dss-fg); font-variant-numeric: tabular-nums; }
+.dss-pc-stat-l { display: block; font-weight: 500; font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.dss-pc-card {
+  display: flex; flex-direction: column; overflow: hidden; font-family: var(--font-body);
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 14px;
+}
+.dss-pc-head { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; padding: 22px; border-bottom: 1px solid var(--dss-line); }
+.dss-pc-card .dss-pc-who { gap: 4px; }
+.dss-pc-nm { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 600); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))); line-height: var(--dss-title-leading, inherit); letter-spacing: -0.01em; color: var(--dss-fg); }
+.dss-pc-role {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-family: var(--font-mono); font-size: var(--fs-caption);
+  color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.dss-pc-cap { padding: 2px 6px; border-radius: 4px; background: var(--dss-chip-amber-bg); color: var(--dss-chip-amber-fg); font-weight: 700; }
+.dss-pc-vitals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 18px 22px; }
+.dss-pc-v { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-stat); letter-spacing: -0.02em; color: var(--dss-fg); font-variant-numeric: tabular-nums; }
+.dss-pc-v--amber { color: var(--dss-accent-text); }
+.dss-pc-l { margin-top: 2px; font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.dss-pc-hero {
+  position: relative; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; overflow: hidden;
+  padding: 32px; background: var(--base-1000); color: white; border-radius: 18px; font-family: var(--font-body);
+}
+.dss-pc-hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%;
+  background: var(--signal-400); opacity: 0.16; filter: blur(20px);
+}
+.dss-pc-hero-left, .dss-pc-hero-right { position: relative; z-index: 1; }
+.dss-pc-hero-right { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.dss-pc-hero .dss-pc-nm { font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-hero))); letter-spacing: -0.025em; line-height: var(--dss-title-leading, 1.05); color: white; }
+.dss-pc-hero .dss-pc-role { gap: 10px; font-size: var(--fs-caption); color: rgba(255, 255, 255, 0.65); }
+.dss-pc-hero .dss-pc-cap { background: var(--signal-100); color: var(--signal-800); }
+/* PlayerCard behält die etwas größere Positionsmarke (Table nutzt die kompakte Basis) */
+.dss-pc-row .dss-pos, .dss-pc-card .dss-pos, .dss-pc-hero .dss-pos { min-width: 26px; padding: 0 6px; font-size: var(--fs-caption); letter-spacing: 0.06em; }
+.dss-pc-hero .dss-pos { background: rgba(255, 255, 255, 0.12); color: white; }
+.dss-pc-hero .dss-pc-vitals { gap: 24px; padding: 8px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.dss-pc-hero .dss-pc-v { color: white; }
+.dss-pc-hero .dss-pc-v--amber { color: var(--signal-400); }
+.dss-pc-hero .dss-pc-l { color: rgba(255, 255, 255, 0.55); }
+/* Foto (Prop photo): runder Avatar statt Trikotmarke, Trikotnummer als Badge an der Ecke. Die Zeilenhöhe bleibt (Avatar = Trikotmarke = 32 px). */
+.dss-pc-av { position: relative; flex: none; display: block; width: 32px; height: 32px; }
+.dss-pc-av--lg { width: 64px; height: 64px; }
+.dss-pc-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; background: var(--dss-surface-2); }
+.dss-pc-av .dss-pc-img { border-radius: 50%; }
+.dss-pc-av--lg .dss-pc-img { border-radius: 14px; }
+.dss-tn.dss-tn--badge {
+  position: absolute; right: -6px; bottom: -6px; box-sizing: border-box; width: auto; min-width: 20px; height: 20px; padding: 0 3px;
+  border: 2px solid var(--dss-surface); border-radius: 7px; font-size: var(--fs-caption); line-height: 1;
+}
+.dss-pc-av:not(.dss-pc-av--lg) .dss-tn--badge { right: -8px; bottom: -8px; min-width: 16px; height: 16px; padding: 0 2px; border-radius: 6px; font-size: 10px; } /* compact: kleiner und weiter außen, das Gesicht im 32-px-Avatar bleibt frei */
+.dss-tn.dss-tn--badge-lg { right: -8px; bottom: -8px; min-width: 28px; height: 28px; padding: 0 5px; border-radius: 9px; font-size: var(--fs-body-md); }
+/* hero mit Foto: Porträtfläche links bis zum Kartenrand, Verlauf nach Dunkel (der Name liegt nie über hellem Bild) */
+.dss-pc-hero--photo { grid-template-columns: 200px minmax(0, 1fr); gap: 0; padding: 0; }
+.dss-pc-hero--photo .dss-pc-hero-left { align-self: stretch; min-height: 200px; }
+.dss-pc-hero--photo .dss-pc-hero-left::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, transparent 45%, var(--base-1000) 100%);
+}
+.dss-pc-hero--photo .dss-pc-img { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--base-1000); }
+.dss-pc-hero--photo .dss-tn--badge { z-index: 1; left: 16px; right: auto; bottom: 16px; border-color: var(--base-1000); }
+.dss-pc-hero--photo .dss-pc-hero-right { padding: 32px 32px 32px 0; }
+/* Schmale Bildschirme: Trikot über den Text, Kennzahlen schrumpfen statt die Seite zu verbreitern */
+@media (max-width: 560px) {
+  .dss-pc-hero { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 24px; }
+  /* mit Foto: Porträt als Banner oben; der weiße Name liegt über dem dunklen Verlauf */
+  .dss-pc-hero--photo { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; }
+  .dss-pc-hero--photo .dss-pc-hero-left { min-height: 280px; }
+  .dss-pc-hero--photo .dss-pc-img { object-position: center 45%; }
+  .dss-pc-hero--photo .dss-pc-hero-left::after { background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--base-1000) 92%, transparent) 86%, var(--base-1000) 100%); }
+  .dss-pc-hero--photo .dss-tn--badge { top: 16px; bottom: auto; }
+  .dss-pc-hero--photo .dss-pc-hero-right { margin-top: -48px; padding: 0 24px 24px; gap: 18px; }
+  .dss-pc-vitals { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding-inline: 16px; }
+  .dss-pc-hero .dss-pc-vitals { gap: 8px; padding-inline: 0; }
+  .dss-pc-v { font-size: var(--fs-body-lg); }
+}
+
+/* ── PlayByPlay ─────────────────────────────────────────────── */
+.dss-pbp-frame { border: 1px solid var(--dss-line); border-radius: 14px; background: var(--dss-surface); color: var(--dss-fg); overflow: hidden; }
+.dss-pbp-frame--dark { background: var(--n-1000); border-color: var(--n-800); color: var(--n-100); }
+.dss-pbp-head {
+  display: flex; justify-content: space-between; align-items: center; padding: 16px 22px;
+  border-bottom: 1px solid var(--dss-line); background: var(--dss-hover-bg);
+}
+.dss-pbp-frame--dark .dss-pbp-head { background: var(--n-950); border-color: var(--n-800); }
+.dss-pbp-title { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 600); font-size: var(--dss-frame-title-size, var(--dss-title-size, var(--fs-body))); line-height: var(--dss-title-leading, inherit); color: inherit; letter-spacing: -0.005em; }
+.dss-pbp-meta {
+  display: flex; gap: 14px; align-items: center; font-family: var(--font-mono); font-size: var(--fs-caption);
+  color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.dss-pbp-frame--dark .dss-pbp-meta { color: var(--n-400); }
+.dss-pbp-live { display: inline-flex; align-items: center; gap: 6px; color: var(--dss-live-fg); font-weight: 700; }
+.dss-pbp-frame--dark .dss-pbp-live { color: var(--dss-live-fg-on-dark); }
+.dss-pbp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--live-fill); } /* Puls: siehe Abschnitt Live */
+.dss-pbp-feed { max-height: 600px; overflow-y: auto; }
+.dss-pbp-feed:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+.dss-pbp-event {
+  display: flex; align-items: center; gap: 14px; padding: 12px 22px; border-bottom: 1px solid var(--dss-line);
+  transition: background 0.12s; animation: dss-pbp-in 0.45s ease-out;
+}
+@keyframes dss-pbp-in {
+  from { opacity: 0; transform: translateY(-4px); background: var(--dss-selected-bg); }
+  to   { opacity: 1; transform: translateY(0); background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .dss-pbp-event { animation: none; } }
+.dss-pbp-frame--dark .dss-pbp-event { border-bottom-color: var(--n-800); }
+.dss-pbp-event:last-child { border-bottom: 0; }
+.dss-pbp-event:hover { background: var(--dss-hover-bg); }
+.dss-pbp-frame--dark .dss-pbp-event:hover { background: var(--n-900); }
+.dss-pbp-time {
+  width: 70px; flex-shrink: 0; font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body-sm); line-height: 1.2;
+  color: var(--dss-fg-soft); font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.dss-pbp-frame--dark .dss-pbp-time { color: var(--n-200); }
+.dss-pbp-q { display: block; font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.06em; text-transform: uppercase; }
+.dss-pbp-frame--dark .dss-pbp-q { color: var(--n-400); }
+.dss-pbp-strip { width: 4px; height: 36px; border-radius: 2px; flex-shrink: 0; }
+.dss-pbp-strip--heim { background: var(--team-heim, oklch(0.55 0.20 27)); }
+.dss-pbp-strip--gast { background: var(--team-gast, oklch(0.55 0.18 245)); }
+.dss-pbp-strip--none { background: var(--dss-line-strong); }
+.dss-pbp-frame--dark .dss-pbp-strip--none { background: var(--n-700); }
+.dss-pbp-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.dss-pbp-action { font-family: var(--font-body); font-weight: 600; font-size: var(--fs-body-md); line-height: 1.25; color: var(--dss-fg); }
+.dss-pbp-frame--dark .dss-pbp-action { color: var(--n-50); }
+.dss-pbp-action b { font-weight: 700; }
+.dss-pbp-detail { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); letter-spacing: 0.02em; }
+.dss-pbp-frame--dark .dss-pbp-detail { color: var(--n-400); }
+.dss-pbp-score {
+  flex-shrink: 0; min-width: 80px; text-align: right; font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body);
+  color: var(--dss-fg); font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+}
+.dss-pbp-frame--dark .dss-pbp-score { color: var(--n-50); }
+.dss-pbp-sep { margin: 0 4px; font-weight: 500; color: var(--dss-mute); }
+.dss-pbp-event--foul .dss-pbp-action { color: var(--dss-chip-err-fg); }
+.dss-pbp-frame--dark .dss-pbp-event--foul .dss-pbp-action { color: oklch(0.88 0.16 27); }
+.dss-pbp-event--timeout .dss-pbp-action { color: var(--dss-chip-sky-fg); }
+.dss-pbp-frame--dark .dss-pbp-event--timeout .dss-pbp-action { color: oklch(0.88 0.13 245); }
+.dss-pbp-event--score-3p .dss-pbp-action b { color: var(--dss-accent-text); }
+.dss-pbp-frame--dark .dss-pbp-event--score-3p .dss-pbp-action b { color: var(--signal-400); }
+
+/* ── CourtLines: Spielfeldlinien als Seitenhintergrund (FIBA 28 × 15 m, SVG als Maske) ── */
+/* BBV: schwaches Amber (hell amber-200, dunkel amber-700); gedämpfter Text darüber bleibt ≥ 7:1 */
+:root { --dss-court-color: var(--signal-200); --dss-court-opacity: 0.4; }
+:root[data-theme="dark"] { --dss-court-color: var(--signal-700); --dss-court-opacity: 0.15; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --dss-court-color: var(--signal-700); --dss-court-opacity: 0.15; } }
+/* DBB: Linien in Gold, dezent genug, dass gedämpfter Text darüber 7:1 hält (hell gold-200, dunkel gold-700) */
+:root[data-brand="dbb"] { --dss-cta-fg-hover: oklch(0 0 0); }
+:root[data-brand="dbb"] { --dss-court-color: var(--gold-200); --dss-court-opacity: 0.5; }
+:root[data-brand="dbb"][data-theme="dark"] { --dss-court-color: var(--gold-700); --dss-court-opacity: 0.15; }
+@media (prefers-color-scheme: dark) {
+  :root[data-brand="dbb"]:not([data-theme="light"]) { --dss-court-color: var(--gold-700); --dss-court-opacity: 0.15; }
+}
+.dss-courtbg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.dss-courtbg--absolute { position: absolute; }
+.dss-courtlines {
+  position: absolute; inset: 0;
+  /* hell genug, dass auch gedämpfter 13-px-Text über einer Linie den AAA-Kontrast (7:1) hält */
+  background: var(--dss-court-color); opacity: var(--dss-court-opacity);
+  -webkit-mask: url("courtlines/court.svg") center 8% / min(1500px, 170vw) auto no-repeat;
+  mask: url("courtlines/court.svg") center 8% / min(1500px, 170vw) auto no-repeat;
+}
+/* Handy: das ganze Feld im Hochformat statt eines Ausschnitts */
+@media (max-width: 700px) {
+  .dss-courtlines {
+    -webkit-mask: url("courtlines/court-portrait.svg") center 3% / 96% auto no-repeat;
+    mask: url("courtlines/court-portrait.svg") center 3% / 96% auto no-repeat;
+  }
+}
+
+/* ── Typografie-Klassen (Type scale aus tokens.css) ─────────── */
+.dss-t-display, .dss-t-clock, .dss-t-h1, .dss-t-h2, .dss-t-h3, .dss-t-hero, .dss-t-stat,
+.dss-t-body-lg, .dss-t-body, .dss-t-body-md, .dss-t-body-sm, .dss-t-label, .dss-t-caption {
+  margin: 0; font-style: normal;
+}
+.dss-t-display { font: var(--fw-display) var(--fs-display)/var(--lh-display) var(--font-display); letter-spacing: var(--ls-display); text-transform: var(--tt-display); font-variant-numeric: tabular-nums; }
+.dss-t-clock   { font: var(--fw-clock) var(--fs-clock)/var(--lh-clock) var(--font-mono); letter-spacing: var(--ls-clock); font-variant-numeric: tabular-nums; }
+.dss-t-h1      { font: var(--fw-h1) var(--fs-h1)/var(--lh-h1) var(--font-heading); letter-spacing: var(--ls-h1); text-transform: var(--tt-display); }
+.dss-t-h2      { font: var(--fw-h2) var(--fs-h2)/var(--lh-h2) var(--font-heading); letter-spacing: var(--ls-h2); text-transform: var(--tt-display); }
+.dss-t-hero    { font: var(--fw-hero) var(--fs-hero)/var(--lh-hero) var(--font-heading); letter-spacing: var(--ls-hero); }
+.dss-t-stat    { font: var(--fw-stat) var(--fs-stat)/var(--lh-stat) var(--font-display); letter-spacing: var(--ls-stat); font-variant-numeric: tabular-nums; }
+.dss-t-h3      { font: var(--fw-h3) var(--fs-h3)/var(--lh-h3) var(--font-heading); letter-spacing: var(--ls-h3); }
+.dss-t-body-lg { font: var(--fw-body-lg) var(--fs-body-lg)/var(--lh-body-lg) var(--font-body); }
+.dss-t-body    { font: var(--fw-body) var(--fs-body)/var(--lh-body) var(--font-body); }
+.dss-t-body-md { font: var(--fw-body-md) var(--fs-body-md)/var(--lh-body-md) var(--font-body); }
+.dss-t-body-sm { font: var(--fw-body-sm) var(--fs-body-sm)/var(--lh-body-sm) var(--font-body); }
+.dss-t-label   { font: var(--fw-label) var(--fs-label)/var(--lh-label) var(--font-body); letter-spacing: var(--ls-label); text-transform: uppercase; }
+.dss-t-caption { font: var(--fw-caption) var(--fs-caption)/var(--lh-caption) var(--font-mono); letter-spacing: var(--ls-caption); text-transform: uppercase; }
+.dss-tnum { font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .dss-t-display { font-size: var(--fs-display-sm); }
+  .dss-t-clock   { font-size: var(--fs-clock-sm); }
+  .dss-t-h1      { font-size: var(--fs-h1-sm); }
+  .dss-t-h2      { font-size: var(--fs-h2-sm); }
+}
+.dss-measure { max-width: var(--measure); }
+
+/* ── contained: Leisten voll breit, Inhalt an --dss-shell-max ausgerichtet ── */
+:root { --dss-shell-max: 64rem; }
+.dss-topbar.dss-topbar--dark.dss-topbar--contained {
+  padding-inline: max(20px, calc((100% - var(--dss-shell-max)) / 2 + 16px));
+}
+.dss-appnav--contained .dss-appnav-bar {
+  padding-inline: max(8px, calc((100% - var(--dss-shell-max)) / 2 + 4px));
+}
+
+/* ── Spielplan · ScheduleTable (Variante A) ─────────────────── */
+.dss-tbl--schedule td { white-space: normal; }
+/* Positionierter Vorfahre für die absolut positionierten dss-sr-only-Texte, sonst verbreitern sie bei
+   breiten Tabellen (Layout columns) die ganze Seite. */
+.dss-tbl--schedule td { position: relative; }
+/* Vertikaler Innenabstand, damit zweite und dritte Zeilen (Liga, Hinweis) nicht am Zeilenrand kleben.
+   border-box, damit einzeilige Zeilen exakt die Dichte-Höhe (60/48/40 px) behalten und nur mehrzeilige wachsen.
+   Die Handy-Karten setzen padding: 0 mit höherer Spezifität zurück. */
+.dss-tbl--schedule td { box-sizing: border-box; padding-block: 8px; }
+/* Kompakt: 8 px Padding plus Ergebnis-Chip (29 px) ergäben 45 px; mit 4 px bleibt die einzeilige Zeile bei 40 px,
+   Zeilen mit zweiter Zeile wachsen weiterhin. Handy-Karten bleiben unberührt (eigene Regel mit höherer Spezifität). */
+.dss-tbl--schedule.dss-tbl--compact td { padding-block: 4px; }
+.dss-tbl--schedule tr.dss-sch-group th {
+  position: static; text-align: left; height: 32px; padding: 0 14px;
+  background: var(--dss-surface-2); color: var(--dss-fg-soft); border-bottom: 1px solid var(--dss-line);
+}
+.dss-tbl--schedule td.dss-sch-nr { width: 48px; color: var(--dss-mute); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.dss-tbl--schedule td.dss-sch-when { color: var(--dss-fg); font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dss-sch-date { color: var(--dss-fg-soft); }
+.dss-sch-date + .dss-sch-time::before { content: " · "; color: var(--dss-mute); }
+.dss-sch-live { margin-left: 8px; font-size: var(--fs-caption); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.dss-sch-venue { display: block; margin-top: 2px; font-size: var(--fs-body-sm); color: var(--dss-mute); }
+.dss-tbl--schedule.dss-tbl--touch .dss-sch-date { display: block; color: var(--dss-fg); font-weight: 600; font-size: var(--fs-body-md); }
+.dss-tbl--schedule.dss-tbl--touch .dss-sch-date + .dss-sch-time::before { content: none; }
+.dss-tbl--schedule.dss-tbl--touch .dss-sch-time { font-size: var(--fs-body-sm); color: var(--dss-fg-soft); }
+.dss-tbl--schedule td.dss-sch-ha { width: 64px; padding-right: 0; }
+.dss-tbl--schedule td.dss-sch-match { color: var(--dss-fg); }
+.dss-sch-sub { display: block; margin-top: 2px; font-size: var(--fs-body-sm); }
+/* Zielgröße: Links in der Unterzeile und am Teamnamen bekommen 3 px Fläche oben und unten (WCAG 2.5.8), der negative Rand hält die Zeilenhöhe */
+.dss-sch-sub .dss-link, .dss-sch-team .dss-link { padding-block: 3px; margin-block: -3px; }
+.dss-sch-sep { color: var(--dss-mute); }
+.dss-sch-team.is-loser, .dss-sch-team.is-loser .dss-link { color: var(--dss-mute); }
+.dss-sch-ph { color: var(--dss-mute); font-style: italic; }
+.dss-sch-note { display: block; margin-top: 2px; font-size: var(--fs-body-sm); font-weight: 600; color: var(--dss-chip-warn-fg); }
+.dss-sch-opp { display: flex; align-items: center; gap: 12px; }
+.dss-sch-logo {
+  flex: none; display: grid; place-items: center; width: 36px; height: 36px; overflow: hidden;
+  border: 1px solid var(--dss-line); border-radius: var(--radius-md); background: var(--dss-surface);
+  font-family: var(--font-display); font-weight: 800; font-size: var(--fs-caption); color: var(--dss-fg-soft);
+}
+.dss-sch-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+/* ── Namen und Logos (Spielplan, MatchCard) ──────────────────
+   Namen: Hat ein Team einen Kurznamen, stehen beide Texte im Markup (.dss-name-full, .dss-name-short). Standard: voller Name.
+   Mit .dss-team-name--short (Prop names="short") und bis 640 px Breite (wie die Handy-Karten) ist der Kurzname sichtbar;
+   der volle Name bleibt dann für Hilfstechnik lesbar (dss-sr-only-Muster), der Kurzname ist aria-hidden und trägt den vollen Namen als title (Tooltip); der versteckte volle Name ist nicht markierbar. */
+.dss-team-name { position: relative; }
+.dss-team-name .dss-name-short { display: none; }
+.dss-team-name--short .dss-name-short { display: inline; }
+.dss-team-name--short .dss-name-full {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; user-select: none;
+}
+@media (max-width: 640px) {
+  .dss-team-name .dss-name-short { display: inline; }
+  .dss-team-name .dss-name-full {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; user-select: none;
+  }
+}
+/* Logo vor dem Teamnamen: dekorativ (der Name steht daneben). Bild in Kachel (--dss-surface-2, auch für transparente PNGs im
+   Dunkelmodus), ohne Bild ein Kreis mit Initialen (--dss-fg auf --dss-surface-2, ≥ 7:1). 28 px, in compact 20 px. */
+.dss-team-logo {
+  flex: none; display: inline-grid; place-items: center; box-sizing: border-box; width: 28px; height: 28px; padding: 2px; overflow: hidden;
+  border: 1px solid var(--dss-line); border-radius: var(--radius-md); background: var(--dss-surface-2);
+  font-family: var(--font-display); font-weight: 800; font-size: var(--fs-caption); line-height: 1; letter-spacing: 0; color: var(--dss-fg);
+}
+.dss-team-logo--initials { padding: 0; border-radius: 50%; }
+.dss-team-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.dss-tbl--compact .dss-team-logo { width: 20px; height: 20px; padding: 1px; font-size: 9px; }
+.dss-tbl--compact .dss-team-logo--initials { padding: 0; }
+.dss-sch-team--logo { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; }
+.dss-tbl--compact .dss-sch-team--logo { gap: 6px; }
+/* Handy: Teams mit Logo stehen untereinander (je Team eine Zeile), der Gedankenstrich entfällt; sonst bricht er allein um */
+@media (max-width: 640px) {
+  .dss-sch-match .dss-sch-team--logo, .dss-sg-teams .dss-sch-team--logo { display: flex; }
+  .dss-sch-team--logo + .dss-sch-sep { display: none; }
+  .dss-sch-match .dss-sch-team--logo + .dss-sch-sep + .dss-sr-only + .dss-sch-team--logo, .dss-sg-teams .dss-sch-team--logo + .dss-sch-sep + .dss-sr-only + .dss-sch-team--logo { margin-top: 4px; }
+}
+.dss-tbl--schedule td.dss-sch-res { width: 1%; text-align: right; white-space: nowrap; }
+.dss-sch--columns td.dss-sch-res { text-align: center; }
+/* Ergebnis-Box: Zahl (und Sieg-/Niederlage-Chip links davon); "vorläufig" steht klein unter der Zahl.
+   Die Zahl behält ihre Ausrichtung (rechts, im Layout columns mittig), auch wenn das Tag breiter ist als die Zahl.
+   Der Chip steht über beide Zeilen, so wächst die Zeile durch das Tag nicht über die Dichte-Höhe hinaus. */
+.dss-sch-resbox { display: inline-grid; grid-template-columns: auto auto; justify-items: end; align-items: center; vertical-align: middle; }
+.dss-sch--columns .dss-sch-resbox { justify-items: center; }
+.dss-sch-resbox .dss-chip { grid-column: 1; grid-row: 1 / span 2; }
+.dss-sch-resbox .dss-sch-score { grid-column: 2; grid-row: 1; }
+.dss-sch-resbox .dss-sch-prov { grid-column: 2; grid-row: 2; }
+.dss-sch-res .dss-chip { margin-right: 10px; }
+/* Zeilen mit vorläufigem Ergebnis: Zahl (22 px) plus Tag (11 px, 1 px Abstand) sind 34 px hoch (plus 1 px Zeilenlinie); weniger Innenabstand in der Ergebniszelle,
+   damit die Dichte-Höhen (default 48, compact 40) auch dann gelten. touch (60) hat genug Platz. */
+.dss-tbl--schedule.dss-tbl--default td.dss-sch-res { padding-block: 6px; }
+.dss-tbl--schedule.dss-tbl--compact td.dss-sch-res { padding-block: 2px; }
+.dss-sch-score {
+  font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-stat); line-height: 1;
+  letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--dss-fg);
+}
+.dss-sch-none { font-family: var(--font-mono); color: var(--dss-mute); }
+.dss-sch-prov { font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; line-height: 1; letter-spacing: 0.04em; color: var(--dss-mute); white-space: nowrap; margin-top: 1px; }
+/* inline-block statt inline-flex (nötig für die Auslassungspunkte); line-height = Inhaltshöhe des Chips (24 px), damit der Text mittig sitzt;
+   die Zeilenbox liegt hier etwas anders als im Flex-Chip, deshalb 2 px statt 3/1 px Innenabstand (gemessen) */
+.dss-sch-field { max-width: 14ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle; line-height: 24px; padding-block: 2px; }
+.dss-tbl--schedule td.dss-sch-notice { max-width: 24ch; white-space: normal; }
+.dss-tbl--schedule tr.is-own td:first-child { box-shadow: inset 3px 0 0 var(--indicator); }
+/* Eigene Zeile: gedämpfter Text auf dem getönten Grund (Dunkelmodus 5,5:1 mit --dss-mute) auf ≥ 7:1 */
+.dss-tbl--schedule tr.is-own, .dss-sg-game.is-own { --dss-mute: var(--dss-mute-on-selected); }
+.dss-tbl--schedule tr.is-cancelled td,
+.dss-tbl--schedule tr.is-cancelled .dss-sch-date,
+.dss-tbl--schedule tr.is-cancelled .dss-sch-time { color: var(--dss-mute); }
+.dss-tbl--schedule tr.is-cancelled .dss-sch-team,
+.dss-tbl--schedule tr.is-cancelled .dss-sch-date,
+.dss-tbl--schedule tr.is-cancelled .dss-sch-time { text-decoration: line-through; }
+.dss-tbl--schedule tr.is-postponed td,
+.dss-tbl--schedule tr.is-postponed .dss-sch-date,
+.dss-tbl--schedule tr.is-postponed .dss-sch-time { color: var(--dss-mute); }
+.dss-tbl--schedule tr.is-bye td, .dss-tbl--schedule td.dss-sch-bye { color: var(--dss-mute); font-style: italic; }
+
+/* Handy: jede Zeile wird zur Karte (Tabellensemantik über role-Attribute im Markup).
+   Zellen werden über benannte Grid-Bereiche platziert; fehlende Zellen lassen leere Spuren (0 Höhe). */
+@media (max-width: 640px) {
+  .dss-tbl--schedule, .dss-tbl--schedule tbody { display: block; }
+  .dss-sch--columns thead {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  .dss-tbl--schedule tr.dss-sch-group, .dss-tbl--schedule tr.dss-sch-group th { display: block; }
+  .dss-tbl--schedule tr.dss-sch-row {
+    display: grid; grid-template-columns: 1fr auto; column-gap: 12px; row-gap: 0; padding: 12px 14px;
+    border-bottom: 1px solid var(--dss-line);
+  }
+  .dss-tbl--schedule tr.dss-sch-row:last-child { border-bottom: 0; }
+  .dss-sch--versus tr.dss-sch-row { grid-template-areas: "when when" "match res"; }
+  /* Perspektive: erste Zeile Datum und Uhrzeit, zweite Zeile "vs."/"@" vor dem Gegner, Ergebnis rechts.
+     Die DOM-Reihenfolge (Zeit, Heim/Auswärts, Gegner, Ergebnis) bleibt für Screenreader unverändert. */
+  .dss-sch--opponent tr.dss-sch-row { grid-template-columns: auto 1fr auto; grid-template-areas: "when when when" "ha match res"; }
+  .dss-tbl--schedule.dss-sch--opponent .dss-sch-date { display: inline; }
+  .dss-tbl--schedule.dss-sch--opponent .dss-sch-date + .dss-sch-time::before { content: " · "; color: var(--dss-mute); }
+  .dss-sch--columns tr.dss-sch-row { grid-template-areas: "nr field" "when venue" "heim res" "gast res" "notice notice"; }
+
+  .dss-tbl.dss-tbl--schedule tbody tr.dss-sch-row td {
+    display: block; height: auto; width: auto; margin-top: 4px; padding: 0; border: 0; background: transparent;
+  }
+  .dss-tbl.dss-tbl--schedule tbody tr.dss-sch-row td:first-child { margin-top: 0; }
+  .dss-tbl--schedule td.dss-sch-nr { grid-area: nr; }
+  .dss-tbl--schedule td.dss-sch-when { grid-area: when; }
+  .dss-tbl--schedule td.dss-sch-ha { grid-area: ha; text-align: left; align-self: start; }
+  /* Chip (28 px) mittig zum Logo (36 px) der ersten Gegner-Zeile: 4 px Grundabstand der Zellen plus 4 px */
+  .dss-tbl.dss-tbl--schedule tbody tr.dss-sch-row td.dss-sch-ha { margin-top: 8px; }
+  .dss-tbl--schedule td.dss-sch-match { grid-area: match; }
+  .dss-tbl--schedule td.dss-sch-heim { grid-area: heim; }
+  .dss-tbl--schedule td.dss-sch-gast { grid-area: gast; }
+  .dss-tbl--schedule td.dss-sch-field-cell { grid-area: field; text-align: right; }
+  .dss-tbl--schedule td.dss-sch-venue-cell { grid-area: venue; text-align: right; }
+  .dss-tbl--schedule td.dss-sch-res { grid-area: res; align-self: center; text-align: right; }
+  .dss-tbl--schedule td.dss-sch-notice { grid-area: notice; max-width: none; }
+  .dss-tbl--schedule td.dss-sch-bye { grid-area: auto / 1 / auto / -1; max-width: none; }
+  /* Leere Zelle (z. B. Hinweis ohne Inhalt) bräuchte sonst Rand und Zeilenhöhe; Selektor so stark wie die display:block-Regel oben */
+  .dss-tbl.dss-tbl--schedule tbody tr.dss-sch-row td:empty { display: none; }
+
+  /* Hervorhebung und Hover gehören an die Karte (Zeile), nicht an die einzelnen Zellen */
+  .dss-tbl--schedule tr.dss-sch-row.is-own { background: var(--dss-selected-bg); box-shadow: inset 3px 0 0 var(--indicator); }
+  .dss-tbl--schedule tr.is-own td:first-child { box-shadow: none; }
+  .dss-tbl--schedule tr.dss-sch-row:hover { background: var(--dss-hover-bg); }
+}
+
+/* ── Spielplan · ScheduleGrid (Variante B, Zeitraster) ─────── */
+.dss-sgrid th, .dss-sgrid td { white-space: normal; vertical-align: top; }
+.dss-sgrid thead th { text-align: left; z-index: 2; } /* über der sticky Zeitzelle im Rumpf (z-index 1) */
+.dss-sgrid td.dss-sg-cell { height: auto; padding: 8px 10px; min-width: 180px; }
+.dss-sgrid th.dss-sg-time { position: static; width: 96px; min-width: 96px; }
+.dss-sgrid tbody th.dss-sg-time {
+  position: sticky; left: 0; top: auto; z-index: 1; height: auto; padding: 12px 14px;
+  text-transform: none; letter-spacing: 0; font-family: var(--font-mono); font-size: var(--fs-body-md); font-weight: 600;
+  color: var(--dss-fg); font-variant-numeric: tabular-nums; white-space: nowrap;
+  background: var(--dss-surface); border-bottom: 1px solid var(--dss-line);
+}
+.dss-sgrid tbody tr:last-child th.dss-sg-time { border-bottom: 0; }
+.dss-sgrid tbody tr:hover th.dss-sg-time { background: var(--dss-hover-bg); }
+/* Kompakt: Karten und Zellen deutlich enger (sonst bestimmt min-height der Karte die Zeilenhöhe) */
+@media (min-width: 641px) {
+  .dss-sgrid.dss-tbl--compact td.dss-sg-cell { padding: 4px 8px; }
+  .dss-sgrid.dss-tbl--compact tbody th.dss-sg-time { padding: 6px 12px; font-size: var(--fs-body-sm); }
+}
+/* position: relative, damit die absolut positionierten dss-sr-only-Texte im Scroll-Container bleiben
+   (sonst entsteht durch sie seitliches Scrollen der ganzen Seite). */
+.dss-sg-game {
+  position: relative; display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; min-height: 56px;
+  border: 1px solid var(--dss-line); border-radius: var(--radius-md); background: var(--dss-surface);
+  font-size: var(--fs-body-md); color: var(--dss-fg);
+}
+.dss-sg-game.is-own { background: var(--dss-selected-bg); box-shadow: inset 3px 0 0 var(--indicator); font-weight: 600; }
+.dss-sg-game.is-cancelled { color: var(--dss-mute); }
+.dss-sg-game.is-cancelled .dss-sch-team { text-decoration: line-through; }
+.dss-sg-game.is-postponed { color: var(--dss-mute); }
+.dss-sg-teams { line-height: 1.35; }
+/* Ergebnis und Live-Tag stehen in einer Zeile und brechen erst um, wenn die Zelle (mindestens 180 px) zu schmal wird.
+   Ohne Stand steht das Live-Tag hinter der Paarung (läuft im Text mit, bricht dort um). */
+.dss-sg-result { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.dss-sg-result .dss-sch-score { font-size: var(--fs-body); }
+.dss-sg-result .dss-sch-live { margin-left: 0; }
+.dss-sg-result .dss-sch-resbox { justify-items: start; }
+.dss-sg-game + .dss-sg-game { margin-top: 6px; }
+.dss-tbl--compact .dss-sg-game { min-height: 0; padding: 4px 8px; gap: 2px; }
+.dss-tbl--compact .dss-sg-game + .dss-sg-game { margin-top: 4px; }
+.dss-sg-meta { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--dss-mute); }
+.dss-sg-empty { display: block; padding: 8px 0; color: var(--dss-mute); font-style: italic; }
+.dss-sgrid tr.dss-sg-break td, .dss-sgrid tr.dss-sg-bye td { height: auto; padding: 10px 14px; color: var(--dss-mute); font-style: italic; background: var(--dss-surface-2); }
+
+@media (max-width: 640px) {
+  .dss-sgrid, .dss-sgrid tbody { display: block; }
+  .dss-sgrid thead {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  .dss-sgrid tr { display: block; border-bottom: 1px solid var(--dss-line); padding-bottom: 8px; }
+  .dss-sgrid tbody th.dss-sg-time, .dss-sgrid tbody tr:hover th.dss-sg-time { position: static; display: block; width: auto; padding: 12px 14px 4px; border: 0; background: none; }
+  .dss-sgrid tbody tr:hover td { background: none; }
+  .dss-sgrid tbody tr:hover { background: var(--dss-hover-bg); }
+  .dss-sgrid td.dss-sg-cell { display: block; min-width: 0; padding: 4px 14px; border: 0; }
+  .dss-sgrid td.dss-sg-cell.is-empty { display: none; }
+  .dss-sgrid td.dss-sg-cell::before {
+    content: attr(data-label); display: block; margin-bottom: 4px; font-family: var(--font-mono);
+    font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dss-mute);
+  }
+  .dss-sgrid tr.dss-sg-break td, .dss-sgrid tr.dss-sg-bye td { display: block; }
+}
+
+/* ── TeamCard ───────────────────────────────────────────────
+   Mannschaftskarte (standard) und Listenzeile (compact). Logo/Initialen und Kurzname teilen die Bausteine der Namen-und-Logos-Regeln
+   (.dss-team-logo, .dss-team-name). Klickbar: der Name in der Überschrift ist ein Link (a) oder Button, sein ::after deckt die ganze Karte
+   ab (eine Aktion je Karte; Hover auf der Karte, gestrichelter Fokus-Ring wie bei der Spielkarte um die ganze Karte). */
+.dss-team {
+  position: relative; box-sizing: border-box; display: flex; flex-direction: column; width: 100%; font-family: var(--font-body); color: var(--dss-fg);
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 14px; transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+.dss-team--link { cursor: pointer; }
+.dss-team--link:hover { border-color: var(--dss-line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+/* Hover am Link der Karte (auch die erzwungene Darstellung in Storybook) hebt dieselbe Karte */
+.dss-team--link:has(.dss-team-link:hover) { border-color: var(--dss-line-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) { .dss-team { transition: none; } }
+.dss-team-link { appearance: none; margin: 0; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; text-decoration: none; cursor: pointer; }
+.dss-team-link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.dss-team-link:focus-visible { outline: none; }
+.dss-team-link:focus-visible::after { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; border-radius: 14px; }
+.dss-team--compact .dss-team-link:focus-visible::after { border-radius: 12px; }
+
+.dss-team-head { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; align-items: center; padding: 18px 20px; }
+.dss-team-who { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.dss-team-nm { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 600); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))); letter-spacing: -0.01em; line-height: var(--dss-title-leading, 1.2); color: var(--dss-fg); overflow-wrap: break-word; }
+.dss-team-sub {
+  display: flex; flex-wrap: wrap; gap: 4px 10px; font-family: var(--font-mono); font-size: var(--fs-caption); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--dss-mute);
+}
+.dss-team-logo--lg { width: 48px; height: 48px; padding: 3px; font-size: var(--fs-body-md); }
+.dss-team-logo--lg.dss-team-logo--initials { padding: 0; }
+.dss-team-logo--sm { width: 20px; height: 20px; padding: 1px; font-size: 9px; }
+.dss-team-logo--sm.dss-team-logo--initials { padding: 0; }
+.dss-team--compact .dss-team-logo { width: 32px; height: 32px; padding: 2px; font-size: var(--fs-caption); }
+.dss-team--compact .dss-team-logo--initials { padding: 0; }
+
+.dss-team-vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)); gap: 16px; padding: 14px 20px; border-top: 1px solid var(--dss-line); }
+.dss-team-stats .dss-team-vitals { padding: 8px 0 0; border-top: 0; }
+.dss-team-stats { padding: 14px 20px 16px; border-top: 1px solid var(--dss-line); }
+.dss-team-sec { font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+
+.dss-team-games { display: flex; flex-direction: column; gap: 14px; padding: 14px 20px; border-top: 1px solid var(--dss-line); }
+.dss-team-game-l { font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.dss-team-game-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 6px; min-width: 0; }
+.dss-team-game-opp { display: inline-flex; align-items: center; gap: 8px; flex: 1 1 150px; min-width: 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body); color: var(--dss-fg); }
+.dss-team-game-end { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-body-md); color: var(--dss-fg-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dss-team-game-score { font-weight: 700; font-size: var(--fs-body-lg); color: var(--dss-fg); }
+.dss-team-game-venue { margin-top: 4px; font-size: var(--fs-body-sm); color: var(--dss-mute); }
+.dss-team-squad { padding: 12px 20px; border-top: 1px solid var(--dss-line); font-family: var(--font-mono); font-size: var(--fs-body-sm); letter-spacing: 0.02em; color: var(--dss-fg-soft); }
+
+.dss-team--compact { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 16px; border-radius: 12px; }
+.dss-team--compact .dss-team-who { gap: 2px; }
+.dss-team--compact .dss-team-nm { font-family: var(--font-body); font-weight: var(--dss-title-weight, 600); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body))); letter-spacing: -0.005em; line-height: var(--dss-title-leading, 1.2); }
+.dss-team-end { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.dss-team-rec { font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body-md); color: var(--dss-fg); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dss-team-rank { font-family: var(--font-mono); font-size: var(--fs-caption); letter-spacing: 0.06em; text-transform: uppercase; color: var(--dss-mute); white-space: nowrap; }
+@media (max-width: 560px) {
+  .dss-team-head, .dss-team-games, .dss-team-squad, .dss-team-stats, .dss-team-vitals { padding-inline: 16px; }
+  .dss-team-stats .dss-team-vitals { padding-inline: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); } /* Statistik 2 × 2 statt 3 + 1 */
+  .dss-team-vitals { gap: 8px; }
+}
+
+/* ── Fokus-Ring auf immer dunklen Flächen: dezenter Ton (--ring-color-on-dark), auch im hellen Theme ── */
+.dss-frame--dark :focus-visible, .dss-pbp-frame--dark :focus-visible, .dss-topbar--dark :focus-visible {
+  outline-color: var(--ring-color-on-dark);
+}
+
+/* ── Accordion · Bereiche auf und zu klappen ───────────────────
+   Zwei Markup-Wege mit gleichem Aussehen:
+   (1) Überschrift + Button:  div.dss-acc-item > h3.dss-acc-title > button.dss-acc-trigger[aria-expanded][aria-controls]
+       und div.dss-acc-panel[hidden] > div.dss-acc-panel-inner > div.dss-acc-body   (Komponenten und js/accordion.js)
+   (2) natives details:  details.dss-acc-item > summary.dss-acc-trigger + div.dss-acc-panel (ohne Skript bedienbar)
+   Tokens (nicht vorbelegt, nur mit Rückfall gelesen): --dss-acc-gap, --dss-acc-pad, --dss-acc-radius, --dss-acc-title-size
+   (Rückfall --dss-card-title-size → --dss-title-size → heutiger Wert), --dss-acc-sticky-top (Abstand zu einer festen Kopfzeile). */
+.dss-acc {
+  --_dss-acc-chev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5l5 5 5-5'/%3E%3C/svg%3E");
+  display: flex; flex-direction: column; min-width: 0;
+  font-family: var(--font-body); color: var(--dss-fg);
+}
+.dss-acc--card { gap: var(--dss-acc-gap, 12px); }
+.dss-acc-item {
+  min-width: 0; background: var(--dss-surface); border: 1px solid var(--dss-line);
+  border-radius: var(--dss-acc-radius, var(--radius-lg)); box-shadow: var(--shadow-sm);
+  scroll-margin-top: calc(var(--dss-acc-sticky-top, 0px) + 8px);
+}
+.dss-acc-title { margin: 0; font: inherit; border-radius: inherit; }
+.dss-acc-trigger {
+  appearance: none; box-sizing: border-box; border: 0; background: transparent; margin: 0; width: 100%; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: 12px; min-height: 44px; padding: var(--dss-acc-pad, 12px 18px);
+  font: inherit; font-family: var(--font-display); font-weight: var(--dss-title-weight, 600);
+  font-size: var(--dss-acc-title-size, var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))));
+  line-height: var(--dss-title-leading, 1.3); letter-spacing: -0.005em; color: var(--dss-fg);
+  border-radius: inherit; transition: background 0.12s;
+}
+summary.dss-acc-trigger { list-style: none; }
+summary.dss-acc-trigger::-webkit-details-marker { display: none; }
+/* Komma zwischen Titel und Zusatzinfo nur für Hilfstechnik: Schriftgröße 0 (nicht sichtbar, nicht markierbar, bleibt im Namen) */
+.dss-acc-sep { font-size: 0; line-height: 0; }
+.dss-acc-label { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.dss-acc-meta {
+  flex: none; display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 8px; max-width: 60%;
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dss-mute);
+}
+.dss-acc-chevron, summary.dss-acc-trigger::after, .dss-acc-nav-toggle::after {
+  flex: none; width: 20px; height: 20px; color: var(--dss-mute); transition: transform 0.2s ease;
+}
+summary.dss-acc-trigger::after, .dss-acc-nav-toggle::after {
+  content: ""; background: currentColor;
+  -webkit-mask: var(--_dss-acc-chev) center / contain no-repeat; mask: var(--_dss-acc-chev) center / contain no-repeat;
+}
+.dss-acc-trigger[aria-expanded="true"] .dss-acc-chevron, details[open] > summary.dss-acc-trigger::after, .dss-acc-nav-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
+
+/* Zustände: Hover, Aktiv, Fokus (gestrichelt, innen), Offen (Kopf abgesetzt), Gesperrt */
+.dss-acc-trigger:hover:not([aria-disabled="true"]) { background: var(--dss-hover-bg); }
+.dss-acc-trigger:active:not([aria-disabled="true"]) { background: var(--dss-surface-2); }
+.dss-acc-trigger:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+.dss-acc-trigger[aria-expanded="true"], details[open] > summary.dss-acc-trigger { background: var(--dss-hover-bg); }
+.dss-acc-trigger[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+.dss-acc-item.is-open > .dss-acc-title > .dss-acc-trigger,
+details[open].dss-acc-item > summary.dss-acc-trigger { border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: inset 0 -1px 0 var(--dss-line); }
+
+/* Bereich: Höhen-Animation 0fr → 1fr (200 ms); geschlossen bleibt hidden gesetzt, sichtbar steuert visibility (nach dem Zuklappen) */
+.dss-acc-panel { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.2s ease, visibility 0s linear 0s; }
+.dss-acc-panel[hidden] { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 0.2s ease, visibility 0s linear 0.2s; }
+.dss-acc-panel-inner { min-height: 0; overflow: hidden; }
+.dss-acc-body { padding: var(--dss-acc-pad, 12px 18px); padding-block-start: 14px; color: var(--dss-fg-soft); font-size: var(--fs-body); line-height: var(--lh-body); }
+@supports (transition-behavior: allow-discrete) {
+  /* Nach dem Aufklappen nicht mehr abschneiden (Fokus-Ringe, Popups); beim Zuklappen sofort wieder */
+  .dss-acc-panel:not([hidden]) > .dss-acc-panel-inner { overflow: visible; transition: overflow 0s linear 0.2s allow-discrete; }
+}
+
+/* Flach: nur Trennlinien */
+.dss-acc--flat { gap: 0; border-top: 1px solid var(--dss-line); }
+.dss-acc--flat > .dss-acc-item { background: transparent; border: 0; border-bottom: 1px solid var(--dss-line); border-radius: 0; box-shadow: none; }
+.dss-acc--flat > .dss-acc-item > .dss-acc-title > .dss-acc-trigger,
+.dss-acc--flat > details.dss-acc-item > summary.dss-acc-trigger { border-radius: 0; }
+
+/* Verschachtelt: kleiner, eingerückt, Linien statt Karte, kein Schatten */
+.dss-acc--nested { gap: 0; margin-top: 4px; padding-left: 12px; border-left: 2px solid var(--dss-line); }
+.dss-acc--nested > .dss-acc-item { background: transparent; border: 0; border-bottom: 1px solid var(--dss-line); border-radius: 0; box-shadow: none; }
+.dss-acc--nested > .dss-acc-item > .dss-acc-title > .dss-acc-trigger,
+.dss-acc--nested > details.dss-acc-item > summary.dss-acc-trigger { min-height: 44px; border-radius: 0; font-size: var(--dss-acc-nested-title-size, var(--fs-body)); font-weight: 600; }
+.dss-acc--nested > .dss-acc-item:last-child { border-bottom: 0; }
+
+/* Zusatzinfo im Kopf: Live-Tag und Chip bringen ihre eigene Farbe mit; der Rest ist Text in --dss-mute */
+.dss-acc-meta .dss-chip, .dss-acc-meta .dss-live { text-transform: uppercase; }
+
+/* Kopf des offenen Bereichs klebt oben, solange sein Bereich im Bild ist (nur die oberste Gruppe; keine abgeschnittenen Vorfahren dazwischen) */
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-acc-item.is-open > .dss-acc-title,
+.dss-acc--sticky:not(.dss-acc--nested) > details[open].dss-acc-item > summary.dss-acc-trigger {
+  position: sticky; top: var(--dss-acc-sticky-top, 0px); z-index: 2; background: var(--dss-surface);
+}
+
+/* Werkzeugleiste: Alle öffnen/schließen und Sprungleiste */
+.dss-acc-tools { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 16px; }
+/* Platzhalter im Server-Markup (bis die Bereiche angemeldet sind): reserviert die Höhe der Leiste, damit nach dem Hydrieren nichts springt */
+.dss-acc-tools--pending { min-height: 44px; }
+@media (max-width: 639.98px) { .dss-acc-tools--pending[data-parts="both"] { min-height: 100px; } }
+.dss-acc-bar { display: flex; flex-wrap: wrap; gap: 8px; }
+.dss-acc-nav { flex: 1 1 320px; min-width: 0; }
+.dss-acc-nav-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.dss-acc-nav-link {
+  display: inline-flex; align-items: center; box-sizing: border-box; min-height: 44px; padding: 0 14px; border-radius: var(--radius-full);
+  border: 1px solid var(--dss-line); background: var(--dss-surface); color: var(--dss-fg-soft);
+  font-size: var(--fs-body-sm); font-weight: 600; text-decoration: none;
+}
+.dss-acc-nav-link:hover { border-color: var(--dss-line-strong); color: var(--dss-fg); }
+.dss-acc-nav-link:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-acc-nav-link[aria-current="true"] { background: var(--dss-btn-bg); border-color: var(--dss-btn-bg); color: var(--dss-btn-fg); }
+.dss-acc-nav-toggle {
+  appearance: none; display: none; align-items: center; justify-content: space-between; box-sizing: border-box; gap: 12px; width: 100%; min-height: 44px; padding: 0 14px;
+  border: 1px solid var(--dss-line); border-radius: var(--radius-md); background: var(--dss-surface-2); color: var(--dss-fg);
+  font-family: inherit; font-size: var(--fs-body-sm); font-weight: 600; cursor: pointer;
+}
+.dss-acc-nav-toggle:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+@media (max-width: 639.98px) {
+  .dss-acc-nav-toggle { display: flex; }
+  .dss-acc-nav:not(.is-open) .dss-acc-nav-list { display: none; }
+  .dss-acc-nav-list { flex-direction: column; margin-top: 8px; gap: 4px; }
+  .dss-acc-nav-link { width: 100%; border-radius: var(--radius-md); }
+}
+
+/* Aus bei „Bewegung reduzieren“ und data-motion="reduce" auf <html>: keine Höhen- und Drehanimation (zuklappen ist sofort) */
+@media (prefers-reduced-motion: reduce) {
+  .dss-acc-panel, .dss-acc-panel[hidden] { transition: none; }
+  .dss-acc-panel[hidden] { display: none; }
+  .dss-acc-panel:not([hidden]) > .dss-acc-panel-inner { transition: none; }
+  .dss-acc-chevron, summary.dss-acc-trigger::after, .dss-acc-nav-toggle::after, .dss-acc-trigger { transition: none; }
+}
+:root[data-motion="reduce"] .dss-acc-panel, :root[data-motion="reduce"] .dss-acc-panel[hidden] { transition: none; }
+:root[data-motion="reduce"] .dss-acc-panel[hidden] { display: none; }
+:root[data-motion="reduce"] .dss-acc-panel:not([hidden]) > .dss-acc-panel-inner { transition: none; }
+:root[data-motion="reduce"] .dss-acc-chevron, :root[data-motion="reduce"] summary.dss-acc-trigger::after,
+:root[data-motion="reduce"] .dss-acc-nav-toggle::after, :root[data-motion="reduce"] .dss-acc-trigger { transition: none; }
+
+/* Druck: alle Bereiche offen (Skript-Zustand egal), keine Bedienelemente; natives details je nach Browser (::details-content) */
+@media print {
+  .dss-acc-panel, .dss-acc-panel[hidden], :root[data-motion="reduce"] .dss-acc-panel[hidden] { display: grid; grid-template-rows: 1fr; visibility: visible; transition: none; }
+  .dss-acc-panel-inner, .dss-acc-panel:not([hidden]) > .dss-acc-panel-inner { overflow: visible; }
+  .dss-acc-tools, .dss-acc-chevron, summary.dss-acc-trigger::after { display: none; }
+  .dss-acc-item { box-shadow: none; break-inside: auto; }
+  .dss-acc-title { break-after: avoid; }
+  .dss-acc--sticky .dss-acc-title, .dss-acc--sticky summary.dss-acc-trigger { position: static; }
+  .dss-acc-trigger[aria-expanded="true"], .dss-acc-trigger:hover { background: transparent; }
+  details.dss-acc-item::details-content { content-visibility: visible; display: block; }
+}
+
+/* ── Seitennavigation und Nach-oben-Knopf (PageNav, BackToTop) ──
+   Markup (js/pagenav.js, js/backtop.js): nav.dss-pagenav[aria-labelledby] > p.dss-eyebrow + ul.dss-pagenav-list > li > a.dss-pagenav-link;
+   button.dss-backtop (fest unten rechts). Die Seitenränder und das Scrollen werden NICHT global gesetzt, sondern über Tokens und Opt-in-Klassen:
+   --dss-scroll-offset  Höhe einer festen oberen Leiste (Rückfall --dss-acc-sticky-top des Accordions, damit beide dasselbe meinen);
+                        die Ziele der Navigation (.dss-pagenav-target, setzt initPageNav) halten diesen Abstand plus 1rem nach oben.
+   .dss-scroll-pad      Opt-in auf <html> oder einem Scrollbereich: scroll-padding oben (Token) und unten (--dss-scroll-offset-bottom, Standard 4,5rem,
+                        damit Fokus nicht unter dem Nach-oben-Knopf endet).
+   --dss-backtop-offset Abstand des Knopfes von unten (Standard 16px, plus Sicherheitsabstand); initBackToTop setzt ihn über eine feste dss-bnav.
+   --dss-backtop-gap    Abstand vom Rand der Leserichtung (rechts, bei rechts-nach-links links; Standard 16px, plus Sicherheitsabstand).
+   --dss-z-backtop      Ebene des Knopfes (Standard 20, unter Overlays wie dem Modal mit 100). */
 .dss-pagenav { margin: 1rem 0 1.5rem; }
 .dss-pagenav .dss-eyebrow { margin: 0 0 0.5rem; }
-.dss-pagenav ul { list-style: none; margin: 0; padding: 0; }
-.dss-pagenav .dss-tab { text-decoration: none; color: var(--dss-link); }
-.dss-backtop { position: fixed; right: 16px; bottom: 16px; z-index: 20; box-shadow: var(--shadow-md), inset 0 0 0 1px var(--dss-line-strong); }
+.dss-pagenav-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.dss-pagenav-link {
+  display: inline-flex; align-items: center; box-sizing: border-box; min-height: var(--touch-sm); max-width: 100%; padding: 6px 14px;
+  border-radius: var(--radius-full); border: 1px solid var(--dss-line); background: var(--dss-surface); color: var(--dss-link);
+  font-size: var(--fs-body-sm); font-weight: 600; text-decoration: none; overflow-wrap: anywhere;
+}
+.dss-pagenav-link:hover { border-color: var(--dss-line-strong); color: var(--dss-fg); }
+.dss-pagenav-link:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; }
+.dss-pagenav-target { scroll-margin-top: calc(var(--dss-scroll-offset, var(--dss-acc-sticky-top, 0px)) + 1rem); }
+.dss-scroll-pad { scroll-padding-top: var(--dss-scroll-offset, var(--dss-acc-sticky-top, 0px)); scroll-padding-bottom: var(--dss-scroll-offset-bottom, 4.5rem); }
+.dss-backtop {
+  position: fixed; z-index: var(--dss-z-backtop, 20);
+  inset-inline-end: calc(var(--dss-backtop-gap, 16px) + env(safe-area-inset-right, 0px)); bottom: calc(var(--dss-backtop-offset, 16px) + env(safe-area-inset-bottom, 0px));
+  box-shadow: var(--shadow-md), inset 0 0 0 1px var(--dss-line-strong);
+}
+.dss-backtop:dir(rtl) { inset-inline-end: calc(var(--dss-backtop-gap, 16px) + env(safe-area-inset-left, 0px)); } /* von rechts nach links: der Knopf sitzt links, dort gilt der linke Sicherheitsabstand */
 .dss-backtop[hidden] { display: none; }
+@media print { .dss-pagenav, .dss-backtop { display: none; } }
 
-/* OSM kennt keinen Dunkelmodus: Kacheln abdunkeln und umfärben, Marker (eigene Ebene) bleiben unberührt */
-:root[data-theme="dark"] .dss-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+/* ── Dunkelmodus-Umschalter (initTheme) ──────────────────────────
+   Markup: button.dss-btn.dss-btn--secondary.dss-btn--icon[data-dss="theme"] (mit hidden bis das Skript läuft); initTheme ergänzt die Klasse
+   .dss-theme-toggle, aria-pressed (gedrückt = Dunkelmodus), data-theme-state="light|dark" (tatsächlicher Zustand) und data-theme-mode="light|dark|system"
+   und legt, falls der Button leer ist, zwei Symbole an. Die Beschriftung bleibt fest; der Zustand steht im Symbol (Mond im Dunkelmodus, Sonne sonst). */
+.dss-theme-toggle .dss-theme-icon { display: block; flex: none; width: 20px; height: 20px; }
+.dss-theme-toggle[data-theme-state="dark"] .dss-theme-icon--sun,
+.dss-theme-toggle:not([data-theme-state="dark"]) .dss-theme-icon--moon { display: none; }
+.dss-theme-toggle[aria-pressed="true"] { background: var(--dss-selected-bg); }
+
+/* ── Map (Karte mit Leaflet und OpenStreetMap) ───────────────────
+   Markup: div.dss-map > a.dss-map-skip + div.dss-map-frame[role=region] > div.dss-map-stage (Platzhalter | Leaflet-Fläche .dss-map-canvas,
+   Zoom-Schaltflächen, Quellenangabe .dss-map-attr, Status) + div.dss-map-text (Liste der Orte mit Koordinaten und Links).
+   Leaflet selbst liefert nur Kacheln, Marker und Gesten; leaflet/dist/leaflet.css muss die App laden. Zoom, Quelle, Platzhalter und
+   Fehlerhinweis sind Markup der Komponente. Tokens (nicht vorbelegt): --dss-map-dim (Kachelhelligkeit im Dunkelmodus, Rückfall 0.8). */
+.dss-map { --_dss-map-h: var(--dss-map-h, 320px); display: grid; gap: 12px; min-width: 0; color: var(--dss-fg); font-family: var(--font-body); }
+.dss-map-skip {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.dss-map-skip:focus-visible {
+  position: static; width: auto; height: auto; margin: 0; padding: 10px 14px; clip: auto; white-space: normal;
+  display: inline-flex; align-items: center; min-height: 44px; justify-self: start;
+  background: var(--dss-surface); color: var(--dss-link); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--dss-line-strong);
+  outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px;
+}
+.dss-map-frame { position: relative; min-width: 240px; border: 1px solid var(--dss-line-strong); border-radius: var(--radius-lg); background: var(--dss-surface-2); overflow: hidden; box-shadow: var(--shadow-sm); }
+.dss-map-stage { position: relative; isolation: isolate; height: var(--_dss-map-h); min-height: 200px; overflow: hidden; }
+
+/* Platzhalter (Zwei-Klick): ruhiges Gitter, Marker als Hinweis auf die Lage, Karte mit Hinweis und Schaltfläche */
+.dss-map-ph {
+  position: absolute; inset: 0; z-index: 900; display: grid; place-items: end center; padding: 16px 16px 44px; /* unten Platz für die Quellenangabe (28 px) */
+  background-color: var(--dss-surface-2);
+  background-image: linear-gradient(var(--dss-line) 1px, transparent 1px), linear-gradient(90deg, var(--dss-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.dss-map-ph-pin {
+  position: absolute; width: 28px; height: 28px; margin: -14px 0 0 -14px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--dss-map-pin-bg, var(--base-1000)); color: var(--dss-map-pin-fg, var(--n-0));
+  box-shadow: 0 0 0 2px var(--dss-map-pin-ring, var(--n-0)), 0 0 0 3px var(--dss-map-pin-edge, var(--base-1000));
+  font-family: var(--font-mono); font-size: var(--fs-body-sm); font-weight: 700; line-height: 1;
+}
+.dss-map-ph-pin.is-own { background: var(--dss-cta-bg); color: var(--dss-cta-fg); }
+/* Haus-Symbol (Sitzmarker) im Platzhalter und in der Liste: Maske in currentColor, nicht Teil des Textes */
+.dss-map-ph-pin.is-seat::before, .dss-map-num.is-seat::before {
+  content: ''; display: block; width: 16px; height: 16px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3 21 10.6V21h-6.2v-6.4H9.2V21H3V10.6z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3 21 10.6V21h-6.2v-6.4H9.2V21H3V10.6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.dss-map-ph-card {
+  position: relative; display: grid; justify-items: center; gap: 10px; max-width: min(100%, 420px); padding: 14px 16px; text-align: center;
+  background: var(--dss-surface); border: 1px solid var(--dss-line-strong); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+}
+.dss-map-note { margin: 0; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--dss-fg-soft); }
+.dss-map-load { min-width: 44px; }
+
+/* Status: leer unsichtbar (aber vorhanden, damit Änderungen angesagt werden); Ladehinweis oben, Fehler in der Mitte */
+.dss-map-status:empty {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.dss-map-status:not(:empty) {
+  position: absolute; z-index: 1002; top: 12px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 24px);
+  padding: 8px 14px; text-align: center; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--dss-fg);
+  background: var(--dss-surface); border: 1px solid var(--dss-line-strong); border-radius: var(--radius-md);
+}
+.dss-map[data-state="error"] .dss-map-status:not(:empty) {
+  top: 50%; transform: translate(-50%, -50%); width: max-content; max-width: min(calc(100% - 32px), 420px);
+  padding: 14px 18px; font-size: var(--fs-body); line-height: var(--lh-body); box-shadow: var(--shadow-sm);
+}
+
+/* Leaflet-Fläche */
+.dss-map-canvas.leaflet-container { position: absolute; inset: 0; height: 100%; background: var(--dss-surface-2); font: inherit; outline-offset: -3px; }
+.dss-map-canvas.leaflet-container:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+
+/* Kacheln: im Dunkelmodus abgedunkelt (nur die Kachelebene, nie Marker oder Steuerung) */
+:root[data-theme="dark"] .dss-map[data-dim="true"] .dss-map-tiles { filter: brightness(var(--dss-map-dim, 0.8)); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .dss-map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+  :root:not([data-theme="light"]) .dss-map[data-dim="true"] .dss-map-tiles { filter: brightness(var(--dss-map-dim, 0.8)); }
+}
+/* darkTiles="invert": Kacheln invertieren und umfärben statt nur abzudunkeln (Wasser und Straßen wirken fremd, dafür wird die Karte wirklich dunkel).
+   Gilt nur mit dimInDark; nur die Kachelebene, Marker, Steuerung und Quellenangabe bleiben unberührt. Token: --dss-map-invert-filter. */
+:root[data-theme="dark"] .dss-map[data-dim="true"][data-tiles="invert"] .dss-map-tiles { filter: var(--dss-map-invert-filter, invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9)); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dss-map[data-dim="true"][data-tiles="invert"] .dss-map-tiles { filter: var(--dss-map-invert-filter, invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9)); }
+}
+
+/* Marker (Inline-SVG): dunkle Füllung mit weißem Ring und dunkler Kontur, sichtbar auf hellen wie dunklen Kacheln; Nummer weiß auf dunkel */
+.dss-map-marker { display: flex; justify-content: center; align-items: flex-start; background: transparent; border: 0; border-radius: 8px; cursor: pointer; }
+.dss-map-pin { display: block; overflow: visible; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); }
+.dss-map-pin-edge { fill: none; stroke: var(--dss-map-pin-edge, var(--base-1000)); stroke-width: 6; stroke-linejoin: round; }
+.dss-map-pin-body { fill: var(--dss-map-pin-bg, var(--base-1000)); stroke: var(--dss-map-pin-ring, var(--n-0)); stroke-width: 3; stroke-linejoin: round; }
+.dss-map-pin-dot { fill: var(--dss-map-pin-fg, var(--n-0)); }
+.dss-map-pin-num { fill: var(--dss-map-pin-fg, var(--n-0)); font-family: var(--font-mono); font-size: 15px; font-weight: 700; }
+.dss-map-pin-num.is-small { font-size: 11px; }
+.dss-map-marker.is-own .dss-map-pin-body { fill: var(--dss-cta-bg); }
+/* Sitzmarker (kind="seat"): dasselbe Pin wie die anderen (44 px breit, gleiche Kontur und Ring), im Pin ein weißes Haus statt Nummer oder Punkt */
+.dss-map-pin-house { fill: var(--dss-map-pin-fg, var(--n-0)); stroke: var(--dss-map-pin-fg, var(--n-0)); stroke-width: 1; stroke-linejoin: round; }
+.dss-map-marker.is-own .dss-map-pin-dot, .dss-map-marker.is-own .dss-map-pin-num { fill: var(--dss-cta-fg); }
+.dss-map-marker.is-own .dss-map-pin-house { fill: var(--dss-cta-fg); stroke: var(--dss-cta-fg); }
+/* Fokus: Fläche und 8 px Hof in --dss-surface unter dem gestrichelten Ring, damit er auf jeder Kachel (hell, dunkel, abgedunkelt) mindestens 3:1 hat */
+.dss-map-marker:focus-visible {
+  outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: 2px; background: var(--dss-surface); box-shadow: 0 0 0 8px var(--dss-surface);
+}
+
+/* Zoom-Schaltflächen: eigene Steuerung (Leaflets Standard ist aus), 44 px Ziel, gestrichelter Ring innen */
+.dss-map-zoom { position: absolute; z-index: 1001; top: 12px; right: 12px; display: grid; gap: 8px; }
+.dss-map-zoom-btn {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; width: var(--touch-sm); height: var(--touch-sm); padding: 0;
+  background: var(--dss-surface); color: var(--dss-fg); border: 1px solid var(--dss-line-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+  cursor: pointer; transition: background 0.12s;
+}
+.dss-map-zoom-btn svg { width: 20px; height: 20px; display: block; }
+.dss-map-zoom-btn:hover:not([aria-disabled="true"]) { background: var(--dss-hover-bg); }
+.dss-map-zoom-btn:active:not([aria-disabled="true"]) { background: var(--dss-surface-2); }
+.dss-map-zoom-btn:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -5px; }
+.dss-map-zoom-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+
+/* Quellenangabe: immer sichtbar, lesbar (Text auf Fläche über 7:1) und verlinkt */
+.dss-map-attr {
+  position: absolute; z-index: 1001; right: 0; bottom: 0; margin: 0; padding: 0 4px;
+  background: var(--dss-surface); border-top-left-radius: var(--radius-md); font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--dss-fg);
+}
+.dss-map-attr a { display: inline-flex; align-items: center; min-height: 28px; padding: 0 6px; color: var(--dss-link); text-decoration: underline; text-underline-offset: 3px; }
+.dss-map-attr a:focus-visible { outline: var(--ring-w) var(--ring-style) var(--ring-color); outline-offset: -3px; }
+
+/* Textalternative: nummerierte Liste mit Koordinaten und Links */
+.dss-map-text { min-width: 0; outline: none; }
+.dss-map-text.is-quiet {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.dss-map-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dss-map-item { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.dss-map-num {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; border-radius: 14px;
+  background: var(--dss-map-pin-bg, var(--base-1000)); color: var(--dss-map-pin-fg, var(--n-0)); font-family: var(--font-mono); font-size: var(--fs-body-sm); font-weight: 700;
+  box-shadow: inset 0 0 0 2px var(--dss-map-pin-ring, var(--n-0)), 0 0 0 1px var(--dss-map-pin-edge, var(--base-1000));
+}
+.dss-map-num.is-own { background: var(--dss-cta-bg); color: var(--dss-cta-fg); }
+.dss-map-item-body { display: grid; gap: 2px; min-width: 0; }
+.dss-map-name { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: var(--fs-body); font-weight: 600; line-height: var(--lh-body); color: var(--dss-fg); overflow-wrap: anywhere; }
+.dss-map-coords { margin: 0; font-family: var(--font-mono); font-size: var(--fs-body-sm); color: var(--dss-mute); }
+.dss-map-links { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.dss-map-links .dss-link { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs-body-md); }
+
+/* Aus bei „Bewegung reduzieren“ und data-motion="reduce" auf <html>: keine Animationen der Karte (Leaflets Optionen sind im Skript ebenfalls aus) */
+@media (prefers-reduced-motion: reduce) {
+  .dss-map .leaflet-zoom-anim .leaflet-zoom-animated, .dss-map .leaflet-fade-anim .leaflet-tile, .dss-map .leaflet-fade-anim .leaflet-popup,
+  .dss-map .leaflet-pan-anim .leaflet-proxy, .dss-map-zoom-btn { transition: none !important; animation: none !important; }
+}
+:root[data-motion="reduce"] .dss-map .leaflet-zoom-anim .leaflet-zoom-animated, :root[data-motion="reduce"] .dss-map .leaflet-fade-anim .leaflet-tile,
+:root[data-motion="reduce"] .dss-map .leaflet-fade-anim .leaflet-popup, :root[data-motion="reduce"] .dss-map .leaflet-pan-anim .leaflet-proxy,
+:root[data-motion="reduce"] .dss-map-zoom-btn { transition: none !important; animation: none !important; }
+
+/* Druck: statt der Karte nur die Liste mit Adresse und Koordinaten */
+@media print {
+  .dss-map-frame, .dss-map-skip { display: none; }
+  .dss-map-text.is-quiet { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+  .dss-map-item { break-inside: avoid; }
+}
+
+/* ── LeagueCard (Ligencard) ─────────────────────────────────
+   Mini-Tabelle einer Liga in einer Karte: Kopf (Titel, Untertitel, Live-Tag), Tabelle (.dss-tbl, Dichte touch 60 px bzw. compact 40 px),
+   Legende der Zonen, Link zur kompletten Tabelle. Logos und Kurznamen teilen die Bausteine der Namen-und-Logos-Regeln
+   (.dss-team-logo, .dss-team-name). Der Titel hängt an den Überschriften-Tokens (--dss-card-title-size), nie am Elementnamen.
+   Optionale Spalten (.dss-league-opt: S, N, Diff, Form) entfallen bis 640 px. Nie nur Farbe: Zonen, eigene Zeile, Form und Diff
+   haben Text (versteckt bzw. Vorzeichen). */
+.dss-league {
+  box-sizing: border-box; width: 100%; overflow: hidden; font-family: var(--font-body); color: var(--dss-fg);
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 16px;
+}
+.dss-league-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px 12px; padding: 20px 24px 16px; }
+.dss-league-heading { min-width: 0; }
+.dss-league-title { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-h3))); letter-spacing: -0.01em; line-height: var(--dss-title-leading, 1.2); color: var(--dss-fg); overflow-wrap: break-word; }
+.dss-league-sub { margin: 4px 0 0; font-size: var(--fs-body-md); line-height: 1.4; color: var(--dss-mute); }
+/* Live-Tag: grüne Live-Sprache (Chip-Token für die Fläche, Text ≥ 7:1); der Puls liegt nur am Punkt (.dss-live-dot, aus bei „Bewegung reduzieren“ und data-motion="reduce") */
+.dss-league-live { flex: none; display: inline-flex; align-items: center; gap: 10px; padding: 4px 12px; border-radius: 999px; background: var(--dss-chip-ok-bg); color: var(--dss-chip-ok-fg); font-size: var(--fs-caption); }
+.dss-league-live .dss-live { color: var(--dss-chip-ok-fg); font-family: var(--font-mono); }
+.dss-league-live .dss-live-dot { background: var(--dss-chip-ok-fg); }
+.dss-league-live-n { font-weight: 600; font-size: var(--fs-body-sm); }
+
+.dss-league-scroll { border-top: 1px solid var(--dss-line); }
+.dss-league-tbl th:first-child, .dss-league-tbl td:first-child { padding-left: 24px; }
+.dss-league-tbl th:last-child, .dss-league-tbl td:last-child { padding-right: 24px; }
+.dss-league-tbl th.dss-league-rank, .dss-league-tbl td.dss-league-rank { width: 1%; padding-right: 8px; text-align: left; }
+.dss-league-tbl td.dss-league-rank { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; color: var(--dss-fg); }
+.dss-league-tbl td.dss-league-team { width: 100%; min-width: 0; white-space: normal; color: var(--dss-fg); font-weight: 500; }
+.dss-league-who { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+.dss-tbl .dss-league-link { display: inline-flex; align-items: center; min-height: 24px; color: inherit; text-underline-offset: 3px; }
+.dss-league-tbl tr.is-own td { font-weight: 600; }
+.dss-league-tbl tr.is-own td.num { font-weight: 500; }
+.dss-league-tbl tr.is-own td.num.lead { font-weight: 700; }
+/* Eigene Mannschaft: Balken links in der ersten Zelle; Zone: Streifen daneben (innen der Balken, außen die Zone) */
+.dss-league-tbl tr.is-own td:first-child { box-shadow: inset 4px 0 0 var(--dss-accent-text); }
+.dss-league-zone--up { --league-zone: var(--dss-chip-ok-fg); }
+.dss-league-zone--playoff { --league-zone: var(--dss-chip-info-fg); }
+.dss-league-zone--down { --league-zone: var(--dss-chip-err-fg); }
+.dss-league-tbl tr.dss-league-zone td:first-child { box-shadow: inset 4px 0 0 var(--league-zone); }
+.dss-league-tbl tr.is-own.dss-league-zone td:first-child { box-shadow: inset 4px 0 0 var(--league-zone), inset 8px 0 0 var(--dss-accent-text); }
+
+/* Form: die Punkte der Spalte „Form“ sind der Baustein `dss-form` (Abschnitt Kennzahlen-Gitter und Form); der Text steht versteckt in der Zelle (formLabel) */
+
+.dss-league-legend { list-style: none; margin: 0; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 6px 18px; border-top: 1px solid var(--dss-line); font-size: var(--fs-body-sm); color: var(--dss-fg-soft); }
+.dss-league-legend li { display: inline-flex; align-items: center; gap: 8px; }
+.dss-league-key { flex: none; width: 4px; height: 16px; border-radius: 2px; background: var(--dss-fg-soft); }
+.dss-league-key--up { background: var(--dss-chip-ok-fg); }
+.dss-league-key--playoff { background: var(--dss-chip-info-fg); }
+.dss-league-key--down { background: var(--dss-chip-err-fg); }
+
+.dss-league-foot { padding: 4px 24px; border-top: 1px solid var(--dss-line); }
+.dss-league-more { display: inline-flex; align-items: center; min-height: 48px; font-size: var(--fs-body-md); font-weight: 500; }
+
+/* compact: Seitenleisten. Zeilen 40 px (dss-tbl--compact), kleinerer Titel, engere Ränder */
+.dss-league--compact { border-radius: 12px; }
+.dss-league--compact .dss-league-head { padding: 14px 16px 10px; }
+.dss-league--compact .dss-league-title { font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))); line-height: var(--dss-title-leading, 1.2); }
+.dss-league--compact .dss-league-tbl th:first-child, .dss-league--compact .dss-league-tbl td:first-child { padding-left: 16px; }
+.dss-league--compact .dss-league-tbl th:last-child, .dss-league--compact .dss-league-tbl td:last-child { padding-right: 16px; }
+.dss-league--compact .dss-league-legend { padding: 10px 16px; }
+.dss-league--compact .dss-league-foot { padding: 0 16px; }
+.dss-league--compact .dss-league-more { min-height: 44px; }
+
+/* Handy: S, N, Diff und Form entfallen (Kopf und Zellen); # · Mannschaft · SP · PKT bleiben */
+@media (max-width: 640px) {
+  .dss-league-opt { display: none; }
+  .dss-league-head { padding: 16px 16px 12px; }
+  .dss-league-tbl th:first-child, .dss-league-tbl td:first-child { padding-left: 16px; }
+  .dss-league-tbl th.dss-league-pts, .dss-league-tbl td.dss-league-pts { padding-right: 16px; }
+  .dss-league-legend { padding: 10px 16px; }
+  .dss-league-foot { padding: 0 16px; }
+}
+
+/* ── VenueCard (Hallenkarte) ─────────────────────────────────
+   Links eine kleine Karte (Map, nicht interaktiv; Spalte etwa 40 %, mindestens 224 px: Kartenrahmen mindestens 206 px, damit die Quellenangabe in einer Zeile bleibt), rechts die Daten der Halle: Name (Überschrift), Adresse
+   (address), Kurzinfo, Kontakt (dl mit tel:- und mailto:-Links), die nächsten Spiele in der Halle (Liste im Stil der Spielkarte) und der Link zur
+   Hallenseite. Die Karte füllt die Höhe der Daten (Mindesthöhe aus --dss-map-h der Karte). Ohne Koordinaten (.dss-venue--map fehlt) nehmen die Daten
+   die ganze Breite. Ist die Karte höchstens 640 px breit (Container-Abfrage), steht die Karte oben im Format 16:9. Der Name hängt an den Überschriften-Tokens (--dss-card-title-size), nie am
+   Elementnamen. Logos und Kurznamen teilen die Bausteine der Namen-und-Logos-Regeln (.dss-team-logo, .dss-team-name). */
+.dss-venue {
+  box-sizing: border-box; width: 100%; container: dss-venue / inline-size; font-family: var(--font-body); color: var(--dss-fg);
+  background: var(--dss-surface); border: 1px solid var(--dss-line); border-radius: 16px;
+}
+.dss-venue-in { display: grid; grid-template-columns: minmax(0, 1fr); }
+.dss-venue--map .dss-venue-in { grid-template-columns: minmax(224px, 40%) minmax(0, 1fr); }
+.dss-venue--map.dss-venue--compact .dss-venue-in { grid-template-columns: minmax(224px, 30%) minmax(0, 1fr); }
+
+/* Kartenspalte: Karte füllt die Höhe, darunter die Links (Größere Karte, Route planen) */
+.dss-venue-map { display: flex; flex-direction: column; min-width: 0; padding: 16px 0 8px 16px; }
+.dss-venue-map .dss-map { flex: 1 1 auto; min-height: 0; grid-template-rows: minmax(0, 1fr); gap: 0; }
+.dss-venue-map .dss-map-frame { display: flex; min-width: 0; }
+.dss-venue-map .dss-map-stage { flex: 1 1 auto; height: auto; min-height: var(--_dss-map-h); }
+.dss-venue-map .dss-map-ph { padding: 10px 10px 32px; } /* unten Platz für die Quellenangabe (28 px) */
+.dss-venue-map .dss-map-ph-card { padding: 8px 12px; gap: 6px; }
+.dss-venue-maplinks { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.dss-venue-maplinks .dss-link { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs-body-md); }
+
+/* Datenspalte */
+.dss-venue-body { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px 20px; }
+.dss-venue-title { margin: 0; font-family: var(--font-display); font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-h3))); letter-spacing: -0.01em; line-height: var(--dss-title-leading, 1.2); color: var(--dss-fg); overflow-wrap: break-word; }
+.dss-venue-address { display: grid; grid-template-columns: minmax(0, 1fr); font-style: normal; font-size: var(--fs-body-md); line-height: 1.4; color: var(--dss-fg-soft); }
+.dss-venue-line { display: block; overflow-wrap: anywhere; }
+.dss-venue-info { margin: 0; font-size: var(--fs-body-md); line-height: 1.5; color: var(--dss-fg-soft); overflow-wrap: anywhere; }
+.dss-venue-contact { display: grid; gap: 0; margin: 0; }
+.dss-venue-contact > div { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: 8px; align-items: center; }
+.dss-venue-contact dt { font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.dss-venue-contact dd { margin: 0; min-width: 0; font-size: var(--fs-body-md); color: var(--dss-fg); overflow-wrap: anywhere; }
+.dss-venue-contact > div { min-height: 32px; }
+.dss-venue-contact .dss-link { display: inline-flex; align-items: center; min-height: 32px; }
+
+/* Nächste Spiele: Karten im Stil der Spielkarte (Kopfzeile in Mono, Trikotpunkte, Namen) */
+.dss-venue-games { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--dss-line); }
+.dss-venue-sec { overflow-wrap: anywhere; font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-mute); }
+.dss-venue-game-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.dss-venue-game { padding: 10px 14px 12px; background: var(--dss-surface-2); border: 1px solid var(--dss-line); border-radius: 12px; }
+.dss-venue-game-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dss-fg-soft); }
+.dss-venue-when { color: var(--dss-fg); overflow-wrap: anywhere; min-width: 0; }
+.dss-venue-game-meta { margin-top: 2px; font-family: var(--font-mono); font-size: var(--fs-caption); letter-spacing: 0.04em; color: var(--dss-mute); overflow-wrap: anywhere; }
+.dss-venue-teams { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin-top: 8px; }
+.dss-venue-team { display: flex; align-items: center; gap: 10px; min-width: 0; }
+/* Trikotpunkt mit Rand in --dss-mute (≥ 3:1 auf der Fläche), damit er auch im Dunkelmodus sichtbar bleibt; die Seite steht zusätzlich als versteckter Text im Markup */
+.dss-venue-dot { box-sizing: border-box; flex: none; width: 12px; height: 12px; border: 1px solid var(--dss-mute); border-radius: 50%; background: var(--team-heim, oklch(0.55 0.20 27)); }
+.dss-venue-dot--gast { background: var(--team-gast, oklch(0.55 0.18 245)); }
+.dss-venue-team-name { min-width: 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body); letter-spacing: -0.005em; color: var(--dss-fg); overflow-wrap: anywhere; }
+
+.dss-venue-foot { margin: auto 0 -10px; } /* der Link ist 48 px hoch, sein Text hat darüber und darunter Luft: der Überstand gleicht den Innenabstand aus */
+.dss-venue-more { display: inline-flex; align-items: center; max-width: 100%; min-height: 48px; overflow-wrap: anywhere; font-size: var(--fs-body-md); font-weight: 500; }
+
+/* compact: kleinere Karte, kleinerer Titel, engere Ränder; die Spiele entfallen (im Markup) */
+.dss-venue--compact { border-radius: 12px; }
+.dss-venue--compact .dss-venue-map { padding: 12px 0 4px 12px; }
+.dss-venue--compact .dss-venue-body { gap: 8px; padding: 14px 16px; }
+.dss-venue--compact .dss-venue-foot { margin-bottom: -8px; }
+.dss-venue--compact .dss-venue-title { font-weight: var(--dss-title-weight, 700); font-size: var(--dss-card-title-size, var(--dss-title-size, var(--fs-body-lg))); line-height: var(--dss-title-leading, 1.2); }
+.dss-venue--compact .dss-venue-more { min-height: 44px; }
+
+/* Schmal (Karte höchstens 640 px breit, also auch auf dem Handy und in schmalen Spalten): Karte oben (16:9, mindestens 224 px hoch), Daten darunter.
+   Maßgeblich ist die Breite der Karte, nicht die des Fensters (Container-Abfrage), damit sie auch in einer schmalen Spalte am großen Bildschirm passt. */
+@container dss-venue (max-width: 640px) {
+  .dss-venue--map .dss-venue-in, .dss-venue--map.dss-venue--compact .dss-venue-in { grid-template-columns: minmax(0, 1fr); }
+  .dss-venue-map, .dss-venue--compact .dss-venue-map { padding: 12px 12px 0; }
+  .dss-venue-map .dss-map { flex: none; }
+  .dss-venue-map .dss-map-stage { flex: none; width: 100%; height: auto; aspect-ratio: 16 / 9; min-height: 224px; } /* 224: der Pin im Platzhalter bleibt über dem Hinweis sichtbar */
+  .dss-venue-body, .dss-venue--compact .dss-venue-body { padding: 16px; }
+  .dss-venue-contact > div { grid-template-columns: 5.5rem minmax(0, 1fr); min-height: 44px; }
+  .dss-venue-contact .dss-link { min-height: 44px; }
+}
+
+/* Druck: Daten untereinander, die Karte selbst druckt die Liste mit Koordinaten */
+@media print {
+  .dss-venue--map .dss-venue-in, .dss-venue--map.dss-venue--compact .dss-venue-in { grid-template-columns: minmax(0, 1fr); }
+  .dss-venue-maplinks { display: none; }
+  .dss-venue-game { break-inside: avoid; }
+}
+
+/* ── Einklappbare Rahmen (Table, ScheduleTable, ScheduleGrid, LeagueCard mit collapsible) ──
+   Der Kopf des Rahmens wird zum Accordion-Kopf, der Inhalt zum Panel (dieselben Klassen .dss-acc-trigger, .dss-acc-panel, .dss-acc-chevron):
+     div.dss-frame.is-collapsible[.is-open] > div.dss-frame-head.dss-frame-head--acc > h3.dss-frame-title > button.dss-acc-trigger
+     div.dss-league.is-collapsible[.is-open] > div.dss-league-head.dss-league-head--acc > h3.dss-league-title > button.dss-acc-trigger
+     darunter div.dss-acc-panel[hidden] > div.dss-acc-panel-inner > Tabelle (mit eigenem Scrollbereich als benannter Region).
+   Die Titelgröße bleibt an den Rahmen-Tokens (--dss-frame-title-size bzw. --dss-card-title-size): der Button erbt die Schrift vom Titel,
+   die Accordion-Tokens (--dss-acc-title-size, --dss-acc-pad) gelten hier nicht. Geschlossen zeigt der Rahmen nur den Kopf ohne unteren Strich. */
+.dss-frame.is-collapsible, .dss-league.is-collapsible { scroll-margin-top: calc(var(--dss-acc-sticky-top, 0px) + 8px); }
+.dss-frame-head--acc, .dss-league-head--acc { display: block; padding: 0; }
+.dss-frame-head--acc > .dss-frame-title, .dss-league-head--acc > .dss-league-title { border-radius: inherit; }
+.dss-frame-title > .dss-acc-trigger, .dss-league-title > .dss-acc-trigger { font: inherit; letter-spacing: inherit; color: inherit; border-radius: inherit; }
+.dss-frame-title > .dss-acc-trigger { padding: 16px 22px; }
+.dss-frame-title > .dss-acc-trigger[aria-expanded="true"], .dss-league-title > .dss-acc-trigger[aria-expanded="true"] { background: transparent; }
+
+/* Rahmen: Kopfzeile bleibt im Rand eingebettet (Radius = Rahmenradius minus Rand); geschlossen ohne unteren Strich (der Rahmenrand schließt ab) */
+.dss-frame-head--acc { border-radius: 13px 13px 0 0; }
+.dss-frame.is-collapsible:not(.is-open) > .dss-frame-head--acc { border-bottom-color: transparent; border-radius: 13px; }
+.dss-frame-head--acc .dss-acc-trigger:hover:not([aria-disabled="true"]) { background: color-mix(in oklab, var(--dss-hover-bg), var(--dss-fg) 6%); }
+.dss-frame-head--acc .dss-acc-trigger:active:not([aria-disabled="true"]) { background: color-mix(in oklab, var(--dss-hover-bg), var(--dss-fg) 12%); }
+.dss-frame--dark .dss-frame-head--acc .dss-acc-trigger:hover:not([aria-disabled="true"]) { background: var(--n-900); }
+.dss-frame--dark .dss-frame-head--acc .dss-acc-trigger:active:not([aria-disabled="true"]) { background: var(--n-800); }
+/* Die Zusatzinfo (gedämpft) wird auf der getönten Hover-/Aktiv-Fläche dunkler, damit der Kontrast ≥ 7:1 bleibt */
+.dss-frame-head--acc .dss-acc-trigger:is(:hover, :active) .dss-frame-meta { color: var(--dss-fg-soft); }
+.dss-frame--dark .dss-frame-head--acc .dss-acc-trigger:is(:hover, :active) .dss-frame-meta { color: var(--n-200); }
+.dss-frame--dark .dss-acc-trigger:focus-visible { outline-color: var(--ring-color-on-dark); }
+.dss-frame--dark .dss-acc-chevron { color: var(--n-400); }
+.dss-frame-head--acc .dss-frame-meta { flex: none; }
+/* Der Pfeil (20 px) soll die Kopfhöhe nicht bestimmen: sie bleibt wie beim Rahmen ohne collapsible (Titelzeile + 2 × 16 px) */
+.dss-frame-title > .dss-acc-trigger .dss-acc-chevron { margin-block: -2px; }
+
+/* Karte: Kopf mit Titel, Untertitel (Teil des Namens) und Live-Tag; die Tabelle darunter trägt ihren Trennstrich selbst (.dss-league-scroll) */
+.dss-league-head--acc, .dss-league--compact .dss-league-head--acc { padding: 0; }
+.dss-league-head--acc { border-radius: 15px 15px 0 0; }
+.dss-league.is-collapsible:not(.is-open) > .dss-league-head--acc { border-radius: 15px; }
+.dss-league-title > .dss-acc-trigger { align-items: flex-start; padding: 20px 24px 16px; }
+.dss-league--compact .dss-league-title > .dss-acc-trigger { padding: 14px 16px 10px; }
+@media (max-width: 640px) { .dss-league-title > .dss-acc-trigger { padding: 16px 16px 12px; } }
+.dss-league-head--acc .dss-acc-trigger:hover:not([aria-disabled="true"]) { background: var(--dss-hover-bg); }
+.dss-league-head--acc .dss-acc-trigger:active:not([aria-disabled="true"]) { background: var(--dss-surface-2); }
+.dss-league-head--acc .dss-league-live, .dss-league-head--acc .dss-acc-chevron { align-self: flex-start; }
+.dss-league-head--acc .dss-acc-chevron { margin-top: max(0px, calc((var(--dss-title-leading, 1.2) * 1em - 20px) / 2)); }
+
+/* Untertitel im Kopf (Karte): wie .dss-league-sub, aber als Teil des Buttons */
+.dss-acc-label > .dss-acc-sub {
+  display: block; margin-top: 4px; font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-md);
+  line-height: 1.4; letter-spacing: 0; color: var(--dss-mute);
+}
+
+/* Kopf des offenen Rahmens klebt oben (Gruppe mit sticky); `overflow: clip` statt `hidden`, damit der Rahmen kein Scrollcontainer wird */
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-frame.is-collapsible, .dss-acc--sticky:not(.dss-acc--nested) > .dss-league.is-collapsible { overflow: clip; }
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-frame.is-open > .dss-frame-head--acc,
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-league.is-open > .dss-league-head--acc {
+  position: sticky; top: var(--dss-acc-sticky-top, 0px); z-index: 2; background: var(--dss-surface);
+}
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-frame.is-open > .dss-frame-head--acc { background: var(--dss-hover-bg); }
+.dss-acc--sticky:not(.dss-acc--nested) > .dss-frame--dark.is-open > .dss-frame-head--acc { background: var(--n-950); }
+
+/* Druck: Rahmen offen mit Strich unter dem Kopf, Kopf nicht klebend */
+@media print {
+  .dss-frame.is-collapsible:not(.is-open) > .dss-frame-head--acc { border-bottom-color: var(--dss-line); border-radius: 13px 13px 0 0; }
+  .dss-frame--dark.is-collapsible:not(.is-open) > .dss-frame-head--acc { border-bottom-color: var(--n-800); }
+  .dss-league.is-collapsible:not(.is-open) > .dss-league-head--acc { border-radius: 15px 15px 0 0; }
+  .dss-acc--sticky > .dss-frame.is-collapsible > .dss-frame-head--acc, .dss-acc--sticky > .dss-league.is-collapsible > .dss-league-head--acc { position: static; }
+  .dss-frame-head--acc .dss-acc-trigger:hover, .dss-league-head--acc .dss-acc-trigger:hover { background: transparent; }
+}
+
+/* Druck: eine offene Modal-Sperre (overflow: hidden auf <html>) darf den Druck nicht auf die erste Seite beschränken */
+@media print {
+  html { overflow: visible !important; padding-inline-end: 0 !important; }
 }
