@@ -391,6 +391,10 @@
   "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-zr-grp-5/",
   "history": []
  },
+ "52977": {
+  "path": "liga/deutscher-rollstuhlbasketball/rollstuhl-basketball-deutschland-pokal-achtelfinale/",
+  "history": []
+ },
  "53030": {
   "path": "liga/baden-wuerttemberg/bbw2-bezirkspokal-maenner-ue35/",
   "history": []
@@ -7123,6 +7127,10 @@
  },
  "56700": {
   "path": "liga/bundesligen/opf-bezirkspokal-damen-26-27/",
+  "history": []
+ },
+ "56701": {
+  "path": "liga/bayern/bm-ue40-herren-endrunde/",
   "history": []
  }
 }
