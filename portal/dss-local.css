@@ -1,6 +1,6 @@
 /* Lokale Ergänzungen zum DSS (portal/dss/components.css ist eine unveränderte Kopie).
    Diese Regeln hatte das Vereinsregister selbst ergänzt, das DSS führt sie (noch) nicht:
-   - Brotkrumen als Liste (nav.dss-crumbs > ol), mit 44 px Zielgröße (WCAG 2.5.5)
+   - Brotkrumen: Listenstruktur (nav.dss-crumbs > ol) und 44 px Zielgröße (WCAG 2.5.5) auf dem DSS-Markup
    - Links in Tabellen und Spielzeilen (.dss-tbl a, .dss-row-main a): Farbe, Fokus, 44 px Zielgröße
    - Seitennavigation als Pillen (.dss-pagenav), Chips in Form-Anzeigen (.dss-form .dss-chip)
    - Vereinssitz-Pin der Karte (.dss-map-pin--seat), dunkle Kacheln (.dss-map .leaflet-tile-pane)
@@ -27,16 +27,9 @@
   width: 28px; height: 28px; border-radius: 8px; background: var(--ink-1000); color: var(--n-0);
   display: grid; place-items: center; box-sizing: border-box;}
 .dss-map-pin--seat svg { width: 16px; height: 16px; fill: currentColor;}
-.dss-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; list-style: none; margin: 0; padding: 0; font-family: var(--font-body); font-size: 13px; color: var(--dss-mute);}
+.dss-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; list-style: none; margin: 0; padding: 0;}
 .dss-crumbs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow-wrap: anywhere;}
-.dss-crumbs li + li::before {
-  content: ''; flex-shrink: 0; width: 14px; height: 14px; background: var(--dss-mute); opacity: 0.7;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;}
-.dss-crumbs a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 0 2px; color: var(--dss-mute); text-decoration: none;}
-.dss-crumbs a:hover { color: var(--dss-fg); text-decoration: underline; text-underline-offset: 3px;}
-.dss-crumbs a:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; border-radius: var(--radius-sm);}
-.dss-crumbs [aria-current="page"] { color: var(--dss-fg); font-weight: 600;}
+a.dss-crumbs-item { min-height: 44px; min-width: 44px;}
 h2[id] { scroll-margin-top: 1rem;}
 .dss-pagenav ul { list-style: none; margin: 0; padding: 0;}
 .dss-pagenav .dss-tab { text-decoration: none; color: var(--dss-link);}

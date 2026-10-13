@@ -380,8 +380,9 @@ test('Seitennavigation: Abschnitte der Ligaseite, Sprung zur Überschrift', asyn
 
 test('Ligen eines Verbands: aufklappbare Hierarchie, Sprung zu einem zugeklappten Ziel klappt die Blöcke auf', async ({ page }) => {
   await open(page, '/liga/regionalliga-suedost/', 'light', '.liga-card a');
-  expect(await page.locator('details.liga-fold').count()).toBeGreaterThanOrEqual(3);   // Altersklasse, Geschlecht, Ebene
-  await expect(page.locator('summary > h2').first()).toBeVisible();
+  expect(await page.locator('details.liga-fold').count()).toBeGreaterThanOrEqual(2);   // Geschlecht, Ebene
+  await expect(page.locator('summary > h3').first()).toBeVisible();
+  expect(await page.locator('summary > h2').count()).toBe(0);                        // Altersklasse ist eine einfache Überschrift
   await page.evaluate(() => document.querySelectorAll('details.liga-fold').forEach(d => d.removeAttribute('open')));
   await expect(page.locator('.liga-card').first()).toBeHidden();                       // zugeklappt, aber im HTML
   const id = await page.locator('summary > h4').first().getAttribute('id');

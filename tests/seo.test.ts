@@ -146,7 +146,7 @@ describe('buildSite', () => {
     expect(hub).toContain('<ul class="region-cards">');
     expect(hub).toContain('<a class="region-link" href="bayern/">Bayern</a>');
     expect(hub).toContain('<a class="region-link" href="bundesweit/">Bundesweit (Bundesligen, Rollstuhl, Kooperationen)</a>');
-    expect(hub).toContain('<li><a href="index.html">Vereinsregister</a></li>');
+    expect(hub).toContain('<a class="dss-crumbs-item" href="index.html">Vereinsregister</a>');
     expect(b.files.get('sitemap.xml')).toContain('/vereine/<');
     const out = injectRegionLinks('<nav><!--REGION-LINKS--></nav>', b.regions);
     expect(out).toContain('<a class="dss-link" href="vereine/">Vereine nach Bundesland</a>');
@@ -324,7 +324,7 @@ describe('Ligaseiten', () => {
     expect(EBENEN.map(e => e.key)).toEqual(['Verband', 'Bezirk', 'Kreis', 'Weitere']);
   });
 
-  it('Verbandsseite: Altersklasse, Geschlecht, Ebene als Akkordeons, Bezirk als einfache Überschrift', () => {
+  it('Verbandsseite: Altersklasse als Überschrift, Geschlecht und Ebene als Akkordeons, Bezirk als einfache Überschrift', () => {
     const b = buildLigaPages([
       liga(1, 'Kreisliga A', { skEbeneName: 'Kreis', bezirkName: 'Oberpfalz', kreisname: 'Regensburg' }), liga(2, 'Landesliga', { skEbeneName: 'Verband' }),
       liga(3, 'U14 Liga', { skEbeneName: 'Bezirk', akName: 'U14', bezirkName: 'Schwaben' }), liga(4, 'U14 Damen', { akName: 'U14', geschlecht: 'weiblich', skEbeneName: 'Bezirk', bezirkName: 'Schwaben' }),
@@ -332,8 +332,10 @@ describe('Ligaseiten', () => {
     ], {}, BASE, {});
     const html = b.files.get('liga/bayern/index.html')!;
     const at = (x: string): number => html.indexOf(x);
-    expect(html.match(/<details/g)!.length).toBeGreaterThanOrEqual(6);                             // Altersklasse, Geschlecht und Ebene aufklappbar
-    expect(html.match(/<details class="liga-fold liga-fold--2" open>/g)).toHaveLength(1);         // nur die erste Altersklasse offen
+    expect(html.match(/<details/g)!.length).toBeGreaterThanOrEqual(5);                             // Geschlecht und Ebene aufklappbar
+    expect(html).not.toContain('liga-fold--2');                                                    // Altersklasse ist kein Akkordeon
+    expect(html).not.toMatch(/<summary><h2/);
+    expect(html.match(/<details class="liga-fold liga-fold--3" open>/g)).toHaveLength(1);         // nur das erste Geschlecht der ersten Altersklasse offen
     expect(html).not.toMatch(/<details[^>]*><summary><h5/);                                       // Bezirk ist kein Akkordeon
     expect(at('id="ak-senioren"')).toBeLessThan(at('id="ak-u14"'));                                // Altersklassen in Reihenfolge
     expect(at('id="ak-senioren-maennlich-verband"')).toBeLessThan(at('id="ak-senioren-maennlich-kreis"'));
@@ -700,7 +702,7 @@ describe('Hallenseiten', () => {
     expect(before.files.get('halle/baden-wuerttemberg/index.html')).toContain('href="halle/baden-wuerttemberg/ulm/"');
     const ortHallen = before.files.get('halle/baden-wuerttemberg/ulm/index.html')!;
     expect(ortHallen).toContain('<a href="halle/baden-wuerttemberg/ulm/sporthalle-ost/">Sporthalle Ost</a>');
-    expect(ortHallen).toContain('<li><a href="halle/">Hallen</a></li>');
+    expect(ortHallen).toContain('<a class="dss-crumbs-item" href="halle/">Hallen</a>');
     expect(before.files.get('sitemap.xml')).toContain('/halle/<');
     expect(before.hasHalls).toBe(true);
 
