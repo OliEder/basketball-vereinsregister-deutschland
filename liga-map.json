@@ -6303,6 +6303,10 @@
   "path": "liga/nordrhein-westfalen/kreisliga-u12-offen/",
   "history": []
  },
+ "56299": {
+  "path": "liga/bayern/vorbereitungsliga-jugend/",
+  "history": []
+ },
  "56305": {
   "path": "liga/bayern/bbv-pokal-u16-maennlich/",
   "history": []
@@ -7115,6 +7119,10 @@
  },
  "56699": {
   "path": "liga/regionalliga-west/bestenspiele-ue35-maennlich/",
+  "history": []
+ },
+ "56700": {
+  "path": "liga/bundesligen/opf-bezirkspokal-damen-26-27/",
   "history": []
  }
 }
