@@ -32,7 +32,6 @@
 .liga-fold[open] > summary::before { transform: rotate(45deg); }
 .liga-fold > summary:focus-visible { outline: var(--ring-w) solid var(--ring-color); outline-offset: 2px; }
 .liga-fold > summary > :is(h2, h3, h4) { margin: 0; }
-.liga-fold--2 > summary > h2 { font-size: 1.35rem; }
 .liga-fold--3 > summary > h3 { font-size: 1.15rem; }
 .liga-fold--4 > summary > h4 { font-size: 1rem; }
 .liga-fold > h5 { margin: 1rem 0 0.5rem; font-size: 0.95rem; }

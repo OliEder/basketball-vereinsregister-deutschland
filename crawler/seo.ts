@@ -239,10 +239,13 @@ function breadcrumbLd(base: string, items: { name: string; path: string }[]): st
   })}</script>\n`;
 }
 
+const CRUMB_SEP = '<svg class="dss-crumbs-sep" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+
+/** Brotkrumen im Markup des DSS (dss-crumbs-item, -sep, is-current), als Liste für Screenreader. */
 function crumbNav(items: { name: string; path: string }[]): string {
   const parts = items.map((it, i) => i === items.length - 1
-    ? `<li aria-current="page">${esc(it.name)}</li>`
-    : `<li><a href="${it.path || 'index.html'}">${esc(it.name)}</a></li>`);
+    ? `<li><span class="dss-crumbs-item is-current" aria-current="page">${esc(it.name)}</span></li>`
+    : `<li><a class="dss-crumbs-item" href="${it.path || 'index.html'}">${esc(it.name)}</a>${CRUMB_SEP}</li>`);
   return `    <nav class="dss-crumbs" aria-label="Brotkrumen"><ol>${parts.join('')}</ol></nav>`;
 }
 
@@ -719,14 +722,15 @@ export function ligaHierarchy(
   const ebenen = (list: LigaDoc[], idBase: string, level: number): string =>
     EBENEN.map(e => ({ ...e, docs: list.filter(d => ebeneKey(d, ebeneOf) === e.key) })).filter(x => x.docs.length)
       .map((x, i) => fold(level, `${idBase}-${x.key.toLowerCase()}`, x.label, x.docs.length, i === 0, bezirke(x.docs, level + 1))).join('\n');
-  const genders = (list: LigaDoc[], idBase: string, level: number): string =>
+  const genders = (list: LigaDoc[], idBase: string, level: number, openFirst = true): string =>
     [...group(list, d => d.geschlecht || 'Weitere').entries()]
       .sort((a, b) => geschlechtSort(a[0]) - geschlechtSort(b[0]) || a[0].localeCompare(b[0], 'de'))
-      .map(([g, ds], i) => fold(level, `${idBase}-${slugify(g)}`, capitalize(g), ds.length, i === 0, `${ebenen(ds, `${idBase}-${slugify(g)}`, level + 1)}\n`)).join('\n');
+      .map(([g, ds], i) => fold(level, `${idBase}-${slugify(g)}`, capitalize(g), ds.length, openFirst && i === 0, `${ebenen(ds, `${idBase}-${slugify(g)}`, level + 1)}\n`)).join('\n');
   if (opts.fromGender) return genders(docs, opts.idBase ?? 'ligen', opts.level);
   return [...group(docs, d => d.akName || 'Weitere Ligen').entries()]
     .sort((a, b) => akSortKey(a[0]) - akSortKey(b[0]) || a[0].localeCompare(b[0], 'de'))
-    .map(([ak, ds], i) => fold(opts.level, `ak-${slugify(ak)}`, ak, ds.length, i === 0, `${genders(ds, `ak-${slugify(ak)}`, opts.level + 1)}\n`)).join('\n');
+    // Altersklasse ist nur eine Überschrift; aufgeklappt wird zu Beginn nur das erste Geschlecht der ersten Altersklasse
+    .map(([ak, ds], i) => `<h${opts.level} id="ak-${slugify(ak)}">${esc(ak)} ${count(ds.length)}</h${opts.level}>\n${genders(ds, `ak-${slugify(ak)}`, opts.level + 1, i === 0)}\n`).join('\n');
 }
 
 /** Ligenbereiche der Übersicht: bundesweite Ligen, Regionalligen, Landesverbände, alles andere zuletzt. */
