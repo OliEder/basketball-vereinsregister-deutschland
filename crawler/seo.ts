@@ -174,8 +174,6 @@ export function depthPrefix(p: string): string {
   return '../'.repeat(depth);
 }
 
-const FONTS = 'https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap';
-
 interface PageOpts {
   title: string;
   description: string;
@@ -194,7 +192,7 @@ function shell(o: PageOpts): string {
   const url = `${o.base}/${o.canonicalPath ?? o.pagePath}`;
   const styles = (o.styles ?? ['style.css']).map(s => `  <link rel="stylesheet" href="${s}">`).join('\n');
   return `<!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-brand="dbb" data-type="dbb">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,9 +205,7 @@ ${o.noindex ? '  <meta name="robots" content="noindex">\n' : ''}  <meta property
   <meta property="og:title" content="${esc(o.title)}">
   <meta property="og:description" content="${esc(o.description)}">
   <meta property="og:url" content="${esc(url)}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="${FONTS}" rel="stylesheet">
+  <link rel="stylesheet" href="dss/fonts/fonts.css">
   <link rel="stylesheet" href="dss/tokens.css">
   <link rel="stylesheet" href="dss/components.css">
   <link rel="stylesheet" href="dss-local.css">
