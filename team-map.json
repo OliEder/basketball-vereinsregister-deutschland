@@ -451,6 +451,10 @@
   "path": "bayern/noerdlingen/tsv-1861-noerdlingen/herren/",
   "history": []
  },
+ "151010": {
+  "path": "bayern/schwandorf/tsv-1880-schwandorf/herren/",
+  "history": []
+ },
  "151011": {
   "path": "bayern/wolnzach/tsv-1884-wolnzach/herren/",
   "history": []
@@ -521,6 +525,10 @@
  },
  "151035": {
   "path": "bayern/herzogenaurach/ts-herzogenaurach/frauen/",
+  "history": []
+ },
+ "151036": {
+  "path": "bayern/fuerth/tv-fuerth-1860/frauen-151036/",
   "history": []
  },
  "151039": {
@@ -4705,6 +4713,10 @@
   "path": "bayern/burgsinn/tv-burgsinn-1889/herren/",
   "history": []
  },
+ "157464": {
+  "path": "bayern/wuerzburg/tsv-grombuehl/herren-157464/",
+  "history": []
+ },
  "157465": {
   "path": "rheinland-pfalz/landau/asv-46-landau/herren/",
   "history": []
@@ -4769,6 +4781,14 @@
   "path": "bayern/oerlenbach/sg-oerlenbach-ebenhausen/herren/",
   "history": []
  },
+ "157552": {
+  "path": "bayern/arnstein/tb-arnstein/herren-157552/",
+  "history": []
+ },
+ "157554": {
+  "path": "bayern/bad-neustadt-a-d-saale/tsv-brendlorenzen/herren/",
+  "history": []
+ },
  "157557": {
   "path": "bayern/gerolzhofen/tv-1862-gerolzhofen/herren/",
   "history": []
@@ -4783,6 +4803,10 @@
  },
  "157564": {
   "path": "bayern/veitshoechheim/tg-1877-veitshoechheim/herren/",
+  "history": []
+ },
+ "157568": {
+  "path": "bayern/weitere/sv-kuernach-1946/herren/",
   "history": []
  },
  "157569": {
@@ -6285,6 +6309,10 @@
  },
  "158905": {
   "path": "bayern/fuerth/tv-fuerth-1860/frauen/",
+  "history": []
+ },
+ "158907": {
+  "path": "bayern/schwabach/tv-48-schwabach/frauen-158907/",
   "history": []
  },
  "158910": {
@@ -11013,6 +11041,14 @@
   "path": "bayern/landshut/tg-landshut/u18-maennlich/",
   "history": []
  },
+ "162987": {
+  "path": "bayern/weilheim/tsv-weilheim/u16-maennlich/",
+  "history": []
+ },
+ "162988": {
+  "path": "bayern/muenchen/bc-hellenen-muenchen/u16-maennlich/",
+  "history": []
+ },
  "162989": {
   "path": "bayern/muenchen/tsv-muenchen-forstenried/u16-maennlich/",
   "history": []
@@ -11042,6 +11078,10 @@
   "history": [
    "bayern/muenchen/djk-sb-muenchen/u16-maennlich-2/"
   ]
+ },
+ "162997": {
+  "path": "bayern/muenchen/tsv-muenchen-ost/u16-maennlich-162997/",
+  "history": []
  },
  "162998": {
   "path": "bayern/muenchen/mtv-1879-muenchen/u16-maennlich/",
@@ -11117,6 +11157,10 @@
  },
  "163029": {
   "path": "bayern/vilsbiburg/tsv-vilsbiburg/u12-maennlich/",
+  "history": []
+ },
+ "163032": {
+  "path": "bayern/unterhaching/tsv-unterhaching/u16-maennlich-163032/",
   "history": []
  },
  "163035": {
@@ -13169,6 +13213,10 @@
   "path": "bayern/peiting/tsv-peiting/u16-maennlich/",
   "history": []
  },
+ "165506": {
+  "path": "bayern/peiting/tsv-peiting/u14-maennlich/",
+  "history": []
+ },
  "165508": {
   "path": "bayern/penzberg/tsv-1898-penzberg/u18-maennlich/",
   "history": []
@@ -13337,8 +13385,28 @@
   "path": "baden-wuerttemberg/konstanz/tv-konstanz/herren-2/",
   "history": []
  },
+ "165586": {
+  "path": "baden-wuerttemberg/konstanz/tv-konstanz/herren-165586/",
+  "history": []
+ },
+ "165590": {
+  "path": "baden-wuerttemberg/sigmaringen/tb-sigmaringen/herren/",
+  "history": []
+ },
  "165591": {
   "path": "baden-wuerttemberg/tettnang/bg-bodensee/herren/",
+  "history": []
+ },
+ "165592": {
+  "path": "baden-wuerttemberg/tettnang/bg-bodensee/herren-165592/",
+  "history": []
+ },
+ "165593": {
+  "path": "baden-wuerttemberg/stockach/tg-stockach/herren/",
+  "history": []
+ },
+ "165594": {
+  "path": "baden-wuerttemberg/ueberlingen/bc-ueberlingen/herren/",
   "history": []
  },
  "165595": {
@@ -13447,6 +13515,10 @@
  },
  "165655": {
   "path": "baden-wuerttemberg/neu-ulm/bbu-01/u12-maennlich-165655/",
+  "history": []
+ },
+ "165656": {
+  "path": "baden-wuerttemberg/neu-ulm/bbu-01/u12-maennlich-165656/",
   "history": []
  },
  "165660": {
@@ -14369,6 +14441,10 @@
   "path": "baden-wuerttemberg/ehingen-donau/tsg-ehingen-donau-1848/u14-maennlich/",
   "history": []
  },
+ "166171": {
+  "path": "baden-wuerttemberg/ehingen-donau/tsg-ehingen-donau-1848/u12-maennlich/",
+  "history": []
+ },
  "166172": {
   "path": "baden-wuerttemberg/sinsheim/tv-sinsheim/u14-maennlich/",
   "history": []
@@ -14379,6 +14455,22 @@
  },
  "166174": {
   "path": "baden-wuerttemberg/sinsheim/tv-sinsheim/u18-maennlich/",
+  "history": []
+ },
+ "166178": {
+  "path": "bayern/muenchen/fc-bayern-muenchen/u16-maennlich/",
+  "history": []
+ },
+ "166180": {
+  "path": "bayern/muenchen/djk-sb-muenchen/u16-maennlich-166180/",
+  "history": []
+ },
+ "166181": {
+  "path": "bayern/muenchen/mtsv-schwabing/u16-maennlich-166181/",
+  "history": []
+ },
+ "166182": {
+  "path": "bayern/muenchen/ts-jahn-muenchen/u16-maennlich-166182/",
   "history": []
  },
  "166183": {
@@ -14523,6 +14615,10 @@
  },
  "166316": {
   "path": "baden-wuerttemberg/tettnang/bg-bodensee/u16-maennlich/",
+  "history": []
+ },
+ "166317": {
+  "path": "baden-wuerttemberg/tettnang/bg-bodensee/u18-maennlich/",
   "history": []
  },
  "166321": {
@@ -15579,6 +15675,10 @@
   "path": "bayern/tegernheim/fc-tegernheim/u14-maennlich/",
   "history": []
  },
+ "167031": {
+  "path": "bayern/weiden-i-d-opf/tb-weiden/u10-mix/",
+  "history": []
+ },
  "167035": {
   "path": "bayern/regensburg/ts-regensburg/u20-maennlich/",
   "history": []
@@ -15705,6 +15805,10 @@
  },
  "167120": {
   "path": "baden-wuerttemberg/karlsruhe/ssc-karlsruhe/u18-maennlich/",
+  "history": []
+ },
+ "167121": {
+  "path": "baden-wuerttemberg/karlsruhe/sg-eichenkreuz-karlsruhe/u12-mix/",
   "history": []
  },
  "167124": {
@@ -16781,6 +16885,10 @@
   "path": "bayern/oerlenbach/sg-oerlenbach-ebenhausen/u12-mix/",
   "history": []
  },
+ "167937": {
+  "path": "bayern/wuerzburg/tg-48-wuerzburg/u10-mix-167937/",
+  "history": []
+ },
  "167938": {
   "path": "bayern/goldbach/tv-1897-goldbach/u10-mix/",
   "history": []
@@ -17043,6 +17151,10 @@
  },
  "168394": {
   "path": "bremen/bremerhaven/1-bc-bremerhaven/u18-maennlich/",
+  "history": []
+ },
+ "168399": {
+  "path": "bayern/oerlenbach/sg-oerlenbach-ebenhausen/herren-168399/",
   "history": []
  },
  "168407": {
@@ -17881,6 +17993,10 @@
   "path": "baden-wuerttemberg/ludwigsburg/bsg-basket-ludwigsburg/u14-weiblich/",
   "history": []
  },
+ "169246": {
+  "path": "baden-wuerttemberg/ludwigsburg/bsg-basket-ludwigsburg/u16-weiblich/",
+  "history": []
+ },
  "169296": {
   "path": "baden-wuerttemberg/ludwigsburg/bsg-basket-ludwigsburg/u18-weiblich/",
   "history": []
@@ -17915,6 +18031,10 @@
  },
  "170437": {
   "path": "baden-wuerttemberg/haiterbach/kkk-haiterbach/herren-170437/",
+  "history": []
+ },
+ "170518": {
+  "path": "bayern/weitere/tv-1899-parsberg/herren/",
   "history": []
  },
  "170692": {
@@ -18567,6 +18687,10 @@
   "path": "bayern/icking/tus-geretsried/herren-2/",
   "history": []
  },
+ "180948": {
+  "path": "bayern/neustadt-an-der-aisch/ttv-neustadt/u14-weiblich/",
+  "history": []
+ },
  "180955": {
   "path": "bayern/neustadt-an-der-aisch/ttv-neustadt/u16-maennlich/",
   "history": []
@@ -19023,6 +19147,10 @@
   "path": "berlin/berlin/einheit-pankow/herren-2/",
   "history": []
  },
+ "188242": {
+  "path": "bayern/herzogenaurach/ts-herzogenaurach/u14-weiblich/",
+  "history": []
+ },
  "188272": {
   "path": "bayern/herzogenaurach/ts-herzogenaurach/u18-maennlich/",
   "history": []
@@ -19123,6 +19251,10 @@
  },
  "189572": {
   "path": "bayern/rosenheim/sb-djk-rosenheim/u16-weiblich-189572/",
+  "history": []
+ },
+ "189789": {
+  "path": "baden-wuerttemberg/bretten/turnverein-1846-bretten/u12-mix/",
   "history": []
  },
  "189841": {
@@ -19453,6 +19585,10 @@
   "path": "berlin/berlin/tsc-berlin/herren/",
   "history": []
  },
+ "195060": {
+  "path": "bayern/fuerth/tv-fuerth-1860/u14-weiblich/",
+  "history": []
+ },
  "195083": {
   "path": "bayern/fuerth/tv-fuerth-1860/u16-weiblich/",
   "history": []
@@ -19695,6 +19831,10 @@
  },
  "198903": {
   "path": "brandenburg/cottbus/bbc-cottbus/u14-maennlich/",
+  "history": []
+ },
+ "199027": {
+  "path": "bayern/roth/spvgg-roth/frauen-199027/",
   "history": []
  },
  "199051": {
@@ -20085,8 +20225,16 @@
   "path": "niedersachsen/bad-essen/tus-bad-essen/u12-maennlich-204390/",
   "history": []
  },
+ "204520": {
+  "path": "baden-wuerttemberg/ueberlingen/bc-ueberlingen/u12-maennlich/",
+  "history": []
+ },
  "204522": {
   "path": "baden-wuerttemberg/ueberlingen/bc-ueberlingen/u14-maennlich/",
+  "history": []
+ },
+ "204547": {
+  "path": "baden-wuerttemberg/ueberlingen/bc-ueberlingen/u18-maennlich/",
   "history": []
  },
  "204616": {
@@ -21085,6 +21233,10 @@
   "path": "bayern/rattelsdorf/spvgg-rattelsdorf/frauen/",
   "history": []
  },
+ "218186": {
+  "path": "bayern/rattelsdorf/spvgg-rattelsdorf/u14-maennlich/",
+  "history": []
+ },
  "218195": {
   "path": "bayern/rattelsdorf/spvgg-rattelsdorf/u14-weiblich/",
   "history": []
@@ -21229,6 +21381,10 @@
   "path": "bayern/muenchen/mtsv-schwabing/u14-maennlich-220936/",
   "history": []
  },
+ "221022": {
+  "path": "baden-wuerttemberg/tuebingen/sv-03-tuebingen/u12-weiblich/",
+  "history": []
+ },
  "221062": {
   "path": "baden-wuerttemberg/tuebingen/sv-03-tuebingen/u14-weiblich/",
   "history": []
@@ -21299,6 +21455,10 @@
  },
  "221690": {
   "path": "berlin/berlin/bg-zehlendorf/herren-221690/",
+  "history": []
+ },
+ "221740": {
+  "path": "bayern/ebermannstadt/tsv-ebermannstadt/u14-maennlich/",
   "history": []
  },
  "221812": {
@@ -21395,6 +21555,10 @@
   "path": "schleswig-holstein/luebeck/tus-luebeck/u18-maennlich/",
   "history": []
  },
+ "223643": {
+  "path": "baden-wuerttemberg/rottenburg/tv-rottenburg/u14-weiblich/",
+  "history": []
+ },
  "223821": {
   "path": "rheinland-pfalz/bad-kreuznach/vfl-bad-kreuznach/u18-weiblich/",
   "history": []
@@ -21457,6 +21621,10 @@
  },
  "224709": {
   "path": "baden-wuerttemberg/freiburg/usc-freiburg/u16-maennlich/",
+  "history": []
+ },
+ "224721": {
+  "path": "baden-wuerttemberg/freiburg/usc-freiburg/u16-weiblich-224721/",
   "history": []
  },
  "224855": {
@@ -21523,8 +21691,16 @@
   "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/u12-maennlich/",
   "history": []
  },
+ "225344": {
+  "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/u12-weiblich/",
+  "history": []
+ },
  "225354": {
   "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/u14-maennlich/",
+  "history": []
+ },
+ "225371": {
+  "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/u14-weiblich/",
   "history": []
  },
  "225400": {
@@ -21541,6 +21717,10 @@
  },
  "225475": {
   "path": "baden-wuerttemberg/boeblingen/sv-boeblingen/u16-maennlich-2/",
+  "history": []
+ },
+ "225568": {
+  "path": "bayern/eggolsheim/djk-eggolsheim/u14-maennlich-225568/",
   "history": []
  },
  "225650": {
@@ -21621,6 +21801,10 @@
  },
  "226128": {
   "path": "rheinland-pfalz/boppard/ssv-buchholz/u16-maennlich/",
+  "history": []
+ },
+ "226206": {
+  "path": "baden-wuerttemberg/stuttgart/mtv-stuttgart/u16-weiblich-226206/",
   "history": []
  },
  "226231": {
@@ -21763,6 +21947,10 @@
   "path": "bayern/penzberg/tsv-1898-penzberg/u20-maennlich/",
   "history": []
  },
+ "227361": {
+  "path": "bayern/penzberg/tsv-1898-penzberg/u14-maennlich-227361/",
+  "history": []
+ },
  "227364": {
   "path": "bayern/penzberg/tsv-1898-penzberg/u16-maennlich-227364/",
   "history": []
@@ -21835,12 +22023,20 @@
   "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/u12-maennlich-228215/",
   "history": []
  },
+ "228254": {
+  "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/u14-weiblich/",
+  "history": []
+ },
  "228308": {
   "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/u18-weiblich/",
   "history": []
  },
  "228331": {
   "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/u12-maennlich/",
+  "history": []
+ },
+ "228408": {
+  "path": "bayern/marktheidenfeld/tv-marktheidenfeld/u14-weiblich/",
   "history": []
  },
  "228417": {
@@ -22005,6 +22201,10 @@
  },
  "230469": {
   "path": "baden-wuerttemberg/sindelfingen/vfl-sindelfingen/herren-230469/",
+  "history": []
+ },
+ "230546": {
+  "path": "baden-wuerttemberg/ravensburg/tsb-ravensburg/u12-maennlich/",
   "history": []
  },
  "230665": {
@@ -22225,6 +22425,10 @@
  },
  "234240": {
   "path": "bayern/mammendorf/sv-mammendorf/u18-maennlich/",
+  "history": []
+ },
+ "234447": {
+  "path": "bayern/kronach/ts-1861-kronach/u14-maennlich/",
   "history": []
  },
  "234540": {
@@ -22657,6 +22861,10 @@
  },
  "240754": {
   "path": "bayern/noerdlingen/tsv-1861-noerdlingen/u12-mix-240754/",
+  "history": []
+ },
+ "241110": {
+  "path": "bayern/freising/tsv-jahn-freising/u12-weiblich/",
   "history": []
  },
  "241149": {
@@ -23459,6 +23667,10 @@
   "path": "baden-wuerttemberg/sandhausen/tg-sandhausen/u14-weiblich/",
   "history": []
  },
+ "253414": {
+  "path": "baden-wuerttemberg/sandhausen/tg-sandhausen/u16-weiblich-253414/",
+  "history": []
+ },
  "253434": {
   "path": "baden-wuerttemberg/sandhausen/tg-sandhausen/u18-weiblich/",
   "history": []
@@ -23629,6 +23841,10 @@
  },
  "255113": {
   "path": "baden-wuerttemberg/heidelberg/usc-heidelberg/u14-weiblich/",
+  "history": []
+ },
+ "255166": {
+  "path": "baden-wuerttemberg/heidelberg/usc-heidelberg/u16-weiblich-255166/",
   "history": []
  },
  "255203": {
@@ -23845,6 +24061,10 @@
  },
  "258312": {
   "path": "bayern/lindau/tsv-1850-lindau/u14-maennlich/",
+  "history": []
+ },
+ "258412": {
+  "path": "baden-wuerttemberg/konstanz/tv-konstanz/u12-maennlich/",
   "history": []
  },
  "258434": {
@@ -24227,6 +24447,10 @@
   "path": "bayern/bayreuth/bbc-bayreuth/u18-weiblich/",
   "history": []
  },
+ "264996": {
+  "path": "bayern/bayreuth/bbc-bayreuth/u14-maennlich-264996/",
+  "history": []
+ },
  "265014": {
   "path": "bayern/bayreuth/bbc-bayreuth/u18-maennlich-265014/",
   "history": []
@@ -24571,12 +24795,20 @@
   "path": "bayern/hemau/sportgruppe-hohenschambach/u16-maennlich/",
   "history": []
  },
+ "272946": {
+  "path": "bayern/polling/sv-polling/u14-maennlich/",
+  "history": []
+ },
  "273045": {
   "path": "bayern/nuernberg/nuernberger-basketball-club/herren-273045/",
   "history": []
  },
  "273141": {
   "path": "bayern/nuernberg/nuernberger-basketball-club/u20-maennlich/",
+  "history": []
+ },
+ "273289": {
+  "path": "bayern/muensterschwarzach/djk-muensterschwarzach/u14-weiblich/",
   "history": []
  },
  "273304": {
@@ -24831,6 +25063,10 @@
   "path": "sachsen-anhalt/kalbe-milde/vfl-kalbe-milde/u18-maennlich/",
   "history": []
  },
+ "276830": {
+  "path": "bayern/kitzingen/tg-kitzingen-1848/herren/",
+  "history": []
+ },
  "276951": {
   "path": "bundesweit/goettingen/bg-goettingen/herren/",
   "history": []
@@ -24999,6 +25235,10 @@
   "path": "rheinland-pfalz/mehlingen/bbc-mehlingen/u14-maennlich/",
   "history": []
  },
+ "280333": {
+  "path": "baden-wuerttemberg/balingen/tsg-balingen/u18-maennlich/",
+  "history": []
+ },
  "280355": {
   "path": "baden-wuerttemberg/balingen/tsg-balingen/herren-2/",
   "history": []
@@ -25069,6 +25309,10 @@
  },
  "281897": {
   "path": "bayern/hirschaid/bg-regnitztal/u12-mix/",
+  "history": []
+ },
+ "281903": {
+  "path": "bayern/hirschaid/bg-regnitztal/u14-maennlich-281903/",
   "history": []
  },
  "282006": {
@@ -25233,6 +25477,10 @@
  },
  "285774": {
   "path": "nordrhein-westfalen/beverungen/hlc-hoexter/u14-mix/",
+  "history": []
+ },
+ "285782": {
+  "path": "bayern/uffenheim/sg-bomhard-schule-uffenheim/herren/",
   "history": []
  },
  "286016": {
@@ -25777,6 +26025,14 @@
   "path": "nordrhein-westfalen/dortmund/dortmunder-tg-von-1873/herren-2/",
   "history": []
  },
+ "309749": {
+  "path": "bayern/tegernheim/fc-tegernheim/u10-mix/",
+  "history": []
+ },
+ "309752": {
+  "path": "bayern/neustadt-a-d-waldnaab/djk-neustadt-a-d-waldnaab/u8-mix/",
+  "history": []
+ },
  "309759": {
   "path": "hessen/seeheim-jugenheim/s-c-bergstrasse/u12-mix-309759/",
   "history": []
@@ -25907,6 +26163,10 @@
  },
  "309995": {
   "path": "bayern/marktheidenfeld/tv-marktheidenfeld/u12-mix/",
+  "history": []
+ },
+ "309997": {
+  "path": "bayern/marktheidenfeld/tv-marktheidenfeld/u10-mix/",
   "history": []
  },
  "310012": {
@@ -26445,6 +26705,10 @@
   "path": "nordrhein-westfalen/beverungen/hlc-hoexter/u18-maennlich/",
   "history": []
  },
+ "310667": {
+  "path": "bayern/wuerzburg/tg-48-wuerzburg/u14-weiblich-310667/",
+  "history": []
+ },
  "310669": {
   "path": "nordrhein-westfalen/muelheim-an-der-ruhr/muelheimer-tg-1856/u16-weiblich/",
   "history": []
@@ -26537,6 +26801,14 @@
   "path": "baden-wuerttemberg/offenburg/etsv-jahn-offenburg/herren-2/",
   "history": []
  },
+ "310792": {
+  "path": "baden-wuerttemberg/stuttgart/regio-team-stuttgart/u16-weiblich/",
+  "history": []
+ },
+ "310793": {
+  "path": "baden-wuerttemberg/neu-ulm/bbu-01/u16-weiblich-310793/",
+  "history": []
+ },
  "310794": {
   "path": "baden-wuerttemberg/neu-ulm/bbu-01/u14-weiblich/",
   "history": []
@@ -26627,6 +26899,14 @@
  },
  "310848": {
   "path": "bayern/erlangen/cvjm-erlangen/u14-weiblich/",
+  "history": []
+ },
+ "310850": {
+  "path": "bayern/nuernberg/post-sv-nuernberg/u14-weiblich-310850/",
+  "history": []
+ },
+ "310851": {
+  "path": "bayern/schwabach/tv-48-schwabach/u14-weiblich-310851/",
   "history": []
  },
  "310869": {
@@ -27121,6 +27401,10 @@
   "path": "baden-wuerttemberg/fellbach/tsv-schmiden/herren/",
   "history": []
  },
+ "311215": {
+  "path": "baden-wuerttemberg/karlsruhe/ssc-karlsruhe/u16-weiblich-311215/",
+  "history": []
+ },
  "311216": {
   "path": "baden-wuerttemberg/karlsruhe/post-suedstadt-karlsruhe/u16-weiblich/",
   "history": []
@@ -27399,6 +27683,10 @@
   "path": "bayern/graefelfing/tsv-graefelfing/u18-maennlich/",
   "history": []
  },
+ "311461": {
+  "path": "baden-wuerttemberg/karlsruhe/ssc-karlsruhe/u12-mix/",
+  "history": []
+ },
  "311463": {
   "path": "mecklenburg-vorpommern/rostock/rostock-seawolves/u14-mix-311463/",
   "history": []
@@ -27421,6 +27709,10 @@
  },
  "311488": {
   "path": "bayern/wuerzburg/tg-48-wuerzburg/u10-mix/",
+  "history": []
+ },
+ "311489": {
+  "path": "bayern/wuerzburg/tg-48-wuerzburg/u10-mix-311489/",
   "history": []
  },
  "311501": {
@@ -28661,12 +28953,24 @@
   "path": "baden-wuerttemberg/karlsruhe/kit-sc-karlsruhe/u18-maennlich/",
   "history": []
  },
+ "312553": {
+  "path": "baden-wuerttemberg/neu-ulm/bbu-01/u12-maennlich-312553/",
+  "history": []
+ },
+ "312555": {
+  "path": "baden-wuerttemberg/weingarten/tv-weingarten/u12-maennlich/",
+  "history": []
+ },
  "312561": {
   "path": "baden-wuerttemberg/karlsruhe/kit-sc-karlsruhe/u16-maennlich/",
   "history": []
  },
  "312562": {
   "path": "baden-wuerttemberg/karlsruhe/kit-sc-karlsruhe/u14-maennlich/",
+  "history": []
+ },
+ "312563": {
+  "path": "baden-wuerttemberg/karlsruhe/kit-sc-karlsruhe/u12-mix/",
   "history": []
  },
  "312565": {
@@ -29037,6 +29341,14 @@
   "path": "bayern/nuernberg/tuspo-1888-nuernberg/u14-maennlich/",
   "history": []
  },
+ "312950": {
+  "path": "bayern/nuernberg/tuspo-1888-nuernberg/frauen-312950/",
+  "history": []
+ },
+ "312951": {
+  "path": "bayern/nuernberg/tuspo-1888-nuernberg/u14-weiblich/",
+  "history": []
+ },
  "312956": {
   "path": "niedersachsen/achim/bg-bierden-bassen-achim/u18-weiblich/",
   "history": []
@@ -29284,6 +29596,10 @@
   "history": [
    "bayern/stadtbergen/bg-leitershofen-stadtbergen/u10-mix-2/"
   ]
+ },
+ "313145": {
+  "path": "baden-wuerttemberg/weingarten/tv-weingarten/herren-313145/",
+  "history": []
  },
  "313150": {
   "path": "bayern/gauting/gautinger-sportclub/u12-maennlich/",
@@ -30437,6 +30753,10 @@
   "path": "bayern/oerlenbach/sg-oerlenbach-ebenhausen/u10-mix/",
   "history": []
  },
+ "313807": {
+  "path": "bayern/veitshoechheim/tg-1877-veitshoechheim/u10-mix/",
+  "history": []
+ },
  "313808": {
   "path": "bayern/veitshoechheim/tg-1877-veitshoechheim/u8-mix/",
   "history": []
@@ -31097,6 +31417,10 @@
   "path": "bayern/karlstadt/tsv-karlstadt/u10-mix/",
   "history": []
  },
+ "314352": {
+  "path": "bayern/lohr/tsv-1846-lohr/u10-mix/",
+  "history": []
+ },
  "314353": {
   "path": "bundesweit/heidelberg/usc-bascats-heidelberg/frauen/",
   "history": []
@@ -31569,6 +31893,10 @@
   "path": "berlin/berlin/alba-berlin-basketballteam/u12-weiblich-314641/",
   "history": []
  },
+ "314667": {
+  "path": "baden-wuerttemberg/vs-schwenningen/bv-villingen-schwenningen/u18-maennlich-314667/",
+  "history": []
+ },
  "314670": {
   "path": "hessen/weiterstadt/sportgemeinde-1886-weiterstadt/u10-weiblich/",
   "history": []
@@ -31803,6 +32131,10 @@
  },
  "314813": {
   "path": "bayern/goldbach/bb-akademie-bayerischer-untermain/herren/",
+  "history": []
+ },
+ "314814": {
+  "path": "bayern/murnau/esv-staffelsee/u14-maennlich-314814/",
   "history": []
  },
  "314817": {
@@ -32337,6 +32669,10 @@
   "path": "berlin/berlin/alba-berlin-basketballteam/herren-315694/",
   "history": []
  },
+ "315704": {
+  "path": "baden-wuerttemberg/biberach/tg-biberach/u12-maennlich/",
+  "history": []
+ },
  "315708": {
   "path": "baden-wuerttemberg/lahr/tv-lahr-von-1846/herren/",
   "history": []
@@ -32399,6 +32735,10 @@
  },
  "315780": {
   "path": "baden-wuerttemberg/heiligkreuzsteinach/vfl-heiligkreuzsteinach/u12-weiblich/",
+  "history": []
+ },
+ "315781": {
+  "path": "bayern/regensburg/ts-regensburg/u8-mix/",
   "history": []
  },
  "315782": {
@@ -32909,6 +33249,10 @@
   "path": "schleswig-holstein/schwentinetal/tsv-klausdorf-von-1916/u16-maennlich/",
   "history": []
  },
+ "316325": {
+  "path": "bayern/weitere/artio-nuernberg/frauen-316325/",
+  "history": []
+ },
  "316328": {
   "path": "rheinland-pfalz/koblenz/sg-luetzel-post-koblenz/u16-maennlich-2/",
   "history": []
@@ -33015,6 +33359,10 @@
  },
  "316391": {
   "path": "bundesweit/berlin/bg-zehlendorf/u16-maennlich/",
+  "history": []
+ },
+ "316392": {
+  "path": "bundesweit/weitere/vfl-kirchheim-knights/u16-maennlich/",
   "history": []
  },
  "316396": {
@@ -33281,6 +33629,10 @@
   "path": "sachsen/limbach-oberfrohna/tv-oberfrohna-1862/u14-weiblich/",
   "history": []
  },
+ "316609": {
+  "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u10-mix-316609/",
+  "history": []
+ },
  "316610": {
   "path": "baden-wuerttemberg/kehl/kehler-turnerschaft/u14-maennlich/",
   "history": []
@@ -33299,6 +33651,10 @@
  },
  "316621": {
   "path": "baden-wuerttemberg/bad-boll/tsv-bad-boll/u12-weiblich/",
+  "history": []
+ },
+ "316623": {
+  "path": "baden-wuerttemberg/reutlingen/tsg-reutlingen/u12-weiblich/",
   "history": []
  },
  "316626": {
@@ -33587,6 +33943,14 @@
  },
  "316823": {
   "path": "saarland/saarlouis/djk-saarlouis-roden/u12-mix-316823/",
+  "history": []
+ },
+ "316834": {
+  "path": "baden-wuerttemberg/pfinztal-bergh/tsv-berghausen/u12-mix/",
+  "history": []
+ },
+ "316835": {
+  "path": "baden-wuerttemberg/pfinztal-bergh/tsv-berghausen/u12-mix-316835/",
   "history": []
  },
  "316839": {
@@ -33995,6 +34359,10 @@
  },
  "317119": {
   "path": "hessen/bad-hersfeld/tv-hersfeld-1848/ue35-maennlich/",
+  "history": []
+ },
+ "317123": {
+  "path": "baden-wuerttemberg/laupheim/tsv-laupheim-1862/u12-maennlich/",
   "history": []
  },
  "317124": {
@@ -34693,6 +35061,10 @@
   "path": "bundesweit/wuppertal/young-lions-wuppertal/u16-maennlich/",
   "history": []
  },
+ "317710": {
+  "path": "bundesweit/weitere/tsv-muenchen-ost/u16-maennlich/",
+  "history": []
+ },
  "317711": {
   "path": "thueringen/weimar/culture-city-weimar/u13-maennlich/",
   "history": []
@@ -35087,6 +35459,10 @@
  },
  "318040": {
   "path": "hessen/alsfeld/tv-alsfeld/u14-maennlich/",
+  "history": []
+ },
+ "318044": {
+  "path": "baden-wuerttemberg/karlsbad-langensteinbach/bg-karlsbad/u12-mix/",
   "history": []
  },
  "318048": {
@@ -35533,8 +35909,16 @@
   "path": "nordrhein-westfalen/hagen/sv-70-hagen-haspe/u14-mix-318382/",
   "history": []
  },
+ "318383": {
+  "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u10-mix-318383/",
+  "history": []
+ },
  "318394": {
   "path": "bayern/regensburg/ts-regensburg/u10-weiblich/",
+  "history": []
+ },
+ "318396": {
+  "path": "bayern/regensburg/ts-regensburg/u10-mix-318396/",
   "history": []
  },
  "318400": {
@@ -35949,6 +36333,10 @@
   "path": "baden-wuerttemberg/isny-im-allgaeu/tv-1846-isny/u16-maennlich/",
   "history": []
  },
+ "318952": {
+  "path": "baden-wuerttemberg/isny-im-allgaeu/tv-1846-isny/u12-maennlich/",
+  "history": []
+ },
  "318953": {
   "path": "baden-wuerttemberg/isny-im-allgaeu/tv-1846-isny/herren/",
   "history": []
@@ -36143,6 +36531,14 @@
  },
  "319101": {
   "path": "brandenburg/rathenow/bv-eberswalde-99/u16-maennlich/",
+  "history": []
+ },
+ "319105": {
+  "path": "bayern/erlangen/tb-1888-erlangen/frauen-319105/",
+  "history": []
+ },
+ "319106": {
+  "path": "bayern/nuernberg/nuernberg-falcons/frauen/",
   "history": []
  },
  "319109": {
@@ -36497,6 +36893,10 @@
   "path": "bayern/kitzingen/tg-kitzingen-1848/u12-weiblich/",
   "history": []
  },
+ "319358": {
+  "path": "bayern/kitzingen/tg-kitzingen-1848/u10-weiblich/",
+  "history": []
+ },
  "319359": {
   "path": "bayern/kitzingen/tg-kitzingen-1848/u18-maennlich/",
   "history": []
@@ -36691,6 +37091,10 @@
  },
  "319477": {
   "path": "bayern/straubing/djk-sb-straubing/frauen/",
+  "history": []
+ },
+ "319478": {
+  "path": "bayern/muenchen/tsv-muenchen-forstenried/u14-maennlich-319478/",
   "history": []
  },
  "319479": {
@@ -37083,6 +37487,10 @@
   "path": "bayern/regensburg/ts-regensburg/u12-weiblich/",
   "history": []
  },
+ "319765": {
+  "path": "bayern/bruck-i-d-opf/spvgg-bruck/u10-mix/",
+  "history": []
+ },
  "319766": {
   "path": "nordrhein-westfalen/bochum/tv-gerthe-1911/u10-weiblich/",
   "history": []
@@ -37175,6 +37583,10 @@
   "path": "bayern/ottobrunn/tsv-ottobrunn/u12-weiblich/",
   "history": []
  },
+ "319868": {
+  "path": "bayern/muenchen/tsv-milbertshofen/u12-weiblich/",
+  "history": []
+ },
  "319871": {
   "path": "bayern/garching/vfr-garching/u12-maennlich/",
   "history": []
@@ -37193,6 +37605,10 @@
  },
  "319882": {
   "path": "bayern/landsberg-am-lech/djk-landsberg/ue40-maennlich/",
+  "history": []
+ },
+ "319883": {
+  "path": "baden-wuerttemberg/baden-baden/united-colors-baden-baden/u12-mix/",
   "history": []
  },
  "319889": {
@@ -37241,6 +37657,10 @@
  },
  "319907": {
   "path": "bayern/hof/tsv-hof-1861/u16-maennlich-2/",
+  "history": []
+ },
+ "319916": {
+  "path": "bayern/muenchen/fc-bayern-muenchen/u12-weiblich-319916/",
   "history": []
  },
  "319917": {
@@ -37767,6 +38187,10 @@
  },
  "320732": {
   "path": "bayern/nuernberg/atv-1873-frankonia-nuernberg/frauen/",
+  "history": []
+ },
+ "320733": {
+  "path": "bayern/treuchtlingen/vfl-treuchtlingen/frauen/",
   "history": []
  },
  "320734": {
@@ -38427,6 +38851,14 @@
   "path": "hamburg/hamburg/fc-st-pauli-von-1910/frauen-321140/",
   "history": []
  },
+ "321141": {
+  "path": "bayern/karlstadt/tsv-karlstadt/u14-weiblich/",
+  "history": []
+ },
+ "321144": {
+  "path": "bayern/kitzingen/tg-kitzingen-1848/u14-weiblich/",
+  "history": []
+ },
  "321146": {
   "path": "bayern/laufach/kusg-laufach/u12-weiblich/",
   "history": []
@@ -38505,6 +38937,10 @@
  },
  "321188": {
   "path": "sachsen/dresden/dresden-titans/u14-weiblich/",
+  "history": []
+ },
+ "321189": {
+  "path": "bayern/wertheim/sg-wartberg-kreuzw-wertheim/u10-mix/",
   "history": []
  },
  "321191": {
@@ -38725,6 +39161,10 @@
  },
  "321326": {
   "path": "bayern/freilassing/tsv-1896-freilassing/u12-maennlich/",
+  "history": []
+ },
+ "321328": {
+  "path": "bayern/muenchen/esv-muenchen/u14-maennlich-321328/",
   "history": []
  },
  "321332": {
@@ -39291,6 +39731,10 @@
   "path": "baden-wuerttemberg/heidelberg/basket-ladies-kurpfalz/u12-weiblich-321647/",
   "history": []
  },
+ "321648": {
+  "path": "baden-wuerttemberg/konstanz/tv-konstanz/u12-weiblich/",
+  "history": []
+ },
  "321649": {
   "path": "baden-wuerttemberg/ulm-soeflingen/tsg-soeflingen-1864/u12-weiblich/",
   "history": []
@@ -39309,6 +39753,10 @@
  },
  "321653": {
   "path": "baden-wuerttemberg/schwaikheim/tsv-schwaikheim/herren-2/",
+  "history": []
+ },
+ "321654": {
+  "path": "baden-wuerttemberg/weingarten/sv-ochsenhausen/u12-maennlich/",
   "history": []
  },
  "321655": {
@@ -39457,6 +39905,10 @@
  },
  "321724": {
   "path": "saarland/bexbach/sc-frankenholz/u12-weiblich/",
+  "history": []
+ },
+ "321727": {
+  "path": "baden-wuerttemberg/pforzheim/goldstadt-united/u12-mix/",
   "history": []
  },
  "321731": {
@@ -39769,6 +40221,10 @@
   "path": "hessen/offenbach/eosc-offenbach/u10-mix-2/",
   "history": []
  },
+ "322015": {
+  "path": "baden-wuerttemberg/kirchheim-teck/vfl-kirchheim-teck/u12-weiblich/",
+  "history": []
+ },
  "322017": {
   "path": "baden-wuerttemberg/goeppingen/ts-goeppingen/u12-weiblich/",
   "history": []
@@ -39791,6 +40247,10 @@
  },
  "322042": {
   "path": "baden-wuerttemberg/winterbach/vfl-winterbach-1883/u12-maennlich/",
+  "history": []
+ },
+ "322049": {
+  "path": "bayern/erding/spvgg-altenerding/u12-weiblich/",
   "history": []
  },
  "322050": {
@@ -41723,6 +42183,10 @@
   "path": "bayern/veitshoechheim/tg-1877-veitshoechheim/u16-weiblich/",
   "history": []
  },
+ "323116": {
+  "path": "bayern/wuerzburg/sv-oberduerrbach-1959/u14-weiblich/",
+  "history": []
+ },
  "323117": {
   "path": "bayern/wuerzburg/tsv-grombuehl/u10-weiblich/",
   "history": []
@@ -42371,6 +42835,10 @@
   "path": "baden-wuerttemberg/freiburg/basketball-freizeit-club-freiburg/u14-maennlich/",
   "history": []
  },
+ "323384": {
+  "path": "baden-wuerttemberg/tettnang/bg-bodensee/u12-maennlich/",
+  "history": []
+ },
  "323385": {
   "path": "baden-wuerttemberg/ulm-soeflingen/tsg-soeflingen-1864/u16-maennlich-323385/",
   "history": []
@@ -42405,6 +42873,10 @@
  },
  "323393": {
   "path": "baden-wuerttemberg/ulm-soeflingen/tsg-soeflingen-1864/u14-weiblich/",
+  "history": []
+ },
+ "323394": {
+  "path": "baden-wuerttemberg/tuebingen/sv-03-tuebingen/u14-weiblich-323394/",
   "history": []
  },
  "323395": {
@@ -42565,6 +43037,14 @@
  },
  "323504": {
   "path": "niedersachsen/weitere/t-c-gifhorn/herren/",
+  "history": []
+ },
+ "323505": {
+  "path": "bayern/burglengenfeld/tv-1875-burglengenfeld/u10-mix/",
+  "history": []
+ },
+ "323506": {
+  "path": "bayern/burglengenfeld/tv-1875-burglengenfeld/u8-mix/",
   "history": []
  },
  "323507": {
@@ -42769,6 +43249,10 @@
  },
  "323603": {
   "path": "baden-wuerttemberg/weitere/sg-haiterbach-nagold/u14-maennlich/",
+  "history": []
+ },
+ "323608": {
+  "path": "bayern/bruck-i-d-opf/spvgg-bruck/u10-mix-323608/",
   "history": []
  },
  "323609": {

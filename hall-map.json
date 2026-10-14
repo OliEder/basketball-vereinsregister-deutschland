@@ -5914,8 +5914,10 @@
   "history": []
  },
  "105805": {
-  "path": "halle/weitere/kuernach/hoellberghalle/",
-  "history": []
+  "path": "halle/bayern/kuernach/hoellberghalle/",
+  "history": [
+   "halle/weitere/kuernach/hoellberghalle/"
+  ]
  },
  "105808": {
   "path": "halle/bayern/lohr/spessarttorhalle/",
@@ -11499,6 +11501,10 @@
  },
  "109400": {
   "path": "halle/bayern/muenchen/mittelschule-an-der-rockefellerstrasse/",
+  "history": []
+ },
+ "109401": {
+  "path": "halle/hessen/rodgau/sporthalle-weiskirchen-109401/",
   "history": []
  },
  "109403": {

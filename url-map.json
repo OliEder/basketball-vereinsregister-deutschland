@@ -3701,6 +3701,10 @@
   "path": "rheinland-pfalz/montabaur/bbc-montabaur/",
   "history": []
  },
+ "1877": {
+  "path": "bayern/weitere/sv-kuernach-1946/",
+  "history": []
+ },
  "1880": {
   "path": "rheinland-pfalz/mainz/tsv-mainz-ebersheim/",
   "history": [
@@ -6535,6 +6539,10 @@
    "bundesweit/hagen-altenhagen/bba-hagen/"
   ]
  },
+ "4985": {
+  "path": "bundesweit/weitere/tsv-muenchen-ost/",
+  "history": []
+ },
  "4991": {
   "path": "bundesweit/berlin/sg-alba-wiesel-berlin/",
   "history": []
@@ -6601,6 +6609,10 @@
  },
  "5017": {
   "path": "bundesweit/berlin/bg-zehlendorf/",
+  "history": []
+ },
+ "5018": {
+  "path": "bundesweit/weitere/vfl-kirchheim-knights/",
   "history": []
  },
  "5020": {
