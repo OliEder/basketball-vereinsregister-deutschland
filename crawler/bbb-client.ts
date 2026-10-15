@@ -69,6 +69,42 @@ export class BbbClient {
     return data.data.verbaende;
   }
 
+  /** Ligatypen (1 = Ligaspielbetrieb, 2 = Pokalrunde, 3 = Auf-/Abstieg, 4 = Play-off, 9 = Finals, 11 = Vorbereitung …). */
+  async getLigatypen(): Promise<Array<{ id: number; label: string }>> {
+    await this.sleep(RATE_LIMIT_MS);
+    const data = await this.requestWithRetry<{ data: { ligatypen: Array<{ id: number; label: string }> } }>(
+      `${BBB_BASE}/wam/data`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ token: 0, verbandIds: [], gebietIds: [], ligatypIds: [], akgGeschlechtIds: [], altersklasseIds: [], spielklasseIds: [] })
+      }
+    );
+    return data.data.ligatypen ?? [];
+  }
+
+  /** ligaId → Ligatyp für alle Ligen, die kein regulärer Ligaspielbetrieb (Typ 1) sind. */
+  async getNonRegularLigatypen(): Promise<Map<number, number>> {
+    const out = new Map<number, number>();
+    for (const typ of await this.getLigatypen()) {
+      if (typ.id === 1) continue;
+      let start = 0;
+      for (;;) {
+        await this.sleep(RATE_LIMIT_MS);
+        const data = await this.requestWithRetry<{ data: { ligen: BbbLiga[]; hasMoreData: boolean } }>(
+          `${BBB_BASE}/wam/liga/list?startAtIndex=${start}`,
+          {
+            method: 'POST',
+            body: JSON.stringify({ token: 0, verbandIds: [], gebietIds: [], ligatypIds: [typ.id], akgGeschlechtIds: [], altersklasseIds: [], spielklasseIds: [] })
+          }
+        );
+        for (const l of data.data.ligen) out.set(l.ligaId, typ.id);
+        start += data.data.ligen.length;
+        if (!data.data.hasMoreData || data.data.ligen.length === 0) break;
+      }
+    }
+    return out;
+  }
+
   async getLigen(verbandId: number, startAtIndex: number): Promise<{ ligen: BbbLiga[]; hasMoreData: boolean }> {
     await this.sleep(RATE_LIMIT_MS);
     const data = await this.requestWithRetry<{ data: { ligen: BbbLiga[]; hasMoreData: boolean } }>(
@@ -104,6 +140,15 @@ export class BbbClient {
     } catch {
       return null;
     }
+  }
+
+  /** Spielplan einer Liga samt Gebietsangaben; Quelle für Ligen ohne Tabelle (Pokal, K.-o.-Runden). */
+  async getLigaSpielplan(ligaId: number): Promise<{ matches: any[]; ligaData: BbbLigaData | null }> {
+    await this.sleep(RATE_LIMIT_MS);
+    const data = await this.requestWithRetry<{ data: { matches?: any[]; ligaData?: BbbLigaData } }>(
+      `${BBB_BASE}/competition/spielplan/id/${ligaId}`
+    );
+    return { matches: data.data.matches ?? [], ligaData: data.data.ligaData ?? null };
   }
 
   async getSpielplan(teamPermanentId: number): Promise<BbbMatch[]> {

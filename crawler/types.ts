@@ -28,6 +28,8 @@ export interface TeamEntry {
   ligaId?: number;
   liganame?: string;
   rang?: number;
+  /** Weitere Wettbewerbe des Teams (Pokal, Vorbereitung, Auf-/Abstieg …); ligaId/liganame/rang gehören zum Hauptwettbewerb */
+  weitereWettbewerbe?: Array<{ ligaId: number; liganame: string }>;
   /** Spielebene der Liga (z. B. "Verband", "Bezirk", "Kreis") aus ligaData */
   ebene?: string;
   /** Bezirk und Kreis der Liga; Grundlage der Ortsvalidierung */
@@ -106,6 +108,7 @@ export interface BbbLiga {
   seasonId?: number;
   seasonName?: string;
   skName?: string;
+  skEbeneId?: number | null;
   skEbeneName?: string | null;
   bezirkName?: string | null;
   kreisname?: string | null;
