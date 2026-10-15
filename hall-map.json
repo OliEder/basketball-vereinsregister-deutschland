@@ -6700,8 +6700,10 @@
   "history": []
  },
  "106465": {
-  "path": "halle/bundesweit/elxleben/fit-in/",
-  "history": []
+  "path": "halle/thueringen/elxleben/fit-in/",
+  "history": [
+   "halle/bundesweit/elxleben/fit-in/"
+  ]
  },
  "106466": {
   "path": "halle/rheinland-pfalz/koblenz/goethe-realschule-plus/",

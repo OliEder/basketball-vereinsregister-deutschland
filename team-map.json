@@ -15703,6 +15703,10 @@
   "path": "bayern/weiden-i-d-opf/tb-weiden/u14-maennlich/",
   "history": []
  },
+ "167043": {
+  "path": "bayern/weiden-i-d-opf/tb-weiden/u12-mix/",
+  "history": []
+ },
  "167044": {
   "path": "bayern/schwandorf/tsv-1880-schwandorf/u16-maennlich/",
   "history": []
@@ -16795,6 +16799,10 @@
  },
  "167881": {
   "path": "bayern/neumarkt/fibalon-baskets-neumarkt/u10-mix/",
+  "history": []
+ },
+ "167882": {
+  "path": "bayern/neumarkt/fibalon-baskets-neumarkt/u12-mix/",
   "history": []
  },
  "167885": {
@@ -19001,6 +19009,10 @@
  },
  "185929": {
   "path": "nordrhein-westfalen/haltern/alter-turnverein-haltern/u14-mix-2/",
+  "history": []
+ },
+ "186111": {
+  "path": "bayern/tegernheim/fc-tegernheim/u12-mix-186111/",
   "history": []
  },
  "186126": {
@@ -23501,6 +23513,10 @@
  },
  "251527": {
   "path": "baden-wuerttemberg/heilbronn-sontheim/tsg-heilbronn/herren-251527/",
+  "history": []
+ },
+ "251590": {
+  "path": "bayern/schwandorf/tsv-1880-schwandorf/u12-mix/",
   "history": []
  },
  "251633": {
@@ -28945,6 +28961,10 @@
   "path": "baden-wuerttemberg/stuttgart/sportvg-feuerbach/herren-3/",
   "history": []
  },
+ "312545": {
+  "path": "bayern/pressath/djk-pressath/u12-mix-312545/",
+  "history": []
+ },
  "312548": {
   "path": "bayern/neustadt-a-d-waldnaab/djk-neustadt-a-d-waldnaab/u10-weiblich/",
   "history": []
@@ -33629,6 +33649,10 @@
   "path": "sachsen/limbach-oberfrohna/tv-oberfrohna-1862/u14-weiblich/",
   "history": []
  },
+ "316608": {
+  "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u12-mix-316608/",
+  "history": []
+ },
  "316609": {
   "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u10-mix-316609/",
   "history": []
@@ -35913,12 +35937,20 @@
   "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u10-mix-318383/",
   "history": []
  },
+ "318393": {
+  "path": "bayern/regensburg/ts-regensburg/u12-mix-318393/",
+  "history": []
+ },
  "318394": {
   "path": "bayern/regensburg/ts-regensburg/u10-weiblich/",
   "history": []
  },
  "318396": {
   "path": "bayern/regensburg/ts-regensburg/u10-mix-318396/",
+  "history": []
+ },
+ "318398": {
+  "path": "bayern/bruck-i-d-opf/spvgg-bruck/u12-mix/",
   "history": []
  },
  "318400": {
@@ -43261,6 +43293,10 @@
  },
  "323610": {
   "path": "bayern/amberg/tv-amberg-sulzbach-bsg/u12-mix-323610/",
+  "history": []
+ },
+ "323611": {
+  "path": "bayern/bruck-i-d-opf/spvgg-bruck/u12-weiblich/",
   "history": []
  }
 }
