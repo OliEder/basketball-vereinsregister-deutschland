@@ -1,5 +1,5 @@
 import { BbbClient } from './bbb-client';
-import { extractClubs, extractCityFromName, extractTeams } from './extractor';
+import { extractClubs, extractCityFromName, extractTeams, teamsFromMatches, TeamSource } from './extractor';
 import { geocodeClub } from './club-geocoder';
 import { RegionIndex } from './region';
 import { isSuspect } from './regeocode';
@@ -50,7 +50,15 @@ async function crawl(): Promise<void> {
 
       for (const liga of ligen) {
         try {
-          const { entries, ligaData } = await client.getTableWithLiga(liga.ligaId);
+          const table = await client.getTableWithLiga(liga.ligaId);
+          let entries: TeamSource[] = table.entries;
+          let ligaData = table.ligaData;
+          // Ligen ohne Tabelle (Pokal, K.-o.-Runden): Teams aus dem Spielplan
+          if (entries.length === 0) {
+            const plan = await client.getLigaSpielplan(liga.ligaId);
+            entries = teamsFromMatches(plan.matches);
+            ligaData = ligaData ?? plan.ligaData;
+          }
           const clubs = extractClubs(entries, verband.id, verband.label);
           for (const club of clubs) {
             if (!allClubs.has(club.clubId)) {

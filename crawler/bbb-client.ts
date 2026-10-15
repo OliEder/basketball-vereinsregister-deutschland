@@ -106,6 +106,15 @@ export class BbbClient {
     }
   }
 
+  /** Spielplan einer Liga samt Gebietsangaben; Quelle für Ligen ohne Tabelle (Pokal, K.-o.-Runden). */
+  async getLigaSpielplan(ligaId: number): Promise<{ matches: any[]; ligaData: BbbLigaData | null }> {
+    await this.sleep(RATE_LIMIT_MS);
+    const data = await this.requestWithRetry<{ data: { matches?: any[]; ligaData?: BbbLigaData } }>(
+      `${BBB_BASE}/competition/spielplan/id/${ligaId}`
+    );
+    return { matches: data.data.matches ?? [], ligaData: data.data.ligaData ?? null };
+  }
+
   async getSpielplan(teamPermanentId: number): Promise<BbbMatch[]> {
     await this.sleep(RATE_LIMIT_MS);
     try {

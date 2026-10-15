@@ -111,7 +111,7 @@ export function extractCityFromName(name: string): string {
 }
 
 export function extractClubs(
-  entries: BbbTableEntry[],
+  entries: TeamSource[],
   verbandId: number,
   verbandName: string
 ): ClubEntry[] {
@@ -157,8 +157,25 @@ export function regionFields(ligaData?: BbbLigaData | null): Pick<TeamEntry, 'eb
   return out;
 }
 
+/** Teamquelle einer Liga: Tabelleneintrag oder (ohne Tabelle) ein Team aus dem Spielplan, dann ohne Rang. */
+export type TeamSource = { rang?: number; team: BbbTableEntry['team'] };
+
+/**
+ * Teams einer Liga ohne Tabelle (z. B. Pokal mit K.-o.-Runden) aus den Spielen.
+ * Platzhalter wie "Sieger A/B" haben keine clubId und fallen später in extractTeams heraus.
+ */
+export function teamsFromMatches(matches: any[]): TeamSource[] {
+  const seen = new Map<number, TeamSource>();
+  for (const m of matches ?? []) {
+    for (const team of [m?.homeTeam, m?.guestTeam]) {
+      if (team?.teamPermanentId && !seen.has(team.teamPermanentId)) seen.set(team.teamPermanentId, { team });
+    }
+  }
+  return Array.from(seen.values());
+}
+
 export function extractTeams(
-  entries: BbbTableEntry[],
+  entries: TeamSource[],
   altersklasse: string,
   geschlecht: string,
   liga?: { ligaId: number; liganame: string; ligaData?: BbbLigaData | null }
@@ -177,7 +194,7 @@ export function extractTeams(
         teamPermanentId,
         altersklasse,
         geschlecht,
-        ...(liga ? { ligaId: liga.ligaId, liganame: liga.liganame, rang: entry.rang, ...regionFields(liga.ligaData) } : {}),
+        ...(liga ? { ligaId: liga.ligaId, liganame: liga.liganame, ...(entry.rang !== undefined ? { rang: entry.rang } : {}), ...regionFields(liga.ligaData) } : {}),
         training: []
       });
     }

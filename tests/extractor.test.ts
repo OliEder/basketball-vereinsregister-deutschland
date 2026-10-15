@@ -1,5 +1,5 @@
 // tests/extractor.test.ts
-import { extractClubs, extractCityFromName, cityCandidates, extractTeams, regionFields } from '../crawler/extractor';
+import { extractClubs, extractCityFromName, cityCandidates, extractTeams, regionFields, teamsFromMatches } from '../crawler/extractor';
 import { BbbTableEntry, TeamEntry } from '../crawler/types';
 
 const makeEntry = (clubId: number, teamname: string, teamPermanentId: number): BbbTableEntry => ({
@@ -186,5 +186,32 @@ describe('regionFields / extractTeams mit ligaData', () => {
     });
     expect(result.get(10)![0]).toMatchObject({ ligaId: 51961, ebene: 'Bezirk', bezirk: 'Oberpfalz' });
     expect(result.get(10)![0]).not.toHaveProperty('kreis');
+  });
+});
+
+describe('teamsFromMatches (Ligen ohne Tabelle)', () => {
+  const t = (id: number, club: number | null, name = `T${id}`) =>
+    ({ teamPermanentId: id, teamname: name, clubId: club, seasonTeamId: id, teamnameSmall: null });
+
+  it('nimmt Heim- und Gastteams, jedes Team einmal', () => {
+    const matches = [
+      { homeTeam: t(1, 10), guestTeam: t(2, 20) },
+      { homeTeam: t(2, 20), guestTeam: t(3, 30) },
+    ];
+    expect(teamsFromMatches(matches).map(e => e.team.teamPermanentId)).toEqual([1, 2, 3]);
+  });
+
+  it('liefert Teams ohne Rang und ohne rang-Feld im TeamEntry (K.-o.-Runde)', () => {
+    const matches = [{ homeTeam: t(1, 10), guestTeam: t(2, null, 'Sieger A/B') }];
+    const result = extractTeams(teamsFromMatches(matches), 'U14', 'männlich', { ligaId: 7, liganame: 'Pokal' });
+    expect(result.get(10)).toEqual([
+      { teamPermanentId: 1, altersklasse: 'U14', geschlecht: 'männlich', ligaId: 7, liganame: 'Pokal', training: [] },
+    ]);
+    expect(result.has(null as any)).toBe(false);
+  });
+
+  it('verträgt fehlende Spiele und Teams', () => {
+    expect(teamsFromMatches([])).toEqual([]);
+    expect(teamsFromMatches([{ homeTeam: null, guestTeam: undefined }])).toEqual([]);
   });
 });
