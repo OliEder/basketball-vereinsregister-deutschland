@@ -141,7 +141,7 @@ function renderNext(list, doc, ownClubId, hallIndex) {
   matchup.appendChild(side(m.homeTeam, 'next-game-team--home'));
   const mid = el('div', 'next-game-vs');
   mid.appendChild(el('div', 'next-game-vs-label', 'vs.'));
-  const when = TeamLogic.formatKickoff(m.kickoffDate, m.kickoffTime).split(' · ');
+  const when = TeamLogic.kickoffLabel(m).split(' · ');
   mid.appendChild(el('div', 'next-game-kickoff', when[0]));
   if (when[1]) mid.appendChild(el('div', 'next-game-kickoff-time', when[1] + ' Uhr'));
   mid.appendChild(el('div', 'next-game-ha ' + (next.isHome ? 'next-game-ha--home' : 'next-game-ha--away'), next.isHome ? 'Heimspiel' : 'Auswärtsspiel'));
@@ -207,7 +207,7 @@ function renderTable(doc, teamId) {
 
 function matchRow(d, ligaId) {
   const row = el('div', 'team-match dss-row dss-row--match' + (d.played ? ' team-match-past' : ''));
-  row.appendChild(el('div', 'team-match-when dss-row-when', TeamLogic.formatKickoff(d.match.kickoffDate, d.match.kickoffTime)));
+  row.appendChild(el('div', 'team-match-when dss-row-when', TeamLogic.kickoffLabel(d.match)));
 
   const teams = el('div', 'team-match-teams dss-row-main');
   teams.appendChild(haBadge(d.isHome));
@@ -227,7 +227,7 @@ function matchRow(d, ligaId) {
     res.appendChild(document.createTextNode(' ' + home + ':' + guest));
     if (d.status === 'provisional') res.appendChild(el('span', 'team-match-note', 'vorläufig'));
   } else {
-    res.textContent = '–';
+    res.textContent = TeamLogic.nichtBestaetigt(d.match, todayIso()) ? 'nicht bestätigt' : '–';
   }
   row.appendChild(res);
   return row;

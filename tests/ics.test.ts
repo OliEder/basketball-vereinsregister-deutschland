@@ -12,7 +12,10 @@ const liga: IcsLiga = {
     { matchId: 3, kickoffDate: '2026-09-20', kickoffTime: '17:00', homeTeam: t(1, 'TV Test'), guestTeam: t(2, 'SV Gast'), result: '70:60' },   // zu alt
     { matchId: 4, kickoffDate: '2026-10-01', kickoffTime: '17:00', homeTeam: t(1, 'TV Test'), guestTeam: t(3, 'Dritte'), result: '80:60' },     // 2 Tage zurück
     { matchId: 5, kickoffDate: '2026-11-01', homeTeam: t(3, 'Dritte'), guestTeam: t(4, 'Andere') },                                                // fremdes Spiel
-    { matchId: 6, kickoffDate: '2026-11-14', homeTeam: t(1, 'TV Test'), guestTeam: t(2, 'SV Gast') }                                                 // ohne Uhrzeit
+    { matchId: 6, kickoffDate: '2026-11-14', homeTeam: t(1, 'TV Test'), guestTeam: t(2, 'SV Gast') },                                                // ohne Uhrzeit, kein Ergebnis: Termin offen
+    { matchId: 7, kickoffDate: '2026-11-15', kickoffTime: '00:00', homeTeam: t(1, 'TV Test'), guestTeam: t(2, 'SV Gast') },                        // 00:00, kein Ergebnis: Termin offen
+    { matchId: 8, kickoffDate: '2026-10-02', kickoffTime: '00:00', homeTeam: t(1, 'TV Test'), guestTeam: t(3, 'Dritte'), result: '55:50' },         // 00:00 mit Ergebnis: Datum zählt, Uhrzeit nicht
+    { matchId: 9, kickoffDate: '2026-12-12', kickoffTime: '00:00', homeTeam: t(1, 'TV Test'), guestTeam: t(2, 'SV Gast'), abgesagt: true }          // 00:00, abgesagt: kein Termin offen, ganztägig
   ],
   venues: { '1': 500 },
   halls: { '500': { bezeichnung: 'Sporthalle; Nord', strasse: 'Weg 1', plz: '93047', ort: 'Regensburg', lat: 49.01, lng: 12.1 } }
@@ -56,7 +59,7 @@ describe('buildCalendar', () => {
 
   it('enthält eigene Spiele ab 7 Tage zurück, nicht ältere und keine fremden', () => {
     const uids = [...ics.matchAll(/UID:(.+)\r/g)].map(m => m[1]);
-    expect(uids).toEqual(['m4-t1@vereinsregister', 'm1-t1@vereinsregister', 'm6-t1@vereinsregister', 'm2-t1@vereinsregister']);
+    expect(uids).toEqual(['m4-t1@vereinsregister', 'm8-t1@vereinsregister', 'm1-t1@vereinsregister', 'm2-t1@vereinsregister', 'm9-t1@vereinsregister']);
   });
 
   it('Spiel mit Halle: Ort, Koordinaten, UTC-Zeit, Dauer', () => {
@@ -69,13 +72,25 @@ describe('buildCalendar', () => {
     expect(ev).toContain('DESCRIPTION:Kreisliga A\\, Gruppe 1');
   });
 
-  it('Ergebnis in der Beschreibung, abgesagte Spiele als CANCELLED, ohne Uhrzeit ganztägig', () => {
+  it('Ergebnis in der Beschreibung, abgesagte Spiele als CANCELLED, 00:00 ohne Termin ganztägig', () => {
     expect(ics.split('BEGIN:VEVENT').find(e => e.includes('UID:m4-'))).toContain('Ergebnis: 80:60');
     expect(ics.split('BEGIN:VEVENT').find(e => e.includes('UID:m2-'))).toContain('STATUS:CANCELLED');
-    const allDay = ics.split('BEGIN:VEVENT').find(e => e.includes('UID:m6-'))!;
-    expect(allDay).toContain('DTSTART;VALUE=DATE:20261114');
-    expect(allDay).toContain('DTEND;VALUE=DATE:20261115');
+    const allDay = ics.split('BEGIN:VEVENT').find(e => e.includes('UID:m9-'))!;
+    expect(allDay).toContain('DTSTART;VALUE=DATE:20261212');
+    expect(allDay).toContain('DTEND;VALUE=DATE:20261213');
     expect(allDay).not.toContain('LOCATION');          // keine gemeldete Halle: kein Ort
+  });
+
+  it('Spiele mit offenem Termin (ohne Uhrzeit oder 00:00, kein Ergebnis) stehen nicht im Kalender', () => {
+    expect(ics).not.toContain('UID:m6-');
+    expect(ics).not.toContain('UID:m7-');
+    expect(ics).not.toContain('T000000Z');             // kein Termin um Mitternacht
+  });
+
+  it('00:00 mit Ergebnis ist ein Spiel an diesem Tag, ohne Mitternachtszeit', () => {
+    const ev = ics.split('BEGIN:VEVENT').find(e => e.includes('UID:m8-'))!;
+    expect(ev).toContain('DTSTART;VALUE=DATE:20261002');
+    expect(ev).toContain('Ergebnis: 55:50');
   });
 
   it('gleicher Stand ergibt dieselbe Datei', () => {
@@ -88,7 +103,7 @@ describe('buildCalendar', () => {
     const home = buildCalendar({ ...base, scope: 'home' });
     const away = buildCalendar({ ...base, scope: 'away' });
     const uids = (c: string) => [...c.matchAll(/UID:(.+)\r/g)].map(m => m[1]);
-    expect(uids(home)).toEqual(['m4-t1@vereinsregister', 'm1-t1@vereinsregister', 'm6-t1@vereinsregister']);
+    expect(uids(home)).toEqual(['m4-t1@vereinsregister', 'm8-t1@vereinsregister', 'm1-t1@vereinsregister', 'm9-t1@vereinsregister']);
     expect(uids(away)).toEqual(['m2-t1@vereinsregister']);
     expect(home).toContain('X-WR-CALNAME:TV Test – Basketball – Heimspiele');
     expect(away).toContain('X-WR-CALNAME:TV Test – Basketball – Auswärtsspiele');

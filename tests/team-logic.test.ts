@@ -204,3 +204,58 @@ describe('registerStats', () => {
     expect(L.registerStats(null).clubs).toBe(0);
   });
 });
+
+describe('Termin offen (00:00 ohne Ergebnis)', () => {
+  const g = (o: any) => ({ matchId: 1, kickoffDate: '2026-11-28', kickoffTime: '14:00', homeTeam: { teamPermanentId: 1 }, guestTeam: { teamPermanentId: 2 }, result: null, ...o });
+
+  it('erkennt 00:00 und fehlende Uhrzeit ohne Ergebnis, nicht abgesagte und nicht gespielte', () => {
+    expect(L.isTerminOffen(g({ kickoffTime: '00:00' }))).toBe(true);
+    expect(L.isTerminOffen(g({ kickoffTime: '0:00' }))).toBe(true);
+    expect(L.isTerminOffen(g({ kickoffTime: '00:00:00' }))).toBe(true);
+    expect(L.isTerminOffen(g({ kickoffTime: undefined }))).toBe(true);
+    expect(L.isTerminOffen(g({ kickoffTime: '10:00' }))).toBe(false);
+    expect(L.isTerminOffen(g({ kickoffTime: '00:00', result: '60:50' }))).toBe(false);
+    expect(L.isTerminOffen(g({ kickoffTime: '00:00', abgesagt: true }))).toBe(false);
+    expect(L.isTerminOffen(g({ kickoffTime: '00:00', verzicht: true }))).toBe(false);
+  });
+
+  it('00:08 oder 23:59 sind keine Platzhalter', () => {
+    expect(L.hasKickoffTime('00:08')).toBe(true);
+    expect(L.hasKickoffTime('23:59')).toBe(true);
+  });
+
+  it('Anzeige: "Termin offen" ohne Datum; mit Ergebnis Datum ohne Mitternachtszeit', () => {
+    expect(L.kickoffLabel(g({ kickoffTime: '00:00' }))).toBe('Termin offen');
+    expect(L.kickoffLabel(g({ kickoffTime: '00:00', result: '60:50' }))).toBe('Sa, 28.11.2026');
+    expect(L.kickoffLabel(g({ kickoffTime: '14:00' }))).toBe('Sa, 28.11.2026 · 14:00');
+    expect(L.formatKickoff('2026-11-28', '00:00')).toBe('Sa, 28.11.2026');
+  });
+
+  it('Spielplan: feste Termine zuerst, offene am Ende', () => {
+    const list = L.teamMatches([
+      g({ matchId: 1, kickoffDate: '2026-11-02', kickoffTime: '00:00' }),
+      g({ matchId: 2, kickoffDate: '2026-11-28', kickoffTime: '16:00' }),
+      g({ matchId: 3, kickoffDate: '2026-11-28', kickoffTime: '10:00' })
+    ], 1);
+    expect(list.map((d: any) => d.match.matchId)).toEqual([3, 2, 1]);
+    expect(list[2].terminOffen).toBe(true);
+  });
+
+  it('nächstes Spiel: fester Termin vor offenem, sonst das offene', () => {
+    const offenFrueh = g({ matchId: 1, kickoffDate: '2026-11-02', kickoffTime: '00:00' });
+    const fest = g({ matchId: 2, kickoffDate: '2026-12-05', kickoffTime: '18:00' });
+    expect(L.nextMatch(L.teamMatches([offenFrueh, fest], 1), '2026-10-15').match.matchId).toBe(2);
+    const only = L.nextMatch(L.teamMatches([offenFrueh], 1), '2026-10-15');
+    expect(only.match.matchId).toBe(1);
+    expect(only.terminOffen).toBe(true);
+  });
+
+  it('offener Termin mit vergangenem Platzhalterdatum: nicht bestätigt, nicht mehr nächstes Spiel', () => {
+    const alt = g({ matchId: 1, kickoffDate: '2026-09-14', kickoffTime: '00:00' });
+    expect(L.nichtBestaetigt(alt, '2026-10-15')).toBe(true);
+    expect(L.nichtBestaetigt(g({ kickoffDate: '2026-11-02', kickoffTime: '00:00' }), '2026-10-15')).toBe(false);
+    expect(L.nichtBestaetigt(g({ kickoffDate: '2026-09-14', kickoffTime: '12:00' }), '2026-10-15')).toBe(false);
+    expect(L.nextMatch(L.teamMatches([alt], 1), '2026-10-15')).toBeNull();
+  });
+});
+

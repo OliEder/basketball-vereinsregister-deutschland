@@ -16,8 +16,29 @@
     return !!a && String(a.teamPermanentId) === String(id);
   }
 
+  /** Echte Uhrzeit: BBB führt Spiele ohne festgelegten Termin mit 00:00, ein Spiel um Mitternacht gibt es nicht. */
+  function hasKickoffTime(t) {
+    return !!t && !/^0{1,2}:00(:00)?$/.test(String(t));
+  }
+
+  /**
+   * Termin offen: kein Ergebnis, nicht abgesagt und die Uhrzeit fehlt oder ist 00:00.
+   * Auch das Datum ist dann nur ein Platzhalter und wird nicht als Termin gezeigt.
+   */
+  function isTerminOffen(m) {
+    if (!m || m.result || m.abgesagt || m.verzicht) return false;
+    return !hasKickoffTime(m.kickoffTime);
+  }
+
+  /** Termin offen und das Platzhalterdatum ist schon vorbei: das Spiel wurde nie bestätigt. */
+  function nichtBestaetigt(m, today) {
+    return isTerminOffen(m) && !!m.kickoffDate && m.kickoffDate < today;
+  }
+
+  /** Sortierung: Spiele mit festem Termin chronologisch, Spiele mit offenem Termin danach (nach Platzhalterdatum). */
   function sortKey(m) {
-    return (m.kickoffDate || '9999-12-31') + ' ' + (m.kickoffTime || '00:00');
+    if (isTerminOffen(m)) return '9999-99-99 ' + (m.kickoffDate || '');
+    return (m.kickoffDate || '9999-12-31') + ' ' + (hasKickoffTime(m.kickoffTime) ? m.kickoffTime : '00:00');
   }
 
   /**
@@ -45,6 +66,7 @@
       opp: opp,
       outcome: outcome,
       status: status,
+      terminOffen: isTerminOffen(match),
       played: !!res && status !== 'cancelled'
     };
   }
@@ -58,14 +80,20 @@
       .map(function (m) { return describeMatch(m, teamId); });
   }
 
-  /** Nächstes Spiel: erstes nicht gespieltes, nicht abgesagtes Spiel ab "today" (YYYY-MM-DD). */
+  /**
+   * Nächstes Spiel: erstes nicht gespieltes, nicht abgesagtes Spiel mit festem Termin ab "today" (YYYY-MM-DD).
+   * Gibt es keins, das erste Spiel mit offenem Termin (dessen Platzhalterdatum nicht vorbei ist).
+   */
   function nextMatch(list, today) {
+    var offen = null;
     for (var i = 0; i < list.length; i++) {
       var d = list[i];
       if (d.played || d.status === 'cancelled' || d.status === 'forfeit') continue;
-      if ((d.match.kickoffDate || '') >= today) return d;
+      if ((d.match.kickoffDate || '') < today) continue;
+      if (d.terminOffen) { if (!offen) offen = d; continue; }
+      return d;
     }
-    return null;
+    return offen;
   }
 
   /** Letzte n Ergebnisse (älteste zuerst), z. B. ['S','N','S']. */
@@ -223,9 +251,14 @@
   /** "2026-09-26", "18:30" → "Sa, 26.09.2026 · 18:30" */
   function formatKickoff(date, time) {
     var m = typeof date === 'string' && date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if (!m) return time || '';
+    if (!m) return hasKickoffTime(time) ? time : '';
     var wd = WEEKDAYS[new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10)).getDay()];
-    return wd + ', ' + m[3] + '.' + m[2] + '.' + m[1] + (time ? ' · ' + time : '');
+    return wd + ', ' + m[3] + '.' + m[2] + '.' + m[1] + (hasKickoffTime(time) ? ' · ' + time : '');
+  }
+
+  /** Anzeige des Termins eines Spiels: "Termin offen" oder Datum mit Uhrzeit. */
+  function kickoffLabel(match) {
+    return isTerminOffen(match) ? 'Termin offen' : formatKickoff(match && match.kickoffDate, match && match.kickoffTime);
   }
 
   /**
@@ -255,6 +288,11 @@
     clubIdOf: clubIdOf,
     pickPrimaryLiga: pickPrimaryLiga,
     formatKickoff: formatKickoff,
+    kickoffLabel: kickoffLabel,
+    hasKickoffTime: hasKickoffTime,
+    isTerminOffen: isTerminOffen,
+    nichtBestaetigt: nichtBestaetigt,
+    sortKey: sortKey,
     venueFor: venueFor,
     venueForMatch: venueForMatch,
     initials: initials
