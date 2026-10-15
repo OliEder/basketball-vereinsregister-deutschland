@@ -768,6 +768,21 @@ describe('Spielplan-Zeile', () => {
     expect(kickoffText('2026-10-10')).toBe('Sa, 10.10.2026');
     expect(kickoffText(undefined, '18:00')).toBe('18:00');
   });
+  it('00:00 ist keine Uhrzeit', () => {
+    expect(kickoffText('2026-10-10', '00:00')).toBe('Sa, 10.10.2026');
+    expect(kickoffText(undefined, '00:00')).toBe('');
+  });
+  it('Spiel ohne Termin: "Termin offen" statt Datum und Mitternacht', () => {
+    const html = scheduleRows([{ match: { kickoffDate: '2026-11-23', kickoffTime: '00:00', result: null }, teams: 'A – B' }]);
+    expect(html).toContain('<div class="dss-row-when">Termin offen</div>');
+    expect(html).not.toContain('23.11.2026');
+    expect(html).not.toContain('00:00');
+  });
+  it('überfälliger offener Termin: "nicht bestätigt", sonst Strich', () => {
+    const row = { match: { kickoffDate: '2026-09-14', kickoffTime: '00:00', result: null }, teams: 'A – B' };
+    expect(scheduleRows([row], '2026-10-15')).toContain('<div class="dss-row-score">nicht bestätigt</div>');
+    expect(scheduleRows([row])).toContain('<div class="dss-row-score">–</div>');
+  });
   it('immer Zeit | Paarung | Ergebnis in einem dss-rows-Rahmen', () => {
     const html = scheduleRows([{ match: m, teams: 'A – B', meta: ['Liga 1'] }]);
     expect(html).toBe('<div class="dss-rows"><div class="dss-row dss-row--match"><div class="dss-row-when">Sa, 10.10.2026 · 18:00</div><div class="dss-row-main"><span class="dss-row-teams">A – B</span><span class="dss-row-meta">Liga 1</span></div><div class="dss-row-score">–</div></div></div>');

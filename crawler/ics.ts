@@ -10,11 +10,14 @@
 // Die Datei heißt nach der Team-ID und bleibt daher stabil, auch wenn ein Verein auf eine andere Seite umzieht.
 // Enthalten sind Spiele ab 7 Tage zurück (Ergebnis in der Beschreibung) und alle kommenden. Der Spielort steht nur,
 // wenn die Halle aus matchInfo gemeldet ist (liga/<id>.json: venues und halls, siehe apply-venues.ts).
+// Spiele mit offenem Termin (Uhrzeit fehlt oder 00:00, kein Ergebnis) stehen nicht im Kalender.
 // Zeiten sind deutsche Ortszeit und werden als UTC ausgegeben; Kalender-Apps rechnen sie in die eigene Zeitzone um.
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { DEFAULT_BASE } from './seo';
+
+const TeamLogic: any = require('../portal/team-logic.js');
 
 export interface IcsMatch {
   matchId: number;
@@ -144,13 +147,16 @@ export function buildCalendar(o: CalendarOptions): string {
       const home = m.homeTeam?.teamPermanentId === o.teamId;
       const guest = m.guestTeam?.teamPermanentId === o.teamId;
       if (!(home || guest) || !m.kickoffDate || m.kickoffDate < from || seen.has(m.matchId)) continue;
+      // Termin offen (00:00 bzw. ohne Uhrzeit, kein Ergebnis): auch das Datum ist nur ein Platzhalter, also kein Eintrag.
+      // Die UID bleibt stabil; sobald ein Termin feststeht, erscheint das Spiel im Kalender.
+      if (TeamLogic.isTerminOffen(m)) continue;
       if ((scope === 'home' && !home) || (scope === 'away' && !guest)) continue;
       seen.add(m.matchId);
 
       const cancelled = !!m.abgesagt || !!m.verzicht;
       const summary = `${m.homeTeam?.teamname ?? '?'} – ${m.guestTeam?.teamname ?? '?'}`;
       const ev: string[] = ['BEGIN:VEVENT', `UID:m${m.matchId}-t${o.teamId}@vereinsregister`, `DTSTAMP:${stamp}`];
-      if (m.kickoffTime && /^\d{1,2}:\d{2}$/.test(m.kickoffTime)) {
+      if (m.kickoffTime && TeamLogic.hasKickoffTime(m.kickoffTime) && /^\d{1,2}:\d{2}$/.test(m.kickoffTime)) {
         const start = berlinToUtc(m.kickoffDate, m.kickoffTime.padStart(5, '0'));
         ev.push(`DTSTART:${formatUtc(start)}`, `DTEND:${formatUtc(start + MATCH_MINUTES * 60000)}`);
       } else {

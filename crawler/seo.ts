@@ -554,15 +554,16 @@ const WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 /** Wie TeamLogic.formatKickoff im Browser: "Sa, 12.10.2026 · 18:00". */
 export function kickoffText(date?: string, time?: string): string {
   const m = typeof date === 'string' ? /^(\d{4})-(\d{2})-(\d{2})$/.exec(date) : null;
-  if (!m) return time ?? '';
+  if (!m) return TeamLogic.hasKickoffTime(time) ? time ?? '' : '';
   const wd = WEEKDAYS[new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getDay()];
-  return `${wd}, ${m[3]}.${m[2]}.${m[1]}${time ? ` · ${time}` : ''}`;
+  return `${wd}, ${m[3]}.${m[2]}.${m[1]}${TeamLogic.hasKickoffTime(time) ? ` · ${time}` : ''}`;
 }
 
-function scoreText(m: any): string {
+function scoreText(m: any, today?: string): string {
   if (m.verzicht) return 'Verzicht';
   if (m.abgesagt) return 'abgesagt';
-  return m.result ? esc(String(m.result)) : '–';
+  if (m.result) return esc(String(m.result));
+  return today && TeamLogic.nichtBestaetigt(m, today) ? 'nicht bestätigt' : '–';
 }
 
 /** Heim/Auswärts-Kürzel wie auf der Teamseite (team.js haBadge). */
@@ -574,10 +575,10 @@ function haChip(mark: 'vs.' | '@'): string {
 interface SchedRow { match: any; mark?: 'vs.' | '@'; teams: string; meta?: string[] }
 
 /** Der eine Spielplan: gleiche Zeile (Zeit | Paarung | Ergebnis) auf Liga-, Orts-, Team- und Hallenseiten, wie auf der Teamseite. */
-export function scheduleRows(rows: SchedRow[]): string {
+export function scheduleRows(rows: SchedRow[], today?: string): string {
   const items = rows.map(r => {
     const meta = (r.meta ?? []).filter(Boolean);
-    return `<div class="dss-row dss-row--match"><div class="dss-row-when">${esc(kickoffText(r.match.kickoffDate, r.match.kickoffTime))}</div><div class="dss-row-main">${r.mark ? haChip(r.mark) : ''}<span class="dss-row-teams">${r.teams}</span>${meta.length ? `<span class="dss-row-meta">${meta.join(' · ')}</span>` : ''}</div><div class="dss-row-score">${scoreText(r.match)}</div></div>`;
+    return `<div class="dss-row dss-row--match"><div class="dss-row-when">${esc(TeamLogic.kickoffLabel(r.match))}</div><div class="dss-row-main">${r.mark ? haChip(r.mark) : ''}<span class="dss-row-teams">${r.teams}</span>${meta.length ? `<span class="dss-row-meta">${meta.join(' · ')}</span>` : ''}</div><div class="dss-row-score">${scoreText(r.match, today)}</div></div>`;
   });
   return `<div class="dss-rows">${items.join('')}</div>`;
 }
@@ -614,8 +615,8 @@ export function renderLigaPage(ctx: LigaPageCtx): string {
 
   const played = (doc.matches ?? []).filter(m => m.result && !m.abgesagt);
   const upcoming = (doc.matches ?? []).filter(m => !m.result && !m.abgesagt && !m.verzicht && m.kickoffDate)
-    .sort((a, b) => `${a.kickoffDate} ${a.kickoffTime ?? ''}`.localeCompare(`${b.kickoffDate} ${b.kickoffTime ?? ''}`)).slice(0, 10);
-  const recent = played.sort((a, b) => `${b.kickoffDate} ${b.kickoffTime ?? ''}`.localeCompare(`${a.kickoffDate} ${a.kickoffTime ?? ''}`)).slice(0, 10);
+    .sort((a, b) => TeamLogic.sortKey(a).localeCompare(TeamLogic.sortKey(b))).slice(0, 10);
+  const recent = played.sort((a, b) => TeamLogic.sortKey(b).localeCompare(TeamLogic.sortKey(a))).slice(0, 10);
 
   const tile = (value: number, label: string): string => `<div class="dss-stat"><div class="dss-stat-value">${value}</div><div class="dss-stat-label">${label}</div></div>`;
   const all = (doc.matches ?? []).filter(m => !m.abgesagt && !m.verzicht);
@@ -884,7 +885,7 @@ export function localDerbies(
 }
 
 export function renderDerbies(derbies: Derby[], today: string, clubPaths: Record<string, string>, ligaPaths: Record<number, string>, placeName: string): string {
-  const key = (m: any) => `${m.kickoffDate ?? ''} ${m.kickoffTime ?? ''}`;
+  const key = (m: any): string => TeamLogic.sortKey(m);
   const open = derbies.filter(d => !d.match.result && !d.match.abgesagt && !d.match.verzicht && d.match.kickoffDate && d.match.kickoffDate >= today)
     .sort((a, b) => key(a.match).localeCompare(key(b.match)) || a.level - b.level).slice(0, 10);
   const done = derbies.filter(d => d.match.result && !d.match.abgesagt)
@@ -893,7 +894,7 @@ export function renderDerbies(derbies: Derby[], today: string, clubPaths: Record
   const list = (ds: Derby[]): string => scheduleRows(ds.map(d => {
     const lp = ligaPaths[d.doc.ligaId];
     return { match: d.match, teams: pairing(d.match, clubPaths), meta: [lp ? `<a href="${lp}">${esc(d.doc.liganame)}</a>` : esc(d.doc.liganame)] };
-  }));
+  }), today);
   return `      <h2>Lokalderbys in ${esc(placeName)}</h2>
       <p>Spiele zweier Vereine aus ${esc(placeName)} in den höchsten Ligen des Ortes.</p>
 ${open.length ? `      <h3>Nächste Derbys</h3>${list(open)}\n` : ''}${done.length ? `      <h3>Letzte Derbys</h3>${list(done)}\n` : ''}`;
@@ -967,7 +968,7 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
   const label = teamLabel(ref.team);
 
   const mine = (doc?.matches ?? []).filter(m => involves(m, id));
-  const key = (m: any) => `${m.kickoffDate ?? ''} ${m.kickoffTime ?? ''}`;
+  const key = (m: any): string => TeamLogic.sortKey(m);
   const upcoming = mine.filter(m => !m.result && !m.abgesagt && !m.verzicht && m.kickoffDate && m.kickoffDate >= today).sort((a, b) => key(a).localeCompare(key(b))).slice(0, 5);
   const recent = mine.filter(m => m.result && !m.abgesagt).sort((a, b) => key(b).localeCompare(key(a))).slice(0, 5);
 
@@ -975,7 +976,7 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
     const home = sameTeam(m.homeTeam, id);
     const hall = withHall && doc ? hallOf(doc, m) : null;
     return { match: m, mark: home ? 'vs.' : '@', teams: teamCell(home ? m.guestTeam : m.homeTeam, clubPaths, teamPaths), meta: hall ? [esc([hall.bezeichnung, hall.ort].filter(Boolean).join(', '))] : [] };
-  }));
+  }), today);
 
   // Kennzahlen und Tabelle fest im HTML (team.js ersetzt sie nach dem Laden der Live-Daten)
   const statsBlock = doc ? statsHtml(TeamLogic.summary(doc, id), false) : '';
@@ -1000,7 +1001,7 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
   const description = [
     `${name} (${label})${doc ? ` – ${doc.liganame}` : ''}.`,
     standing ? `${standing.split(' (')[0]} in der Tabelle.` : '',
-    next ? `Nächstes Spiel: ${deDate(next.kickoffDate)} ${sameTeam(next.homeTeam, id) ? 'gegen' : 'bei'} ${(sameTeam(next.homeTeam, id) ? next.guestTeam : next.homeTeam)?.teamname ?? ''}.` : 'Tabelle, Spielplan und Ergebnisse.'
+    next ? `Nächstes Spiel: ${TeamLogic.isTerminOffen(next) ? 'Termin offen' : deDate(next.kickoffDate)} ${sameTeam(next.homeTeam, id) ? 'gegen' : 'bei'} ${(sameTeam(next.homeTeam, id) ? next.guestTeam : next.homeTeam)?.teamname ?? ''}.` : 'Tabelle, Spielplan und Ergebnisse.'
   ].filter(Boolean).join(' ');
 
   const team: Record<string, unknown> = {
@@ -1009,10 +1010,10 @@ export function renderTeamPage(ctx: TeamPageCtx): string {
   };
   if (doc) team.memberOf = { '@type': 'SportsOrganization', name: doc.liganame, url: ligaPaths[doc.ligaId] ? `${base}/${ligaPaths[doc.ligaId]}` : undefined };
   // Nur Spiele mit bestätigter Halle: Suchmaschinen verlangen einen Ort
-  const events = doc ? upcoming.map(m => ({ m, hall: hallOf(doc, m) })).filter(x => x.hall).slice(0, 3).map(({ m, hall }) => ({
+  const events = doc ? upcoming.filter(m => !TeamLogic.isTerminOffen(m)).map(m => ({ m, hall: hallOf(doc, m) })).filter(x => x.hall).slice(0, 3).map(({ m, hall }) => ({
     '@context': 'https://schema.org', '@type': 'SportsEvent', sport: 'Basketball',
     name: `${m.homeTeam?.teamname} – ${m.guestTeam?.teamname}`,
-    startDate: `${m.kickoffDate}${m.kickoffTime ? `T${m.kickoffTime}:00` : ''}`,
+    startDate: `${m.kickoffDate}T${m.kickoffTime}:00`,
     homeTeam: { '@type': 'SportsTeam', name: m.homeTeam?.teamname }, awayTeam: { '@type': 'SportsTeam', name: m.guestTeam?.teamname },
     location: { '@type': 'Place', name: hall!.bezeichnung, address: { '@type': 'PostalAddress', ...(hall!.strasse ? { streetAddress: hall!.strasse } : {}), ...(hall!.plz ? { postalCode: hall!.plz } : {}), ...(hall!.ort ? { addressLocality: hall!.ort } : {}), addressCountry: 'DE' } }
   })) : [];
@@ -1200,7 +1201,7 @@ export function renderHallPage(ctx: HallPageCtx): string {
     { name: hall.name, path: urlPath }
   ];
 
-  const key = (m: any): string => `${m.kickoffDate ?? ''} ${m.kickoffTime ?? ''}`;
+  const key = (m: any): string => TeamLogic.sortKey(m);
   const games = hall.games.filter(g => !g.match.abgesagt && !g.match.verzicht);
   const played = games.filter(g => g.match.result).length;
   const upcoming = games.filter(g => !g.match.result && g.match.kickoffDate && g.match.kickoffDate >= today)
@@ -1225,7 +1226,7 @@ export function renderHallPage(ctx: HallPageCtx): string {
   const matchRows = scheduleRows(upcoming.slice(0, 10).map(({ doc, match: m }) => {
     const lp = ligaPaths[doc.ligaId];
     return { match: m, teams: pairing(m, clubPaths, teamPaths), meta: [lp ? `<a href="${lp}">${esc(doc.liganame)}</a>` : esc(doc.liganame)] };
-  }));
+  }), today);
 
   const exact = hall.lat !== undefined && hall.precision !== 'ort';
   const osm = exact

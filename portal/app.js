@@ -646,7 +646,7 @@ function favTeamCard(t) {
     const n = r.next;
     next.appendChild(favEl('div', 'dss-eyebrow', 'Nächstes Spiel'));
     next.appendChild(favEl('div', 'fav-next-text', n && n.match
-      ? TeamLogic.formatKickoff(n.match.kickoffDate, n.match.kickoffTime) + ' · ' + (n.isHome ? 'vs. ' : '@ ') + (n.opponent ? n.opponent.teamname : '?')
+      ? TeamLogic.kickoffLabel(n.match) + ' · ' + (n.isHome ? 'vs. ' : '@ ') + (n.opponent ? n.opponent.teamname : '?')
       : 'Kein Spiel angesetzt'));
   });
   return li;
