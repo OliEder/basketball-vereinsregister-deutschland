@@ -609,6 +609,8 @@ Tabellen und Spielpläne änderten sich laufend und wurden zuvor im Browser live
 * (-) Daten sind bis zu 6 Stunden alt
 * (-) Ein Saison-Archiv (Historie, Teamvergleiche) ist damit noch nicht abgedeckt
 
+*Ergänzung Ausfallsicherheit und Log:* Siehe ADR-016. Fällt der Spielplan einer Liga aus, holt `live.ts` die Spiele über die Teams der Tabelle oder übernimmt das Dokument des letzten Laufs; Auffälligkeiten stehen als `[liga]`- und `[summary]`-Zeilen im Log.
+
 == ADR-008: Spielorte inkrementell aus matchInfo, dauerhaft im Branch data-store
 
 *Status:* angenommen
@@ -668,6 +670,8 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 
 *Folgen:* (+) Funktioniert in Apple Kalender, Google Kalender, Outlook und Thunderbird ohne Konto und ohne Server. (+) Die Spielorte erscheinen automatisch, sobald der Venue-Crawler sie geholt hat. (−) Ein Abo ist nur so aktuell wie der letzte Deploy; manche Dienste (z. B. Google Kalender) laden abonnierte Kalender nur etwa alle ein bis zwei Tage nach. (−) Rund 10 000 Dateien, geschätzt 80 MB im Artefakt. (−) Solange erst ein Teil der Spiele eine gemeldete Halle hat, fehlt bei vielen Terminen der Ort.
 
+*Ergänzung Termin offen (ADR-017):* Spiele ohne festen Termin (Uhrzeit fehlt oder `00:00`, kein Ergebnis) stehen nicht im Kalender; auch ihr Datum ist nur ein Platzhalter. Die UID bleibt stabil, das Spiel erscheint, sobald ein Termin feststeht. `00:00` bei Spielen mit Ergebnis oder Absage gilt als „ohne Uhrzeit“ und ist ganztägig, nie ein Termin um Mitternacht.
+
 *Ergänzung Heim/Auswärts und Android:* Je Team gibt es drei Abos: `ics/<id>.ics` (alle Spiele), `ics/<id>-heim.ics` (nur Heimspiele) und `ics/<id>-auswaerts.ics` (nur Auswärtsspiele) mit jeweils eigenem Kalendernamen und gleichen UIDs. Die Team-Seite lässt die Variante wählen und bietet je Auswahl „iPhone / Mac“ (`webcal://`), „Android (Google Kalender)“ (`https://www.google.com/calendar/render?cid=<webcal-Adresse>`, wie im ics-generator), „Link kopieren“ und die Datei. Android hat kein systemweites Kalender-Abo; Google Kalender richtet es einmalig im Browser ein und synchronisiert es dann auf alle Geräte. Eine kurze Erklärung („Wie funktioniert das Abo?“) nennt die Wege für iPhone/Mac, Android, Outlook und andere Apps.
 
 == ADR-013: Hallenseiten und Hallenzähler
@@ -719,6 +723,53 @@ Die Zuordnung Verein → Pfad liegt in `url-map.json` im Branch `url-store` (vom
 *Ergänzung inkrementelle Kalender:* `generateCalendars` baut die Kalender eines Teams nur neu, wenn sich dessen Eingaben geändert haben. Der Hash eines Teams besteht aus dem Programmstand (Hash von `crawler/ics.ts`), dem Teamnamen, der Seitenadresse und je Liga aus dem Hash der Rohdatei (`liga/<id>.json` nach `apply-venues`, also samt Spielorten) und der Zahl der noch im Zeitfenster liegenden Spiele (so ändert nicht jeder Tag alles, sondern nur das Herausfallen alter Spiele). Das Manifest (`--manifest`, Hash je Team) und die Dateien liegen im Actions-Cache; ein Team wird übersprungen, wenn Hash und alle drei Dateien vorhanden sind. Kalender von Teams, die es nicht mehr gibt, werden entfernt, fremde Dateien bleiben. Der Cache wird einmal pro Tag und nur auf `main` gespeichert (Schlüssel `ics-<Datum>`), damit zwei Kalendersätze pro Tag nicht den Cache der Live-Daten verdrängen; spätere Läufe desselben Tages starten vom Stand des ersten und bauen entsprechend mehr um, bleiben aber richtig. Fehlt der Cache, werden wie bisher alle Kalender gebaut.
 
 *Ergänzung DBB-Marke und selbst gehostete Schriften:* Alle Seiten tragen `data-brand="dbb"` und `data-type="dbb"` auf `<html>` (Farben Schwarz, Weiß, Anthrazit, Gold und Orange, Schrift nach basketball-bund.de; beides sieht das DSS als wählbare Marke vor). Die Display-Schrift Sucrose ist lizenzpflichtig und liegt nicht im Projekt; es gilt der freie Ersatz Barlow Condensed (Überschriften), Rubik für den Fließtext, JetBrains Mono für Beschriftungen. Die Schriften kommen aus `portal/dss/fonts/` (aus dem DSS übernommen, SIL OFL 1.1), die Einbindung bei Google Fonts entfällt: weniger Anfragen an Dritte und keine Übermittlung der IP-Adresse an Google. Die Kontrast-, Zielgrößen- und Reflow-Prüfungen (WCAG 2.2 AA und AAA, Playwright) laufen unverändert mit der DBB-Marke. Die Seite ist ein unabhängiges Projekt und kein Angebot des DBB; mit der DBB-Optik sollte das an geeigneter Stelle (Fußzeile, Impressum) gesagt werden.
+
+== ADR-015: Hauptwettbewerb je Team und Teams aus Ligen ohne Tabelle
+
+*Status:* angenommen
+
+*Kontext:* Teams spielen in mehreren Wettbewerben (Messung am Live-Index vom 14.10.2026: 1 602 von 12 114 Teams), etwa in der Regionalliga und im Landespokal. Der Stammdaten-Crawl (`crawler/index.ts`) leitete Teams nur aus den Tabelleneinträgen ab und behielt je Team die zuerst gesehene Liga; das hing von der Verbandsreihenfolge und der API-Reihenfolge ab. Bei 79 Teams stand ein Pokal als Liga, obwohl es eine Spielklasse gibt (z. B. NRW-Jugendpokal statt Jugendoberliga). Ligen ohne Tabelle (Pokal, K.-o.-Runden) lieferten gar keine Teams. Der `skName` hilft nicht: der „BBV-Pokal U16“ hat `skName = Bayernliga`. `tableExists` liefert die Ligenliste immer als `null`.
+
+*Entscheidung:*
+. **Teams aus dem Spielplan:** Ist die Tabelle einer Liga leer, nimmt der Crawler die Teams aus `competition/spielplan/id/{ligaId}` (`teamsFromMatches`, ohne `rang`). Platzhalter wie „Sieger A/B“ haben keine `clubId` und entfallen. Das ist kein Fehler und erzeugt keine Warnung.
+. **Hauptwettbewerb:** Je Team ist `ligaId`/`liganame`/`rang`/`ebene` der Hauptwettbewerb, alle weiteren stehen in `teams[].weitereWettbewerbe` (`ligaId`, `liganame`). Rangfolge (`crawler/extractor.ts`, `addCompetition`): Spielklasse vor Nebenwettbewerb, dann höhere Ebene (`skEbeneId`: 0 Verband, 1 Bezirk, 2 Kreis), dann früherer Verband im Crawl (Bundesligen und Regionalligen vor den Landesverbänden), dann kleinere `ligaId`. Das Ergebnis hängt nicht von der Crawl-Reihenfolge ab.
+. **Nebenwettbewerb** ist jede Liga mit Ligatyp ≠ 1 (Pokalrunde, Auf-/Abstieg, Play-off, Finals, Vorbereitung, Liga ohne Spielplan) oder mit „Pokal“, „Testspiel“ oder „Vorbereit…“ im Namen. Der Ligatyp kommt nicht an der Liga selbst; `BbbClient.getNonRegularLigatypen` fragt die Ligenliste je Typ gefiltert ab (6 Typen, rund 40 Requests, 377 Ligen) und bildet `ligaId → Ligatyp`. Der Namensanteil fängt Pokale, die BBB formal als Ligaspielbetrieb führt.
+. **Pokalrunden** (BBL-/DBBL-Pokal: 1. Runde, 1/8-Finale, 1/4-Finale, Top4) sind bei BBB einzelne Ligen und bleiben einzelne Einträge in `weitereWettbewerbe`; betroffen sind etwa 11 Teams.
+. Spielt ein Team nur in Pokal oder Test, bleibt dieser der Hauptwettbewerb.
+
+*Folgen:* (+) Teams aus K.-o.-Ligen sind erfasst, die Hauptliga ist stabil und erklärbar. (+) Die Live-Seite zeigte schon alle Wettbewerbe (`team-index.json`); die Stammdaten ziehen nach. (+) `weitereWettbewerbe` ist optional und ändert bestehende Felder nicht. (−) Die Ligatyp-Abfrage kostet rund 40 Requests je Crawl. (−) Das Namensmuster ist eine Heuristik; eine Liga mit „Pokal“ im Namen, die tatsächlich die Spielklasse ist, würde zum Nebenwettbewerb. (−) Teams aus reinen Spielplänen haben keinen Tabellenplatz; die Oberfläche zeigt dann „kein Tabellenplatz“. (−) Ein Spielplan ohne Spiele liefert weiterhin kein Team.
+
+== ADR-016: Live-Crawl mit Fallback über Team-Spiele, Cache-Rückfall und auswertbarem Log
+
+*Status:* angenommen
+
+*Kontext:* Schlug `competition/spielplan/id/{ligaId}` einer Liga fehl (Beispiel Liga 53035, HTTP 500), fehlten alle Spiele ihrer Teams in den Live-Daten, obwohl BBB sie über `team/id/{id}/matches` liefert (vier Teams mit je 16 Spielen). Die Liga verschwand außerdem aus dem Live-Index, weil `_live` komplett durch `_live_new` ersetzt wird. Ein einzelner Fehler lag unter der 10-%-Schwelle und stand nur als Logzeile in einem erfolgreichen Schritt; der Melde-Schritt prüft `outcome == 'failure'` und lief nie. Stichprobe: 8 Teams, 146 Spiele, keine fehlenden Spiele im Normalfall.
+
+*Entscheidung (`crawler/live.ts`, `crawlLiga`):*
+. Spielplan der Liga; ist die Tabelle leer und es gibt Spiele, wird sie über `competition/table/id/{ligaId}` nachgeladen.
+. Schlägt der Spielplan fehl: Teams aus der Tabelle (`competition/table/id/…`), je Team `team/id/{teamPermanentId}/matches`, gefiltert auf `ligaData.ligaId`, ohne Doppelte (nach `matchId`). Einzelne Team-Fehler werden gezählt.
+. Scheitert auch das: Das Dokument des letzten Laufs bleibt erhalten (`--prev`, im Workflow `_live` aus dem Cache). Gibt es keins, gilt die Liga als fehlgeschlagen. Liefert kein Team Spiele, entsteht kein leeres Dokument.
+. Der Guard (`MAX_FAILURE_RATIO` 10 %) zählt Fehlschläge und Ligen aus dem Cache, damit bei einem API-Totalausfall nicht still Altes deployt wird.
+. `index.json` führt zusätzlich `ausTeamSpielen` und `veraltet`.
+. **Log:** Je auffälliger Liga eine Zeile `[liga] id=… status=team-matches|cache|fehlgeschlagen name=… spiele=… tabelle=… teams=… teams_ohne_spiele=… teams_fehler=… grund=…`; regulär geladene Ligen bleiben still. Am Ende `[summary]`-Zeilen mit Zählern (`ligen`, `geladen`, `fehlgeschlagen`, `spielplan`, `team_matches`, `cache`, `tabelle_nachgeladen`, `ohne_tabelle`, `ohne_spiele`, `spiele`, `teams`) und ID-Listen (auf 25 gekürzt). Dieselben Zahlen stehen als Tabelle in der Step Summary und als `::warning::`-/`::notice::`-Annotationen an der Lauf-Übersicht.
+
+*Folgen:* (+) Teams einer ausgefallenen Liga behalten ihre Spiele; eine Liga verschwindet nicht mehr durch einen einzelnen Ausfall. (+) Schlüsse über Datenqualität lassen sich direkt aus dem Log ziehen (Anteil Fallback, Ligen ohne Tabelle oder Spiele). (−) Der Fallback braucht einen Request je Team der Liga. (−) Ein Team, dessen Endpunkt ebenfalls 500 liefert (Liga 53035, Team 224976), bleibt ohne Spiele und erscheint als `teams_fehler`. (−) Ein Dokument aus dem Cache ist veraltet (`fetchedAt` zeigt den Stand); die Oberfläche kennzeichnet das nicht. (−) Ist die Tabelle ebenfalls nicht abrufbar, hilft nur der Cache.
+
+== ADR-017: Spiele ohne festen Termin als „Termin offen“
+
+*Status:* angenommen
+
+*Kontext:* BBB führt Spiele ohne festgelegten Termin mit der Uhrzeit `00:00`; ein Spiel beginnt nie um Mitternacht. Messung an den Live-Daten (15.10.2026, 89 538 Spiele): 4 886 Spiele mit `00:00`, davon 4 142 in der Zukunft in 466 Ligen, dazu 60 Spiele ganz ohne Uhrzeit. Auch das Datum ist oft nur ein Platzhalter: 1 305 dieser Spiele liegen auf einem Montag (Dienstag bis Donnerstag: 30), und bei 876 dieser Montagsspiele finden die übrigen Spiele desselben Spieltags erst Freitag bis Sonntag statt. Bis dahin zeigten wir „Sa, 28.11.2026 · 00:00“, trugen Kalendertermine um 0:00 Uhr ein, gaben `startDate …T00:00:00` aus und nannten solche Spiele „nächstes Spiel“.
+
+*Entscheidung:* Eine gemeinsame Definition in `portal/team-logic.js` (`isTerminOffen`, von Portal, SEO und ICS genutzt): *Termin offen* heißt kein Ergebnis, nicht abgesagt, kein Verzicht und die Uhrzeit fehlt oder ist `00:00`. Das Datum gilt dann nicht.
+* **Anzeige:** „Termin offen“ statt Datum und Uhrzeit (`kickoffLabel`). `00:00` bei Spielen mit Ergebnis oder Absage wird nur als Datum ohne Uhrzeit gezeigt. Es gibt keine Sonderregel für Montage.
+* **Nächstes Spiel:** Spiele mit festem Termin zuerst; gibt es nur offene, ist das erste offene das nächste Spiel („Termin offen“).
+* **Sortierung:** feste Termine chronologisch, offene danach (nach Platzhalterdatum).
+* **Nicht bestätigt:** Ein offener Termin mit vergangenem Platzhalterdatum zeigt in der Ergebnisspalte „nicht bestätigt“ statt „–“ und ist nicht mehr „nächstes Spiel“.
+* **Kalender (ADR-012):** Spiele mit offenem Termin entfallen; die UID bleibt stabil.
+* **Strukturierte Daten:** kein `SportsEvent` für offene Termine; die Beschreibung der Teamseite nennt „Termin offen“.
+
+*Folgen:* (+) Keine erfundenen Mitternachtstermine mehr in Anzeige, Kalender und Suchmaschinen. (+) Eine Definition für alle Stellen. (−) Das Datum offener Spiele ist nirgends sichtbar, auch nicht als Woche; wer wissen will, ob das Spiel diese Woche stattfindet, erfährt es nicht. (−) „Nicht bestätigt“ stützt sich auf das Platzhalterdatum; ein nachgeholtes Spiel ohne eingetragenes Ergebnis steht ebenso da. (−) Spiele ganz ohne Uhrzeit, die früher ganztägig im Kalender standen, fehlen dort jetzt. Wirkung am 15.10.2026: 3 814 offene Termine (3 280 in der Zukunft, 475 „nicht bestätigt“), 1 400 Teams betroffen, bei 44 sind alle anstehenden Spiele offen.
 
 = Kapitel 10: Qualitätsanforderungen
 
@@ -821,6 +872,18 @@ graph TD
 |Fuse.js und Leaflet werden per CDN geladen. CDN-Ausfall = Portal teilweise funktionslos.
 |Sehr gering
 |Bei Bedarf: Bibliotheken lokal einbinden und mit Portal committen.
+
+|R6
+|Einzelne BBB-Endpunkte fallen aus
+|Der Spielplan einzelner Ligen liefert HTTP 500 (Beispiel Liga 53035), obwohl Tabelle und Team-Spiele erreichbar sind.
+|Mittel
+|Fallback über Team-Spiele und Rückfall auf den letzten Lauf (ADR-016); `[liga]`-Zeilen und Annotationen im Log zeigen jeden Fall.
+
+|R7
+|Platzhalter-Termine und Typisierung
+|BBB führt Spiele ohne Termin mit 00:00 (ADR-017); Pokale sind teils formal Ligaspielbetrieb, `tableExists` ist in der Ligenliste `null` (ADR-015). Die Erkennung beruht auf Ligatyp und Namensmuster.
+|Mittel
+|Gemeinsame Definition `isTerminOffen`; Muster und Ligatypen testen. Bei neuen Wettbewerbsnamen die Heuristik prüfen (Messung am Live-Index).
 |===
 
 == Technische Schulden
@@ -917,4 +980,16 @@ graph TD
 
 |MergedClub
 |TypeScript-Interface (`crawler/types.ts`): Kombination aus `ClubEntry` (Crawler-Daten) und `ClubEnriched` (manuelle Anreicherung).
+
+|Hauptwettbewerb
+|Die Liga eines Teams, die `ligaId`, `liganame` und `rang` bestimmt: Spielklasse vor Pokal, Test und Vorbereitung (ADR-015). Alle anderen Wettbewerbe stehen in `weitereWettbewerbe`.
+
+|Ligatyp
+|BBB-Einteilung eines Wettbewerbs: 1 Ligaspielbetrieb, 2 Pokalrunde, 3 Auf-/Abstiegsspiele, 4 Play-Off/Qualifikation, 9 Meisterschaft/Finals, 10 Liga ohne Spielplan, 11 Vorbereitungsliga. Nur über die gefilterte Ligenliste abrufbar.
+
+|Termin offen
+|Spiel ohne Ergebnis, dessen Uhrzeit fehlt oder `00:00` ist. Auch das Datum gilt dann nicht (ADR-017).
+
+|Nicht bestätigt
+|Spiel mit offenem Termin, dessen Platzhalterdatum schon vorbei ist.
 |===
