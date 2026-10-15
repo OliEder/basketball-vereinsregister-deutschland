@@ -35,6 +35,18 @@
 |Fuse.js und Leaflet werden per CDN geladen. CDN-Ausfall = Portal teilweise funktionslos.
 |Sehr gering
 |Bei Bedarf: Bibliotheken lokal einbinden und mit Portal committen.
+
+|R6
+|Einzelne BBB-Endpunkte fallen aus
+|Der Spielplan einzelner Ligen liefert HTTP 500 (Beispiel Liga 53035), obwohl Tabelle und Team-Spiele erreichbar sind.
+|Mittel
+|Fallback über Team-Spiele und Rückfall auf den letzten Lauf (ADR-016); `[liga]`-Zeilen und Annotationen im Log zeigen jeden Fall.
+
+|R7
+|Platzhalter-Termine und Typisierung
+|BBB führt Spiele ohne Termin mit 00:00 (ADR-017); Pokale sind teils formal Ligaspielbetrieb, `tableExists` ist in der Ligenliste `null` (ADR-015). Die Erkennung beruht auf Ligatyp und Namensmuster.
+|Mittel
+|Gemeinsame Definition `isTerminOffen`; Muster und Ligatypen testen. Bei neuen Wettbewerbsnamen die Heuristik prüfen (Messung am Live-Index).
 |===
 
 == Technische Schulden
