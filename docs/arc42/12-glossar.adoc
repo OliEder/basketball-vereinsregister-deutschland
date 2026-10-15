@@ -60,4 +60,16 @@
 
 |MergedClub
 |TypeScript-Interface (`crawler/types.ts`): Kombination aus `ClubEntry` (Crawler-Daten) und `ClubEnriched` (manuelle Anreicherung).
+
+|Hauptwettbewerb
+|Die Liga eines Teams, die `ligaId`, `liganame` und `rang` bestimmt: Spielklasse vor Pokal, Test und Vorbereitung (ADR-015). Alle anderen Wettbewerbe stehen in `weitereWettbewerbe`.
+
+|Ligatyp
+|BBB-Einteilung eines Wettbewerbs: 1 Ligaspielbetrieb, 2 Pokalrunde, 3 Auf-/Abstiegsspiele, 4 Play-Off/Qualifikation, 9 Meisterschaft/Finals, 10 Liga ohne Spielplan, 11 Vorbereitungsliga. Nur über die gefilterte Ligenliste abrufbar.
+
+|Termin offen
+|Spiel ohne Ergebnis, dessen Uhrzeit fehlt oder `00:00` ist. Auch das Datum gilt dann nicht (ADR-017).
+
+|Nicht bestätigt
+|Spiel mit offenem Termin, dessen Platzhalterdatum schon vorbei ist.
 |===

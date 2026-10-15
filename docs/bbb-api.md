@@ -37,6 +37,11 @@ interface ApiResponse<T> {
 - **Anonymisierung (U8–U14):** `person.anonym === true`, `vorname: "***"`, `nachname: "****"`, `playerId: 0`, `no: "**"`.
 - **Statistiken sind oft leer:** `attempted: 0.0` und `quota: null`, Rebounds, Assists, Steals und Blocks meist `0.0`.
 - **Platzhalter-Teams:** Pokal-Setzlisten ("Sieger X/Y") haben keine `clubId`.
+- **Platzhalter-Termine:** Spiele ohne festgelegten Termin haben `kickoffTime: "00:00"`, auch das `kickoffDate` ist dann oft nur ein Platzhalter (häufig ein Montag). Ein Spiel um Mitternacht gibt es nicht; ohne Ergebnis gilt `00:00` als „Termin offen“ (ADR-017).
+- **Spielplan kann 500 liefern:** `GET /competition/spielplan/id/{ligaId}` antwortet bei einzelnen Ligen mit HTTP 500 (z. B. 53035), während `GET /competition/table/id/{ligaId}` und `GET /team/id/{id}/matches` funktionieren. Die Spiele einer Liga lassen sich dann über die Team-Spiele holen, gefiltert auf `ligaData.ligaId` (ADR-016). Ein einzelnes Team kann dabei ebenfalls 500 liefern.
+- **Ligen ohne Tabelle:** Pokale und K.-o.-Runden haben `tabelle.entries` leer, ihre Teams stehen nur in den Spielen (`homeTeam`, `guestTeam`).
+- **Pokalrunden sind einzelne Ligen:** BBL-/DBBL-Pokal führen je Runde (1. Runde, 1/8-Finale, 1/4-Finale, Top4) eine eigene `ligaId`.
+- **Leere Namen:** Vereinzelt ist `liganame` `null` (z. B. Liga 56601).
 - **`ligaData`** steht bei Tabelle und Spielplan oben in `data`, in jedem Spiel steht es je nach Endpunkt `null` oder noch einmal.
 
 ## WAM (Filter und Ligensuche)
@@ -67,6 +72,20 @@ Eine Liga enthält u. a.:
 | `kreisnr`, `kreisname` | Kreis, nur bei Kreisligen gesetzt, sonst `null` |
 | `tableExists`, `crossTableExists` | Tabelle bzw. Kreuztabelle vorhanden |
 | `statisticType` | `0` volle, `1` reduzierte Statistik (U8–U14) |
+
+`tableExists` und `crossTableExists` sind in dieser Liste immer `null`; die Ligatypen (`ligatypen` aus `POST /wam/data`) stehen nicht an der Liga, sondern lassen sich nur über `ligatypIds` im Request-Body filtern:
+
+| `ligatypId` | Bedeutung | Ligen (15.10.2026) |
+|---|---|---|
+| 1 | Ligaspielbetrieb | 1 889 |
+| 2 | Pokalrunde | 141 |
+| 3 | Auf-/Abstiegsspiele | 152 |
+| 4 | Play-Off-/Qualifikation | 14 |
+| 9 | Meisterschaft/Finals | 43 |
+| 10 | Liga ohne Spielplan | 1 |
+| 11 | Vorbereitungsliga | 42 |
+
+Die Typen überschneiden sich nicht (zusammen 2 122 Ligen). Ein „Pokal“ im Namen heißt nicht Typ 2: Der NRW-Jugendpokal ist Typ 1. Deshalb nutzt ADR-015 Ligatyp und Namensmuster zusammen. `skEbeneId` ist 0 Verband, 1 Bezirk, 2 Kreis; Bundesliga und Regionalliga haben ebenfalls 0.
 
 Wir speichern `skEbeneName`, `bezirkName` und `kreisname` pro Team als `ebene`, `bezirk` und `kreis` (siehe arc42, Kapitel 8).
 
