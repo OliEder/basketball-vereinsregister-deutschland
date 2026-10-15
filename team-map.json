@@ -12381,6 +12381,10 @@
   "path": "baden-wuerttemberg/karlsbad-langensteinbach/bg-karlsbad/u16-maennlich/",
   "history": []
  },
+ "164360": {
+  "path": "baden-wuerttemberg/karlsruhe/post-suedstadt-karlsruhe/u16-maennlich-164360/",
+  "history": []
+ },
  "164361": {
   "path": "baden-wuerttemberg/karlsruhe/ts-durlach/u16-maennlich/",
   "history": []
@@ -12399,6 +12403,10 @@
  },
  "164370": {
   "path": "baden-wuerttemberg/weil-am-rhein/tv-weil/u16-maennlich/",
+  "history": []
+ },
+ "164371": {
+  "path": "baden-wuerttemberg/freiburg/usc-freiburg/u16-maennlich-164371/",
   "history": []
  },
  "164388": {
@@ -21655,6 +21663,10 @@
   "path": "baden-wuerttemberg/freiburg/usc-freiburg/u14-weiblich-224964/",
   "history": []
  },
+ "224976": {
+  "path": "baden-wuerttemberg/freiburg/usc-freiburg/u16-maennlich-224976/",
+  "history": []
+ },
  "224985": {
   "path": "baden-wuerttemberg/freiburg/usc-freiburg/u16-weiblich-224985/",
   "history": []
@@ -25293,6 +25305,10 @@
  },
  "281086": {
   "path": "nordrhein-westfalen/wuppertal/sv-bayer-wuppertal/u12-mix/",
+  "history": []
+ },
+ "281411": {
+  "path": "baden-wuerttemberg/ettenheim/bg-ettenheim/u16-maennlich/",
   "history": []
  },
  "281424": {
@@ -33551,6 +33567,10 @@
  },
  "316515": {
   "path": "bayern/illertissen/bg-illertal/herren-316515/",
+  "history": []
+ },
+ "316519": {
+  "path": "baden-wuerttemberg/donaueschingen/tv-donaueschingen/u16-maennlich-316519/",
   "history": []
  },
  "316520": {
