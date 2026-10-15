@@ -68,7 +68,7 @@ jobs:
         if: steps.need.outputs.crawl == 'true'
         continue-on-error: true
         run: |
-          npm run live -- --out=_live_new
+          npm run live -- --out=_live_new --prev=_live
           rm -rf _live
           mv _live_new _live
 
