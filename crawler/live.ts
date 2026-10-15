@@ -145,6 +145,7 @@ async function live(): Promise<void> {
   fs.mkdirSync(path.join(out, 'liga'), { recursive: true });
   const docs: LigaDoc[] = [];
   const failed: number[] = [];
+  const failureReasons: string[] = [];
   let fallbacks = 0;
   let next = 0;
   const startedAt = new Date().toISOString();
@@ -165,6 +166,7 @@ async function live(): Promise<void> {
         docs.push(doc);
       } catch (err) {
         failed.push(meta.ligaId);
+        failureReasons.push(`Liga ${meta.ligaId} (${meta.liganame}): ${err}`);
         console.warn(`  Liga ${meta.ligaId} fehlgeschlagen: ${err}`);
       }
       if ((docs.length + failed.length) % 200 === 0) console.log(`  ${docs.length + failed.length}/${ligen.length}...`);
@@ -185,7 +187,15 @@ async function live(): Promise<void> {
 
   const summary = `Live-Crawl: ${docs.length}/${ligen.length} Ligen, ${failed.length} fehlgeschlagen, ${fallbacks} Tabellen-Nachladungen.`;
   console.log(summary);
-  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + '\n');
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    const list = failureReasons.length > 0 ? `\n\n${failureReasons.map(r => `- ${r}`).join('\n')}\n` : '';
+    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + list + '\n');
+  }
+  // Annotationen erscheinen an der Lauf-Übersicht und im Schritt, statt nur im Log unterzugehen
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    for (const r of failureReasons.slice(0, 10)) console.log(`::warning title=Liga im Live-Crawl fehlgeschlagen::${r}`);
+    if (failureReasons.length > 10) console.log(`::warning title=Live-Crawl::... und ${failureReasons.length - 10} weitere Ligen fehlgeschlagen`);
+  }
 
   // Guard: bei Totalausfall nicht deployen
   if (docs.length === 0 || failed.length / ligen.length > MAX_FAILURE_RATIO) {
