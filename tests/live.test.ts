@@ -1,4 +1,4 @@
-import { buildTeamIndex, tabelleEntries, toLigaDoc, definedOnly, LigaMeta } from '../crawler/live';
+import { buildTeamIndex, tabelleEntries, toLigaDoc, definedOnly, crawlLiga, LigaMeta, LigaDoc } from '../crawler/live';
 
 const meta: LigaMeta = { ligaId: 7, liganame: 'Bezirksliga', verbandName: 'Bayern' };
 const team = (id: number) => ({ teamPermanentId: id, teamname: `T${id}`, clubId: id * 10 });
@@ -49,5 +49,82 @@ describe('buildTeamIndex', () => {
 describe('definedOnly', () => {
   it('entfernt nur undefined-Felder', () => {
     expect(definedOnly({ a: 1, b: undefined, c: null, d: '' })).toEqual({ a: 1, c: null, d: '' });
+  });
+});
+
+describe('crawlLiga', () => {
+  const BASE = 'https://www.basketball-bund.net/rest';
+  const sleep = async () => {};
+  const mk = (routes: Record<string, any>, loadPrev?: (id: number) => LigaDoc | undefined) => {
+    const calls: string[] = [];
+    const fetchJson = async (url: string) => {
+      calls.push(url.replace(BASE, ''));
+      const hit = routes[url.replace(BASE, '')];
+      if (hit instanceof Error) throw hit;
+      if (hit === undefined) throw new Error(`HTTP 404 ${url}`);
+      return hit;
+    };
+    return { calls, deps: { fetchJson, sleep, delay: 0, now: () => 'NOW', loadPrev } };
+  };
+  const match = (id: number, home: number, guest: number, ligaId = 7) =>
+    ({ matchId: id, kickoffDate: '2026-10-10', homeTeam: team(home), guestTeam: team(guest), ligaData: { ligaId } });
+
+  it('Normalfall: Spielplan der Liga, Quelle spielplan', async () => {
+    const { deps, calls } = mk({ '/competition/spielplan/id/7': { data: { tabelle: { entries: [{ rang: 1, team: team(1) }] }, matches: [match(1, 1, 2)] } } });
+    const r = await crawlLiga(meta, deps);
+    expect(r.quelle).toBe('spielplan');
+    expect(r.tabelleNachgeladen).toBe(false);
+    expect(r.doc.matches).toHaveLength(1);
+    expect(calls).toEqual(['/competition/spielplan/id/7']);
+  });
+
+  it('leere Tabelle bei vorhandenen Spielen wird nachgeladen und so ausgewiesen', async () => {
+    const { deps } = mk({
+      '/competition/spielplan/id/7': { data: { matches: [match(1, 1, 2)] } },
+      '/competition/table/id/7': { data: { tabelle: { entries: [{ rang: 1, team: team(1) }] } } }
+    });
+    const r = await crawlLiga(meta, deps);
+    expect(r.tabelleNachgeladen).toBe(true);
+    expect(r.doc.tabelle).toHaveLength(1);
+  });
+
+  it('Spielplan HTTP 500: Spiele über die Teams der Tabelle, nur dieser Liga, ohne Doppelte', async () => {
+    const { deps } = mk({
+      '/competition/spielplan/id/7': new Error('HTTP 500 .../spielplan/id/7'),
+      '/competition/table/id/7': { data: { tabelle: { entries: [{ rang: 1, team: team(1) }, { rang: 2, team: team(2) }, { rang: 3, team: team(3) }] } } },
+      '/team/id/1/matches': { data: { matches: [match(1, 1, 2), match(9, 1, 5, 99)] } },
+      '/team/id/2/matches': { data: { matches: [match(1, 1, 2), match(2, 2, 3)] } },
+      '/team/id/3/matches': new Error('HTTP 500')
+    });
+    const r = await crawlLiga(meta, deps);
+    expect(r.quelle).toBe('team-matches');
+    expect(r.doc.matches.map(m => m.matchId).sort()).toEqual([1, 2]);
+    expect(r.doc.matches[0]).not.toHaveProperty('ligaData');
+    expect(r.doc.tabelle).toHaveLength(3);
+    expect(r).toMatchObject({ teams: 3, teamFehler: 1, teamsOhneSpiele: 0 });
+    expect(r.grund).toContain('HTTP 500');
+  });
+
+  it('alles schlägt fehl: Dokument des letzten Laufs bleibt erhalten', async () => {
+    const prev: LigaDoc = { ...meta, fetchedAt: 'GESTERN', tabelle: [], matches: [{ matchId: 5 }] };
+    const { deps } = mk({ '/competition/spielplan/id/7': new Error('HTTP 500') }, id => (id === 7 ? prev : undefined));
+    const r = await crawlLiga(meta, deps);
+    expect(r.quelle).toBe('cache');
+    expect(r.doc.fetchedAt).toBe('GESTERN');
+    expect(r.grund).toContain('HTTP 500');
+  });
+
+  it('alles schlägt fehl und kein Cache: wirft mit Grund', async () => {
+    const { deps } = mk({ '/competition/spielplan/id/7': new Error('HTTP 500') });
+    await expect(crawlLiga(meta, deps)).rejects.toThrow(/HTTP 500.*Rückfall/);
+  });
+
+  it('kein Team liefert Spiele: kein leeres Dokument, sondern Cache bzw. Fehler', async () => {
+    const { deps } = mk({
+      '/competition/spielplan/id/7': new Error('HTTP 500'),
+      '/competition/table/id/7': { data: { tabelle: { entries: [{ rang: 1, team: team(1) }] } } },
+      '/team/id/1/matches': new Error('HTTP 500')
+    });
+    await expect(crawlLiga(meta, deps)).rejects.toThrow(/kein Team lieferte Spiele/);
   });
 });
