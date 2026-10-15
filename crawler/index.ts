@@ -1,5 +1,5 @@
 import { BbbClient } from './bbb-client';
-import { extractClubs, extractCityFromName, extractTeams, teamsFromMatches, TeamSource } from './extractor';
+import { extractClubs, extractCityFromName, extractTeams, teamsFromMatches, addCompetition, Competition, TeamSource } from './extractor';
 import { geocodeClub } from './club-geocoder';
 import { RegionIndex } from './region';
 import { isSuspect } from './regeocode';
@@ -33,13 +33,17 @@ async function crawl(): Promise<void> {
   // teamsByClub accumulates teamPermanentIds + altersklasse/geschlecht per club
   const teamsByClub = new Map<number, TeamEntry[]>();
   const existingClubs = loadExistingClubs();
+  // Hauptwettbewerb je Team (siehe addCompetition); ligaId → Ligatyp nur für Typen außer Ligaspielbetrieb
+  const mainCompetition = new Map<number, Competition>();
+  const ligatypByLiga = await client.getNonRegularLigatypen();
+  console.log(`${ligatypByLiga.size} Ligen mit Typ außer Ligaspielbetrieb (Pokal, Auf-/Abstieg, Vorbereitung …).`);
 
   // Phase 1: Verbände → Ligen → Tabellen
   console.log('Phase 1: Lade Tabellen...');
   const verbaende = await client.getVerbaende();
   console.log(`${verbaende.length} Verbände gefunden.`);
 
-  for (const verband of verbaende) {
+  for (const [verbandOrder, verband] of verbaende.entries()) {
     console.log(`\nVerband: ${verband.label} (${verband.id})`);
     let startAtIndex = 0;
     let hasMore = true;
@@ -70,11 +74,14 @@ async function crawl(): Promise<void> {
           const teamsFromLiga = extractTeams(entries, altersklasse, geschlecht, { ligaId: liga.ligaId, liganame: liga.liganame, ligaData });
           for (const [clubId, teams] of teamsFromLiga) {
             const existing = teamsByClub.get(clubId) ?? [];
-            for (const team of teams) {
-              if (!existing.some(t => t.teamPermanentId === team.teamPermanentId)) {
-                existing.push(team);
-              }
-            }
+            const comp: Competition = {
+              ligaId: liga.ligaId,
+              liganame: liga.liganame,
+              ligatypId: ligatypByLiga.get(liga.ligaId),
+              ebeneId: liga.skEbeneId ?? undefined,
+              verbandOrder
+            };
+            for (const team of teams) addCompetition(existing, team, comp, mainCompetition);
             teamsByClub.set(clubId, existing);
           }
         } catch (err) {

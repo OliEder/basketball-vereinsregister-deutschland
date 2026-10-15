@@ -174,6 +174,72 @@ export function teamsFromMatches(matches: any[]): TeamSource[] {
   return Array.from(seen.values());
 }
 
+/** Ein Wettbewerb, in dem ein Team spielt. `ligatypId` nur für Typen außer 1 (Ligaspielbetrieb). */
+export interface Competition {
+  ligaId: number;
+  liganame: string;
+  ligatypId?: number;
+  /** skEbeneId der Liga: 0 Verband, 1 Bezirk, 2 Kreis */
+  ebeneId?: number;
+  /** Position des Verbands im Crawl (Bundesligen, Regionalligen vor den Landesverbänden) */
+  verbandOrder?: number;
+}
+
+/** Pokale, Testspiele und Vorbereitung heißen auch dann so, wenn BBB sie als Ligaspielbetrieb führt (z. B. NRW-Jugendpokal). */
+const SIDE_NAME = /pokal|testspiel|vorbereit/i;
+
+/** Pokal, Auf-/Abstieg, Play-off, Finals, Vorbereitung: nie der Hauptwettbewerb, solange das Team in einer Spielklasse spielt. */
+export function isSideCompetition(c: Competition): boolean {
+  return (c.ligatypId !== undefined && c.ligatypId !== 1) || SIDE_NAME.test(c.liganame ?? '');
+}
+
+/** Kleiner ist besser: Spielklasse vor Nebenwettbewerb, dann höhere Ebene, dann früherer Verband, dann kleinere ligaId. */
+function rank(c: Competition): number[] {
+  return [isSideCompetition(c) ? 1 : 0, c.ebeneId ?? 9, c.verbandOrder ?? 999, c.ligaId];
+}
+
+export function isBetterMain(candidate: Competition, current: Competition): boolean {
+  const a = rank(candidate);
+  const b = rank(current);
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i];
+  return false;
+}
+
+/**
+ * Nimmt ein Team einer weiteren Liga in `teams` auf. Das Team mit der besten Rangfolge ist der
+ * Hauptwettbewerb (ligaId/liganame/rang), alle anderen landen in `weitereWettbewerbe`.
+ * `known` merkt sich pro Team den Hauptwettbewerb; die Reihenfolge der Ligen im Crawl ist damit egal.
+ */
+export function addCompetition(
+  teams: TeamEntry[],
+  team: TeamEntry,
+  comp: Competition,
+  known: Map<number, Competition>
+): void {
+  const idx = teams.findIndex(t => t.teamPermanentId === team.teamPermanentId);
+  // BBB liefert vereinzelt Ligen ohne Namen; das Schema verlangt einen String
+  const asOther = (c: { ligaId: number; liganame?: string }) => ({ ligaId: c.ligaId, liganame: c.liganame || `Liga ${c.ligaId}` });
+  const byLiga = (a: { ligaId: number }, b: { ligaId: number }) => a.ligaId - b.ligaId;
+
+  if (idx < 0) {
+    teams.push(team);
+    known.set(team.teamPermanentId, comp);
+    return;
+  }
+  const current = teams[idx];
+  const currentComp = known.get(team.teamPermanentId);
+  if (currentComp && currentComp.ligaId === comp.ligaId) return;
+  const others = current.weitereWettbewerbe ?? [];
+
+  if (currentComp && isBetterMain(comp, currentComp)) {
+    const demoted = [...others, asOther(currentComp)].sort(byLiga);
+    teams[idx] = { ...team, weitereWettbewerbe: demoted };
+    known.set(team.teamPermanentId, comp);
+  } else if (!others.some(o => o.ligaId === comp.ligaId)) {
+    current.weitereWettbewerbe = [...others, asOther(comp)].sort(byLiga);
+  }
+}
+
 export function extractTeams(
   entries: TeamSource[],
   altersklasse: string,

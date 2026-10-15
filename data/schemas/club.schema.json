@@ -65,6 +65,18 @@
           "ligaId": { "type": "integer" },
           "liganame": { "type": "string" },
           "rang": { "type": "integer" },
+          "weitereWettbewerbe": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["ligaId", "liganame"],
+              "unevaluatedProperties": false,
+              "properties": {
+                "ligaId": { "type": "integer" },
+                "liganame": { "type": "string" }
+              }
+            }
+          },
           "ebene": { "type": "string" },
           "bezirk": { "type": "string" },
           "kreis": { "type": "string" },
