@@ -3801,6 +3801,10 @@
   "path": "halle/nordrhein-westfalen/muenster/pascal-gymnasium/",
   "history": []
  },
+ "102375": {
+  "path": "halle/weitere/herzogenrath/schulzentrum-herzogenrath/",
+  "history": []
+ },
  "102379": {
   "path": "halle/nordrhein-westfalen/burscheid/3-fach-halle-auf-dem-schulberg/",
   "history": []
@@ -6411,6 +6415,10 @@
  },
  "106241": {
   "path": "halle/bundesweit/osnabrueck/sporthalle-am-goethering/",
+  "history": []
+ },
+ "106244": {
+  "path": "halle/bayern/knetzgau/vs-knetzgau/",
   "history": []
  },
  "106246": {
@@ -11875,6 +11883,10 @@
  },
  "109525": {
   "path": "halle/brandenburg/strausberg/theodor-fontane-gymnasium/",
+  "history": []
+ },
+ "109527": {
+  "path": "halle/hessen/karben/sporthalle-berufsbildungswerk/",
   "history": []
  }
 }
