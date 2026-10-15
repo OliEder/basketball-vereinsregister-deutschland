@@ -1,5 +1,5 @@
 // tests/extractor.test.ts
-import { extractClubs, extractCityFromName, cityCandidates, extractTeams, regionFields } from '../crawler/extractor';
+import { extractClubs, extractCityFromName, cityCandidates, extractTeams, regionFields, teamsFromMatches, addCompetition, isSideCompetition, Competition } from '../crawler/extractor';
 import { BbbTableEntry, TeamEntry } from '../crawler/types';
 
 const makeEntry = (clubId: number, teamname: string, teamPermanentId: number): BbbTableEntry => ({
@@ -186,5 +186,100 @@ describe('regionFields / extractTeams mit ligaData', () => {
     });
     expect(result.get(10)![0]).toMatchObject({ ligaId: 51961, ebene: 'Bezirk', bezirk: 'Oberpfalz' });
     expect(result.get(10)![0]).not.toHaveProperty('kreis');
+  });
+});
+
+describe('teamsFromMatches (Ligen ohne Tabelle)', () => {
+  const t = (id: number, club: number | null, name = `T${id}`) =>
+    ({ teamPermanentId: id, teamname: name, clubId: club, seasonTeamId: id, teamnameSmall: null });
+
+  it('nimmt Heim- und Gastteams, jedes Team einmal', () => {
+    const matches = [
+      { homeTeam: t(1, 10), guestTeam: t(2, 20) },
+      { homeTeam: t(2, 20), guestTeam: t(3, 30) },
+    ];
+    expect(teamsFromMatches(matches).map(e => e.team.teamPermanentId)).toEqual([1, 2, 3]);
+  });
+
+  it('liefert Teams ohne Rang und ohne rang-Feld im TeamEntry (K.-o.-Runde)', () => {
+    const matches = [{ homeTeam: t(1, 10), guestTeam: t(2, null, 'Sieger A/B') }];
+    const result = extractTeams(teamsFromMatches(matches), 'U14', 'männlich', { ligaId: 7, liganame: 'Pokal' });
+    expect(result.get(10)).toEqual([
+      { teamPermanentId: 1, altersklasse: 'U14', geschlecht: 'männlich', ligaId: 7, liganame: 'Pokal', training: [] },
+    ]);
+    expect(result.has(null as any)).toBe(false);
+  });
+
+  it('verträgt fehlende Spiele und Teams', () => {
+    expect(teamsFromMatches([])).toEqual([]);
+    expect(teamsFromMatches([{ homeTeam: null, guestTeam: undefined }])).toEqual([]);
+  });
+});
+
+describe('Hauptwettbewerb bei mehreren Ligen', () => {
+  const team = (ligaId: number, liganame: string) => ({ teamPermanentId: 1, ligaId, liganame, training: [] });
+  const run = (comps: Array<[Competition]>) => {
+    const teams: any[] = [];
+    const known = new Map<number, Competition>();
+    for (const [c] of comps) addCompetition(teams, team(c.ligaId, c.liganame), c, known);
+    return teams[0];
+  };
+  const regionalliga: Competition = { ligaId: 10, liganame: '1. Regionalliga Südwest', ebeneId: 0, verbandOrder: 5 };
+  const landespokal: Competition = { ligaId: 20, liganame: 'BVRP POKAL Herren', ligatypId: 2, ebeneId: 0, verbandOrder: 9 };
+
+  it('Regionalliga bleibt Hauptwettbewerb, der Landespokal wird weiterer Wettbewerb', () => {
+    const t = run([[regionalliga], [landespokal]]);
+    expect(t.ligaId).toBe(10);
+    expect(t.weitereWettbewerbe).toEqual([{ ligaId: 20, liganame: 'BVRP POKAL Herren' }]);
+  });
+
+  it('ist unabhängig von der Crawl-Reihenfolge', () => {
+    const t = run([[landespokal], [regionalliga]]);
+    expect(t.ligaId).toBe(10);
+    expect(t.weitereWettbewerbe).toEqual([{ ligaId: 20, liganame: 'BVRP POKAL Herren' }]);
+  });
+
+  it('Pokal im Namen ist auch bei Ligatyp 1 ein Nebenwettbewerb (NRW-Jugendpokal)', () => {
+    const jugendpokal: Competition = { ligaId: 5, liganame: 'Jugendpokal U16 männlich (JPU16M)', ebeneId: 1, verbandOrder: 1 };
+    const oberliga: Competition = { ligaId: 6, liganame: 'Jugendoberliga 2 U16 männlich (JOL2U16M)', ebeneId: 1, verbandOrder: 1 };
+    expect(isSideCompetition(jugendpokal)).toBe(true);
+    expect(run([[jugendpokal], [oberliga]]).ligaId).toBe(6);
+  });
+
+  it('Auf-/Abstieg und Finals ohne Pokal im Namen zählen über den Ligatyp', () => {
+    expect(isSideCompetition({ ligaId: 1, liganame: 'Aufstiegsspiele zur 2. DBBL', ligatypId: 3 })).toBe(true);
+    expect(isSideCompetition({ ligaId: 2, liganame: 'Bezirksliga Herren', ligatypId: undefined })).toBe(false);
+  });
+
+  it('bei gleicher Klasse gewinnt die höhere Ebene, dann der frühere Verband', () => {
+    const bezirk: Competition = { ligaId: 1, liganame: 'Bezirksliga', ebeneId: 1, verbandOrder: 1 };
+    const verband: Competition = { ligaId: 2, liganame: 'Landesliga', ebeneId: 0, verbandOrder: 8 };
+    expect(run([[bezirk], [verband]]).ligaId).toBe(2);
+  });
+
+  it('nur Pokal: der Pokal bleibt Hauptwettbewerb', () => {
+    const t = run([[landespokal]]);
+    expect(t.ligaId).toBe(20);
+    expect(t.weitereWettbewerbe).toBeUndefined();
+  });
+
+  it('dieselbe Liga zweimal ergibt keinen doppelten Eintrag', () => {
+    const t = run([[regionalliga], [landespokal], [landespokal]]);
+    expect(t.weitereWettbewerbe).toHaveLength(1);
+  });
+
+  it('jede Pokalrunde bleibt ein eigener weiterer Wettbewerb (BBL-Pokal: Runde, Achtelfinale, Viertelfinale)', () => {
+    const bundesliga: Competition = { ligaId: 1, liganame: '1. Bundesliga', ebeneId: 0, verbandOrder: 0 };
+    const runde1: Competition = { ligaId: 55809, liganame: 'BBL-Pokal 1. Runde', ligatypId: 2, ebeneId: 0, verbandOrder: 0 };
+    const achtel: Competition = { ligaId: 55807, liganame: 'BBL-Pokal 1/8-Finale', ligatypId: 2, ebeneId: 0, verbandOrder: 0 };
+    const viertel: Competition = { ligaId: 55758, liganame: 'DBBL-Pokal 1/4-Finale', ligatypId: 4, ebeneId: 0, verbandOrder: 0 };
+    const t = run([[runde1], [bundesliga], [viertel], [achtel]]);
+    expect(t.ligaId).toBe(1);
+    expect(t.weitereWettbewerbe.map((w: any) => w.ligaId)).toEqual([55758, 55807, 55809]);
+  });
+
+  it('Liga ohne Namen erzeugt trotzdem einen schemagültigen Eintrag', () => {
+    const t = run([[regionalliga], [{ ligaId: 56601, liganame: undefined as any, ligatypId: 2 }]]);
+    expect(t.weitereWettbewerbe).toEqual([{ ligaId: 56601, liganame: 'Liga 56601' }]);
   });
 });
