@@ -7085,6 +7085,10 @@
   "path": "halle/bundesweit/berlin/alba-trainingshalle/",
   "history": []
  },
+ "106790": {
+  "path": "halle/bayern/muenchen/volksschule-flurstr/",
+  "history": []
+ },
  "106792": {
   "path": "halle/bremen/bremen/sz-in-den-sandwehen/",
   "history": []
@@ -11685,6 +11689,10 @@
  },
  "109455": {
   "path": "halle/baden-wuerttemberg/mannheim/gbg-halle-herzogenried-109455/",
+  "history": []
+ },
+ "109456": {
+  "path": "halle/bayern/sulzbach/pestalozzischule/",
   "history": []
  },
  "109457": {
