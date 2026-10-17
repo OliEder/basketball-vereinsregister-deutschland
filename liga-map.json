@@ -2335,6 +2335,10 @@
   "path": "liga/niedersachsen/nbv-pokal-damen/",
   "history": []
  },
+ "54221": {
+  "path": "liga/niedersachsen/seniorenmeisterschaften-wue35/",
+  "history": []
+ },
  "54262": {
   "path": "liga/niedersachsen/u9-nbv-minicup-gruppe-a/",
   "history": []
@@ -6941,6 +6945,10 @@
  },
  "56599": {
   "path": "liga/baden-wuerttemberg/turnier-kaderlehrgang/",
+  "history": []
+ },
+ "56600": {
+  "path": "liga/nordrhein-westfalen/jugenkreisliga-u10/",
   "history": []
  },
  "56605": {
