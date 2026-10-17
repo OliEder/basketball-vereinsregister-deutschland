@@ -5218,8 +5218,10 @@
   "history": []
  },
  "105133": {
-  "path": "halle/bayern/dingolfing/hans-glas-schule/",
-  "history": []
+  "path": "halle/bayern/dingolfing/hans-glas-halle/",
+  "history": [
+   "halle/bayern/dingolfing/hans-glas-schule/"
+  ]
  },
  "105157": {
   "path": "halle/bayern/grafing/gymnasium/",
@@ -11485,6 +11487,10 @@
   "path": "halle/nordrhein-westfalen/koeln/emanuel-grundschule-koeln-drittelfeld-rechts/",
   "history": []
  },
+ "109374": {
+  "path": "halle/baden-wuerttemberg/stuttgart/sporthalle-degerloch-wilhelms-gymnasium/",
+  "history": []
+ },
  "109375": {
   "path": "halle/mecklenburg-vorpommern/wismar/sporthalle-friedenshof-i/",
   "history": []
@@ -11895,6 +11901,10 @@
   "path": "halle/berlin/berlin/baumeisterstrasse/",
   "history": []
  },
+ "109523": {
+  "path": "halle/bayern/regenstauf/realschule-regenstauf/",
+  "history": []
+ },
  "109524": {
   "path": "halle/baden-wuerttemberg/ludwigsburg/oststadthalle/",
   "history": []
@@ -11905,6 +11915,10 @@
  },
  "109527": {
   "path": "halle/hessen/karben/sporthalle-berufsbildungswerk/",
+  "history": []
+ },
+ "109528": {
+  "path": "halle/baden-wuerttemberg/herrenberg/ammertalhalle/",
   "history": []
  }
 }
