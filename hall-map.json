@@ -11552,8 +11552,10 @@
   "history": []
  },
  "109405": {
-  "path": "halle/bayern/margetshoechheim/sprintis-sportpark-sportinghouse/",
-  "history": []
+  "path": "halle/bayern/margetshoechheim/sprintis-sportpark/",
+  "history": [
+   "halle/bayern/margetshoechheim/sprintis-sportpark-sportinghouse/"
+  ]
  },
  "109407": {
   "path": "halle/nordrhein-westfalen/koeln/basketball-campus-koeln-5-powered-by-flossbach-von-storch/",
