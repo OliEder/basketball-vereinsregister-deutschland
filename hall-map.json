@@ -6173,6 +6173,10 @@
   "path": "halle/bundesweit/stralsund/adolph-diesterweg-realschule/",
   "history": []
  },
+ "106006": {
+  "path": "halle/hamburg/hamburg/sporthalle-neuwiedenthal/",
+  "history": []
+ },
  "106013": {
   "path": "halle/niedersachsen/osnabrueck/sporthalle-voxtrup/",
   "history": []
@@ -11941,6 +11945,10 @@
  },
  "109528": {
   "path": "halle/baden-wuerttemberg/herrenberg/ammertalhalle/",
+  "history": []
+ },
+ "109530": {
+  "path": "halle/hessen/bad-vilbel/sporthalle-quellenschule/",
   "history": []
  }
 }
