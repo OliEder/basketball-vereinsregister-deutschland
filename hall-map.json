@@ -11911,6 +11911,10 @@
   "path": "halle/niedersachsen/goslar/helmut-sander-sporthalle/",
   "history": []
  },
+ "109513": {
+  "path": "halle/bayern/parsberg/gymnasium-parsberg-zweifachturnhalle/",
+  "history": []
+ },
  "109516": {
   "path": "halle/niedersachsen/hildesheim/mehrzweckhalle-des-goethegymnasiums-hildesheim-109516/",
   "history": []
@@ -11961,6 +11965,10 @@
  },
  "109530": {
   "path": "halle/hessen/bad-vilbel/sporthalle-quellenschule/",
+  "history": []
+ },
+ "109532": {
+  "path": "halle/hessen/marburg/sporthalle-steinmuehle/",
   "history": []
  }
 }
