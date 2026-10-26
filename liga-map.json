@@ -2351,6 +2351,10 @@
   "path": "liga/niedersachsen/nbv-pokal-damen/",
   "history": []
  },
+ "54218": {
+  "path": "liga/niedersachsen/seniorenmeisterschaften-mue35/",
+  "history": []
+ },
  "54221": {
   "path": "liga/niedersachsen/seniorenmeisterschaften-wue35/",
   "history": []
@@ -6239,6 +6243,14 @@
   "path": "liga/niedersachsen/regionsliga-u8/",
   "history": []
  },
+ "56245": {
+  "path": "liga/hessen/ox12-rueckrunde-c/",
+  "history": []
+ },
+ "56246": {
+  "path": "liga/hessen/ox12-rueckrunde-d/",
+  "history": []
+ },
  "56249": {
   "path": "liga/nordrhein-westfalen/kreisliga-vorrunde-d-ne/",
   "history": []
@@ -6847,6 +6859,22 @@
   "path": "liga/saarland/bv-saar-pokal-herren-2026-2027/",
   "history": []
  },
+ "56542": {
+  "path": "liga/bundesligen/2-nbbl-einteilungsrunde-gruppe-1/",
+  "history": []
+ },
+ "56543": {
+  "path": "liga/bundesligen/2-nbbl-einteilungsrunde-gruppe-2/",
+  "history": []
+ },
+ "56544": {
+  "path": "liga/bundesligen/2-nbbl-einteilungsrunde-gruppe-3/",
+  "history": []
+ },
+ "56545": {
+  "path": "liga/bundesligen/2-nbbl-einteilungsrunde-gruppe-4/",
+  "history": []
+ },
  "56554": {
   "path": "liga/nordrhein-westfalen/test-ha-26-27/",
   "history": []
@@ -7127,6 +7155,14 @@
  },
  "56673": {
   "path": "liga/saarland/bv-saar-pokal-maennliche-u-16-2026-2027/",
+  "history": []
+ },
+ "56674": {
+  "path": "liga/hessen/lx12-rueckrunde-c/",
+  "history": []
+ },
+ "56676": {
+  "path": "liga/hessen/lx12-rueckrunde-d/",
   "history": []
  },
  "56686": {
