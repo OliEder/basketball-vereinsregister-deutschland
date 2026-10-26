@@ -6875,6 +6875,26 @@
   "path": "liga/bundesligen/2-nbbl-einteilungsrunde-gruppe-4/",
   "history": []
  },
+ "56546": {
+  "path": "liga/bundesligen/2-jbbl-einteilungsrunde-gruppe-1/",
+  "history": []
+ },
+ "56548": {
+  "path": "liga/bundesligen/2-jbbl-einteilungsrunde-gruppe-2/",
+  "history": []
+ },
+ "56549": {
+  "path": "liga/bundesligen/2-jbbl-einteilungsrunde-gruppe-3/",
+  "history": []
+ },
+ "56550": {
+  "path": "liga/bundesligen/2-jbbl-einteilungsrunde-gruppe-4/",
+  "history": []
+ },
+ "56552": {
+  "path": "liga/bundesligen/2-jbbl-einteilungsrunde-gruppe-6/",
+  "history": []
+ },
  "56554": {
   "path": "liga/nordrhein-westfalen/test-ha-26-27/",
   "history": []
@@ -7215,6 +7235,26 @@
  },
  "56701": {
   "path": "liga/bayern/bm-ue40-herren-endrunde/",
+  "history": []
+ },
+ "56703": {
+  "path": "liga/bundesligen/nbbl-ligapokal-finale/",
+  "history": []
+ },
+ "56706": {
+  "path": "liga/bundesligen/jbbl-ligapokal-finale/",
+  "history": []
+ },
+ "56709": {
+  "path": "liga/rheinland-pfalz/u12-mix-hauptrunde/",
+  "history": []
+ },
+ "56710": {
+  "path": "liga/rheinland-pfalz/u12-mix-platzierungsrunde-1/",
+  "history": []
+ },
+ "56711": {
+  "path": "liga/rheinland-pfalz/u12-mix-platzierungsrunde-2/",
   "history": []
  }
 }
