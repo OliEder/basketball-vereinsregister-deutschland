@@ -6288,8 +6288,10 @@
   "history": []
  },
  "56270": {
-  "path": "liga/hessen/mixed-u12-gruppe-2/",
-  "history": []
+  "path": "liga/hessen/u12-bezirksliga-gruppe-2/",
+  "history": [
+   "liga/hessen/mixed-u12-gruppe-2/"
+  ]
  },
  "56271": {
   "path": "liga/niedersachsen/regionspokal-herren-hannover/",
@@ -7255,6 +7257,10 @@
  },
  "56711": {
   "path": "liga/rheinland-pfalz/u12-mix-platzierungsrunde-2/",
+  "history": []
+ },
+ "56712": {
+  "path": "liga/sachsen/testliga-jugend/",
   "history": []
  }
 }
