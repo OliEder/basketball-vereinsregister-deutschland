@@ -1613,6 +1613,10 @@
   "path": "halle/rheinland-pfalz/koblenz/sporthalle-erbenstr/",
   "history": []
  },
+ "8041": {
+  "path": "halle/rheinland-pfalz/koblenz/grundschule-koblenz-luetzel/",
+  "history": []
+ },
  "8043": {
   "path": "halle/rheinland-pfalz/konz/schulzentrum-konz/",
   "history": []
@@ -3587,6 +3591,10 @@
  },
  "102250": {
   "path": "halle/nordrhein-westfalen/muenster/gymnasium-paulinum/",
+  "history": []
+ },
+ "102251": {
+  "path": "halle/nordrhein-westfalen/muenster/3-fach-halle-der-realschule-wolbeck/",
   "history": []
  },
  "102256": {
