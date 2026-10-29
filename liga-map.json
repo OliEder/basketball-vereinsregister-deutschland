@@ -6622,8 +6622,10 @@
   "history": []
  },
  "56434": {
-  "path": "liga/niedersachsen/stuetzpunktturnier-osnabrueck/",
-  "history": []
+  "path": "liga/niedersachsen/sichtungsturniere/",
+  "history": [
+   "liga/niedersachsen/stuetzpunktturnier-osnabrueck/"
+  ]
  },
  "56439": {
   "path": "liga/baden-wuerttemberg/bbw4-u14-weibl-landesliga-west/",
