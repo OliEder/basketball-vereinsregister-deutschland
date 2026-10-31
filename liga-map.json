@@ -5311,6 +5311,14 @@
   "path": "liga/berlin/herren-ue35-berliner-meisterschaft/",
   "history": []
  },
+ "55646": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-meisterschaft/",
+  "history": []
+ },
+ "55647": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-platzierung1/",
+  "history": []
+ },
  "55648": {
   "path": "liga/baden-wuerttemberg/bbw-u14m-jol-gruppe-b/",
   "history": []
@@ -5325,6 +5333,10 @@
  },
  "55651": {
   "path": "liga/baden-wuerttemberg/bbw-u16m-jol-gruppe-b/",
+  "history": []
+ },
+ "55653": {
+  "path": "liga/rheinland-pfalz/u14-maennlich-trier-platzierung2/",
   "history": []
  },
  "55655": {
