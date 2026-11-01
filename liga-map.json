@@ -4331,6 +4331,10 @@
   "path": "liga/rheinland-pfalz/u18w-rheinlandliga/",
   "history": []
  },
+ "55179": {
+  "path": "liga/rheinland-pfalz/u12mix-hauptrunde-kreis-koblenz/",
+  "history": []
+ },
  "55180": {
   "path": "liga/rheinland-pfalz/u12w-kreis-koblenz/",
   "history": []
@@ -4345,6 +4349,14 @@
  },
  "55183": {
   "path": "liga/rheinland-pfalz/u12mix-vorrunde-kreis-koblenz-gr-2/",
+  "history": []
+ },
+ "55184": {
+  "path": "liga/rheinland-pfalz/u12mix-platzierungsrunde-7-12-kreis-koblenz/",
+  "history": []
+ },
+ "55185": {
+  "path": "liga/rheinland-pfalz/u12mix-platzierungsrunde-13-16-kreis-koblenz/",
   "history": []
  },
  "55188": {
@@ -7195,6 +7207,78 @@
  },
  "56646": {
   "path": "liga/saarland/bv-saar-pokal-mixed-u-12-2026-2027/",
+  "history": []
+ },
+ "56650": {
+  "path": "liga/bundesligen/nbbl-a-nord/",
+  "history": []
+ },
+ "56652": {
+  "path": "liga/bundesligen/nbbl-a-suedwest/",
+  "history": []
+ },
+ "56653": {
+  "path": "liga/bundesligen/nbbl-a-west/",
+  "history": []
+ },
+ "56655": {
+  "path": "liga/bundesligen/nbbl-a-sued/",
+  "history": []
+ },
+ "56656": {
+  "path": "liga/bundesligen/nbbl-b-nord/",
+  "history": []
+ },
+ "56657": {
+  "path": "liga/bundesligen/nbbl-b-ost/",
+  "history": []
+ },
+ "56658": {
+  "path": "liga/bundesligen/nbbl-b-west/",
+  "history": []
+ },
+ "56659": {
+  "path": "liga/bundesligen/nbbl-b-sued/",
+  "history": []
+ },
+ "56660": {
+  "path": "liga/bundesligen/jbbl-a-nord/",
+  "history": []
+ },
+ "56661": {
+  "path": "liga/bundesligen/jbbl-a-mitte/",
+  "history": []
+ },
+ "56662": {
+  "path": "liga/bundesligen/jbbl-b-ost/",
+  "history": []
+ },
+ "56663": {
+  "path": "liga/bundesligen/jbbl-a-west/",
+  "history": []
+ },
+ "56664": {
+  "path": "liga/bundesligen/jbbl-a-sued/",
+  "history": []
+ },
+ "56665": {
+  "path": "liga/bundesligen/jbbl-b-suedost/",
+  "history": []
+ },
+ "56666": {
+  "path": "liga/bundesligen/jbbl-b-suedwest/",
+  "history": []
+ },
+ "56667": {
+  "path": "liga/bundesligen/jbbl-b-nord/",
+  "history": []
+ },
+ "56668": {
+  "path": "liga/bundesligen/jbbl-b-west/",
+  "history": []
+ },
+ "56669": {
+  "path": "liga/bundesligen/jbbl-b-sued/",
   "history": []
  },
  "56673": {
