@@ -3421,6 +3421,10 @@
   "path": "halle/nordrhein-westfalen/dormagen/tsv-bayer-dormagen-halle-1/",
   "history": []
  },
+ "102151": {
+  "path": "halle/nordrhein-westfalen/soest/schulzentrum-soest/",
+  "history": []
+ },
  "102153": {
   "path": "halle/nordrhein-westfalen/aachen/einhard-gymnasium-halle-2/",
   "history": []
@@ -4783,6 +4787,10 @@
  },
  "102949": {
   "path": "halle/nordrhein-westfalen/koeln/stadtgymnasium-porz-halle-2/",
+  "history": []
+ },
+ "102950": {
+  "path": "halle/nordrhein-westfalen/koeln/stadtgymnasium-porz-halle-1/",
   "history": []
  },
  "102951": {
@@ -9147,6 +9155,10 @@
   "path": "halle/hamburg/hamburg/grundschule-iserbarg/",
   "history": []
  },
+ "108251": {
+  "path": "halle/niedersachsen/seesen/sporthalle-am-schildberg/",
+  "history": []
+ },
  "108252": {
   "path": "halle/baden-wuerttemberg/stuttgart/sporthalle-waldau/",
   "history": []
@@ -10657,6 +10669,10 @@
  },
  "108999": {
   "path": "halle/nordrhein-westfalen/meckenheim/sporthalle-der-kgs-merl/",
+  "history": []
+ },
+ "109000": {
+  "path": "halle/weitere/bannewitz/oberschule-am-marienschacht-bannewitz/",
   "history": []
  },
  "109001": {
