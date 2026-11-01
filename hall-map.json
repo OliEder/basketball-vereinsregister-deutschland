@@ -920,8 +920,10 @@
   "history": []
  },
  "2037": {
-  "path": "halle/weitere/oberstdorf/gertrud-von-le-fort-gymnasium/",
-  "history": []
+  "path": "halle/bayern/oberstdorf/gertrud-von-le-fort-gymnasium/",
+  "history": [
+   "halle/weitere/oberstdorf/gertrud-von-le-fort-gymnasium/"
+  ]
  },
  "2039": {
   "path": "halle/bayern/donauwoerth/stauferpark-halle/",
@@ -6544,8 +6546,10 @@
   "history": []
  },
  "106294": {
-  "path": "halle/bundesweit/gruenheide-mark-ot-kienbaum/bundesleistungszentrum-kienbaum/",
-  "history": []
+  "path": "halle/berlin/gruenheide-mark-ot-kienbaum/bundesleistungszentrum-kienbaum/",
+  "history": [
+   "halle/bundesweit/gruenheide-mark-ot-kienbaum/bundesleistungszentrum-kienbaum/"
+  ]
  },
  "106295": {
   "path": "halle/bundesweit/bremen/oevb-arena-106295/",
@@ -6762,8 +6766,10 @@
   "history": []
  },
  "106461": {
-  "path": "halle/weitere/braunschweig/grundschule-lamme/",
-  "history": []
+  "path": "halle/niedersachsen/braunschweig/grundschule-lamme/",
+  "history": [
+   "halle/weitere/braunschweig/grundschule-lamme/"
+  ]
  },
  "106463": {
   "path": "halle/nordrhein-westfalen/moers/sporthalle-der-geschwister-scholl-gesamtschule/",
@@ -6972,8 +6978,10 @@
   "history": []
  },
  "106613": {
-  "path": "halle/weitere/berlin/max-schmeling-nebenhalle-a/",
-  "history": []
+  "path": "halle/berlin/berlin/max-schmeling-nebenhalle-a/",
+  "history": [
+   "halle/weitere/berlin/max-schmeling-nebenhalle-a/"
+  ]
  },
  "106630": {
   "path": "halle/bayern/hoehenkirchen-siegertsbrunn/gymnasium-hoehenkirchen-siegertsbrunn/",
@@ -7956,8 +7964,10 @@
   "history": []
  },
  "107392": {
-  "path": "halle/weitere/postbauer-heng/erich-kaestner-schule/",
-  "history": []
+  "path": "halle/berlin/postbauer-heng/erich-kaestner-schule/",
+  "history": [
+   "halle/weitere/postbauer-heng/erich-kaestner-schule/"
+  ]
  },
  "107396": {
   "path": "halle/baden-wuerttemberg/nuertingen/neckarrealsporthalle/",
@@ -10040,8 +10050,10 @@
   "history": []
  },
  "108712": {
-  "path": "halle/weitere/ostseebad-wustrow/fischlandhalle/",
-  "history": []
+  "path": "halle/mecklenburg-vorpommern/ostseebad-wustrow/fischlandhalle/",
+  "history": [
+   "halle/weitere/ostseebad-wustrow/fischlandhalle/"
+  ]
  },
  "108715": {
   "path": "halle/hamburg/quickborn/freie-gemeinschaftsschule-quickborn/",
@@ -10672,8 +10684,10 @@
   "history": []
  },
  "109000": {
-  "path": "halle/weitere/bannewitz/oberschule-am-marienschacht-bannewitz/",
-  "history": []
+  "path": "halle/sachsen/bannewitz/oberschule-am-marienschacht-bannewitz/",
+  "history": [
+   "halle/weitere/bannewitz/oberschule-am-marienschacht-bannewitz/"
+  ]
  },
  "109001": {
   "path": "halle/bayern/muenchen/grandlschule/",

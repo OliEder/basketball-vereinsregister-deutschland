@@ -913,6 +913,10 @@
   "path": "baden-wuerttemberg/stuttgart/sportvg-feuerbach/",
   "history": []
  },
+ "540": {
+  "path": "berlin/weitere/deutscher-basketball-bund-be/",
+  "history": []
+ },
  "541": {
   "path": "bayern/erlangen/tb-1888-erlangen/",
   "history": []
@@ -2155,6 +2159,10 @@
   "path": "bayern/marktheidenfeld/tv-marktheidenfeld/",
   "history": []
  },
+ "1050": {
+  "path": "sachsen-anhalt/weitere/deutscher-basketball-bund-st/",
+  "history": []
+ },
  "1052": {
   "path": "sachsen/bischofswerda/deutscher-basketball-bund-sn/",
   "history": []
@@ -2707,6 +2715,10 @@
  },
  "1281": {
   "path": "berlin/berlin/alba-berlin-basketballteam/",
+  "history": []
+ },
+ "1282": {
+  "path": "bayern/weitere/tsv-oberstdorf/",
   "history": []
  },
  "1283": {
@@ -5841,6 +5853,10 @@
   "path": "hessen/lich/lich-basketball/",
   "history": []
  },
+ "4597": {
+  "path": "mecklenburg-vorpommern/weitere/tsv-wustrow/",
+  "history": []
+ },
  "4600": {
   "path": "berlin/berlin/berliner-tsc/",
   "history": []
@@ -6977,6 +6993,10 @@
   "path": "sachsen-anhalt/quedlinburg/bg-gm-panthers-qlb-hbs/",
   "history": []
  },
+ "5185": {
+  "path": "niedersachsen/weitere/tsv-germania-lamme/",
+  "history": []
+ },
  "5186": {
   "path": "niedersachsen/seelze/sg-seelze-ahlem/",
   "history": []
@@ -7019,6 +7039,10 @@
  },
  "5201": {
   "path": "bundesweit/wuerzburg/vr-bank-wuerzburg-baskets-akademie-5201/",
+  "history": []
+ },
+ "5202": {
+  "path": "sachsen/weitere/sv-bannewitz/",
   "history": []
  },
  "5203": {
@@ -7401,6 +7425,10 @@
   "path": "bayern/weitere/djk-nuernberg-eibach/",
   "history": []
  },
+ "5350": {
+  "path": "bayern/weitere/djk-laibstadt/",
+  "history": []
+ },
  "5351": {
   "path": "baden-wuerttemberg/weitere/vfr-umkirch-1923/",
   "history": []
@@ -7481,6 +7509,10 @@
   "path": "berlin/weitere/turn-und-sportclub-wannsee-1896/",
   "history": []
  },
+ "5385": {
+  "path": "bayern/weitere/sv-altenstadt-a-d-waldnaab-1949/",
+  "history": []
+ },
  "5386": {
   "path": "nordrhein-westfalen/weitere/rollstuhlbasketballclub-koeln-99ers/",
   "history": []
@@ -7491,6 +7523,10 @@
  },
  "5390": {
   "path": "bundesweit/weitere/scala-hamburg/",
+  "history": []
+ },
+ "5391": {
+  "path": "bayern/weitere/djk-oberasbach/",
   "history": []
  },
  "5392": {
@@ -7507,6 +7543,10 @@
  },
  "5396": {
   "path": "baden-wuerttemberg/weitere/basketball-club-albstadt/",
+  "history": []
+ },
+ "5397": {
+  "path": "baden-wuerttemberg/weitere/sg-05-wiesenbach/",
   "history": []
  },
  "5400": {
@@ -7551,6 +7591,10 @@
  },
  "5416": {
   "path": "baden-wuerttemberg/weitere/sg-haiterbach-nagold/",
+  "history": []
+ },
+ "5421": {
+  "path": "sachsen/weitere/oberlausitzer-sc-loebau/",
   "history": []
  }
 }
