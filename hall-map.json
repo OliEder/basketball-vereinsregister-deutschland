@@ -823,6 +823,10 @@
   "path": "halle/baden-wuerttemberg/sigmaringen/halle-hohenzollerngymnasium/",
   "history": []
  },
+ "1240": {
+  "path": "halle/baden-wuerttemberg/sigmaringen/kreissporthalle-sigmaringen/",
+  "history": []
+ },
  "1243": {
   "path": "halle/baden-wuerttemberg/singen/kreissporthalle-singen/",
   "history": []
@@ -12035,6 +12039,10 @@
  },
  "109532": {
   "path": "halle/hessen/marburg/sporthalle-steinmuehle/",
+  "history": []
+ },
+ "109543": {
+  "path": "halle/sachsen/chemnitz/georgius-agricola-gymnasium-sporthalle/",
   "history": []
  }
 }
