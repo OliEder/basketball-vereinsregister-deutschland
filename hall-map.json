@@ -8117,6 +8117,10 @@
   "path": "halle/sachsen/dresden/76-grundschule/",
   "history": []
  },
+ "107490": {
+  "path": "halle/bundesweit/nersingen/bbu-trainingszentrum-by/",
+  "history": []
+ },
  "107493": {
   "path": "halle/niedersachsen/neustadt/sporthalle-der-leine-schule/",
   "history": []
@@ -10475,6 +10479,10 @@
   "path": "halle/nordrhein-westfalen/soest/schulzentrum-soest-einfach-sh/",
   "history": []
  },
+ "108911": {
+  "path": "halle/nordrhein-westfalen/wuppertal/sporthalle-nevigeser-strasse/",
+  "history": []
+ },
  "108912": {
   "path": "halle/nordrhein-westfalen/hagen/sporthalle-altenhagen-querfeld-1/",
   "history": []
@@ -11728,9 +11736,9 @@
   "history": []
  },
  "109432": {
-  "path": "halle/hamburg/hamburg/margit-zinke-halle/",
+  "path": "halle/bundesweit/hamburg/margit-zinke-halle/",
   "history": [
-   "halle/bundesweit/hamburg/margit-zinke-halle/"
+   "halle/hamburg/hamburg/margit-zinke-halle/"
   ]
  },
  "109434": {
