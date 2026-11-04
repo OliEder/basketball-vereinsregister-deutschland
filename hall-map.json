@@ -10921,6 +10921,10 @@
   "path": "halle/bundesweit/koeln/motorworld-koeln/",
   "history": []
  },
+ "109113": {
+  "path": "halle/baden-wuerttemberg/backnang/murrtal-arena-backnang/",
+  "history": []
+ },
  "109115": {
   "path": "halle/schleswig-holstein/niebuell/gemeinschaftsschule-halle-2/",
   "history": []
@@ -12055,6 +12059,10 @@
  },
  "109543": {
   "path": "halle/sachsen/chemnitz/georgius-agricola-gymnasium-sporthalle/",
+  "history": []
+ },
+ "109546": {
+  "path": "halle/hessen/rodgau-juegesheim/sporthalle-lange-strasse/",
   "history": []
  }
 }
