@@ -2235,6 +2235,10 @@
   "path": "halle/niedersachsen/bad-rothenfelde/sporthalle-bad-rothenfelde/",
   "history": []
  },
+ "100275": {
+  "path": "halle/niedersachsen/wallenhorst-rulle/wittekindhalle/",
+  "history": []
+ },
  "100276": {
   "path": "halle/niedersachsen/varel/lothar-meyer-gymnasium/",
   "history": []
@@ -11993,6 +11997,10 @@
   "path": "halle/thueringen/jena/talschule/",
   "history": []
  },
+ "109509": {
+  "path": "halle/nordrhein-westfalen/burscheid/sporthalle-im-hagen/",
+  "history": []
+ },
  "109510": {
   "path": "halle/niedersachsen/braunschweig/sporthalle-grundschule-heidberg/",
   "history": []
@@ -12049,6 +12057,10 @@
   "path": "halle/brandenburg/strausberg/theodor-fontane-gymnasium/",
   "history": []
  },
+ "109526": {
+  "path": "halle/brandenburg/hoppegarten-ot-hoenow/asg-campus-hoppegarten/",
+  "history": []
+ },
  "109527": {
   "path": "halle/hessen/karben/sporthalle-berufsbildungswerk/",
   "history": []
@@ -12079,6 +12091,10 @@
  },
  "109549": {
   "path": "halle/nordrhein-westfalen/duesseldorf/sh-goethe-gymnasium/",
+  "history": []
+ },
+ "109551": {
+  "path": "halle/nordrhein-westfalen/wesseling/sporthalle-der-johannes-gutenberg-schule/",
   "history": []
  }
 }
