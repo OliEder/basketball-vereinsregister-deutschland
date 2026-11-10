@@ -1939,6 +1939,10 @@
   "path": "halle/baden-wuerttemberg/waiblingen/sporthalle-der-staufer-hauptschule/",
   "history": []
  },
+ "100028": {
+  "path": "halle/baden-wuerttemberg/vaihingen-enz/sporthalle-stromberg-gymnasium/",
+  "history": []
+ },
  "100034": {
   "path": "halle/rheinland-pfalz/wittlich/clara-viebig-realschule-plus/",
   "history": []
@@ -4017,6 +4021,10 @@
  },
  "102462": {
   "path": "halle/nordrhein-westfalen/duesseldorf/sporthalle-gymnasium-koblenzer-strasse/",
+  "history": []
+ },
+ "102465": {
+  "path": "halle/nordrhein-westfalen/wuppertal/sporthalle-vohwinkel/",
   "history": []
  },
  "102467": {
@@ -7445,6 +7453,10 @@
  },
  "106962": {
   "path": "halle/hessen/frankfurt-sm-main/philipp-holzmann-schule/",
+  "history": []
+ },
+ "106964": {
+  "path": "halle/bayern/coburg/angerhalle/",
   "history": []
  },
  "106968": {
@@ -11461,6 +11473,10 @@
   "path": "halle/sachsen/limbach-oberfrohna-ot-pleissa/turnhalle-pleissa/",
   "history": []
  },
+ "109297": {
+  "path": "halle/nordrhein-westfalen/bielefeld/th-grundschule-am-waldschloesschen/",
+  "history": []
+ },
  "109298": {
   "path": "halle/bayern/regensburg/werner-von-siemens-gymnasium-regensburg/",
   "history": []
@@ -12115,6 +12131,10 @@
  },
  "109551": {
   "path": "halle/nordrhein-westfalen/wesseling/sporthalle-der-johannes-gutenberg-schule/",
+  "history": []
+ },
+ "109555": {
+  "path": "halle/thueringen/jena/sportgymnasium-nebenhalle/",
   "history": []
  }
 }
