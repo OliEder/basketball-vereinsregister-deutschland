@@ -977,6 +977,10 @@
   "path": "halle/bundesweit/bamberg/graf-stauffenberg-schule/",
   "history": []
  },
+ "2062": {
+  "path": "halle/bayern/bamberg/kaiser-heinrich-gymnasium-h1/",
+  "history": []
+ },
  "2066": {
   "path": "halle/bayern/baunach/verbandsschule-baunach/",
   "history": []
@@ -1189,6 +1193,10 @@
  },
  "2232": {
   "path": "halle/bayern/marktheidenfeld/hans-wilhelm-renkhoff-halle/",
+  "history": []
+ },
+ "2235": {
+  "path": "halle/bayern/erlenbach-b-marktheidenfeld/grundschule-erlenbach/",
   "history": []
  },
  "2237": {
@@ -7175,6 +7183,10 @@
   "path": "halle/bundesweit/giessen/sporthalle-ost-106773/",
   "history": []
  },
+ "106778": {
+  "path": "halle/berlin/berlin/onkel-tom/",
+  "history": []
+ },
  "106781": {
   "path": "halle/bayern/dorfen/hauptschule-dorfen/",
   "history": []
@@ -9387,6 +9399,10 @@
  },
  "108328": {
   "path": "halle/mecklenburg-vorpommern/rostock/sporthalle-freie-schule-rostock-108328/",
+  "history": []
+ },
+ "108329": {
+  "path": "halle/nordrhein-westfalen/bruehl/sh-clemens-august-forum/",
   "history": []
  },
  "108330": {
