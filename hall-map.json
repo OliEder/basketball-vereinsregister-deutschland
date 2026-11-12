@@ -3351,6 +3351,10 @@
   "path": "halle/nordrhein-westfalen/dortmund/sh-der-gesamtschule-gartenstadt/",
   "history": []
  },
+ "102082": {
+  "path": "halle/nordrhein-westfalen/meckenheim/dreifachhalle-schulzentrum-neue-mitte-drittelfeld/",
+  "history": []
+ },
  "102089": {
   "path": "halle/nordrhein-westfalen/bad-driburg/dreifachturnhalle/",
   "history": []
@@ -5517,6 +5521,10 @@
   "path": "halle/bayern/fuerth/hardenberg-gymnasium/",
   "history": []
  },
+ "105376": {
+  "path": "halle/weitere/st-ingbert/leibnizgymnasium/",
+  "history": []
+ },
  "105384": {
   "path": "halle/baden-wuerttemberg/stuttgart/mtv-halle-kraeherwald/",
   "history": []
@@ -6987,6 +6995,10 @@
  },
  "106589": {
   "path": "halle/thueringen/nordhausen/sporthalle-der-fachhochschule-nordhausen/",
+  "history": []
+ },
+ "106593": {
+  "path": "halle/weitere/saarlouis/sporthalle-am-max-planck-gymnasium/",
   "history": []
  },
  "106595": {
@@ -10871,6 +10883,10 @@
  },
  "109045": {
   "path": "halle/hamburg/hamburg/schule-baakenhafen/",
+  "history": []
+ },
+ "109048": {
+  "path": "halle/weitere/voelklingen/hermann-neuberger-halle-feld-3/",
   "history": []
  },
  "109049": {
