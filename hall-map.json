@@ -5641,6 +5641,10 @@
   "path": "halle/bayern/landshut/sportzentrum-west-halle-4-5/",
   "history": []
  },
+ "105461": {
+  "path": "halle/weitere/lebach/keplerhalle/",
+  "history": []
+ },
  "105474": {
   "path": "halle/baden-wuerttemberg/heidenheim/landkreishalle/",
   "history": []
@@ -10885,6 +10889,10 @@
   "path": "halle/hamburg/hamburg/schule-baakenhafen/",
   "history": []
  },
+ "109047": {
+  "path": "halle/weitere/voelklingen/hermann-neuberger-halle-feld-1/",
+  "history": []
+ },
  "109048": {
   "path": "halle/weitere/voelklingen/hermann-neuberger-halle-feld-3/",
   "history": []
@@ -11287,6 +11295,10 @@
  },
  "109218": {
   "path": "halle/nordrhein-westfalen/duesseldorf/sporthalle-thomas-edison-realschule-querfeld-links/",
+  "history": []
+ },
+ "109219": {
+  "path": "halle/nordrhein-westfalen/duesseldorf/turnhalle-regenbogen-schule/",
   "history": []
  },
  "109221": {
@@ -12167,6 +12179,10 @@
  },
  "109555": {
   "path": "halle/thueringen/jena/sportgymnasium-nebenhalle/",
+  "history": []
+ },
+ "109557": {
+  "path": "halle/weitere/saarbruecken/rastbachtalhalle/",
   "history": []
  }
 }
