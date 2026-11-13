@@ -7394,16 +7394,22 @@
   "history": []
  },
  "56709": {
-  "path": "liga/rheinland-pfalz/u12-mix-hauptrunde/",
-  "history": []
+  "path": "liga/rheinland-pfalz/u12-mix-trier-hauptrunde/",
+  "history": [
+   "liga/rheinland-pfalz/u12-mix-hauptrunde/"
+  ]
  },
  "56710": {
-  "path": "liga/rheinland-pfalz/u12-mix-platzierungsrunde-1/",
-  "history": []
+  "path": "liga/rheinland-pfalz/u12-mix-trier-platzierungsrunde-1/",
+  "history": [
+   "liga/rheinland-pfalz/u12-mix-platzierungsrunde-1/"
+  ]
  },
  "56711": {
-  "path": "liga/rheinland-pfalz/u12-mix-platzierungsrunde-2/",
-  "history": []
+  "path": "liga/rheinland-pfalz/u12-mix-trier-platzierungsrunde-2/",
+  "history": [
+   "liga/rheinland-pfalz/u12-mix-platzierungsrunde-2/"
+  ]
  },
  "56712": {
   "path": "liga/sachsen/testliga-jugend/",
