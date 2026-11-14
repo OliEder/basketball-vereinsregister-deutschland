@@ -6659,6 +6659,10 @@
   "path": "halle/nordrhein-westfalen/bielefeld/2-fach-sporthalle-ubbedissen-zentralfeld/",
   "history": []
  },
+ "106344": {
+  "path": "halle/nordrhein-westfalen/bielefeld/2-fach-sporthalle-ubbedissen-halbfeld/",
+  "history": []
+ },
  "106347": {
   "path": "halle/bayern/hoechstadt-an-der-aisch/anton-woelker-volksschule/",
   "history": []
@@ -6759,6 +6763,10 @@
  },
  "106415": {
   "path": "halle/thueringen/weimar/innenstadtsporthalle-ish/",
+  "history": []
+ },
+ "106419": {
+  "path": "halle/nordrhein-westfalen/paderborn/sporthalle-an-der-almeschule/",
   "history": []
  },
  "106423": {
@@ -8827,6 +8835,10 @@
  },
  "107997": {
   "path": "halle/berlin/berlin/sporthalle-schoeneberg/",
+  "history": []
+ },
+ "108002": {
+  "path": "halle/berlin/berlin/swinemuender-strasse/",
   "history": []
  },
  "108003": {
@@ -12147,6 +12159,10 @@
  },
  "109530": {
   "path": "halle/hessen/bad-vilbel/sporthalle-quellenschule/",
+  "history": []
+ },
+ "109531": {
+  "path": "halle/bremen/bremerhaven/sporthalle-brookstrasse/",
   "history": []
  },
  "109532": {
