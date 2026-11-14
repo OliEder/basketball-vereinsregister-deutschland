@@ -7435,6 +7435,10 @@
   "path": "liga/hamburg/jugend-m14-l1/",
   "history": []
  },
+ "56729": {
+  "path": "liga/nordrhein-westfalen/freundschaftsspiele/",
+  "history": []
+ },
  "56730": {
   "path": "liga/saarland/bv-saar-pokal-weibliche-u-13-2026-2027/",
   "history": []
@@ -7481,6 +7485,14 @@
  },
  "56743": {
   "path": "liga/saarland/jtfo-wu14-wk-iv/",
+  "history": []
+ },
+ "56744": {
+  "path": "liga/bayern/opf-bezirkspokal-herren-26-27-2/",
+  "history": []
+ },
+ "56745": {
+  "path": "liga/nordrhein-westfalen/u10-turniere-kreis-aachen/",
   "history": []
  }
 }
