@@ -75,6 +75,14 @@
   "path": "liga/bayern/bayernliga-damen-vorbereitung/",
   "history": []
  },
+ "52537": {
+  "path": "liga/bayern/bayernpokal-2027-herren/",
+  "history": []
+ },
+ "52538": {
+  "path": "liga/bayern/bayernpokal-2027-damen/",
+  "history": []
+ },
  "52539": {
   "path": "liga/regionalliga-suedwest/regionalliga-baden-wuerttemberg-frauen/",
   "history": []
@@ -7319,6 +7327,26 @@
  },
  "56676": {
   "path": "liga/hessen/lx12-rueckrunde-d/",
+  "history": []
+ },
+ "56677": {
+  "path": "liga/bundesligen/wnbl-hauptrunde-nord/",
+  "history": []
+ },
+ "56678": {
+  "path": "liga/bundesligen/wnbl-hauptrunde-sued/",
+  "history": []
+ },
+ "56679": {
+  "path": "liga/bundesligen/wnbl-relegation-nord/",
+  "history": []
+ },
+ "56680": {
+  "path": "liga/bundesligen/wnbl-relegation-sued/",
+  "history": []
+ },
+ "56681": {
+  "path": "liga/bundesligen/wnbl-play-off-runde-1/",
   "history": []
  },
  "56686": {
