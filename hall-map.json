@@ -7647,6 +7647,10 @@
   "path": "halle/bayern/miesbach/mittelschulturnhalle/",
   "history": []
  },
+ "107065": {
+  "path": "halle/baden-wuerttemberg/bad-mergentheim/kopernikus-realschulhalle/",
+  "history": []
+ },
  "107067": {
   "path": "halle/niedersachsen/zetel/sporthalle-igs-friesland-sued/",
   "history": []
@@ -11848,9 +11852,9 @@
   "history": []
  },
  "109432": {
-  "path": "halle/bundesweit/hamburg/margit-zinke-halle/",
+  "path": "halle/hamburg/hamburg/margit-zinke-halle/",
   "history": [
-   "halle/hamburg/hamburg/margit-zinke-halle/"
+   "halle/bundesweit/hamburg/margit-zinke-halle/"
   ]
  },
  "109434": {
@@ -12231,6 +12235,10 @@
  },
  "109559": {
   "path": "halle/saarland/theley/sport-und-kulturhalle-theley/",
+  "history": []
+ },
+ "109560": {
+  "path": "halle/hessen/darmstadt/ludwigshoeh-halle/",
   "history": []
  }
 }
