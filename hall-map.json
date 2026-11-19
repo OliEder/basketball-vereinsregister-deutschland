@@ -5175,6 +5175,10 @@
   "path": "halle/nordrhein-westfalen/koeln/turnhalle-der-schule-diesterwegstrasse/",
   "history": []
  },
+ "103357": {
+  "path": "halle/nordrhein-westfalen/dormagen/turnhalle-leibniz-gymnasium/",
+  "history": []
+ },
  "103363": {
   "path": "halle/nordrhein-westfalen/bonn/th-der-grundschule-heideweg/",
   "history": []
@@ -7709,6 +7713,10 @@
  },
  "107108": {
   "path": "halle/baden-wuerttemberg/karlsbad/jahnhalle/",
+  "history": []
+ },
+ "107111": {
+  "path": "halle/bayern/penzberg/neue-sporthalle-wellenbad/",
   "history": []
  },
  "107117": {

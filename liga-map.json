@@ -2380,12 +2380,16 @@
   "history": []
  },
  "54212": {
-  "path": "liga/niedersachsen/nbv-pokal-herren/",
-  "history": []
+  "path": "liga/niedersachsen/nbbv-pokal-herren/",
+  "history": [
+   "liga/niedersachsen/nbv-pokal-herren/"
+  ]
  },
  "54213": {
-  "path": "liga/niedersachsen/nbv-pokal-damen/",
-  "history": []
+  "path": "liga/niedersachsen/nbbv-pokal-damen/",
+  "history": [
+   "liga/niedersachsen/nbv-pokal-damen/"
+  ]
  },
  "54216": {
   "path": "liga/niedersachsen/seniorenmeisterschaften-mue40/",
@@ -6313,6 +6317,10 @@
  },
  "56238": {
   "path": "liga/niedersachsen/regionsliga-u8/",
+  "history": []
+ },
+ "56241": {
+  "path": "liga/hessen/hessenmeisterschaft-mue40/",
   "history": []
  },
  "56244": {
