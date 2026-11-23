@@ -5040,44 +5040,62 @@
   "history": []
  },
  "55480": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-a/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u10o-dne-w-gr-a/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-a/"
+  ]
  },
  "55481": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-b/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u10o-dne-w-gr-b/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u10o-dne-w-gr-b/"
+  ]
  },
  "55482": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-a/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u12o-dne-gr-a/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-a/"
+  ]
  },
  "55483": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-b/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u12o-dne-gr-b/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u12o-dne-gr-b/"
+  ]
  },
  "55484": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-a/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u14o-dne-gr-a/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-a/"
+  ]
  },
  "55485": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-b/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u14o-dne-gr-b/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-b/"
+  ]
  },
  "55487": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-c/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u14o-dne-gr-c/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u14o-dne-gr-c/"
+  ]
  },
  "55489": {
   "path": "liga/baden-wuerttemberg/bbw4-kreisliga-mitte/",
   "history": []
  },
  "55490": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-a/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u16m-dne-w-gr-a/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-a/"
+  ]
  },
  "55491": {
-  "path": "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-b/",
-  "history": []
+  "path": "liga/nordrhein-westfalen/vorrunde-kreisliga-u16m-dne-w-gr-b/",
+  "history": [
+   "liga/nordrhein-westfalen/kreisliga-u16m-dne-w-gr-b/"
+  ]
  },
  "55495": {
   "path": "liga/nordrhein-westfalen/kreisliga-u18m-dne-wuppertal/",
@@ -7553,6 +7571,38 @@
  },
  "56747": {
   "path": "liga/berlin/testliga/",
+  "history": []
+ },
+ "56749": {
+  "path": "liga/regionalliga-west/1-kreisliga-u16m-dne-w/",
+  "history": []
+ },
+ "56750": {
+  "path": "liga/regionalliga-west/1-kreisliga-u14o-dne-w/",
+  "history": []
+ },
+ "56752": {
+  "path": "liga/regionalliga-west/1-kreisliga-u12o-dne/",
+  "history": []
+ },
+ "56753": {
+  "path": "liga/regionalliga-west/2-kreisliga-u12o-dne/",
+  "history": []
+ },
+ "56754": {
+  "path": "liga/regionalliga-west/1-kreisliga-u10o-dne-w/",
+  "history": []
+ },
+ "56755": {
+  "path": "liga/regionalliga-west/2-kreisliga-u10o-dne/",
+  "history": []
+ },
+ "56756": {
+  "path": "liga/regionalliga-west/2-kreisliga-u14o-dne-w/",
+  "history": []
+ },
+ "56757": {
+  "path": "liga/mecklenburg-vorpommern/3-x-3-vereinsmeisterschaft/",
   "history": []
  }
 }
