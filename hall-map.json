@@ -2919,6 +2919,10 @@
   "path": "halle/baden-wuerttemberg/balingen/kreissporthalle/",
   "history": []
  },
+ "100909": {
+  "path": "halle/bayern/peissenberg/glueck-auf-halle/",
+  "history": []
+ },
  "100917": {
   "path": "halle/bayern/bad-toelz/flintkaserne-sportpark/",
   "history": []
@@ -3305,6 +3309,10 @@
  },
  "102051": {
   "path": "halle/nordrhein-westfalen/drolshagen/sporthalle-am-herrnscheid/",
+  "history": []
+ },
+ "102054": {
+  "path": "halle/nordrhein-westfalen/wuerselen/sporthalle-des-heilig-geist-gymnasiums/",
   "history": []
  },
  "102055": {
