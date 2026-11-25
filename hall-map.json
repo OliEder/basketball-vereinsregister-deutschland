@@ -3932,8 +3932,10 @@
   "history": []
  },
  "102397": {
-  "path": "halle/nordrhein-westfalen/koeln/gesamtschule-rodenkirchen/",
-  "history": []
+  "path": "halle/weitere/koeln/gesamtschule-rodenkirchen/",
+  "history": [
+   "halle/nordrhein-westfalen/koeln/gesamtschule-rodenkirchen/"
+  ]
  },
  "102399": {
   "path": "halle/nordrhein-westfalen/hagen/sh-wiesenstrasse/",
