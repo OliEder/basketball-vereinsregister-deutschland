@@ -4489,6 +4489,10 @@
   "path": "halle/nordrhein-westfalen/plettenberg/neue-dreifachhalle-boeddinghausen/",
   "history": []
  },
+ "102726": {
+  "path": "halle/nordrhein-westfalen/detmold/sporthalle-des-felix-fechenbach-berufskollegs/",
+  "history": []
+ },
  "102727": {
   "path": "halle/nordrhein-westfalen/meerbusch/sporthalle-2-meerbusch-gymnasium/",
   "history": []
@@ -9357,6 +9361,10 @@
  },
  "108277": {
   "path": "halle/hessen/langgoens/karl-zeiss-kleine-sporthalle/",
+  "history": []
+ },
+ "108280": {
+  "path": "halle/hessen/kassel/task-halle-frueher-uni-halle/",
   "history": []
  },
  "108281": {
