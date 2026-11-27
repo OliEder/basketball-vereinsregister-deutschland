@@ -935,6 +935,10 @@
   "path": "liga/hamburg/herren-kreisliga-c/",
   "history": []
  },
+ "53495": {
+  "path": "liga/hamburg/qualis-m20/",
+  "history": []
+ },
  "53496": {
   "path": "liga/hamburg/jugend-m18-l/",
   "history": []
@@ -957,6 +961,10 @@
  },
  "53501": {
   "path": "liga/hamburg/jugend-w14-l/",
+  "history": []
+ },
+ "53502": {
+  "path": "liga/hamburg/qualis-w20/",
   "history": []
  },
  "53509": {
@@ -7627,6 +7635,14 @@
  },
  "56757": {
   "path": "liga/mecklenburg-vorpommern/3-x-3-vereinsmeisterschaft/",
+  "history": []
+ },
+ "56795": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-aufstiegsrunde/",
+  "history": []
+ },
+ "56796": {
+  "path": "liga/nordrhein-westfalen/2-kreisliga-herren-platzierungsrunde/",
   "history": []
  }
 }
