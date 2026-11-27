@@ -179,6 +179,10 @@
   "path": "halle/niedersachsen/braunschweig/sporthalle-isoldeschule/",
   "history": []
  },
+ "154": {
+  "path": "halle/niedersachsen/braunschweig/sporthalle-sidonienstr/",
+  "history": []
+ },
  "156": {
   "path": "halle/bremen/bremen/vereinszentrum-bts/",
   "history": []
@@ -9693,6 +9697,10 @@
  },
  "108449": {
   "path": "halle/niedersachsen/hameln/sporthalle-nord/",
+  "history": []
+ },
+ "108451": {
+  "path": "halle/nordrhein-westfalen/duisburg/sporthalle-steinbart-gymnasium-halle-1/",
   "history": []
  },
  "108452": {
